@@ -24,6 +24,9 @@
     - resource: ods
       locator: "Chapters 2–3"
       role: alternative
+    - resource: nptel-pdsa
+      locator: "Weeks on lists, arrays, stacks and queues"
+      role: alternative
 
 - id: hash-tables
   title: Hash tables
@@ -51,6 +54,11 @@
     - resource: algs4
       locator: "Chapter 2"
       role: alternative
+    - resource: nptel-pdsa
+      locator: "Weeks on searching and sorting"
+      role: alternative
+    - resource: cses-problemset
+      locator: "Sorting and Searching"
 
 - id: trees-heaps
   title: Trees and heaps
@@ -63,6 +71,9 @@
       locator: "Lectures 6–8"
     - resource: ods
       locator: "Chapters 6, 9 and 10"
+      role: alternative
+    - resource: nptel-dsa
+      locator: "Lectures on trees, AVL trees and heaps"
       role: alternative
 
 - id: graph-algorithms
@@ -81,6 +92,8 @@
     - resource: clrs
       locator: "Part VI, Graph algorithms"
       role: deep-dive
+    - resource: cses-problemset
+      locator: "Graph Algorithms"
 
 - id: greedy-algorithms
   title: Greedy algorithms
@@ -95,6 +108,10 @@
     - resource: clrs
       locator: "The chapter on greedy algorithms"
       role: deep-dive
+    - resource: nptel-dsa
+      locator: "Lectures on greedy algorithms and minimum spanning trees"
+    - resource: cses-problemset
+      locator: "Sorting and Searching (most are greedy)"
 
 - id: dynamic-programming
   title: Dynamic programming
@@ -108,6 +125,8 @@
     - resource: cses-book
       locator: "Chapter 7, Dynamic programming"
       role: alternative
+    - resource: cses-problemset
+      locator: "Dynamic Programming"
 
 - id: algorithm-practice
   title: Solving problems under pressure

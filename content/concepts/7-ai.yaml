@@ -11,6 +11,14 @@
     - resource: mml-book
       locator: "Part I, if your linear algebra or probability is rusty"
       role: deep-dive
+    - resource: nptel-ml
+      locator: "The full course"
+      why: "A rigorous IIT Madras course that suits a maths background."
+    - resource: ng-ml
+      locator: "All three courses"
+      role: alternative
+    - resource: kaggle-learn
+      locator: "Intro to Machine Learning, then Intermediate Machine Learning"
 
 - id: deep-learning
   title: Deep learning
@@ -22,6 +30,11 @@
   resources:
     - resource: d2l
       locator: "Chapters 1–11"
+    - resource: karpathy-zero-to-hero
+      locator: "All lectures, in order"
+      why: "You build everything from scratch, up to a small GPT."
+    - resource: kaggle-learn
+      locator: "Intro to Deep Learning, then Computer Vision"
 
 - id: mlops
   title: Putting models into production
@@ -33,6 +46,8 @@
   resources:
     - resource: madewithml
       locator: "The whole course"
+    - resource: mlops-zoomcamp
+      locator: "All modules"
 
 - id: project-ml-service
   title: "Project: train, evaluate and serve a model"
@@ -45,3 +60,77 @@
   resources:
     - resource: madewithml
       locator: "Follow the course with your own dataset"
+
+- id: llm-basics
+  title: How large language models work
+  area: ai
+  summary: Tokens, embeddings, attention and the transformer, pretraining and fine-tuning. Enough to reason about what a model can and can't do.
+  hours: 15
+  requires: [programming-basics]
+  recommends: [linear-algebra, probability]
+  resources:
+    - resource: illustrated-transformer
+      locator: "The whole post"
+      why: "The clearest picture of attention there is."
+    - resource: karpathy-zero-to-hero
+      locator: "Let's build GPT, then Intro to large language models"
+    - resource: hf-llm-course
+      locator: "Chapters 1–2"
+      role: alternative
+
+- id: llm-apis
+  title: Prompting and LLM APIs
+  area: ai
+  summary: Calling a model from code, writing prompts that hold up, structured output and tool calls.
+  hours: 10
+  requires: [llm-basics, web-http]
+  resources:
+    - resource: prompting-guide
+      locator: "Introduction, Techniques, then Applications"
+    - resource: deeplearning-ai-prompting
+      locator: "The whole course"
+
+- id: embeddings
+  title: Embeddings and vector search
+  area: ai
+  summary: Representing text as vectors, measuring similarity, and searching millions of them quickly.
+  hours: 10
+  requires: [llm-basics]
+  recommends: [linear-algebra]
+  resources:
+    - resource: boykis-embeddings
+      locator: "The whole book"
+      why: "Short, careful and free. Covers the history as well as the how."
+
+- id: rag
+  title: Retrieval-augmented generation
+  area: ai
+  summary: Giving a model the right documents at the right time. Chunking, retrieval, reranking and citing sources.
+  hours: 15
+  requires: [embeddings, llm-apis]
+  resources:
+    - resource: hf-cookbook
+      locator: "The RAG recipes"
+
+- id: llm-evaluation
+  title: Evaluating LLM systems
+  area: ai
+  summary: Knowing whether a change made your AI feature better or worse. Test sets, graders and reading lots of outputs.
+  hours: 8
+  requires: [llm-apis]
+  recommends: [statistics]
+  resources:
+    - resource: hamel-evals
+      locator: "The whole post, then the follow-ups it links"
+
+- id: project-llm-app
+  title: "Project: build an LLM app with retrieval and evals"
+  area: ai
+  summary: A small assistant over a real set of documents, with citations and an evaluation set that shows it works.
+  hours: 30
+  kind: project
+  requires: [rag, llm-evaluation]
+  recommends: [rest-apis, docker]
+  resources:
+    - resource: hf-cookbook
+      locator: "Start from a RAG recipe and make it your own"

@@ -7,6 +7,8 @@
   resources:
     - resource: nand2tetris
       locator: "Projects 1–3"
+    - resource: nand2tetris-coursera
+      locator: "Weeks 1–3"
 
 - id: computer-architecture
   title: How a computer runs a program
@@ -17,6 +19,11 @@
   resources:
     - resource: nand2tetris
       locator: "Projects 4–6"
+    - resource: nand2tetris-coursera
+      locator: "Weeks 4–6"
+    - resource: nptel-coa
+      locator: "The full course"
+      role: alternative
 
 - id: os-processes-memory
   title: Processes and virtual memory
@@ -28,6 +35,8 @@
   resources:
     - resource: ostep
       locator: "Part I, Virtualization"
+    - resource: nptel-os
+      locator: "Lectures on processes, scheduling and virtual memory"
 
 - id: concurrency
   title: Concurrency
@@ -38,6 +47,8 @@
   resources:
     - resource: ostep
       locator: "Part II, Concurrency"
+    - resource: nptel-os
+      locator: "Lectures on threads, locks and synchronisation"
 
 - id: file-systems
   title: Storage and file systems
@@ -49,6 +60,8 @@
   resources:
     - resource: ostep
       locator: "Part III, Persistence"
+    - resource: nptel-os
+      locator: "Lectures on file systems and crash recovery"
 
 - id: networking
   title: Computer networks
@@ -60,6 +73,12 @@
   resources:
     - resource: cn-systems-approach
       locator: "Chapters 1–6"
+    - resource: kurose-lectures
+      locator: "Chapters 1–5"
+      why: "The author of the most used networking textbook, teaching it himself."
+    - resource: nptel-networks
+      locator: "The full course"
+      role: alternative
 
 - id: web-http
   title: The web and HTTP
@@ -70,6 +89,8 @@
   resources:
     - resource: mdn-http
       locator: "Overview, Messages, Caching and Cookies"
+    - resource: cs50-web
+      locator: "Lecture 3, Django (it opens with how HTTP works)"
 
 - id: distributed-systems
   title: Distributed systems
@@ -84,6 +105,9 @@
     - resource: ddia
       locator: "Parts II and III"
       role: deep-dive
+    - resource: mixu-distsys
+      locator: "The whole book"
+      why: "Short and free. Read it before the MIT lectures."
 
 - id: systems-security
   title: Systems security
@@ -95,6 +119,9 @@
   resources:
     - resource: mit-6858
       locator: "Lectures on buffer overflows, privilege separation and web security"
+    - resource: anderson-security
+      locator: "The free chapters"
+      role: alternative
 
 - id: system-design
   title: System design
@@ -109,6 +136,9 @@
     - resource: ddia
       locator: "Parts I and II"
       role: deep-dive
+    - resource: bytebytego
+      locator: "The system design videos"
+      why: "Short, well-drawn explanations of one building block at a time."
 
 - id: messaging
   title: Message queues and event streams
@@ -121,3 +151,47 @@
   resources:
     - resource: kafka-docs
       locator: "Introduction, then Design"
+
+- id: microcontrollers
+  title: Microcontrollers
+  area: systems
+  summary: Programming a small chip directly. Registers, GPIO, timers, interrupts and reading the datasheet.
+  hours: 35
+  requires: [c-and-memory, digital-logic]
+  resources:
+    - resource: valvano-ebook
+      locator: "Chapters 1–10"
+    - resource: nptel-embedded
+      locator: "The full course"
+
+- id: embedded-protocols
+  title: Talking to hardware
+  area: systems
+  summary: UART, I2C and SPI, how sensors and chips talk to each other, and how to debug them with a logic analyser.
+  hours: 10
+  requires: [microcontrollers]
+  resources:
+    - resource: sparkfun-serial
+      locator: "Serial communication, then the I2C and SPI tutorials"
+
+- id: rtos
+  title: Real-time operating systems
+  area: systems
+  summary: Tasks, priorities, queues and timing guarantees on a microcontroller.
+  hours: 15
+  requires: [microcontrollers]
+  recommends: [concurrency]
+  resources:
+    - resource: freertos-book
+      locator: "The whole book"
+
+- id: project-embedded
+  title: "Project: build a working device"
+  area: systems
+  summary: A sensor or controller that reads real input, does something useful with it and runs on its own.
+  hours: 30
+  kind: project
+  requires: [microcontrollers, embedded-protocols]
+  resources:
+    - resource: arduino-docs
+      locator: "Start from a sensor tutorial and extend it"

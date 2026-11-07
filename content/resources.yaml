@@ -1,5 +1,7 @@
 # Everything Pregraph links to. Concepts point at parts of these.
 # free: true means you can learn from it without paying.
+# medium says how you use it: read (books, docs, written courses),
+# watch (lecture videos and video courses) or practice (problems, exercises).
 
 # Maths
 - id: mit-6042
@@ -8,6 +10,7 @@
   type: course
   url: https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/
   free: true
+  medium: read
   short: "6.042"
   note: The course text is a free PDF on the course page.
 
@@ -17,6 +20,7 @@
   type: course
   url: https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/
   free: true
+  medium: watch
   short: "18.06"
 
 - id: stat110
@@ -25,6 +29,7 @@
   type: course
   url: https://stat110.hsites.harvard.edu/
   free: true
+  medium: watch
   short: "Stat 110"
 
 # Programming
@@ -34,6 +39,7 @@
   type: book
   url: https://allendowney.github.io/ThinkPython/
   free: true
+  medium: read
 
 - id: cs50x
   title: CS50x, Introduction to Computer Science (Harvard)
@@ -41,6 +47,7 @@
   type: course
   url: https://cs50.harvard.edu/x/
   free: true
+  medium: watch
   short: "CS50"
 
 - id: composing-programs
@@ -49,6 +56,7 @@
   type: book
   url: https://www.composingprograms.com/
   free: true
+  medium: read
   short: "CS 61A SICP"
   note: The Python textbook for Berkeley's CS 61A, based on SICP.
 
@@ -58,6 +66,7 @@
   type: course
   url: https://missing.csail.mit.edu/
   free: true
+  medium: watch
   short: "Missing Semester"
 
 - id: pro-git
@@ -66,6 +75,7 @@
   type: book
   url: https://git-scm.com/book/en/v2
   free: true
+  medium: read
 
 - id: swe-at-google
   title: Software Engineering at Google
@@ -73,6 +83,7 @@
   type: book
   url: https://abseil.io/resources/swe-book
   free: true
+  medium: read
 
 - id: refactoring-guru
   title: Design Patterns catalogue
@@ -80,6 +91,7 @@
   type: site
   url: https://refactoring.guru/design-patterns
   free: true
+  medium: read
 
 # Algorithms
 - id: mit-6006
@@ -88,6 +100,7 @@
   type: course
   url: https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/
   free: true
+  medium: watch
   short: "6.006"
 
 - id: ods
@@ -96,6 +109,7 @@
   type: book
   url: https://opendatastructures.org/
   free: true
+  medium: read
   short: "ODS"
 
 - id: algs4
@@ -104,6 +118,7 @@
   type: site
   url: https://algs4.cs.princeton.edu/home/
   free: true
+  medium: read
   note: The website and code are free. The printed book is paid.
 
 - id: cses-book
@@ -112,6 +127,7 @@
   type: book
   url: https://cses.fi/book/book.pdf
   free: true
+  medium: read
   short: "CSES"
 
 - id: cses-problemset
@@ -120,6 +136,7 @@
   type: site
   url: https://cses.fi/problemset/
   free: true
+  medium: practice
   short: "CSES"
 
 - id: clrs
@@ -128,6 +145,7 @@
   type: book
   url: https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/
   free: false
+  medium: read
   short: "CLRS"
 
 # Theory and languages
@@ -137,6 +155,7 @@
   type: course
   url: https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/
   free: true
+  medium: watch
   short: "18.404 Sipser"
 
 - id: crafting-interpreters
@@ -145,6 +164,7 @@
   type: book
   url: https://craftinginterpreters.com/
   free: true
+  medium: read
 
 - id: cryptobook
   title: A Graduate Course in Applied Cryptography
@@ -152,6 +172,7 @@
   type: book
   url: https://toc.cryptobook.us/
   free: true
+  medium: read
 
 # Systems
 - id: nand2tetris
@@ -160,6 +181,7 @@
   type: course
   url: https://www.nand2tetris.org/
   free: true
+  medium: read
   short: "Nand2Tetris"
 
 - id: ostep
@@ -168,6 +190,7 @@
   type: book
   url: https://pages.cs.wisc.edu/~remzi/OSTEP/
   free: true
+  medium: read
   short: "OSTEP"
 
 - id: cn-systems-approach
@@ -176,6 +199,7 @@
   type: book
   url: https://book.systemsapproach.org/
   free: true
+  medium: read
 
 - id: mdn-http
   title: HTTP guide (MDN Web Docs)
@@ -183,6 +207,7 @@
   type: site
   url: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
   free: true
+  medium: read
 
 - id: mit-6824
   title: Distributed Systems (MIT 6.5840, formerly 6.824)
@@ -190,6 +215,7 @@
   type: course
   url: https://pdos.csail.mit.edu/6.824/
   free: true
+  medium: watch
   short: "6.824 6.5840"
   note: Lecture videos, notes and the Go labs are all on the course site.
 
@@ -199,6 +225,7 @@
   type: book
   url: https://dataintensive.net/
   free: false
+  medium: read
   short: "DDIA"
 
 - id: mit-6858
@@ -207,6 +234,7 @@
   type: course
   url: https://ocw.mit.edu/courses/6-858-computer-systems-security-fall-2014/
   free: true
+  medium: watch
   short: "6.858"
 
 # Data
@@ -216,6 +244,7 @@
   type: site
   url: https://sqlbolt.com/
   free: true
+  medium: practice
   note: Short interactive lessons that run in the browser.
 
 - id: cmu-15445
@@ -224,6 +253,7 @@
   type: course
   url: https://15445.courses.cs.cmu.edu/
   free: true
+  medium: watch
   short: "15-445"
   note: Lecture videos are on the CMU Database Group YouTube channel.
 
@@ -234,6 +264,7 @@
   type: book
   url: https://www.statlearning.com/
   free: true
+  medium: read
   short: "ISLP ISLR"
 
 - id: mml-book
@@ -242,6 +273,7 @@
   type: book
   url: https://mml-book.github.io/
   free: true
+  medium: read
   short: "MML"
 
 - id: d2l
@@ -250,6 +282,7 @@
   type: book
   url: https://d2l.ai/
   free: true
+  medium: read
   short: "D2L"
 
 # Web
@@ -259,6 +292,7 @@
   type: course
   url: https://developer.mozilla.org/en-US/docs/Learn_web_development
   free: true
+  medium: read
 
 - id: odin
   title: The Odin Project
@@ -266,6 +300,7 @@
   type: course
   url: https://www.theodinproject.com/
   free: true
+  medium: read
 
 - id: fullstackopen
   title: Full Stack Open
@@ -273,6 +308,7 @@
   type: course
   url: https://fullstackopen.com/en/
   free: true
+  medium: read
 
 - id: javascript-info
   title: The Modern JavaScript Tutorial
@@ -280,6 +316,7 @@
   type: book
   url: https://javascript.info/
   free: true
+  medium: read
   short: "javascript.info"
 
 - id: ts-handbook
@@ -288,6 +325,7 @@
   type: site
   url: https://www.typescriptlang.org/docs/handbook/intro.html
   free: true
+  medium: read
 
 - id: react-docs
   title: Learn React (react.dev)
@@ -295,6 +333,7 @@
   type: site
   url: https://react.dev/learn
   free: true
+  medium: read
 
 - id: wai-intro
   title: Introduction to Web Accessibility
@@ -302,6 +341,7 @@
   type: site
   url: https://www.w3.org/WAI/fundamentals/accessibility-intro/
   free: true
+  medium: read
   short: "WAI WCAG"
 
 - id: webdev-perf
@@ -310,6 +350,7 @@
   type: course
   url: https://web.dev/learn/performance
   free: true
+  medium: read
 
 - id: zalando-api
   title: RESTful API Guidelines
@@ -317,6 +358,7 @@
   type: site
   url: https://opensource.zalando.com/restful-api-guidelines/
   free: true
+  medium: read
 
 - id: owasp-top10
   title: OWASP Top Ten
@@ -324,6 +366,7 @@
   type: site
   url: https://owasp.org/www-project-top-ten/
   free: true
+  medium: read
   short: "OWASP"
 
 # Backend
@@ -333,6 +376,7 @@
   type: site
   url: https://dev.java/learn/
   free: true
+  medium: read
 
 - id: spring-guides
   title: Spring Guides
@@ -340,6 +384,7 @@
   type: site
   url: https://spring.io/guides
   free: true
+  medium: read
   short: "Spring Boot"
 
 - id: django-tutorial
@@ -348,6 +393,7 @@
   type: site
   url: https://docs.djangoproject.com/en/stable/intro/tutorial01/
   free: true
+  medium: read
 
 - id: sd-primer
   title: The System Design Primer
@@ -355,6 +401,7 @@
   type: site
   url: https://github.com/donnemartin/system-design-primer
   free: true
+  medium: read
 
 - id: kafka-docs
   title: Apache Kafka documentation
@@ -362,6 +409,7 @@
   type: site
   url: https://kafka.apache.org/documentation/
   free: true
+  medium: read
   short: "Kafka"
 
 # Infrastructure
@@ -371,6 +419,7 @@
   type: site
   url: https://linuxjourney.com/
   free: true
+  medium: read
 
 - id: docker-docs
   title: Get started with Docker
@@ -378,6 +427,7 @@
   type: site
   url: https://docs.docker.com/get-started/
   free: true
+  medium: read
 
 - id: k8s-basics
   title: Learn Kubernetes Basics
@@ -385,6 +435,7 @@
   type: site
   url: https://kubernetes.io/docs/tutorials/kubernetes-basics/
   free: true
+  medium: read
   short: "k8s"
 
 - id: gh-actions
@@ -393,6 +444,7 @@
   type: site
   url: https://docs.github.com/en/actions
   free: true
+  medium: read
 
 - id: aws-ccp
   title: AWS Cloud Practitioner Essentials
@@ -400,6 +452,7 @@
   type: course
   url: https://aws.amazon.com/training/course-descriptions/cloud-practitioner-essentials/
   free: true
+  medium: watch
   short: "AWS"
   note: The course itself is free on AWS Skill Builder. The certification exam is paid and optional.
 
@@ -409,6 +462,7 @@
   type: book
   url: https://sre.google/sre-book/table-of-contents/
   free: true
+  medium: read
   short: "SRE book"
 
 - id: prometheus-docs
@@ -417,6 +471,7 @@
   type: site
   url: https://prometheus.io/docs/introduction/overview/
   free: true
+  medium: read
 
 - id: terraform-tutorials
   title: Terraform tutorials
@@ -424,6 +479,7 @@
   type: site
   url: https://developer.hashicorp.com/terraform/tutorials
   free: true
+  medium: read
 
 # Data
 - id: openintro
@@ -432,6 +488,7 @@
   type: book
   url: https://www.openintro.org/book/os/
   free: true
+  medium: read
 
 - id: gcf-excel
   title: Excel tutorials (GCFGlobal)
@@ -439,6 +496,7 @@
   type: site
   url: https://edu.gcfglobal.org/en/excel/
   free: true
+  medium: read
   short: "Excel spreadsheets"
 
 - id: py4da
@@ -447,6 +505,7 @@
   type: book
   url: https://wesmckinney.com/book/
   free: true
+  medium: read
   short: "pandas"
 
 - id: dataviz-wilke
@@ -455,6 +514,7 @@
   type: book
   url: https://clauswilke.com/dataviz/
   free: true
+  medium: read
 
 - id: powerbi-learn
   title: Power BI training (Microsoft Learn)
@@ -462,6 +522,7 @@
   type: course
   url: https://learn.microsoft.com/en-us/training/powerplatform/power-bi
   free: true
+  medium: read
   short: "Power BI"
 
 - id: kimball
@@ -470,6 +531,7 @@
   type: site
   url: https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/
   free: true
+  medium: read
   short: "Kimball star schema"
 
 - id: spark-docs
@@ -478,6 +540,7 @@
   type: site
   url: https://spark.apache.org/docs/latest/quick-start.html
   free: true
+  medium: read
   short: "PySpark"
 
 - id: de-zoomcamp
@@ -486,6 +549,7 @@
   type: course
   url: https://github.com/DataTalksClub/data-engineering-zoomcamp
   free: true
+  medium: watch
 
 - id: airflow-docs
   title: Airflow tutorials
@@ -493,6 +557,7 @@
   type: site
   url: https://airflow.apache.org/docs/apache-airflow/stable/tutorial/index.html
   free: true
+  medium: read
 
 - id: kaggle-datasets
   title: Kaggle Datasets
@@ -500,6 +565,7 @@
   type: site
   url: https://www.kaggle.com/datasets
   free: true
+  medium: practice
 
 - id: madewithml
   title: Made With ML, MLOps course
@@ -507,6 +573,7 @@
   type: course
   url: https://madewithml.com/courses/mlops/
   free: true
+  medium: read
 
 # Mobile
 - id: kotlin-docs
@@ -515,6 +582,7 @@
   type: site
   url: https://kotlinlang.org/docs/getting-started.html
   free: true
+  medium: read
 
 - id: android-courses
   title: Android training courses
@@ -522,6 +590,7 @@
   type: course
   url: https://developer.android.com/courses
   free: true
+  medium: read
 
 # Testing
 - id: playwright-docs
@@ -530,3 +599,534 @@
   type: site
   url: https://playwright.dev/docs/intro
   free: true
+  medium: read
+
+# Video lectures (YouTube, NPTEL, OCW, Coursera)
+- id: mit-6042-2010
+  title: Mathematics for Computer Science, video lectures (MIT 6.042J, Fall 2010)
+  author: Tom Leighton, Marten van Dijk
+  type: course
+  url: https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/
+  free: true
+  medium: watch
+
+- id: three-blue-one-brown-la
+  title: Essence of Linear Algebra
+  author: Grant Sanderson (3Blue1Brown)
+  type: video
+  url: https://www.3blue1brown.com/topics/linear-algebra
+  free: true
+  medium: watch
+  short: "3Blue1Brown 3b1b"
+
+- id: khan-statistics
+  title: Statistics and Probability (Khan Academy)
+  author: Khan Academy
+  type: course
+  url: https://www.khanacademy.org/math/statistics-probability
+  free: true
+  medium: watch
+
+- id: cs50p
+  title: CS50's Introduction to Programming with Python
+  author: David J. Malan
+  type: course
+  url: https://cs50.harvard.edu/python/
+  free: true
+  medium: watch
+  short: "CS50P"
+
+- id: mit-60001
+  title: Introduction to Computer Science and Programming in Python (MIT 6.0001, Fall 2016)
+  author: Ana Bell, Eric Grimson, John Guttag
+  type: course
+  url: https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/
+  free: true
+  medium: watch
+  short: "6.0001"
+
+- id: cs50-web
+  title: CS50's Web Programming with Python and JavaScript
+  author: Brian Yu, David J. Malan
+  type: course
+  url: https://cs50.harvard.edu/web/
+  free: true
+  medium: watch
+  short: "CS50W"
+
+- id: nptel-pdsa
+  title: Programming, Data Structures and Algorithms using Python (NPTEL)
+  author: Madhavan Mukund, Chennai Mathematical Institute
+  type: course
+  url: https://nptel.ac.in/courses/106106145
+  free: true
+  medium: watch
+  short: "NPTEL PDSA"
+
+- id: nptel-dsa
+  title: Data Structures and Algorithms (NPTEL)
+  author: Naveen Garg, IIT Delhi
+  type: course
+  url: https://nptel.ac.in/courses/106102064
+  free: true
+  medium: watch
+  short: "NPTEL DSA"
+
+- id: nptel-java
+  title: Programming in Java (NPTEL)
+  author: Debasis Samanta, IIT Kharagpur
+  type: course
+  url: https://nptel.ac.in/courses/106105191
+  free: true
+  medium: watch
+  short: "NPTEL Java"
+
+- id: nptel-dbms
+  title: Data Base Management System (NPTEL)
+  author: Partha Pratim Das, Samiran Chattopadhyay, IIT Kharagpur
+  type: course
+  url: https://nptel.ac.in/courses/106105175
+  free: true
+  medium: watch
+  short: "NPTEL DBMS"
+
+- id: nptel-networks
+  title: Computer Networks and Internet Protocol (NPTEL)
+  author: Soumya Kanti Ghosh, Sandip Chakraborty, IIT Kharagpur
+  type: course
+  url: https://nptel.ac.in/courses/106105183
+  free: true
+  medium: watch
+  short: "NPTEL networks"
+
+- id: nptel-compilers
+  title: Principles of Compiler Design (NPTEL)
+  author: Y. N. Srikant, IISc Bangalore
+  type: course
+  url: https://nptel.ac.in/courses/106108113
+  free: true
+  medium: watch
+  short: "NPTEL compilers"
+
+- id: nptel-os
+  title: Operating Systems lectures (NPTEL)
+  author: Sorav Bansal, IIT Delhi
+  type: course
+  url: https://iitd-os.github.io/os-nptel
+  free: true
+  medium: watch
+  short: "NPTEL OS"
+
+- id: nptel-toc
+  title: Theory of Computation (NPTEL)
+  author: IIT Kanpur
+  type: course
+  url: https://nptel.ac.in/courses/106104148
+  free: true
+  medium: watch
+  short: "NPTEL TOC"
+
+- id: nptel-ml
+  title: Introduction to Machine Learning (NPTEL)
+  author: Balaraman Ravindran, IIT Madras
+  type: course
+  url: https://nptel.ac.in/courses/106106139
+  free: true
+  medium: watch
+  short: "NPTEL ML"
+
+- id: nptel-coa
+  title: Computer Organization and Architecture (NPTEL)
+  author: IIT Madras
+  type: course
+  url: https://nptel.ac.in/courses/106106166
+  free: true
+  medium: watch
+  short: "NPTEL COA"
+
+- id: nptel-embedded
+  title: Introduction to Embedded System Design (NPTEL)
+  author: NPTEL
+  type: course
+  url: https://nptel.ac.in/courses/108102169
+  free: true
+  medium: watch
+  short: "NPTEL embedded"
+
+- id: kurose-lectures
+  title: Computer Networking video lectures
+  author: Jim Kurose
+  type: video
+  url: https://gaia.cs.umass.edu/kurose_ross/online_lectures.htm
+  free: true
+  medium: watch
+  short: "Kurose Ross top-down"
+
+- id: nand2tetris-coursera
+  title: "From Nand to Tetris, Part I (Coursera)"
+  author: Noam Nisan, Shimon Schocken
+  type: course
+  url: https://www.coursera.org/learn/build-a-computer
+  free: true
+  medium: watch
+  note: Free to audit.
+
+- id: crypto-boneh
+  title: Cryptography I (Coursera)
+  author: Dan Boneh, Stanford
+  type: course
+  url: https://www.coursera.org/learn/crypto
+  free: true
+  medium: watch
+  note: Free to audit.
+
+- id: ng-ml
+  title: Machine Learning Specialization (Coursera)
+  author: Andrew Ng
+  type: course
+  url: https://www.coursera.org/specializations/machine-learning-introduction
+  free: true
+  medium: watch
+  note: Free to audit.
+
+- id: karpathy-zero-to-hero
+  title: "Neural Networks: Zero to Hero"
+  author: Andrej Karpathy
+  type: video
+  url: https://karpathy.ai/zero-to-hero.html
+  free: true
+  medium: watch
+  short: "Karpathy"
+
+- id: bytebytego
+  title: ByteByteGo videos
+  author: Alex Xu, Sahn Lam
+  type: video
+  url: https://www.youtube.com/@ByteByteGo
+  free: true
+  medium: watch
+
+- id: mlops-zoomcamp
+  title: MLOps Zoomcamp
+  author: DataTalks.Club
+  type: course
+  url: https://github.com/DataTalksClub/mlops-zoomcamp
+  free: true
+  medium: watch
+
+- id: lfs101
+  title: Introduction to Linux (LFS101)
+  author: The Linux Foundation
+  type: course
+  url: https://training.linuxfoundation.org/training/introduction-to-linux/
+  free: true
+  medium: watch
+
+- id: professor-messer
+  title: CompTIA Security+ video course
+  author: Professor Messer
+  type: video
+  url: https://www.professormesser.com/
+  free: true
+  medium: watch
+  short: "Security+"
+  note: The videos are free. The certification exam is paid and optional.
+
+- id: deeplearning-ai-prompting
+  title: ChatGPT Prompt Engineering for Developers
+  author: Isa Fulford, Andrew Ng (DeepLearning.AI)
+  type: course
+  url: https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/
+  free: true
+  medium: watch
+
+# More books and written guides
+- id: probability-book
+  title: Introduction to Probability, 2nd edition
+  author: Joe Blitzstein, Jessica Hwang
+  type: book
+  url: http://probabilitybook.net/
+  free: true
+  medium: read
+  note: The free online edition from the authors.
+
+- id: tlcl
+  title: The Linux Command Line
+  author: William Shotts
+  type: book
+  url: https://linuxcommand.org/tlcl.php
+  free: true
+  medium: read
+
+- id: beej-c
+  title: Beej's Guide to C Programming
+  author: Brian "Beej" Hall
+  type: book
+  url: https://beej.us/guide/bgc/
+  free: true
+  medium: read
+
+- id: mooc-java
+  title: Java Programming MOOC
+  author: University of Helsinki
+  type: course
+  url: https://java-programming.mooc.fi/
+  free: true
+  medium: read
+  note: Written lessons with hundreds of graded exercises.
+
+- id: postgres-tutorial
+  title: The PostgreSQL tutorial
+  author: The PostgreSQL Global Development Group
+  type: site
+  url: https://www.postgresql.org/docs/current/tutorial.html
+  free: true
+  medium: read
+
+- id: db-architecture
+  title: Architecture of a Database System
+  author: Hellerstein, Stonebraker, Hamilton
+  type: book
+  url: https://dsf.berkeley.edu/papers/fntdb07-architecture.pdf
+  free: true
+  medium: read
+
+- id: mixu-distsys
+  title: "Distributed systems: for fun and profit"
+  author: Mikito Takada
+  type: book
+  url: http://book.mixu.net/distsys/
+  free: true
+  medium: read
+
+- id: erickson-models
+  title: Models of Computation (lecture notes)
+  author: Jeff Erickson
+  type: book
+  url: https://jeffe.cs.illinois.edu/teaching/algorithms/#models
+  free: true
+  medium: read
+
+- id: anderson-security
+  title: Security Engineering, 3rd edition
+  author: Ross Anderson
+  type: book
+  url: https://www.cl.cam.ac.uk/~rja14/book.html
+  free: true
+  medium: read
+  note: Several chapters are free to read on the author's site.
+
+- id: aws-overview
+  title: Overview of Amazon Web Services
+  author: Amazon Web Services
+  type: site
+  url: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html
+  free: true
+  medium: read
+
+# Practice
+- id: exercism
+  title: Exercism
+  author: Exercism
+  type: site
+  url: https://exercism.org/tracks
+  free: true
+  medium: practice
+  note: Free practice tracks with mentoring, one per language.
+
+- id: kaggle-learn
+  title: Kaggle Learn
+  author: Kaggle
+  type: course
+  url: https://www.kaggle.com/learn
+  free: true
+  medium: practice
+  note: Short hands-on courses that run in the browser.
+
+# Data science
+- id: causal-handbook
+  title: Causal Inference for the Brave and True
+  author: Matheus Facure
+  type: book
+  url: https://matheusfacure.github.io/python-causality-handbook/landing-page.html
+  free: true
+  medium: read
+
+- id: feat-engineering
+  title: "Feature Engineering and Selection"
+  author: Max Kuhn, Kjell Johnson
+  type: book
+  url: https://www.feat.engineering/
+  free: true
+  medium: read
+
+# LLMs and AI engineering
+- id: illustrated-transformer
+  title: The Illustrated Transformer
+  author: Jay Alammar
+  type: site
+  url: https://jalammar.github.io/illustrated-transformer/
+  free: true
+  medium: read
+
+- id: prompting-guide
+  title: Prompt Engineering Guide
+  author: DAIR.AI
+  type: site
+  url: https://www.promptingguide.ai/
+  free: true
+  medium: read
+
+- id: boykis-embeddings
+  title: What are embeddings
+  author: Vicki Boykis
+  type: book
+  url: https://vickiboykis.com/what_are_embeddings/
+  free: true
+  medium: read
+
+- id: hf-llm-course
+  title: Hugging Face LLM Course
+  author: Hugging Face
+  type: course
+  url: https://huggingface.co/learn/llm-course
+  free: true
+  medium: read
+
+- id: hf-cookbook
+  title: Open-Source AI Cookbook
+  author: Hugging Face
+  type: site
+  url: https://huggingface.co/learn/cookbook
+  free: true
+  medium: read
+
+- id: hamel-evals
+  title: Your AI product needs evals
+  author: Hamel Husain
+  type: site
+  url: https://hamel.dev/blog/posts/evals/
+  free: true
+  medium: read
+
+# Cloud
+- id: aws-vpc
+  title: Amazon VPC user guide
+  author: Amazon Web Services
+  type: site
+  url: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+  free: true
+  medium: read
+
+- id: aws-iam
+  title: IAM user guide
+  author: Amazon Web Services
+  type: site
+  url: https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
+  free: true
+  medium: read
+
+- id: aws-well-architected
+  title: AWS Well-Architected Framework
+  author: Amazon Web Services
+  type: site
+  url: https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html
+  free: true
+  medium: read
+
+# Operations and support
+- id: atlassian-incidents
+  title: Incident management handbook
+  author: Atlassian
+  type: site
+  url: https://www.atlassian.com/incident-management/handbook
+  free: true
+  medium: read
+
+- id: use-the-index
+  title: Use The Index, Luke
+  author: Markus Winand
+  type: book
+  url: https://use-the-index-luke.com/
+  free: true
+  medium: read
+
+# Security
+- id: mitre-attack
+  title: MITRE ATT&CK
+  author: MITRE
+  type: site
+  url: https://attack.mitre.org/
+  free: true
+  medium: read
+  short: "ATT&CK"
+
+- id: overthewire
+  title: OverTheWire wargames
+  author: OverTheWire
+  type: site
+  url: https://overthewire.org/wargames/
+  free: true
+  medium: practice
+  short: "Bandit"
+
+- id: picoctf
+  title: picoCTF
+  author: Carnegie Mellon University
+  type: site
+  url: https://picoctf.org/
+  free: true
+  medium: practice
+  short: "CTF"
+
+# Embedded
+- id: valvano-ebook
+  title: "Embedded Systems: Introduction to ARM Cortex-M Microcontrollers"
+  author: Jonathan Valvano, Ramesh Yerraballi
+  type: book
+  url: https://users.ece.utexas.edu/~valvano/Volume1/E-Book/
+  free: true
+  medium: read
+
+- id: sparkfun-serial
+  title: Serial communication tutorials
+  author: SparkFun
+  type: site
+  url: https://learn.sparkfun.com/tutorials/serial-communication
+  free: true
+  medium: read
+  short: "UART I2C SPI"
+
+- id: freertos-book
+  title: Mastering the FreeRTOS Real Time Kernel
+  author: Richard Barry
+  type: book
+  url: https://www.freertos.org/Documentation/RTOS_book.html
+  free: true
+  medium: read
+  short: "FreeRTOS RTOS"
+
+- id: arduino-docs
+  title: Arduino documentation
+  author: Arduino
+  type: site
+  url: https://docs.arduino.cc/
+  free: true
+  medium: read
+
+- id: learn-git-branching
+  title: Learn Git Branching
+  author: Peter Cottle
+  type: site
+  url: https://learngitbranching.js.org/
+  free: true
+  medium: practice
+
+- id: portswigger-academy
+  title: Web Security Academy
+  author: PortSwigger
+  type: site
+  url: https://portswigger.net/web-security
+  free: true
+  medium: practice
+  note: Free labs where you exploit real vulnerabilities in a safe sandbox.

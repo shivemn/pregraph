@@ -6,6 +6,8 @@
   resources:
     - resource: mit-6042
       locator: "Part I: Proofs"
+    - resource: mit-6042-2010
+      locator: "The proof and induction lectures at the start"
 
 - id: discrete-math
   title: Discrete maths
@@ -16,6 +18,8 @@
   resources:
     - resource: mit-6042
       locator: "Parts II and III: Structures, Counting"
+    - resource: mit-6042-2010
+      locator: "Lectures on number theory, graphs, counting and recurrences"
 
 - id: linear-algebra
   title: Linear algebra
@@ -28,6 +32,10 @@
     - resource: mml-book
       locator: "Chapters 2–4"
       role: alternative
+    - resource: three-blue-one-brown-la
+      locator: "The whole series, before or alongside 18.06"
+      role: alternative
+      why: "Builds the geometric picture in about three hours."
 
 - id: probability
   title: Probability
@@ -41,3 +49,6 @@
     - resource: mit-6042
       locator: "Part IV: Probability"
       role: alternative
+    - resource: probability-book
+      locator: "Chapters 1–7"
+      why: "The textbook that goes with Stat 110, free from the authors."

@@ -9,6 +9,11 @@
     - resource: cs50x
       locator: "Weeks 0–3, then Week 6 for Python"
       role: alternative
+    - resource: cs50p
+      locator: "Lectures 0–6"
+      why: "Short, clear lectures with problem sets that check your code."
+    - resource: exercism
+      locator: "Python track"
 
 - id: recursion
   title: Recursion
@@ -23,6 +28,8 @@
     - resource: composing-programs
       locator: "Section 1.7, Recursive functions"
       role: alternative
+    - resource: mit-60001
+      locator: "Lecture 6, Recursion and dictionaries"
 
 - id: higher-order-programming
   title: Functions and abstraction
@@ -33,6 +40,8 @@
   resources:
     - resource: composing-programs
       locator: "Chapters 1–2"
+    - resource: mit-60001
+      locator: "Lecture 4, Decomposition, abstraction and functions"
 
 - id: shell-tools
   title: The shell and command-line tools
@@ -42,6 +51,11 @@
   resources:
     - resource: missing-semester
       locator: "The Shell; Shell Tools and Scripting; Editors"
+    - resource: tlcl
+      locator: "Part 1, Learning the shell"
+      why: "Free, patient and complete. Read it with a terminal open."
+    - resource: overthewire
+      locator: "Bandit, levels 0–15"
 
 - id: git
   title: Git
@@ -55,6 +69,8 @@
     - resource: missing-semester
       locator: "Version Control (Git)"
       role: alternative
+    - resource: learn-git-branching
+      locator: "Main and Remote sequences"
 
 - id: oop-design
   title: Objects and design
@@ -68,6 +84,8 @@
     - resource: refactoring-guru
       locator: "Creational, structural and behavioural patterns"
       role: deep-dive
+    - resource: mit-60001
+      locator: "Lectures 8–9, Object oriented programming"
 
 - id: testing-debugging
   title: Testing and debugging
@@ -81,7 +99,7 @@
       locator: "Debugging and Profiling"
     - resource: swe-at-google
       locator: "Chapters 11–14 on testing"
-      role: deep-dive
+      role: alternative
 
 - id: c-and-memory
   title: C and memory
@@ -93,6 +111,11 @@
   resources:
     - resource: cs50x
       locator: "Weeks 1–5"
+    - resource: beej-c
+      locator: "The chapters on pointers, arrays, strings, structs and memory allocation"
+      why: "Friendly and precise. Pairs well with the CS50 lectures."
+    - resource: exercism
+      locator: "C track"
 
 - id: software-engineering
   title: Working in a codebase
@@ -115,6 +138,14 @@
   resources:
     - resource: dev-java
       locator: "Getting started, Language basics, Classes and objects"
+      role: alternative
+    - resource: mooc-java
+      locator: "Java Programming I, parts 1–7"
+      why: "Hundreds of small graded exercises. The best free way to actually get fluent."
+    - resource: nptel-java
+      locator: "The full course"
+    - resource: exercism
+      locator: "Java track"
 
 - id: test-automation
   title: Test automation

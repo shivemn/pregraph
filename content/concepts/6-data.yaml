@@ -10,6 +10,10 @@
     - resource: cs50x
       locator: "Week 7, SQL"
       role: alternative
+    - resource: postgres-tutorial
+      locator: "Part I, Tutorial"
+    - resource: kaggle-learn
+      locator: "Intro to SQL, then Advanced SQL"
 
 - id: database-internals
   title: How databases work
@@ -21,6 +25,12 @@
   resources:
     - resource: cmu-15445
       locator: "The full lecture series"
+    - resource: db-architecture
+      locator: "The whole paper"
+      why: "How a real database is put together, by people who built them."
+    - resource: nptel-dbms
+      locator: "The full course"
+      role: alternative
 
 - id: statistics
   title: Statistics
@@ -31,6 +41,8 @@
   resources:
     - resource: openintro
       locator: "Chapters 1–9"
+    - resource: khan-statistics
+      locator: "Units on study design through inference for regression"
 
 - id: spreadsheets
   title: Spreadsheets
@@ -52,6 +64,8 @@
   resources:
     - resource: py4da
       locator: "Chapters 4–10"
+    - resource: kaggle-learn
+      locator: "Pandas course"
 
 - id: data-visualization
   title: Data visualisation
@@ -65,6 +79,8 @@
     - resource: py4da
       locator: "Chapter 9, Plotting and visualization"
       role: alternative
+    - resource: kaggle-learn
+      locator: "Data Visualization course"
 
 - id: bi-tools
   title: Dashboards and BI tools
@@ -88,6 +104,8 @@
   resources:
     - resource: kimball
       locator: "Fundamental concepts, then fact and dimension table techniques"
+    - resource: de-zoomcamp
+      locator: "Module on data warehousing"
 
 - id: spark
   title: Large-scale processing with Spark
@@ -144,3 +162,40 @@
   resources:
     - resource: de-zoomcamp
       locator: "Follow the course project brief"
+
+- id: experiments
+  title: Experiments and causal inference
+  area: data
+  summary: A/B tests, why correlation isn't enough, and the tools for estimating cause and effect when you can't run an experiment.
+  hours: 25
+  requires: [statistics]
+  recommends: [probability]
+  resources:
+    - resource: causal-handbook
+      locator: "Part I, chapters 1–12"
+      why: "Practical, funny and written in Python."
+
+- id: feature-engineering
+  title: Feature engineering
+  area: data
+  summary: Turning raw columns into inputs a model can use. Encoding, scaling, missing values and leakage.
+  hours: 12
+  requires: [pandas]
+  recommends: [machine-learning]
+  resources:
+    - resource: feat-engineering
+      locator: "Chapters 1–8"
+    - resource: kaggle-learn
+      locator: "Feature Engineering course"
+
+- id: project-data-science
+  title: "Project: answer a business question with data and a model"
+  area: data
+  summary: Frame a question, explore the data, build a model or run an analysis, and explain the result to someone who isn't technical.
+  hours: 35
+  kind: project
+  requires: [machine-learning, data-visualization]
+  recommends: [experiments, feature-engineering]
+  resources:
+    - resource: kaggle-datasets
+      locator: "Pick a dataset with a decision attached to it"

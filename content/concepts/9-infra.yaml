@@ -7,6 +7,10 @@
   resources:
     - resource: linux-journey
       locator: "Grasshopper and Journeyman sections"
+    - resource: lfs101
+      locator: "The whole course"
+    - resource: overthewire
+      locator: "Bandit, levels 15–30"
 
 - id: docker
   title: Containers and Docker
@@ -40,6 +44,8 @@
   resources:
     - resource: gh-actions
       locator: "Quickstart, then Building and testing, then Deployment"
+    - resource: cs50-web
+      locator: "Lecture 7, Testing, CI/CD"
 
 - id: cloud-basics
   title: Cloud basics
@@ -50,6 +56,8 @@
   resources:
     - resource: aws-ccp
       locator: "The whole course"
+    - resource: aws-overview
+      locator: "The overview, then the sections on compute, storage, networking and security"
 
 - id: observability
   title: Monitoring and observability
@@ -89,3 +97,109 @@
     - resource: gh-actions
       locator: "Deployment section"
       role: alternative
+
+- id: cloud-networking
+  title: Cloud networking
+  area: infra
+  summary: VPCs, subnets, routing, security groups, load balancers and DNS, the cloud versions of things you know from networking.
+  hours: 12
+  requires: [cloud-basics, networking]
+  resources:
+    - resource: aws-vpc
+      locator: "How Amazon VPC works, then the examples"
+    - resource: aws-ccp
+      locator: "The modules on networking, security and architecture"
+      role: alternative
+
+- id: cloud-iam
+  title: Identity and access in the cloud
+  area: infra
+  summary: Users, roles and policies. Least privilege, and the permission mistakes that cause most cloud breaches.
+  hours: 8
+  requires: [cloud-basics]
+  resources:
+    - resource: aws-iam
+      locator: "Introduction, then Identities and Policies"
+    - resource: aws-ccp
+      locator: "The modules on networking, security and architecture"
+      role: alternative
+
+- id: cloud-architecture
+  title: Designing for the cloud
+  area: infra
+  summary: Reliability, security, cost and performance trade-offs when you build on a public cloud.
+  hours: 12
+  requires: [cloud-networking, cloud-iam]
+  recommends: [system-design]
+  resources:
+    - resource: aws-well-architected
+      locator: "The six pillars"
+    - resource: aws-ccp
+      locator: "The modules on networking, security and architecture"
+      role: alternative
+
+- id: project-cloud-app
+  title: "Project: run a three-tier app on the cloud"
+  area: infra
+  summary: A web front end, an API and a database, deployed with infrastructure as code, with sensible networking and permissions.
+  hours: 30
+  kind: project
+  requires: [cloud-networking, cloud-iam, infrastructure-as-code]
+  recommends: [docker]
+  resources:
+    - resource: terraform-tutorials
+      locator: "Build the app's infrastructure step by step"
+
+- id: incident-management
+  title: Handling incidents
+  area: infra
+  summary: What to do when production breaks. Triage, communication, escalation and the blameless postmortem afterwards.
+  hours: 8
+  recommends: [web-http]
+  resources:
+    - resource: atlassian-incidents
+      locator: "The whole handbook"
+    - resource: sre-book
+      locator: "Chapters 14 and 15, Managing incidents and Postmortem culture"
+      role: deep-dive
+
+- id: log-analysis
+  title: Reading logs and troubleshooting
+  area: infra
+  summary: Finding the one useful line in a million. grep, awk, timestamps, and a method for narrowing down the cause.
+  hours: 10
+  requires: [shell-tools]
+  resources:
+    - resource: sre-book
+      locator: "Chapter 12, Effective troubleshooting"
+    - resource: missing-semester
+      locator: "Data Wrangling"
+    - resource: overthewire
+      locator: "Bandit, levels 0–20"
+
+- id: query-performance
+  title: Why a query is slow
+  area: data
+  summary: Indexes, query plans and the common reasons a query that used to be fast isn't any more.
+  hours: 10
+  requires: [sql]
+  recommends: [database-internals]
+  resources:
+    - resource: use-the-index
+      locator: "Chapters 1–3"
+      why: "The book support and backend engineers wish they'd read sooner."
+    - resource: cmu-15445
+      locator: "Lectures on indexes and query execution"
+      role: alternative
+
+- id: project-support-runbook
+  title: "Project: break an app and write the runbook"
+  area: infra
+  summary: Run a small app, break it in five different ways, and write the runbook someone on call would need to fix each one.
+  hours: 15
+  kind: project
+  requires: [incident-management, log-analysis]
+  recommends: [observability, query-performance]
+  resources:
+    - resource: sre-book
+      locator: "Use chapter 12 as the method for each failure"

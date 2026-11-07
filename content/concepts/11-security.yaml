@@ -1,0 +1,38 @@
+- id: security-fundamentals
+  title: Security fundamentals
+  area: security
+  summary: Threats, vulnerabilities, controls, authentication, encryption basics and the vocabulary every security job assumes.
+  hours: 30
+  recommends: [networking]
+  resources:
+    - resource: professor-messer
+      locator: "The Security+ course videos"
+      why: "The standard free entry point, used by most people starting in security."
+    - resource: anderson-security
+      locator: "The free chapters"
+    - resource: picoctf
+      locator: "The practice gym, General Skills first"
+
+- id: threat-detection
+  title: Detecting attacks
+  area: security
+  summary: How attackers behave, what that looks like in logs, and how alerts and SIEM tools catch it.
+  hours: 20
+  requires: [security-fundamentals, log-analysis]
+  resources:
+    - resource: mitre-attack
+      locator: "The Enterprise matrix, one tactic at a time"
+
+- id: project-ctf
+  title: "Project: work through beginner CTFs"
+  area: security
+  summary: Solve real puzzles in Linux, the web and cryptography, and write up how you solved each one.
+  hours: 30
+  kind: project
+  requires: [security-fundamentals, shell-tools]
+  recommends: [web-security]
+  resources:
+    - resource: overthewire
+      locator: "Bandit, then Natas"
+    - resource: picoctf
+      locator: "The practice gym"

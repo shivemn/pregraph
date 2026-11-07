@@ -98,3 +98,57 @@
   summary: The CS paper of GATE, used for M.Tech admissions and some PSU jobs. Engineering maths is left out here.
   tiers:
     hire: [digital-logic, computer-architecture, c-and-memory, trees-heaps, graph-algorithms, greedy-algorithms, dynamic-programming, automata, computability, compilers, os-processes-memory, concurrency, file-systems, networking, sql, database-internals]
+
+- id: data-scientist
+  title: Data scientist
+  family: data
+  summary: Uses statistics, experiments and models to answer questions a business actually has, and explains the answer clearly.
+  tiers:
+    hire: [statistics, probability, sql, pandas, data-visualization, machine-learning, experiments, feature-engineering, project-data-science]
+    firstYear: [git, bi-tools, query-performance]
+    extra: [deep-learning, spark]
+
+- id: ai-engineer
+  title: AI / LLM engineer
+  family: data
+  summary: Builds products on top of large language models. Mostly software engineering, plus retrieval, prompting and careful evaluation.
+  tiers:
+    hire: [programming-basics, git, rest-apis, llm-basics, llm-apis, embeddings, rag, llm-evaluation, project-llm-app]
+    firstYear: [machine-learning, docker, cloud-basics, testing-debugging]
+    extra: [deep-learning, mlops]
+
+- id: cloud-engineer
+  title: Cloud engineer
+  family: infra
+  summary: Designs, builds and runs infrastructure on a public cloud. A large share of IT services hiring.
+  tiers:
+    hire: [shell-tools, linux-admin, networking, cloud-basics, cloud-networking, cloud-iam, infrastructure-as-code, docker, git, project-cloud-app]
+    firstYear: [kubernetes, observability, ci-cd, cloud-architecture]
+    extra: [systems-security, distributed-systems]
+
+- id: support-engineer
+  title: Application support engineer
+  family: infra
+  summary: Keeps business applications running for the people who use them. Incidents, logs, databases and a lot of careful detective work.
+  tiers:
+    hire: [sql, shell-tools, linux-admin, networking, web-http, incident-management, log-analysis, git, project-support-runbook]
+    firstYear: [query-performance, observability, java, messaging, ci-cd]
+    extra: [cloud-basics, docker]
+
+- id: security-analyst
+  title: Security analyst (SOC)
+  family: infra
+  summary: Watches for attacks, investigates alerts and responds when something gets through.
+  tiers:
+    hire: [networking, linux-admin, shell-tools, security-fundamentals, log-analysis, threat-detection, incident-management, web-security, project-ctf]
+    firstYear: [programming-basics, systems-security, cryptography, cloud-basics]
+    extra: [cloud-iam]
+
+- id: embedded-engineer
+  title: Embedded engineer
+  family: software
+  summary: Writes the software inside devices, from sensors to cars. A natural fit for electronics and electrical graduates.
+  tiers:
+    hire: [c-and-memory, digital-logic, computer-architecture, microcontrollers, embedded-protocols, git, project-embedded]
+    firstYear: [rtos, os-processes-memory, concurrency, testing-debugging]
+    extra: [networking]

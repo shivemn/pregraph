@@ -7,6 +7,11 @@
   resources:
     - resource: mit-18404
       locator: "Lectures 1–5"
+    - resource: erickson-models
+      locator: "Chapters on strings, regular languages and finite automata"
+    - resource: nptel-toc
+      locator: "The lectures on finite automata and context-free grammars"
+      role: alternative
 
 - id: computability
   title: Computability and complexity
@@ -17,6 +22,8 @@
   resources:
     - resource: mit-18404
       locator: "Lecture 6 onwards"
+    - resource: erickson-models
+      locator: "Chapters on Turing machines and undecidability"
 
 - id: interpreters
   title: Building an interpreter
@@ -28,6 +35,9 @@
   resources:
     - resource: crafting-interpreters
       locator: "Part II, A Tree-Walk Interpreter"
+    - resource: nptel-compilers
+      locator: "The lectures on lexical analysis and parsing"
+      role: alternative
 
 - id: compilers
   title: Compilers and virtual machines
@@ -39,6 +49,8 @@
   resources:
     - resource: crafting-interpreters
       locator: "Part III, A Bytecode Virtual Machine"
+    - resource: nptel-compilers
+      locator: "The full course"
 
 - id: cryptography
   title: Cryptography
@@ -50,3 +62,6 @@
   resources:
     - resource: cryptobook
       locator: "Part I, Secret key cryptography"
+    - resource: crypto-boneh
+      locator: "The whole course"
+      why: "The standard introduction, from the co-author of the book."

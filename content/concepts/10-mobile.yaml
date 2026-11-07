@@ -7,6 +7,8 @@
   resources:
     - resource: kotlin-docs
       locator: "Getting started, then Basics and Concepts"
+    - resource: exercism
+      locator: "Kotlin track"
 
 - id: android
   title: Android development

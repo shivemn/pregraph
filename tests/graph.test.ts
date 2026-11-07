@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
 import { criticalPath, findCycle, indexConcepts, neededConcepts, planPath, type ConceptNode } from '../src/lib/graph';
 import { checkContent, loadContent } from '../src/lib/content';
-import { targetsUpTo, type Tier } from '../src/lib/schema';
+import { picksFor, targetsUpTo, type Tier } from '../src/lib/schema';
 
 const node = (id: string, requires: string[] = [], extra: Partial<ConceptNode> = {}): ConceptNode => ({
   id,
@@ -237,5 +237,30 @@ describe('real content', () => {
     const r = broken.roles[0]!;
     r.tiers.extra.push(r.tiers.hire[0]!);
     expect(checkContent(broken).join('\n')).toMatch(/more than one tier/);
+  });
+});
+
+describe('picks', () => {
+  const content = loadContent();
+  const resources = new Map(content.resources.map((r) => [r.id, r]));
+
+  it('picks a free source of the right medium, preferring primary over alternative, never a deep dive', () => {
+    const concept = {
+      resources: [
+        { resource: 'clrs', role: 'primary' },         // paid book: never the pick
+        { resource: 'algs4', role: 'alternative' },     // free read
+        { resource: 'mit-6006', role: 'deep-dive' },    // free watch, but a deep dive
+        { resource: 'cses-problemset', role: 'primary' },
+      ],
+    };
+    const p = picksFor(concept, resources);
+    expect(p.read).toBe(1);
+    expect(p.watch).toBeUndefined();
+    expect(p.practice).toBe(3);
+  });
+
+  it('gives almost every stop something to read', () => {
+    const withRead = content.concepts.filter((c) => picksFor(c, resources).read !== undefined).length;
+    expect(withRead / content.concepts.length).toBeGreaterThan(0.95);
   });
 });

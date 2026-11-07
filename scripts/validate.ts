@@ -1,5 +1,6 @@
 /** `npm run validate` — fails (exit 1) if content/ has any problem. Runs in CI and before every build. */
 import { loadContent, ContentError } from '../src/lib/content';
+import { MEDIA, picksFor } from '../src/lib/schema';
 
 try {
   const c = loadContent();
@@ -12,6 +13,18 @@ try {
       `${c.resources.length} resources, ${sections} resource sections (${unverified} not yet verified), ` +
       `${c.roles.length} roles (${drafts} still drafts without job-posting evidence)`,
   );
+
+  // Coverage of the three picks. Not an error: gaps are shown on the site as "not picked yet".
+  const resources = new Map(c.resources.map((r) => [r.id, r]));
+  const picks = c.concepts.map((x) => ({ id: x.id, kind: x.kind, p: picksFor(x, resources) }));
+  const line = MEDIA.map((m) => `${m} ${picks.filter((x) => x.p[m] !== undefined).length}/${c.concepts.length}`).join(', ');
+  console.log(`  picks: ${line}`);
+  if (process.argv.includes('--gaps')) {
+    for (const m of MEDIA) {
+      const missing = picks.filter((x) => x.p[m] === undefined && x.kind !== 'project').map((x) => x.id);
+      if (missing.length) console.log(`  no ${m} pick: ${missing.join(', ')}`);
+    }
+  }
 } catch (err) {
   if (err instanceof ContentError) {
     console.error(`✗ ${err.message}`);

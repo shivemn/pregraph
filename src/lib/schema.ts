@@ -20,6 +20,8 @@ export const resourceSchema = z.object({
   type: z.enum(['book', 'video', 'course', 'site']),
   url: z.url(),
   free: z.boolean(),
+  /** How you use it: read it, watch it, or practise with it. */
+  medium: z.enum(['read', 'watch', 'practice']),
   /** What people actually call it, e.g. "OSTEP" or "CLRS". Used by search. */
   short: z.string().optional(),
   note: z.string().optional(),
@@ -32,6 +34,8 @@ export const resourceSectionSchema = z.object({
   role: z.enum(['primary', 'alternative', 'deep-dive']).default('primary'),
   /** False until a human has opened the resource and checked the locator. */
   verified: z.boolean().default(false),
+  /** One line on why this is the pick, shown next to it. */
+  why: z.string().optional(),
 });
 
 export const conceptSchema = z.object({
@@ -95,6 +99,28 @@ export const roleSchema = z.object({
     })
     .optional(),
 });
+
+export type Medium = z.infer<typeof resourceSchema>['medium'];
+export const MEDIA: Medium[] = ['read', 'watch', 'practice'];
+
+/**
+ * The pick for each medium: the first free section of that medium, preferring
+ * "primary" over "alternative". Deep dives are never the pick.
+ */
+export function picksFor(
+  concept: { resources: Array<{ resource: string; role: string }> },
+  resources: ReadonlyMap<string, { medium: Medium; free: boolean }>,
+): Partial<Record<Medium, number>> {
+  const out: Partial<Record<Medium, number>> = {};
+  for (const role of ['primary', 'alternative']) {
+    concept.resources.forEach((s, i) => {
+      const r = resources.get(s.resource);
+      if (!r || !r.free || s.role !== role || out[r.medium] !== undefined) return;
+      out[r.medium] = i;
+    });
+  }
+  return out;
+}
 
 export type Area = z.infer<typeof areaSchema>;
 export type Resource = z.infer<typeof resourceSchema>;
