@@ -1,47 +1,93 @@
-# Every resource Pregraph links to. Concepts point at parts of these.
-# free: true means the main way to use it costs nothing.
+# Everything Pregraph links to. Concepts point at parts of these.
+# free: true means you can learn from it without paying.
 
+# Maths
 - id: mit-6042
-  title: Mathematics for Computer Science (MIT 6.042J, Spring 2015)
-  author: Eric Lehman, F. Thomson Leighton, Albert R. Meyer
+  title: Mathematics for Computer Science (MIT 6.042J)
+  author: Eric Lehman, Tom Leighton, Albert Meyer
   type: course
   url: https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/
   free: true
-  note: The course text is a free PDF linked from the course page.
+  note: The course text is a free PDF on the course page.
 
-- id: missing-semester
-  title: The Missing Semester of Your CS Education
-  author: MIT CSAIL
+- id: mit-1806
+  title: Linear Algebra (MIT 18.06)
+  author: Gilbert Strang
   type: course
-  url: https://missing.csail.mit.edu/
+  url: https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/
   free: true
 
-- id: pro-git
-  title: Pro Git (2nd edition)
-  author: Scott Chacon, Ben Straub
-  type: book
-  url: https://git-scm.com/book/en/v2
-  free: true
-
-- id: cs50x
-  title: CS50x — Introduction to Computer Science
-  author: Harvard University
+- id: stat110
+  title: Statistics 110, Probability (Harvard)
+  author: Joe Blitzstein
   type: course
-  url: https://cs50.harvard.edu/x/
+  url: https://stat110.hsites.harvard.edu/
   free: true
 
+# Programming
 - id: think-python
-  title: Think Python (3rd edition)
+  title: Think Python, 3rd edition
   author: Allen B. Downey
   type: book
   url: https://allendowney.github.io/ThinkPython/
   free: true
 
+- id: cs50x
+  title: CS50x, Introduction to Computer Science (Harvard)
+  author: David J. Malan
+  type: course
+  url: https://cs50.harvard.edu/x/
+  free: true
+
+- id: composing-programs
+  title: Composing Programs
+  author: John DeNero
+  type: book
+  url: https://www.composingprograms.com/
+  free: true
+  note: The Python textbook for Berkeley's CS 61A, based on SICP.
+
+- id: missing-semester
+  title: The Missing Semester of Your CS Education (MIT)
+  author: Anish Athalye, Jon Gjengset, Jose Javier Gonzalez Ortiz
+  type: course
+  url: https://missing.csail.mit.edu/
+  free: true
+
+- id: pro-git
+  title: Pro Git, 2nd edition
+  author: Scott Chacon, Ben Straub
+  type: book
+  url: https://git-scm.com/book/en/v2
+  free: true
+
+- id: swe-at-google
+  title: Software Engineering at Google
+  author: Titus Winters, Tom Manshreck, Hyrum Wright
+  type: book
+  url: https://abseil.io/resources/swe-book
+  free: true
+
+- id: refactoring-guru
+  title: Design Patterns catalogue
+  author: Refactoring.Guru
+  type: site
+  url: https://refactoring.guru/design-patterns
+  free: true
+
+# Algorithms
 - id: mit-6006
   title: Introduction to Algorithms (MIT 6.006, Spring 2020)
   author: Erik Demaine, Jason Ku, Justin Solomon
   type: course
   url: https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/
+  free: true
+
+- id: ods
+  title: Open Data Structures
+  author: Pat Morin
+  type: book
+  url: https://opendatastructures.org/
   free: true
 
 - id: algs4
@@ -50,7 +96,21 @@
   type: site
   url: https://algs4.cs.princeton.edu/home/
   free: true
-  note: The website summaries and code are free; the full book is paid.
+  note: The website and code are free. The printed book is paid.
+
+- id: cses-book
+  title: Competitive Programmer's Handbook
+  author: Antti Laaksonen
+  type: book
+  url: https://cses.fi/book/book.pdf
+  free: true
+
+- id: cses-problemset
+  title: CSES Problem Set
+  author: CSES
+  type: site
+  url: https://cses.fi/problemset/
+  free: true
 
 - id: clrs
   title: Introduction to Algorithms, 4th edition (CLRS)
@@ -59,6 +119,29 @@
   url: https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/
   free: false
 
+# Theory and languages
+- id: mit-18404
+  title: Theory of Computation (MIT 18.404J)
+  author: Michael Sipser
+  type: course
+  url: https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/
+  free: true
+
+- id: crafting-interpreters
+  title: Crafting Interpreters
+  author: Robert Nystrom
+  type: book
+  url: https://craftinginterpreters.com/
+  free: true
+
+- id: cryptobook
+  title: A Graduate Course in Applied Cryptography
+  author: Dan Boneh, Victor Shoup
+  type: book
+  url: https://toc.cryptobook.us/
+  free: true
+
+# Systems
 - id: nand2tetris
   title: "Nand2Tetris: The Elements of Computing Systems"
   author: Noam Nisan, Shimon Schocken
@@ -68,7 +151,7 @@
 
 - id: ostep
   title: "Operating Systems: Three Easy Pieces"
-  author: Remzi H. Arpaci-Dusseau, Andrea C. Arpaci-Dusseau
+  author: Remzi and Andrea Arpaci-Dusseau
   type: book
   url: https://pages.cs.wisc.edu/~remzi/OSTEP/
   free: true
@@ -80,17 +163,70 @@
   url: https://book.systemsapproach.org/
   free: true
 
+- id: mdn-http
+  title: HTTP guide (MDN Web Docs)
+  author: Mozilla
+  type: site
+  url: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
+  free: true
+
+- id: mit-6824
+  title: Distributed Systems (MIT 6.5840, formerly 6.824)
+  author: Robert Morris and others
+  type: course
+  url: https://pdos.csail.mit.edu/6.824/
+  free: true
+  note: Lecture videos, notes and the Go labs are all on the course site.
+
+- id: ddia
+  title: Designing Data-Intensive Applications
+  author: Martin Kleppmann
+  type: book
+  url: https://dataintensive.net/
+  free: false
+
+- id: mit-6858
+  title: Computer Systems Security (MIT 6.858)
+  author: Nickolai Zeldovich, James Mickens
+  type: course
+  url: https://ocw.mit.edu/courses/6-858-computer-systems-security-fall-2014/
+  free: true
+
+# Data
+- id: sqlbolt
+  title: SQLBolt
+  author: SQLBolt
+  type: site
+  url: https://sqlbolt.com/
+  free: true
+  note: Short interactive lessons that run in the browser.
+
 - id: cmu-15445
-  title: Intro to Database Systems (CMU 15-445/645)
-  author: Andy Pavlo, Carnegie Mellon University
+  title: Database Systems (CMU 15-445/645)
+  author: Andy Pavlo
   type: course
   url: https://15445.courses.cs.cmu.edu/
   free: true
   note: Lecture videos are on the CMU Database Group YouTube channel.
 
-- id: crafting-interpreters
-  title: Crafting Interpreters
-  author: Robert Nystrom
+# Machine learning
+- id: islp
+  title: An Introduction to Statistical Learning, with Python (ISLP)
+  author: James, Witten, Hastie, Tibshirani, Taylor
   type: book
-  url: https://craftinginterpreters.com/
+  url: https://www.statlearning.com/
+  free: true
+
+- id: mml-book
+  title: Mathematics for Machine Learning
+  author: Deisenroth, Faisal, Ong
+  type: book
+  url: https://mml-book.github.io/
+  free: true
+
+- id: d2l
+  title: Dive into Deep Learning
+  author: Zhang, Lipton, Li, Smola
+  type: book
+  url: https://d2l.ai/
   free: true

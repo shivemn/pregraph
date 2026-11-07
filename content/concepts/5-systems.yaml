@@ -1,0 +1,97 @@
+- id: digital-logic
+  title: Digital logic
+  area: systems
+  summary: Gates, adders and memory built from nothing but NAND.
+  hours: 15
+  recommends: [discrete-math]
+  resources:
+    - resource: nand2tetris
+      locator: "Projects 1–3"
+
+- id: computer-architecture
+  title: How a computer runs a program
+  area: systems
+  summary: Machine language, a working CPU and an assembler, built by you.
+  hours: 30
+  requires: [digital-logic, programming-basics]
+  resources:
+    - resource: nand2tetris
+      locator: "Projects 4–6"
+
+- id: os-processes-memory
+  title: Processes and virtual memory
+  area: systems
+  summary: How an operating system shares one CPU and one memory between many programs.
+  hours: 30
+  requires: [c-and-memory, computer-architecture]
+  recommends: [shell-tools]
+  resources:
+    - resource: ostep
+      locator: "Part I, Virtualization"
+
+- id: concurrency
+  title: Concurrency
+  area: systems
+  summary: Threads, locks, condition variables and the bugs they cause.
+  hours: 20
+  requires: [os-processes-memory]
+  resources:
+    - resource: ostep
+      locator: "Part II, Concurrency"
+
+- id: file-systems
+  title: Storage and file systems
+  area: systems
+  summary: Disks, file system design, crash consistency and journaling.
+  hours: 20
+  requires: [os-processes-memory]
+  recommends: [trees-heaps]
+  resources:
+    - resource: ostep
+      locator: "Part III, Persistence"
+
+- id: networking
+  title: Computer networks
+  area: systems
+  summary: Packets, IP, TCP, routing and congestion. How data actually crosses the internet.
+  hours: 35
+  requires: [programming-basics]
+  recommends: [os-processes-memory]
+  resources:
+    - resource: cn-systems-approach
+      locator: "Chapters 1–6"
+
+- id: web-http
+  title: The web and HTTP
+  area: systems
+  summary: Requests, responses, headers, caching and cookies. What happens when you open a page.
+  hours: 8
+  requires: [networking]
+  resources:
+    - resource: mdn-http
+      locator: "Overview, Messages, Caching and Cookies"
+
+- id: distributed-systems
+  title: Distributed systems
+  area: systems
+  summary: Replication, consensus with Raft, and staying correct when machines and networks fail.
+  hours: 60
+  requires: [concurrency, networking]
+  recommends: [database-internals]
+  resources:
+    - resource: mit-6824
+      locator: "Lectures, plus the MapReduce and Raft labs"
+    - resource: ddia
+      locator: "Parts II and III"
+      role: deep-dive
+
+- id: systems-security
+  title: Systems security
+  area: systems
+  summary: Memory-safety bugs, privilege separation and web attacks, and how real systems defend against them.
+  hours: 30
+  requires: [os-processes-memory, web-http]
+  recommends: [cryptography]
+  resources:
+    - resource: mit-6858
+      locator: "Lectures on buffer overflows, privilege separation and web security"

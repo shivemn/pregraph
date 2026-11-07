@@ -8,7 +8,10 @@ const id = z
   .string()
   .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'ids must be kebab-case, e.g. "operating-systems"');
 
-export const areaSchema = z.enum(['foundations', 'programming', 'algorithms', 'systems', 'data']);
+export const areaSchema = z.object({
+  id,
+  title: z.string().min(1),
+});
 
 export const resourceSchema = z.object({
   id,
@@ -32,7 +35,7 @@ export const resourceSectionSchema = z.object({
 export const conceptSchema = z.object({
   id,
   title: z.string().min(1),
-  area: areaSchema,
+  area: id,
   summary: z.string().min(1),
   hours: z.number().positive(),
   /** Hard prerequisites: must be learned first, and are pulled into a plan. */
@@ -61,7 +64,8 @@ export const pathSchema = z.object({
   title: z.string().min(1),
   tagline: z.string().min(1),
   background: id,
-  goal: id,
+  /** Goals you can switch between on this path. The first is the default. */
+  goals: z.array(id).min(1),
 });
 
 export type Area = z.infer<typeof areaSchema>;
@@ -73,12 +77,10 @@ export type Goal = z.infer<typeof goalSchema>;
 export type LearningPath = z.infer<typeof pathSchema>;
 
 export interface Content {
+  areas: Area[];
   concepts: Concept[];
   resources: Resource[];
   backgrounds: Background[];
   goals: Goal[];
   paths: LearningPath[];
 }
-
-/** Display order of areas; also the reading order of the concept list. */
-export const AREA_ORDER: Area[] = areaSchema.options;

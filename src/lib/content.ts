@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import { parse } from 'yaml';
 import { z } from 'zod';
 import {
+  areaSchema,
   backgroundSchema,
   conceptSchema,
   goalSchema,
@@ -49,6 +50,7 @@ export function checkContent(c: Content): string[] {
       seen.add(id);
     }
   };
+  dupes('area', c.areas.map((x) => x.id));
   dupes('concept', c.concepts.map((x) => x.id));
   dupes('resource', c.resources.map((x) => x.id));
   dupes('background', c.backgrounds.map((x) => x.id));
@@ -56,7 +58,9 @@ export function checkContent(c: Content): string[] {
   dupes('path', c.paths.map((x) => x.slug));
   for (const x of c.concepts) conceptIds.add(x.id);
 
+  const areaIds = new Set(c.areas.map((a) => a.id));
   for (const concept of c.concepts) {
+    if (!areaIds.has(concept.area)) problems.push(`Concept "${concept.id}" is in unknown area "${concept.area}"`);
     for (const p of [...concept.requires, ...concept.recommends]) {
       if (!conceptIds.has(p)) problems.push(`Concept "${concept.id}" refers to unknown concept "${p}"`);
       if (p === concept.id) problems.push(`Concept "${concept.id}" lists itself as a prerequisite`);
@@ -90,7 +94,9 @@ export function checkContent(c: Content): string[] {
   const goalIds = new Set(c.goals.map((g) => g.id));
   for (const p of c.paths) {
     if (!backgroundIds.has(p.background)) problems.push(`Path "${p.slug}" refers to unknown background "${p.background}"`);
-    if (!goalIds.has(p.goal)) problems.push(`Path "${p.slug}" refers to unknown goal "${p.goal}"`);
+    for (const g of p.goals) {
+      if (!goalIds.has(g)) problems.push(`Path "${p.slug}" refers to unknown goal "${g}"`);
+    }
   }
   return problems;
 }
@@ -105,6 +111,7 @@ export function loadContent(root = join(process.cwd(), 'content')): Content {
     .flatMap((f) => parseList(conceptSchema, readYaml(join(conceptDir, f)), `concepts/${f}`, problems));
 
   const content: Content = {
+    areas: parseList(areaSchema, readYaml(join(root, 'areas.yaml')), 'areas.yaml', problems),
     concepts,
     resources: parseList(resourceSchema, readYaml(join(root, 'resources.yaml')), 'resources.yaml', problems),
     backgrounds: parseList(backgroundSchema, readYaml(join(root, 'backgrounds.yaml')), 'backgrounds.yaml', problems),

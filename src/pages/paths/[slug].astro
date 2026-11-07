@@ -11,7 +11,7 @@ export function getStaticPaths() {
 const content = loadContent();
 const path = content.paths.find((p) => p.slug === Astro.params.slug)!;
 const background = content.backgrounds.find((b) => b.id === path.background)!;
-const goal = content.goals.find((g) => g.id === path.goal)!;
+const goal = content.goals.find((g) => g.id === path.goals[0])!;
 
 // Only what the planner needs goes to the browser — keeps the page small.
 const nodes: ConceptNode[] = content.concepts.map(({ id, title, area, hours, requires, recommends }) => ({

@@ -1,0 +1,23 @@
+- id: sql
+  title: SQL
+  area: data
+  summary: Querying, joining and aggregating tables. The most useful language you'll learn in a weekend.
+  hours: 10
+  recommends: [discrete-math]
+  resources:
+    - resource: sqlbolt
+      locator: "All lessons"
+    - resource: cs50x
+      locator: "Week 7, SQL"
+      role: alternative
+
+- id: database-internals
+  title: How databases work
+  area: data
+  summary: Storage, indexes, query plans, transactions and recovery.
+  hours: 40
+  requires: [sql, trees-heaps, hash-tables]
+  recommends: [file-systems, concurrency]
+  resources:
+    - resource: cmu-15445
+      locator: "The full lecture series"

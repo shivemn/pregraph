@@ -1,0 +1,24 @@
+- id: machine-learning
+  title: Machine learning
+  area: ai
+  summary: Regression, classification, resampling, trees and model selection, with honest attention to what can go wrong.
+  hours: 60
+  requires: [linear-algebra, probability, programming-basics]
+  recommends: [git, sql]
+  resources:
+    - resource: islp
+      locator: "Chapters 2–9"
+    - resource: mml-book
+      locator: "Part I, if your linear algebra or probability is rusty"
+      role: deep-dive
+
+- id: deep-learning
+  title: Deep learning
+  area: ai
+  summary: Neural networks from linear layers up to convolutions, recurrence and transformers.
+  hours: 60
+  requires: [machine-learning]
+  recommends: [linear-structures]
+  resources:
+    - resource: d2l
+      locator: "Chapters 1–11"

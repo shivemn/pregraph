@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
-import { findCycle, indexConcepts, neededConcepts, planPath, type ConceptNode } from '../src/lib/graph';
+import { criticalPath, findCycle, indexConcepts, neededConcepts, planPath, type ConceptNode } from '../src/lib/graph';
 import { checkContent, loadContent } from '../src/lib/content';
 
 const node = (id: string, requires: string[] = [], extra: Partial<ConceptNode> = {}): ConceptNode => ({
@@ -58,17 +58,47 @@ describe('planPath', () => {
     expect(planPath(concepts, ['goal'], new Set()).steps.map((s) => s.id)).toEqual(['x', 'y', 'goal']);
   });
 
-  it('tie-breaks by same area, then fewer hours, then id', () => {
+  it('starts the longest chain first', () => {
+    // short (1h) unlocks nothing else; long1 -> long2 -> goal is a 30h chain
     const concepts = [
-      node('m1', [], { area: 'maths', hours: 5 }),
-      node('c-long', [], { area: 'cs', hours: 9 }),
-      node('c-short', [], { area: 'cs', hours: 2 }),
-      node('m2', [], { area: 'maths', hours: 3 }),
-      node('goal', ['m1', 'c-long', 'c-short', 'm2'], { area: 'cs' }),
+      node('short', [], { hours: 1 }),
+      node('long1', [], { hours: 10 }),
+      node('long2', ['long1'], { hours: 10 }),
+      node('goal', ['short', 'long2'], { hours: 10 }),
     ];
-    const ids = planPath(concepts, ['goal'], new Set()).steps.map((s) => s.id);
-    // c-short (2h) first, then stay in cs, then maths shortest-first.
-    expect(ids).toEqual(['c-short', 'c-long', 'm2', 'm1', 'goal']);
+    expect(planPath(concepts, ['goal'], new Set()).steps.map((s) => s.id)).toEqual(['long1', 'long2', 'short', 'goal']);
+  });
+
+  it('stays in the same area unless another one is much more urgent', () => {
+    const concepts = [
+      node('a1', [], { area: 'a', hours: 10 }),
+      node('a2', [], { area: 'a', hours: 6 }), // 60% as urgent as b1: stay in area a
+      node('b1', [], { area: 'b', hours: 10 }),
+      node('goal', ['a1', 'a2', 'b1'], { area: 'g', hours: 1 }),
+    ];
+    expect(planPath(concepts, ['goal'], new Set()).steps.map((s) => s.id)).toEqual(['a1', 'a2', 'b1', 'goal']);
+    concepts[1]!.hours = 4; // now only 40% as urgent: jump to b1 first
+    expect(planPath(concepts, ['goal'], new Set()).steps.map((s) => s.id)).toEqual(['a1', 'b1', 'a2', 'goal']);
+  });
+
+  it('explains why each step is there', () => {
+    const concepts = [node('base'), node('x', ['base']), node('y', ['base']), node('only-y', [])];
+    concepts[2]!.requires.push('only-y');
+    const plan = planPath(concepts, ['x', 'y'], new Set());
+    const step = (id: string) => plan.steps.find((s) => s.id === id)!;
+    expect(step('base').neededFor.sort()).toEqual(['x', 'y']);
+    expect(step('only-y').neededFor).toEqual(['y']);
+    expect(step('base').unlocks.sort()).toEqual(['x', 'y']);
+  });
+});
+
+describe('criticalPath', () => {
+  it('adds up the longest chain of hours waiting on each concept', () => {
+    const idx = indexConcepts(diamond.map((c) => ({ ...c, hours: 2 })));
+    const rank = criticalPath(idx, new Set(['a', 'b', 'c', 'd']));
+    expect(rank.get('d')).toBe(2);
+    expect(rank.get('b')).toBe(4);
+    expect(rank.get('a')).toBe(6);
   });
 });
 
@@ -169,17 +199,17 @@ describe('real content', () => {
   it('maths graduates skip proofs and discrete maths', () => {
     const path = content.paths.find((p) => p.slug === 'maths-to-cs')!;
     const bg = content.backgrounds.find((b) => b.id === path.background)!;
-    const goal = content.goals.find((g) => g.id === path.goal)!;
+    const goal = content.goals.find((g) => g.id === path.goals[0])!;
     const ids = planPath(content.concepts, goal.targets, new Set(bg.knows)).steps.map((s) => s.id);
     expect(ids).not.toContain('proofs');
     expect(ids).not.toContain('discrete-math');
-    expect(ids).toContain('operating-systems');
-    expect(ids.indexOf('c-and-memory')).toBeLessThan(ids.indexOf('operating-systems'));
+    expect(ids).toContain('os-processes-memory');
+    expect(ids.indexOf('c-and-memory')).toBeLessThan(ids.indexOf('os-processes-memory'));
   });
 
   it('catches a cycle someone might add by mistake', () => {
     const broken = structuredClone(content);
-    broken.concepts.find((c) => c.id === 'programming-basics')!.requires.push('algorithms');
+    broken.concepts.find((c) => c.id === 'programming-basics')!.requires.push('graph-algorithms');
     expect(checkContent(broken).join('\n')).toMatch(/cycle/);
   });
 });

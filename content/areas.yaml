@@ -1,0 +1,15 @@
+# Topic areas, in the order they're shown. Each one is drawn as its own coloured line.
+- id: foundations
+  title: Maths foundations
+- id: programming
+  title: Programming
+- id: algorithms
+  title: Algorithms and data structures
+- id: theory
+  title: Theory and languages
+- id: systems
+  title: Systems
+- id: data
+  title: Data
+- id: ai
+  title: Machine learning

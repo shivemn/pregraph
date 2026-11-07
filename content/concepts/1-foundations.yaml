@@ -1,18 +1,43 @@
 - id: proofs
-  title: Mathematical Proof
+  title: Mathematical proof
   area: foundations
-  summary: Direct proof, contradiction, induction and the habit of precise definitions.
+  summary: Direct proof, contradiction and induction, plus the habit of writing precise definitions.
   hours: 20
   resources:
     - resource: mit-6042
       locator: "Part I: Proofs"
 
 - id: discrete-math
-  title: Discrete Mathematics
+  title: Discrete maths
   area: foundations
-  summary: Logic, sets, relations, counting, graphs and recurrences — the maths CS is built on.
+  summary: Logic, sets, relations, counting, graphs and recurrences. Most of algorithms rests on this.
   hours: 40
   requires: [proofs]
   resources:
     - resource: mit-6042
-      locator: "Parts II–III: Structures and Counting"
+      locator: "Parts II and III: Structures, Counting"
+
+- id: linear-algebra
+  title: Linear algebra
+  area: foundations
+  summary: Vectors, matrices, eigenvalues and least squares. Essential for machine learning and graphics.
+  hours: 40
+  resources:
+    - resource: mit-1806
+      locator: "Video lectures, in order"
+    - resource: mml-book
+      locator: "Chapters 2–4"
+      role: alternative
+
+- id: probability
+  title: Probability
+  area: foundations
+  summary: Random variables, conditioning, expectation and the common distributions.
+  hours: 40
+  recommends: [discrete-math]
+  resources:
+    - resource: stat110
+      locator: "Lecture videos and the strategic practice sets"
+    - resource: mit-6042
+      locator: "Part IV: Probability"
+      role: alternative

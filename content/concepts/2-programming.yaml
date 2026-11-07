@@ -1,58 +1,106 @@
 - id: programming-basics
-  title: Programming Fundamentals (Python)
+  title: Programming in Python
   area: programming
-  summary: Variables, control flow, functions, lists and dictionaries, reading and writing files.
+  summary: Variables, conditions, loops, functions, lists and dictionaries. Enough to write small programs on your own.
   hours: 40
   resources:
     - resource: think-python
       locator: "Chapters 1–11"
     - resource: cs50x
-      locator: "Weeks 0–3 (in C), then Week 6 (Python)"
+      locator: "Weeks 0–3, then Week 6 for Python"
       role: alternative
 
 - id: recursion
   title: Recursion
   area: programming
-  summary: Functions that call themselves, base cases, and thinking of problems as smaller copies of themselves.
+  summary: Functions that call themselves. If you know induction, you already know the idea; this is the practice.
   hours: 8
   requires: [programming-basics]
   recommends: [proofs]
   resources:
     - resource: think-python
-      locator: "Chapters on recursion and fruitful functions"
-    - resource: cs50x
-      locator: "Week 3: Algorithms (recursion section)"
+      locator: "Chapters 5–6"
+    - resource: composing-programs
+      locator: "Section 1.7, Recursive functions"
       role: alternative
 
-- id: shell-tools
-  title: The Shell and Command-Line Tools
+- id: higher-order-programming
+  title: Functions and abstraction
   area: programming
-  summary: Navigating files, pipes, scripts and the editor — the everyday tools no course teaches.
+  summary: Functions as values, closures and data abstraction. How to keep a growing program understandable.
+  hours: 20
+  requires: [recursion]
+  resources:
+    - resource: composing-programs
+      locator: "Chapters 1–2"
+
+- id: shell-tools
+  title: The shell and command-line tools
+  area: programming
+  summary: Moving around files, pipes, small scripts and an editor you're fast in. Nobody teaches this, everybody expects it.
   hours: 8
   resources:
     - resource: missing-semester
-      locator: "Lectures: The Shell; Shell Tools and Scripting; Editors"
+      locator: "The Shell; Shell Tools and Scripting; Editors"
 
 - id: git
-  title: Version Control with Git
+  title: Git
   area: programming
-  summary: Commits, branches, merging, remotes and how to undo mistakes.
+  summary: Commits, branches, merging, remotes, and how to get out of trouble.
   hours: 6
   recommends: [shell-tools]
   resources:
     - resource: pro-git
       locator: "Chapters 1–3"
     - resource: missing-semester
-      locator: "Lecture: Version Control (Git)"
+      locator: "Version Control (Git)"
       role: alternative
 
-- id: c-and-memory
-  title: C and Memory
+- id: oop-design
+  title: Objects and design
   area: programming
-  summary: Pointers, the stack and the heap, manual memory management, and why programs crash.
+  summary: Classes, inheritance and when not to use it, and the common design patterns you'll meet in real code.
+  hours: 20
+  requires: [higher-order-programming]
+  resources:
+    - resource: think-python
+      locator: "Chapters 14–17"
+    - resource: refactoring-guru
+      locator: "Creational, structural and behavioural patterns"
+      role: deep-dive
+
+- id: testing-debugging
+  title: Testing and debugging
+  area: programming
+  summary: Unit tests, test doubles, debuggers and profilers. How to find out why your program is wrong.
+  hours: 12
+  requires: [programming-basics]
+  recommends: [shell-tools]
+  resources:
+    - resource: missing-semester
+      locator: "Debugging and Profiling"
+    - resource: swe-at-google
+      locator: "Chapters 11–14 on testing"
+      role: deep-dive
+
+- id: c-and-memory
+  title: C and memory
+  area: programming
+  summary: Pointers, the stack and the heap, and managing memory by hand. Why programs crash.
   hours: 25
   requires: [programming-basics]
-  recommends: [computer-architecture]
+  recommends: [git, shell-tools]
   resources:
     - resource: cs50x
       locator: "Weeks 1–5"
+
+- id: software-engineering
+  title: Working in a codebase
+  area: programming
+  summary: Code review, style, documentation and keeping a project healthy as more people touch it.
+  hours: 15
+  requires: [git, testing-debugging]
+  recommends: [oop-design]
+  resources:
+    - resource: swe-at-google
+      locator: "Part I, then the chapters on style, code review and documentation"

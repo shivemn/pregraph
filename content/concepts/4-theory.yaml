@@ -1,0 +1,52 @@
+- id: automata
+  title: Automata and formal languages
+  area: theory
+  summary: Finite automata, regular expressions and context-free grammars. The maths behind every parser.
+  hours: 20
+  requires: [discrete-math]
+  resources:
+    - resource: mit-18404
+      locator: "Lectures 1–5"
+
+- id: computability
+  title: Computability and complexity
+  area: theory
+  summary: Turing machines, problems no program can solve, and what P versus NP actually asks.
+  hours: 30
+  requires: [automata, complexity-analysis]
+  resources:
+    - resource: mit-18404
+      locator: "Lecture 6 onwards"
+
+- id: interpreters
+  title: Building an interpreter
+  area: theory
+  summary: Scanning, parsing into a tree and evaluating it. How a programming language actually runs.
+  hours: 50
+  requires: [recursion, hash-tables]
+  recommends: [automata, oop-design]
+  resources:
+    - resource: crafting-interpreters
+      locator: "Part II, A Tree-Walk Interpreter"
+
+- id: compilers
+  title: Compilers and virtual machines
+  area: theory
+  summary: Compiling to bytecode, a stack-based virtual machine and garbage collection.
+  hours: 50
+  requires: [interpreters, c-and-memory]
+  recommends: [computer-architecture]
+  resources:
+    - resource: crafting-interpreters
+      locator: "Part III, A Bytecode Virtual Machine"
+
+- id: cryptography
+  title: Cryptography
+  area: theory
+  summary: Ciphers, hashing, signatures and key exchange, with proofs of what they do and don't guarantee.
+  hours: 40
+  requires: [probability, discrete-math]
+  recommends: [complexity-analysis]
+  resources:
+    - resource: cryptobook
+      locator: "Part I, Secret key cryptography"

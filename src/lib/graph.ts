@@ -23,6 +23,10 @@ export interface PlanStep {
   hours: number;
   /** Hard prerequisites of this step that are still in the plan (not yet known). */
   waitingOn: string[];
+  /** Later steps that list this one as a hard prerequisite. */
+  unlocks: string[];
+  /** Which of the requested goals pulled this step into the plan. */
+  neededFor: string[];
 }
 
 export interface Plan {
@@ -118,22 +122,65 @@ export function neededConcepts(
 
 /**
  * Step 2: order the needed concepts so each comes after its prerequisites
- * (Kahn's algorithm). Soft edges inside the set also count for ordering;
- * if they happen to create a cycle, they're dropped and hard edges alone decide.
+ * (Kahn's algorithm). Soft edges inside the set count for ordering too; if
+ * they happen to form a cycle they're dropped and hard edges alone decide.
  *
- * Tie-break when several concepts are ready: stay in the same area as the
- * previous step, then shorter first, then alphabetical.
+ * When several concepts are ready at once, two things pull against each other.
+ * Starting the long chains early (largest critical path first, the classic
+ * list-scheduling rule) keeps them from holding up the end. Staying in one
+ * area keeps the plan readable. So: stay in the current area if something
+ * there is at least STAY_RATIO as urgent as the most urgent ready concept;
+ * otherwise jump to the most urgent one. Remaining ties go by id.
  */
 export function orderConcepts(index: Index, needed: ReadonlySet<string>): string[] {
-  const withSoft = kahn(index, needed, true);
+  const rank = criticalPath(index, needed);
+  const withSoft = kahn(index, needed, rank, true);
   if (withSoft) return withSoft;
-  const hardOnly = kahn(index, needed, false);
+  const hardOnly = kahn(index, needed, rank, false);
   if (hardOnly) return hardOnly;
   const cycle = findCycle(needed, (id) => index.get(id)!.requires.filter((p) => needed.has(p)));
   throw new Error(`Prerequisite cycle: ${cycle?.join(' → ') ?? 'unknown'}`);
 }
 
-function kahn(index: Index, needed: ReadonlySet<string>, useSoft: boolean): string[] | null {
+/**
+ * For each needed concept: its own hours plus the longest chain of hours that
+ * waits on it inside the needed set. Soft edges count here too, otherwise a
+ * short soft prerequisite (say, Git before C) would look unimportant and hold
+ * up the long chain behind it. Memoised DFS, O(V + E).
+ */
+export function criticalPath(index: Index, needed: ReadonlySet<string>): Map<string, number> {
+  const dependents = new Map<string, string[]>();
+  for (const id of needed) dependents.set(id, []);
+  for (const id of needed) {
+    const node = index.get(id)!;
+    for (const p of new Set([...node.requires, ...node.recommends])) {
+      if (needed.has(p) && p !== id) dependents.get(p)!.push(id);
+    }
+  }
+  const rank = new Map<string, number>();
+  const visiting = new Set<string>();
+  const visit = (id: string): number => {
+    const known = rank.get(id);
+    if (known !== undefined) return known;
+    if (visiting.has(id)) return 0; // a soft-edge cycle; ignore the back edge
+    visiting.add(id);
+    let longest = 0;
+    for (const d of dependents.get(id)!) longest = Math.max(longest, visit(d));
+    visiting.delete(id);
+    const r = index.get(id)!.hours + longest;
+    rank.set(id, r);
+    return r;
+  };
+  for (const id of needed) visit(id);
+  return rank;
+}
+
+function kahn(
+  index: Index,
+  needed: ReadonlySet<string>,
+  rank: ReadonlyMap<string, number>,
+  useSoft: boolean,
+): string[] | null {
   const inDegree = new Map<string, number>();
   const unlocks = new Map<string, string[]>();
   for (const id of needed) {
@@ -154,12 +201,9 @@ function kahn(index: Index, needed: ReadonlySet<string>, useSoft: boolean): stri
   const order: string[] = [];
   let lastArea: string | null = null;
 
+  // A linear scan of `ready` is plenty for a few hundred concepts.
   while (ready.length > 0) {
-    let best = 0;
-    for (let i = 1; i < ready.length; i++) {
-      if (better(index.get(ready[i]!)!, index.get(ready[best]!)!, lastArea)) best = i;
-    }
-    const id = ready.splice(best, 1)[0]!;
+    const id = ready.splice(pickNext(ready, index, rank, lastArea), 1)[0]!;
     order.push(id);
     lastArea = index.get(id)!.area;
     for (const next of unlocks.get(id)!) {
@@ -171,15 +215,35 @@ function kahn(index: Index, needed: ReadonlySet<string>, useSoft: boolean): stri
   return order.length === needed.size ? order : null;
 }
 
-function better(a: ConceptNode, b: ConceptNode, lastArea: string | null): boolean {
-  const sa = a.area === lastArea ? 0 : 1;
-  const sb = b.area === lastArea ? 0 : 1;
-  if (sa !== sb) return sa < sb;
-  if (a.hours !== b.hours) return a.hours < b.hours;
-  return a.id < b.id;
+/** How urgent a same-area concept must be, relative to the most urgent, to keep the current area. */
+export const STAY_RATIO = 0.5;
+
+function pickNext(
+  ready: readonly string[],
+  index: Index,
+  rank: ReadonlyMap<string, number>,
+  lastArea: string | null,
+): number {
+  const better = (a: number, b: number) => {
+    const ra = rank.get(ready[a]!)!;
+    const rb = rank.get(ready[b]!)!;
+    return ra !== rb ? ra > rb : ready[a]! < ready[b]!;
+  };
+  let best = 0;
+  let bestSameArea = -1;
+  for (let i = 0; i < ready.length; i++) {
+    if (better(i, best)) best = i;
+    if (index.get(ready[i]!)!.area === lastArea && (bestSameArea < 0 || better(i, bestSameArea))) {
+      bestSameArea = i;
+    }
+  }
+  if (bestSameArea >= 0 && rank.get(ready[bestSameArea]!)! >= STAY_RATIO * rank.get(ready[best]!)!) {
+    return bestSameArea;
+  }
+  return best;
 }
 
-/** Steps 1–3 together: the personal plan for these goals given what you know. */
+/** Steps 1–3 together: the personal plan for these goals, given what you know. */
 export function planPath(
   concepts: readonly ConceptNode[] | Index,
   goals: readonly string[],
@@ -189,6 +253,13 @@ export function planPath(
   const needed = neededConcepts(index, goals, known);
   const order = orderConcepts(index, needed);
 
+  // "Why is this here?": run the pruned walk once per goal. G small walks of
+  // O(V + E) each is still nothing at this size.
+  const neededFor = new Map<string, string[]>(order.map((id) => [id, []]));
+  for (const g of goals) {
+    for (const id of neededConcepts(index, [g], known)) neededFor.get(id)?.push(g);
+  }
+
   const steps = order.map((id): PlanStep => {
     const c = index.get(id)!;
     return {
@@ -197,6 +268,8 @@ export function planPath(
       area: c.area,
       hours: c.hours,
       waitingOn: c.requires.filter((p) => needed.has(p)),
+      unlocks: order.filter((other) => index.get(other)!.requires.includes(id)),
+      neededFor: neededFor.get(id)!,
     };
   });
 
