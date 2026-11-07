@@ -1,38 +1,122 @@
 ---
 import Base from '../layouts/Base.astro';
-import { loadContent } from '../lib/content';
+import { planPath } from '../lib/graph';
+import { content, listOf, pathContext, title } from '../lib/site';
+import '../styles/route.css';
 
-const content = loadContent();
+const c = content();
+const areaTitle = new Map(c.areas.map((a) => [a.id, a.title]));
+
+const routes = c.paths.map((p) => {
+  const { background, goals } = pathContext(c, p);
+  const plans = goals.map((g) => ({ goal: g, plan: planPath(c.concepts, g.targets, new Set(background.knows)) }));
+  return { path: p, background, plans };
+});
+
+const featured = routes[0]!;
+const preview = featured.plans[0]!.plan.steps.slice(0, 6);
+const remaining = featured.plans[0]!.plan.steps.length - preview.length;
 ---
 
-<Base title="Pregraph">
-  <h1>Learn a new field,<br />starting from the one you know.</h1>
-  <p class="lead muted">
-    Pregraph maps a subject as a graph of concepts and prerequisites. Tell it where you're coming from,
-    and it removes what you already know, puts the rest in order, and points you to the exact chapter or
-    lecture to learn each step — free resources first.
-  </p>
+<Base title="Pregraph" wide>
+  <div class="top">
+  <section class="hero">
+    <h1>A study plan that starts from what you already know.</h1>
+    <p class="lede">
+      Teaching yourself computer science is mostly a problem of order. Pregraph keeps the subject as a map of
+      concepts and what each one depends on. Tell it your background and your goal, and it drops what you
+      know, sorts the rest so nothing comes before its prerequisites, and points you to the free chapter or
+      lecture for every step.
+    </p>
+    <p><a class="go" href={`/paths/${featured.path.slug}`}>Open the {featured.path.title.toLowerCase()} route</a></p>
+  </section>
 
-  <h2>Paths</h2>
-  <ul class="paths">
-    {
-      content.paths.map((p) => (
-        <li>
-          <a class="card path" href={`/paths/${p.slug}`}>
-            <strong>{p.title}</strong>
-            <span class="muted">{p.tagline}</span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-  <p class="muted">More transitions are coming. Each one reuses the same concept graph with a different starting point.</p>
+  <section class="preview" aria-labelledby="preview-heading">
+    <h2 id="preview-heading">
+      The first stops for a {featured.background.title.toLowerCase()} heading for {featured.plans[0]!.goal.title}
+    </h2>
+    <ol class="route">
+      {
+        preview.map((s) => (
+          <li class="stop" data-area={s.area} data-state={s.waitingOn.length === 0 ? 'ready' : 'waiting'}>
+            <span class="station" aria-hidden="true" />
+            <div class="stop-body">
+              <div class="stop-head">
+                <a class="stop-title" href={`/concepts/${s.id}`}>{s.title}</a>
+                <span class="stop-hours">{s.hours} h</span>
+              </div>
+              <p class="stop-sub">
+                <span class="area-name">{areaTitle.get(s.area)}</span>.{' '}
+                {s.waitingOn.length === 0 ? 'Ready to start.' : `After ${listOf(s.waitingOn.map((id) => title(c, id)))}.`}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="route-end">
+      and {remaining} more stops to the end of the route.
+    </p>
+  </section>
+  </div>
+
+  <section class="routes" aria-labelledby="routes-heading">
+    <h2 id="routes-heading">Routes</h2>
+    <ul>
+      {
+        routes.map(({ path, plans }) => (
+          <li>
+            <a href={`/paths/${path.slug}`}>{path.title}</a>
+            <p class="quiet">{path.tagline}</p>
+            <p class="faint num">
+              {listOf(plans.map(({ goal, plan }) => `${goal.title} in ${plan.steps.length} stops`))}.
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="how" aria-labelledby="how-heading">
+    <h2 id="how-heading">How the order is worked out</h2>
+    <p>
+      Every concept lists what you need to know first. Starting from your goal, Pregraph walks back through
+      those prerequisites and stops wherever your background already covers the ground, so a maths graduate
+      never sees a proofs course. What's left is put in order with a topological sort. When several things
+      could come next, it starts the longest chains first and tries to keep you in one area at a time.
+    </p>
+    <p>
+      There are {c.concepts.length} concepts and {c.resources.filter((r) => r.free).length} free resources on
+      the map so far. The details are in the <a href="https://github.com/shivemn/pregraph/blob/main/docs/SYSTEM_DESIGN.md">design notes</a>.
+    </p>
+  </section>
 </Base>
 
 <style>
-  .lead { font-size: 1.15rem; max-width: 60ch; }
-  .paths { list-style: none; padding: 0; display: grid; gap: 12px; }
-  .path { display: flex; flex-direction: column; gap: 4px; text-decoration: none; color: inherit; }
-  .path:hover { border-color: var(--accent); }
-  .path strong { font-family: var(--serif); font-size: 1.3rem; color: var(--accent); }
+  .top { display: grid; grid-template-columns: 1.05fr 1fr; gap: 72px; align-items: start; padding-top: 40px; }
+  .hero { display: grid; gap: 22px; position: sticky; top: 24px; }
+  .hero h1 { max-width: 14ch; font-size: clamp(2.3rem, 6vw, 3.7rem); letter-spacing: -0.02em; }
+  .lede { font-size: 1.1875rem; max-width: 52ch; color: var(--ink-2); }
+  .go {
+    display: inline-block; padding: 11px 18px; border-radius: 8px;
+    background: var(--ink); color: var(--paper); font-weight: 700; text-decoration: none;
+  }
+  .go:hover { background: color-mix(in srgb, var(--ink) 85%, var(--paper)); }
+
+  .preview { padding: 22px 24px 20px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
+  .preview h2 { font-size: 1rem; font-weight: 700; margin-bottom: 18px; color: var(--ink-2); }
+  .preview .station { --paper: var(--surface); }
+
+  .routes, .how { margin-top: 80px; max-width: 760px; }
+  @media (max-width: 960px) {
+    .top { grid-template-columns: 1fr; gap: 40px; padding-top: 16px; }
+    .hero { position: static; }
+  }
+  .routes ul { list-style: none; padding: 0; margin: 16px 0 0; border-top: 1px solid var(--rule); }
+  .routes li { padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+  .routes li > a { font-size: 1.3rem; font-weight: 750; text-decoration: none; }
+  .routes li > a:hover { text-decoration: underline; }
+  .routes .faint { font-size: 0.9375rem; }
+
+  .how p { margin-top: 14px; max-width: 64ch; }
 </style>

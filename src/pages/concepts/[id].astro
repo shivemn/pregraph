@@ -1,73 +1,133 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { loadContent } from '../../lib/content';
-import { unlockedBy } from '../../lib/graph';
+import { content, listOf } from '../../lib/site';
 
 export function getStaticPaths() {
-  return loadContent().concepts.map((c) => ({ params: { id: c.id } }));
+  return content().concepts.map((x) => ({ params: { id: x.id } }));
 }
 
-const content = loadContent();
-const concept = content.concepts.find((c) => c.id === Astro.params.id)!;
-const byId = new Map(content.concepts.map((c) => [c.id, c]));
-const resources = new Map(content.resources.map((r) => [r.id, r]));
-const unlocks = unlockedBy(content.concepts, concept.id);
-const roleLabel = { primary: 'Start here', alternative: 'Alternative', 'deep-dive': 'Go deeper' } as const;
+const c = content();
+const concept = c.concepts.find((x) => x.id === Astro.params.id)!;
+const byId = new Map(c.concepts.map((x) => [x.id, x]));
+const resources = new Map(c.resources.map((r) => [r.id, r]));
+const area = c.areas.find((a) => a.id === concept.area)!;
+
+const before = concept.requires.map((id) => byId.get(id)!);
+const helpful = concept.recommends.map((id) => byId.get(id)!);
+const after = c.concepts.filter((x) => x.requires.includes(concept.id));
+const inGoals = c.goals.filter((g) => g.targets.includes(concept.id));
+
+const groups = [
+  { role: 'primary', heading: 'Start here' },
+  { role: 'alternative', heading: 'Another way in' },
+  { role: 'deep-dive', heading: 'If you want to go further' },
+] as const;
 ---
 
 <Base title={concept.title} description={concept.summary}>
-  <p class="muted crumbs"><a href="/paths/maths-to-cs">← Back to the path</a></p>
-  <h1>{concept.title}</h1>
-  <p class="lead">{concept.summary}</p>
-  <p class="muted">About {concept.hours} hours · {concept.area}</p>
+  <article data-area={concept.area}>
+    <header class="head">
+      <span class="area-chip">{area.title}</span>
+      <h1>{concept.title}</h1>
+      <p class="summary">{concept.summary}</p>
+      <p class="quiet">
+        About <span class="num">{concept.hours}</span> hours of study.{' '}
+        {inGoals.length > 0 && <>A target for {listOf(inGoals.map((g) => g.title))}.</>}
+      </p>
+    </header>
 
-  <h2>Learn it from</h2>
-  <ul class="resources">
-    {
-      concept.resources.map((s) => {
-        const r = resources.get(s.resource)!;
-        return (
-          <li class="card">
-            <div class="row">
-              <span class="tag">{roleLabel[s.role]}</span>
-              {!r.free && <span class="tag warn">Paid</span>}
-              {!s.verified && <span class="tag warn" title="This chapter or lecture reference hasn't been checked by a human yet">Unverified locator</span>}
+    <section aria-labelledby="learn">
+      <h2 id="learn">Where to learn it</h2>
+      {
+        groups.map(({ role, heading }) => {
+          const sections = concept.resources.filter((s) => s.role === role);
+          if (sections.length === 0) return null;
+          return (
+            <div class="group">
+              <h3>{heading}</h3>
+              {sections.map((s) => {
+                const r = resources.get(s.resource)!;
+                return (
+                  <div class="source">
+                    <a class="source-title" href={r.url} rel="noopener">{r.title}</a>
+                    <p class="quiet">{r.author}</p>
+                    <p class="use">Use: {s.locator}</p>
+                    {(!r.free || !s.verified) && (
+                      <p class="flags">
+                        {!r.free && <span class="flag paid">Paid</span>}
+                        {!s.verified && (
+                          <span class="flag" title="Nobody has opened this resource to confirm the chapter or lecture numbers yet.">
+                            Section not checked yet
+                          </span>
+                        )}
+                      </p>
+                    )}
+                    {r.note && <p class="faint note">{r.note}</p>}
+                  </div>
+                );
+              })}
             </div>
-            <a href={r.url} rel="noopener" target="_blank"><strong>{r.title}</strong></a>
-            <div class="muted">{r.author} · {r.type}</div>
-            <div>Read/watch: <strong>{s.locator}</strong></div>
-            {r.note && <div class="muted small">{r.note}</div>}
-          </li>
-        );
-      })
-    }
-  </ul>
+          );
+        })
+      }
+    </section>
 
-  <div class="links">
-    <section>
-      <h3>Learn first</h3>
-      {concept.requires.length === 0 ? <p class="muted">Nothing — you can start here.</p> : (
-        <ul>{concept.requires.map((id) => <li><a href={`/concepts/${id}`}>{byId.get(id)!.title}</a></li>)}</ul>
-      )}
-      {concept.recommends.length > 0 && (
-        <p class="muted small">Helpful but optional: {concept.recommends.map((id, i) => <>{i > 0 && ', '}<a href={`/concepts/${id}`}>{byId.get(id)!.title}</a></>)}</p>
-      )}
+    <section class="neighbours" aria-labelledby="around">
+      <h2 id="around">Before and after</h2>
+      <div class="lanes">
+        <div class="lane">
+          <h3>Learn first</h3>
+          {before.length === 0 ? <p class="quiet">Nothing. You can start here.</p> : (
+            <ul>{before.map((x) => <li data-area={x.area}><a href={`/concepts/${x.id}`}>{x.title}</a></li>)}</ul>
+          )}
+          {helpful.length > 0 && (
+            <p class="faint small">Helps to know: {helpful.map((x, i) => (
+              <>{i > 0 && (i === helpful.length - 1 ? ' and ' : ', ')}<a href={`/concepts/${x.id}`}>{x.title}</a></>
+            ))}</p>
+          )}
+        </div>
+        <div class="lane this" data-area={concept.area}>
+          <span class="dot" aria-hidden="true"></span>
+          <strong>{concept.title}</strong>
+        </div>
+        <div class="lane">
+          <h3>Opens up</h3>
+          {after.length === 0 ? <p class="quiet">Nothing else on the map yet.</p> : (
+            <ul>{after.map((x) => <li data-area={x.area}><a href={`/concepts/${x.id}`}>{x.title}</a></li>)}</ul>
+          )}
+        </div>
+      </div>
     </section>
-    <section>
-      <h3>Unlocks</h3>
-      {unlocks.length === 0 ? <p class="muted">Nothing yet in this graph.</p> : (
-        <ul>{unlocks.map((c) => <li><a href={`/concepts/${c.id}`}>{c.title}</a></li>)}</ul>
-      )}
-    </section>
-  </div>
+  </article>
 </Base>
 
 <style>
-  .crumbs { margin: 0; }
-  .lead { font-size: 1.15rem; }
-  .resources { list-style: none; padding: 0; display: grid; gap: 12px; }
-  .resources li { display: grid; gap: 4px; }
-  .row { display: flex; gap: 6px; flex-wrap: wrap; }
-  .small { font-size: 0.875rem; }
-  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+  .head { display: grid; gap: 12px; padding: 24px 0 8px; }
+  .summary { font-size: 1.25rem; line-height: 1.45; max-width: 56ch; }
+
+  section { margin-top: 44px; }
+  h2 { margin-bottom: 8px; }
+
+  .group { margin-top: 20px; }
+  .group h3 { font-size: 0.9375rem; color: var(--ink-2); font-weight: 650; margin-bottom: 8px; }
+  .source { padding: 14px 0 14px 18px; border-left: 3px solid var(--line); display: grid; gap: 3px; }
+  .source + .source { margin-top: 10px; }
+  .source-title { font-size: 1.125rem; font-weight: 700; }
+  .use { font-weight: 600; }
+  .flags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .note { font-size: 0.9375rem; }
+  .small { font-size: 0.9375rem; margin-top: 8px; }
+
+  .lanes { display: grid; grid-template-columns: 1fr auto 1fr; gap: 28px; align-items: start; margin-top: 16px; }
+  .lane h3 { font-size: 0.9375rem; color: var(--ink-2); font-weight: 650; margin-bottom: 8px; }
+  .lane ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .lane li { display: flex; align-items: center; gap: 10px; }
+  .lane li::before { content: ''; width: 12px; height: 12px; border-radius: 50%; border: 3px solid var(--line); flex: none; }
+  .this { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 26px 8px 0; text-align: center; max-width: 16ch; }
+  .this .dot { width: 26px; height: 26px; border-radius: 50%; background: var(--line); box-shadow: 0 0 0 5px color-mix(in srgb, var(--line) 22%, transparent); }
+
+  @media (max-width: 640px) {
+    .lanes { grid-template-columns: 1fr; gap: 20px; }
+    .this { flex-direction: row; padding: 0; max-width: none; text-align: left; }
+  }
 </style>

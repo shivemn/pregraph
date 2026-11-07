@@ -1,0 +1,37 @@
+.planner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 56px;
+  align-items: start;
+  margin-top: 28px;
+}
+
+.goal-picker { display: grid; gap: 10px; justify-items: start; }
+.goal-label { font-weight: 650; }
+.goal-description { max-width: 58ch; font-size: 0.9375rem; }
+
+.summary { margin-top: 26px; font-size: 1.25rem; line-height: 1.4; }
+.summary strong { font-weight: 800; }
+.hint { margin: 6px 0 22px; font-size: 0.875rem; }
+
+.planner-side {
+  position: sticky; top: 20px;
+  display: grid; gap: 28px;
+  padding-top: 4px;
+}
+.side-heading { font-size: 1rem; font-weight: 750; margin-bottom: 12px; }
+.small { font-size: 0.9375rem; }
+
+.areas { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.area-row { display: flex; justify-content: space-between; gap: 8px; font-size: 0.9375rem; }
+.area-bar { height: 4px; border-radius: 2px; margin-top: 6px; background: color-mix(in srgb, var(--line) 22%, transparent); overflow: hidden; }
+.area-bar span { display: block; height: 100%; background: var(--line); transition: width 0.35s ease; }
+
+.skipped { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 4px; font-size: 0.9375rem; }
+
+@media (max-width: 900px) {
+  .planner { grid-template-columns: 1fr; gap: 32px; }
+  .planner-side { position: static; order: 2; border-top: 1px solid var(--rule); padding-top: 24px; }
+}
+
+.start-over { justify-self: start; }

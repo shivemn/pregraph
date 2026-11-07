@@ -1,0 +1,136 @@
+/*
+  Pregraph's look borrows from transit maps: every topic area is a coloured
+  line, every concept is a stop, and your plan is a route that fills in as
+  you go. One typeface (Overpass, modelled on US highway signage), cool paper,
+  navy ink. The route line is the loud part; everything else stays quiet.
+*/
+
+:root {
+  --paper: #f4f6f8;
+  --surface: #ffffff;
+  --ink: #14202c;
+  --ink-2: #4a5867;
+  --ink-3: #7c8896;
+  --rule: #d5dce3;
+  --focus: #2563c9;
+  --warn: #9a5b00;
+
+  --foundations: #6e56cf;
+  --programming: #12805c;
+  --algorithms: #c53b30;
+  --theory: #a86a00;
+  --systems: #2162c6;
+  --data: #0a7f93;
+  --ai: #b33a86;
+
+  --font: 'Overpass Variable', 'Overpass', system-ui, sans-serif;
+  --measure: 66ch;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0e141b;
+    --surface: #151d26;
+    --ink: #e6ebf0;
+    --ink-2: #a3afbc;
+    --ink-3: #74818f;
+    --rule: #26313d;
+    --focus: #7ea8f5;
+    --warn: #e2b55a;
+
+    --foundations: #a08ef2;
+    --programming: #3dbf8f;
+    --algorithms: #f0705f;
+    --theory: #e0a63c;
+    --systems: #5b95f0;
+    --data: #3cc2d6;
+    --ai: #e27cc0;
+    color-scheme: dark;
+  }
+}
+
+/* Each area sets --line for everything inside it. */
+[data-area='foundations'] { --line: var(--foundations); }
+[data-area='programming'] { --line: var(--programming); }
+[data-area='algorithms'] { --line: var(--algorithms); }
+[data-area='theory'] { --line: var(--theory); }
+[data-area='systems'] { --line: var(--systems); }
+[data-area='data'] { --line: var(--data); }
+[data-area='ai'] { --line: var(--ai); }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-feature-settings: 'kern';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { line-height: 1.12; letter-spacing: -0.012em; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5.5vw, 3.1rem); font-weight: 800; }
+h2 { font-size: 1.5rem; font-weight: 750; }
+h3 { font-size: 1.125rem; font-weight: 700; }
+p { margin: 0; }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 3px; }
+
+button { font: inherit; color: inherit; cursor: pointer; }
+
+.num { font-variant-numeric: tabular-nums; }
+.quiet { color: var(--ink-2); }
+.faint { color: var(--ink-3); }
+
+.skip {
+  position: absolute; left: 16px; top: -48px; z-index: 10;
+  background: var(--ink); color: var(--paper); padding: 8px 12px; border-radius: 4px;
+}
+.skip:focus { top: 8px; }
+
+/* Masthead */
+.masthead {
+  max-width: 1120px; margin: 0 auto; padding: 18px 20px;
+  display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+}
+.wordmark {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; text-decoration: none;
+}
+.masthead nav { display: flex; gap: 20px; }
+.masthead nav a { color: var(--ink-2); text-decoration: none; font-weight: 600; padding: 4px 0; border-bottom: 2px solid transparent; }
+.masthead nav a:hover { color: var(--ink); }
+.masthead nav a[aria-current='page'] { color: var(--ink); border-bottom-color: var(--ink); }
+
+/* Page */
+.page { max-width: 1120px; margin: 0 auto; padding: 24px 20px 96px; }
+.page:not(.wide) > * { max-width: 760px; }
+
+.colophon { border-top: 1px solid var(--rule); }
+.colophon p { max-width: 1120px; margin: 0 auto; padding: 24px 20px 40px; color: var(--ink-2); font-size: 0.9375rem; }
+
+/* Small shared pieces */
+.area-chip { display: inline-flex; align-items: center; gap: 8px; font-weight: 650; font-size: 0.9375rem; color: var(--ink-2); }
+.area-chip::before { content: ''; width: 22px; height: 6px; border-radius: 3px; background: var(--line); }
+
+.flag { display: inline-block; font-size: 0.8125rem; font-weight: 600; padding: 1px 8px; border-radius: 4px; border: 1px solid currentColor; color: var(--ink-2); }
+.flag.paid { color: var(--warn); }
+
+.segmented { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; padding: 3px; background: var(--surface); gap: 2px; flex-wrap: wrap; }
+.segmented button { border: 0; background: none; padding: 6px 12px; border-radius: 6px; font-weight: 600; color: var(--ink-2); }
+.segmented button:hover { color: var(--ink); }
+.segmented button[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

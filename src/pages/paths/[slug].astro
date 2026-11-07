@@ -1,42 +1,36 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PathPlanner from '../../components/PathPlanner';
-import { loadContent } from '../../lib/content';
-import type { ConceptNode } from '../../lib/graph';
+import { content, pathContext, plannerNodes } from '../../lib/site';
+import '../../styles/route.css';
+import '../../styles/planner.css';
 
 export function getStaticPaths() {
-  return loadContent().paths.map((p) => ({ params: { slug: p.slug } }));
+  return content().paths.map((p) => ({ params: { slug: p.slug } }));
 }
 
-const content = loadContent();
-const path = content.paths.find((p) => p.slug === Astro.params.slug)!;
-const background = content.backgrounds.find((b) => b.id === path.background)!;
-const goal = content.goals.find((g) => g.id === path.goals[0])!;
-
-// Only what the planner needs goes to the browser — keeps the page small.
-const nodes: ConceptNode[] = content.concepts.map(({ id, title, area, hours, requires, recommends }) => ({
-  id, title, area, hours, requires, recommends,
-}));
-const knownTitles = background.knows.map((k) => content.concepts.find((c) => c.id === k)!.title);
+const c = content();
+const path = c.paths.find((p) => p.slug === Astro.params.slug)!;
+const { background, goals } = pathContext(c, path);
 ---
 
-<Base title={path.title} description={path.tagline}>
-  <h1>{path.title}</h1>
-  <p class="muted">{path.tagline}</p>
-  <div class="card summary">
-    <div><span class="label">From</span> <strong>{background.title}</strong> — already covers {knownTitles.join(', ')}.</div>
-    <div><span class="label">To</span> <strong>{goal.title}</strong> — {goal.description}</div>
-  </div>
+<Base title={path.title} description={path.tagline} wide>
+  <header class="path-head">
+    <h1>{path.title}</h1>
+    <p class="lede quiet">{path.tagline}</p>
+  </header>
   <PathPlanner
     client:load
     slug={path.slug}
-    concepts={nodes}
-    goals={goal.targets}
+    concepts={plannerNodes(c)}
+    areas={c.areas}
+    goals={goals.map(({ id, title, description, targets }) => ({ id, title, description, targets }))}
+    backgroundTitle={background.title}
     backgroundKnows={background.knows}
   />
 </Base>
 
 <style>
-  .summary { display: grid; gap: 6px; margin: 16px 0 24px; }
-  .label { display: inline-block; min-width: 3em; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .path-head { max-width: 760px; display: grid; gap: 12px; }
+  .lede { font-size: 1.1875rem; max-width: 56ch; }
 </style>

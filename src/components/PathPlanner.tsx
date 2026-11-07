@@ -1,22 +1,26 @@
-/**
- * The interactive planner — the only JavaScript island on the page.
- * Re-runs the path engine in the browser whenever you tick something, and
- * saves your choices in localStorage (no account needed in v0).
- */
+// The planner: the only interactive part of a path page. It re-runs the path
+// engine in the browser whenever you change something, and remembers your
+// choices in localStorage (no account needed yet).
 import { useEffect, useMemo, useState } from 'react';
-import { indexConcepts, planPath, type ConceptNode } from '../lib/graph';
+import { indexConcepts, planPath, type ConceptNode, type PlanStep } from '../lib/graph';
+
+interface Named { id: string; title: string }
+interface Goal extends Named { description: string; targets: string[] }
 
 interface Props {
   slug: string;
   concepts: ConceptNode[];
-  goals: string[];
+  areas: Named[];
+  goals: Goal[];
+  backgroundTitle: string;
   backgroundKnows: string[];
 }
 
 interface Saved {
-  /** Concepts you said you already know: removed from the plan (with anything only they needed). */
+  goal?: string;
+  /** Concepts you said you already know. They leave the plan, along with anything only they needed. */
   known: string[];
-  /** Concepts you finished while following the plan: stay in the list, ticked. */
+  /** Concepts you've finished. They stay in the plan, ticked. */
   done: string[];
 }
 
@@ -24,12 +28,10 @@ const empty: Saved = { known: [], done: [] };
 
 function load(key: string): Saved {
   try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return empty;
-    const parsed = JSON.parse(raw) as Partial<Saved>;
-    return { known: parsed.known ?? [], done: parsed.done ?? [] };
+    const parsed = JSON.parse(localStorage.getItem(key) ?? 'null') as Partial<Saved> | null;
+    return { goal: parsed?.goal, known: parsed?.known ?? [], done: parsed?.done ?? [] };
   } catch {
-    return empty; // private window, blocked storage, or corrupt JSON
+    return empty; // private browsing, blocked storage or a corrupt value
   }
 }
 
@@ -37,141 +39,214 @@ function save(key: string, value: Saved) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    /* storage unavailable: progress lasts for this visit only */
+    // storage unavailable: progress lasts for this visit only
   }
 }
 
-export default function PathPlanner({ slug, concepts, goals, backgroundKnows }: Props) {
+function listOf(items: string[]): string {
+  if (items.length <= 1) return items[0] ?? '';
+  return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+}
+
+const Tick = () => (
+  <svg viewBox="0 0 12 12" aria-hidden="true">
+    <path d="M2 6.5 5 9.2 10 3" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export default function PathPlanner({ slug, concepts, areas, goals, backgroundTitle, backgroundKnows }: Props) {
   const key = `pregraph:${slug}`;
   const index = useMemo(() => indexConcepts(concepts), [concepts]);
+  const areaTitle = useMemo(() => new Map(areas.map((a) => [a.id, a.title])), [areas]);
+  const titleOf = (id: string) => index.get(id)?.title ?? id;
+
   const [saved, setSaved] = useState<Saved>(empty);
   const [loaded, setLoaded] = useState(false);
+  const [open, setOpen] = useState<string | null>(null);
 
-  // Read storage after the first render so server HTML and client HTML match.
+  // Read storage and the URL after the first render, so the server HTML and
+  // the first client render match.
   useEffect(() => {
-    setSaved(load(key));
+    const fromStorage = load(key);
+    const fromUrl = new URLSearchParams(location.search).get('goal');
+    if (fromUrl && goals.some((g) => g.id === fromUrl)) fromStorage.goal = fromUrl;
+    setSaved(fromStorage);
     setLoaded(true);
-  }, [key]);
-  useEffect(() => {
-    if (loaded) save(key, saved);
-  }, [key, saved, loaded]);
+  }, [key, goals]);
 
+  useEffect(() => {
+    if (!loaded) return;
+    save(key, saved);
+    const url = new URL(location.href);
+    if (saved.goal && saved.goal !== goals[0]!.id) url.searchParams.set('goal', saved.goal);
+    else url.searchParams.delete('goal');
+    history.replaceState(null, '', url);
+  }, [key, saved, loaded, goals]);
+
+  const goal = goals.find((g) => g.id === saved.goal) ?? goals[0]!;
   const known = useMemo(() => new Set([...backgroundKnows, ...saved.known]), [backgroundKnows, saved.known]);
   const done = useMemo(() => new Set(saved.done), [saved.done]);
-  const plan = useMemo(() => planPath(index, goals, known), [index, goals, known]);
+  const plan = useMemo(() => planPath(index, goal.targets, known), [index, goal, known]);
 
-  const doneSteps = plan.steps.filter((s) => done.has(s.id));
+  const why = (s: PlanStep) => {
+    const others = s.neededFor.filter((t) => t !== s.id).map(titleOf);
+    if (goal.targets.includes(s.id)) {
+      return others.length > 0
+        ? `It's one of the targets for ${goal.title}, and ${listOf(others)} also needs it.`
+        : `It's one of the targets for ${goal.title}.`;
+    }
+    return `${listOf(others)} ${others.length === 1 ? 'needs' : 'need'} it, on the way to ${goal.title}.`;
+  };
+
+  const stateOf = (s: PlanStep) =>
+    done.has(s.id) ? 'done' : s.waitingOn.every((p) => done.has(p)) ? 'ready' : 'waiting';
+
+  const finished = plan.steps.filter((s) => done.has(s.id));
   const hoursLeft = plan.steps.filter((s) => !done.has(s.id)).reduce((h, s) => h + s.hours, 0);
-  const canStart = (id: string) => plan.steps.find((s) => s.id === id)!.waitingOn.every((p) => done.has(p));
-  const nextUp = plan.steps.filter((s) => !done.has(s.id) && canStart(s.id));
+  const left = plan.steps.length - finished.length;
+
+  const byArea = areas
+    .map((a) => {
+      const steps = plan.steps.filter((s) => s.area === a.id);
+      return { ...a, total: steps.length, done: steps.filter((s) => done.has(s.id)).length };
+    })
+    .filter((a) => a.total > 0);
 
   const toggleDone = (id: string) =>
     setSaved((s) => ({ ...s, done: s.done.includes(id) ? s.done.filter((x) => x !== id) : [...s.done, id] }));
-  const markKnown = (id: string) =>
-    setSaved((s) => ({ known: [...s.known, id], done: s.done.filter((x) => x !== id) }));
-  const unmarkKnown = (id: string) => setSaved((s) => ({ ...s, known: s.known.filter((x) => x !== id) }));
-
-  const pct = plan.steps.length === 0 ? 100 : Math.round((doneSteps.length / plan.steps.length) * 100);
+  const skip = (id: string) => {
+    setOpen(null);
+    setSaved((s) => ({ ...s, known: [...s.known, id], done: s.done.filter((x) => x !== id) }));
+  };
+  const unskip = (id: string) => setSaved((s) => ({ ...s, known: s.known.filter((x) => x !== id) }));
+  const chooseGoal = (id: string) => setSaved((s) => ({ ...s, goal: id }));
 
   return (
     <div className="planner">
-      <div className="stats">
-        <div><strong>{plan.steps.length}</strong> steps</div>
-        <div><strong>{hoursLeft}</strong> hours left</div>
-        <div><strong>{pct}%</strong> done</div>
-      </div>
-      <div className="bar" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
-        <span style={{ width: `${pct}%` }} />
-      </div>
+      <div className="planner-main">
+        <div className="goal-picker">
+          <span className="goal-label" id="goal-label">I want to reach</span>
+          <div className="segmented" role="group" aria-labelledby="goal-label">
+            {goals.map((g) => (
+              <button key={g.id} aria-pressed={g.id === goal.id} onClick={() => chooseGoal(g.id)}>
+                {g.title}
+              </button>
+            ))}
+          </div>
+          <p className="goal-description quiet">{goal.description}</p>
+        </div>
 
-      {nextUp.length > 0 && (
-        <p className="next">
-          <span className="label">Start here</span>{' '}
-          {nextUp.map((s, i) => (
-            <span key={s.id}>
-              {i > 0 && ' · '}
-              <a href={`/concepts/${s.id}`}>{s.title}</a>
-            </span>
-          ))}
+        <p className="summary" aria-live="polite">
+          {left === 0 ? (
+            <>You've finished every stop on this route.</>
+          ) : (
+            <>
+              <strong className="num">{left}</strong> {left === 1 ? 'stop' : 'stops'} to go, about{' '}
+              <strong className="num">{hoursLeft}</strong> hours of study.
+              {finished.length > 0 && <> You've finished {finished.length}.</>}
+            </>
+          )}
         </p>
-      )}
+        <p className="hint faint">Click a stop's circle when you've finished it. Use "Why?" to see what a stop leads to, or to skip it if you already know it.</p>
 
-      <ol className="steps">
-        {plan.steps.map((s, i) => {
-          const isDone = done.has(s.id);
-          const ready = canStart(s.id);
-          return (
-            <li key={s.id} className={`step${isDone ? ' done' : ''}${!isDone && !ready ? ' waiting' : ''}`}>
-              <label className="check">
-                <input type="checkbox" checked={isDone} onChange={() => toggleDone(s.id)} aria-label={`Mark ${s.title} as done`} />
-              </label>
-              <div className="body">
-                <div className="title">
-                  <span className="num">{i + 1}</span>
-                  <a href={`/concepts/${s.id}`}>{s.title}</a>
-                </div>
-                <div className="meta">
-                  {s.area} · ~{s.hours}h
-                  {s.waitingOn.length > 0 && (
-                    <> · after {s.waitingOn.map((p) => index.get(p)!.title).join(', ')}</>
+        <ol className="route">
+          {plan.steps.map((s) => {
+            const state = stateOf(s);
+            const isOpen = open === s.id;
+            const status =
+              state === 'done'
+                ? 'Done.'
+                : state === 'ready'
+                  ? 'Ready to start.'
+                  : `After ${listOf(s.waitingOn.filter((p) => !done.has(p)).map(titleOf))}.`;
+            return (
+              <li key={s.id} className="stop" data-area={s.area} data-state={state}>
+                <button
+                  className="station"
+                  aria-pressed={state === 'done'}
+                  aria-label={state === 'done' ? `Mark ${s.title} as not done` : `Mark ${s.title} as done`}
+                  title={state === 'done' ? 'Mark as not done' : 'Mark as done'}
+                  onClick={() => toggleDone(s.id)}
+                >
+                  <Tick />
+                </button>
+                <div className="stop-body">
+                  <div className="stop-head">
+                    <a className="stop-title" href={`/concepts/${s.id}`}>{s.title}</a>
+                    <span className="stop-hours">{s.hours} h</span>
+                  </div>
+                  <p className="stop-sub">
+                    <span className="area-name">{areaTitle.get(s.area)}</span>. {status}{' '}
+                    <button
+                      className="why-toggle"
+                      aria-expanded={isOpen}
+                      aria-label={`Why is ${s.title} on this route?`}
+                      onClick={() => setOpen(isOpen ? null : s.id)}
+                    >
+                      Why?
+                    </button>
+                  </p>
+                  {isOpen && (
+                    <div className="why">
+                      <p>{why(s)}</p>
+                      {s.unlocks.length > 0 && <p>Opens up {listOf(s.unlocks.map(titleOf))}.</p>}
+                      <div className="stop-tools">
+                        <a className="text-button" href={`/concepts/${s.id}`}>Where to learn it</a>
+                        <button className="text-button" onClick={() => skip(s.id)}>Skip it, I already know this</button>
+                      </div>
+                    </div>
                   )}
                 </div>
-              </div>
-              {goals.includes(s.id) ? (
-                <span className="goal" title="One of this path's goals">Goal</span>
-              ) : (
-                <button className="ghost" onClick={() => markKnown(s.id)} title="Remove this and anything only it needed">
-                  I know this
-                </button>
-              )}
-            </li>
-          );
-        })}
-      </ol>
+              </li>
+            );
+          })}
+        </ol>
+        {plan.steps.length > 0 && <p className="route-end">That's the whole route for {goal.title}.</p>}
+      </div>
 
-      {saved.known.length > 0 && (
-        <p className="muted small">
-          You said you already know:{' '}
-          {saved.known.map((id, i) => (
-            <span key={id}>
-              {i > 0 && ', '}
-              {index.get(id)?.title ?? id}{' '}
-              <button className="link" onClick={() => unmarkKnown(id)}>undo</button>
-            </span>
-          ))}
-        </p>
-      )}
-      {(saved.known.length > 0 || saved.done.length > 0) && (
-        <button className="ghost" onClick={() => setSaved(empty)}>Reset my progress</button>
-      )}
+      <aside className="planner-side" aria-label="Progress">
+        <section>
+          <h2 className="side-heading">Progress by area</h2>
+          <ul className="areas">
+            {byArea.map((a) => (
+              <li key={a.id} data-area={a.id}>
+                <div className="area-row">
+                  <span className="area-chip">{a.title}</span>
+                  <span className="num faint">{a.done}/{a.total}</span>
+                </div>
+                <div className="area-bar"><span style={{ width: `${(a.done / a.total) * 100}%` }} /></div>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <style>{css}</style>
+        <section>
+          <h2 className="side-heading">Left out</h2>
+          <p className="quiet small">
+            As a {backgroundTitle.toLowerCase()} you already know {listOf(backgroundKnows.map(titleOf))}.
+          </p>
+          {saved.known.length > 0 && (
+            <ul className="skipped">
+              {saved.known.map((id) => (
+                <li key={id}>
+                  {titleOf(id)} <button className="text-button" onClick={() => unskip(id)}>Put it back</button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        {(saved.known.length > 0 || saved.done.length > 0) && (
+          <button
+            className="text-button start-over"
+            onClick={() => {
+              if (confirm('Clear your ticks and skips on this route?')) setSaved({ goal: saved.goal, known: [], done: [] });
+            }}
+          >
+            Start this route over
+          </button>
+        )}
+      </aside>
     </div>
   );
 }
-
-const css = `
-.planner .stats { display: flex; gap: 24px; flex-wrap: wrap; font-size: 0.95rem; color: var(--muted); }
-.planner .stats strong { font-family: var(--serif); font-size: 1.5rem; color: var(--ink); margin-right: 4px; }
-.planner .bar { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 8px 0 16px; }
-.planner .bar span { display: block; height: 100%; background: var(--accent); transition: width .25s; }
-.planner .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); font-weight: 600; }
-.planner .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-.planner .step { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
-.planner .step.done { opacity: .6; }
-.planner .step.done .title a { text-decoration: line-through; }
-.planner .step.waiting { border-style: dashed; }
-.planner .check input { width: 20px; height: 20px; accent-color: var(--accent); }
-.planner .body { flex: 1; min-width: 0; }
-.planner .title { display: flex; gap: 8px; align-items: baseline; font-weight: 600; }
-.planner .title a { color: var(--ink); text-decoration: none; }
-.planner .title a:hover { color: var(--accent); text-decoration: underline; }
-.planner .num { font-family: var(--serif); color: var(--muted); font-weight: 400; min-width: 1.5em; }
-.planner .meta { font-size: 0.85rem; color: var(--muted); }
-.planner .ghost { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; padding: 4px 10px; font-size: 0.85rem; white-space: nowrap; }
-.planner .ghost:hover { border-color: var(--accent); color: var(--accent); }
-.planner .goal { font-size: 0.75rem; padding: 1px 8px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); }
-.planner .link { background: none; border: 0; padding: 0; color: var(--accent); text-decoration: underline; font-size: inherit; }
-.planner .small { font-size: 0.875rem; }
-@media (max-width: 520px) { .planner .step { flex-wrap: wrap; } .planner .ghost { margin-left: 32px; } }
-`;

@@ -1,9 +1,15 @@
 ---
+import '@fontsource-variable/overpass';
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description?: string;
+  /** Wider main column, for pages with a sidebar. */
+  wide?: boolean;
 }
-const { title, description = 'Personal learning paths that start from what you already know.' } = Astro.props;
+const { title, description = 'A study plan that starts from what you already know.', wide = false } = Astro.props;
+const path = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -12,79 +18,36 @@ const { title, description = 'Personal learning paths that start from what you a
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f4f6f8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e141b" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>{title === 'Pregraph' ? title : `${title} · Pregraph`}</title>
+    <title>{title === 'Pregraph' ? 'Pregraph: a study plan that starts from what you know' : `${title} | Pregraph`}</title>
   </head>
   <body>
-    <header class="site">
-      <a href="/" class="brand"><span class="dot"></span>Pregraph</a>
-      <nav><a href="/paths/maths-to-cs">Maths → CS</a></nav>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="masthead">
+      <a href="/" class="wordmark" aria-label="Pregraph home">
+        <svg viewBox="0 0 34 14" width="34" height="14" aria-hidden="true">
+          <path d="M5 7h24" stroke="currentColor" stroke-width="2.5" />
+          <circle cx="5" cy="7" r="4" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" />
+          <circle cx="29" cy="7" r="5" fill="currentColor" />
+        </svg>
+        Pregraph
+      </a>
+      <nav aria-label="Routes">
+        <a href="/paths/maths-to-cs" aria-current={path.startsWith('/paths/maths-to-cs') ? 'page' : undefined}>Maths to CS</a>
+        <a href="/paths/from-zero" aria-current={path.startsWith('/paths/from-zero') ? 'page' : undefined}>From zero</a>
+      </nav>
+      <slot name="search" />
     </header>
-    <main>
+    <main id="main" class:list={['page', { wide }]}>
       <slot />
     </main>
-    <footer class="site">
-      Free resources, linked not copied. Content lives on
-      <a href="https://github.com/shivemn/pregraph">GitHub</a>.
+    <footer class="colophon">
+      <p>
+        Pregraph links to free books, courses and lecture notes. It never copies them.
+        Found a dead link or a better source? <a href="https://github.com/shivemn/pregraph/issues">Tell us on GitHub</a>.
+      </p>
     </footer>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --paper: #f7f5ef;
-    --card: #ffffff;
-    --ink: #1d232b;
-    --muted: #5d6673;
-    --line: #dcd8cc;
-    --accent: #0f6e6a;
-    --accent-soft: #dcefec;
-    --warn: #8a5a00;
-    --grid: rgba(15, 110, 106, 0.06);
-    --serif: 'Iowan Old Style', 'Charter', 'Georgia', serif;
-    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #12161b;
-      --card: #1a2027;
-      --ink: #e6e9ed;
-      --muted: #9aa4b0;
-      --line: #2c343d;
-      --accent: #5cc8bf;
-      --accent-soft: #173533;
-      --warn: #e2b55a;
-      --grid: rgba(92, 200, 191, 0.05);
-      color-scheme: dark;
-    }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background-color: var(--paper);
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 24px 24px;
-    color: var(--ink);
-    font: 16px/1.6 var(--sans);
-  }
-  main { max-width: 860px; margin: 0 auto; padding: 24px 16px 64px; }
-  h1, h2, h3 { font-family: var(--serif); line-height: 1.2; font-weight: 600; }
-  h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 0.4em 0 0.3em; }
-  a { color: var(--accent); }
-  .muted { color: var(--muted); }
-  header.site, footer.site {
-    max-width: 860px; margin: 0 auto; padding: 16px;
-    display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  }
-  header.site nav a { color: var(--muted); text-decoration: none; }
-  footer.site { display: block; color: var(--muted); font-size: 0.875rem; border-top: 1px solid var(--line); }
-  .brand { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 16px 0 0 -3px var(--accent); margin-right: 14px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
-  .tag { display: inline-block; font-size: 0.75rem; padding: 1px 8px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
-  .tag.warn { background: transparent; border: 1px solid var(--warn); color: var(--warn); }
-  button { font: inherit; cursor: pointer; }
-</style>
