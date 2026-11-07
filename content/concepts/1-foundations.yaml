@@ -1,0 +1,18 @@
+- id: proofs
+  title: Mathematical Proof
+  area: foundations
+  summary: Direct proof, contradiction, induction and the habit of precise definitions.
+  hours: 20
+  resources:
+    - resource: mit-6042
+      locator: "Part I: Proofs"
+
+- id: discrete-math
+  title: Discrete Mathematics
+  area: foundations
+  summary: Logic, sets, relations, counting, graphs and recurrences — the maths CS is built on.
+  hours: 40
+  requires: [proofs]
+  resources:
+    - resource: mit-6042
+      locator: "Parts II–III: Structures and Counting"

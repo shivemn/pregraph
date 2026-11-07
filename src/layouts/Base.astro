@@ -1,0 +1,90 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Personal learning paths that start from what you already know.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title === 'Pregraph' ? title : `${title} · Pregraph`}</title>
+  </head>
+  <body>
+    <header class="site">
+      <a href="/" class="brand"><span class="dot"></span>Pregraph</a>
+      <nav><a href="/paths/maths-to-cs">Maths → CS</a></nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site">
+      Free resources, linked not copied. Content lives on
+      <a href="https://github.com/shivemn/pregraph">GitHub</a>.
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --paper: #f7f5ef;
+    --card: #ffffff;
+    --ink: #1d232b;
+    --muted: #5d6673;
+    --line: #dcd8cc;
+    --accent: #0f6e6a;
+    --accent-soft: #dcefec;
+    --warn: #8a5a00;
+    --grid: rgba(15, 110, 106, 0.06);
+    --serif: 'Iowan Old Style', 'Charter', 'Georgia', serif;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12161b;
+      --card: #1a2027;
+      --ink: #e6e9ed;
+      --muted: #9aa4b0;
+      --line: #2c343d;
+      --accent: #5cc8bf;
+      --accent-soft: #173533;
+      --warn: #e2b55a;
+      --grid: rgba(92, 200, 191, 0.05);
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--ink);
+    font: 16px/1.6 var(--sans);
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1, h2, h3 { font-family: var(--serif); line-height: 1.2; font-weight: 600; }
+  h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin: 0.4em 0 0.3em; }
+  a { color: var(--accent); }
+  .muted { color: var(--muted); }
+  header.site, footer.site {
+    max-width: 860px; margin: 0 auto; padding: 16px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  header.site nav a { color: var(--muted); text-decoration: none; }
+  footer.site { display: block; color: var(--muted); font-size: 0.875rem; border-top: 1px solid var(--line); }
+  .brand { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 16px 0 0 -3px var(--accent); margin-right: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .tag { display: inline-block; font-size: 0.75rem; padding: 1px 8px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+  .tag.warn { background: transparent; border: 1px solid var(--warn); color: var(--warn); }
+  button { font: inherit; cursor: pointer; }
+</style>

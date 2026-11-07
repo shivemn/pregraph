@@ -1,0 +1,9 @@
+- id: maths-grad
+  title: Maths graduate
+  description: A B.Sc. or M.Sc. in mathematics. Comfortable with proofs and discrete structures; little or no programming.
+  knows: [proofs, discrete-math]
+
+- id: no-background
+  title: Starting from scratch
+  description: No assumed university maths or programming.
+  knows: []

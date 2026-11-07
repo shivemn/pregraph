@@ -1,0 +1,32 @@
+- id: computer-architecture
+  title: How Computers Work
+  area: systems
+  summary: From logic gates to a working CPU, memory and machine language.
+  hours: 40
+  requires: [programming-basics]
+  recommends: [discrete-math]
+  resources:
+    - resource: nand2tetris
+      locator: "Part I: Projects 1–6"
+
+- id: operating-systems
+  title: Operating Systems
+  area: systems
+  summary: Processes, scheduling, virtual memory, concurrency and file systems.
+  hours: 50
+  requires: [c-and-memory, computer-architecture]
+  recommends: [shell-tools]
+  resources:
+    - resource: ostep
+      locator: "Virtualization, Concurrency and Persistence"
+
+- id: networking
+  title: Computer Networks
+  area: systems
+  summary: How data moves across the internet — packets, TCP/IP, routing, HTTP.
+  hours: 40
+  requires: [programming-basics]
+  recommends: [operating-systems]
+  resources:
+    - resource: cn-systems-approach
+      locator: "Chapters 1–6"

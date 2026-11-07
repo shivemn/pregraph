@@ -1,0 +1,4 @@
+- id: core-cs
+  title: Core computer science
+  description: The core of an undergraduate CS degree — enough to work as a software engineer and keep learning on your own.
+  targets: [algorithms, operating-systems, networking, databases, git]

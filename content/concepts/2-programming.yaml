@@ -1,0 +1,58 @@
+- id: programming-basics
+  title: Programming Fundamentals (Python)
+  area: programming
+  summary: Variables, control flow, functions, lists and dictionaries, reading and writing files.
+  hours: 40
+  resources:
+    - resource: think-python
+      locator: "Chapters 1–11"
+    - resource: cs50x
+      locator: "Weeks 0–3 (in C), then Week 6 (Python)"
+      role: alternative
+
+- id: recursion
+  title: Recursion
+  area: programming
+  summary: Functions that call themselves, base cases, and thinking of problems as smaller copies of themselves.
+  hours: 8
+  requires: [programming-basics]
+  recommends: [proofs]
+  resources:
+    - resource: think-python
+      locator: "Chapters on recursion and fruitful functions"
+    - resource: cs50x
+      locator: "Week 3: Algorithms (recursion section)"
+      role: alternative
+
+- id: shell-tools
+  title: The Shell and Command-Line Tools
+  area: programming
+  summary: Navigating files, pipes, scripts and the editor — the everyday tools no course teaches.
+  hours: 8
+  resources:
+    - resource: missing-semester
+      locator: "Lectures: The Shell; Shell Tools and Scripting; Editors"
+
+- id: git
+  title: Version Control with Git
+  area: programming
+  summary: Commits, branches, merging, remotes and how to undo mistakes.
+  hours: 6
+  recommends: [shell-tools]
+  resources:
+    - resource: pro-git
+      locator: "Chapters 1–3"
+    - resource: missing-semester
+      locator: "Lecture: Version Control (Git)"
+      role: alternative
+
+- id: c-and-memory
+  title: C and Memory
+  area: programming
+  summary: Pointers, the stack and the heap, manual memory management, and why programs crash.
+  hours: 25
+  requires: [programming-basics]
+  recommends: [computer-architecture]
+  resources:
+    - resource: cs50x
+      locator: "Weeks 1–5"

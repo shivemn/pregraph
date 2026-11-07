@@ -1,0 +1,49 @@
+- id: complexity-analysis
+  title: Asymptotic Analysis (Big-O)
+  area: algorithms
+  summary: Measuring how running time and memory grow with input size.
+  hours: 6
+  requires: [discrete-math]
+  resources:
+    - resource: mit-6006
+      locator: "Lectures 1–2"
+
+- id: data-structures
+  title: Data Structures
+  area: algorithms
+  summary: Arrays, linked lists, stacks, queues, hash tables, trees and heaps — and when to use each.
+  hours: 35
+  requires: [programming-basics]
+  recommends: [complexity-analysis, recursion]
+  resources:
+    - resource: mit-6006
+      locator: "Lectures 2–8"
+    - resource: algs4
+      locator: "Sections 1.3, 2.4, 3.1–3.4"
+      role: alternative
+
+- id: algorithms
+  title: Algorithms
+  area: algorithms
+  summary: Sorting, graph search, shortest paths and dynamic programming, with proofs of correctness.
+  hours: 60
+  requires: [data-structures, complexity-analysis, recursion]
+  resources:
+    - resource: mit-6006
+      locator: "Lectures 9–20"
+    - resource: algs4
+      locator: "Chapters 2 and 4"
+      role: alternative
+    - resource: clrs
+      locator: "Parts II, IV and VI"
+      role: deep-dive
+
+- id: interpreters
+  title: Interpreters and Compilers
+  area: algorithms
+  summary: Scanning, parsing, trees and evaluation — how a programming language actually runs.
+  hours: 50
+  requires: [data-structures, recursion]
+  resources:
+    - resource: crafting-interpreters
+      locator: "Part II: A Tree-Walk Interpreter"

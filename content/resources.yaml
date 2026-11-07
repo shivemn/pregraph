@@ -1,0 +1,96 @@
+# Every resource Pregraph links to. Concepts point at parts of these.
+# free: true means the main way to use it costs nothing.
+
+- id: mit-6042
+  title: Mathematics for Computer Science (MIT 6.042J, Spring 2015)
+  author: Eric Lehman, F. Thomson Leighton, Albert R. Meyer
+  type: course
+  url: https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/
+  free: true
+  note: The course text is a free PDF linked from the course page.
+
+- id: missing-semester
+  title: The Missing Semester of Your CS Education
+  author: MIT CSAIL
+  type: course
+  url: https://missing.csail.mit.edu/
+  free: true
+
+- id: pro-git
+  title: Pro Git (2nd edition)
+  author: Scott Chacon, Ben Straub
+  type: book
+  url: https://git-scm.com/book/en/v2
+  free: true
+
+- id: cs50x
+  title: CS50x — Introduction to Computer Science
+  author: Harvard University
+  type: course
+  url: https://cs50.harvard.edu/x/
+  free: true
+
+- id: think-python
+  title: Think Python (3rd edition)
+  author: Allen B. Downey
+  type: book
+  url: https://allendowney.github.io/ThinkPython/
+  free: true
+
+- id: mit-6006
+  title: Introduction to Algorithms (MIT 6.006, Spring 2020)
+  author: Erik Demaine, Jason Ku, Justin Solomon
+  type: course
+  url: https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/
+  free: true
+
+- id: algs4
+  title: Algorithms, 4th edition (book website)
+  author: Robert Sedgewick, Kevin Wayne
+  type: site
+  url: https://algs4.cs.princeton.edu/home/
+  free: true
+  note: The website summaries and code are free; the full book is paid.
+
+- id: clrs
+  title: Introduction to Algorithms, 4th edition (CLRS)
+  author: Cormen, Leiserson, Rivest, Stein
+  type: book
+  url: https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/
+  free: false
+
+- id: nand2tetris
+  title: "Nand2Tetris: The Elements of Computing Systems"
+  author: Noam Nisan, Shimon Schocken
+  type: course
+  url: https://www.nand2tetris.org/
+  free: true
+
+- id: ostep
+  title: "Operating Systems: Three Easy Pieces"
+  author: Remzi H. Arpaci-Dusseau, Andrea C. Arpaci-Dusseau
+  type: book
+  url: https://pages.cs.wisc.edu/~remzi/OSTEP/
+  free: true
+
+- id: cn-systems-approach
+  title: "Computer Networks: A Systems Approach"
+  author: Larry Peterson, Bruce Davie
+  type: book
+  url: https://book.systemsapproach.org/
+  free: true
+
+- id: cmu-15445
+  title: Intro to Database Systems (CMU 15-445/645)
+  author: Andy Pavlo, Carnegie Mellon University
+  type: course
+  url: https://15445.courses.cs.cmu.edu/
+  free: true
+  note: Lecture videos are on the CMU Database Group YouTube channel.
+
+- id: crafting-interpreters
+  title: Crafting Interpreters
+  author: Robert Nystrom
+  type: book
+  url: https://craftinginterpreters.com/
+  free: true

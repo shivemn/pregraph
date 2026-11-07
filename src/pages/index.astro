@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { loadContent } from '../lib/content';
+
+const content = loadContent();
+---
+
+<Base title="Pregraph">
+  <h1>Learn a new field,<br />starting from the one you know.</h1>
+  <p class="lead muted">
+    Pregraph maps a subject as a graph of concepts and prerequisites. Tell it where you're coming from,
+    and it removes what you already know, puts the rest in order, and points you to the exact chapter or
+    lecture to learn each step — free resources first.
+  </p>
+
+  <h2>Paths</h2>
+  <ul class="paths">
+    {
+      content.paths.map((p) => (
+        <li>
+          <a class="card path" href={`/paths/${p.slug}`}>
+            <strong>{p.title}</strong>
+            <span class="muted">{p.tagline}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="muted">More transitions are coming. Each one reuses the same concept graph with a different starting point.</p>
+</Base>
+
+<style>
+  .lead { font-size: 1.15rem; max-width: 60ch; }
+  .paths { list-style: none; padding: 0; display: grid; gap: 12px; }
+  .path { display: flex; flex-direction: column; gap: 4px; text-decoration: none; color: inherit; }
+  .path:hover { border-color: var(--accent); }
+  .path strong { font-family: var(--serif); font-size: 1.3rem; color: var(--accent); }
+</style>

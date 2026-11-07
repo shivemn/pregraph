@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import { loadContent } from '../../lib/content';
+import { unlockedBy } from '../../lib/graph';
+
+export function getStaticPaths() {
+  return loadContent().concepts.map((c) => ({ params: { id: c.id } }));
+}
+
+const content = loadContent();
+const concept = content.concepts.find((c) => c.id === Astro.params.id)!;
+const byId = new Map(content.concepts.map((c) => [c.id, c]));
+const resources = new Map(content.resources.map((r) => [r.id, r]));
+const unlocks = unlockedBy(content.concepts, concept.id);
+const roleLabel = { primary: 'Start here', alternative: 'Alternative', 'deep-dive': 'Go deeper' } as const;
+---
+
+<Base title={concept.title} description={concept.summary}>
+  <p class="muted crumbs"><a href="/paths/maths-to-cs">← Back to the path</a></p>
+  <h1>{concept.title}</h1>
+  <p class="lead">{concept.summary}</p>
+  <p class="muted">About {concept.hours} hours · {concept.area}</p>
+
+  <h2>Learn it from</h2>
+  <ul class="resources">
+    {
+      concept.resources.map((s) => {
+        const r = resources.get(s.resource)!;
+        return (
+          <li class="card">
+            <div class="row">
+              <span class="tag">{roleLabel[s.role]}</span>
+              {!r.free && <span class="tag warn">Paid</span>}
+              {!s.verified && <span class="tag warn" title="This chapter or lecture reference hasn't been checked by a human yet">Unverified locator</span>}
+            </div>
+            <a href={r.url} rel="noopener" target="_blank"><strong>{r.title}</strong></a>
+            <div class="muted">{r.author} · {r.type}</div>
+            <div>Read/watch: <strong>{s.locator}</strong></div>
+            {r.note && <div class="muted small">{r.note}</div>}
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <div class="links">
+    <section>
+      <h3>Learn first</h3>
+      {concept.requires.length === 0 ? <p class="muted">Nothing — you can start here.</p> : (
+        <ul>{concept.requires.map((id) => <li><a href={`/concepts/${id}`}>{byId.get(id)!.title}</a></li>)}</ul>
+      )}
+      {concept.recommends.length > 0 && (
+        <p class="muted small">Helpful but optional: {concept.recommends.map((id, i) => <>{i > 0 && ', '}<a href={`/concepts/${id}`}>{byId.get(id)!.title}</a></>)}</p>
+      )}
+    </section>
+    <section>
+      <h3>Unlocks</h3>
+      {unlocks.length === 0 ? <p class="muted">Nothing yet in this graph.</p> : (
+        <ul>{unlocks.map((c) => <li><a href={`/concepts/${c.id}`}>{c.title}</a></li>)}</ul>
+      )}
+    </section>
+  </div>
+</Base>
+
+<style>
+  .crumbs { margin: 0; }
+  .lead { font-size: 1.15rem; }
+  .resources { list-style: none; padding: 0; display: grid; gap: 12px; }
+  .resources li { display: grid; gap: 4px; }
+  .row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .small { font-size: 0.875rem; }
+  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+</style>
