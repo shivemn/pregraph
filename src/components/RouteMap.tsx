@@ -101,6 +101,8 @@ export default function RouteMap({ steps, stateOf, areaTitle, onToggle }: Props)
         <svg
           width={layout.width}
           height={layout.height + 40}
+          // Shrink to fit if it's only a little too wide; past that, scroll instead.
+          style={{ width: '100%', maxWidth: layout.width, minWidth: Math.round(layout.width * 0.8), height: 'auto' }}
           viewBox={`0 0 ${layout.width} ${layout.height + 40}`}
           role="group"
           aria-label="Map of the route"

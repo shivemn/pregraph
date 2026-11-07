@@ -1,76 +1,80 @@
 # Pregraph
 
-**Learn a new field, starting from the one you know.**
+A study plan that starts from what you already know.
 
-Pregraph stores a subject as a graph of concepts and prerequisites. Tell it where you're coming from (say, a maths degree) and where you want to go (core computer science). It removes what you already know, orders the rest so every concept comes after its prerequisites, and points you to the exact chapter or lecture for each step — free resources first.
+I have a maths degree and had to work out computer science on my own. The material is all free. The hard part was knowing what to study, in what order, and from where. Pregraph keeps the subject as a graph of concepts and their prerequisites. You tell it your background and your goal, and it drops what you already know, puts the rest in order, and points you to the chapter or lecture that teaches each step.
 
-> Status: **v0 in progress.** First path: *Maths → Computer Science* (15 sample concepts; the full graph will be 80–150).
+![The planner: a route of stops, three done, with the reason one stop is on the route opened up](docs/img/route-list.png)
 
-## How it works
+![The map view: stops in rows, with one stop's chain of prerequisites and follow-ups highlighted](docs/img/route-map.png)
 
-```mermaid
-flowchart LR
-    A[content/*.yaml<br/>concepts · resources] --> B[validate + test]
-    B --> C[Astro static build]
-    C --> D[CDN]
-    D --> E[Browser: path planner<br/>re-plans locally]
-```
+## What's here
 
-1. **Backward search with pruning.** Walk back from your goals along prerequisites, stopping at anything you already know.
-2. **Topological sort** (Kahn's algorithm) puts what's left in a valid order, with a stable tie-break.
-3. **Frontier.** Shows what you can start right now.
+- Two routes, **Maths to computer science** and **Computer science from zero**, over one graph of 40 concepts and 31 free resources.
+- Three goals to switch between: Core CS, GATE CS and Machine learning.
+- Tick stops off as you go. Ask any stop why it's there, or skip it if you already know it.
+- A map of the route, drawn by a layout algorithm written for this project.
+- Search across concepts and the books and courses behind them ("ostep", "strang", "6.006").
+- No account. Progress is saved in your browser.
 
-The same TypeScript engine runs at build time and in the browser, so ticking a box re-plans instantly with no server.
+## How the order is worked out
 
-## Docs
+1. Walk back from your goal through the prerequisites, and stop wherever your background already covers the ground.
+2. Topologically sort what's left (Kahn's algorithm).
+3. When several things could come next, start the longest chains first, but stay in the same area if something there is nearly as urgent.
 
-- [System design](docs/SYSTEM_DESIGN.md) — scope, data model, algorithm, architecture, storage, milestones, decisions
-- [Concepts you'll learn](docs/CONCEPTS.md) — every technique used here and where to learn it
+The same TypeScript runs at build time and in the browser, so ticking a box re-plans instantly with no server. The details are in the [design notes](docs/SYSTEM_DESIGN.md).
 
 ## Run it
 
-Requires Node 22.23.4 or newer.
+You need Node 22.23.4 or newer.
 
 ```bash
 npm install
 npm run dev        # http://localhost:4321
-npm test           # path engine tests, including property-based tests on random graphs
-npm run validate   # checks content/ for schema errors, unknown ids and prerequisite cycles
+npm test           # engine, layout and search tests, including property tests on random graphs
+npm run validate   # checks content/ for typos, unknown ids and prerequisite loops
 npm run build      # validate, then build the static site into dist/
 ```
 
-## Project layout
+## Adding to the graph
 
-```
-content/            the learning graph, as YAML (this is the product)
-src/lib/graph.ts    path engine: pruned backward search, topological sort, cycle detection
-src/lib/schema.ts   content contract (zod)
-src/lib/content.ts  loads + cross-checks content at build time
-src/components/     PathPlanner — the only interactive island
-src/pages/          index, /paths/[slug], /concepts/[id]
-tests/              vitest + fast-check
-```
-
-## Adding content
-
-Add a concept to the right file in `content/concepts/`:
+Concepts live in `content/concepts/`, one file per area:
 
 ```yaml
-- id: operating-systems
-  title: Operating Systems
+- id: concurrency
+  title: Concurrency
   area: systems
-  summary: Processes, scheduling, virtual memory, concurrency and file systems.
-  hours: 50
-  requires: [c-and-memory, computer-architecture]   # must come first
-  recommends: [shell-tools]                         # nudges order only
+  summary: Threads, locks, condition variables and the bugs they cause.
+  hours: 20
+  requires: [os-processes-memory]      # has to come first, pulled into plans
+  recommends: [shell-tools]            # nice to have first, only affects order
   resources:
-    - resource: ostep                               # id from content/resources.yaml
-      locator: "Virtualization, Concurrency and Persistence"
-      verified: true                                # only after you've checked it
+    - resource: ostep                  # an id from content/resources.yaml
+      locator: "Part II, Concurrency"
+      verified: true                   # only once you've opened it and checked
 ```
 
-Then run `npm run validate`. Every concept needs at least one free primary resource.
+Run `npm run validate` afterwards. Every concept needs at least one free resource marked as the place to start.
 
-## Stack
+Every chapter and lecture reference is currently `verified: false`. Checking them is the most useful contribution right now.
 
-TypeScript · Astro · React · zod · Vitest · fast-check · Cloudflare Pages (planned) · Cloudflare Workers + Neon Postgres (v1)
+## Layout
+
+```
+content/            the graph, as YAML
+src/lib/graph.ts    the path engine
+src/lib/layout.ts   layered graph layout for the map
+src/lib/search.ts   search scoring
+src/components/     planner and map (React), search box (plain TypeScript)
+src/pages/          home, routes, concept pages
+docs/               design notes, what the project teaches, changelog
+```
+
+## Docs
+
+- [System design](docs/SYSTEM_DESIGN.md): data model, algorithms, architecture, decisions
+- [What building this teaches](docs/CONCEPTS.md): every technique used, with free places to learn it
+- [Changelog](docs/CHANGELOG.md): what changed each week
+
+Built with TypeScript, Astro, React, zod, Vitest and fast-check. It'll be hosted on Cloudflare Pages.

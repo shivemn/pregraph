@@ -1,143 +1,190 @@
-# Concepts you'll learn building Pregraph
+# What building Pregraph teaches
 
-Every technique the project uses, in the order you'll meet it. Each entry says **what it is**, **where it shows up in Pregraph**, and **where to learn it** (free first).
+These are the techniques the project uses, roughly in the order you meet them in the code. For each one there's a line on what it is, where it shows up here, and where to learn it, with free sources first.
 
-Fittingly, this list is itself a small prerequisite graph: Part A comes before B, and B before C.
+The list is a small prerequisite graph of its own: part A before B, B before C.
 
----
+## A. The engine
 
-## Part A — The engine (graph theory you already half-know)
+### A1. Directed graphs and DAGs
 
-### A1. Directed graphs, DAGs and adjacency lists
-**What:** A directed graph is a set of nodes and arrows. A *DAG* (directed acyclic graph) has no cycles. An *adjacency list* stores, for each node, the nodes it points to: `Map<id, id[]>`.
-**In Pregraph:** concepts are nodes; "A must come before B" is the arrow `A → B`. `src/lib/graph.ts` builds two adjacency lists: forward (*what does this unlock?*) and reverse (*what does this need?*).
-**Maths link:** a DAG is exactly a strict partial order; the transitive closure gives the full "comes before" relation.
-**Learn from:**
-- Sedgewick & Wayne, *Algorithms* 4e — [§4.2 Directed Graphs](https://algs4.cs.princeton.edu/42digraph/) (free site)
-- CLRS — "Elementary Graph Algorithms" (ch. 22 in 3e, ch. 20 in 4e)
+A directed graph is nodes plus arrows. A DAG (directed acyclic graph) has no way to follow arrows back to where you started. The usual way to store one is an adjacency list, `Map<id, id[]>`.
 
-### A2. Graph traversal: DFS and BFS
-**What:** two systematic ways to visit every reachable node: depth-first (go deep, back up) and breadth-first (layer by layer).
-**In Pregraph:** step 1 of the engine walks *backwards* from your goals with an explicit stack (iterative DFS), stopping at concepts you already know. That pruned walk is what makes a path personal.
-**Learn from:**
-- [MIT 6.006 (Spring 2020)](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) — the BFS and DFS lectures
-- algs4 §4.2 (as above)
+In Pregraph, concepts are nodes and "learn A before B" is an arrow from A to B. `src/lib/graph.ts` builds lookups in both directions: what a concept needs, and what it unlocks.
 
-### A3. Topological sorting (Kahn's algorithm)
-**What:** list the nodes of a DAG so every arrow points forward. Kahn's algorithm repeatedly removes a node with no incoming arrows.
-**In Pregraph:** step 2 of the engine. When several concepts are ready at once, a tie-break rule picks one (stay in the same area → shorter first → alphabetical), so the output is stable and testable.
-**Learn from:**
-- [Wikipedia — Topological sorting](https://en.wikipedia.org/wiki/Topological_sorting) (both Kahn's and the DFS method)
-- algs4 §4.2, "Topological sort"
+If you've done order theory, a DAG is a strict partial order in disguise, and its transitive closure is the full "comes before" relation.
+
+Learn it from: Sedgewick and Wayne, [Algorithms §4.2 Directed Graphs](https://algs4.cs.princeton.edu/42digraph/) (free site); CLRS, "Elementary Graph Algorithms" (ch. 22 in the 3rd edition, ch. 20 in the 4th).
+
+### A2. Depth-first and breadth-first search
+
+These are the two systematic ways to visit everything reachable from a node.
+
+In Pregraph, step one of the engine is an iterative depth-first walk backwards from your goals, which stops at anything you already know. That early stop is what makes a plan personal.
+
+Learn it from: [MIT 6.006, Spring 2020](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/), the BFS and DFS lectures.
+
+### A3. Topological sort
+
+This lists a DAG's nodes so that every arrow points forward. Kahn's algorithm repeatedly takes a node with nothing left pointing into it.
+
+In Pregraph, it's step two of the engine. The interesting part is choosing among several ready nodes (see A5).
+
+Learn it from: [Wikipedia, Topological sorting](https://en.wikipedia.org/wiki/Topological_sorting), which covers Kahn's method and the DFS method; algs4 §4.2.
 
 ### A4. Cycle detection
-**What:** a DFS that colours nodes white / grey / black finds a cycle the moment it meets a grey node, i.e. one still on the current path.
-**In Pregraph:** `npm run validate` refuses content with a prerequisite cycle and prints it (`a → b → c → a`). Without this, a single bad edit could make every plan impossible.
-**Learn from:** CLRS DFS section ("white-path theorem", edge classification); algs4 `DirectedCycle.java`.
 
-### A5. Complexity analysis in practice
-**What:** big-O for real decisions, not exams.
-**In Pregraph:** the engine is O(V² + E) because of the tie-break scan, and the design doc argues why that's fine for hundreds of nodes and when it stops being fine. Practise writing that argument.
-**Learn from:** MIT 6.006 lectures 1–2; Skiena, *The Algorithm Design Manual*, ch. 2 (paid).
+A depth-first search that colours nodes white (unseen), grey (on the current path) and black (finished) finds a cycle the moment it reaches a grey node.
 
-### A6. Testing: unit tests and property-based tests
-**What:** unit tests check examples you chose. Property-based tests generate hundreds of random inputs and check a rule that must always hold.
-**In Pregraph:** `tests/graph.test.ts`. Example properties: *for every random DAG, every concept in the plan appears after all its hard prerequisites*, and *nothing you marked as known appears in the plan*. That is a theorem statement turned into code.
-**Learn from:** [Vitest](https://vitest.dev/guide/); [fast-check](https://fast-check.dev/) (property-based testing for JS/TS).
+In Pregraph, `npm run validate` refuses content with a prerequisite cycle and prints the loop. One careless edit would otherwise make every plan impossible.
 
----
+Learn it from: the DFS section of CLRS (edge classification); `DirectedCycle.java` on the algs4 site.
 
-## Part B — The website (making it fast and free)
+### A5. Critical paths and list scheduling
+
+Give each task a weight and ask how long the longest chain of work behind it is. That's its critical path. Project planners use it to decide what to start first, and it's the core of "list scheduling", which comes from operating-system and factory scheduling.
+
+In Pregraph, the engine's first ordering rule (shortest first) put Git ahead of learning to program. Now each concept is scored by the hours of study waiting behind it, and a stay-in-the-same-area rule keeps the plan readable. Computing the scores is a memoised DFS. The trade-off between the two rules is one constant, `STAY_RATIO`.
+
+Learn it from: [Wikipedia, Critical path method](https://en.wikipedia.org/wiki/Critical_path_method) and [List scheduling](https://en.wikipedia.org/wiki/List_scheduling).
+
+### A6. Complexity in practice
+
+This is using big-O to make real decisions, not for exams.
+
+In Pregraph, the design doc argues that the engine's O(V² + E) is fine at a few hundred concepts, and says what to change if it ever isn't. Practise writing that kind of argument.
+
+Learn it from: MIT 6.006, lectures 1–2.
+
+### A7. Unit tests and property-based tests
+
+Unit tests check examples you picked. Property-based tests generate hundreds of random inputs and check a rule that must always hold, then shrink any failure to the smallest example.
+
+In Pregraph, `tests/` has both. Examples of properties: on any random DAG, every stop comes after its prerequisites; nothing you marked as known shows up; the map layout never has more crossings than it started with. These are theorem statements turned into code.
+
+Learn it from: [Vitest](https://vitest.dev/guide/); [fast-check](https://fast-check.dev/).
+
+## B. The site
 
 ### B1. TypeScript
-**What:** JavaScript with static types. Coming from Java, it'll feel familiar, but the types are structural (shape-based), not nominal.
-**In Pregraph:** everything. `type Concept = { id: string; requires: string[]; … }`.
-**Learn from:** [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html), especially "Everyday Types" and "Narrowing".
 
-### B2. Schema validation and "content as code"
-**What:** describe the shape of your data once, then check every file against it. Store content in Git so every change is a reviewable diff.
-**In Pregraph:** `src/lib/schema.ts` uses **zod**. A typo like `requiers:` fails the build with a clear message instead of silently producing a broken path.
-**Learn from:** [zod docs](https://zod.dev/).
+TypeScript is JavaScript with types. Coming from Java it feels familiar, except that types are structural (they match by shape) rather than nominal.
 
-### B3. Rendering strategies: static vs server vs client
-**What:** pages can be built once at deploy time (static generation), on every request (server-side rendering), or in the browser (single-page app). Each trades freshness against speed and cost.
-**In Pregraph:** content changes rarely, so every page is static. This one decision is why the site costs ₹0 and loads in milliseconds.
-**Learn from:** [patterns.dev — rendering patterns](https://www.patterns.dev/); [web.dev — Rendering on the Web](https://web.dev/articles/rendering-on-the-web).
+Learn it from: the [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html), especially "Everyday Types" and "Narrowing".
 
-### B4. Islands architecture (Astro + React)
-**What:** a mostly-HTML page with small interactive "islands" that load JavaScript. Everything else ships zero JS.
-**In Pregraph:** the planner (`PathPlanner.tsx`) is the only island. Concept pages are plain HTML.
-**Learn from:** [Astro docs — Islands](https://docs.astro.build/en/concepts/islands/); [react.dev/learn](https://react.dev/learn) for React itself (state, effects, props).
+### B2. Schema validation and content as code
+
+You describe the shape of your data once, then check every file against it. Keeping content in Git means every change is a reviewable diff.
+
+In Pregraph, `src/lib/schema.ts` uses zod. A typo like `requiers:` fails the build with a clear message instead of quietly producing a broken route.
+
+Learn it from: [zod.dev](https://zod.dev/).
+
+### B3. Static, server and client rendering
+
+Pages can be built once at deploy time, on every request, or in the browser. Each choice trades freshness against speed and cost.
+
+In Pregraph, content changes rarely, so every page is static. That single decision is why the site is free to host and quick to load.
+
+Learn it from: [web.dev, Rendering on the Web](https://web.dev/articles/rendering-on-the-web); [patterns.dev](https://www.patterns.dev/).
+
+### B4. Islands, and code splitting
+
+An "island" page is mostly plain HTML with a few interactive pieces that load JavaScript. Code splitting goes further: even inside an island, rarely used parts load only when needed.
+
+In Pregraph, the planner is the one React island. The map is a separate chunk loaded with `React.lazy` the first time someone switches to it. Concept pages ship no framework at all.
+
+Learn it from: [Astro docs, Islands](https://docs.astro.build/en/concepts/islands/); [react.dev, lazy](https://react.dev/reference/react/lazy); [react.dev/learn](https://react.dev/learn) for React in general.
 
 ### B5. CDNs and HTTP caching
-**What:** a CDN keeps copies of your files on servers worldwide; cache headers tell browsers and CDNs how long to keep them.
-**In Pregraph:** Cloudflare Pages serves the built site from the edge. Learn why built JS files get long-lived cache headers (their names contain a content hash) while HTML is revalidated.
-**Learn from:** [Cloudflare — What is a CDN?](https://www.cloudflare.com/learning/cdn/what-is-a-cdn/); [MDN — HTTP caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching).
 
-### B6. Browser storage and offline-first
-**What:** `localStorage` saves small key-value data in the browser. "Offline-first" means the app works without the network and syncs later.
-**In Pregraph:** your ticked concepts live in localStorage in v0, so there's no login and nothing to lose if a server is down. Wrap every read in `try/catch`: private windows can block storage.
-**Learn from:** [MDN — Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API).
+A CDN keeps copies of your files on servers around the world, and cache headers tell browsers and CDNs how long to keep them.
 
-### B7. CI/CD with GitHub Actions
-**What:** run checks on every push; deploy automatically when they pass.
-**In Pregraph:** `.github/workflows/ci.yml` runs validate → test → build. Later, Cloudflare Pages deploys each push to `main`, with a preview URL for every branch.
-**Learn from:** [GitHub Actions docs](https://docs.github.com/en/actions).
+In Pregraph, built JavaScript files have a content hash in their names, so they can be cached for a long time. HTML is re-checked on each visit. That's why a deploy shows up immediately without anyone clearing a cache.
 
-### B8. Drawing graphs: layered layout
-**What:** placing a DAG's nodes in layers so arrows mostly point one way and cross as little as possible (the Sugiyama method). Minimising crossings is NP-hard, so real tools use heuristics. Good maths here.
-**In Pregraph:** the week-5 graph view. Likely tools: dagre or ELK for layout, React Flow for rendering.
-**Learn from:** [Wikipedia — Layered graph drawing](https://en.wikipedia.org/wiki/Layered_graph_drawing); [React Flow](https://reactflow.dev/).
+Learn it from: [Cloudflare, What is a CDN?](https://www.cloudflare.com/learning/cdn/what-is-a-cdn/); [MDN, HTTP caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching).
 
-### B9. Client-side search
-**What:** searching without a server, using an index built at deploy time.
-**In Pregraph:** search across concepts and resources on a static site.
-**Learn from:** [Pagefind](https://pagefind.app/) (built for static sites, works with Astro).
+### B6. Browser storage and hydration
 
----
+`localStorage` keeps small key-value data in the browser. Hydration is React attaching to HTML the server already rendered. If the first client render differs from that HTML, React complains and redraws.
 
-## Part C — v1 and beyond (backend, data, maths)
+In Pregraph, progress lives in localStorage and is read in an effect after the first render, so server and client agree. Every read is wrapped in `try/catch`, because private windows can block storage.
 
-### C1. Serverless and edge functions
-**What:** small functions that run on demand on the CDN's servers. No machine to manage, no idle sleep.
-**In Pregraph:** the v1 progress API on Cloudflare Workers.
-**Learn from:** [Cloudflare Workers docs](https://developers.cloudflare.com/workers/).
+Learn it from: [MDN, Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API); [react.dev, hydrateRoot](https://react.dev/reference/react-dom/client/hydrateRoot).
+
+### B7. Drawing graphs: layered layout
+
+Layered layout places a DAG's nodes in rows so that arrows point one way and cross as little as possible. This is the Sugiyama method. Minimising crossings exactly is NP-hard, so real tools use heuristics like the barycentre method.
+
+In Pregraph, `src/lib/layout.ts` is a small version written from scratch: longest-path rows, dummy nodes for long edges, barycentre sweeps that keep the best ordering seen, and a coordinate pass that straightens edges. This is the most mathematical code in the project.
+
+Learn it from: [Wikipedia, Layered graph drawing](https://en.wikipedia.org/wiki/Layered_graph_drawing). For the real thing, see the papers behind dagre and ELK.
+
+### B8. SVG
+
+SVG is vector drawing in the browser: paths, circles and text, all styleable with CSS.
+
+In Pregraph, the map is SVG. Edges are cubic Bézier curves (`C` commands). Labels use `paint-order: stroke` to get a halo that keeps them readable over lines.
+
+Learn it from: [MDN, SVG tutorial](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial), especially the "Paths" page.
+
+### B9. Search without a search engine
+
+When there are only hundreds of records, a scored linear scan over a small JSON file beats any index library. Normalising text matters more than the algorithm: lower case, strip accents, split on punctuation.
+
+In Pregraph, it's `src/lib/search.ts`. The scoring rules are in the design doc.
+
+### B10. Accessibility
+
+Accessibility means building the site so it works with a keyboard and a screen reader, not only with a mouse.
+
+In Pregraph, the search box follows the ARIA combobox pattern (arrow keys, Enter, Escape). Map stops are focusable buttons. Station toggles have labels like "Mark Concurrency as done". Motion is turned off for people who ask for reduced motion.
+
+Learn it from: the [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/), in particular its combobox pattern.
+
+### B11. CI with GitHub Actions
+
+CI runs checks on every push and stops a broken build from getting deployed.
+
+In Pregraph, `.github/workflows/ci.yml` runs validate, then tests, then build. From week 6, Cloudflare Pages will deploy every push to `main` and give each branch a preview URL.
+
+Learn it from: [GitHub Actions docs](https://docs.github.com/en/actions).
+
+## C. Later (v1 and v2)
+
+### C1. Edge functions
+
+These are small functions that run on the CDN's servers when called. There's no machine to manage and nothing to wake up.
+
+In Pregraph, the v1 progress API will run on Cloudflare Workers. Learn it from: [Cloudflare Workers docs](https://developers.cloudflare.com/workers/).
 
 ### C2. Relational modelling and recursive SQL
-**What:** designing tables, keys and constraints; `WITH RECURSIVE` walks a graph inside the database.
-**In Pregraph:** the `progress` table uses a composite primary key `(user_id, concept_id)`. If content ever moves into Postgres, prerequisite closure becomes one recursive query.
-**Learn from:** [PostgreSQL — WITH queries](https://www.postgresql.org/docs/current/queries-with.html); [CMU 15-445 Database Systems](https://15445.courses.cs.cmu.edu/) (lectures on YouTube).
+
+This covers tables, keys and constraints, plus `WITH RECURSIVE`, which walks a graph inside the database.
+
+In Pregraph, the `progress` table has a composite key `(user_id, concept_id)`. Learn it from: [PostgreSQL, WITH queries](https://www.postgresql.org/docs/current/queries-with.html); [CMU 15-445](https://15445.courses.cs.cmu.edu/).
 
 ### C3. Authentication
-**What:** proving who a user is: sessions, cookies, OAuth ("Sign in with Google"), magic links.
-**In Pregraph:** v1 sign-in for sync. Use a library; never roll your own crypto.
-**Learn from:** [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html).
 
-### C4. Sync and conflict resolution
-**What:** when the same data changes on two devices, decide which version wins. "Last writer wins" per record is the simplest correct-enough rule.
-**In Pregraph:** merge localStorage and server progress by newest `updated_at` per concept.
-**Learn from:** Kleppmann, *Designing Data-Intensive Applications*, ch. 5 "Replication" (paid; worth owning).
+Authentication is proving who someone is: sessions, cookies, OAuth, magic links. Use a library, and don't write your own crypto. Learn it from: the [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html).
 
-### C5. Scheduled jobs
-**What:** code that runs on a timer (cron).
-**In Pregraph:** a weekly GitHub Actions job checks every resource URL and flags dead ones.
-**Learn from:** GitHub Actions docs — `on: schedule`.
+### C4. Sync and conflicts
 
-### C6. Knowledge Space Theory — the diagnostic (v2)
-**What:** a mathematical theory (Doignon & Falmagne) that models what a learner knows as a *feasible set* in a prerequisite structure. If you know X, you very likely know X's prerequisites; if you fail X, you likely don't know what X unlocks. So each question rules out large parts of the graph, and a diagnostic can be short. This is the theory behind the ALEKS adaptive tutoring system.
-**In Pregraph:** "Test me instead of making me tick 80 boxes." Choose questions that split the remaining possibilities roughly in half, much like a binary search over the graph.
-**Learn from:** [Wikipedia — Knowledge space](https://en.wikipedia.org/wiki/Knowledge_space); Doignon & Falmagne, *Knowledge Spaces* (Springer, 1999).
+When the same record changes on two devices, something has to decide which version wins. Last writer wins, per record, is the simplest rule that's correct enough here. Learn it from: Kleppmann, *Designing Data-Intensive Applications*, ch. 5 (paid).
 
-### C7. Item Response Theory (v2+)
-**What:** statistical models of how likely a person of ability θ is to answer an item of difficulty *b* correctly, e.g. the logistic model P = 1 / (1 + e^−(θ−b)). Used in GRE/GMAT-style adaptive tests.
-**In Pregraph:** calibrating question difficulty from real answers.
-**Learn from:** [Wikipedia — Item response theory](https://en.wikipedia.org/wiki/Item_response_theory).
+### C5. Knowledge Space Theory
 
----
+This is the maths behind the planned adaptive test. Doignon and Falmagne model what a learner knows as a "feasible set" in a prerequisite structure. If you know X, you probably know what X needs. If you fail X, you probably don't know what X unlocks. Each question therefore rules out a big part of the graph, a bit like binary search, so a test can be short. The ALEKS tutoring system is built on it.
 
-## Part D — Product skills (not taught in any CS course)
+Learn it from: [Wikipedia, Knowledge space](https://en.wikipedia.org/wiki/Knowledge_space); Doignon and Falmagne, *Knowledge Spaces* (Springer).
 
-- **Talking to users** without leading them: Rob Fitzpatrick, *The Mom Test* (short, paid).
-- **SEO basics**, since static pages are how people will find you: [Google's SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide).
-- **Privacy-friendly analytics**: Cloudflare Web Analytics (free, no cookies).
-- **Scoping**: the design doc's "Not in v0" list is a skill. Defend it.
+### C6. Item response theory
+
+IRT models the chance that someone of ability θ answers a question of difficulty b correctly, for example P = 1 / (1 + e^−(θ−b)). Adaptive exams like the GRE use it. In Pregraph, it would be used to calibrate questions from real answers. Learn it from: [Wikipedia, Item response theory](https://en.wikipedia.org/wiki/Item_response_theory).
+
+## D. Things no course teaches
+
+- **Talking to users without leading them.** Rob Fitzpatrick, *The Mom Test* (short, paid).
+- **Being findable.** [Google's SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide). Static pages with real titles and descriptions do most of the work.
+- **Measuring without tracking people.** Cloudflare Web Analytics is free and uses no cookies.
+- **Saying no.** The "Next" and "Not planned" lists in the design doc are a skill in themselves.
