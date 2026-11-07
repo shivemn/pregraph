@@ -52,6 +52,18 @@ npm run evidence -- backend-engineer # counts tagged job postings for a role
 npm run build                        # validate, then build the static site into dist/
 ```
 
+## Deploying
+
+It's a static site, so there's no server or database to run. It's hosted on Cloudflare Pages:
+
+- Build command: `npm run build`
+- Output folder: `dist`
+- Node version: whatever `.nvmrc` says.
+
+Every push to `main` deploys, and every other branch gets its own preview URL. `public/_headers` sets the caching. If the site ever moves to a custom domain, change `site` in `astro.config.mjs` and the sitemap line in `public/robots.txt`.
+
+Before a release, run `npm run check-links` on your own machine. It tries every resource URL and lists the ones to look at.
+
 ## Adding to the graph
 
 Concepts, tools and projects live in `content/concepts/`, one file per area:

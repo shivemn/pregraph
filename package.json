@@ -11,10 +11,12 @@
     "validate": "tsx scripts/validate.ts",
     "test": "vitest run",
     "check": "astro check",
-    "evidence": "tsx scripts/role-evidence.ts"
+    "evidence": "tsx scripts/role-evidence.ts",
+    "check-links": "tsx scripts/check-links.ts"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.4",
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource/mukta": "^5.3.0",
     "astro": "^7.4.7",
     "react": "^19.3.1",

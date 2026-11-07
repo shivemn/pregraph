@@ -13,6 +13,9 @@ interface Props {
 }
 const { title, description = 'A study plan that starts from what you already know.', wide = false } = Astro.props;
 const path = Astro.url.pathname;
+const fullTitle = title === 'Pregraph' ? 'Pregraph: a study plan that starts from what you know' : `${title} | Pregraph`;
+const canonical = Astro.site ? new URL(path, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
 ---
 
 <!doctype html>
@@ -24,7 +27,15 @@ const path = Astro.url.pathname;
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>{title === 'Pregraph' ? 'Pregraph: a study plan that starts from what you know' : `${title} | Pregraph`}</title>
+    <title>{fullTitle}</title>
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pregraph" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

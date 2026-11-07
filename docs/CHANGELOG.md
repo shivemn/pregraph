@@ -1,5 +1,11 @@
 # Changelog
 
+## Ready to deploy
+
+- Sitemap, `robots.txt`, canonical URLs and social share tags with a preview image (`public/og.png`), so a shared link shows a proper card on LinkedIn or WhatsApp.
+- `public/_headers` caches built assets for a year and the JSON data for an hour.
+- `npm run check-links` tries every resource URL from your own machine and lists the ones to look at.
+
 ## Week 7, later: new heading font
 
 - Signs, headings and station names now use Teko, by the Indian Type Foundry, in place of Anek Latin. Mukta stays for reading text. Teko is self-hosted with a corrected size and vertical metrics, and fonts are now about 80 KB on a first visit instead of about 165 KB.
