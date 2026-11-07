@@ -223,7 +223,7 @@ Measured from `npm run build`, gzipped:
 | Concept page | 4.6 KB | about 1 KB inline (search) |
 | Role page | 11.8 KB | 66 KB React runtime + 6.4 KB planner and panel; +2.9 KB when the map opens; +18 KB of stop data on the first panel |
 
-Fonts are the other cost: about 165 KB of woff2 on a first visit, cached after that. Most of it is Anek Latin's variable width axis (104 KB for Latin). Subsetting it to the characters we actually use would roughly halve that, and it's the next performance job if first loads ever feel slow.
+Fonts are the other cost: about 80 KB of woff2 on a first visit, cached after that. That's Teko's variable weight axis (15 KB for Latin) plus three weights of Mukta (about 21 KB each).
 
 The React runtime is most of the weight. Swapping in Preact through `@astrojs/preact` with its React compatibility layer would cut about 55 KB without changing component code. I'm keeping React for now because it's what I want to practise, but it's the obvious first move if the role page ever feels slow.
 
@@ -236,7 +236,7 @@ The design borrows from the Mumbai local, because a learning path really is a tr
 - **Station boards.** Each page's own name sits on a yellow board with black condensed capitals, like a station name board. There's one per page and nowhere else, so it stays special.
 - **The ticket.** The home page picker is a ticket: *From* your background *To* the role, with a perforated yellow stub holding "Plan my route".
 - **Train lines.** A route is a thick line with a station for every stop. The line takes the colour of each stop's area and turns solid as you finish stops. Projects get square stations.
-- **Type.** Two typefaces, both from Ek Type, a type foundry in Mumbai: Anek Latin (its condensed widths) for signs, headings and station names, and Mukta for reading.
+- **Type.** Two Indian typefaces. Signs, headings and station names are in Teko, by the Indian Type Foundry in Ahmedabad. Reading text is in Mukta, by Ek Type in Mumbai. Teko is self-hosted from `src/assets/fonts` with its own `@font-face`, which sets `size-adjust` and the ascent and descent overrides. Without that, Teko's small, high-sitting capitals would need nudging in every component.
 - **Colour.** Black on white, signage yellow, and one colour per area, checked in light and dark mode. In dark mode the boards stay yellow, the way station signs stay lit at night.
 - **Kept out on purpose:** rounded cards, soft shadows, gradients, all-caps labels on small text, and decorative animation. The only motion is the panel sliding in and the line filling as you tick stops, and both are switched off for people who ask for reduced motion.
 
@@ -350,7 +350,7 @@ scripts/validate.ts      npm run validate
 | Tiers backed by job postings | Without evidence a role list is one more opinion | — |
 | One pick per medium (read, watch, practise) | People learn differently; a single list mixed everything together | Users want a choice of several videos |
 | Panel instead of navigating away | You keep your place on the route | — |
-| Mumbai local look, Ek Type fonts | Specific to the product and its first users, and unlike template sites | — |
+| Mumbai local look, Teko and Mukta | Specific to the product and its first users, and unlike template sites | — |
 
 ## 14. Risks
 

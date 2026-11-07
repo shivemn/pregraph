@@ -1,5 +1,9 @@
 # Changelog
 
+## Week 7, later: new heading font
+
+- Signs, headings and station names now use Teko, by the Indian Type Foundry, in place of Anek Latin. Mukta stays for reading text. Teko is self-hosted with a corrected size and vertical metrics, and fonts are now about 80 KB on a first visit instead of about 165 KB.
+
 ## Week 7: more roles, three picks per stop, and a new look
 
 - **Six new roles:** data scientist, AI/LLM engineer, cloud engineer, application support engineer, security analyst (SOC) and embedded engineer. That's sixteen roles plus GATE. They brought 18 new concepts, tools and projects (LLMs and RAG, cloud networking and IAM, incident handling, log analysis, threat detection, microcontrollers and RTOS, and more) and a new Security area.

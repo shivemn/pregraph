@@ -26,9 +26,9 @@ Pregraph starts from a ticket: *From a maths graduate, To Backend engineer.* Eac
 - **Search** across concepts and the resources behind them ("ostep", "strang", "kafka").
 - **No account.** Progress is saved in your browser.
 
-Every role is a draft until its tiers have been checked against real job postings.
+Every role is a draft until its tiers have been checked against real job postings. [docs/ROLES.md](docs/ROLES.md) explains how, and `npm run evidence` does the counting.
 
-The look is borrowed from the Mumbai local: yellow station boards, a ticket for picking your route, and routes drawn as train lines. The type is by Ek Type, a Mumbai foundry. [docs/ROLES.md](docs/ROLES.md) explains how, and `npm run evidence` does the counting.
+The look is borrowed from the Mumbai local: yellow station boards, a ticket for picking your route, and routes drawn as train lines. Signs and headings are set in Teko, by the Indian Type Foundry in Ahmedabad. Reading text is set in Mukta, by Ek Type in Mumbai.
 
 ## How the order is worked out
 

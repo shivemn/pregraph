@@ -1,8 +1,37 @@
 /*
+  Teko, by the Indian Type Foundry (Ahmedabad), for signs, headings and
+  station names. Self-hosted with our own @font-face so we can correct its
+  size and vertical metrics in one place: Teko's capitals are small for their
+  em size and sit high, which would otherwise mean nudging every label.
+*/
+@font-face {
+  font-family: 'Pregraph Sign';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('../assets/fonts/teko-latin-wght-normal.woff2') format('woff2-variations');
+  size-adjust: 110%;
+  ascent-override: 72%;
+  descent-override: 28%;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Pregraph Sign';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('../assets/fonts/teko-latin-ext-wght-normal.woff2') format('woff2-variations');
+  size-adjust: 110%;
+  ascent-override: 72%;
+  descent-override: 28%;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/*
   Pregraph looks like the Mumbai local. Page titles are yellow station
   boards, the home page picker is a ticket (From, To), and every route is a
-  train line with stations. Both typefaces are by Ek Type, a Mumbai foundry:
-  Anek Latin (condensed, for signs) and Mukta (for reading).
+  train line with stations. Signs and headings are in Teko (Indian Type
+  Foundry, Ahmedabad); reading text is in Mukta (Ek Type, Mumbai).
 
   The yellow board is the loud part. Everything else is black on white.
 */
@@ -31,7 +60,7 @@
   --mobile: #5b8a0a;
   --security: #8b5a2b;
 
-  --sign: 'Anek Latin Variable', 'Arial Narrow', sans-serif;
+  --sign: 'Pregraph Sign', 'Arial Narrow', sans-serif;
   --text: 'Mukta', system-ui, sans-serif;
   color-scheme: light;
 }
@@ -94,9 +123,9 @@ h1, h2, h3 {
   line-height: 1.08;
   margin: 0;
 }
-h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 760; }
-h2 { font-size: 1.6rem; font-weight: 720; }
-h3 { font-size: 1.15rem; font-weight: 680; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 600; }
+h2 { font-size: 1.6rem; font-weight: 600; }
+h3 { font-size: 1.15rem; font-weight: 600; }
 p { margin: 0; }
 
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
@@ -124,8 +153,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   outline-offset: -8px;
   padding: 0.32em 0.6em 0.18em;
   font-family: var(--sign);
-  font-stretch: 75%;
-  font-weight: 760;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   line-height: 1;
@@ -142,7 +170,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .wordmark {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--sign); font-stretch: 78%; font-weight: 800; font-size: 1.55rem;
+  font-family: var(--sign); font-weight: 600; font-size: 1.6rem;
   text-decoration: none; line-height: 1;
 }
 .masthead nav { display: flex; gap: 22px; }
