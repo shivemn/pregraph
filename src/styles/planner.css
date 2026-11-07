@@ -30,8 +30,12 @@
 .skipped { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 4px; font-size: 0.9375rem; }
 
 @media (max-width: 900px) {
-  .planner { grid-template-columns: 1fr; gap: 32px; }
+  .planner { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .planner-side { position: static; order: 2; border-top: 1px solid var(--rule); padding-top: 24px; }
 }
 
 .start-over { justify-self: start; }
+.map-loading { padding: 40px 0; }
+.view-switch + .hint, .view-switch + .route-map { margin-top: 14px; }
+.planner.is-map { grid-template-columns: minmax(0, 1fr); }
+.planner.is-map .planner-side { position: static; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; border-top: 1px solid var(--rule); padding-top: 24px; }

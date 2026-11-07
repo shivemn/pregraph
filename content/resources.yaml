@@ -8,6 +8,7 @@
   type: course
   url: https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/
   free: true
+  short: "6.042"
   note: The course text is a free PDF on the course page.
 
 - id: mit-1806
@@ -16,6 +17,7 @@
   type: course
   url: https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/
   free: true
+  short: "18.06"
 
 - id: stat110
   title: Statistics 110, Probability (Harvard)
@@ -23,6 +25,7 @@
   type: course
   url: https://stat110.hsites.harvard.edu/
   free: true
+  short: "Stat 110"
 
 # Programming
 - id: think-python
@@ -38,6 +41,7 @@
   type: course
   url: https://cs50.harvard.edu/x/
   free: true
+  short: "CS50"
 
 - id: composing-programs
   title: Composing Programs
@@ -45,6 +49,7 @@
   type: book
   url: https://www.composingprograms.com/
   free: true
+  short: "CS 61A SICP"
   note: The Python textbook for Berkeley's CS 61A, based on SICP.
 
 - id: missing-semester
@@ -53,6 +58,7 @@
   type: course
   url: https://missing.csail.mit.edu/
   free: true
+  short: "Missing Semester"
 
 - id: pro-git
   title: Pro Git, 2nd edition
@@ -82,6 +88,7 @@
   type: course
   url: https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/
   free: true
+  short: "6.006"
 
 - id: ods
   title: Open Data Structures
@@ -89,6 +96,7 @@
   type: book
   url: https://opendatastructures.org/
   free: true
+  short: "ODS"
 
 - id: algs4
   title: Algorithms, 4th edition (book website)
@@ -104,6 +112,7 @@
   type: book
   url: https://cses.fi/book/book.pdf
   free: true
+  short: "CSES"
 
 - id: cses-problemset
   title: CSES Problem Set
@@ -111,6 +120,7 @@
   type: site
   url: https://cses.fi/problemset/
   free: true
+  short: "CSES"
 
 - id: clrs
   title: Introduction to Algorithms, 4th edition (CLRS)
@@ -118,6 +128,7 @@
   type: book
   url: https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/
   free: false
+  short: "CLRS"
 
 # Theory and languages
 - id: mit-18404
@@ -126,6 +137,7 @@
   type: course
   url: https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/
   free: true
+  short: "18.404 Sipser"
 
 - id: crafting-interpreters
   title: Crafting Interpreters
@@ -148,6 +160,7 @@
   type: course
   url: https://www.nand2tetris.org/
   free: true
+  short: "Nand2Tetris"
 
 - id: ostep
   title: "Operating Systems: Three Easy Pieces"
@@ -155,6 +168,7 @@
   type: book
   url: https://pages.cs.wisc.edu/~remzi/OSTEP/
   free: true
+  short: "OSTEP"
 
 - id: cn-systems-approach
   title: "Computer Networks: A Systems Approach"
@@ -176,6 +190,7 @@
   type: course
   url: https://pdos.csail.mit.edu/6.824/
   free: true
+  short: "6.824 6.5840"
   note: Lecture videos, notes and the Go labs are all on the course site.
 
 - id: ddia
@@ -184,6 +199,7 @@
   type: book
   url: https://dataintensive.net/
   free: false
+  short: "DDIA"
 
 - id: mit-6858
   title: Computer Systems Security (MIT 6.858)
@@ -191,6 +207,7 @@
   type: course
   url: https://ocw.mit.edu/courses/6-858-computer-systems-security-fall-2014/
   free: true
+  short: "6.858"
 
 # Data
 - id: sqlbolt
@@ -207,6 +224,7 @@
   type: course
   url: https://15445.courses.cs.cmu.edu/
   free: true
+  short: "15-445"
   note: Lecture videos are on the CMU Database Group YouTube channel.
 
 # Machine learning
@@ -216,6 +234,7 @@
   type: book
   url: https://www.statlearning.com/
   free: true
+  short: "ISLP ISLR"
 
 - id: mml-book
   title: Mathematics for Machine Learning
@@ -223,6 +242,7 @@
   type: book
   url: https://mml-book.github.io/
   free: true
+  short: "MML"
 
 - id: d2l
   title: Dive into Deep Learning
@@ -230,3 +250,4 @@
   type: book
   url: https://d2l.ai/
   free: true
+  short: "D2L"

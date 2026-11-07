@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/overpass';
 import '../styles/global.css';
+import Search from '../components/Search.astro';
 
 interface Props {
   title: string;
@@ -38,7 +39,7 @@ const path = Astro.url.pathname;
         <a href="/paths/maths-to-cs" aria-current={path.startsWith('/paths/maths-to-cs') ? 'page' : undefined}>Maths to CS</a>
         <a href="/paths/from-zero" aria-current={path.startsWith('/paths/from-zero') ? 'page' : undefined}>From zero</a>
       </nav>
-      <slot name="search" />
+      <Search />
     </header>
     <main id="main" class:list={['page', { wide }]}>
       <slot />

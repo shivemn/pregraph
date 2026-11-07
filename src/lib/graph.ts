@@ -203,7 +203,7 @@ function kahn(
 
   // A linear scan of `ready` is plenty for a few hundred concepts.
   while (ready.length > 0) {
-    const id = ready.splice(pickNext(ready, index, rank, lastArea), 1)[0]!;
+    const id: string = ready.splice(pickNext(ready, index, rank, lastArea), 1)[0]!;
     order.push(id);
     lastArea = index.get(id)!.area;
     for (const next of unlocks.get(id)!) {

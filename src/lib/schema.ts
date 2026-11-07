@@ -20,6 +20,8 @@ export const resourceSchema = z.object({
   type: z.enum(['book', 'video', 'course', 'site']),
   url: z.url(),
   free: z.boolean(),
+  /** What people actually call it, e.g. "OSTEP" or "CLRS". Used by search. */
+  short: z.string().optional(),
   note: z.string().optional(),
 });
 

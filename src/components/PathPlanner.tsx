@@ -1,8 +1,11 @@
 // The planner: the only interactive part of a path page. It re-runs the path
 // engine in the browser whenever you change something, and remembers your
 // choices in localStorage (no account needed yet).
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { indexConcepts, planPath, type ConceptNode, type PlanStep } from '../lib/graph';
+
+// The map pulls in the layout code, so it only loads when someone opens it.
+const RouteMap = lazy(() => import('./RouteMap'));
 
 interface Named { id: string; title: string }
 interface Goal extends Named { description: string; targets: string[] }
@@ -18,6 +21,7 @@ interface Props {
 
 interface Saved {
   goal?: string;
+  view?: 'list' | 'map';
   /** Concepts you said you already know. They leave the plan, along with anything only they needed. */
   known: string[];
   /** Concepts you've finished. They stay in the plan, ticked. */
@@ -29,7 +33,7 @@ const empty: Saved = { known: [], done: [] };
 function load(key: string): Saved {
   try {
     const parsed = JSON.parse(localStorage.getItem(key) ?? 'null') as Partial<Saved> | null;
-    return { goal: parsed?.goal, known: parsed?.known ?? [], done: parsed?.done ?? [] };
+    return { goal: parsed?.goal, view: parsed?.view, known: parsed?.known ?? [], done: parsed?.done ?? [] };
   } catch {
     return empty; // private browsing, blocked storage or a corrupt value
   }
@@ -84,6 +88,7 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
   }, [key, saved, loaded, goals]);
 
   const goal = goals.find((g) => g.id === saved.goal) ?? goals[0]!;
+  const view = saved.view ?? 'list';
   const known = useMemo(() => new Set([...backgroundKnows, ...saved.known]), [backgroundKnows, saved.known]);
   const done = useMemo(() => new Set(saved.done), [saved.done]);
   const plan = useMemo(() => planPath(index, goal.targets, known), [index, goal, known]);
@@ -98,7 +103,7 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
     return `${listOf(others)} ${others.length === 1 ? 'needs' : 'need'} it, on the way to ${goal.title}.`;
   };
 
-  const stateOf = (s: PlanStep) =>
+  const stateOf = (s: PlanStep): 'done' | 'ready' | 'waiting' =>
     done.has(s.id) ? 'done' : s.waitingOn.every((p) => done.has(p)) ? 'ready' : 'waiting';
 
   const finished = plan.steps.filter((s) => done.has(s.id));
@@ -122,7 +127,7 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
   const chooseGoal = (id: string) => setSaved((s) => ({ ...s, goal: id }));
 
   return (
-    <div className="planner">
+    <div className={view === 'map' ? 'planner is-map' : 'planner'}>
       <div className="planner-main">
         <div className="goal-picker">
           <span className="goal-label" id="goal-label">I want to reach</span>
@@ -147,6 +152,22 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
             </>
           )}
         </p>
+        <div className="segmented view-switch" role="group" aria-label="View">
+          <button aria-pressed={view === 'list'} onClick={() => setSaved((s) => ({ ...s, view: 'list' }))}>List</button>
+          <button aria-pressed={view === 'map'} onClick={() => setSaved((s) => ({ ...s, view: 'map' }))}>Map</button>
+        </div>
+
+        {view === 'map' ? (
+          <Suspense fallback={<p className="faint map-loading">Drawing the map…</p>}>
+            <RouteMap
+              steps={plan.steps}
+              stateOf={stateOf}
+              areaTitle={(id) => areaTitle.get(id) ?? id}
+              onToggle={toggleDone}
+            />
+          </Suspense>
+        ) : (
+        <>
         <p className="hint faint">Click a stop's circle when you've finished it. Use "Why?" to see what a stop leads to, or to skip it if you already know it.</p>
 
         <ol className="route">
@@ -202,6 +223,8 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
           })}
         </ol>
         {plan.steps.length > 0 && <p className="route-end">That's the whole route for {goal.title}.</p>}
+        </>
+        )}
       </div>
 
       <aside className="planner-side" aria-label="Progress">

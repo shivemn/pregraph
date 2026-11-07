@@ -4,6 +4,7 @@ import PathPlanner from '../../components/PathPlanner';
 import { content, pathContext, plannerNodes } from '../../lib/site';
 import '../../styles/route.css';
 import '../../styles/planner.css';
+import '../../styles/map.css';
 
 export function getStaticPaths() {
   return content().paths.map((p) => ({ params: { slug: p.slug } }));
