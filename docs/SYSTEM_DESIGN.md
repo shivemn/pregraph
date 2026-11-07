@@ -1,41 +1,49 @@
 # Pregraph: system design
 
-Last updated after week 5 (November 2026). I keep this file in step with the code, so if something here disagrees with `src/`, the code wins and this file has a bug.
+Last updated after week 6, the move to roles (November 2026). I keep this file in step with the code, so if something here disagrees with `src/`, the code wins and this file has a bug.
 
 The companion file, [CONCEPTS.md](CONCEPTS.md), explains each technique used here and where to learn it.
 
 ## 1. The problem
 
-Say you have a maths degree and want to learn computer science on your own. The material is all free and all online. What's missing is someone to tell you:
+Say you have a maths degree and want a job as a backend engineer. The material is all free and all online. What's missing is someone to tell you:
 
-1. what to study, given what you already know,
-2. in what order, and
-3. where to learn each piece, down to the chapter or lecture rather than "take this course".
+1. what the job actually needs,
+2. which of that you already know and can skip,
+3. what order to learn the rest in,
+4. where to learn each piece, down to the chapter or lecture, and
+5. how to tell that you've really learned it.
 
-roadmap.sh, OSSU and teachyourselfcs.com each give one path for everybody. Pregraph gives you a path that starts from your background.
+roadmap.sh has role-based lists and OSSU has a full curriculum, but both give everybody the same path. Pregraph's path starts from your background. Point 5 isn't built yet; it's the next big piece (section 12).
 
 ## 2. What it does
 
-You pick where you're coming from (a maths degree, or nothing) and where you're going (Core CS, GATE CS or machine learning). Pregraph stores the subject as a graph of concepts and prerequisites. It drops what your background covers, orders what's left so every concept comes after the things it depends on, and links each step to the free chapter or lecture that teaches it. You tick stops off as you go and the plan updates straight away.
+You say where you're starting from and which job you want: "I'm a maths graduate and I'm aiming for Backend engineer". Each role lists what it needs in three tiers: to get hired, in the first year, and good to have. Pregraph stores everything as a graph of concepts, tools and projects with prerequisites. It drops what your background covers, orders what's left so every stop comes after the things it depends on, and links each step to a free chapter, course or video. You tick stops off as you go, and the plan updates straight away. Your progress is shared across roles, so SQL you finished while looking at data analysis stays finished when you look at backend.
 
 ## 3. Scope
 
 Done so far:
 
-- Two routes, *Maths to CS* and *CS from zero*, over one shared graph of 40 concepts and 31 resources.
-- Three goals per route: Core CS, GATE CS and Machine learning.
-- A planner with progress, "why is this here?", skipping and progress by area.
+- Ten tech roles plus GATE CS, over one shared graph: 57 concepts, 14 tools, 8 projects and 68 resources.
+- Four backgrounds: maths graduate, engineering graduate (not CS), CS or IT graduate, and starting from zero.
+- A planner with a background picker, tiers, progress, "why is this here?", skipping and progress by area.
 - A map view of the route, drawn by a layout algorithm in `src/lib/layout.ts`.
 - Search over concepts and the resources behind them.
 - Progress saved in the browser. No accounts.
 
 Next:
 
-- Week 6: deploy to Cloudflare Pages, add privacy-friendly analytics, share with the first users.
-- Later (v1): accounts and sync across devices, a weekly dead-link checker.
-- Later (v2): a short adaptive test instead of ticking boxes, ratings, more routes.
+- Evidence for the first two roles (SDE, backend) from real job postings. The process is in [ROLES.md](ROLES.md).
+- Deploy to Cloudflare Pages, add privacy-friendly analytics, share with the first users.
+- Check yourself: a few questions per concept, used to test out of a stop, to finish one, and for spaced review.
+- Depth: a short page per concept with its own explanation, a worked example and common traps, built to one template.
+- Later: more role families next to tech (business analyst, product manager, digital marketing, finance). Accounts and sync. A dead-link checker.
 
-Not planned: hosting course material (Pregraph links, it never copies), and paid courses in the main path. Paid books can appear, marked as paid, as optional extras.
+Not planned:
+- Hosting course material. Pregraph links, it never copies.
+- Paid courses in the main path. Paid books can appear, marked as paid, as optional extras.
+- Regulated professions (medicine, law, chartered accountancy and so on). Those are learned through degrees and licences, not free resources. If they ever appear, it'll be as "here's the official route" with a link.
+- Every job at once. The engine doesn't care about the field, but each role needs real curation. Roles get added in families that share most of their concepts, so each new one is cheap.
 
 ## 4. Requirements
 
@@ -60,19 +68,19 @@ erDiagram
     CONCEPT ||--o{ RESOURCE_SECTION : "taught by"
     RESOURCE ||--o{ RESOURCE_SECTION : "contains"
     BACKGROUND }o--o{ CONCEPT : "already knows"
-    GOAL }o--o{ CONCEPT : "targets"
-    PATH }o--|| BACKGROUND : "starts from"
-    PATH }o--o{ GOAL : "offers"
+    FAMILY ||--o{ ROLE : "groups"
+    ROLE }o--o{ CONCEPT : "needs, by tier"
 ```
 
 | File | What's in it |
 |---|---|
 | `content/areas.yaml` | Topic areas, in display order. Each gets a colour in `src/styles/global.css`. |
-| `content/concepts/*.yaml` | One file per area. A concept has an `id`, `title`, `area`, `summary`, `hours`, `requires` (hard prerequisites), `recommends` (soft ones) and `resources`. |
+| `content/concepts/*.yaml` | One file per area. Each entry has an `id`, `title`, `area`, `kind`, `summary`, `hours`, `requires` (hard prerequisites), `recommends` (soft ones) and `resources`. `kind` is `concept` (something to understand), `tool` (something to get fluent in, like Docker or React) or `project` (something to build and show). The engine treats all three the same; the interface labels them. |
 | `content/resources.yaml` | Books, courses and sites: title, author, URL, whether it's free, and an optional `short` name people actually use ("OSTEP", "CLRS"). |
-| `content/backgrounds.yaml` | What a kind of learner already knows, as a list of concept ids. |
-| `content/goals.yaml` | A goal is a list of target concepts. |
-| `content/paths.yaml` | A route: one background plus the goals you can switch between. |
+| `content/backgrounds.yaml` | What a kind of learner already knows, as a list of concept ids, plus a `phrase` for the home page sentence ("a maths graduate"). |
+| `content/families.yaml` | Groups of roles: software, data, infrastructure, exams. |
+| `content/roles.yaml` | A role (or an exam): `title`, `family`, `summary`, and `tiers` with three lists of concept ids: `hire`, `firstYear` and `extra`. An optional `evidence` block records the job postings the tiers are based on. Without it the role page says "Draft". |
+| `research/postings/*.csv` | Hand-collected, hand-tagged job postings, one file per role. `npm run evidence -- <role>` turns them into counts. See [ROLES.md](ROLES.md). |
 
 A resource section says which part of a resource teaches a concept (`locator: "Part I, Virtualization"`), its role (`primary`, `alternative` or `deep-dive`), and `verified`. Every section starts as `verified: false` until someone opens the resource and checks the chapter numbers. Concept pages say "Section not checked yet" for those.
 
@@ -80,15 +88,23 @@ Hard and soft prerequisites behave differently, and that's deliberate. A hard on
 
 Ids appear in URLs, so once the site is live a concept id shouldn't change.
 
+One known gap: prerequisites are all "and", never "or". A frontend learner really needs *a* first language, which could be JavaScript, but `linear-structures` requires `programming-basics` (Python), so a frontend route includes both. Supporting "any one of these" would turn the backward walk into a choice problem (pick the cheapest option given what you know). It's worth doing once enough routes hit it.
+
+## 5a. Roles
+
+A role is just a set of targets, so the engine needed no changes. Tiers are cumulative: "first year" means hire plus first year. The "How far" switch on the role page picks the tier.
+
+Where the tiers come from matters more than the code. Every role starts as a draft. To turn a draft into something defensible, collect about 50 real postings for the role (India, 0–2 years), tag each with concept ids, and run `npm run evidence`. It prints how often each concept is asked for, a suggested tier (at least half the postings: hire; a fifth to a half: first year; less: good to have), and where that differs from the current list. A human makes the final call and writes down why when it goes against the numbers. Postings rarely mention data structures and algorithms, for example, but interviews test them.
+
 ## 6. The path engine
 
 `src/lib/graph.ts`. Pure functions with no I/O, so the same code runs at build time (to render pages) and in the browser (to re-plan when you tick something).
 
-Inputs: the concepts, a set of goal concepts `T`, and a set of known concepts `K` (your background plus anything you skipped).
+Inputs: the concepts, a set of target concepts `T` (a role's tiers, up to the one you picked), and a set of known concepts `K` (your background plus anything you skipped).
 
 ### 6.1 What do I still need?
 
-Walk backwards from each goal along hard prerequisites. When you reach something you already know, stop and don't look behind it, because knowing it means you're past its prerequisites too.
+Walk backwards from each target along hard prerequisites. When you reach something you already know, stop and don't look behind it, because knowing it means you're past its prerequisites too.
 
 ```
 needed = {}
@@ -122,9 +138,9 @@ Each step in the result also carries:
 
 - `waitingOn`: hard prerequisites still in the plan,
 - `unlocks`: later steps that need it,
-- `neededFor`: which goal targets pulled it in. This runs the pruned walk once per target, so it's O(T · (V + E)). That's still nothing at this size.
+- `neededFor`: which role targets pulled it in. This runs the pruned walk once per target, so it's O(T · (V + E)). That's still nothing at this size.
 
-The planner turns those into the "Why?" text: "Processes and virtual memory, Concurrency and Storage and file systems need it, on the way to Core CS."
+The planner turns those into the "Why?" text. For example: "It's part of what it takes to get hired as a backend engineer, and Building a REST API also needs it."
 
 ### 6.4 Build-time checks
 
@@ -134,7 +150,8 @@ The planner turns those into the "Why?" text: "Processes and virtual memory, Con
 - any id is referenced but never defined,
 - hard prerequisites contain a cycle. This is found with a three-colour DFS, and the error prints the cycle, e.g. `a → b → c → a`,
 - a concept has no free primary resource,
-- an area, background, goal or path refers to something that doesn't exist.
+- an area, background, family or role refers to something that doesn't exist,
+- a role lists the same concept in two tiers.
 
 Bad content gets caught in CI, not by someone using the site.
 
@@ -181,7 +198,7 @@ flowchart LR
     E -. first search .-> S[/search.json/]
 ```
 
-Every page is plain HTML built at deploy time. The planner is the one React island, on route pages only. Concept pages and the home page ship no framework at all.
+Every page is plain HTML built at deploy time. The planner is the one React island, on role pages only. Concept pages and the home page ship no framework at all.
 
 ### What ships
 
@@ -189,11 +206,11 @@ Measured from `npm run build`, gzipped:
 
 | Page | HTML | JavaScript |
 |---|---|---|
-| Home | 4.7 KB | about 1 KB inline (search) |
-| Concept page | about 3 KB | about 1 KB inline (search) |
-| Route page | 9.4 KB | 66 KB React runtime + 4 KB planner; +3 KB when the map opens |
+| Home | 5.4 KB | about 1.5 KB inline (search, picker) |
+| Concept page | about 3.7 KB | about 1 KB inline (search) |
+| Role page | about 11 KB | 66 KB React runtime + 4 KB planner; +3 KB when the map opens |
 
-The React runtime is most of the weight. Swapping in Preact through `@astrojs/preact` with its React compatibility layer would cut about 55 KB without changing component code. I'm keeping React for now because it's what I want to practise, but it's the obvious first move if the route page ever feels slow.
+The React runtime is most of the weight. Swapping in Preact through `@astrojs/preact` with its React compatibility layer would cut about 55 KB without changing component code. I'm keeping React for now because it's what I want to practise, but it's the obvious first move if the role page ever feels slow.
 
 Fonts are self-hosted (Overpass, from `@fontsource-variable`). There's no request to Google and no layout shift from a late font.
 
@@ -206,10 +223,13 @@ Tokens live in `src/styles/global.css`. Area colours are set once, with `[data-a
 ### Planner state
 
 ```ts
-{ goal?: string, view?: 'list' | 'map', known: string[], done: string[] }
+// pregraph:me, shared by every role
+{ background?: string, known: string[], done: string[] }
+// pregraph:role:<id>, one per role
+{ tier?: 'hire' | 'firstYear' | 'extra', view?: 'list' | 'map' }
 ```
 
-This is stored per route under `pregraph:<slug>` in localStorage. Every read and write is wrapped in `try/catch`, because private windows can block storage. The selected goal is also mirrored into the URL (`?goal=gate-cs`), so a link to a GATE plan opens as a GATE plan.
+What you know and what you've finished belong to you, not to one role, so they live in one shared record. The tier and view are per role. Every read and write is wrapped in `try/catch`, because private windows can block storage. Background and tier are mirrored into the URL (`/roles/backend-engineer?from=cs-grad&tier=firstYear`), so a shared link opens the same plan.
 
 The planner reads storage in an effect after the first render, so the server HTML and the first client render match.
 
@@ -265,8 +285,10 @@ src/lib/layout.ts        layered layout for the map
 src/lib/search.ts        scoring for search
 src/lib/schema.ts        content contract (zod)
 src/lib/content.ts       loads and cross-checks content at build time
-src/components/          PathPlanner, RouteMap (React), Search (plain TS)
-src/pages/               home, /paths/[slug], /concepts/[id], /search.json, 404
+src/components/          RolePlanner, RouteMap (React), Search (plain TS)
+src/pages/               home, /roles, /roles/[id], /concepts/[id], /search.json, 404
+research/postings/       tagged job postings per role (the evidence)
+scripts/role-evidence.ts npm run evidence
 src/styles/              tokens, route, planner, map
 tests/                   vitest + fast-check
 scripts/validate.ts      npm run validate
@@ -280,9 +302,11 @@ scripts/validate.ts      npm run validate
 | 2–3 | Graph grown to 40 concepts, 3 goals, 2 routes | Done (locators still to verify) |
 | 4 | Redesign; planner: goals, "why", skipping, progress by area | Done |
 | 5 | Map view with own layout; search | Done |
-| 6 | Deploy on Cloudflare Pages, analytics, first users | Next |
-| 7–8 | Verify every locator, fix what users report, third route | |
-| later | v1 accounts and sync, link checker; v2 adaptive test | |
+| 6 | Roles: ten tech roles and GATE, tiers, four backgrounds, tools and projects | Done (drafts) |
+| 7 | Job-posting evidence for SDE and backend; deploy; first users | Next |
+| 8–9 | Check yourself: questions, test out, spaced review | |
+| 10+ | Depth pages to one template, starting with the most shared concepts | |
+| later | More role families, accounts and sync, link checker, adaptive test | |
 
 ## 13. Decisions
 
@@ -297,6 +321,9 @@ scripts/validate.ts      npm run validate
 | Own graph layout, not dagre / React Flow | Small, fits exactly, and worth understanding | The map needs zoom, drag, editing |
 | Own search, not Pagefind | 40–300 short records; a 1 KB scorer beats an index | Content pages get long text worth searching |
 | localStorage before accounts | Nothing to sign up for, no personal data to protect | v1 |
+| Roles as the way in | People think in jobs, not in "Core CS" | — |
+| Launch with one family of tech roles, not every job | Each role needs real curation; tech roles share most concepts | The first family is solid and has evidence |
+| Tiers backed by job postings | Without evidence a role list is one more opinion | — |
 
 ## 14. Risks
 
@@ -308,5 +335,5 @@ scripts/validate.ts      npm run validate
 ## 15. Open questions
 
 - Licences: MIT for the code? CC BY-SA for the content?
-- NPTEL courses for the GATE goal. They need checking course by course before going in.
+- NPTEL courses for GATE. They need checking course by course before going in.
 - `hours` are my estimates for now. With real users, the time between "started" and "done" would give better numbers.

@@ -11,9 +11,9 @@ import {
   areaSchema,
   backgroundSchema,
   conceptSchema,
-  goalSchema,
-  pathSchema,
+  familySchema,
   resourceSchema,
+  roleSchema,
   type Content,
 } from './schema';
 import { findCycle } from './graph';
@@ -54,8 +54,8 @@ export function checkContent(c: Content): string[] {
   dupes('concept', c.concepts.map((x) => x.id));
   dupes('resource', c.resources.map((x) => x.id));
   dupes('background', c.backgrounds.map((x) => x.id));
-  dupes('goal', c.goals.map((x) => x.id));
-  dupes('path', c.paths.map((x) => x.slug));
+  dupes('family', c.families.map((x) => x.id));
+  dupes('role', c.roles.map((x) => x.id));
   for (const x of c.concepts) conceptIds.add(x.id);
 
   const areaIds = new Set(c.areas.map((a) => a.id));
@@ -85,17 +85,14 @@ export function checkContent(c: Content): string[] {
       if (!conceptIds.has(k)) problems.push(`Background "${b.id}" refers to unknown concept "${k}"`);
     }
   }
-  for (const g of c.goals) {
-    for (const t of g.targets) {
-      if (!conceptIds.has(t)) problems.push(`Goal "${g.id}" refers to unknown concept "${t}"`);
-    }
-  }
-  const backgroundIds = new Set(c.backgrounds.map((b) => b.id));
-  const goalIds = new Set(c.goals.map((g) => g.id));
-  for (const p of c.paths) {
-    if (!backgroundIds.has(p.background)) problems.push(`Path "${p.slug}" refers to unknown background "${p.background}"`);
-    for (const g of p.goals) {
-      if (!goalIds.has(g)) problems.push(`Path "${p.slug}" refers to unknown goal "${g}"`);
+  const familyIds = new Set(c.families.map((f) => f.id));
+  for (const r of c.roles) {
+    if (!familyIds.has(r.family)) problems.push(`Role "${r.id}" is in unknown family "${r.family}"`);
+    const seen = new Set<string>();
+    for (const t of [...r.tiers.hire, ...r.tiers.firstYear, ...r.tiers.extra]) {
+      if (!conceptIds.has(t)) problems.push(`Role "${r.id}" refers to unknown concept "${t}"`);
+      if (seen.has(t)) problems.push(`Role "${r.id}" lists "${t}" in more than one tier`);
+      seen.add(t);
     }
   }
   return problems;
@@ -115,8 +112,8 @@ export function loadContent(root = join(process.cwd(), 'content')): Content {
     concepts,
     resources: parseList(resourceSchema, readYaml(join(root, 'resources.yaml')), 'resources.yaml', problems),
     backgrounds: parseList(backgroundSchema, readYaml(join(root, 'backgrounds.yaml')), 'backgrounds.yaml', problems),
-    goals: parseList(goalSchema, readYaml(join(root, 'goals.yaml')), 'goals.yaml', problems),
-    paths: parseList(pathSchema, readYaml(join(root, 'paths.yaml')), 'paths.yaml', problems),
+    families: parseList(familySchema, readYaml(join(root, 'families.yaml')), 'families.yaml', problems),
+    roles: parseList(roleSchema, readYaml(join(root, 'roles.yaml')), 'roles.yaml', problems),
   };
 
   problems.push(...checkContent(content));

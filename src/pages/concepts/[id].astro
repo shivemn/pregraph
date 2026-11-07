@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { content, listOf } from '../../lib/site';
+import { TIERS } from '../../lib/schema';
 
 export function getStaticPaths() {
   return content().concepts.map((x) => ({ params: { id: x.id } }));
@@ -15,7 +16,10 @@ const area = c.areas.find((a) => a.id === concept.area)!;
 const before = concept.requires.map((id) => byId.get(id)!);
 const helpful = concept.recommends.map((id) => byId.get(id)!);
 const after = c.concepts.filter((x) => x.requires.includes(concept.id));
-const inGoals = c.goals.filter((g) => g.targets.includes(concept.id));
+const inRoles = c.roles.flatMap((r) =>
+  TIERS.filter((t) => r.tiers[t.id].includes(concept.id)).map((t) => ({ role: r, tier: t })),
+);
+const kindLabel = concept.kind === 'tool' ? 'Tool' : concept.kind === 'project' ? 'Project to build' : null;
 
 const groups = [
   { role: 'primary', heading: 'Start here' },
@@ -27,12 +31,14 @@ const groups = [
 <Base title={concept.title} description={concept.summary}>
   <article data-area={concept.area}>
     <header class="head">
-      <span class="area-chip">{area.title}</span>
+      <p class="chips">
+        <span class="area-chip">{area.title}</span>
+        {kindLabel && <span class="kind">{kindLabel}</span>}
+      </p>
       <h1>{concept.title}</h1>
       <p class="summary">{concept.summary}</p>
       <p class="quiet">
-        About <span class="num">{concept.hours}</span> hours of study.{' '}
-        {inGoals.length > 0 && <>A target for {listOf(inGoals.map((g) => g.title))}.</>}
+        About <span class="num">{concept.hours}</span> hours{concept.kind === 'project' ? ' to build' : ' of study'}.
       </p>
     </header>
 
@@ -72,6 +78,22 @@ const groups = [
       }
     </section>
 
+    {
+      inRoles.length > 0 && (
+        <section aria-labelledby="roles">
+          <h2 id="roles">Which roles ask for it</h2>
+          <ul class="role-uses">
+            {inRoles.map(({ role, tier }) => (
+              <li>
+                <a href={`/roles/${role.id}`}>{role.title}</a>
+                <span class="quiet"> {tier.id === 'hire' ? 'to get hired' : tier.id === 'firstYear' ? 'in the first year' : 'good to have'}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
     <section class="neighbours" aria-labelledby="around">
       <h2 id="around">Before and after</h2>
       <div class="lanes">
@@ -103,6 +125,10 @@ const groups = [
 
 <style>
   .head { display: grid; gap: 12px; padding: 24px 0 8px; }
+  .chips { display: flex; gap: 12px; align-items: center; }
+  .kind { font-size: 0.8125rem; font-weight: 700; padding: 1px 8px; border-radius: 4px; border: 1.5px solid var(--line); color: var(--line); }
+  .role-uses { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; }
+  .role-uses a { font-weight: 650; }
   .summary { font-size: 1.25rem; line-height: 1.45; max-width: 56ch; }
 
   section { margin-top: 44px; }

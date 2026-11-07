@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import fc from 'fast-check';
 import { criticalPath, findCycle, indexConcepts, neededConcepts, planPath, type ConceptNode } from '../src/lib/graph';
 import { checkContent, loadContent } from '../src/lib/content';
+import { targetsUpTo, type Tier } from '../src/lib/schema';
 
 const node = (id: string, requires: string[] = [], extra: Partial<ConceptNode> = {}): ConceptNode => ({
   id,
@@ -196,20 +197,45 @@ describe('real content', () => {
     expect(checkContent(content)).toEqual([]);
   });
 
+  const plan = (role: string, background: string, tier: Tier = 'firstYear') => {
+    const r = content.roles.find((x) => x.id === role)!;
+    const b = content.backgrounds.find((x) => x.id === background)!;
+    return planPath(content.concepts, targetsUpTo(r, tier), new Set(b.knows)).steps.map((s) => s.id);
+  };
+
   it('maths graduates skip proofs and discrete maths', () => {
-    const path = content.paths.find((p) => p.slug === 'maths-to-cs')!;
-    const bg = content.backgrounds.find((b) => b.id === path.background)!;
-    const goal = content.goals.find((g) => g.id === path.goals[0])!;
-    const ids = planPath(content.concepts, goal.targets, new Set(bg.knows)).steps.map((s) => s.id);
+    const ids = plan('software-engineer', 'maths-grad');
     expect(ids).not.toContain('proofs');
     expect(ids).not.toContain('discrete-math');
     expect(ids).toContain('os-processes-memory');
     expect(ids.indexOf('c-and-memory')).toBeLessThan(ids.indexOf('os-processes-memory'));
   });
 
+  it('a CS graduate gets a much shorter route than someone starting from zero', () => {
+    for (const r of content.roles) {
+      expect(plan(r.id, 'cs-grad', 'extra').length).toBeLessThanOrEqual(plan(r.id, 'no-background', 'extra').length);
+    }
+    expect(plan('backend-engineer', 'cs-grad').length).toBeLessThan(plan('backend-engineer', 'no-background').length - 8);
+  });
+
+  it('later tiers only ever add stops', () => {
+    for (const r of content.roles) {
+      const hire = new Set(plan(r.id, 'no-background', 'hire'));
+      const year = plan(r.id, 'no-background', 'firstYear');
+      for (const id of hire) expect(year).toContain(id);
+    }
+  });
+
   it('catches a cycle someone might add by mistake', () => {
     const broken = structuredClone(content);
     broken.concepts.find((c) => c.id === 'programming-basics')!.requires.push('graph-algorithms');
     expect(checkContent(broken).join('\n')).toMatch(/cycle/);
+  });
+
+  it('catches a role that lists the same thing in two tiers', () => {
+    const broken = structuredClone(content);
+    const r = broken.roles[0]!;
+    r.tiers.extra.push(r.tiers.hire[0]!);
+    expect(checkContent(broken).join('\n')).toMatch(/more than one tier/);
   });
 });

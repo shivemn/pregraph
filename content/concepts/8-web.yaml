@@ -1,0 +1,137 @@
+- id: html-css
+  title: HTML and CSS
+  area: web
+  summary: Structuring a page so it means something, then laying it out and styling it so it works on any screen.
+  hours: 30
+  resources:
+    - resource: mdn-learn
+      locator: "Structuring content with HTML, CSS styling basics, CSS layout"
+    - resource: odin
+      locator: "Foundations course, HTML and CSS sections"
+      role: alternative
+
+- id: javascript
+  title: JavaScript
+  area: web
+  summary: The language of the browser. Functions, objects, the event loop, promises and async code.
+  hours: 40
+  recommends: [programming-basics, html-css]
+  resources:
+    - resource: javascript-info
+      locator: "Part 1, The JavaScript language"
+    - resource: fullstackopen
+      locator: "Part 1"
+      role: alternative
+
+- id: typescript
+  title: TypeScript
+  area: web
+  summary: JavaScript with types. Catches a whole class of bugs before the code runs.
+  hours: 10
+  requires: [javascript]
+  resources:
+    - resource: ts-handbook
+      locator: "The Basics through Narrowing, then Object Types"
+
+- id: react
+  title: React
+  area: web
+  summary: Building interfaces out of components, state and effects. The most asked-for frontend library.
+  hours: 30
+  kind: tool
+  requires: [javascript, html-css]
+  resources:
+    - resource: react-docs
+      locator: "Describing the UI, Adding interactivity, Managing state"
+    - resource: fullstackopen
+      locator: "Parts 1–2"
+      role: alternative
+
+- id: web-accessibility
+  title: Accessibility
+  area: web
+  summary: Making pages work with keyboards, screen readers and zoom. Often a legal requirement, always good practice.
+  hours: 8
+  requires: [html-css]
+  resources:
+    - resource: wai-intro
+      locator: "Introduction, then the linked WCAG overview"
+
+- id: web-performance
+  title: Web performance
+  area: web
+  summary: Why pages are slow and how to measure it. Loading, rendering and the Core Web Vitals.
+  hours: 10
+  requires: [javascript, web-http]
+  resources:
+    - resource: webdev-perf
+      locator: "The whole course"
+
+- id: rest-apis
+  title: Designing HTTP APIs
+  area: web
+  summary: Resources, methods, status codes, versioning and errors. What a good API feels like to the person calling it.
+  hours: 8
+  requires: [web-http]
+  resources:
+    - resource: zalando-api
+      locator: "General guidelines, REST basics, JSON guidelines"
+    - resource: fullstackopen
+      locator: "Part 3"
+      role: alternative
+
+- id: backend-framework
+  title: A backend framework
+  area: web
+  summary: Routing, data access, validation and configuration in a real framework, so you're not rebuilding them by hand.
+  hours: 35
+  kind: tool
+  requires: [rest-apis, sql]
+  recommends: [java]
+  resources:
+    - resource: spring-guides
+      locator: "Building a RESTful Web Service, Accessing Data with JPA, Building REST services with Spring"
+    - resource: django-tutorial
+      locator: "Parts 1–8"
+      role: alternative
+    - resource: fullstackopen
+      locator: "Parts 3–4, Node.js and Express"
+      role: alternative
+
+- id: web-security
+  title: Web security
+  area: web
+  summary: Injection, broken access control, XSS and the other usual ways web apps get broken into.
+  hours: 12
+  requires: [web-http]
+  recommends: [sql]
+  resources:
+    - resource: owasp-top10
+      locator: "Each of the ten categories"
+
+- id: project-web-app
+  title: "Project: build and ship a web app"
+  area: web
+  summary: A small but real app with a few screens, data from an API and a public URL you can put on your CV.
+  hours: 40
+  kind: project
+  requires: [react]
+  recommends: [rest-apis, git]
+  resources:
+    - resource: odin
+      locator: "Full Stack JavaScript path, project lessons"
+    - resource: fullstackopen
+      locator: "Exercises in parts 1–5"
+      role: alternative
+
+- id: project-portfolio-api
+  title: "Project: build and deploy a REST API"
+  area: web
+  summary: An API with a database, tests and authentication, deployed somewhere people can call it.
+  hours: 40
+  kind: project
+  requires: [backend-framework, git]
+  recommends: [docker, testing-debugging]
+  resources:
+    - resource: spring-guides
+      locator: "Building REST services with Spring, then Securing a Web Application"

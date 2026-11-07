@@ -11,7 +11,14 @@ interface Props {
   stateOf: (s: PlanStep) => State;
   areaTitle: (id: string) => string;
   onToggle: (id: string) => void;
+  kindOf: (id: string) => string;
 }
+
+/** Projects are drawn as squares, so the label can drop its "Project:" prefix. */
+const label = (title: string) => {
+  const t = title.replace(/^Project:\s*/, '');
+  return t.charAt(0).toUpperCase() + t.slice(1);
+};
 
 const NODE_WIDTH = 138;
 
@@ -39,7 +46,7 @@ function trim(points: Array<[number, number]>, fromTitle: string): Array<[number
   return out;
 }
 
-export default function RouteMap({ steps, stateOf, areaTitle, onToggle }: Props) {
+export default function RouteMap({ steps, stateOf, areaTitle, onToggle, kindOf }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
 
@@ -93,7 +100,7 @@ export default function RouteMap({ steps, stateOf, areaTitle, onToggle }: Props)
             </div>
           </>
         ) : (
-          <p className="faint small">Select a stop to light up what it needs and what it leads to. Each row only depends on rows above it.</p>
+          <p className="faint small">Select a stop to light up what it needs and what it leads to. Each row only depends on rows above it. Squares are projects.</p>
         )}
       </div>
 
@@ -112,7 +119,7 @@ export default function RouteMap({ steps, stateOf, areaTitle, onToggle }: Props)
             {layout.edges.map((e) => (
               <path
                 key={`${e.from}>${e.to}`}
-                d={curvePath(trim(e.points, byId.get(e.from)!.title))}
+                d={curvePath(trim(e.points, label(byId.get(e.from)!.title)))}
                 className={related && related.has(e.from) && related.has(e.to) ? 'on' : undefined}
               />
             ))}
@@ -120,7 +127,7 @@ export default function RouteMap({ steps, stateOf, areaTitle, onToggle }: Props)
           {layout.layers.flat().map((id) => {
             const s = byId.get(id)!;
             const p = layout.nodes.get(id)!;
-            const lines = wrap(s.title);
+            const lines = wrap(label(s.title));
             return (
               <g
                 key={id}
@@ -143,7 +150,11 @@ export default function RouteMap({ steps, stateOf, areaTitle, onToggle }: Props)
                 onMouseLeave={() => setHovered(null)}
               >
                 <circle className="halo" r="17" />
-                <circle className="dot" r="9" />
+                {kindOf(id) === 'project' ? (
+                  <rect className="dot" x="-9" y="-9" width="18" height="18" rx="3" />
+                ) : (
+                  <circle className="dot" r="9" />
+                )}
                 <text y="30" textAnchor="middle">
                   {lines.map((l, i) => (
                     <tspan key={i} x="0" dy={i === 0 ? 0 : 15}>{l}</tspan>

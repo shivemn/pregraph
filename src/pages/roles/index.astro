@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import { content } from '../../lib/site';
+
+const c = content();
+const groups = c.families
+  .map((f) => ({ family: f, roles: c.roles.filter((r) => r.family === f.id) }))
+  .filter((g) => g.roles.length > 0);
+---
+
+<Base title="Roles" description="Pick a job and see what it takes to get hired, starting from what you already know.">
+  <h1>Roles</h1>
+  <p class="lede quiet">
+    Pick a job. You'll see what it takes to get hired, then what the first year expects, starting from what you
+    already know. Every role is a draft until it has been checked against real job postings.
+  </p>
+  {
+    groups.map(({ family, roles }) => (
+      <section>
+        <h2>{family.title}</h2>
+        <ul class="role-list">
+          {roles.map((r) => (
+            <li>
+              <a href={`/roles/${r.id}`}>{r.title}</a>
+              <p class="quiet">{r.summary}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  h1 { padding-top: 24px; }
+  .lede { font-size: 1.1875rem; max-width: 60ch; margin-top: 14px; }
+  section { margin-top: 44px; }
+  .role-list { list-style: none; padding: 0; margin: 12px 0 0; border-top: 1px solid var(--rule); }
+  .role-list li { padding: 16px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+  .role-list a { font-size: 1.2rem; font-weight: 750; text-decoration: none; }
+  .role-list a:hover { text-decoration: underline; }
+</style>

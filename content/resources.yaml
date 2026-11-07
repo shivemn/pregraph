@@ -251,3 +251,282 @@
   url: https://d2l.ai/
   free: true
   short: "D2L"
+
+# Web
+- id: mdn-learn
+  title: Learn web development (MDN)
+  author: Mozilla
+  type: course
+  url: https://developer.mozilla.org/en-US/docs/Learn_web_development
+  free: true
+
+- id: odin
+  title: The Odin Project
+  author: The Odin Project community
+  type: course
+  url: https://www.theodinproject.com/
+  free: true
+
+- id: fullstackopen
+  title: Full Stack Open
+  author: University of Helsinki
+  type: course
+  url: https://fullstackopen.com/en/
+  free: true
+
+- id: javascript-info
+  title: The Modern JavaScript Tutorial
+  author: Ilya Kantor and contributors
+  type: book
+  url: https://javascript.info/
+  free: true
+  short: "javascript.info"
+
+- id: ts-handbook
+  title: The TypeScript Handbook
+  author: Microsoft
+  type: site
+  url: https://www.typescriptlang.org/docs/handbook/intro.html
+  free: true
+
+- id: react-docs
+  title: Learn React (react.dev)
+  author: The React team
+  type: site
+  url: https://react.dev/learn
+  free: true
+
+- id: wai-intro
+  title: Introduction to Web Accessibility
+  author: W3C Web Accessibility Initiative
+  type: site
+  url: https://www.w3.org/WAI/fundamentals/accessibility-intro/
+  free: true
+  short: "WAI WCAG"
+
+- id: webdev-perf
+  title: Learn Performance (web.dev)
+  author: Google Chrome team
+  type: course
+  url: https://web.dev/learn/performance
+  free: true
+
+- id: zalando-api
+  title: RESTful API Guidelines
+  author: Zalando
+  type: site
+  url: https://opensource.zalando.com/restful-api-guidelines/
+  free: true
+
+- id: owasp-top10
+  title: OWASP Top Ten
+  author: OWASP Foundation
+  type: site
+  url: https://owasp.org/www-project-top-ten/
+  free: true
+  short: "OWASP"
+
+# Backend
+- id: dev-java
+  title: Learn Java (dev.java)
+  author: Oracle
+  type: site
+  url: https://dev.java/learn/
+  free: true
+
+- id: spring-guides
+  title: Spring Guides
+  author: The Spring team
+  type: site
+  url: https://spring.io/guides
+  free: true
+  short: "Spring Boot"
+
+- id: django-tutorial
+  title: Writing your first Django app
+  author: Django Software Foundation
+  type: site
+  url: https://docs.djangoproject.com/en/stable/intro/tutorial01/
+  free: true
+
+- id: sd-primer
+  title: The System Design Primer
+  author: Donne Martin
+  type: site
+  url: https://github.com/donnemartin/system-design-primer
+  free: true
+
+- id: kafka-docs
+  title: Apache Kafka documentation
+  author: Apache Software Foundation
+  type: site
+  url: https://kafka.apache.org/documentation/
+  free: true
+  short: "Kafka"
+
+# Infrastructure
+- id: linux-journey
+  title: Linux Journey
+  author: Linux Journey
+  type: site
+  url: https://linuxjourney.com/
+  free: true
+
+- id: docker-docs
+  title: Get started with Docker
+  author: Docker
+  type: site
+  url: https://docs.docker.com/get-started/
+  free: true
+
+- id: k8s-basics
+  title: Learn Kubernetes Basics
+  author: The Kubernetes project
+  type: site
+  url: https://kubernetes.io/docs/tutorials/kubernetes-basics/
+  free: true
+  short: "k8s"
+
+- id: gh-actions
+  title: GitHub Actions documentation
+  author: GitHub
+  type: site
+  url: https://docs.github.com/en/actions
+  free: true
+
+- id: aws-ccp
+  title: AWS Cloud Practitioner Essentials
+  author: Amazon Web Services
+  type: course
+  url: https://aws.amazon.com/training/course-descriptions/cloud-practitioner-essentials/
+  free: true
+  short: "AWS"
+  note: The course itself is free on AWS Skill Builder. The certification exam is paid and optional.
+
+- id: sre-book
+  title: Site Reliability Engineering
+  author: Google
+  type: book
+  url: https://sre.google/sre-book/table-of-contents/
+  free: true
+  short: "SRE book"
+
+- id: prometheus-docs
+  title: Prometheus overview
+  author: The Prometheus project
+  type: site
+  url: https://prometheus.io/docs/introduction/overview/
+  free: true
+
+- id: terraform-tutorials
+  title: Terraform tutorials
+  author: HashiCorp
+  type: site
+  url: https://developer.hashicorp.com/terraform/tutorials
+  free: true
+
+# Data
+- id: openintro
+  title: OpenIntro Statistics
+  author: Diez, Çetinkaya-Rundel, Barr
+  type: book
+  url: https://www.openintro.org/book/os/
+  free: true
+
+- id: gcf-excel
+  title: Excel tutorials (GCFGlobal)
+  author: GCFGlobal
+  type: site
+  url: https://edu.gcfglobal.org/en/excel/
+  free: true
+  short: "Excel spreadsheets"
+
+- id: py4da
+  title: Python for Data Analysis, 3rd edition
+  author: Wes McKinney
+  type: book
+  url: https://wesmckinney.com/book/
+  free: true
+  short: "pandas"
+
+- id: dataviz-wilke
+  title: Fundamentals of Data Visualization
+  author: Claus O. Wilke
+  type: book
+  url: https://clauswilke.com/dataviz/
+  free: true
+
+- id: powerbi-learn
+  title: Power BI training (Microsoft Learn)
+  author: Microsoft
+  type: course
+  url: https://learn.microsoft.com/en-us/training/powerplatform/power-bi
+  free: true
+  short: "Power BI"
+
+- id: kimball
+  title: Dimensional modeling techniques
+  author: Kimball Group
+  type: site
+  url: https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/
+  free: true
+  short: "Kimball star schema"
+
+- id: spark-docs
+  title: Spark quick start
+  author: Apache Software Foundation
+  type: site
+  url: https://spark.apache.org/docs/latest/quick-start.html
+  free: true
+  short: "PySpark"
+
+- id: de-zoomcamp
+  title: Data Engineering Zoomcamp
+  author: DataTalks.Club
+  type: course
+  url: https://github.com/DataTalksClub/data-engineering-zoomcamp
+  free: true
+
+- id: airflow-docs
+  title: Airflow tutorials
+  author: Apache Software Foundation
+  type: site
+  url: https://airflow.apache.org/docs/apache-airflow/stable/tutorial/index.html
+  free: true
+
+- id: kaggle-datasets
+  title: Kaggle Datasets
+  author: Kaggle
+  type: site
+  url: https://www.kaggle.com/datasets
+  free: true
+
+- id: madewithml
+  title: Made With ML, MLOps course
+  author: Goku Mohandas
+  type: course
+  url: https://madewithml.com/courses/mlops/
+  free: true
+
+# Mobile
+- id: kotlin-docs
+  title: Kotlin documentation
+  author: JetBrains
+  type: site
+  url: https://kotlinlang.org/docs/getting-started.html
+  free: true
+
+- id: android-courses
+  title: Android training courses
+  author: Google
+  type: course
+  url: https://developer.android.com/courses
+  free: true
+
+# Testing
+- id: playwright-docs
+  title: Playwright documentation
+  author: Microsoft
+  type: site
+  url: https://playwright.dev/docs/intro
+  free: true

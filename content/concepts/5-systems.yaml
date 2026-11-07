@@ -95,3 +95,29 @@
   resources:
     - resource: mit-6858
       locator: "Lectures on buffer overflows, privilege separation and web security"
+
+- id: system-design
+  title: System design
+  area: systems
+  summary: Load balancers, caches, queues, sharding and the trade-offs between them. How a single app grows to serve millions.
+  hours: 40
+  requires: [web-http, sql, hash-tables]
+  recommends: [distributed-systems, database-internals]
+  resources:
+    - resource: sd-primer
+      locator: "The study guide, then each topic in the index"
+    - resource: ddia
+      locator: "Parts I and II"
+      role: deep-dive
+
+- id: messaging
+  title: Message queues and event streams
+  area: systems
+  summary: Decoupling services with queues and logs. Delivery guarantees, ordering and consumer groups.
+  hours: 10
+  kind: tool
+  requires: [networking]
+  recommends: [concurrency]
+  resources:
+    - resource: kafka-docs
+      locator: "Introduction, then Design"

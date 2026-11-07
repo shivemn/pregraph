@@ -21,3 +21,126 @@
   resources:
     - resource: cmu-15445
       locator: "The full lecture series"
+
+- id: statistics
+  title: Statistics
+  area: data
+  summary: Summarising data, sampling, confidence intervals, hypothesis tests and regression, and how each one gets misused.
+  hours: 30
+  recommends: [probability]
+  resources:
+    - resource: openintro
+      locator: "Chapters 1–9"
+
+- id: spreadsheets
+  title: Spreadsheets
+  area: data
+  summary: Formulas, lookups, pivot tables and charts. Still where most business data gets looked at first.
+  hours: 10
+  kind: tool
+  resources:
+    - resource: gcf-excel
+      locator: "Formulas and functions, then the data analysis lessons"
+
+- id: pandas
+  title: Data wrangling with pandas
+  area: data
+  summary: Loading, cleaning, joining, reshaping and summarising tables in Python.
+  hours: 25
+  kind: tool
+  requires: [programming-basics]
+  resources:
+    - resource: py4da
+      locator: "Chapters 4–10"
+
+- id: data-visualization
+  title: Data visualisation
+  area: data
+  summary: Choosing the right chart, and the small decisions that make a chart honest and readable.
+  hours: 12
+  recommends: [statistics]
+  resources:
+    - resource: dataviz-wilke
+      locator: "Parts I and II"
+    - resource: py4da
+      locator: "Chapter 9, Plotting and visualization"
+      role: alternative
+
+- id: bi-tools
+  title: Dashboards and BI tools
+  area: data
+  summary: Building dashboards other people use to make decisions, in tools like Power BI.
+  hours: 15
+  kind: tool
+  requires: [sql]
+  recommends: [data-visualization, spreadsheets]
+  resources:
+    - resource: powerbi-learn
+      locator: "The data analyst learning paths"
+
+- id: data-warehousing
+  title: Data modelling for analytics
+  area: data
+  summary: Fact and dimension tables, star schemas and slowly changing dimensions. How warehouses are organised.
+  hours: 15
+  requires: [sql]
+  recommends: [database-internals]
+  resources:
+    - resource: kimball
+      locator: "Fundamental concepts, then fact and dimension table techniques"
+
+- id: spark
+  title: Large-scale processing with Spark
+  area: data
+  summary: Processing data that doesn't fit on one machine, with DataFrames that look a lot like pandas.
+  hours: 20
+  kind: tool
+  requires: [pandas, sql]
+  resources:
+    - resource: spark-docs
+      locator: "Quick start, then the SQL and DataFrames guide"
+    - resource: de-zoomcamp
+      locator: "Module on batch processing"
+      role: alternative
+
+- id: orchestration
+  title: Pipelines and scheduling
+  area: data
+  summary: Running data jobs in the right order, on a schedule, with retries when they fail.
+  hours: 10
+  kind: tool
+  requires: [programming-basics]
+  recommends: [sql]
+  resources:
+    - resource: airflow-docs
+      locator: "Fundamental concepts, then Working with TaskFlow"
+    - resource: de-zoomcamp
+      locator: "Module on workflow orchestration"
+      role: alternative
+
+- id: project-data-analysis
+  title: "Project: analyse a public dataset"
+  area: data
+  summary: Pick a question, find data that answers it, clean it, analyse it, and publish what you found with charts.
+  hours: 25
+  kind: project
+  requires: [pandas, data-visualization]
+  recommends: [sql, statistics]
+  resources:
+    - resource: kaggle-datasets
+      locator: "Pick a dataset with a question you care about"
+    - resource: py4da
+      locator: "Chapter 13, Data analysis examples"
+      role: alternative
+
+- id: project-data-pipeline
+  title: "Project: build a data pipeline"
+  area: data
+  summary: Pull data from a public source on a schedule, load it into a warehouse and model it for analysis.
+  hours: 35
+  kind: project
+  requires: [data-warehousing, pandas]
+  recommends: [orchestration, spark]
+  resources:
+    - resource: de-zoomcamp
+      locator: "Follow the course project brief"

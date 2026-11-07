@@ -22,6 +22,9 @@
   --systems: #2162c6;
   --data: #0a7f93;
   --ai: #b33a86;
+  --web: #c4570a;
+  --infra: #556372;
+  --mobile: #5e7d0e;
 
   --font: 'Overpass Variable', 'Overpass', system-ui, sans-serif;
   --measure: 66ch;
@@ -46,6 +49,9 @@
     --systems: #5b95f0;
     --data: #3cc2d6;
     --ai: #e27cc0;
+    --web: #f3934f;
+    --infra: #9fb0c2;
+    --mobile: #9ecb45;
     color-scheme: dark;
   }
 }
@@ -58,6 +64,9 @@
 [data-area='systems'] { --line: var(--systems); }
 [data-area='data'] { --line: var(--data); }
 [data-area='ai'] { --line: var(--ai); }
+[data-area='web'] { --line: var(--web); }
+[data-area='infra'] { --line: var(--infra); }
+[data-area='mobile'] { --line: var(--mobile); }
 
 *, *::before, *::after { box-sizing: border-box; }
 

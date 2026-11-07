@@ -1,0 +1,91 @@
+- id: linux-admin
+  title: Linux administration
+  area: infra
+  summary: Users, permissions, processes, services, logs and packages. The machine everything else runs on.
+  hours: 20
+  requires: [shell-tools]
+  resources:
+    - resource: linux-journey
+      locator: "Grasshopper and Journeyman sections"
+
+- id: docker
+  title: Containers and Docker
+  area: infra
+  summary: Packaging an app with everything it needs so it runs the same everywhere.
+  hours: 12
+  kind: tool
+  requires: [shell-tools]
+  resources:
+    - resource: docker-docs
+      locator: "The getting-started guide, start to finish"
+
+- id: kubernetes
+  title: Kubernetes
+  area: infra
+  summary: Running many containers across many machines, and keeping them running.
+  hours: 25
+  kind: tool
+  requires: [docker, networking]
+  resources:
+    - resource: k8s-basics
+      locator: "All six modules"
+
+- id: ci-cd
+  title: CI and CD
+  area: infra
+  summary: Building, testing and deploying automatically on every change.
+  hours: 8
+  kind: tool
+  requires: [git, testing-debugging]
+  resources:
+    - resource: gh-actions
+      locator: "Quickstart, then Building and testing, then Deployment"
+
+- id: cloud-basics
+  title: Cloud basics
+  area: infra
+  summary: Compute, storage, networking and identity on a public cloud, and how the bill works.
+  hours: 15
+  requires: [networking]
+  resources:
+    - resource: aws-ccp
+      locator: "The whole course"
+
+- id: observability
+  title: Monitoring and observability
+  area: infra
+  summary: Metrics, logs, traces and alerts. Knowing your system is broken before your users tell you.
+  hours: 12
+  requires: [linux-admin]
+  recommends: [kubernetes]
+  resources:
+    - resource: sre-book
+      locator: "Chapter 6, Monitoring Distributed Systems"
+    - resource: prometheus-docs
+      locator: "Overview, then First steps"
+      role: alternative
+
+- id: infrastructure-as-code
+  title: Infrastructure as code
+  area: infra
+  summary: Describing servers, networks and permissions in files you can review and version, instead of clicking in a console.
+  hours: 12
+  kind: tool
+  requires: [cloud-basics]
+  resources:
+    - resource: terraform-tutorials
+      locator: "Get Started track for your cloud"
+
+- id: project-deploy-pipeline
+  title: "Project: containerise an app and deploy it with CI"
+  area: infra
+  summary: Take any small app, put it in a container, and have every push to main test it and deploy it to the cloud.
+  hours: 25
+  kind: project
+  requires: [docker, ci-cd, cloud-basics]
+  resources:
+    - resource: docker-docs
+      locator: "Use the guides on sharing and deploying images"
+    - resource: gh-actions
+      locator: "Deployment section"
+      role: alternative

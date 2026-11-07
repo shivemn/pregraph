@@ -14,6 +14,8 @@ export interface ConceptNode {
   hours: number;
   requires: string[];
   recommends: string[];
+  /** concept, tool or project. The engine ignores it; the planner shows it. */
+  kind?: string;
 }
 
 export interface PlanStep {

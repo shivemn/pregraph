@@ -35,9 +35,8 @@ const path = Astro.url.pathname;
         </svg>
         Pregraph
       </a>
-      <nav aria-label="Routes">
-        <a href="/paths/maths-to-cs" aria-current={path.startsWith('/paths/maths-to-cs') ? 'page' : undefined}>Maths to CS</a>
-        <a href="/paths/from-zero" aria-current={path.startsWith('/paths/from-zero') ? 'page' : undefined}>From zero</a>
+      <nav aria-label="Main">
+        <a href="/roles" aria-current={path.startsWith('/roles') ? 'page' : undefined}>Roles</a>
       </nav>
       <Search />
     </header>

@@ -13,3 +13,9 @@
   title: Data
 - id: ai
   title: Machine learning
+- id: web
+  title: Web development
+- id: infra
+  title: Infrastructure and operations
+- id: mobile
+  title: Mobile

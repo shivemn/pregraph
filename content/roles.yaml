@@ -1,0 +1,100 @@
+# Roles and what they need, in three tiers. These lists are drafts until each
+# role has an `evidence` block from real job postings (see docs/ROLES.md).
+
+- id: software-engineer
+  title: Software engineer (SDE)
+  family: software
+  summary: Writes and maintains the code behind products. Entry-level hiring in India mostly tests data structures and algorithms first, then how you write and reason about code.
+  tiers:
+    hire: [programming-basics, oop-design, git, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, algorithm-practice, sql, testing-debugging]
+    firstYear: [web-http, os-processes-memory, concurrency, networking, system-design, software-engineering, ci-cd]
+    extra: [distributed-systems, database-internals, docker, project-portfolio-api]
+
+- id: backend-engineer
+  title: Backend engineer
+  family: software
+  summary: Builds the services, APIs and data storage behind an app. Most of the job is correctness, performance and keeping things running.
+  tiers:
+    hire: [java, oop-design, git, sql, rest-apis, backend-framework, hash-tables, trees-heaps, algorithm-practice, testing-debugging, shell-tools, project-portfolio-api]
+    firstYear: [database-internals, concurrency, system-design, docker, ci-cd, web-security, messaging]
+    extra: [distributed-systems, kubernetes, observability]
+
+- id: frontend-engineer
+  title: Frontend engineer
+  family: software
+  summary: Builds what people see and touch in the browser, and makes it fast, accessible and pleasant to use.
+  tiers:
+    hire: [html-css, javascript, react, typescript, git, web-http, linear-structures, hash-tables, project-web-app]
+    firstYear: [web-accessibility, web-performance, testing-debugging, ci-cd, web-security]
+    extra: [system-design, test-automation]
+
+- id: full-stack-engineer
+  title: Full-stack engineer
+  family: software
+  summary: Works across the browser, the server and the database. Common in startups, where one person ships a whole feature.
+  tiers:
+    hire: [html-css, javascript, react, rest-apis, backend-framework, sql, git, linear-structures, hash-tables, project-web-app, project-portfolio-api]
+    firstYear: [typescript, testing-debugging, docker, ci-cd, web-security]
+    extra: [system-design, web-performance]
+
+- id: android-developer
+  title: Android developer
+  family: software
+  summary: Builds and ships Android apps. India is one of the largest Android markets, so the work is everywhere from startups to banks.
+  tiers:
+    hire: [kotlin, android, git, oop-design, linear-structures, hash-tables, web-http, project-android-app]
+    firstYear: [testing-debugging, concurrency, ci-cd, rest-apis]
+    extra: [system-design]
+
+- id: qa-engineer
+  title: QA engineer / SDET
+  family: software
+  summary: Finds out whether software works before customers do, increasingly by writing code that tests code.
+  tiers:
+    hire: [programming-basics, testing-debugging, test-automation, git, sql, web-http, rest-apis, project-test-suite]
+    firstYear: [ci-cd, javascript, docker]
+    extra: [web-performance, web-security]
+
+- id: data-analyst
+  title: Data analyst
+  family: data
+  summary: Turns business questions into queries, numbers and charts that someone can act on.
+  tiers:
+    hire: [spreadsheets, sql, statistics, pandas, data-visualization, project-data-analysis]
+    firstYear: [bi-tools, probability, git]
+    extra: [machine-learning]
+
+- id: data-engineer
+  title: Data engineer
+  family: data
+  summary: Builds the pipelines and warehouses that get data from where it's created to where it's analysed, reliably and on time.
+  tiers:
+    hire: [programming-basics, sql, data-warehousing, pandas, spark, shell-tools, git, project-data-pipeline]
+    firstYear: [orchestration, database-internals, cloud-basics, docker, messaging]
+    extra: [distributed-systems, kubernetes]
+
+- id: ml-engineer
+  title: Machine learning engineer
+  family: data
+  summary: Trains models and, more often, gets them working reliably in a real product.
+  tiers:
+    hire: [machine-learning, deep-learning, pandas, sql, git, statistics, algorithm-practice, project-ml-service]
+    firstYear: [mlops, docker, software-engineering, cloud-basics]
+    extra: [distributed-systems, spark]
+
+- id: devops-engineer
+  title: DevOps / site reliability engineer
+  family: infra
+  summary: Keeps software building, deploying and running. Automation, infrastructure and being calm when things break.
+  tiers:
+    hire: [shell-tools, linux-admin, git, networking, docker, ci-cd, cloud-basics, programming-basics, project-deploy-pipeline]
+    firstYear: [kubernetes, observability, infrastructure-as-code, os-processes-memory]
+    extra: [distributed-systems, systems-security, concurrency]
+
+- id: gate-cs
+  title: GATE computer science
+  family: exams
+  kind: exam
+  summary: The CS paper of GATE, used for M.Tech admissions and some PSU jobs. Engineering maths is left out here.
+  tiers:
+    hire: [digital-logic, computer-architecture, c-and-memory, trees-heaps, graph-algorithms, greedy-algorithms, dynamic-programming, automata, computability, compilers, os-processes-memory, concurrency, file-systems, networking, sql, database-internals]

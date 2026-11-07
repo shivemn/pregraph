@@ -1,5 +1,17 @@
 # Changelog
 
+## Week 6: roles
+
+Pregraph now starts from a job instead of a subject: "I'm a maths graduate and I'm aiming for Backend engineer."
+
+- Ten tech roles plus GATE CS, in families (software, data, infrastructure, exams). Each role lists what it needs in three tiers: to get hired, first year on the job, and good to have. A "How far" switch picks the tier.
+- Four starting points: maths graduate, engineering graduate (not CS), CS or IT graduate, and starting from zero.
+- The graph grew to 57 concepts, 14 tools and 8 projects, with 68 resources. New areas: web development, infrastructure and operations, and mobile.
+- Your ticks and skips are now shared across every role. The tier and view are remembered per role. Background and tier are kept in the link.
+- Concept pages show which roles ask for each concept, and at which tier. Tools and projects are labelled, and projects are drawn as squares on the map.
+- Every role is marked as a draft until it's backed by job postings. `docs/ROLES.md` describes how to collect them, and `npm run evidence -- <role>` counts them and suggests tiers.
+- The old Maths to CS and From zero pages are gone; the roles replace them.
+
 ## Week 5: map and search
 
 - Map view of the route. Stops sit in rows, each row below what it depends on. Selecting a stop lights up its whole chain. The layout is written from scratch in `src/lib/layout.ts` (longest-path rows, dummy nodes, barycentre sweeps, neighbour pull) and tested on random graphs.

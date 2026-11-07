@@ -22,3 +22,26 @@
   resources:
     - resource: d2l
       locator: "Chapters 1–11"
+
+- id: mlops
+  title: Putting models into production
+  area: ai
+  summary: Versioning data and models, testing them, serving them, and noticing when they go stale.
+  hours: 30
+  requires: [machine-learning, git]
+  recommends: [docker, ci-cd]
+  resources:
+    - resource: madewithml
+      locator: "The whole course"
+
+- id: project-ml-service
+  title: "Project: train, evaluate and serve a model"
+  area: ai
+  summary: A model trained on real data, evaluated honestly, and served behind an API someone can call.
+  hours: 35
+  kind: project
+  requires: [machine-learning, pandas]
+  recommends: [mlops, docker]
+  resources:
+    - resource: madewithml
+      locator: "Follow the course with your own dataset"

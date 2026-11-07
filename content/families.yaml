@@ -1,0 +1,8 @@
+- id: software
+  title: Software engineering
+- id: data
+  title: Data and machine learning
+- id: infra
+  title: Infrastructure
+- id: exams
+  title: Exams

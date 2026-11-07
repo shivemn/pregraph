@@ -1,122 +1,172 @@
 ---
 import Base from '../layouts/Base.astro';
 import { planPath } from '../lib/graph';
-import { content, listOf, pathContext, title } from '../lib/site';
+import { targetsUpTo } from '../lib/schema';
+import { content, listOf, title } from '../lib/site';
 import '../styles/route.css';
 
 const c = content();
 const areaTitle = new Map(c.areas.map((a) => [a.id, a.title]));
+const kindOf = new Map(c.concepts.map((x) => [x.id, x.kind]));
 
-const routes = c.paths.map((p) => {
-  const { background, goals } = pathContext(c, p);
-  const plans = goals.map((g) => ({ goal: g, plan: planPath(c.concepts, g.targets, new Set(background.knows)) }));
-  return { path: p, background, plans };
-});
+const exampleRole = c.roles.find((r) => r.id === 'backend-engineer')!;
+const exampleBg = c.backgrounds.find((b) => b.id === 'maths-grad')!;
+const plan = planPath(c.concepts, targetsUpTo(exampleRole, 'hire'), new Set(exampleBg.knows));
+const preview = plan.steps.slice(0, 6);
 
-const featured = routes[0]!;
-const preview = featured.plans[0]!.plan.steps.slice(0, 6);
-const remaining = featured.plans[0]!.plan.steps.length - preview.length;
+const groups = c.families
+  .map((f) => ({ family: f, roles: c.roles.filter((r) => r.family === f.id) }))
+  .filter((g) => g.roles.length > 0);
+const counts = {
+  concepts: c.concepts.filter((x) => x.kind === 'concept').length,
+  tools: c.concepts.filter((x) => x.kind === 'tool').length,
+  projects: c.concepts.filter((x) => x.kind === 'project').length,
+  resources: c.resources.filter((r) => r.free).length,
+};
 ---
 
 <Base title="Pregraph" wide>
   <div class="top">
-  <section class="hero">
-    <h1>A study plan that starts from what you already know.</h1>
-    <p class="lede">
-      Teaching yourself computer science is mostly a problem of order. Pregraph keeps the subject as a map of
-      concepts and what each one depends on. Tell it your background and your goal, and it drops what you
-      know, sorts the rest so nothing comes before its prerequisites, and points you to the free chapter or
-      lecture for every step.
-    </p>
-    <p><a class="go" href={`/paths/${featured.path.slug}`}>Open the {featured.path.title.toLowerCase()} route</a></p>
-  </section>
+    <section class="hero">
+      <h1>A study plan that starts from what you already know.</h1>
+      <p class="lede">
+        Pick the job you want. Pregraph works out what it takes, drops what your background already covers,
+        puts the rest in an order that makes sense, and points you to a free chapter, course or video for every step.
+      </p>
 
-  <section class="preview" aria-labelledby="preview-heading">
-    <h2 id="preview-heading">
-      The first stops for a {featured.background.title.toLowerCase()} heading for {featured.plans[0]!.goal.title}
-    </h2>
-    <ol class="route">
-      {
-        preview.map((s) => (
-          <li class="stop" data-area={s.area} data-state={s.waitingOn.length === 0 ? 'ready' : 'waiting'}>
-            <span class="station" aria-hidden="true" />
-            <div class="stop-body">
-              <div class="stop-head">
-                <a class="stop-title" href={`/concepts/${s.id}`}>{s.title}</a>
-                <span class="stop-hours">{s.hours} h</span>
+      <form class="picker" action="/roles" method="get" data-picker>
+        <label>
+          <span>I'm</span>
+          <select name="from">
+            {c.backgrounds.map((b) => <option value={b.id} selected={b.id === exampleBg.id}>{b.phrase}</option>)}
+          </select>
+        </label>
+        <label>
+          <span>and I'm aiming for</span>
+          <select name="role">
+            {groups.map(({ family, roles }) => (
+              <optgroup label={family.title}>
+                {roles.map((r) => <option value={r.id} selected={r.id === exampleRole.id}>{r.title}</option>)}
+              </optgroup>
+            ))}
+          </select>
+        </label>
+        <button type="submit">Show my route</button>
+      </form>
+    </section>
+
+    <section class="preview" aria-labelledby="preview-heading">
+      <h2 id="preview-heading">
+        For example, {exampleBg.phrase} who wants to be a {exampleRole.title.toLowerCase()} starts like this
+      </h2>
+      <ol class="route">
+        {
+          preview.map((s) => (
+            <li class="stop" data-area={s.area} data-state={s.waitingOn.length === 0 ? 'ready' : 'waiting'}>
+              <span class="station" aria-hidden="true" />
+              <div class="stop-body">
+                <div class="stop-head">
+                  <a class="stop-title" href={`/concepts/${s.id}`}>{s.title}</a>
+                  {kindOf.get(s.id) !== 'concept' && <span class="kind">{kindOf.get(s.id) === 'tool' ? 'Tool' : 'Project'}</span>}
+                  <span class="stop-hours">{s.hours} h</span>
+                </div>
+                <p class="stop-sub">
+                  <span class="area-name">{areaTitle.get(s.area)}</span>.{' '}
+                  {s.waitingOn.length === 0 ? 'Ready to start.' : `After ${listOf(s.waitingOn.map((id) => title(c, id)))}.`}
+                </p>
               </div>
-              <p class="stop-sub">
-                <span class="area-name">{areaTitle.get(s.area)}</span>.{' '}
-                {s.waitingOn.length === 0 ? 'Ready to start.' : `After ${listOf(s.waitingOn.map((id) => title(c, id)))}.`}
-              </p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-    <p class="route-end">
-      and {remaining} more stops to the end of the route.
-    </p>
-  </section>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="route-end">
+        {plan.steps.length - preview.length} more stops to get hired, about {plan.totalHours} hours in all.
+      </p>
+    </section>
   </div>
 
-  <section class="routes" aria-labelledby="routes-heading">
-    <h2 id="routes-heading">Routes</h2>
-    <ul>
+  <section class="roles" aria-labelledby="roles-heading">
+    <h2 id="roles-heading">Roles so far</h2>
+    <div class="families">
       {
-        routes.map(({ path, plans }) => (
-          <li>
-            <a href={`/paths/${path.slug}`}>{path.title}</a>
-            <p class="quiet">{path.tagline}</p>
-            <p class="faint num">
-              {listOf(plans.map(({ goal, plan }) => `${goal.title} in ${plan.steps.length} stops`))}.
-            </p>
-          </li>
+        groups.map(({ family, roles }) => (
+          <div>
+            <h3>{family.title}</h3>
+            <ul>{roles.map((r) => <li><a href={`/roles/${r.id}`}>{r.title}</a></li>)}</ul>
+          </div>
         ))
       }
-    </ul>
+    </div>
   </section>
 
   <section class="how" aria-labelledby="how-heading">
-    <h2 id="how-heading">How the order is worked out</h2>
+    <h2 id="how-heading">How it works</h2>
     <p>
-      Every concept lists what you need to know first. Starting from your goal, Pregraph walks back through
-      those prerequisites and stops wherever your background already covers the ground, so a maths graduate
-      never sees a proofs course. What's left is put in order with a topological sort. When several things
-      could come next, it starts the longest chains first and tries to keep you in one area at a time.
+      Every role lists what it needs in three tiers: what gets you hired, what the first year expects, and what's
+      good to have. Every concept lists what you need to know first. Pregraph walks back from the role through
+      those prerequisites and stops wherever your background already covers the ground, so a CS graduate aiming
+      for backend work never sees an intro programming course. What's left goes in order with a topological sort,
+      starting the longest chains first and keeping you in one area at a time where it can.
     </p>
     <p>
-      There are {c.concepts.length} concepts and {c.resources.filter((r) => r.free).length} free resources on
-      the map so far. The details are in the <a href="https://github.com/shivemn/pregraph/blob/main/docs/SYSTEM_DESIGN.md">design notes</a>.
+      The map has {counts.concepts} concepts, {counts.tools} tools, {counts.projects} projects to build, and
+      {' '}{counts.resources} free resources. Role lists are drafts until they've been checked against real job
+      postings. The <a href="https://github.com/shivemn/pregraph/blob/main/docs/SYSTEM_DESIGN.md">design notes</a> have the details.
     </p>
   </section>
 </Base>
 
+<script>
+  // Send the picker straight to the role page; without JavaScript it falls back to the roles list.
+  const form = document.querySelector<HTMLFormElement>('[data-picker]');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    location.href = `/roles/${data.get('role')}?from=${data.get('from')}`;
+  });
+</script>
+
 <style>
   .top { display: grid; grid-template-columns: 1.05fr 1fr; gap: 72px; align-items: start; padding-top: 40px; }
-  .hero { display: grid; gap: 22px; position: sticky; top: 24px; }
+  .hero { display: grid; gap: 22px; }
   .hero h1 { max-width: 14ch; font-size: clamp(2.3rem, 6vw, 3.7rem); letter-spacing: -0.02em; }
   .lede { font-size: 1.1875rem; max-width: 52ch; color: var(--ink-2); }
-  .go {
-    display: inline-block; padding: 11px 18px; border-radius: 8px;
-    background: var(--ink); color: var(--paper); font-weight: 700; text-decoration: none;
+
+  .picker {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px;
+    font-size: 1.25rem; font-weight: 650; margin-top: 6px;
   }
-  .go:hover { background: color-mix(in srgb, var(--ink) 85%, var(--paper)); }
+  .picker label { display: contents; }
+  .picker select {
+    font: inherit; font-weight: 750; color: var(--ink);
+    padding: 6px 34px 6px 12px; border-radius: 8px;
+    border: 2px solid var(--ink); background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%237c8896' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;
+    appearance: none; max-width: 100%;
+  }
+  .picker button {
+    font: inherit; font-size: 1rem; font-weight: 700;
+    padding: 11px 18px; border-radius: 8px; border: 0;
+    background: var(--ink); color: var(--paper);
+  }
+  .picker button:hover { background: color-mix(in srgb, var(--ink) 85%, var(--paper)); }
 
   .preview { padding: 22px 24px 20px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
   .preview h2 { font-size: 1rem; font-weight: 700; margin-bottom: 18px; color: var(--ink-2); }
   .preview .station { --paper: var(--surface); }
 
-  .routes, .how { margin-top: 80px; max-width: 760px; }
+  .roles, .how { margin-top: 80px; }
+  .families { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 18px; }
+  .families h3 { font-size: 1rem; color: var(--ink-2); margin-bottom: 10px; }
+  .families ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .families a { font-weight: 650; }
+  .how { max-width: 760px; }
+  .how p { margin-top: 14px; max-width: 64ch; }
+
   @media (max-width: 960px) {
     .top { grid-template-columns: 1fr; gap: 40px; padding-top: 16px; }
-    .hero { position: static; }
   }
-  .routes ul { list-style: none; padding: 0; margin: 16px 0 0; border-top: 1px solid var(--rule); }
-  .routes li { padding: 18px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
-  .routes li > a { font-size: 1.3rem; font-weight: 750; text-decoration: none; }
-  .routes li > a:hover { text-decoration: underline; }
-  .routes .faint { font-size: 0.9375rem; }
-
-  .how p { margin-top: 14px; max-width: 64ch; }
+  @media (max-width: 640px) {
+    .picker { font-size: 1.125rem; }
+    .picker select { width: 100%; }
+  }
 </style>

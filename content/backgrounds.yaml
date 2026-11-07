@@ -1,9 +1,23 @@
 - id: maths-grad
+  phrase: a maths graduate
   title: Maths graduate
-  description: A degree in mathematics. You're comfortable with proof, discrete structures, linear algebra and probability, and have done little or no programming.
-  knows: [proofs, discrete-math, linear-algebra, probability]
+  description: A degree in mathematics. Comfortable with proof, discrete structures, linear algebra, probability and statistics, and little or no programming.
+  knows: [proofs, discrete-math, linear-algebra, probability, statistics]
+
+- id: engineering-grad
+  phrase: an engineering graduate, not CS
+  title: Engineering graduate, not CS
+  description: Mechanical, civil, electrical or similar. Engineering maths is done; programming probably stopped at a first-year course.
+  knows: [linear-algebra, probability]
+
+- id: cs-grad
+  phrase: a CS or IT graduate
+  title: CS or IT graduate
+  description: The textbook basics are done. What's left is what the job adds on top.
+  knows: [proofs, discrete-math, programming-basics, recursion, c-and-memory, oop-design, linear-structures, hash-tables, trees-heaps, sorting-searching, complexity-analysis, sql, digital-logic, computer-architecture, os-processes-memory, networking]
 
 - id: no-background
+  phrase: starting from zero
   title: Starting from zero
   description: No university maths or programming assumed.
   knows: []

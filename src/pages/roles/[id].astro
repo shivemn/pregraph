@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import RolePlanner from '../../components/RolePlanner';
+import { content, plannerNodes } from '../../lib/site';
+import { TIERS } from '../../lib/schema';
+import '../../styles/route.css';
+import '../../styles/planner.css';
+import '../../styles/map.css';
+
+export function getStaticPaths() {
+  return content().roles.map((r) => ({ params: { id: r.id } }));
+}
+
+const c = content();
+const role = c.roles.find((r) => r.id === Astro.params.id)!;
+const family = c.families.find((f) => f.id === role.family)!;
+const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((t) => t.n > 0);
+---
+
+<Base title={role.title} description={role.summary} wide>
+  <header class="role-head">
+    <p class="crumbs quiet"><a href="/roles">Roles</a> / {family.title}</p>
+    <h1>{role.title}</h1>
+    <p class="lede quiet">{role.summary}</p>
+    {
+      role.evidence ? (
+        <p class="evidence">
+          Based on {role.evidence.postings} job postings ({role.evidence.region}, collected {role.evidence.collected}).
+          {role.evidence.note && ` ${role.evidence.note}`}
+        </p>
+      ) : (
+        <p class="evidence draft">
+          Draft. {role.kind === 'exam' ? 'Based on the published syllabus as we read it.' : 'This list is our judgement and hasn’t been checked against real job postings yet.'}{' '}
+          <a href="https://github.com/shivemn/pregraph/blob/main/docs/ROLES.md">How roles get checked</a>
+        </p>
+      )
+    }
+  </header>
+
+  <RolePlanner
+    client:load
+    role={{ id: role.id, title: role.title, tiers: role.tiers }}
+    concepts={plannerNodes(c)}
+    areas={c.areas}
+    tiers={TIERS}
+    backgrounds={c.backgrounds}
+  />
+
+  <noscript>
+    <section class="static-list">
+      {counts.map((t) => (
+        <>
+          <h2>{t.title}</h2>
+          <ul>{role.tiers[t.id].map((id) => <li><a href={`/concepts/${id}`}>{c.concepts.find((x) => x.id === id)!.title}</a></li>)}</ul>
+        </>
+      ))}
+    </section>
+  </noscript>
+</Base>
+
+<style>
+  .role-head { max-width: 760px; display: grid; gap: 12px; }
+  .crumbs { font-size: 0.9375rem; }
+  .crumbs a { color: inherit; }
+  .lede { font-size: 1.1875rem; max-width: 58ch; }
+  .evidence { font-size: 0.9375rem; color: var(--ink-2); padding-left: 12px; border-left: 3px solid var(--programming); }
+  .evidence.draft { border-left-color: var(--warn); }
+  .static-list { margin-top: 24px; }
+</style>

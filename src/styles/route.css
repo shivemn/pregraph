@@ -55,6 +55,10 @@ button.station:hover svg { opacity: 0.45; }
 }
 .stop-title:hover { text-decoration: underline; }
 .stop[data-state='done'] .stop-title { color: var(--ink-2); }
+.kind {
+  font-size: 0.75rem; font-weight: 700; padding: 0 7px; border-radius: 4px;
+  border: 1.5px solid var(--line); color: var(--line); line-height: 1.5; align-self: center;
+}
 .stop-hours { margin-left: auto; color: var(--ink-3); font-size: 0.9375rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 .stop-sub { color: var(--ink-2); font-size: 0.9375rem; margin-top: 2px; }

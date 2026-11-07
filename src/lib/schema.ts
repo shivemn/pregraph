@@ -38,6 +38,8 @@ export const conceptSchema = z.object({
   id,
   title: z.string().min(1),
   area: id,
+  /** A concept to understand, a tool to get fluent in, or a project to build and show. */
+  kind: z.enum(['concept', 'tool', 'project']).default('concept'),
   summary: z.string().min(1),
   hours: z.number().positive(),
   /** Hard prerequisites: must be learned first, and are pulled into a plan. */
@@ -50,24 +52,48 @@ export const conceptSchema = z.object({
 export const backgroundSchema = z.object({
   id,
   title: z.string().min(1),
+  /** How it reads after "I'm", e.g. "a maths graduate" or "starting from zero". */
+  phrase: z.string().min(1),
   description: z.string().min(1),
   knows: z.array(id),
 });
 
-export const goalSchema = z.object({
+export const familySchema = z.object({
   id,
   title: z.string().min(1),
-  description: z.string().min(1),
-  targets: z.array(id).min(1),
 });
 
-export const pathSchema = z.object({
-  slug: id,
+/**
+ * A job role (or an exam) and what it takes. Requirements come in tiers so a
+ * fresher can see the short list that gets them hired before the long one.
+ */
+export const roleSchema = z.object({
+  id,
   title: z.string().min(1),
-  tagline: z.string().min(1),
-  background: id,
-  /** Goals you can switch between on this path. The first is the default. */
-  goals: z.array(id).min(1),
+  family: id,
+  kind: z.enum(['role', 'exam']).default('role'),
+  /** What the job actually is, in a sentence or two. */
+  summary: z.string().min(1),
+  tiers: z.object({
+    /** Needed to get hired as a fresher. */
+    hire: z.array(id).min(1),
+    /** Expected within the first year on the job. */
+    firstYear: z.array(id).default([]),
+    /** Useful, often asked about, rarely required. */
+    extra: z.array(id).default([]),
+  }),
+  /**
+   * Where the requirements come from. Without this, the role is a draft based
+   * on our own judgement, and the site says so.
+   */
+  evidence: z
+    .object({
+      postings: z.number().int().positive(),
+      region: z.string().min(1),
+      collected: z.string().regex(/^\d{4}-\d{2}$/, 'use YYYY-MM'),
+      note: z.string().optional(),
+    })
+    .optional(),
 });
 
 export type Area = z.infer<typeof areaSchema>;
@@ -75,14 +101,27 @@ export type Resource = z.infer<typeof resourceSchema>;
 export type ResourceSection = z.infer<typeof resourceSectionSchema>;
 export type Concept = z.infer<typeof conceptSchema>;
 export type Background = z.infer<typeof backgroundSchema>;
-export type Goal = z.infer<typeof goalSchema>;
-export type LearningPath = z.infer<typeof pathSchema>;
+export type Family = z.infer<typeof familySchema>;
+export type Role = z.infer<typeof roleSchema>;
+export type Tier = keyof Role['tiers'];
+
+export const TIERS: Array<{ id: Tier; title: string }> = [
+  { id: 'hire', title: 'To get hired' },
+  { id: 'firstYear', title: 'First year on the job' },
+  { id: 'extra', title: 'Good to have' },
+];
+
+/** Targets for a role up to and including a tier. */
+export function targetsUpTo(role: Role, tier: Tier): string[] {
+  const order: Tier[] = ['hire', 'firstYear', 'extra'];
+  return order.slice(0, order.indexOf(tier) + 1).flatMap((t) => role.tiers[t]);
+}
 
 export interface Content {
   areas: Area[];
+  families: Family[];
   concepts: Concept[];
   resources: Resource[];
   backgrounds: Background[];
-  goals: Goal[];
-  paths: LearningPath[];
+  roles: Role[];
 }

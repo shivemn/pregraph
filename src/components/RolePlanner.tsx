@@ -1,6 +1,10 @@
-// The planner: the only interactive part of a path page. It re-runs the path
-// engine in the browser whenever you change something, and remembers your
-// choices in localStorage (no account needed yet).
+// The planner: the interactive part of a role page. It re-runs the path engine
+// in the browser whenever you change something, and remembers your choices in
+// localStorage (no account needed yet).
+//
+// What you know and what you've finished belong to you, not to one role, so
+// they're stored once and shared across every role page. The tier and view
+// you picked are stored per role.
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { indexConcepts, planPath, type ConceptNode, type PlanStep } from '../lib/graph';
 
@@ -8,38 +12,41 @@ import { indexConcepts, planPath, type ConceptNode, type PlanStep } from '../lib
 const RouteMap = lazy(() => import('./RouteMap'));
 
 interface Named { id: string; title: string }
-interface Goal extends Named { description: string; targets: string[] }
+interface Background extends Named { description: string; knows: string[] }
+type TierId = 'hire' | 'firstYear' | 'extra';
 
 interface Props {
-  slug: string;
+  role: { id: string; title: string; tiers: Record<TierId, string[]> };
   concepts: ConceptNode[];
   areas: Named[];
-  goals: Goal[];
-  backgroundTitle: string;
-  backgroundKnows: string[];
+  tiers: Array<{ id: TierId; title: string }>;
+  backgrounds: Background[];
 }
 
-interface Saved {
-  goal?: string;
-  view?: 'list' | 'map';
-  /** Concepts you said you already know. They leave the plan, along with anything only they needed. */
+interface Me {
+  background?: string;
+  /** Things you said you already know. They leave every plan, along with anything only they needed. */
   known: string[];
-  /** Concepts you've finished. They stay in the plan, ticked. */
+  /** Things you've finished. They stay in the plan, ticked. */
   done: string[];
 }
 
-const empty: Saved = { known: [], done: [] };
+interface RoleState {
+  tier?: TierId;
+  view?: 'list' | 'map';
+}
 
-function load(key: string): Saved {
+const ME_KEY = 'pregraph:me';
+
+function read<T>(key: string, fallback: T): T {
   try {
-    const parsed = JSON.parse(localStorage.getItem(key) ?? 'null') as Partial<Saved> | null;
-    return { goal: parsed?.goal, view: parsed?.view, known: parsed?.known ?? [], done: parsed?.done ?? [] };
+    return { ...fallback, ...(JSON.parse(localStorage.getItem(key) ?? 'null') ?? {}) };
   } catch {
-    return empty; // private browsing, blocked storage or a corrupt value
+    return fallback; // private browsing, blocked storage or a corrupt value
   }
 }
 
-function save(key: string, value: Saved) {
+function write(key: string, value: unknown) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch {
@@ -58,50 +65,77 @@ const Tick = () => (
   </svg>
 );
 
-export default function PathPlanner({ slug, concepts, areas, goals, backgroundTitle, backgroundKnows }: Props) {
-  const key = `pregraph:${slug}`;
+export default function RolePlanner({ role, concepts, areas, tiers, backgrounds }: Props) {
+  const roleKey = `pregraph:role:${role.id}`;
   const index = useMemo(() => indexConcepts(concepts), [concepts]);
   const areaTitle = useMemo(() => new Map(areas.map((a) => [a.id, a.title])), [areas]);
   const titleOf = (id: string) => index.get(id)?.title ?? id;
+  const usedTiers = tiers.filter((t) => role.tiers[t.id].length > 0);
 
-  const [saved, setSaved] = useState<Saved>(empty);
+  const [me, setMe] = useState<Me>({ known: [], done: [] });
+  const [roleState, setRoleState] = useState<RoleState>({});
   const [loaded, setLoaded] = useState(false);
   const [open, setOpen] = useState<string | null>(null);
 
   // Read storage and the URL after the first render, so the server HTML and
   // the first client render match.
   useEffect(() => {
-    const fromStorage = load(key);
-    const fromUrl = new URLSearchParams(location.search).get('goal');
-    if (fromUrl && goals.some((g) => g.id === fromUrl)) fromStorage.goal = fromUrl;
-    setSaved(fromStorage);
+    const m = read<Me>(ME_KEY, { known: [], done: [] });
+    const r = read<RoleState>(roleKey, {});
+    const params = new URLSearchParams(location.search);
+    const from = params.get('from');
+    const tier = params.get('tier');
+    if (from && backgrounds.some((b) => b.id === from)) m.background = from;
+    if (tier && usedTiers.some((t) => t.id === tier)) r.tier = tier as TierId;
+    setMe(m);
+    setRoleState(r);
     setLoaded(true);
-  }, [key, goals]);
+  }, [roleKey]);
 
   useEffect(() => {
     if (!loaded) return;
-    save(key, saved);
+    write(ME_KEY, me);
+    write(roleKey, roleState);
     const url = new URL(location.href);
-    if (saved.goal && saved.goal !== goals[0]!.id) url.searchParams.set('goal', saved.goal);
-    else url.searchParams.delete('goal');
+    url.searchParams.set('from', background.id);
+    if (tier !== 'hire') url.searchParams.set('tier', tier);
+    else url.searchParams.delete('tier');
     history.replaceState(null, '', url);
-  }, [key, saved, loaded, goals]);
+  }, [me, roleState, loaded]);
 
-  const goal = goals.find((g) => g.id === saved.goal) ?? goals[0]!;
-  const view = saved.view ?? 'list';
-  const known = useMemo(() => new Set([...backgroundKnows, ...saved.known]), [backgroundKnows, saved.known]);
-  const done = useMemo(() => new Set(saved.done), [saved.done]);
-  const plan = useMemo(() => planPath(index, goal.targets, known), [index, goal, known]);
+  const background = backgrounds.find((b) => b.id === me.background) ?? backgrounds[0]!;
+  const tier: TierId = usedTiers.some((t) => t.id === roleState.tier) ? roleState.tier! : 'hire';
+  const view = roleState.view ?? 'list';
+
+  // Each target and the tier that asks for it, up to the chosen tier.
+  const targetTier = useMemo(() => {
+    const m = new Map<string, TierId>();
+    for (const t of usedTiers) {
+      for (const id of role.tiers[t.id]) m.set(id, t.id);
+      if (t.id === tier) break;
+    }
+    return m;
+  }, [role, tier]);
+  const targets = useMemo(() => [...targetTier.keys()], [targetTier]);
+
+  const known = useMemo(() => new Set([...background.knows, ...me.known]), [background, me.known]);
+  const done = useMemo(() => new Set(me.done), [me.done]);
+  const plan = useMemo(() => planPath(index, targets, known), [index, targets, known]);
+  const tierTitle = (t: TierId) => tiers.find((x) => x.id === t)!.title.toLowerCase();
 
   const why = (s: PlanStep) => {
     const others = s.neededFor.filter((t) => t !== s.id).map(titleOf);
-    if (goal.targets.includes(s.id)) {
+    const own = targetTier.get(s.id);
+    if (own) {
+      const list = own === 'hire' ? 'what it takes to get hired' : own === 'firstYear' ? 'what the first year expects' : 'the good-to-have list';
       return others.length > 0
-        ? `It's one of the targets for ${goal.title}, and ${listOf(others)} also needs it.`
-        : `It's one of the targets for ${goal.title}.`;
+        ? `It's part of ${list} as a ${role.title.toLowerCase()}, and ${listOf(others)} also ${others.length === 1 ? 'needs' : 'need'} it.`
+        : `It's part of ${list} as a ${role.title.toLowerCase()}.`;
     }
-    return `${listOf(others)} ${others.length === 1 ? 'needs' : 'need'} it, on the way to ${goal.title}.`;
+    return `${listOf(others)} ${others.length === 1 ? 'needs' : 'need'} it.`;
   };
+
+  const kindOf = (id: string) => index.get(id)?.kind ?? 'concept';
 
   const stateOf = (s: PlanStep): 'done' | 'ready' | 'waiting' =>
     done.has(s.id) ? 'done' : s.waitingOn.every((p) => done.has(p)) ? 'ready' : 'waiting';
@@ -118,32 +152,43 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
     .filter((a) => a.total > 0);
 
   const toggleDone = (id: string) =>
-    setSaved((s) => ({ ...s, done: s.done.includes(id) ? s.done.filter((x) => x !== id) : [...s.done, id] }));
+    setMe((m) => ({ ...m, done: m.done.includes(id) ? m.done.filter((x) => x !== id) : [...m.done, id] }));
   const skip = (id: string) => {
     setOpen(null);
-    setSaved((s) => ({ ...s, known: [...s.known, id], done: s.done.filter((x) => x !== id) }));
+    setMe((m) => ({ ...m, known: [...m.known, id], done: m.done.filter((x) => x !== id) }));
   };
-  const unskip = (id: string) => setSaved((s) => ({ ...s, known: s.known.filter((x) => x !== id) }));
-  const chooseGoal = (id: string) => setSaved((s) => ({ ...s, goal: id }));
+  const unskip = (id: string) => setMe((m) => ({ ...m, known: m.known.filter((x) => x !== id) }));
+  const setView = (v: 'list' | 'map') => setRoleState((r) => ({ ...r, view: v }));
 
   return (
     <div className={view === 'map' ? 'planner is-map' : 'planner'}>
       <div className="planner-main">
-        <div className="goal-picker">
-          <span className="goal-label" id="goal-label">I want to reach</span>
-          <div className="segmented" role="group" aria-labelledby="goal-label">
-            {goals.map((g) => (
-              <button key={g.id} aria-pressed={g.id === goal.id} onClick={() => chooseGoal(g.id)}>
-                {g.title}
-              </button>
-            ))}
-          </div>
-          <p className="goal-description quiet">{goal.description}</p>
+        <div className="controls">
+          <label className="control">
+            <span className="control-label">Starting as</span>
+            <select value={background.id} onChange={(e) => setMe((m) => ({ ...m, background: e.target.value }))}>
+              {backgrounds.map((b) => (
+                <option key={b.id} value={b.id}>{b.title}</option>
+              ))}
+            </select>
+          </label>
+          {usedTiers.length > 1 && (
+            <div className="control">
+              <span className="control-label" id="tier-label">How far</span>
+              <div className="segmented" role="group" aria-labelledby="tier-label">
+                {usedTiers.map((t) => (
+                  <button key={t.id} aria-pressed={t.id === tier} onClick={() => setRoleState((r) => ({ ...r, tier: t.id }))}>
+                    {t.id === 'hire' ? t.title : `+ ${t.title.toLowerCase()}`}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <p className="summary" aria-live="polite">
           {left === 0 ? (
-            <>You've finished every stop on this route.</>
+            <>You've finished every stop on this route. Try the next tier, or another role.</>
           ) : (
             <>
               <strong className="num">{left}</strong> {left === 1 ? 'stop' : 'stops'} to go, about{' '}
@@ -153,8 +198,8 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
           )}
         </p>
         <div className="segmented view-switch" role="group" aria-label="View">
-          <button aria-pressed={view === 'list'} onClick={() => setSaved((s) => ({ ...s, view: 'list' }))}>List</button>
-          <button aria-pressed={view === 'map'} onClick={() => setSaved((s) => ({ ...s, view: 'map' }))}>Map</button>
+          <button aria-pressed={view === 'list'} onClick={() => setView('list')}>List</button>
+          <button aria-pressed={view === 'map'} onClick={() => setView('map')}>Map</button>
         </div>
 
         {view === 'map' ? (
@@ -164,6 +209,7 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
               stateOf={stateOf}
               areaTitle={(id) => areaTitle.get(id) ?? id}
               onToggle={toggleDone}
+              kindOf={kindOf}
             />
           </Suspense>
         ) : (
@@ -194,6 +240,7 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
                 <div className="stop-body">
                   <div className="stop-head">
                     <a className="stop-title" href={`/concepts/${s.id}`}>{s.title}</a>
+                    {kindOf(s.id) !== 'concept' && <span className="kind">{kindOf(s.id) === 'tool' ? 'Tool' : 'Project'}</span>}
                     <span className="stop-hours">{s.hours} h</span>
                   </div>
                   <p className="stop-sub">
@@ -222,7 +269,12 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
             );
           })}
         </ol>
-        {plan.steps.length > 0 && <p className="route-end">That's the whole route for {goal.title}.</p>}
+        {plan.steps.length > 0 && (
+          <p className="route-end">
+            That's everything for {tierTitle(tier)}.
+            {tier !== usedTiers[usedTiers.length - 1]!.id && ' Switch "How far" to see what comes after.'}
+          </p>
+        )}
         </>
         )}
       </div>
@@ -245,12 +297,20 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
 
         <section>
           <h2 className="side-heading">Left out</h2>
-          <p className="quiet small">
-            As a {backgroundTitle.toLowerCase()} you already know {listOf(backgroundKnows.map(titleOf))}.
-          </p>
-          {saved.known.length > 0 && (
+          <p className="quiet small">{background.description}</p>
+          {background.knows.length === 0 ? (
+            <p className="quiet small">Nothing is left out when you start from zero.</p>
+          ) : background.knows.length <= 5 ? (
+            <p className="quiet small">So {listOf(background.knows.map(titleOf))} {background.knows.length === 1 ? 'is' : 'are'} left out.</p>
+          ) : (
+            <details className="quiet small left-out">
+              <summary>{background.knows.length} topics are left out</summary>
+              <p>{listOf(background.knows.map(titleOf))}.</p>
+            </details>
+          )}
+          {me.known.length > 0 && (
             <ul className="skipped">
-              {saved.known.map((id) => (
+              {me.known.map((id) => (
                 <li key={id}>
                   {titleOf(id)} <button className="text-button" onClick={() => unskip(id)}>Put it back</button>
                 </li>
@@ -259,14 +319,16 @@ export default function PathPlanner({ slug, concepts, areas, goals, backgroundTi
           )}
         </section>
 
-        {(saved.known.length > 0 || saved.done.length > 0) && (
+        {(me.known.length > 0 || me.done.length > 0) && (
           <button
             className="text-button start-over"
             onClick={() => {
-              if (confirm('Clear your ticks and skips on this route?')) setSaved({ goal: saved.goal, known: [], done: [] });
+              if (confirm('Clear everything you have ticked and skipped? This affects every role.')) {
+                setMe((m) => ({ ...m, known: [], done: [] }));
+              }
             }}
           >
-            Start this route over
+            Clear my progress
           </button>
         )}
       </aside>

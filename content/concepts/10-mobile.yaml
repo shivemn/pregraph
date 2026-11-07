@@ -1,0 +1,33 @@
+- id: kotlin
+  title: Kotlin
+  area: mobile
+  summary: The main language for Android. Concise, null-safe and easy to pick up after Python or Java.
+  hours: 20
+  requires: [programming-basics]
+  resources:
+    - resource: kotlin-docs
+      locator: "Getting started, then Basics and Concepts"
+
+- id: android
+  title: Android development
+  area: mobile
+  summary: Building Android apps with Jetpack Compose. Screens, state, navigation, data and background work.
+  hours: 50
+  kind: tool
+  requires: [kotlin]
+  recommends: [oop-design]
+  resources:
+    - resource: android-courses
+      locator: "Android Basics with Compose, all units"
+
+- id: project-android-app
+  title: "Project: ship an Android app"
+  area: mobile
+  summary: An app that solves a small real problem, published on the Play Store or as a signed APK.
+  hours: 40
+  kind: project
+  requires: [android]
+  recommends: [rest-apis, git]
+  resources:
+    - resource: android-courses
+      locator: "Use the later units on data and networking as you build"

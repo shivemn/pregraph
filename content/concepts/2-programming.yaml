@@ -104,3 +104,37 @@
   resources:
     - resource: swe-at-google
       locator: "Part I, then the chapters on style, code review and documentation"
+
+- id: java
+  title: Java
+  area: programming
+  summary: A typed, compiled language and still the most common choice for backend jobs in India.
+  hours: 30
+  requires: [programming-basics]
+  recommends: [oop-design]
+  resources:
+    - resource: dev-java
+      locator: "Getting started, Language basics, Classes and objects"
+
+- id: test-automation
+  title: Test automation
+  area: programming
+  summary: Tests that drive a real browser or API, run on every change, and fail for the right reasons.
+  hours: 15
+  kind: tool
+  requires: [testing-debugging]
+  recommends: [web-http, javascript]
+  resources:
+    - resource: playwright-docs
+      locator: "Getting started, Writing tests, Locators, Fixtures"
+
+- id: project-test-suite
+  title: "Project: automate the tests for a real web app"
+  area: programming
+  summary: Pick an open-source web app, write end-to-end tests for its main flows, and run them in CI.
+  hours: 25
+  kind: project
+  requires: [test-automation, ci-cd]
+  resources:
+    - resource: playwright-docs
+      locator: "Use the guides on API testing and CI as you go"

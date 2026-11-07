@@ -1,0 +1,34 @@
+# How roles get checked
+
+Every role in `content/roles.yaml` starts as a draft: a list of what we think the job needs, split into three tiers. A draft is a guess. This page is how a guess becomes something you can defend.
+
+## The tiers
+
+- **To get hired** (`hire`): what a fresher needs to clear the interviews and be useful from week one.
+- **First year on the job** (`firstYear`): what you'll be expected to pick up once you're in.
+- **Good to have** (`extra`): asked about often, required rarely.
+
+## Collecting evidence
+
+1. **Pick the role, region and level.** For now that's India and 0–2 years of experience.
+2. **Collect about 50 real postings**, by hand, from LinkedIn, Naukri and company career pages. Copy them one at a time. Don't scrape: most job sites forbid it in their terms, and 50 is an afternoon's work anyway.
+3. **Tag each posting** with the concept ids it asks for, and save it as one row in `research/postings/<role-id>.csv`. Copy the header from `TEMPLATE.csv`. Translate the posting's words into our ids: "Spring Boot" is `backend-framework`, "REST" is `rest-apis`, "Docker/containers" is `docker`. Skip vague asks like "good communication".
+4. **Run** `npm run evidence -- <role-id>`. It prints the share of postings asking for each concept, the tier it would suggest, and where that differs from the current list. It also flags tags that aren't concept ids yet, which usually means a missing concept.
+5. **Decide, then write it down.** The suggestions use simple cut-offs: asked for by at least half the postings suggests `hire`, a fifth to a half `firstYear`, less than that `extra`. Treat them as a starting point, not a rule. Postings under-report some things. Almost no posting says "data structures and algorithms", yet nearly every SDE interview in India tests them. When you keep something in a tier against the numbers, say why in the `note`.
+6. **Add the evidence block** to the role:
+
+```yaml
+  evidence:
+    postings: 52
+    region: India, 0–2 years
+    collected: 2026-11
+    note: DSA kept in "hire" although postings rarely list it; interview loops test it.
+```
+
+The role page then says "Based on 52 job postings" instead of "Draft".
+
+## Keeping it honest
+
+- Re-collect once a year. Job markets move.
+- Keep the CSVs in the repo. They're the receipts.
+- Exams such as GATE use the official syllabus instead of postings.
