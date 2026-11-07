@@ -115,35 +115,35 @@ const areaTitles = Object.fromEntries(content().areas.map((a) => [a.id, a.title]
   .search { position: relative; margin-left: auto; width: min(320px, 100%); }
   input {
     width: 100%;
-    font: inherit; font-size: 0.9375rem;
-    padding: 8px 34px 8px 12px;
-    border: 1px solid var(--rule); border-radius: 8px;
-    background: var(--surface); color: var(--ink);
+    font: inherit; font-size: 1rem;
+    padding: 7px 34px 6px 12px;
+    border: 2px solid var(--ink); border-radius: 0;
+    background: var(--paper); color: var(--ink);
   }
   input::placeholder { color: var(--ink-3); }
   input::-webkit-search-cancel-button { display: none; }
   kbd {
     position: absolute; right: 9px; top: 50%; transform: translateY(-50%);
-    font: inherit; font-size: 0.75rem; color: var(--ink-3);
-    border: 1px solid var(--rule); border-radius: 4px; padding: 0 6px;
+    font: inherit; font-size: 0.8rem; font-weight: 700; color: var(--on-yellow);
+    background: var(--yellow); padding: 0 6px;
   }
   input:focus + kbd { display: none; }
   ul {
-    position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; right: 0;
-    list-style: none; margin: 0; padding: 6px;
-    background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
-    box-shadow: 0 12px 32px -12px color-mix(in srgb, var(--ink) 35%, transparent);
+    position: absolute; z-index: 30; top: calc(100% + 4px); left: 0; right: 0;
+    list-style: none; margin: 0; padding: 4px;
+    background: var(--paper); border: 2px solid var(--ink);
     max-height: 60vh; overflow: auto;
   }
   ul :global(a) {
-    display: grid; gap: 1px;
-    padding: 7px 10px; border-radius: 6px; text-decoration: none;
-    border-left: 3px solid var(--line);
+    display: grid; gap: 0;
+    padding: 6px 10px; text-decoration: none;
+    border-left: 5px solid var(--line);
   }
-  ul :global(a[aria-selected='true']), ul :global(a:hover) { background: color-mix(in srgb, var(--line) 12%, transparent); }
-  ul :global(.hit-title) { font-weight: 650; }
-  ul :global(.hit-area) { font-size: 0.8125rem; color: var(--ink-3); }
-  ul :global(.empty) { padding: 10px; color: var(--ink-2); font-size: 0.9375rem; }
+  ul :global(a + a), ul :global(li + li) { margin-top: 2px; }
+  ul :global(a[aria-selected='true']), ul :global(a:hover) { background: var(--platform); }
+  ul :global(.hit-title) { font-family: var(--sign); font-stretch: 88%; font-weight: 680; font-size: 1.1rem; }
+  ul :global(.hit-area) { font-size: 0.85rem; color: var(--ink-3); }
+  ul :global(.empty) { padding: 10px; color: var(--ink-2); font-size: 0.95rem; }
   .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   @media (max-width: 640px) {

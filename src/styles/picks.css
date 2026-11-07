@@ -1,0 +1,23 @@
+/* The three picks for a stop: something to read, something to watch, something to practise. */
+.picks { margin-top: 22px; display: grid; gap: 0; border-top: 3px solid var(--ink); }
+.pick { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.pick-label {
+  display: flex; align-items: center; gap: 7px; align-self: start;
+  font-family: var(--sign); font-stretch: 85%; font-weight: 720; font-size: 1.1rem;
+}
+.pick-label svg { width: 22px; height: 22px; fill: none; stroke: var(--line); stroke-width: 2; flex: none; }
+.pick-label svg .fill { fill: var(--line); stroke: none; }
+.pick-body { display: grid; gap: 2px; min-width: 0; }
+.pick-title { font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
+.pick-use { font-weight: 600; }
+.pick.missing .pick-label { color: var(--ink-3); }
+.pick .flags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+
+.others { margin-top: 16px; }
+.others summary { cursor: pointer; font-weight: 700; }
+.others ul { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 10px; font-size: 0.95rem; }
+
+
+@media (max-width: 560px) {
+  .pick { grid-template-columns: 1fr; gap: 6px; }
+}

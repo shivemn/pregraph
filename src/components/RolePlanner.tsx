@@ -10,6 +10,7 @@ import { indexConcepts, planPath, type ConceptNode, type PlanStep } from '../lib
 
 // The map pulls in the layout code, so it only loads when someone opens it.
 const RouteMap = lazy(() => import('./RouteMap'));
+import StopPanel from './StopPanel';
 
 interface Named { id: string; title: string }
 interface Background extends Named { description: string; knows: string[] }
@@ -75,7 +76,25 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
   const [me, setMe] = useState<Me>({ known: [], done: [] });
   const [roleState, setRoleState] = useState<RoleState>({});
   const [loaded, setLoaded] = useState(false);
-  const [open, setOpen] = useState<string | null>(null);
+  /** The stop whose panel is open. Mirrored in the URL hash so it can be shared. */
+  const [panel, setPanel] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fromHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      setPanel(index.has(id) ? id : null);
+    };
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+    return () => window.removeEventListener('hashchange', fromHash);
+  }, [index]);
+
+  const openPanel = (id: string | null) => {
+    setPanel(id);
+    const url = new URL(location.href);
+    url.hash = id ?? '';
+    history.replaceState(null, '', id ? url : url.pathname + url.search);
+  };
 
   // Read storage and the URL after the first render, so the server HTML and
   // the first client render match.
@@ -127,10 +146,10 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
     const others = s.neededFor.filter((t) => t !== s.id).map(titleOf);
     const own = targetTier.get(s.id);
     if (own) {
-      const list = own === 'hire' ? 'what it takes to get hired' : own === 'firstYear' ? 'what the first year expects' : 'the good-to-have list';
+      const list = own === 'hire' ? 'hiring list' : own === 'firstYear' ? 'first-year list' : 'good-to-have list';
       return others.length > 0
-        ? `It's part of ${list} as a ${role.title.toLowerCase()}, and ${listOf(others)} also ${others.length === 1 ? 'needs' : 'need'} it.`
-        : `It's part of ${list} as a ${role.title.toLowerCase()}.`;
+        ? `It's on the ${list} for ${role.title}, and ${listOf(others)} also ${others.length === 1 ? 'needs' : 'need'} it.`
+        : `It's on the ${list} for ${role.title}.`;
     }
     return `${listOf(others)} ${others.length === 1 ? 'needs' : 'need'} it.`;
   };
@@ -154,7 +173,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
   const toggleDone = (id: string) =>
     setMe((m) => ({ ...m, done: m.done.includes(id) ? m.done.filter((x) => x !== id) : [...m.done, id] }));
   const skip = (id: string) => {
-    setOpen(null);
+    openPanel(null);
     setMe((m) => ({ ...m, known: [...m.known, id], done: m.done.filter((x) => x !== id) }));
   };
   const unskip = (id: string) => setMe((m) => ({ ...m, known: m.known.filter((x) => x !== id) }));
@@ -175,7 +194,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
           {usedTiers.length > 1 && (
             <div className="control">
               <span className="control-label" id="tier-label">How far</span>
-              <div className="segmented" role="group" aria-labelledby="tier-label">
+              <div className="tabs" role="group" aria-labelledby="tier-label">
                 {usedTiers.map((t) => (
                   <button key={t.id} aria-pressed={t.id === tier} onClick={() => setRoleState((r) => ({ ...r, tier: t.id }))}>
                     {t.id === 'hire' ? t.title : `+ ${t.title.toLowerCase()}`}
@@ -197,7 +216,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
             </>
           )}
         </p>
-        <div className="segmented view-switch" role="group" aria-label="View">
+        <div className="tabs view-switch" role="group" aria-label="View">
           <button aria-pressed={view === 'list'} onClick={() => setView('list')}>List</button>
           <button aria-pressed={view === 'map'} onClick={() => setView('map')}>Map</button>
         </div>
@@ -210,16 +229,16 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
               areaTitle={(id) => areaTitle.get(id) ?? id}
               onToggle={toggleDone}
               kindOf={kindOf}
+              onOpen={openPanel}
             />
           </Suspense>
         ) : (
         <>
-        <p className="hint faint">Click a stop's circle when you've finished it. Use "Why?" to see what a stop leads to, or to skip it if you already know it.</p>
+        <p className="hint faint">Open a stop to see the book, the video course and the practice for it. Tick its circle when you've finished.</p>
 
         <ol className="route">
           {plan.steps.map((s) => {
             const state = stateOf(s);
-            const isOpen = open === s.id;
             const status =
               state === 'done'
                 ? 'Done.'
@@ -227,7 +246,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
                   ? 'Ready to start.'
                   : `After ${listOf(s.waitingOn.filter((p) => !done.has(p)).map(titleOf))}.`;
             return (
-              <li key={s.id} className="stop" data-area={s.area} data-state={state}>
+              <li key={s.id} className="stop" data-area={s.area} data-state={state} data-kind={kindOf(s.id)}>
                 <button
                   className="station"
                   aria-pressed={state === 'done'}
@@ -239,31 +258,13 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
                 </button>
                 <div className="stop-body">
                   <div className="stop-head">
-                    <a className="stop-title" href={`/concepts/${s.id}`}>{s.title}</a>
+                    <button className="stop-title" aria-haspopup="dialog" onClick={() => openPanel(s.id)}>{s.title}</button>
                     {kindOf(s.id) !== 'concept' && <span className="kind">{kindOf(s.id) === 'tool' ? 'Tool' : 'Project'}</span>}
                     <span className="stop-hours">{s.hours} h</span>
                   </div>
                   <p className="stop-sub">
-                    <span className="area-name">{areaTitle.get(s.area)}</span>. {status}{' '}
-                    <button
-                      className="why-toggle"
-                      aria-expanded={isOpen}
-                      aria-label={`Why is ${s.title} on this route?`}
-                      onClick={() => setOpen(isOpen ? null : s.id)}
-                    >
-                      Why?
-                    </button>
+                    <span className="area-name">{areaTitle.get(s.area)}</span>. {status}
                   </p>
-                  {isOpen && (
-                    <div className="why">
-                      <p>{why(s)}</p>
-                      {s.unlocks.length > 0 && <p>Opens up {listOf(s.unlocks.map(titleOf))}.</p>}
-                      <div className="stop-tools">
-                        <a className="text-button" href={`/concepts/${s.id}`}>Where to learn it</a>
-                        <button className="text-button" onClick={() => skip(s.id)}>Skip it, I already know this</button>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </li>
             );
@@ -332,6 +333,27 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
           </button>
         )}
       </aside>
+
+      {panel && (
+        <StopPanel
+          id={panel}
+          roleTitle={role.title}
+          why={(() => {
+            const step = plan.steps.find((x) => x.id === panel);
+            if (step) return why(step);
+            if (known.has(panel)) return "You've marked this as something you already know.";
+            return `It isn't on your route for ${role.title.toLowerCase()} at this tier.`;
+          })()}
+          done={done.has(panel)}
+          isTarget={targetTier.has(panel)}
+          areaTitle={(id) => areaTitle.get(id) ?? id}
+          titleOf={titleOf}
+          onClose={() => openPanel(null)}
+          onOpen={openPanel}
+          onToggleDone={() => toggleDone(panel)}
+          onSkip={() => skip(panel)}
+        />
+      )}
     </div>
   );
 }

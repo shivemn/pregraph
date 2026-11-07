@@ -1,5 +1,13 @@
 # Changelog
 
+## Week 7: more roles, three picks per stop, and a new look
+
+- **Six new roles:** data scientist, AI/LLM engineer, cloud engineer, application support engineer, security analyst (SOC) and embedded engineer. That's sixteen roles plus GATE. They brought 18 new concepts, tools and projects (LLMs and RAG, cloud networking and IAM, incident handling, log analysis, threat detection, microcontrollers and RTOS, and more) and a new Security area.
+- **Read, watch, practise.** Every resource now says whether you read it, watch it or practise with it, and every stop shows one pick of each. New video sources include NPTEL courses (Madhavan Mukund's PDSA, Naveen Garg's DSA, IIT Kharagpur's DBMS, networks and Java, Y. N. Srikant's compilers, Sorav Bansal's OS, Balaraman Ravindran's ML), MIT 6.0001 and 6.042, CS50P, CS50W, Kurose's networking lectures, 3Blue1Brown and Karpathy. Practice comes from CSES, Exercism, Kaggle Learn, SQLBolt, Learn Git Branching, OverTheWire, picoCTF and PortSwigger's Web Security Academy. Missing picks say so and link to a pre-filled issue.
+- **Stop panel.** Click any stop, in the list or on the map, to open a panel with the three picks, why it's on your route, what it needs and leads to, and done/skip buttons. Its data loads from `/stops.json` on first use. Links can point straight at one stop.
+- **New look, based on the Mumbai local:** yellow station boards for page names, a ticket-style From/To picker, routes drawn as train lines, and type by Ek Type (Anek Latin and Mukta). Overpass is gone.
+- `npm run validate -- --gaps` lists stops without a pick.
+
 ## Week 6: roles
 
 Pregraph now starts from a job instead of a subject: "I'm a maths graduate and I'm aiming for Backend engineer."

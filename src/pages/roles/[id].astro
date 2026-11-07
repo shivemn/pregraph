@@ -6,6 +6,7 @@ import { TIERS } from '../../lib/schema';
 import '../../styles/route.css';
 import '../../styles/planner.css';
 import '../../styles/map.css';
+import '../../styles/picks.css';
 
 export function getStaticPaths() {
   return content().roles.map((r) => ({ params: { id: r.id } }));
@@ -20,7 +21,7 @@ const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((
 <Base title={role.title} description={role.summary} wide>
   <header class="role-head">
     <p class="crumbs quiet"><a href="/roles">Roles</a> / {family.title}</p>
-    <h1>{role.title}</h1>
+    <h1><span class="board">{role.title}</span></h1>
     <p class="lede quiet">{role.summary}</p>
     {
       role.evidence ? (
@@ -59,11 +60,12 @@ const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((
 </Base>
 
 <style>
-  .role-head { max-width: 760px; display: grid; gap: 12px; }
-  .crumbs { font-size: 0.9375rem; }
+  .role-head { max-width: 800px; display: grid; gap: 14px; }
+  .role-head h1 { font-size: clamp(2.2rem, 7vw, 3.8rem); }
+  .crumbs { font-size: 0.95rem; }
   .crumbs a { color: inherit; }
-  .lede { font-size: 1.1875rem; max-width: 58ch; }
-  .evidence { font-size: 0.9375rem; color: var(--ink-2); padding-left: 12px; border-left: 3px solid var(--programming); }
+  .lede { font-size: 1.2rem; max-width: 58ch; }
+  .evidence { font-size: 0.95rem; color: var(--ink-2); padding: 6px 12px; border-left: 5px solid var(--programming); background: var(--platform); }
   .evidence.draft { border-left-color: var(--warn); }
   .static-list { margin-top: 24px; }
 </style>

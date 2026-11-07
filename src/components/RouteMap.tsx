@@ -12,6 +12,7 @@ interface Props {
   areaTitle: (id: string) => string;
   onToggle: (id: string) => void;
   kindOf: (id: string) => string;
+  onOpen: (id: string) => void;
 }
 
 /** Projects are drawn as squares, so the label can drop its "Project:" prefix. */
@@ -46,7 +47,7 @@ function trim(points: Array<[number, number]>, fromTitle: string): Array<[number
   return out;
 }
 
-export default function RouteMap({ steps, stateOf, areaTitle, onToggle, kindOf }: Props) {
+export default function RouteMap({ steps, stateOf, areaTitle, onToggle, kindOf, onOpen }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
 
@@ -85,7 +86,7 @@ export default function RouteMap({ steps, stateOf, areaTitle, onToggle, kindOf }
         {picked ? (
           <>
             <div data-area={picked.area}>
-              <a className="map-detail-title" href={`/concepts/${picked.id}`}>{picked.title}</a>
+              <button className="map-detail-title" onClick={() => onOpen(picked.id)}>{picked.title}</button>
               <p className="quiet small">
                 <span className="area-name">{areaTitle(picked.area)}</span>, about {picked.hours} hours.
                 {picked.waitingOn.length > 0 ? ` Needs ${picked.waitingOn.length} earlier ${picked.waitingOn.length === 1 ? 'stop' : 'stops'}.` : ' Nothing before it.'}
@@ -100,7 +101,7 @@ export default function RouteMap({ steps, stateOf, areaTitle, onToggle, kindOf }
             </div>
           </>
         ) : (
-          <p className="faint small">Select a stop to light up what it needs and what it leads to. Each row only depends on rows above it. Squares are projects.</p>
+          <p className="faint small">Click a stop to see where to learn it and light up what it needs and leads to. Each row only depends on rows above it. Squares are projects.</p>
         )}
       </div>
 
@@ -139,11 +140,15 @@ export default function RouteMap({ steps, stateOf, areaTitle, onToggle, kindOf }
                 role="button"
                 aria-pressed={selected === id}
                 aria-label={`${s.title}, ${stateOf(s) === 'done' ? 'done' : 'not done'}`}
-                onClick={() => setSelected(selected === id ? null : id)}
+                onClick={() => {
+                  setSelected(id);
+                  onOpen(id);
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    setSelected(selected === id ? null : id);
+                    setSelected(id);
+                    onOpen(id);
                   }
                 }}
                 onMouseEnter={() => setHovered(id)}

@@ -1,6 +1,6 @@
 # Pregraph: system design
 
-Last updated after week 6, the move to roles (November 2026). I keep this file in step with the code, so if something here disagrees with `src/`, the code wins and this file has a bug.
+Last updated after week 7: more roles, book and video picks for every stop, and the Mumbai local redesign (November 2026). I keep this file in step with the code, so if something here disagrees with `src/`, the code wins and this file has a bug.
 
 The companion file, [CONCEPTS.md](CONCEPTS.md), explains each technique used here and where to learn it.
 
@@ -24,7 +24,9 @@ You say where you're starting from and which job you want: "I'm a maths graduate
 
 Done so far:
 
-- Ten tech roles plus GATE CS, over one shared graph: 57 concepts, 14 tools, 8 projects and 68 resources.
+- Sixteen roles plus GATE CS, over one shared graph: 75 concepts, 14 tools, 14 projects and 129 resources.
+- For every stop, a pick to read, a pick to watch (YouTube, NPTEL, OCW or Coursera) and, where there's a good one, a pick to practise with.
+- A panel that opens on any stop, in the list or on the map, with those picks and what the stop needs and leads to.
 - Four backgrounds: maths graduate, engineering graduate (not CS), CS or IT graduate, and starting from zero.
 - A planner with a background picker, tiers, progress, "why is this here?", skipping and progress by area.
 - A map view of the route, drawn by a layout algorithm in `src/lib/layout.ts`.
@@ -76,13 +78,15 @@ erDiagram
 |---|---|
 | `content/areas.yaml` | Topic areas, in display order. Each gets a colour in `src/styles/global.css`. |
 | `content/concepts/*.yaml` | One file per area. Each entry has an `id`, `title`, `area`, `kind`, `summary`, `hours`, `requires` (hard prerequisites), `recommends` (soft ones) and `resources`. `kind` is `concept` (something to understand), `tool` (something to get fluent in, like Docker or React) or `project` (something to build and show). The engine treats all three the same; the interface labels them. |
-| `content/resources.yaml` | Books, courses and sites: title, author, URL, whether it's free, and an optional `short` name people actually use ("OSTEP", "CLRS"). |
+| `content/resources.yaml` | Books, courses and sites: title, author, URL, whether it's free, its `medium` (`read`, `watch` or `practice`), and an optional `short` name people actually use ("OSTEP", "CLRS", "NPTEL DBMS"). |
 | `content/backgrounds.yaml` | What a kind of learner already knows, as a list of concept ids, plus a `phrase` for the home page sentence ("a maths graduate"). |
 | `content/families.yaml` | Groups of roles: software, data, infrastructure, exams. |
 | `content/roles.yaml` | A role (or an exam): `title`, `family`, `summary`, and `tiers` with three lists of concept ids: `hire`, `firstYear` and `extra`. An optional `evidence` block records the job postings the tiers are based on. Without it the role page says "Draft". |
 | `research/postings/*.csv` | Hand-collected, hand-tagged job postings, one file per role. `npm run evidence -- <role>` turns them into counts. See [ROLES.md](ROLES.md). |
 
-A resource section says which part of a resource teaches a concept (`locator: "Part I, Virtualization"`), its role (`primary`, `alternative` or `deep-dive`), and `verified`. Every section starts as `verified: false` until someone opens the resource and checks the chapter numbers. Concept pages say "Section not checked yet" for those.
+A resource section says which part of a resource teaches a concept (`locator: "Part I, Virtualization"`), its role (`primary`, `alternative` or `deep-dive`), an optional one-line `why`, and `verified`.
+
+**Picks.** Each stop shows one pick per medium: something to read, something to watch, something to practise with. The pick is the first free section of that medium marked `primary`, or failing that `alternative`. Deep dives and paid resources are never the pick; they appear under "more options". This lives in `picksFor` in `src/lib/schema.ts`, so the concept page, the panel and the tests all agree. `npm run validate -- --gaps` lists the stops still missing a pick. Right now that's 100 of 103 with something to read, 63 with something to watch and 26 with something to practise. The site says "No video course picked yet" and links to a pre-filled GitHub issue, rather than hiding the gap. Every section starts as `verified: false` until someone opens the resource and checks the chapter numbers. Concept pages say "Section not checked yet" for those.
 
 Hard and soft prerequisites behave differently, and that's deliberate. A hard one (`requires`) decides what you need: it gets pulled into your plan. A soft one (`recommends`) only affects order, and only when both concepts are already in the plan. That keeps plans short. Git is a soft prerequisite of C, for example: it's worth learning first, but nobody needs Git to understand pointers.
 
@@ -155,6 +159,14 @@ The planner turns those into the "Why?" text. For example: "It's part of what it
 
 Bad content gets caught in CI, not by someone using the site.
 
+## 6a. The stop panel
+
+Click any stop, in the list or on the map, and a panel slides in from the right (a full-screen sheet on phones). It shows what the stop is, why it's on your route, the three picks, other options, what it needs and what it opens up (each one clickable), and buttons to mark it done or skip it. The URL hash follows the panel (`/roles/backend-engineer#system-design`), so a link can open straight to one stop.
+
+The panel's data comes from `/stops.json`, built at deploy time from the same `stopDetails()` the concept pages use. It's fetched the first time someone opens a stop, so a role page doesn't carry every resource in its HTML. It's 18 KB gzipped for all 103 stops, and cached after that.
+
+The full concept pages stay, for search engines and for links from elsewhere.
+
 ## 7. The map
 
 `src/lib/layout.ts` draws the route as a layered graph. I wrote it rather than pulling in dagre or React Flow. The map only needs a fraction of what those do, the code is about 200 lines, and it's the most mathematical part of the project, so it's worth understanding properly.
@@ -195,10 +207,11 @@ flowchart LR
     E --> F[Planner island, React]
     F -. opens map .-> M[Map chunk, loaded on demand]
     F --> G[(localStorage)]
+    F -. first stop opened .-> T[/stops.json/]
     E -. first search .-> S[/search.json/]
 ```
 
-Every page is plain HTML built at deploy time. The planner is the one React island, on role pages only. Concept pages and the home page ship no framework at all.
+Every page is plain HTML built at deploy time. The planner (with its panel) is the one React island, on role pages only. Concept pages and the home page ship no framework at all.
 
 ### What ships
 
@@ -206,9 +219,11 @@ Measured from `npm run build`, gzipped:
 
 | Page | HTML | JavaScript |
 |---|---|---|
-| Home | 5.4 KB | about 1.5 KB inline (search, picker) |
-| Concept page | about 3.7 KB | about 1 KB inline (search) |
-| Role page | about 11 KB | 66 KB React runtime + 4 KB planner; +3 KB when the map opens |
+| Home | 5.8 KB | about 1.5 KB inline (search, picker) |
+| Concept page | 4.6 KB | about 1 KB inline (search) |
+| Role page | 11.8 KB | 66 KB React runtime + 6.4 KB planner and panel; +2.9 KB when the map opens; +18 KB of stop data on the first panel |
+
+Fonts are the other cost: about 165 KB of woff2 on a first visit, cached after that. Most of it is Anek Latin's variable width axis (104 KB for Latin). Subsetting it to the characters we actually use would roughly halve that, and it's the next performance job if first loads ever feel slow.
 
 The React runtime is most of the weight. Swapping in Preact through `@astrojs/preact` with its React compatibility layer would cut about 55 KB without changing component code. I'm keeping React for now because it's what I want to practise, but it's the obvious first move if the role page ever feels slow.
 
@@ -216,7 +231,14 @@ Fonts are self-hosted (Overpass, from `@fontsource-variable`). There's no reques
 
 ### Look and feel
 
-The design borrows from transit maps, because that's what a learning path is: each area is a coloured line, each concept is a stop, and your route fills in as you finish stops. It uses one typeface, Overpass, which is modelled on US highway signage. Colours are cool paper and navy ink, plus one colour per area, checked in both light and dark mode. The route line is the one loud element, and everything else stays quiet. There are no cards, no gradients and no all-caps labels.
+The design borrows from the Mumbai local, because a learning path really is a train line:
+
+- **Station boards.** Each page's own name sits on a yellow board with black condensed capitals, like a station name board. There's one per page and nowhere else, so it stays special.
+- **The ticket.** The home page picker is a ticket: *From* your background *To* the role, with a perforated yellow stub holding "Plan my route".
+- **Train lines.** A route is a thick line with a station for every stop. The line takes the colour of each stop's area and turns solid as you finish stops. Projects get square stations.
+- **Type.** Two typefaces, both from Ek Type, a type foundry in Mumbai: Anek Latin (its condensed widths) for signs, headings and station names, and Mukta for reading.
+- **Colour.** Black on white, signage yellow, and one colour per area, checked in light and dark mode. In dark mode the boards stay yellow, the way station signs stay lit at night.
+- **Kept out on purpose:** rounded cards, soft shadows, gradients, all-caps labels on small text, and decorative animation. The only motion is the panel sliding in and the line filling as you tick stops, and both are switched off for people who ask for reduced motion.
 
 Tokens live in `src/styles/global.css`. Area colours are set once, with `[data-area="systems"] { --line: … }`, and everything inside picks them up.
 
@@ -285,8 +307,9 @@ src/lib/layout.ts        layered layout for the map
 src/lib/search.ts        scoring for search
 src/lib/schema.ts        content contract (zod)
 src/lib/content.ts       loads and cross-checks content at build time
-src/components/          RolePlanner, RouteMap (React), Search (plain TS)
-src/pages/               home, /roles, /roles/[id], /concepts/[id], /search.json, 404
+src/components/          RolePlanner, StopPanel, RouteMap (React), Search (plain TS)
+src/lib/stops.ts         what a stop's panel shows; also builds /stops.json
+src/pages/               home, /roles, /roles/[id], /concepts/[id], /search.json, /stops.json, 404
 research/postings/       tagged job postings per role (the evidence)
 scripts/role-evidence.ts npm run evidence
 src/styles/              tokens, route, planner, map
@@ -303,7 +326,8 @@ scripts/validate.ts      npm run validate
 | 4 | Redesign; planner: goals, "why", skipping, progress by area | Done |
 | 5 | Map view with own layout; search | Done |
 | 6 | Roles: ten tech roles and GATE, tiers, four backgrounds, tools and projects | Done (drafts) |
-| 7 | Job-posting evidence for SDE and backend; deploy; first users | Next |
+| 7 | Six more roles; read, watch and practise picks; stop panel; Mumbai local redesign | Done |
+| 8 | Job-posting evidence for SDE and backend; deploy; first users | Next |
 | 8–9 | Check yourself: questions, test out, spaced review | |
 | 10+ | Depth pages to one template, starting with the most shared concepts | |
 | later | More role families, accounts and sync, link checker, adaptive test | |
@@ -324,6 +348,9 @@ scripts/validate.ts      npm run validate
 | Roles as the way in | People think in jobs, not in "Core CS" | — |
 | Launch with one family of tech roles, not every job | Each role needs real curation; tech roles share most concepts | The first family is solid and has evidence |
 | Tiers backed by job postings | Without evidence a role list is one more opinion | — |
+| One pick per medium (read, watch, practise) | People learn differently; a single list mixed everything together | Users want a choice of several videos |
+| Panel instead of navigating away | You keep your place on the route | — |
+| Mumbai local look, Ek Type fonts | Specific to the product and its first users, and unlike template sites | — |
 
 ## 14. Risks
 

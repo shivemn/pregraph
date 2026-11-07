@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { planPath } from '../lib/graph';
 import { targetsUpTo } from '../lib/schema';
 import { content, listOf, title } from '../lib/site';
+import { stopDetails } from '../lib/stops';
 import '../styles/route.css';
 
 const c = content();
@@ -17,6 +18,10 @@ const preview = plan.steps.slice(0, 6);
 const groups = c.families
   .map((f) => ({ family: f, roles: c.roles.filter((r) => r.family === f.id) }))
   .filter((g) => g.roles.length > 0);
+const pickCount = (() => {
+  const details = stopDetails(c);
+  return { read: details.filter((d) => d.picks.read).length, watch: details.filter((d) => d.picks.watch).length };
+})();
 const counts = {
   concepts: c.concepts.filter((x) => x.kind === 'concept').length,
   tools: c.concepts.filter((x) => x.kind === 'tool').length,
@@ -30,39 +35,45 @@ const counts = {
     <section class="hero">
       <h1>A study plan that starts from what you already know.</h1>
       <p class="lede">
-        Pick the job you want. Pregraph works out what it takes, drops what your background already covers,
-        puts the rest in an order that makes sense, and points you to a free chapter, course or video for every step.
+        Pick the job you want. Pregraph works out what it takes, leaves out what your background already
+        covers, and puts the rest in order. Every stop comes with a good book, a good video course and,
+        where there is one, a place to practise. All free.
       </p>
 
-      <form class="picker" action="/roles" method="get" data-picker>
-        <label>
-          <span>I'm</span>
-          <select name="from">
-            {c.backgrounds.map((b) => <option value={b.id} selected={b.id === exampleBg.id}>{b.phrase}</option>)}
-          </select>
-        </label>
-        <label>
-          <span>and I'm aiming for</span>
-          <select name="role">
-            {groups.map(({ family, roles }) => (
-              <optgroup label={family.title}>
-                {roles.map((r) => <option value={r.id} selected={r.id === exampleRole.id}>{r.title}</option>)}
-              </optgroup>
-            ))}
-          </select>
-        </label>
-        <button type="submit">Show my route</button>
+      <form class="ticket" action="/roles" method="get" data-picker>
+        <div class="ticket-main">
+          <label class="ticket-row">
+            <span class="ticket-label">From</span>
+            <select name="from">
+              {c.backgrounds.map((b) => <option value={b.id} selected={b.id === exampleBg.id}>{b.phrase}</option>)}
+            </select>
+          </label>
+          <label class="ticket-row">
+            <span class="ticket-label">To</span>
+            <select name="role">
+              {groups.map(({ family, roles }) => (
+                <optgroup label={family.title}>
+                  {roles.map((r) => <option value={r.id} selected={r.id === exampleRole.id}>{r.title}</option>)}
+                </optgroup>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div class="ticket-stub">
+          <button type="submit" class="btn">Plan my route</button>
+          <span class="ticket-small">Free. No account.</span>
+        </div>
       </form>
     </section>
 
     <section class="preview" aria-labelledby="preview-heading">
       <h2 id="preview-heading">
-        For example, {exampleBg.phrase} who wants to be a {exampleRole.title.toLowerCase()} starts like this
+        Next stations for {exampleBg.phrase} going to {exampleRole.title.toLowerCase()}
       </h2>
       <ol class="route">
         {
           preview.map((s) => (
-            <li class="stop" data-area={s.area} data-state={s.waitingOn.length === 0 ? 'ready' : 'waiting'}>
+            <li class="stop" data-area={s.area} data-kind={kindOf.get(s.id)} data-state={s.waitingOn.length === 0 ? 'ready' : 'waiting'}>
               <span class="station" aria-hidden="true" />
               <div class="stop-body">
                 <div class="stop-head">
@@ -80,13 +91,13 @@ const counts = {
         }
       </ol>
       <p class="route-end">
-        {plan.steps.length - preview.length} more stops to get hired, about {plan.totalHours} hours in all.
+        Then {plan.steps.length - preview.length} more stops to get hired, about {plan.totalHours} hours in all.
       </p>
     </section>
   </div>
 
   <section class="roles" aria-labelledby="roles-heading">
-    <h2 id="roles-heading">Roles so far</h2>
+    <h2 id="roles-heading">Where you can go</h2>
     <div class="families">
       {
         groups.map(({ family, roles }) => (
@@ -100,24 +111,25 @@ const counts = {
   </section>
 
   <section class="how" aria-labelledby="how-heading">
-    <h2 id="how-heading">How it works</h2>
+    <h2 id="how-heading">How the route is worked out</h2>
     <p>
       Every role lists what it needs in three tiers: what gets you hired, what the first year expects, and what's
-      good to have. Every concept lists what you need to know first. Pregraph walks back from the role through
+      good to have. Every topic lists what you need to know before it. Pregraph walks back from the role through
       those prerequisites and stops wherever your background already covers the ground, so a CS graduate aiming
-      for backend work never sees an intro programming course. What's left goes in order with a topological sort,
-      starting the longest chains first and keeping you in one area at a time where it can.
+      for backend work never sees an intro programming course. What's left goes in order, starting the longest
+      chains first and keeping you on one line at a time where it can.
     </p>
     <p>
-      The map has {counts.concepts} concepts, {counts.tools} tools, {counts.projects} projects to build, and
-      {' '}{counts.resources} free resources. Role lists are drafts until they've been checked against real job
-      postings. The <a href="https://github.com/shivemn/pregraph/blob/main/docs/SYSTEM_DESIGN.md">design notes</a> have the details.
+      So far there are {counts.concepts} concepts, {counts.tools} tools and {counts.projects} projects.
+      {pickCount.read} have a book or written guide picked and {pickCount.watch} have a video course.
+      Role lists are drafts until they've been checked against real job postings. The
+      {' '}<a href="https://github.com/shivemn/pregraph/blob/main/docs/SYSTEM_DESIGN.md">design notes</a> have the details.
     </p>
   </section>
 </Base>
 
 <script>
-  // Send the picker straight to the role page; without JavaScript it falls back to the roles list.
+  // Send the ticket straight to the role page; without JavaScript it falls back to the roles list.
   const form = document.querySelector<HTMLFormElement>('[data-picker]');
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -127,46 +139,54 @@ const counts = {
 </script>
 
 <style>
-  .top { display: grid; grid-template-columns: 1.05fr 1fr; gap: 72px; align-items: start; padding-top: 40px; }
+  .top { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start; padding-top: 24px; }
   .hero { display: grid; gap: 22px; }
-  .hero h1 { max-width: 14ch; font-size: clamp(2.3rem, 6vw, 3.7rem); letter-spacing: -0.02em; }
-  .lede { font-size: 1.1875rem; max-width: 52ch; color: var(--ink-2); }
+  .hero h1 { max-width: 13ch; font-size: clamp(2.6rem, 7vw, 4.4rem); font-stretch: 75%; font-weight: 780; line-height: 0.98; }
+  .lede { font-size: 1.2rem; max-width: 50ch; color: var(--ink-2); }
 
-  .picker {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px;
-    font-size: 1.25rem; font-weight: 650; margin-top: 6px;
+  .ticket {
+    display: grid; grid-template-columns: 1fr auto;
+    border: 3px solid var(--ink); background: var(--paper); margin-top: 6px;
+    max-width: 600px;
   }
-  .picker label { display: contents; }
-  .picker select {
-    font: inherit; font-weight: 750; color: var(--ink);
-    padding: 6px 34px 6px 12px; border-radius: 8px;
-    border: 2px solid var(--ink); background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%237c8896' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 12px center;
-    appearance: none; max-width: 100%;
+  .ticket-main { padding: 14px 18px; display: grid; gap: 10px; }
+  .ticket-row { display: grid; grid-template-columns: 52px 1fr; align-items: center; gap: 10px; }
+  .ticket-label { font-family: var(--sign); font-stretch: 80%; font-weight: 750; font-size: 1.15rem; }
+  .ticket select {
+    width: 100%; min-width: 0;
+    font-family: var(--sign); font-stretch: 88%; font-weight: 700; font-size: 1.3rem; color: var(--ink);
+    padding: 4px 34px 2px 2px; border: 0; border-bottom: 2px solid var(--ink); border-radius: 0;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2374797f' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 6px center;
+    appearance: none;
   }
-  .picker button {
-    font: inherit; font-size: 1rem; font-weight: 700;
-    padding: 11px 18px; border-radius: 8px; border: 0;
-    background: var(--ink); color: var(--paper);
+  .ticket select option, .ticket select optgroup { font-family: var(--text); font-size: 1rem; }
+  .ticket-stub {
+    display: grid; align-content: center; justify-items: center; gap: 8px;
+    padding: 14px 18px; border-left: 3px dashed var(--ink); background: var(--yellow);
   }
-  .picker button:hover { background: color-mix(in srgb, var(--ink) 85%, var(--paper)); }
+  .ticket-stub .btn { font-size: 1.2rem; }
+  .ticket-small { font-size: 0.85rem; font-weight: 600; color: var(--on-yellow); }
 
-  .preview { padding: 22px 24px 20px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
-  .preview h2 { font-size: 1rem; font-weight: 700; margin-bottom: 18px; color: var(--ink-2); }
-  .preview .station { --paper: var(--surface); }
+  .preview { padding: 20px 22px 18px; border: 3px solid var(--ink); background: var(--paper); }
+  .preview h2 {
+    font-size: 1.05rem; font-stretch: 88%; font-weight: 700; margin: -20px -22px 18px; padding: 8px 22px 6px;
+    background: var(--ink); color: var(--yellow);
+  }
 
   .roles, .how { margin-top: 80px; }
   .families { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 18px; }
-  .families h3 { font-size: 1rem; color: var(--ink-2); margin-bottom: 10px; }
-  .families ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-  .families a { font-weight: 650; }
-  .how { max-width: 760px; }
-  .how p { margin-top: 14px; max-width: 64ch; }
+  .families h3 { font-size: 1.1rem; color: var(--ink-2); padding-bottom: 6px; border-bottom: 3px solid var(--ink); margin-bottom: 10px; }
+  .families ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; }
+  .families a { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.15rem; }
+  .how { max-width: 780px; }
+  .how p { margin-top: 14px; max-width: 66ch; }
 
   @media (max-width: 960px) {
-    .top { grid-template-columns: 1fr; gap: 40px; padding-top: 16px; }
+    .top { grid-template-columns: 1fr; gap: 40px; padding-top: 8px; }
   }
-  @media (max-width: 640px) {
-    .picker { font-size: 1.125rem; }
-    .picker select { width: 100%; }
+  @media (max-width: 560px) {
+    .ticket { grid-template-columns: 1fr; }
+    .ticket-stub { border-left: 0; border-top: 3px dashed var(--ink); grid-auto-flow: column; justify-content: space-between; }
+    .ticket select { font-size: 1.15rem; }
   }
 </style>

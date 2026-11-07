@@ -9,7 +9,7 @@ const groups = c.families
 ---
 
 <Base title="Roles" description="Pick a job and see what it takes to get hired, starting from what you already know.">
-  <h1>Roles</h1>
+  <h1><span class="board">All roles</span></h1>
   <p class="lede quiet">
     Pick a job. You'll see what it takes to get hired, then what the first year expects, starting from what you
     already know. Every role is a draft until it has been checked against real job postings.
@@ -32,11 +32,11 @@ const groups = c.families
 </Base>
 
 <style>
-  h1 { padding-top: 24px; }
+  h1 { padding-top: 8px; font-size: clamp(2.2rem, 7vw, 3.6rem); }
   .lede { font-size: 1.1875rem; max-width: 60ch; margin-top: 14px; }
   section { margin-top: 44px; }
-  .role-list { list-style: none; padding: 0; margin: 12px 0 0; border-top: 1px solid var(--rule); }
-  .role-list li { padding: 16px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
-  .role-list a { font-size: 1.2rem; font-weight: 750; text-decoration: none; }
+  .role-list { list-style: none; padding: 0; margin: 12px 0 0; border-top: 3px solid var(--ink); }
+  .role-list li { padding: 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 2px; }
+  .role-list a { font-family: var(--sign); font-stretch: 85%; font-size: 1.45rem; font-weight: 720; text-decoration: none; }
   .role-list a:hover { text-decoration: underline; }
 </style>

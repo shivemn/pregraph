@@ -4,25 +4,31 @@ A study plan that starts from what you already know.
 
 I have a maths degree and had to work out computer science on my own. The material is all free. What I lost time on was everything around it: what a job actually needs, what I could skip, what order to learn the rest in, and how to know I'd really learned something.
 
-Pregraph starts from one sentence: *I'm a maths graduate and I'm aiming for Backend engineer.* Each role lists what it needs in three tiers: to get hired, in the first year, and good to have. Pregraph keeps everything as a graph of concepts, tools and projects with their prerequisites. It drops what your background covers, puts the rest in order, and points you to a free chapter, course or video for every step.
+Pregraph starts from a ticket: *From a maths graduate, To Backend engineer.* Each role lists what it needs in three tiers: to get hired, in the first year, and good to have. Pregraph keeps everything as a graph of concepts, tools and projects with their prerequisites. It drops what your background covers and puts the rest in order. Every stop comes with three picks: a good book or written guide, a good video course (YouTube, NPTEL, OCW) and, where there's a good one, somewhere to practise.
 
-![The home page: pick where you're starting and the role you want](docs/img/home.png)
+![The home page: a ticket picker, From your background To the role, next to a preview of the route](docs/img/home.png)
 
-![A role page: background and tier pickers, the route with three stops done, progress by area](docs/img/route-list.png)
+![A role page: the route drawn as a train line with three stations done, and progress by area](docs/img/route-list.png)
 
-![The map view: stops in rows, with one stop's chain highlighted. Squares are projects](docs/img/route-map.png)
+![The stop panel for System design: a book to read, videos to watch, and what it needs](docs/img/stop-panel.png)
 
 ## What's here
 
-- **Ten tech roles plus GATE CS:** software engineer, backend, frontend, full-stack, Android, QA/SDET, data analyst, data engineer, ML engineer, DevOps/SRE.
+- **Sixteen roles plus GATE CS:**
+  - Software: software engineer, backend, frontend, full-stack, Android, QA/SDET, embedded.
+  - Data: data analyst, data scientist, data engineer, ML engineer, AI/LLM engineer.
+  - Infrastructure: DevOps/SRE, cloud, application support, security analyst.
 - **Four starting points:** maths graduate, engineering graduate (not CS), CS or IT graduate, starting from zero.
-- **One shared graph** of 57 concepts, 14 tools and 8 projects, linked to 68 resources, almost all of them free.
+- **One shared graph** of 75 concepts, 14 tools and 14 projects, linked to 129 resources, almost all of them free.
+- **Read, watch, practise.** Each stop has one pick of each. Open a stop to see them, along with why it's on your route and what it leads to.
 - **Ticking off progress.** What you finish counts for every role. Each stop can say why it's there, and you can skip what you already know.
 - **A map of the route,** drawn by a layout algorithm written for this project.
 - **Search** across concepts and the resources behind them ("ostep", "strang", "kafka").
 - **No account.** Progress is saved in your browser.
 
-Every role is a draft until its tiers have been checked against real job postings. [docs/ROLES.md](docs/ROLES.md) explains how, and `npm run evidence` does the counting.
+Every role is a draft until its tiers have been checked against real job postings.
+
+The look is borrowed from the Mumbai local: yellow station boards, a ticket for picking your route, and routes drawn as train lines. The type is by Ek Type, a Mumbai foundry. [docs/ROLES.md](docs/ROLES.md) explains how, and `npm run evidence` does the counting.
 
 ## How the order is worked out
 
@@ -41,6 +47,7 @@ npm install
 npm run dev                          # http://localhost:4321
 npm test                             # engine, layout and search tests, including property tests
 npm run validate                     # checks content/ for typos, unknown ids and prerequisite loops
+npm run validate -- --gaps           # also lists stops missing a read, watch or practise pick
 npm run evidence -- backend-engineer # counts tagged job postings for a role
 npm run build                        # validate, then build the static site into dist/
 ```
@@ -60,6 +67,7 @@ Concepts, tools and projects live in `content/concepts/`, one file per area:
   resources:
     - resource: docker-docs           # an id from content/resources.yaml
       locator: "The getting-started guide, start to finish"
+      why: "Short, official and kept up to date."   # optional, shown next to the pick
       verified: true                  # only once you've opened it and checked
 ```
 
@@ -78,8 +86,11 @@ Roles live in `content/roles.yaml`:
 
 Run `npm run validate` afterwards.
 
+Every resource in `content/resources.yaml` has a `medium`: `read`, `watch` or `practice`. Each stop shows the first free one of each medium as its pick.
+
 The most useful contributions right now:
 - Checking chapter and lecture references. All of them are still `verified: false`.
+- Suggesting a video or practice pick where one is missing.
 - Collecting job postings for a role.
 
 ## Layout
@@ -90,7 +101,7 @@ research/postings/    hand-tagged job postings, one CSV per role
 src/lib/graph.ts      the path engine
 src/lib/layout.ts     layered graph layout for the map
 src/lib/search.ts     search scoring
-src/components/       role planner and map (React), search box (plain TypeScript)
+src/components/       role planner, stop panel and map (React), search box (plain TypeScript)
 src/pages/            home, roles, concept pages
 docs/                 design notes, how roles get checked, what this teaches, changelog
 ```
