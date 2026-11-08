@@ -1,25 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 import NetworkMap from '../components/NetworkMap.astro';
-import { planPath, withPrerequisites } from '../lib/graph';
-import { duration } from '../lib/coaches';
-import { BACKGROUND_GROUPS, targetsUpTo } from '../lib/schema';
-import { content, listOf, plannerNodes, title } from '../lib/site';
+import HeroRide from '../components/HeroRide.astro';
+import { withPrerequisites } from '../lib/graph';
+import { BACKGROUND_GROUPS } from '../lib/schema';
+import { content, plannerNodes } from '../lib/site';
 import { stopDetails } from '../lib/stops';
-import { midSentence } from '../lib/text';
 import '../styles/route.css';
 
 const c = content();
-const areaTitle = new Map(c.areas.map((a) => [a.id, a.title]));
-const kindOf = new Map(c.concepts.map((x) => [x.id, x.kind]));
-
-const exampleRole = c.roles.find((r) => r.id === 'backend-engineer')!;
 const jobs = c.roles.filter((r) => r.kind !== 'exam');
 const exams = c.roles.filter((r) => r.kind === 'exam');
-// The preview starts with no background assumed, then re-plans in the browser
-// as the ticket changes. Everything it needs is inlined below as JSON.
-const plan = planPath(c.concepts, targetsUpTo(exampleRole, 'hire'), new Set());
-const preview = plan.steps.slice(0, 6);
+// Nothing is picked to start with. The preview plans in the browser as the
+// ticket changes; everything it needs is inlined below as JSON.
 const previewData = {
   nodes: plannerNodes(c),
   areas: Object.fromEntries(c.areas.map((a) => [a.id, a.title])),
@@ -49,85 +42,32 @@ const counts = {
 ---
 
 <Base title="Terminus" wide>
-  <div class="top">
-    <section class="hero">
-      <h1>A study plan that starts from what you already know.</h1>
+  <section class="intro" aria-labelledby="intro-heading">
+    <div class="intro-text">
+      <h1 id="intro-heading">Roadmaps are the same for everyone. This one starts from you.</h1>
       <p class="lede">
-        Pick the job you want. Terminus works out what it takes, leaves out what your background already
-        covers, and puts the rest in order. Every stop comes with a good book, a good video course and,
-        where there is one, a place to practise. All free.
+        Terminus is a free study planner for jobs in software, data, infrastructure, finance and product. Tell it
+        where you're starting and which job you want. It works out every topic in between, leaves out what you
+        already know, and puts the rest in order, like stops on a line.
       </p>
-
-      <form class="ticket" action="/roles" method="get" data-picker>
-        <div class="ticket-main">
-          <label class="ticket-row">
-            <span class="ticket-label">From</span>
-            <select name="from" required>
-              <option value="" disabled selected>Select your background</option>
-              {BACKGROUND_GROUPS.map((g) => (
-                <optgroup label={g.title}>
-                  {c.backgrounds.filter((b) => b.group === g.id).map((b) => <option value={b.id}>{b.title}</option>)}
-                </optgroup>
-              ))}
-              <optgroup label="Already working as">
-                {jobs.map((r) => <option value={`role:${r.id}`}>{r.title}</option>)}
-              </optgroup>
-            </select>
-          </label>
-          <label class="ticket-row">
-            <span class="ticket-label">To</span>
-            <select name="role">
-              {groups.map(({ family, roles }) => (
-                <optgroup label={family.title}>
-                  {roles.map((r) => <option value={r.id} selected={r.id === exampleRole.id}>{r.title}</option>)}
-                </optgroup>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div class="ticket-stub">
-          <button type="submit" class="btn">Plan my route</button>
-          <span class="ticket-small">Free. No account.</span>
-        </div>
-      </form>
-    </section>
-
-    <section class="preview" aria-labelledby="preview-heading">
-      <h2 id="preview-heading" data-preview-heading>
-        First stations to {midSentence(exampleRole.title)}, from the very beginning
-      </h2>
-      <ol class="route" data-preview-route aria-live="polite">
-        {
-          preview.map((s) => (
-            <li class="stop" data-area={s.area} data-kind={kindOf.get(s.id)} data-state={s.waitingOn.length === 0 ? 'ready' : 'waiting'}>
-              <span class="station" aria-hidden="true" />
-              <div class="stop-body">
-                <div class="stop-head">
-                  <a class="stop-title" href={`/concepts/${s.id}`}>{s.title}</a>
-                  {kindOf.get(s.id) !== 'concept' && <span class="kind">{kindOf.get(s.id) === 'tool' ? 'Tool' : 'Project'}</span>}
-                  <span class="stop-hours">{s.hours} h</span>
-                </div>
-                <p class="stop-sub">
-                  <span class="area-name">{areaTitle.get(s.area)}</span>.{' '}
-                  {s.waitingOn.length === 0 ? 'Ready to start.' : `After ${listOf(s.waitingOn.map((id) => title(c, id)))}.`}
-                </p>
-              </div>
-            </li>
-          ))
-        }
+      <ol class="how-steps">
+        <li><span><strong>From.</strong> Your degree, or the job you do now.</span></li>
+        <li><span><strong>To.</strong> One of {jobs.length} jobs or {exams.length} exams.</span></li>
+        <li><span><strong>The ride.</strong> Each stop has a book, a video course and a place to practise, all free. Tick them off as you go; no account needed.</span></li>
       </ol>
-      <p class="route-end" data-preview-end>
-        Then {plan.steps.length - preview.length} more stops to get hired: {duration(plan.totalHours, 10)} in all at 10 hours a week.
+      <p class="intro-actions">
+        <a class="btn" href="#plan">Plan my route</a>
+        <a class="intro-map" href="#roles">See the whole network</a>
       </p>
-      <script type="application/json" id="preview-data" set:html={JSON.stringify(previewData)} />
-    </section>
-  </div>
+    </div>
+    <HeroRide />
+  </section>
 
-  <section class="roles" aria-labelledby="roles-heading">
+  <section class="roles" id="roles" aria-labelledby="roles-heading">
     <h2 id="roles-heading">Where you can go</h2>
     <p class="roles-lede">
       Every line ends at a job. Where two lines share a stop, those jobs ask for the same skills, so that's where you
-      can change from one career to the other.
+      can change from one career to the other. Pick a job to see its route.
     </p>
     <div class="map-wide">
       <NetworkMap />
@@ -149,13 +89,60 @@ const counts = {
         ))
       }
     </div>
-    <p class="one-tool">
-      Or learn just one tool:{' '}
-      {featured.map((x, i) => (
-        <>{i > 0 && ', '}<a href={`/tools/${x.id}`}>{x.title}</a></>
-      ))}
-      . <a href="/tools">All {toolCount} tools</a>
-    </p>
+  </section>
+
+  <section class="plan" id="plan" aria-labelledby="plan-heading">
+    <div class="plan-ticket">
+      <h2 id="plan-heading">Plan your route</h2>
+      <p class="plan-lede">Pick where you're starting and where you're going. The first stations show up on the right, and the map above greys out what's already behind you.</p>
+      <form class="ticket" action="/roles" method="get" data-picker>
+        <div class="ticket-main">
+          <label class="ticket-row">
+            <span class="ticket-label">From</span>
+            <select name="from" required>
+              <option value="" disabled selected>Select your background</option>
+              {BACKGROUND_GROUPS.map((g) => (
+                <optgroup label={g.title}>
+                  {c.backgrounds.filter((b) => b.group === g.id).map((b) => <option value={b.id}>{b.title}</option>)}
+                </optgroup>
+              ))}
+              <optgroup label="Already working as">
+                {jobs.map((r) => <option value={`role:${r.id}`}>{r.title}</option>)}
+              </optgroup>
+            </select>
+          </label>
+          <label class="ticket-row">
+            <span class="ticket-label">To</span>
+            <select name="role" required>
+              <option value="" disabled selected>Select a job</option>
+              {groups.map(({ family, roles }) => (
+                <optgroup label={family.title}>
+                  {roles.map((r) => <option value={r.id}>{r.title}</option>)}
+                </optgroup>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div class="ticket-stub">
+          <button type="submit" class="btn">Plan my route</button>
+          <span class="ticket-small">Free. No account.</span>
+        </div>
+      </form>
+      <p class="one-tool">
+        Or learn just one tool:{' '}
+        {featured.map((x, i) => (
+          <>{i > 0 && ', '}<a href={`/tools/${x.id}`}>{x.title}</a></>
+        ))}
+        . <a href="/tools">All {toolCount} tools</a>
+      </p>
+    </div>
+
+    <section class="preview" aria-labelledby="preview-heading">
+      <h2 id="preview-heading" data-preview-heading>Your first stations</h2>
+      <ol class="route" data-preview-route aria-live="polite"></ol>
+      <p class="route-end" data-preview-end>Pick a job on the ticket and its first stations appear here.</p>
+      <script type="application/json" id="preview-data" set:html={JSON.stringify(previewData)} />
+    </section>
   </section>
 
   <section class="how" aria-labelledby="how-heading">
@@ -213,14 +200,14 @@ const counts = {
     const fd = new FormData(form);
     const bg = data.backgrounds[String(fd.get('from') ?? '')];
     const role = data.roles[String(fd.get('role'))];
-    if (!role) return;
-    const plan = planPath(data.nodes, role.hire, new Set(bg?.knows ?? []));
     const from = String(fd.get('from') ?? '');
     document.dispatchEvent(
       new CustomEvent('terminus:ticket', {
         detail: { known: [...withPrerequisites(data.nodes, bg?.knows ?? [])], from: from.startsWith('role:') ? from.slice(5) : undefined },
       }),
     );
+    if (!role) return; // the preview waits for a job
+    const plan = planPath(data.nodes, role.hire, new Set(bg?.knows ?? []));
     const shown = plan.steps.slice(0, 6);
     document.querySelector('[data-preview-heading]')!.textContent = bg?.job
       ? `From ${midSentence(bg.job)} to ${midSentence(role.title)}: what's new`
@@ -256,18 +243,33 @@ const counts = {
     const more = plan.steps.length - shown.length;
     document.querySelector('[data-preview-end]')!.textContent =
       more > 0
-        ? `Then ${more} more ${more === 1 ? 'stop' : 'stops'} to get hired: ${duration(plan.totalHours, 10)} in all at 10 hours a week.`
-        : `That's the whole route to get hired: ${duration(plan.totalHours, 10)} at 10 hours a week.`;
+        ? `Then ${more} more ${more === 1 ? 'stop' : 'stops'} on the hiring list: ${duration(plan.totalHours, 10)} in all at 10 hours a week.`
+        : `That's the whole hiring list: ${duration(plan.totalHours, 10)} at 10 hours a week.`;
   }
   form.addEventListener('change', update);
   update(); // the browser may have kept the last choices on a back navigation
 </script>
 
 <style>
-  .top { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start; padding-top: 24px; }
-  .hero { display: grid; gap: 22px; }
-  .hero h1 { max-width: 13ch; font-size: clamp(2.6rem, 7vw, 4.4rem); font-weight: 600; line-height: 1; }
-  .lede { font-size: 1.2rem; max-width: 50ch; color: var(--ink-2); }
+  .intro { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: start; padding-top: 24px; }
+  .intro-text { display: grid; gap: 22px; }
+  .intro h1 { max-width: 14ch; font-size: clamp(2.5rem, 6.4vw, 4.3rem); font-weight: 600; line-height: 1; }
+  .lede { font-size: 1.2rem; max-width: 52ch; color: var(--ink-2); }
+  .how-steps { list-style: none; counter-reset: step; padding: 0; margin: 0; display: grid; gap: 10px; max-width: 52ch; }
+  .how-steps li { counter-increment: step; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: baseline; }
+  .how-steps li::before {
+    content: counter(step); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+    border: 3px solid var(--ink); font-family: var(--sign); font-weight: 750; font-size: 1rem; line-height: 1;
+  }
+  .how-steps strong { font-family: var(--sign); font-stretch: 88%; font-size: 1.15rem; }
+  .intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 4px; }
+  .intro-actions .btn { font-size: 1.2rem; }
+  .intro-map { font-weight: 600; }
+
+  .plan { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: start; margin-top: 96px; scroll-margin-top: 90px; }
+  .plan-ticket { display: grid; gap: 16px; align-content: start; }
+  .plan-lede { color: var(--ink-2); max-width: 52ch; }
+  .route-end:only-child, .route:empty + .route-end { color: var(--ink-2); }
 
   .ticket {
     display: grid; grid-template-columns: 1fr auto;
@@ -301,7 +303,8 @@ const counts = {
     background: #000; color: var(--yellow);
   }
 
-  .roles, .how { margin-top: 80px; }
+  .roles { margin-top: 96px; scroll-margin-top: 90px; }
+  .how { margin-top: 80px; }
   .exams-line { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule); }
   .roles-lede { max-width: 66ch; color: var(--ink-2); margin-top: 10px; }
   /* The map is wider than the page column: it breaks out to use the screen, up to 1500px. */
@@ -321,7 +324,8 @@ const counts = {
   .how p { margin-top: 14px; max-width: 66ch; }
 
   @media (max-width: 960px) {
-    .top { grid-template-columns: 1fr; gap: 40px; padding-top: 8px; }
+    .intro, .plan { grid-template-columns: 1fr; gap: 40px; }
+    .intro { padding-top: 8px; }
   }
   @media (max-width: 560px) {
     .ticket { grid-template-columns: 1fr; }

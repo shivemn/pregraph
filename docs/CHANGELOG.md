@@ -1,5 +1,12 @@
 # Changelog
 
+## A home page that explains itself
+
+- **The home page opens with what Terminus is,** not a pre-filled ticket. A short introduction, the three parts of a ticket (from, to, the ride), and a button to plan your route.
+- **A ride plays beside it:** real tickets, one after another, worked out by the planner at build time. Maths graduate to data scientist, commerce graduate to financial analyst, data analyst to data engineer, CS graduate to backend engineer. The route draws itself, what the starting point covers greys out and is struck through, and a coach rides the rest to the terminus. It pauses off screen, has a pause button and picks for each ticket, and stays still for anyone who prefers reduced motion.
+- **Then the map, then the ticket.** "Plan your route" comes after the map, with nothing picked: no more backend engineer by default. The preview fills in once you choose a job, and choosing where you're starting greys out the map above.
+- **Interchange names sit inside their bars** on the map, instead of off to the left with dotted leaders, which also gives the map more room.
+
 ## Wider map, role boxes and any first language
 
 - **The network map is wider.** It now uses up to 1500 px of the screen instead of the page column, with more room between lines and bigger station names.

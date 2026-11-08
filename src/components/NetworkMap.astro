@@ -14,10 +14,10 @@ const jobs = c.roles
 const net = buildNetwork(c.concepts, c.families, jobs);
 
 // Geometry, in SVG units.
-const LABELS = 196; // left margin for interchange names
+const LABELS = 8; // left margin
 const COL = 250;
-const TOP = 86; // first station row
-const ROW = 40;
+const TOP = 92; // first station row
+const ROW = 42;
 const LINE_W = 6;
 const x = (i: number) => LABELS + 22 + i * COL;
 const y = (row: number) => TOP + row * ROW;
@@ -53,14 +53,21 @@ const width = LABELS + net.lines.length * COL + 16;
 
 // Where a line runs past an interchange without stopping, it's drawn over
 // the link with a gap, like a bridge.
-const bridges = net.stations
+const bridges: Array<{ line: string; x: number; y: number; station: string }> = net.stations
   .filter((s) => s.interchange)
   .flatMap((s) => {
     const cols = s.lines.map((l) => col.get(l)!);
     const lo = Math.min(...cols);
     const hi = Math.max(...cols);
-    return net.lines.filter((_, i) => i > lo && i < hi && !cols.includes(i)).map((l) => ({ line: l.id, x: x(col.get(l.id)!), y: y(s.row) }));
+    return net.lines.filter((_, i) => i > lo && i < hi && !cols.includes(i)).map((l) => ({ line: l.id, x: x(col.get(l.id)!), y: y(s.row), station: s.id }));
   });
+
+// An interchange's name sits inside its link, in the first gap between
+// the circles and bridges, which is always a whole column wide.
+const nameAt = (id: string, xs: number[]) => {
+  const crossings = [...xs, ...bridges.filter((b) => b.station === id).map((b) => b.x)].sort((a, b) => a - b);
+  return crossings[0]! + 16;
+};
 ---
 
 <figure class="netmap" data-netmap>
@@ -91,17 +98,16 @@ const bridges = net.stations
       const right = Math.max(...xs);
       return (
         <g class="st inter" data-id={s.id} data-roles={s.roles.join(' ')} data-lines={s.lines.join(' ')}>
-          {left > x(0) && <path class="leader" d={`M${LABELS - 2} ${y(s.row)}H${left - 12}`} />}
-          <rect class="link" x={left - 12} y={y(s.row) - 12} width={right - left + 24} height="24" rx="12" />
-          {xs.map((sx) => <circle cx={sx} cy={y(s.row)} r="6.5" />)}
-          <text class="inter-name" x={LABELS - 8} y={y(s.row) + 5} text-anchor="end">{s.title}</text>
+          <rect class="link" x={left - 15} y={y(s.row) - 15} width={right - left + 30} height="30" rx="15" />
+          {xs.map((sx) => <circle cx={sx} cy={y(s.row)} r="7" />)}
+          <text class="inter-name" x={nameAt(s.id, xs)} y={y(s.row) + 5.5}>{s.title}</text>
         </g>
       );
     })}
     {bridges.map((b) => (
       <g class="bridge" data-line={b.line}>
-        <path class="bridge-gap" d={`M${b.x} ${b.y - 15}V${b.y + 15}`} />
-        <path class="line" data-line={b.line} d={`M${b.x} ${b.y - 15}V${b.y + 15}`} stroke-width={LINE_W} />
+        <path class="bridge-gap" d={`M${b.x} ${b.y - 18}V${b.y + 18}`} />
+        <path class="line" data-line={b.line} d={`M${b.x} ${b.y - 18}V${b.y + 18}`} stroke-width={LINE_W} />
       </g>
     ))}
 
@@ -136,7 +142,7 @@ const bridges = net.stations
   <figcaption class="netmap-key">
     <span><svg viewBox="0 0 44 20" aria-hidden="true"><rect class="key-link" x="2" y="3" width="40" height="14" rx="7" /></svg>An interchange: a stop two or more lines share, where you can change careers.</span>
     <span><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="key-st" cx="10" cy="10" r="6" /></svg>A stop most of that line's jobs need.</span>
-    <span><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="key-passed" cx="10" cy="10" r="6" /></svg>Already behind you. Pick where you're starting from in the ticket above.</span>
+    <span><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="key-passed" cx="10" cy="10" r="6" /></svg>Already behind you. Pick where you're starting from in the ticket below.</span>
     <span><svg viewBox="0 0 20 22" aria-hidden="true"><rect class="key-bar" x="7" y="1" width="7" height="20" /></svg>A job. Pick one to plan your route there.</span>
   </figcaption>
 </figure>
@@ -191,8 +197,7 @@ const bridges = net.stations
 
   .inter .link { fill: var(--paper); stroke: var(--ink); stroke-width: 3px; }
   .inter circle { fill: var(--paper); stroke: var(--ink); stroke-width: 2.5px; }
-  .inter .leader { stroke: var(--ink-3); stroke-width: 1.5px; stroke-dasharray: 2 4; }
-  .inter-name { fill: var(--ink); font-family: var(--text); font-weight: 700; font-size: 16.5px; }
+  .inter-name { fill: var(--ink); font-family: var(--text); font-weight: 700; font-size: 16px; }
 
   .st:not(.inter) circle { fill: var(--paper); stroke: var(--c); stroke-width: 4px; }
   .st:not(.inter) text { fill: var(--ink); font-family: var(--text); font-size: 16.5px; }
@@ -211,6 +216,7 @@ const bridges = net.stations
   .st.passed circle { fill: var(--ink-3); stroke: var(--ink-3); }
   .st.passed .link { stroke: var(--ink-3); }
   .st.passed text { fill: var(--ink-3); }
+  .st.inter.passed .inter-name { text-decoration: line-through; }
 
   /* One job lit up: everything else steps back. */
   .netmap :is(.st, .terminus, .line-head, .line, .bridge) { transition: opacity 0.15s; }

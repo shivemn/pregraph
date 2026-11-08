@@ -1,0 +1,223 @@
+---
+// The home page's opening: a few real tickets played one after another. Each
+// draws the route to a job from scratch, greys out what the starting point
+// already covers, then runs a train over what's left to the terminus.
+// Everything shown is worked out by the real planner at build time.
+import { planPath, withPrerequisites } from '../lib/graph';
+import { duration } from '../lib/coaches';
+import { content } from '../lib/site';
+
+const c = content();
+const EXAMPLES = [
+  { from: 'maths-grad', to: 'data-scientist' },
+  { from: 'commerce-grad', to: 'financial-analyst' },
+  { from: 'role:data-analyst', to: 'data-engineer' },
+  { from: 'cs-grad', to: 'backend-engineer' },
+];
+const SKIPPED_SHOWN = 3;
+const LEFT_SHOWN = 4;
+
+const rides = EXAMPLES.map(({ from, to }) => {
+  const role = c.roles.find((r) => r.id === to)!;
+  const job = from.startsWith('role:') ? c.roles.find((r) => r.id === from.slice(5))! : undefined;
+  const bg = c.backgrounds.find((b) => b.id === from);
+  const known = job
+    ? withPrerequisites(c.concepts, [...job.tiers.hire, ...job.tiers.firstYear])
+    : new Set(bg!.knows);
+  const full = planPath(c.concepts, role.tiers.hire, new Set());
+  const mine = planPath(c.concepts, role.tiers.hire, known);
+  const left = new Set(mine.steps.map((s) => s.id));
+  const skipped = full.steps.filter((s) => !left.has(s.id)).slice(0, SKIPPED_SHOWN).map((s) => s.id);
+  const ahead = mine.steps.slice(0, LEFT_SHOWN).map((s) => s.id);
+  const show = full.steps.filter((s) => skipped.includes(s.id) || ahead.includes(s.id));
+  return {
+    from: job ? job.title : bg!.title,
+    covers: job ? 'Your job covers it' : 'Your degree covers it',
+    to: role.title,
+    stops: show.map((s) => ({ title: s.title, hours: s.hours, skip: !left.has(s.id) })),
+    more: mine.steps.length - ahead.length,
+    behind: full.steps.length - mine.steps.length,
+    time: duration(mine.totalHours, 10),
+  };
+});
+---
+
+<div class="ride" data-ride>
+  {rides.map((r, i) => (
+    <section class="ticket-run" data-run aria-hidden={i === 0 ? undefined : 'true'} data-active={i === 0 ? 'true' : undefined} data-final={i === 0 ? 'true' : undefined}>
+      <header class="run-head">
+        <span class="run-from"><span class="run-label">From</span> {r.from}</span>
+        <span class="run-to"><span class="run-label">To</span> {r.to}</span>
+      </header>
+      <ol class="run-line">
+        {r.stops.map((s, j) => (
+          <li class="run-stop" data-skip={s.skip ? 'true' : undefined} style={`--i:${j}`}>
+            <span class="run-dot" aria-hidden="true" />
+            <span class="run-title">{s.title}</span>
+            <span class="run-tag">{s.skip ? r.covers : `${s.hours} h`}</span>
+          </li>
+        ))}
+        {r.more > 0 && (
+          <li class="run-stop run-more" style={`--i:${r.stops.length}`}>
+            <span class="run-dot" aria-hidden="true" />
+            <span class="run-title">{r.more} more {r.more === 1 ? 'stop' : 'stops'}</span>
+          </li>
+        )}
+        <li class="run-stop run-end" style={`--i:${r.stops.length + 1}`}>
+          <span class="run-bar" aria-hidden="true" />
+          <span class="run-board">{r.to}</span>
+        </li>
+        <li class="train" aria-hidden="true"><span /></li>
+      </ol>
+      <p class="run-foot">
+        {r.behind} {r.behind === 1 ? 'stop is' : 'stops are'} already behind you. The rest takes {r.time} at 10 hours a week.
+      </p>
+    </section>
+  ))}
+  <div class="run-controls">
+    {rides.map((r, i) => (
+      <button class="run-pick" data-pick={i} aria-pressed={i === 0 ? 'true' : 'false'} aria-label={`Show ${r.from} to ${r.to}`} />
+    ))}
+    <button class="run-pause text-button" data-pause>Pause</button>
+  </div>
+</div>
+
+<script>
+  const ride = document.querySelector<HTMLElement>('[data-ride]');
+  if (ride) {
+    const runs = [...ride.querySelectorAll<HTMLElement>('[data-run]')];
+    const picks = [...ride.querySelectorAll<HTMLButtonElement>('[data-pick]')];
+    const pause = ride.querySelector<HTMLButtonElement>('[data-pause]')!;
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ROW = 44; // keep in step with .run-stop height
+    let current = 0;
+    let timers: number[] = [];
+    let paused = still;
+    let visible = true;
+
+    const later = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
+    const clear = () => { timers.forEach(clearTimeout); timers = []; };
+
+    function show(i: number, animate: boolean) {
+      clear();
+      current = i;
+      runs.forEach((r, j) => {
+        const on = j === i;
+        r.toggleAttribute('data-active', on);
+        r.setAttribute('aria-hidden', on ? 'false' : 'true');
+        r.removeAttribute('data-final');
+        r.removeAttribute('data-drawn');
+        r.removeAttribute('data-greyed');
+        r.querySelector<HTMLElement>('.run-end')!.removeAttribute('data-arrived');
+      });
+      picks.forEach((p, j) => p.setAttribute('aria-pressed', String(j === i)));
+      const run = runs[i]!;
+      const stops = [...run.querySelectorAll<HTMLElement>('.run-stop')];
+      const train = run.querySelector<HTMLElement>('.train')!;
+      // Where the train calls: every stop still ahead, then the terminus.
+      const calls = stops.map((s, j) => ({ s, j })).filter(({ s }) => !s.dataset.skip);
+      const placeTrain = (j: number) => { train.style.transform = `translateY(${j * ROW}px)`; };
+      placeTrain(calls[0]!.j);
+
+      if (!animate) {
+        run.setAttribute('data-final', 'true');
+        placeTrain(calls[calls.length - 1]!.j);
+        run.querySelector('.run-end')!.setAttribute('data-arrived', 'true');
+        return;
+      }
+      requestAnimationFrame(() => run.setAttribute('data-drawn', 'true'));
+      later(1300, () => run.setAttribute('data-greyed', 'true'));
+      calls.forEach(({ j }, k) => later(2300 + k * 600, () => placeTrain(j)));
+      const arrive = 2300 + (calls.length - 1) * 600;
+      later(arrive + 300, () => run.querySelector('.run-end')!.setAttribute('data-arrived', 'true'));
+      later(arrive + 3200, () => { if (!paused && visible) show((i + 1) % runs.length, true); });
+    }
+
+    picks.forEach((p, i) => p.addEventListener('click', () => show(i, !paused)));
+    pause.addEventListener('click', () => {
+      paused = !paused;
+      pause.textContent = paused ? 'Play' : 'Pause';
+      show(current, !paused);
+    });
+    if (still) {
+      pause.textContent = 'Play';
+      show(0, false);
+    } else {
+      // Only play while it's on screen.
+      new IntersectionObserver(([e]) => {
+        const was = visible;
+        visible = e!.isIntersecting;
+        if (visible && !was && !paused) show(current, true);
+        if (!visible) clear();
+      }).observe(ride);
+      show(0, true);
+    }
+  }
+</script>
+
+<style>
+  .ride { --row: 44px; border: 3px solid var(--ink); background: var(--paper); }
+  .ticket-run { display: none; }
+  .ticket-run[data-active] { display: block; }
+
+  .run-head { display: grid; grid-template-columns: 1fr 1fr; background: #000; color: var(--yellow); }
+  .run-head > span { padding: 9px 16px 7px; font-family: var(--sign); font-stretch: 88%; font-weight: 700; font-size: 1.2rem; line-height: 1.15; }
+  .run-to { border-left: 3px dashed var(--yellow); }
+  .run-label { display: block; font-size: 0.85rem; color: #fff; font-weight: 600; }
+
+  .run-line { list-style: none; margin: 0; padding: 18px 18px 6px; position: relative; }
+  .run-line::before {
+    content: ''; position: absolute; left: 32px; top: 40px; bottom: 28px; width: 5px; background: var(--ink-3);
+  }
+  .run-stop {
+    position: relative; height: var(--row); display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 10px;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.35s ease calc(var(--i) * 90ms), transform 0.35s ease calc(var(--i) * 90ms);
+  }
+  [data-drawn] .run-stop, [data-final] .run-stop { opacity: 1; transform: none; }
+  .run-dot { justify-self: center; width: 18px; height: 18px; border-radius: 50%; border: 4px solid var(--ink); background: var(--paper); z-index: 1; }
+  .run-title { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .run-tag { font-size: 0.88rem; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+  .run-more .run-title { font-family: var(--text); font-weight: 600; font-size: 0.95rem; color: var(--ink-2); }
+  .run-more .run-dot { border-style: dotted; }
+
+  /* What the starting point covers. */
+  .run-stop[data-skip] .run-tag { opacity: 0; transition: opacity 0.3s; }
+  [data-greyed] .run-stop[data-skip], [data-final] .run-stop[data-skip] { color: var(--ink-3); }
+  [data-greyed] .run-stop[data-skip] .run-title, [data-final] .run-stop[data-skip] .run-title { text-decoration: line-through; text-decoration-thickness: 2px; }
+  [data-greyed] .run-stop[data-skip] .run-dot, [data-final] .run-stop[data-skip] .run-dot { border-color: var(--ink-3); background: var(--ink-3); }
+  [data-greyed] .run-stop[data-skip] .run-tag, [data-final] .run-stop[data-skip] .run-tag { opacity: 1; color: var(--ink-3); }
+  .run-stop[data-skip] .run-title, .run-stop[data-skip] .run-dot { transition: color 0.4s, background 0.4s, border-color 0.4s; }
+
+  .run-end { grid-template-columns: 34px 1fr; }
+  .run-bar { justify-self: center; width: 12px; height: 34px; background: var(--yellow); border: 3px solid #000; z-index: 1; }
+  .run-board {
+    justify-self: start; padding: 4px 12px 2px; border: 3px solid var(--ink); font-family: var(--sign); font-stretch: 88%;
+    font-weight: 750; font-size: 1.3rem; text-transform: uppercase; transition: background 0.3s, color 0.3s;
+  }
+  .run-end[data-arrived] .run-board { background: var(--yellow); color: #000; border-color: #000; }
+
+  /* The train: a single coach riding the line. */
+  .train {
+    position: absolute; left: 18px; top: 18px; width: 34px; height: var(--row); display: grid; place-items: center;
+    transition: transform 0.5s cubic-bezier(0.45, 0, 0.3, 1); z-index: 2; pointer-events: none;
+    opacity: 0;
+  }
+  [data-greyed] .train, [data-final] .train { opacity: 1; }
+  .train span { width: 26px; height: 34px; background: var(--yellow); border: 3px solid #000; border-radius: 7px 7px 3px 3px; box-shadow: inset 0 9px 0 -4px #000; }
+
+  .run-foot { margin: 0; padding: 4px 18px 16px 70px; color: var(--ink-2); font-size: 0.95rem; min-height: 3em; }
+
+  .run-controls { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-top: 2px solid var(--ink); }
+  .run-pick { width: 26px; height: 8px; border: 2px solid var(--ink); background: transparent; padding: 0; cursor: pointer; }
+  .run-pick[aria-pressed='true'] { background: var(--ink); }
+  .run-pause { margin-left: auto; font-size: 0.92rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .run-stop, .train, .run-board, .run-tag, .run-title, .run-dot { transition: none !important; }
+  }
+  @media (max-width: 480px) {
+    .run-tag { display: none; }
+    .run-foot { padding-left: 18px; }
+  }
+</style>
