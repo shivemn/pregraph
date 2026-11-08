@@ -4,7 +4,7 @@ import { withPrerequisites } from '../src/lib/graph';
 import { buildNetwork, crossings, lineStations } from '../src/lib/network';
 
 const c = loadContent();
-const jobs = c.roles.filter((r) => r.kind !== 'exam').map((r) => ({ id: r.id, title: r.title, family: r.family, hire: r.tiers.hire }));
+const jobs = c.roles.filter((r) => r.kind !== 'exam' && !r.variantOf).map((r) => ({ id: r.id, title: r.title, family: r.family, hire: r.tiers.hire }));
 const net = buildNetwork(c.concepts, c.families, jobs);
 const index = new Map(c.concepts.map((x) => [x.id, x]));
 

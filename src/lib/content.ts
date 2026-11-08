@@ -17,6 +17,9 @@ import {
   toolGroupSchema,
   practiceGroupSchema,
   jobSitesSchema,
+  variantSchema,
+  type Role,
+  type Variant,
   startupsSchema,
   type Content,
 } from './schema';
@@ -131,6 +134,40 @@ export function checkContent(c: Content): string[] {
   return problems;
 }
 
+/**
+ * Turns job titles into full roles: the route's tiers, minus `drops`, with
+ * `adds` on the hiring list. Problems are things a schema can't see.
+ */
+export function expandVariants(routes: Role[], variants: Variant[], problems: string[]): Role[] {
+  const byId = new Map(routes.map((r) => [r.id, r]));
+  return variants.flatMap((v): Role[] => {
+    const base = byId.get(v.extends);
+    if (!base) {
+      problems.push(`variants.yaml: "${v.id}" extends unknown route "${v.extends}"`);
+      return [];
+    }
+    if (base.kind === 'exam') problems.push(`variants.yaml: "${v.id}" extends an exam`);
+    const all = [...base.tiers.hire, ...base.tiers.firstYear, ...base.tiers.extra];
+    for (const d of v.drops) if (!all.includes(d)) problems.push(`variants.yaml: "${v.id}" drops "${d}", which "${base.id}" doesn't have`);
+    const dropped = new Set(v.drops);
+    const hire = [...new Set([...base.tiers.hire.filter((x) => !dropped.has(x)), ...v.adds])];
+    const taken = new Set(hire);
+    const keep = (xs: string[]) => xs.filter((x) => !dropped.has(x) && !taken.has(x));
+    return [
+      {
+        id: v.id,
+        title: v.title,
+        family: base.family,
+        kind: 'role',
+        summary: v.summary,
+        search: v.search,
+        tiers: { hire, firstYear: keep(base.tiers.firstYear), extra: keep(base.tiers.extra) },
+        variantOf: base.id,
+      },
+    ];
+  });
+}
+
 /** Reads and validates the whole content/ folder. Throws ContentError on any problem. */
 export function loadContent(root = join(process.cwd(), 'content')): Content {
   const problems: string[] = [];
@@ -140,19 +177,22 @@ export function loadContent(root = join(process.cwd(), 'content')): Content {
     .sort()
     .flatMap((f) => parseList(conceptSchema, readYaml(join(conceptDir, f)), `concepts/${f}`, problems));
 
+  const routes = parseList(roleSchema, readYaml(join(root, 'roles.yaml')), 'roles.yaml', problems);
+  const variants = parseList(variantSchema, readYaml(join(root, 'variants.yaml')), 'variants.yaml', problems);
   const content: Content = {
     areas: parseList(areaSchema, readYaml(join(root, 'areas.yaml')), 'areas.yaml', problems),
     concepts,
     resources: parseList(resourceSchema, readYaml(join(root, 'resources.yaml')), 'resources.yaml', problems),
     backgrounds: parseList(backgroundSchema, readYaml(join(root, 'backgrounds.yaml')), 'backgrounds.yaml', problems),
     families: parseList(familySchema, readYaml(join(root, 'families.yaml')), 'families.yaml', problems),
-    roles: parseList(roleSchema, readYaml(join(root, 'roles.yaml')), 'roles.yaml', problems),
+    roles: [],
     toolGroups: parseList(toolGroupSchema, readYaml(join(root, 'tool-groups.yaml')), 'tool-groups.yaml', problems),
     practiceGroups: parseList(practiceGroupSchema, readYaml(join(root, 'practice-groups.yaml')), 'practice-groups.yaml', problems),
     jobSites: parseOne(z.record(z.string(), jobSitesSchema), readYaml(join(root, 'job-sites.yaml')), 'job-sites.yaml', problems) ?? {},
     startups: parseOne(startupsSchema, JSON.parse(readFileSync(join(root, 'startups', 'yc-india.json'), 'utf8')), 'startups/yc-india.json', problems)!,
   };
 
+  content.roles = [...routes, ...expandVariants(routes, variants, problems)];
   problems.push(...checkContent(content));
   if (problems.length > 0) throw new ContentError(problems);
   return content;

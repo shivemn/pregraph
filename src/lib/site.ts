@@ -32,6 +32,6 @@ export function title(c: Content, id: string): string {
  */
 export function jobStarts(c: Content): Array<{ id: string; title: string; knows: string[] }> {
   return c.roles
-    .filter((r) => r.kind !== 'exam')
+    .filter((r) => r.kind !== 'exam' && !r.variantOf)
     .map((r) => ({ id: `role:${r.id}`, title: r.title, knows: [...r.tiers.hire, ...r.tiers.firstYear] }));
 }

@@ -27,6 +27,21 @@ Every role in `content/roles.yaml` starts as a draft: a list of what we think th
 
 The role page then says "Based on 52 job postings" instead of "Draft".
 
+## Routes and job titles
+
+A **route** is a set of skills with its own hiring list, in `content/roles.yaml`: backend engineer, data engineer, SOC analyst. A **job title** is what employers actually post, in `content/variants.yaml`: Java developer, Python developer, Power BI developer. Most titles are a route plus a tool or two, so a title only says what it adds and drops:
+
+```yaml
+- id: python-developer
+  title: Python developer
+  extends: backend-engineer
+  drops: [java]
+  adds: [programming-basics, django]
+  summary: "Writes backend services, scripts and automation in Python, most often with Django or FastAPI."
+```
+
+The loader turns it into a full role: the route's tiers without `drops`, with `adds` on the hiring list. It gets its own page, planner, job searches and search entry, and appears under its route on the roles page. Only routes go on the home page map. Add a new route when a title needs skills no route has (SAP, mainframes, chip design); add a title when it's a route with a twist. A title's salary link is checked separately and lives in `content/job-sites.yaml`.
+
 ## What the job looks like
 
 Every job role page ends with "What the job looks like". It always has live searches on Naukri, LinkedIn and Indeed, built from the role's title (or its `search` field when the title isn't what employers write), and an official description such as O*NET when `reference` is set.

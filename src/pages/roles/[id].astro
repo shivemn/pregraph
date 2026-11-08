@@ -1,8 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import RolePlanner from '../../components/RolePlanner';
-import { content, jobStarts, plannerNodes } from '../../lib/site';
-import { jobLinks, searchTerm, startupMatch } from '../../lib/jobs';
+import { content, jobStarts, listOf, plannerNodes } from '../../lib/site';
+import { jobLinks, searchTerm, sitesFor, startupMatch } from '../../lib/jobs';
 import { BACKGROUND_GROUPS, TIERS } from '../../lib/schema';
 import '../../styles/route.css';
 import '../../styles/planner.css';
@@ -19,8 +19,15 @@ const family = c.families.find((f) => f.id === role.family)!;
 const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((t) => t.n > 0);
 
 const term = searchTerm(role);
-const links = jobLinks(role, c.jobSites[role.id]);
-const yc = startupMatch(c.jobSites[role.id], c.startups);
+const sites = sitesFor(c.jobSites, role);
+const links = jobLinks(role, sites);
+const yc = startupMatch(sites, c.startups);
+// A job title: which route it builds on, and what it adds.
+const base = role.variantOf ? c.roles.find((r) => r.id === role.variantOf) : undefined;
+const titleOf = (id: string) => c.concepts.find((x) => x.id === id)?.title ?? id;
+const added = base ? role.tiers.hire.filter((id) => !base.tiers.hire.includes(id)).map(titleOf) : [];
+const removed = base ? base.tiers.hire.filter((id) => !role.tiers.hire.includes(id)).map(titleOf) : [];
+const siblings = base ? c.roles.filter((r) => r.variantOf === base.id && r.id !== role.id) : c.roles.filter((r) => r.variantOf === role.id);
 const dateOf = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 const posting = role.posting;
 const isJob = role.kind !== 'exam';
@@ -33,6 +40,21 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
     <p class="crumbs quiet"><a href="/roles">Roles</a> / {family.title}</p>
     <h1><span class="board">{role.title}</span></h1>
     <p class="lede quiet">{role.summary}</p>
+    {base && (
+      <p class="route-of">
+        The route is <a href={`/roles/${base.id}`}>{base.title}</a>
+        {added.length > 0 ? `, with ${listOf(added)} on the hiring list` : ''}{removed.length > 0 ? ` instead of ${listOf(removed)}` : ''}.
+      </p>
+    )}
+    {siblings.length > 0 && (
+      <p class="also quiet">
+        {base ? 'Other titles on this route: ' : 'Also posted as: '}
+        {siblings.slice(0, 14).map((r, i) => (
+          <>{i > 0 && ', '}<a href={`/roles/${r.id}`}>{r.title}</a></>
+        ))}
+        {siblings.length > 14 && `, and ${siblings.length - 14} more`}.
+      </p>
+    )}
     {isJob && <p class="jump"><a href="#the-job">{posting ? 'What the job looks like, from real listings' : 'See real openings for this job'}</a></p>}
     {
       role.evidence ? (
@@ -155,6 +177,8 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
   .evidence.draft { border-left-color: var(--warn); }
   .static-list { margin-top: 24px; }
   .jump { font-weight: 600; }
+  .route-of { font-weight: 600; }
+  .also { max-width: 90ch; font-size: 0.97rem; }
 
   .job { margin-top: 56px; padding-top: 28px; border-top: 4px solid var(--ink); }
   .job h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); }

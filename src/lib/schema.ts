@@ -143,7 +143,26 @@ export const roleSchema = z.object({
     .optional(),
   /** An official description of the occupation, such as O*NET. */
   reference: z.object({ title: z.string(), url: z.string().url() }).optional(),
+  /** Set by the loader on job titles from variants.yaml: the route this title builds on. */
+  variantOf: id.optional(),
 });
+
+/**
+ * A job title that is an existing route plus a few skills (content/variants.yaml).
+ * The loader turns each one into a full role.
+ */
+export const variantSchema = z.object({
+  id,
+  title: z.string().min(1),
+  extends: id,
+  summary: z.string().min(1),
+  /** Put on the hiring list. */
+  adds: z.array(id).default([]),
+  /** Taken off every tier, e.g. Java for a Python developer. */
+  drops: z.array(id).default([]),
+  search: z.string().optional(),
+});
+export type Variant = z.infer<typeof variantSchema>;
 
 export type Medium = z.infer<typeof resourceSchema>['medium'];
 export const MEDIA: Medium[] = ['read', 'watch', 'practice'];

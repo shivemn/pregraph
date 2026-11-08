@@ -26,9 +26,11 @@ const previewData = {
 
 const featured = ['go', 'cpp', 'redis', 'bi-tools', 'spring-boot', 'docker', 'pytorch'].map((id) => c.concepts.find((x) => x.id === id)!);
 const toolCount = c.toolGroups.reduce((n, g) => n + g.tools.length, 0);
+// Every job title in the ticket, A to Z within each family; routes only in the phone list.
 const groups = c.families
-  .map((f) => ({ family: f, roles: c.roles.filter((r) => r.family === f.id) }))
+  .map((f) => ({ family: f, roles: c.roles.filter((r) => r.family === f.id).sort((a, b) => a.title.localeCompare(b.title)) }))
   .filter((g) => g.roles.length > 0);
+const routeGroups = groups.map((g) => ({ ...g, roles: g.roles.filter((r) => !r.variantOf) }));
 const pickCount = (() => {
   const details = stopDetails(c);
   return { read: details.filter((d) => d.picks.read).length, watch: details.filter((d) => d.picks.watch).length };
@@ -72,7 +74,7 @@ const counts = {
     <div class="map-wide">
       <NetworkMap />
       <p class="exams-line">
-        Studying for an exam instead?{' '}
+        <a href="/roles">All {jobs.length} job titles</a>, grouped by route. Studying for an exam instead?{' '}
         {exams.map((r, i) => (
           <>{i > 0 && ', '}<a href={`/roles/${r.id}`}>{r.title}</a></>
         ))}
@@ -81,7 +83,7 @@ const counts = {
     </div>
     <div class="families">
       {
-        groups.map(({ family, roles }) => (
+        routeGroups.map(({ family, roles }) => (
           <div data-family={family.id}>
             <h3>{family.title}</h3>
             <ul>{roles.map((r) => <li><a href={`/roles/${r.id}`}>{r.title}</a></li>)}</ul>

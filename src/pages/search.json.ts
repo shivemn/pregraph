@@ -20,5 +20,19 @@ export function GET() {
       .concat(shelved.has(x.id) ? ` ${x.id.replace(/-/g, ' ')}${x.id === 'go' ? ' golang' : ''}` : ''),
     ...(shelved.has(x.id) ? { tool: true } : {}),
   }));
+  // Jobs too, so "java developer" or "soc analyst" finds its route.
+  const family = new Map(c.families.map((f) => [f.id, f.title]));
+  const title = new Map(c.roles.map((r) => [r.id, r.title]));
+  for (const r of c.roles) {
+    docs.push({
+      id: r.id,
+      title: r.title,
+      area: '',
+      summary: r.summary,
+      sources: `${r.search ?? ''} ${r.variantOf ? title.get(r.variantOf) : ''} ${family.get(r.family) ?? ''} job role career`,
+      href: `/roles/${r.id}`,
+      label: r.kind === 'exam' ? 'Exam' : 'Job',
+    });
+  }
   return new Response(JSON.stringify(docs), { headers: { 'Content-Type': 'application/json' } });
 }

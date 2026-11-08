@@ -3,54 +3,114 @@ import Base from '../../layouts/Base.astro';
 import { content } from '../../lib/site';
 
 const c = content();
+const routes = c.roles.filter((r) => !r.variantOf);
+const titlesOf = (id: string) => c.roles.filter((r) => r.variantOf === id).sort((a, b) => a.title.localeCompare(b.title));
 const groups = c.families
-  .map((f) => ({ family: f, roles: c.roles.filter((r) => r.family === f.id) }))
-  .filter((g) => g.roles.length > 0);
+  .map((f) => ({ family: f, routes: routes.filter((r) => r.family === f.id) }))
+  .filter((g) => g.routes.length > 0);
+const jobCount = c.roles.filter((r) => r.kind !== 'exam').length;
+const examCount = c.roles.length - jobCount;
 ---
 
 <Base title="Roles" description="Pick a job and see what it takes to get hired, starting from what you already know." wide>
   <header class="head">
     <h1><span class="board">All roles</span></h1>
     <p class="lede quiet">
-      Pick a job. You'll see what it takes to get hired, then what the first year expects, starting from what you
-      already know. Every role is a draft until it has been checked against real job postings.
+      {jobCount} job titles and {examCount} exams. Titles that need the same skills share a route: a Java developer and a
+      Spring Boot developer are both on the backend route, with a little extra each. Every role is a draft until it has been
+      checked against real job postings.
     </p>
+    <div class="find">
+      <label for="role-filter">Find a job</label>
+      <input id="role-filter" type="search" placeholder="e.g. java, analyst, sap, security" autocomplete="off" data-filter />
+      <span class="quiet small" data-count aria-live="polite"></span>
+    </div>
     <nav class="lines" aria-label="Families of jobs">
-      {groups.map(({ family, roles }) => (
-        <a href={`#${family.id}`} data-family={family.id}>{family.short ?? family.title} <span>{roles.length}</span></a>
+      {groups.map(({ family, routes }) => (
+        <a href={`#${family.id}`} data-family={family.id}>{family.short ?? family.title} <span>{routes.reduce((n, r) => n + 1 + titlesOf(r.id).length, 0)}</span></a>
       ))}
     </nav>
   </header>
 
   {
-    groups.map(({ family, roles }) => (
-      <section id={family.id} data-family={family.id} aria-labelledby={`${family.id}-title`}>
+    groups.map(({ family, routes }) => (
+      <section id={family.id} data-family={family.id} aria-labelledby={`${family.id}-title`} data-group>
         <h2 id={`${family.id}-title`}>{family.title}</h2>
         <ul class="role-grid">
-          {roles.map((r) => (
-            <li>
-              <a class="role-box" href={`/roles/${r.id}`}>
-                <span class="role-title">{r.title}</span>
-                <span class="role-summary">{r.summary}</span>
-                <span class="role-foot">
-                  {r.kind === 'exam' ? `${r.tiers.hire.length} syllabus topics.` : `${r.tiers.hire.length} on the hiring list.`}
-                  {r.posting && ' Real listings summarised.'}
-                </span>
-              </a>
-            </li>
-          ))}
+          {routes.map((r) => {
+            const titles = titlesOf(r.id);
+            return (
+              <li data-route data-text={[r.title, r.summary, ...titles.map((t) => t.title)].join(' ').toLowerCase()}>
+                <div class="role-box">
+                  <a class="role-title" href={`/roles/${r.id}`}>{r.title}</a>
+                  <span class="role-summary">{r.summary}</span>
+                  {titles.length > 0 && (
+                    <p class="titles">
+                      <span class="titles-label">Also posted as</span>
+                      {titles.map((t) => (
+                        <a class="title-chip" href={`/roles/${t.id}`} data-title={t.title.toLowerCase()}>{t.title}</a>
+                      ))}
+                    </p>
+                  )}
+                  <span class="role-foot">
+                    {r.kind === 'exam' ? `${r.tiers.hire.length} syllabus topics.` : `${r.tiers.hire.length} on the hiring list.`}
+                    {r.posting && ' Real listings summarised.'}
+                  </span>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </section>
     ))
   }
+  <p class="none" data-none hidden>
+    No job matches that. Try a shorter word, or <a href="/tools">look for a tool</a> instead.
+  </p>
 </Base>
 
-<style>
-  .head { max-width: 800px; display: grid; gap: 14px; }
-  h1 { padding-top: 8px; font-size: clamp(2.2rem, 7vw, 3.6rem); }
-  .lede { font-size: 1.1875rem; max-width: 60ch; }
+<script>
+  const input = document.querySelector<HTMLInputElement>('[data-filter]');
+  if (input) {
+    const count = document.querySelector<HTMLElement>('[data-count]')!;
+    const none = document.querySelector<HTMLElement>('[data-none]')!;
+    const routes = [...document.querySelectorAll<HTMLElement>('[data-route]')];
+    const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];
+    const apply = () => {
+      const words = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+      let shown = 0;
+      for (const li of routes) {
+        const show = words.every((w) => li.dataset.text!.includes(w));
+        li.hidden = !show;
+        if (show) shown++;
+        // Point out the titles that match, so "java" lights up Java developer.
+        for (const chip of li.querySelectorAll<HTMLElement>('[data-title]')) {
+          chip.classList.toggle('hit', words.length > 0 && words.every((w) => chip.dataset.title!.includes(w)));
+        }
+      }
+      for (const g of groups) g.hidden = !g.querySelector('[data-route]:not([hidden])');
+      none.hidden = shown > 0;
+      count.textContent = words.length ? `${shown} ${shown === 1 ? 'route' : 'routes'} match` : '';
+    };
+    input.addEventListener('input', apply);
+  }
+</script>
 
-  .lines { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+<style>
+  .head { max-width: 860px; display: grid; gap: 14px; }
+  h1 { padding-top: 8px; font-size: clamp(2.2rem, 7vw, 3.6rem); }
+  .lede { font-size: 1.1875rem; max-width: 64ch; }
+  .small { font-size: 0.92rem; }
+
+  .find { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .find label { font-family: var(--sign); font-stretch: 88%; font-weight: 700; font-size: 1.15rem; }
+  .find input {
+    flex: 1 1 280px; max-width: 460px; font: inherit; font-size: 1.05rem; padding: 8px 12px;
+    border: 3px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 0;
+  }
+  .find input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .lines { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
   .lines a {
     font-family: var(--sign); font-stretch: 88%; font-weight: 700; font-size: 1.05rem; text-decoration: none;
     padding: 5px 12px 3px; background: var(--family); color: var(--l-text);
@@ -60,19 +120,26 @@ const groups = c.families
   .lines a:hover, .lines a:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 
   section { margin-top: 52px; scroll-margin-top: 90px; }
+  section[hidden] { display: none; }
   h2 { font-size: 1.6rem; padding-bottom: 8px; border-bottom: 6px solid var(--family, var(--ink)); }
 
   .role-grid { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 16px; }
   .role-grid li { display: flex; }
+  .role-grid li[hidden] { display: none; }
   .role-box {
-    flex: 1; display: grid; grid-template-rows: auto 1fr auto; gap: 8px;
-    padding: 16px 18px 14px 20px; border: 2px solid var(--ink); border-left: 8px solid var(--family, var(--ink));
-    background: var(--paper); color: var(--ink); text-decoration: none;
+    flex: 1; display: grid; grid-template-rows: auto auto 1fr auto; gap: 8px;
+    padding: 16px 18px 14px 20px; border: 2px solid var(--ink); border-left: 8px solid var(--family, var(--ink)); background: var(--paper);
   }
-  .role-box:hover, .role-box:focus-visible { background: var(--platform); }
-  .role-box:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-  .role-title { font-family: var(--sign); font-stretch: 85%; font-size: 1.5rem; font-weight: 720; line-height: 1.1; }
-  .role-box:hover .role-title { text-decoration: underline; text-decoration-thickness: 2px; }
+  .role-title { font-family: var(--sign); font-stretch: 85%; font-size: 1.5rem; font-weight: 720; line-height: 1.1; color: var(--ink); text-decoration: none; }
+  .role-title:hover, .role-title:focus-visible { text-decoration: underline; text-decoration-thickness: 2px; }
   .role-summary { color: var(--ink-2); line-height: 1.5; }
+  .titles { display: flex; flex-wrap: wrap; gap: 6px; align-content: start; margin: 2px 0 0; }
+  .titles-label { width: 100%; font-size: 0.85rem; font-weight: 700; color: var(--ink-2); }
+  .title-chip {
+    font-size: 0.9rem; font-weight: 600; padding: 2px 8px; border: 1.5px solid var(--ink-3); color: var(--ink); text-decoration: none; background: var(--paper);
+  }
+  .title-chip:hover, .title-chip:focus-visible { border-color: var(--ink); background: var(--platform); }
+  .title-chip.hit { background: var(--yellow); color: #000; border-color: #000; }
   .role-foot { font-size: 0.9rem; font-weight: 600; color: var(--ink-2); padding-top: 8px; border-top: 1px solid var(--rule); }
+  .none { margin-top: 32px; font-size: 1.1rem; }
 </style>

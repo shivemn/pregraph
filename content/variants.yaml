@@ -1,0 +1,777 @@
+# Job titles that are a route plus a few specific skills. Each one gets its
+# own role page, planner and job searches. Its route is the one it `extends`,
+# with `adds` put on the hiring list and `drops` taken off every tier.
+# Titles are ones Indian employers actually post; keep summaries to what the
+# job is, in one or two sentences.
+
+# Software: backend
+- id: java-developer
+  title: "Java developer"
+  extends: backend-engineer
+  adds: [spring-boot]
+  summary: "Builds server-side applications in Java, usually with Spring Boot. The most common developer opening in Indian IT services and banks."
+- id: spring-boot-developer
+  title: "Spring Boot developer"
+  extends: backend-engineer
+  adds: [spring-boot, messaging]
+  summary: "Builds REST services and microservices on Spring Boot, the default Java framework for new backend work."
+- id: python-developer
+  title: "Python developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [programming-basics, django]
+  summary: "Writes backend services, scripts and automation in Python, most often with Django or FastAPI."
+- id: django-developer
+  title: "Django developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [programming-basics, django]
+  summary: "Builds web applications and APIs on Django, Python's batteries-included framework."
+- id: fastapi-developer
+  title: "FastAPI developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [programming-basics, fastapi]
+  summary: "Builds fast, typed Python APIs with FastAPI, common at startups and for serving ML models."
+- id: nodejs-developer
+  title: "Node.js developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [javascript, nodejs, typescript]
+  summary: "Writes backend services in JavaScript or TypeScript on Node.js, often alongside a React frontend."
+- id: php-developer
+  title: "PHP developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [php, html-css]
+  summary: "Builds and maintains websites and web applications in PHP, from WordPress sites to Laravel apps."
+- id: dotnet-developer
+  title: ".NET developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [csharp, aspnet-core]
+  summary: "Builds business applications and APIs in C# on .NET, common in enterprise IT and product companies."
+- id: csharp-developer
+  title: "C# developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [csharp, aspnet-core]
+  search: "c# developer"
+  summary: "Writes applications in C#, mostly web APIs on ASP.NET Core and Windows or enterprise software."
+- id: golang-developer
+  title: "Go developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [go, concurrency]
+  search: "golang developer"
+  summary: "Builds fast backend services and infrastructure tools in Go, popular at fintechs and cloud companies."
+- id: rust-developer
+  title: "Rust developer"
+  extends: backend-engineer
+  drops: [java]
+  adds: [rust, concurrency]
+  summary: "Writes performance-critical and safe systems code in Rust, in blockchain, infrastructure and systems companies."
+- id: api-developer
+  title: "API developer"
+  extends: backend-engineer
+  adds: [web-security, testing-debugging]
+  summary: "Designs, builds and documents the APIs other teams and partners call."
+- id: microservices-developer
+  title: "Microservices developer"
+  extends: backend-engineer
+  adds: [spring-boot, docker, messaging, distributed-systems]
+  summary: "Builds systems as many small services that talk over APIs and queues, and keeps them running together."
+- id: kafka-developer
+  title: "Kafka developer"
+  extends: backend-engineer
+  adds: [messaging, distributed-systems]
+  summary: "Builds event-driven systems on Apache Kafka, where services publish and consume streams of events."
+- id: java-microservices-developer
+  title: "Java microservices developer"
+  extends: backend-engineer
+  adds: [spring-boot, messaging, docker, kubernetes]
+  summary: "Builds Java services on Spring Boot that run in containers on Kubernetes and talk through Kafka."
+- id: graduate-engineer-trainee-it
+  title: "Graduate engineer trainee (IT)"
+  extends: software-engineer
+  search: "graduate engineer trainee"
+  summary: "The fresher entry role at Indian IT services firms. Training first, then a project; the test is aptitude, coding and basics."
+- id: associate-software-engineer
+  title: "Associate software engineer"
+  extends: software-engineer
+  summary: "The first title at many product and services companies. Fixing bugs and building small features with a senior's review."
+- id: systems-engineer-it
+  title: "Systems engineer (IT services)"
+  extends: software-engineer
+  search: "systems engineer"
+  summary: "The fresher title at TCS, Infosys and similar firms, covering development, testing and application support."
+- id: c-plus-plus-developer
+  title: "C++ developer"
+  extends: software-engineer
+  adds: [cpp, concurrency, os-processes-memory]
+  search: "c++ developer"
+  summary: "Writes performance-critical software in C++, from trading systems and games to browsers and embedded products."
+- id: c-developer
+  title: "C developer"
+  extends: software-engineer
+  adds: [c-and-memory, os-processes-memory]
+  summary: "Writes low-level software in C: operating systems, networking stacks, drivers and embedded code."
+- id: systems-programmer
+  title: "Systems programmer"
+  extends: software-engineer
+  adds: [c-and-memory, os-processes-memory, concurrency, file-systems]
+  summary: "Builds the layer under applications, such as runtimes, storage engines and networking."
+- id: compiler-engineer
+  title: "Compiler engineer"
+  extends: software-engineer
+  adds: [cpp, compilers, interpreters, computer-architecture]
+  summary: "Works on compilers and language toolchains, from parsing to code generation, often at chip and tools companies."
+
+# Software: frontend and full stack
+- id: react-developer
+  title: "React developer"
+  extends: frontend-engineer
+  adds: [react, typescript]
+  search: "react js developer"
+  summary: "Builds web interfaces in React, the most asked-for frontend library in Indian job postings."
+- id: angular-developer
+  title: "Angular developer"
+  extends: frontend-engineer
+  drops: [react]
+  adds: [angular, typescript]
+  summary: "Builds web applications in Angular, common in enterprise and banking projects."
+- id: vue-developer
+  title: "Vue.js developer"
+  extends: frontend-engineer
+  drops: [react]
+  adds: [vue]
+  summary: "Builds web interfaces in Vue.js, used by many startups and agencies."
+- id: nextjs-developer
+  title: "Next.js developer"
+  extends: frontend-engineer
+  adds: [nextjs]
+  summary: "Builds React sites and apps on Next.js, with server rendering and routing built in."
+- id: javascript-developer
+  title: "JavaScript developer"
+  extends: frontend-engineer
+  summary: "Writes JavaScript for the browser and often Node.js, with whichever framework the team uses."
+- id: ui-developer
+  title: "UI developer"
+  extends: frontend-engineer
+  adds: [web-accessibility, figma]
+  summary: "Turns designs into accurate, accessible web pages in HTML, CSS and JavaScript."
+- id: web-developer
+  title: "Web developer"
+  extends: full-stack-engineer
+  summary: "Builds websites and web apps end to end, often for small companies or agencies."
+- id: mern-stack-developer
+  title: "MERN stack developer"
+  extends: full-stack-engineer
+  adds: [mongodb, nodejs]
+  summary: "Builds full apps with MongoDB, Express, React and Node.js, the stack most bootcamps and startups use."
+- id: mean-stack-developer
+  title: "MEAN stack developer"
+  extends: full-stack-engineer
+  drops: [react]
+  adds: [mongodb, nodejs, angular]
+  summary: "Builds full apps with MongoDB, Express, Angular and Node.js."
+- id: java-full-stack-developer
+  title: "Java full stack developer"
+  extends: full-stack-engineer
+  adds: [java, spring-boot]
+  summary: "Builds the Java and Spring Boot backend and a React or Angular frontend. A very common services-company opening."
+- id: python-full-stack-developer
+  title: "Python full stack developer"
+  extends: full-stack-engineer
+  adds: [programming-basics, django]
+  summary: "Builds a Django or FastAPI backend with a React frontend."
+- id: dotnet-full-stack-developer
+  title: ".NET full stack developer"
+  extends: full-stack-engineer
+  drops: [react]
+  adds: [csharp, aspnet-core, angular]
+  search: ".net full stack developer"
+  summary: "Builds C# and ASP.NET Core backends with Angular or React frontends."
+
+# Software: mobile
+- id: flutter-developer
+  title: "Flutter developer"
+  extends: android-developer
+  drops: [kotlin, android]
+  adds: [flutter]
+  summary: "Builds Android and iOS apps from one codebase in Flutter and Dart."
+- id: react-native-developer
+  title: "React Native developer"
+  extends: android-developer
+  drops: [kotlin, android]
+  adds: [javascript, react, react-native]
+  summary: "Builds Android and iOS apps in React Native, sharing skills and often code with the web team."
+- id: kotlin-developer
+  title: "Kotlin developer"
+  extends: android-developer
+  summary: "Writes Android apps, and sometimes backend services, in Kotlin."
+- id: swift-developer
+  title: "Swift developer"
+  extends: ios-developer
+  summary: "Builds iPhone and iPad apps in Swift and SwiftUI."
+- id: mobile-app-developer
+  title: "Mobile app developer"
+  extends: android-developer
+  adds: [rest-apis, firebase]
+  summary: "Builds and ships apps for phones, usually Android first in India, talking to a backend over APIs."
+
+# Software: testing
+- id: automation-test-engineer
+  title: "Automation test engineer"
+  extends: qa-engineer
+  adds: [selenium, java]
+  summary: "Writes code that tests software automatically, most often Selenium with Java, and keeps it running in CI."
+- id: selenium-tester
+  title: "Selenium tester"
+  extends: qa-engineer
+  adds: [selenium]
+  summary: "Automates browser testing with Selenium WebDriver."
+- id: api-tester
+  title: "API tester"
+  extends: qa-engineer
+  adds: [postman]
+  summary: "Tests APIs for correct responses, errors and contracts, with Postman and code."
+- id: manual-tester
+  title: "Manual tester"
+  extends: qa-engineer
+  drops: [test-automation, project-test-suite]
+  summary: "Tests software by hand against written test cases and reports bugs. Often a way in to automation testing."
+- id: sdet-java
+  title: "SDET (Java)"
+  extends: qa-engineer
+  adds: [java, junit, selenium]
+  search: "sdet"
+  summary: "A developer who builds the test frameworks and tools, in Java with JUnit and Selenium."
+- id: sdet-python
+  title: "SDET (Python)"
+  extends: qa-engineer
+  adds: [pytest, selenium]
+  search: "sdet python"
+  summary: "A developer who builds the test frameworks and tools, in Python with pytest."
+- id: performance-test-engineer
+  title: "Performance test engineer"
+  extends: qa-engineer
+  adds: [web-performance, observability]
+  summary: "Load-tests applications to find how much traffic they take and where they slow down."
+
+# Data and analytics
+- id: sql-developer
+  title: "SQL developer"
+  extends: data-analyst
+  adds: [query-performance, database-internals]
+  summary: "Writes and tunes SQL queries, views and stored procedures that reports and applications rely on."
+- id: power-bi-developer
+  title: "Power BI developer"
+  extends: bi-developer
+  summary: "Builds Power BI reports and data models that teams use to run the business."
+- id: tableau-developer
+  title: "Tableau developer"
+  extends: bi-developer
+  adds: [tableau]
+  summary: "Builds dashboards and data sources in Tableau."
+- id: mis-executive
+  title: "MIS executive"
+  extends: data-analyst
+  drops: [pandas, statistics]
+  summary: "Prepares the regular reports and trackers a business runs on, mostly in Excel. A common first job for any graduate."
+- id: excel-analyst
+  title: "Excel analyst"
+  extends: data-analyst
+  drops: [pandas]
+  search: "advanced excel"
+  summary: "Builds models, trackers and reports in Excel, with formulas, pivot tables and charts."
+- id: reporting-analyst
+  title: "Reporting analyst"
+  extends: data-analyst
+  adds: [bi-tools]
+  summary: "Owns recurring reports and dashboards, and checks the numbers behind them."
+- id: python-data-analyst
+  title: "Python data analyst"
+  extends: data-analyst
+  adds: [programming-basics]
+  search: "data analyst python"
+  summary: "Analyses data in Python with pandas, beyond what spreadsheets can do."
+- id: marketing-analyst
+  title: "Marketing analyst"
+  extends: product-analyst
+  summary: "Measures campaigns, channels and customers, and runs tests to see what works."
+- id: business-intelligence-analyst
+  title: "Business intelligence analyst"
+  extends: bi-developer
+  search: "business intelligence analyst"
+  summary: "Turns company data into reports and dashboards, and explains what changed."
+- id: snowflake-developer
+  title: "Snowflake developer"
+  extends: data-engineer
+  adds: [snowflake, dbt]
+  summary: "Builds data pipelines and models in the Snowflake cloud warehouse."
+- id: databricks-engineer
+  title: "Databricks engineer"
+  extends: data-engineer
+  adds: [databricks]
+  search: "databricks developer"
+  summary: "Builds pipelines and lakehouse tables on Databricks with Spark."
+- id: big-data-engineer
+  title: "Big data engineer"
+  extends: data-engineer
+  adds: [distributed-systems, messaging]
+  summary: "Moves and processes data too big for one machine, with Spark, Kafka and the Hadoop family."
+- id: etl-developer
+  title: "ETL developer"
+  extends: data-engineer
+  adds: [orchestration]
+  summary: "Builds the jobs that extract, transform and load data into warehouses, on schedule and correctly."
+- id: dbt-developer
+  title: "dbt developer"
+  extends: analytics-engineer
+  summary: "Writes the SQL models, tests and docs in dbt that turn raw tables into clean ones."
+- id: data-modeler
+  title: "Data modeler"
+  extends: data-engineer
+  adds: [database-internals]
+  summary: "Designs the tables and relationships of warehouses and databases so data stays consistent and fast to query."
+- id: azure-data-engineer
+  title: "Azure data engineer"
+  extends: data-engineer
+  adds: [azure, databricks]
+  summary: "Builds data pipelines on Azure: Data Factory, Synapse and Databricks."
+- id: aws-data-engineer
+  title: "AWS data engineer"
+  extends: data-engineer
+  adds: [cloud-basics]
+  summary: "Builds data pipelines on AWS: S3, Glue, Redshift and EMR."
+- id: gcp-data-engineer
+  title: "GCP data engineer"
+  extends: data-engineer
+  adds: [gcp]
+  summary: "Builds data pipelines on Google Cloud: BigQuery, Dataflow and Cloud Composer."
+- id: r-programmer
+  title: "R programmer"
+  extends: statistician
+  summary: "Analyses data and builds statistical models in R, in research, pharma and analytics teams."
+- id: biostatistician
+  title: "Biostatistician"
+  extends: statistician
+  adds: [statistical-inference, linear-models]
+  summary: "Designs and analyses clinical trials and health studies."
+- id: research-analyst
+  title: "Research analyst"
+  extends: data-analyst
+  adds: [experiments]
+  summary: "Gathers and analyses data to answer a business or market question, and writes it up."
+- id: time-series-analyst
+  title: "Forecasting analyst"
+  extends: data-scientist
+  adds: [time-series]
+  search: "demand forecasting"
+  summary: "Forecasts demand, sales or load from past data, and says how sure the forecast is."
+
+# Machine learning and AI
+- id: nlp-engineer
+  title: "NLP engineer"
+  extends: ml-engineer
+  adds: [nlp, transformers]
+  summary: "Builds systems that read, classify and generate text."
+- id: computer-vision-engineer
+  title: "Computer vision engineer"
+  extends: ml-engineer
+  adds: [computer-vision, cnns]
+  summary: "Builds systems that understand images and video, from inspection to medical imaging."
+- id: generative-ai-engineer
+  title: "Generative AI engineer"
+  extends: ai-engineer
+  adds: [generative-models, transformers]
+  summary: "Builds products on large language and image models: prompts, retrieval, fine-tuning and evaluation."
+- id: llm-engineer
+  title: "LLM engineer"
+  extends: ai-engineer
+  adds: [transformers, hugging-face]
+  summary: "Builds, fine-tunes and serves large language models and the apps on top of them."
+- id: prompt-engineer
+  title: "Prompt engineer"
+  extends: ai-engineer
+  summary: "Designs and tests the prompts and evaluations that make language-model features work reliably."
+- id: rag-developer
+  title: "RAG developer"
+  extends: ai-engineer
+  search: "rag"
+  summary: "Builds systems that answer questions from a company's own documents with retrieval and a language model."
+- id: ai-ml-engineer
+  title: "AI/ML engineer"
+  extends: ml-engineer
+  adds: [llm-apis]
+  search: "ai ml engineer"
+  summary: "Builds and ships machine learning and language-model features into products."
+- id: pytorch-developer
+  title: "PyTorch developer"
+  extends: deep-learning-engineer
+  summary: "Builds and trains neural networks in PyTorch."
+- id: tensorflow-developer
+  title: "TensorFlow developer"
+  extends: deep-learning-engineer
+  drops: [pytorch]
+  adds: [tensorflow]
+  summary: "Builds and trains neural networks in TensorFlow and Keras."
+- id: ml-research-engineer
+  title: "Research engineer (ML)"
+  extends: deep-learning-engineer
+  adds: [optimization, linear-algebra, probability]
+  search: "research engineer machine learning"
+  summary: "Turns research ideas into working experiments and code, at labs and AI-first companies."
+- id: applied-scientist
+  title: "Applied scientist"
+  extends: data-scientist
+  adds: [deep-learning, optimization]
+  summary: "Applies machine learning research to product problems, at large tech companies."
+- id: data-science-intern
+  title: "Data science intern"
+  extends: data-scientist
+  drops: [feature-engineering]
+  search: "data science internship"
+  summary: "A first taste of data science work: cleaning data, analysis and simple models, with mentoring."
+
+# Infrastructure and cloud
+- id: aws-cloud-engineer
+  title: "AWS cloud engineer"
+  extends: cloud-engineer
+  adds: [cloud-architecture]
+  search: "aws engineer"
+  summary: "Builds and runs infrastructure on Amazon Web Services, the most used cloud in India."
+- id: azure-cloud-engineer
+  title: "Azure cloud engineer"
+  extends: cloud-engineer
+  adds: [azure]
+  search: "azure engineer"
+  summary: "Builds and runs infrastructure on Microsoft Azure, common in enterprises and banks."
+- id: gcp-cloud-engineer
+  title: "GCP cloud engineer"
+  extends: cloud-engineer
+  adds: [gcp]
+  search: "gcp engineer"
+  summary: "Builds and runs infrastructure on Google Cloud."
+- id: azure-devops-engineer
+  title: "Azure DevOps engineer"
+  extends: devops-engineer
+  adds: [azure]
+  summary: "Builds pipelines and infrastructure with Azure DevOps and Azure."
+- id: aws-devops-engineer
+  title: "AWS DevOps engineer"
+  extends: devops-engineer
+  adds: [cloud-architecture, infrastructure-as-code]
+  search: "aws devops engineer"
+  summary: "Builds pipelines and infrastructure on AWS, with Terraform and CI/CD."
+- id: kubernetes-engineer
+  title: "Kubernetes engineer"
+  extends: platform-engineer
+  adds: [observability]
+  summary: "Runs and improves Kubernetes clusters and the apps deployed on them."
+- id: terraform-engineer
+  title: "Terraform engineer"
+  extends: cloud-engineer
+  adds: [infrastructure-as-code]
+  search: "terraform"
+  summary: "Writes and maintains the Terraform code that creates a company's cloud infrastructure."
+- id: site-reliability-engineer
+  title: "Site reliability engineer (SRE)"
+  extends: platform-engineer
+  adds: [observability, incident-management]
+  search: "site reliability engineer"
+  summary: "Keeps services up and fast, with monitoring, automation and calm incident response."
+- id: build-release-engineer
+  title: "Build and release engineer"
+  extends: devops-engineer
+  adds: [jenkins]
+  search: "build and release engineer"
+  summary: "Owns how code gets built, versioned and released, mostly through CI/CD pipelines."
+- id: jenkins-engineer
+  title: "CI/CD engineer"
+  extends: devops-engineer
+  adds: [jenkins]
+  search: "ci cd engineer"
+  summary: "Builds and runs the pipelines that test and deploy every change."
+- id: linux-administrator
+  title: "Linux administrator"
+  extends: system-administrator
+  summary: "Installs, secures and runs Linux servers, and keeps them patched and backed up."
+- id: network-engineer
+  title: "Network engineer"
+  extends: system-administrator
+  adds: [networking, cloud-networking, wireshark]
+  summary: "Designs and runs a company's networks: routing, switching, firewalls and VPNs."
+- id: network-administrator
+  title: "Network administrator"
+  extends: system-administrator
+  adds: [wireshark]
+  summary: "Looks after day-to-day network operations, from user access to fixing outages."
+- id: ansible-engineer
+  title: "Automation engineer (Ansible)"
+  extends: system-administrator
+  adds: [ansible, programming-basics]
+  search: "ansible"
+  summary: "Automates server setup and changes with Ansible instead of doing them by hand."
+- id: observability-engineer
+  title: "Observability engineer"
+  extends: platform-engineer
+  adds: [observability, log-analysis]
+  summary: "Builds the logging, metrics and tracing that tell teams what their systems are doing."
+- id: mysql-dba
+  title: "MySQL DBA"
+  extends: database-administrator
+  search: "mysql dba"
+  summary: "Runs MySQL databases: installs, backups, replication, tuning and upgrades."
+- id: postgresql-dba
+  title: "PostgreSQL DBA"
+  extends: database-administrator
+  search: "postgresql dba"
+  summary: "Runs PostgreSQL databases: backups, replication, tuning and upgrades."
+- id: mongodb-dba
+  title: "MongoDB DBA"
+  extends: database-administrator
+  adds: [mongodb]
+  search: "mongodb dba"
+  summary: "Runs MongoDB clusters: sharding, replication, backups and performance."
+- id: production-support-engineer
+  title: "Production support engineer"
+  extends: support-engineer
+  summary: "Keeps live applications running: watches alerts, investigates failures and fixes or escalates them."
+- id: l2-support-engineer
+  title: "L2 support engineer"
+  extends: support-engineer
+  search: "l2 support"
+  summary: "Takes the issues first-line support can't solve, digs into logs and data, and fixes or escalates."
+- id: technical-support-engineer
+  title: "Technical support engineer"
+  extends: support-engineer
+  summary: "Helps customers solve problems with a product, and passes real bugs to engineers."
+- id: elasticsearch-engineer
+  title: "Elasticsearch engineer"
+  extends: backend-engineer
+  adds: [elasticsearch]
+  search: "elasticsearch"
+  summary: "Builds search and log analytics on Elasticsearch, and keeps clusters healthy."
+- id: redis-engineer
+  title: "Caching and Redis engineer"
+  extends: backend-engineer
+  adds: [redis]
+  search: "redis"
+  summary: "Speeds up applications with caching, queues and data structures in Redis."
+
+# Security
+- id: soc-analyst-l1
+  title: "SOC analyst (L1)"
+  extends: security-analyst
+  adds: [splunk]
+  search: "soc analyst"
+  summary: "Watches security alerts in a SIEM, sorts real threats from noise and escalates. The usual first security job."
+- id: vapt-analyst
+  title: "VAPT analyst"
+  extends: penetration-tester
+  search: "vapt"
+  summary: "Runs vulnerability assessments and penetration tests on applications and networks, and writes them up."
+- id: web-application-security-tester
+  title: "Web application security tester"
+  extends: penetration-tester
+  adds: [burp-suite, web-security]
+  search: "application security"
+  summary: "Finds and reports security flaws in web apps and APIs."
+- id: network-security-engineer
+  title: "Network security engineer"
+  extends: security-engineer
+  adds: [wireshark, nmap]
+  summary: "Designs and runs firewalls, VPNs and network monitoring."
+- id: cloud-security-engineer
+  title: "Cloud security engineer"
+  extends: security-engineer
+  adds: [cloud-architecture, infrastructure-as-code]
+  summary: "Secures cloud accounts: identity, network rules, logging and misconfiguration checks."
+- id: splunk-engineer
+  title: "Splunk engineer"
+  extends: security-analyst
+  adds: [splunk]
+  search: "splunk"
+  summary: "Builds searches, dashboards and alerts in Splunk for security and operations teams."
+- id: cyber-security-analyst
+  title: "Cyber security analyst"
+  extends: security-analyst
+  search: "cyber security analyst"
+  summary: "Protects a company's systems by monitoring, investigating and fixing security issues."
+
+# Finance and quant
+- id: credit-risk-analyst
+  title: "Credit risk analyst"
+  extends: risk-analyst
+  adds: [linear-models]
+  summary: "Measures the chance that borrowers don't pay back, builds scorecards and sets limits."
+- id: market-risk-analyst
+  title: "Market risk analyst"
+  extends: risk-analyst
+  adds: [portfolio-theory, time-series]
+  summary: "Measures how much a bank's positions could lose when markets move, with VaR and stress tests."
+- id: quantitative-analyst
+  title: "Quantitative analyst"
+  extends: quant-researcher
+  search: "quantitative analyst"
+  summary: "Builds pricing, risk and trading models with maths and code, at banks and funds."
+- id: algorithmic-trader
+  title: "Algorithmic trader"
+  extends: quant-researcher
+  adds: [project-backtest]
+  search: "algo trading"
+  summary: "Designs, tests and runs trading strategies that execute by code."
+- id: equity-research-analyst
+  title: "Equity research analyst"
+  extends: financial-analyst
+  adds: [macroeconomics]
+  summary: "Studies companies and sectors, builds valuation models and writes buy or sell research."
+- id: investment-banking-analyst
+  title: "Investment banking analyst"
+  extends: financial-analyst
+  adds: [corporate-finance]
+  summary: "Builds models and pitch books for mergers, acquisitions and fundraising."
+- id: financial-modeller
+  title: "Financial modeller"
+  extends: financial-analyst
+  search: "financial modelling"
+  summary: "Builds spreadsheet models of companies and projects that decisions are made on."
+- id: fpa-analyst
+  title: "FP&A analyst"
+  extends: financial-analyst
+  adds: [bi-tools]
+  search: "fp&a analyst"
+  summary: "Plans budgets and forecasts for a company, and explains the gap between plan and actual."
+- id: portfolio-analyst
+  title: "Portfolio analyst"
+  extends: financial-analyst
+  adds: [portfolio-theory]
+  summary: "Tracks and analyses investment portfolios: returns, risk and allocation."
+- id: derivatives-analyst
+  title: "Derivatives analyst"
+  extends: risk-analyst
+  adds: [stochastic-processes]
+  summary: "Prices, values and reports on options, futures and swaps."
+- id: treasury-analyst
+  title: "Treasury analyst"
+  extends: financial-analyst
+  adds: [risk-management]
+  summary: "Manages a company's cash, funding and currency and interest-rate risk."
+- id: econometrician
+  title: "Econometrician"
+  extends: economist
+  adds: [time-series, statistical-inference]
+  summary: "Builds statistical models of economic data to test theories and forecast."
+- id: policy-analyst
+  title: "Economic policy analyst"
+  extends: economist
+  search: "policy analyst"
+  summary: "Studies how policies affect people and the economy, at think tanks, governments and consultancies."
+- id: fintech-analyst
+  title: "Fintech data analyst"
+  extends: data-analyst
+  adds: [financial-markets]
+  search: "fintech analyst"
+  summary: "Analyses payments, lending or investing data at a fintech."
+
+# Product, design and delivery
+- id: associate-product-manager
+  title: "Associate product manager"
+  extends: product-manager
+  search: "associate product manager"
+  summary: "The entry product role: owns a small part of a product, writes specs and works with design and engineering."
+- id: technical-product-manager
+  title: "Technical product manager"
+  extends: product-manager
+  adds: [system-design, rest-apis]
+  summary: "A product manager for platforms, APIs and developer tools, who can talk architecture with engineers."
+- id: product-owner
+  title: "Product owner"
+  extends: product-manager
+  summary: "Owns the backlog for a Scrum team: writes stories, sets priorities and accepts the work."
+- id: ux-researcher
+  title: "UX researcher"
+  extends: ui-ux-designer
+  adds: [experiments, statistics]
+  summary: "Finds out what users need through interviews, tests and data, and turns it into decisions."
+- id: product-designer
+  title: "Product designer"
+  extends: ui-ux-designer
+  adds: [product-management]
+  summary: "Designs whole product experiences, from the problem and flows to the final screens."
+- id: ui-designer
+  title: "UI designer"
+  extends: ui-ux-designer
+  summary: "Designs the visual side of apps and websites: layout, type, colour and components."
+- id: business-systems-analyst
+  title: "Business systems analyst"
+  extends: business-analyst
+  adds: [rest-apis]
+  summary: "Works out what a business system must do, and how it connects to the others."
+- id: functional-consultant
+  title: "Functional consultant"
+  extends: business-analyst
+  summary: "Configures and fits enterprise software to how a client works, gathering requirements and testing."
+- id: project-coordinator
+  title: "Project coordinator (IT)"
+  extends: scrum-master
+  search: "project coordinator"
+  summary: "Keeps IT projects on track: schedules, status, risks and meetings."
+- id: agile-coach
+  title: "Agile coach"
+  extends: scrum-master
+  adds: [product-management]
+  summary: "Helps teams and companies work in an agile way, beyond running one team's ceremonies."
+- id: jira-administrator
+  title: "Jira administrator"
+  extends: scrum-master
+  search: "jira admin"
+  summary: "Sets up and runs Jira for a company: workflows, projects, permissions and reports."
+- id: api-documentation-writer
+  title: "API documentation writer"
+  extends: technical-writer
+  adds: [programming-basics]
+  search: "api technical writer"
+  summary: "Writes the references, guides and samples developers use to call an API."
+- id: content-writer-tech
+  title: "Technical content writer"
+  extends: technical-writer
+  search: "technical content writer"
+  summary: "Writes blogs, guides and docs about technical products for developers and buyers."
+
+# Platforms
+- id: salesforce-administrator
+  title: "Salesforce administrator"
+  extends: salesforce-developer
+  drops: [programming-basics]
+  search: "salesforce admin"
+  summary: "Configures Salesforce for a company without code: objects, flows, security, reports."
+- id: salesforce-consultant
+  title: "Salesforce consultant"
+  extends: salesforce-developer
+  adds: [agile-scrum]
+  summary: "Designs and sets up Salesforce for clients, from requirements to rollout."
+- id: servicenow-administrator
+  title: "ServiceNow administrator"
+  extends: servicenow-developer
+  search: "servicenow admin"
+  summary: "Runs and configures a company's ServiceNow instance: users, forms, workflows and upgrades."
+
+# Embedded
+- id: firmware-engineer
+  title: "Firmware engineer"
+  extends: embedded-engineer
+  adds: [rtos]
+  summary: "Writes the software that runs directly on a device's microcontroller."
+- id: iot-developer
+  title: "IoT developer"
+  extends: embedded-engineer
+  adds: [networking, cloud-basics]
+  summary: "Builds connected devices and the cloud side they report to."
+- id: embedded-c-developer
+  title: "Embedded C developer"
+  extends: embedded-engineer
+  search: "embedded c"
+  summary: "Writes C for microcontrollers: drivers, peripherals and bare-metal applications."

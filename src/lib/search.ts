@@ -11,6 +11,10 @@ export interface SearchDoc {
   sources: string;
   /** On the tools page, so results open the tool's own page. */
   tool?: boolean;
+  /** Where the result goes, when it isn't a concept or tool page. */
+  href?: string;
+  /** Shown beside the title instead of the area, e.g. "Job". */
+  label?: string;
 }
 
 export interface Hit {

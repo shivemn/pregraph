@@ -16,7 +16,7 @@ Terminus starts from a ticket: *From a maths graduate, To Backend engineer.* Eac
 
 ## What's here
 
-- **Forty-one roles and five exams:**
+- **184 job titles on 41 routes, and five exams:**
   - Software: software engineer, backend, frontend, full-stack, Android, iOS, QA/SDET, embedded, Salesforce, ServiceNow.
   - Data and ML: data analyst, data scientist, data engineer, analytics engineer, BI developer, product analyst, ML engineer, MLOps engineer, deep learning engineer, AI/LLM engineer.
   - Infrastructure and security: DevOps/SRE, platform engineer, cloud engineer, solutions architect, system administrator, database administrator, application support, security analyst, security engineer, penetration tester.

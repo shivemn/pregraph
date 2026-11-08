@@ -9,7 +9,7 @@ import { content } from '../lib/site';
 
 const c = content();
 const jobs = c.roles
-  .filter((r) => r.kind !== 'exam')
+  .filter((r) => r.kind !== 'exam' && !r.variantOf)
   .map((r) => ({ id: r.id, title: r.title, family: r.family, hire: r.tiers.hire }));
 const net = buildNetwork(c.concepts, c.families, jobs);
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 184 job titles
+
+- **Job titles on top of routes.** A title like Java developer, Power BI developer or SOC analyst (L1) is a route plus the skills that title adds, and drops what it doesn't need (a Python developer is the backend route with Python and Django instead of Java). 143 titles are new, for 184 jobs and 5 exams in all. Each has its own page, planner, job searches and salary link.
+- **All roles groups titles under their route,** with a box to find a job by any word ("java", "analyst", "security"). Matching titles light up.
+- **Search finds jobs** as well as topics and books.
+- **Every title page** says which route it's on and what it changes, and lists the other titles on the same route.
+- **Salary links for 120 titles,** each checked on AmbitionBox. Where AmbitionBox only has a nearby title (FastAPI developer → Python developer), the link says so.
+
 ## Startups, more job sites and a wider page
 
 - **A Startups page** at `/startups`: the 41 YC-funded startups based in India with engineering, product, design or finance openings on 8 November 2026. Each links to its live jobs page on YC, with its batch, city, the kinds of job open and how many take new graduates. You can filter to companies hiring new graduates, or by kind of job. Above the list: the skills the postings named most (linked to Terminus routes), the experience they asked for, and a table by kind of job. It says plainly that only 23 of 132 openings took new graduates or interns.

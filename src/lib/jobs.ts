@@ -19,6 +19,19 @@ export function searchTerm(role: Pick<Role, 'title' | 'search'>): string {
   return (role.search ?? role.title.split(/[/(]/)[0]!).trim();
 }
 
+const ABBREVIATIONS: Record<string, string> = { ai: 'AI', ml: 'ML', sql: 'SQL', api: 'API', mis: 'MIS', ui: 'UI', ux: 'UX', qa: 'QA', it: 'IT', sdet: 'SDET', soc: 'SOC', iot: 'IoT', vapt: 'VAPT', nlp: 'NLP', llm: 'LLM', etl: 'ETL', dba: 'DBA', aws: 'AWS', gcp: 'GCP', fp: 'FP', mysql: 'MySQL', postgresql: 'PostgreSQL', mongodb: 'MongoDB', js: 'JS' };
+/** "react-js-developer" → "React js developer", for saying whose salary page it is. */
+function titleFromSlug(slug: string): string {
+  const words = slug.split('-').map((w) => ABBREVIATIONS[w] ?? w);
+  const s = words.join(' ');
+  return /^[A-Z]{2}/.test(s) ? s : s.charAt(0).toUpperCase() + s.slice(1);
+}
+/** Close enough that the salary page is for this title: same words once spelled out. */
+function sameTitle(slug: string, title: string): boolean {
+  const norm = (x: string) => x.toLowerCase().replace(/c#/g, 'c sharp').replace(/c\+\+/g, 'c plus plus').replace(/\.net/g, 'dot net').replace(/\(.*\)/g, '').replace(/\bdba\b/g, 'database administrator').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '');
+  return norm(slug) === norm(title) || norm(slug).replace(/engineer|developer|administrator/g, '') === norm(title).replace(/engineer|developer|administrator|admin|dba/g, '');
+}
+
 const slugOf = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 export function jobLinks(role: Pick<Role, 'title' | 'search'>, sites: JobSites | undefined): JobLinkGroup[] {
@@ -60,10 +73,34 @@ export function jobLinks(role: Pick<Role, 'title' | 'search'>, sites: JobSites |
   if (sites?.ambitionbox) {
     groups.push({
       title: 'Pay and reviews',
-      links: [{ name: 'AmbitionBox', note: 'salaries', url: `https://www.ambitionbox.com/profile/${sites.ambitionbox}-salary` }],
+      links: [
+        {
+          name: 'AmbitionBox',
+          // Some titles have no salary page of their own; say whose it is.
+          note: sameTitle(sites.ambitionbox, plain) || sameTitle(sites.ambitionbox, role.title) ? 'salaries' : `salaries for ${titleFromSlug(sites.ambitionbox)}`,
+          url: `https://www.ambitionbox.com/profile/${sites.ambitionbox}-salary`,
+        },
+      ],
     });
   }
   return groups;
+}
+
+/**
+ * A job title uses its route's startup pages, which are about the kind of job
+ * rather than the title. Salary pages are per title, so only its own count.
+ */
+export function sitesFor(all: Record<string, JobSites>, role: Pick<Role, 'id' | 'variantOf'>): JobSites | undefined {
+  const own = all[role.id];
+  const base = role.variantOf ? all[role.variantOf] : undefined;
+  if (!base) return own;
+  return {
+    ...base,
+    ambitionbox: own?.ambitionbox,
+    wellfound: own?.wellfound ?? base.wellfound,
+    yc: own?.yc ?? base.yc,
+    kinds: own?.kinds.length ? own.kinds : base.kinds,
+  };
 }
 
 /** How many YC startup postings in India matched this role when the snapshot was taken. */

@@ -6,11 +6,11 @@ const areaTitles = Object.fromEntries(content().areas.map((a) => [a.id, a.title]
 ---
 
 <div class="search" data-areas={JSON.stringify(areaTitles)}>
-  <label class="visually-hidden" for="site-search">Search concepts and resources</label>
+  <label class="visually-hidden" for="site-search">Search jobs, concepts and resources</label>
   <input
     id="site-search"
     type="search"
-    placeholder="Search, e.g. graphs or OSTEP"
+    placeholder="Search jobs, topics or books"
     autocomplete="off"
     spellcheck="false"
     role="combobox"
@@ -73,9 +73,9 @@ const areaTitles = Object.fromEntries(content().areas.map((a) => [a.id, a.title]
     }
     hits.forEach(({ doc }, i) => {
       const li = document.createElement('li');
-      li.dataset.area = doc.area;
+      if (doc.area) li.dataset.area = doc.area;
       const a = document.createElement('a');
-      a.href = `/${doc.tool ? 'tools' : 'concepts'}/${doc.id}`;
+      a.href = doc.href ?? `/${doc.tool ? 'tools' : 'concepts'}/${doc.id}`;
       a.id = `search-hit-${i}`;
       a.setAttribute('role', 'option');
       const t = document.createElement('span');
@@ -83,7 +83,7 @@ const areaTitles = Object.fromEntries(content().areas.map((a) => [a.id, a.title]
       t.textContent = doc.title;
       const s = document.createElement('span');
       s.className = 'hit-area';
-      s.textContent = areas[doc.area] ?? doc.area;
+      s.textContent = doc.label ?? areas[doc.area] ?? doc.area;
       a.append(t, s);
       li.append(a);
       list.append(li);
