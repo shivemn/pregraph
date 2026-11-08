@@ -2275,3 +2275,103 @@
   free: true
   medium: watch
   short: "15.401"
+
+- id: lebl-analysis
+  title: "Basic Analysis: Introduction to Real Analysis"
+  author: Jiří Lebl
+  type: book
+  url: https://www.jirka.org/ra/
+  free: true
+  medium: read
+
+- id: mit-18100a
+  title: "MIT 18.100A Real Analysis (Fall 2020)"
+  author: Casey Rodriguez, MIT OpenCourseWare
+  type: video
+  url: https://www.youtube.com/playlist?list=PLUl4u3cNGP61O7HkcF7UImpM0cR_L2gSw
+  free: true
+  medium: watch
+  short: "18.100a"
+
+- id: nptel-real-analysis
+  title: Real Analysis I
+  author: NPTEL, IIT Madras
+  type: video
+  url: https://www.youtube.com/playlist?list=PLyqSpQzTE6M_UG841pwaUaAYKI1iQFXp9
+  free: true
+  medium: watch
+
+- id: psu-stat415
+  title: "STAT 415: Introduction to Mathematical Statistics"
+  author: Penn State Eberly College of Science
+  type: course
+  url: https://online.stat.psu.edu/stat415/
+  free: true
+  medium: read
+
+- id: psu-stat501
+  title: "STAT 501: Regression Methods"
+  author: Penn State Eberly College of Science
+  type: course
+  url: https://online.stat.psu.edu/stat501/
+  free: true
+  medium: read
+
+- id: psu-stat505
+  title: "STAT 505: Applied Multivariate Statistical Analysis"
+  author: Penn State Eberly College of Science
+  type: course
+  url: https://online.stat.psu.edu/stat505/
+  free: true
+  medium: read
+
+- id: mit-18650
+  title: "MIT 18.650 Statistics for Applications (Fall 2016)"
+  author: Philippe Rigollet, MIT OpenCourseWare
+  type: video
+  url: https://www.youtube.com/playlist?list=PLUl4u3cNGP60uVBMaoNERc6knT_MgPKS0
+  free: true
+  medium: watch
+  short: "18.650"
+
+- id: nptel-stat-inference
+  title: Statistical Inference
+  author: NPTEL, IIT Kharagpur
+  type: video
+  url: https://www.youtube.com/playlist?list=PLbRMhDVUMngeD_vOeveVE-3b7wu_AZph9
+  free: true
+  medium: watch
+
+- id: nptel-multivariate
+  title: Applied Multivariate Analysis
+  author: NPTEL
+  type: video
+  url: https://www.youtube.com/playlist?list=PL3DFCC23FCE3C7EFB
+  free: true
+  medium: watch
+
+- id: cs188-notes
+  title: "CS 188: Introduction to Artificial Intelligence (course notes)"
+  author: UC Berkeley
+  type: book
+  url: https://inst.eecs.berkeley.edu/~cs188/textbook/
+  free: true
+  medium: read
+  short: "cs188"
+
+- id: cs188-videos
+  title: "CS 188 lectures (Spring 2024)"
+  author: UC Berkeley
+  type: video
+  url: https://www.youtube.com/playlist?list=PLp8QV47qJEg67UTShQ4er4RYQ3rOeDKxv
+  free: true
+  medium: watch
+  short: "cs188"
+
+- id: nptel-ai
+  title: An Introduction to Artificial Intelligence
+  author: Mausam, NPTEL, IIT Delhi
+  type: video
+  url: https://www.youtube.com/playlist?list=PLp6ek2hDcoNB_YJCruBFjhF79f5ZHyBuz
+  free: true
+  medium: watch

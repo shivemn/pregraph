@@ -300,3 +300,46 @@
       locator: "The whole course"
       why: "Famous for teaching how to think about models, not just how to fit them."
       verified: true
+
+- id: statistical-inference
+  title: "Mathematical statistics: estimation and testing"
+  area: data
+  summary: Sufficiency, unbiased and maximum likelihood estimators, confidence intervals, most powerful tests and nonparametric tests, with the theory behind them.
+  hours: 40
+  requires: [probability, statistics, calculus]
+  resources:
+    - resource: psu-stat415
+      locator: "The lessons on point estimation, confidence intervals, hypothesis testing and nonparametric methods"
+    - resource: mit-18650
+      locator: "The whole course"
+      verified: true
+    - resource: nptel-stat-inference
+      locator: "The whole course"
+      role: alternative
+      verified: true
+
+- id: linear-models
+  title: Linear models and regression theory
+  area: data
+  summary: Simple and multiple regression in matrix form, the Gauss-Markov theorem, inference on coefficients, diagnostics and model choice.
+  hours: 25
+  requires: [statistical-inference, linear-algebra]
+  resources:
+    - resource: psu-stat501
+      locator: "Lessons 1–12"
+    - resource: mit-18650
+      locator: "The lectures on linear regression"
+      role: alternative
+
+- id: multivariate-analysis
+  title: Multivariate analysis
+  area: data
+  summary: The multivariate normal, Hotelling's T², Wishart, principal components, factor analysis, and multiple and partial correlation.
+  hours: 25
+  requires: [statistical-inference, linear-algebra]
+  resources:
+    - resource: psu-stat505
+      locator: "Lessons 1–12"
+    - resource: nptel-multivariate
+      locator: "The whole course"
+      verified: true

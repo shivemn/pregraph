@@ -158,9 +158,9 @@
   title: GATE computer science
   family: exams
   kind: exam
-  summary: The CS paper of GATE, used for M.Tech admissions and some PSU jobs. Engineering maths is left out here.
+  summary: The CS paper of GATE, used for M.Tech admissions and some PSU jobs. Mapped from the GATE 2027 syllabus (IIT Madras), engineering maths included.
   tiers:
-    hire: [digital-logic, computer-architecture, c-and-memory, trees-heaps, graph-algorithms, greedy-algorithms, dynamic-programming, automata, computability, compilers, os-processes-memory, concurrency, file-systems, networking, sql, database-internals]
+    hire: [discrete-math, linear-algebra, calculus, probability, digital-logic, computer-architecture, c-and-memory, trees-heaps, graph-algorithms, greedy-algorithms, dynamic-programming, automata, computability, compilers, os-processes-memory, concurrency, file-systems, networking, sql, database-internals]
 
 - id: data-scientist
   title: Data scientist
@@ -215,3 +215,35 @@
     hire: [c-and-memory, digital-logic, computer-architecture, microcontrollers, embedded-protocols, git, project-embedded]
     firstYear: [rtos, os-processes-memory, concurrency, testing-debugging]
     extra: [networking]
+
+- id: gate-da
+  title: GATE data science and AI
+  family: exams
+  kind: exam
+  summary: The DA paper of GATE, for M.Tech and M.S. admissions in data science and AI. Mapped from the official GATE 2027 syllabus (IIT Madras).
+  tiers:
+    hire: [probability, statistics, linear-algebra, calculus, programming-basics, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, sql, database-internals, data-warehousing, machine-learning, neural-networks, classical-ai]
+
+- id: gate-st
+  title: GATE statistics
+  family: exams
+  kind: exam
+  summary: The ST paper of GATE, for M.Tech and Ph.D. admissions in statistics and some research jobs. Mapped from the official GATE 2027 syllabus (IIT Madras).
+  tiers:
+    hire: [calculus, multivariable-calculus, real-analysis, linear-algebra, probability, stochastic-processes, statistical-inference, linear-models, multivariate-analysis]
+
+- id: jam-ms
+  title: IIT JAM mathematical statistics
+  family: exams
+  kind: exam
+  summary: The MS paper of JAM, for M.Sc. admissions at the IITs and IISc. About a third maths, two thirds statistics. Mapped from the official JAM syllabus.
+  tiers:
+    hire: [real-analysis, calculus, multivariable-calculus, linear-algebra, probability, statistics, statistical-inference]
+
+- id: ugc-net-cs
+  title: UGC NET computer science
+  family: exams
+  kind: exam
+  summary: Paper 2 of UGC NET in Computer Science and Applications, for assistant professor posts and JRF. Mapped from the ten-unit syllabus NTA publishes; check the current copy on ugcnet.nta.ac.in.
+  tiers:
+    hire: [discrete-math, optimization, digital-logic, computer-architecture, c-and-memory, cpp, oop-design, html-css, sql, database-internals, data-warehousing, os-processes-memory, concurrency, file-systems, distributed-systems, software-engineering, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, greedy-algorithms, complexity-analysis, automata, computability, compilers, networking, classical-ai, neural-networks]

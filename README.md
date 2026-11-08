@@ -14,13 +14,15 @@ Pregraph starts from a ticket: *From a maths graduate, To Backend engineer.* Eac
 
 ## What's here
 
-- **Sixteen roles plus GATE CS:**
+- **Twenty-three roles and five exams:**
   - Software: software engineer, backend, frontend, full-stack, Android, QA/SDET, embedded.
-  - Data: data analyst, data scientist, data engineer, ML engineer, AI/LLM engineer.
+  - Data and ML: data analyst, data scientist, data engineer, ML engineer, deep learning engineer, AI/LLM engineer.
   - Infrastructure: DevOps/SRE, cloud, application support, security analyst.
+  - Finance, economics and quant: quant researcher, quant developer, risk analyst, financial analyst, economist, statistician.
+  - Exams: GATE CS, GATE DA, GATE ST, IIT JAM MS and UGC NET CS, each mapped from its official syllabus.
 - **A tools page** with 68 tools on eleven shelves, for learning one thing on its own: languages from Python to Rust, web and mobile frameworks, ML libraries, databases, BI, DevOps, cloud, testing, security, and platforms like Jira and Salesforce. Each tool page has the three picks and the route to it from your background.
-- **Seven starting points, nothing assumed:** CS or IT, maths or stats, engineering or science graduates; commerce or business graduates; any other degree; or no degree yet. Until you pick one, the route starts from the very beginning.
-- **One shared graph** of 75 concepts, 57 tools and 14 projects, linked to 233 resources, almost all of them free.
+- **Eight starting points, nothing assumed:** CS or IT, maths or stats, engineering or science graduates; commerce, economics or any other degree; or no degree yet. Until you pick one, the route starts from the very beginning.
+- **One shared graph** of 104 concepts, 57 tools and 16 projects, linked to 276 resources, almost all of them free.
 - **Read, watch, practise.** Each stop has one pick of each. Open a stop to see them, along with why it's on your route and what it leads to.
 - **Ticking off progress.** What you finish counts for every role. Each stop can say why it's there, and you can skip what you already know.
 - **A map of the route,** drawn by a layout algorithm written for this project.

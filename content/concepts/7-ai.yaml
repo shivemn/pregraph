@@ -304,3 +304,23 @@
       verified: true
     - resource: learnpytorch-exercises
       locator: "The exercises at the end of chapters 00–06"
+
+- id: classical-ai
+  title: "Classical AI: search, logic and reasoning under uncertainty"
+  area: ai
+  summary: Uninformed, informed and adversarial search, propositional and first-order logic, Bayes nets and inference by elimination and sampling.
+  hours: 30
+  requires: [programming-basics, probability]
+  recommends: [graph-algorithms]
+  resources:
+    - resource: cs188-notes
+      locator: "The notes on search, games, logic and Bayes nets"
+      verified: true
+    - resource: cs188-videos
+      locator: "The whole series"
+      verified: true
+    - resource: nptel-ai
+      locator: "The whole course"
+      role: alternative
+      why: "Mausam's IIT Delhi course, which follows the same topics in an Indian classroom."
+      verified: true

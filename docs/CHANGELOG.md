@@ -1,5 +1,15 @@
 # Changelog
 
+## Deep learning, finance and more exams
+
+- **Dark mode fixes.** Dropdown lists now use the dark colours instead of light grey on white, the route preview's header is readable, and finished stops show their tick.
+- **Deep learning in depth.** The single deep learning stop is now nine: neural networks and backpropagation, convolutional networks, RNNs and LSTMs, attention and transformers, computer vision, NLP, generative models (VAEs, GANs, flows, diffusion), reinforcement learning, and deep learning in practice. Picks include Dive into Deep Learning, Understanding Deep Learning and its notebooks, 3Blue1Brown, Karpathy, Stanford CS231n, CS224n and CS236, MIT 6.S191, fast.ai, Sutton and Barto, and David Silver's course.
+- **A new Economics and finance area** and the maths under it: calculus, multivariable calculus, optimisation, stochastic processes and stochastic calculus, real analysis, time series, Bayesian statistics, mathematical statistics, linear models and multivariate analysis; micro and macroeconomics, econometrics, financial markets, accounting, corporate finance and valuation, derivatives, portfolio theory and risk management, plus two projects. Picks include MIT 18.S096, Aswath Damodaran, Robert Shiller, CORE Econ, Zerodha Varsity (with Hindi versions), OpenStax, Hyndman's forecasting book, Statistical Rethinking and Penn State's statistics courses.
+- **Seven new roles:** deep learning engineer, quant researcher, quant developer, risk analyst, financial analyst, economist and statistician.
+- **Four new exams,** mapped from their official syllabi: GATE data science and AI, GATE statistics, IIT JAM mathematical statistics, and UGC NET computer science. GATE CS now includes its engineering maths and follows the GATE 2027 syllabus.
+- **Classical AI** (search, logic, Bayes nets) from Berkeley's CS 188 and Mausam's NPTEL course, for GATE DA and UGC NET.
+- **Economics graduates** are a new starting point. Starting points now know calculus where the degree covers it, and commerce graduates know accounting.
+
 ## Every common tool
 
 - **The tools page now has 68 tools on eleven shelves:** languages, web frameworks, mobile, data science and ML libraries, databases and search, BI and data engineering, DevOps, cloud, testing, security, and workplace platforms. A row of links at the top jumps to each shelf.

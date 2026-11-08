@@ -131,3 +131,20 @@
     - resource: mit-18s096
       locator: "Lectures 18 and 21: Itô calculus, stochastic differential equations"
       verified: true
+
+- id: real-analysis
+  title: Real analysis
+  area: foundations
+  summary: Calculus done rigorously. Sequences, series, continuity, differentiation and integration, with proofs.
+  hours: 40
+  requires: [calculus, proofs]
+  resources:
+    - resource: lebl-analysis
+      locator: "Chapters 1–6"
+    - resource: mit-18100a
+      locator: "The whole course"
+      verified: true
+    - resource: nptel-real-analysis
+      locator: "The whole course"
+      role: alternative
+      verified: true
