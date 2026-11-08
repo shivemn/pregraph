@@ -27,6 +27,12 @@ Every role in `content/roles.yaml` starts as a draft: a list of what we think th
 
 The role page then says "Based on 52 job postings" instead of "Draft".
 
+## What the job looks like
+
+Every job role page ends with "What the job looks like". It always has live searches on Naukri, LinkedIn and Indeed, built from the role's title (or its `search` field when the title isn't what employers write), and an official description such as O*NET when `reference` is set.
+
+A role can also carry a `posting` block: a short summary of real entry-level listings, written in our own words, with how many listings named each skill. It's lighter than the evidence above (titles, experience and card tags rather than full postings) and doesn't take a role out of draft. Say where the listings came from in `method`, and keep the counts in `research/postings/`. The first five are in `research/postings/naukri-2026-11.md`.
+
 ## Keeping it honest
 
 - Re-collect once a year. Job markets move.

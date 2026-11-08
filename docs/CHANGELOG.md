@@ -1,5 +1,11 @@
 # Changelog
 
+## What the job looks like
+
+- **Every job role now ends with "What the job looks like".** Live searches on Naukri (freshers), LinkedIn and Indeed for that job, so you can read real openings today. A link under the role's summary jumps there.
+- **Five roles summarise real listings:** software engineer, backend engineer, data analyst, data scientist and DevOps engineer. Each says what you'd do, the titles you'll see, the experience asked for, and how many of about 40 entry-level listings named each skill, written in our own words from Naukri in November 2026. The counts are in `research/postings/naukri-2026-11.md`.
+- **Official descriptions** from O*NET on the software and data roles.
+
 ## Your train: study time, coaches and the terminus
 
 - **Study time.** Pick how many hours a week you can give (5, 10, 15, 20 or full time). The route then says how long it takes in weeks or months and roughly when you'll arrive, instead of a bare number of hours.

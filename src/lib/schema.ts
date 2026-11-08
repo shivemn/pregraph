@@ -117,6 +117,28 @@ export const roleSchema = z.object({
       note: z.string().optional(),
     })
     .optional(),
+  /** Search term for the live job-board links, if the title isn't a good one. */
+  search: z.string().optional(),
+  /**
+   * What an entry-level posting for this role looks like, written in our own
+   * words from real listings. Counts are how many listings named each skill.
+   */
+  posting: z
+    .object({
+      source: z.string().min(1),
+      listings: z.number().int().positive(),
+      collected: z.string().regex(/^\d{4}-\d{2}$/, 'use YYYY-MM'),
+      method: z.string().min(1),
+      titles: z.array(z.string()).min(1),
+      experience: z.string().min(1),
+      doing: z.array(z.string()).min(1),
+      asks: z.array(z.object({ skill: z.string(), listings: z.number().int().nonnegative() })).min(1),
+      /** How many listings had skill tags at all; the asks are out of this. */
+      tagged: z.number().int().positive(),
+    })
+    .optional(),
+  /** An official description of the occupation, such as O*NET. */
+  reference: z.object({ title: z.string(), url: z.string().url() }).optional(),
 });
 
 export type Medium = z.infer<typeof resourceSchema>['medium'];

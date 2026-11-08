@@ -16,6 +16,21 @@ const c = content();
 const role = c.roles.find((r) => r.id === Astro.params.id)!;
 const family = c.families.find((f) => f.id === role.family)!;
 const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((t) => t.n > 0);
+
+// Live job-board searches. The title before any "/" or "(" is usually what
+// employers call the job; a role can name a better term with `search`.
+const term = (role.search ?? role.title.split(/[/(]/)[0]!).trim();
+const q = encodeURIComponent(term);
+const slug = term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const boards = [
+  { name: 'Naukri', note: 'freshers, India', url: `https://www.naukri.com/${slug}-jobs?experience=0` },
+  { name: 'LinkedIn', note: 'India', url: `https://www.linkedin.com/jobs/search/?keywords=${q}&location=India` },
+  { name: 'Indeed', note: 'India', url: `https://in.indeed.com/jobs?q=${q}` },
+];
+const posting = role.posting;
+const isJob = role.kind !== 'exam';
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.slice(0, 4)}`;
 ---
 
 <Base title={role.title} description={role.summary} wide>
@@ -23,6 +38,7 @@ const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((
     <p class="crumbs quiet"><a href="/roles">Roles</a> / {family.title}</p>
     <h1><span class="board">{role.title}</span></h1>
     <p class="lede quiet">{role.summary}</p>
+    {isJob && <p class="jump"><a href="#the-job">{posting ? 'What the job looks like, from real listings' : 'See real openings for this job'}</a></p>}
     {
       role.evidence ? (
         <p class="evidence">
@@ -31,7 +47,11 @@ const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((
         </p>
       ) : (
         <p class="evidence draft">
-          Draft. {role.kind === 'exam' ? 'Based on the published syllabus as we read it.' : 'This list is our judgement and hasn’t been checked against real job postings yet.'}{' '}
+          {role.kind === 'exam'
+            ? 'Draft. Based on the published syllabus as we read it.'
+            : posting
+              ? 'Draft. The route is our judgement, checked against real listings below.'
+              : 'Draft. This route is our judgement and hasn’t been checked against real job postings yet.'}{' '}
           <a href="https://github.com/shivemn/terminus/blob/main/docs/ROLES.md">How roles get checked</a>
         </p>
       )
@@ -45,8 +65,61 @@ const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((
     areas={c.areas}
     tiers={TIERS}
     backgrounds={c.backgrounds}
-        backgroundGroups={BACKGROUND_GROUPS}
+    backgroundGroups={BACKGROUND_GROUPS}
   />
+
+  {
+    isJob && (
+      <section class="job" id="the-job" aria-labelledby="the-job-title">
+        <h2 id="the-job-title">What the job looks like</h2>
+        {posting ? (
+          <>
+            <p class="job-source quiet">
+              Summarised in our own words from {posting.listings} entry-level listings on {posting.source}, {monthName(posting.collected)}.
+              {' '}{posting.method}
+            </p>
+            <div class="job-grid">
+              <div>
+                <h3>What you'd do</h3>
+                <ul class="job-doing">{posting.doing.map((d) => <li>{d}</li>)}</ul>
+                <h3>Titles you'll see</h3>
+                <p>{posting.titles.join(', ')}.</p>
+                <h3>Experience asked for</h3>
+                <p>{posting.experience}</p>
+              </div>
+              <div>
+                <h3>What the listings ask for</h3>
+                <p class="quiet small">Out of the {posting.tagged} listings that named skills. Listings show only a few tags, so the real numbers are higher.</p>
+                <ul class="asks">
+                  {posting.asks.map((a) => (
+                    <li>
+                      <span class="ask-name">{a.skill}</span>
+                      <span class="ask-bar" aria-hidden="true"><span style={`width:${Math.round((a.listings / posting.tagged) * 100)}%`} /></span>
+                      <span class="ask-n">{a.listings} of {posting.tagged}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </>
+        ) : (
+          <p class="quiet">We haven't summarised real listings for this role yet. The searches below show what's open today.</p>
+        )}
+        <div class="openings">
+          <h3>See real openings now</h3>
+          <p class="boards">
+            {boards.map((b) => (
+              <a class="board-link" href={b.url} rel="noopener" target="_blank">{b.name} <span class="quiet">({b.note})</span></a>
+            ))}
+          </p>
+          <p class="quiet small">Searches for “{term}”. Read a few listings end to end: the skills repeat quickly.</p>
+          {role.reference && (
+            <p class="small">Official description: <a href={role.reference.url} rel="noopener">{role.reference.title}</a></p>
+          )}
+        </div>
+      </section>
+    )
+  }
 
   <noscript>
     <section class="static-list">
@@ -69,4 +142,24 @@ const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((
   .evidence { font-size: 0.95rem; color: var(--ink-2); padding: 6px 12px; border-left: 5px solid var(--programming); background: var(--platform); }
   .evidence.draft { border-left-color: var(--warn); }
   .static-list { margin-top: 24px; }
+  .jump { font-weight: 600; }
+
+  .job { margin-top: 56px; padding-top: 28px; border-top: 4px solid var(--ink); max-width: 1000px; }
+  .job h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+  .job h3 { font-size: 1.25rem; margin: 22px 0 8px; }
+  .job-source { max-width: 70ch; margin-top: 8px; }
+  .small { font-size: 0.92rem; }
+  .job-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 48px; }
+  @media (max-width: 760px) { .job-grid { grid-template-columns: 1fr; } }
+  .job-doing { padding-left: 1.2em; display: grid; gap: 6px; }
+  .asks { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 10px; }
+  .asks li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: baseline; }
+  .ask-bar { grid-column: 1 / -1; grid-row: 2; height: 10px; background: var(--platform); border: 1.5px solid var(--ink); }
+  .ask-bar span { display: block; height: 100%; background: var(--yellow); border-right: 1.5px solid var(--ink); }
+  .ask-n { font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 0.92rem; white-space: nowrap; }
+  .openings { margin-top: 28px; padding: 16px 18px; background: var(--platform); border-left: 5px solid var(--yellow); }
+  .openings h3 { margin-top: 0; }
+  .boards { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0; }
+  .board-link { display: inline-block; padding: 6px 12px; border: 2px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 600; background: var(--paper); }
+  .board-link:hover, .board-link:focus-visible { background: var(--yellow); color: #000; }
 </style>

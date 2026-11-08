@@ -9,6 +9,31 @@
     hire: [programming-basics, oop-design, git, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, algorithm-practice, sql, testing-debugging]
     firstYear: [web-http, os-processes-memory, concurrency, networking, system-design, software-engineering, ci-cd]
     extra: [distributed-systems, database-internals, docker, project-portfolio-api]
+  search: software engineer fresher
+  posting:
+    source: Naukri
+    listings: 40
+    collected: 2026-11
+    method: "The first 40 listings for \"software engineer\" with 0 years' experience, India."
+    tagged: 40
+    titles: [Software engineer, Graduate software engineer, AI software engineer, Software engineer (fresher)]
+    experience: "Most say 0–5 years or 0–1 year. Large companies (Capgemini, Cisco, Qualcomm, Google) post one opening for a wide range of experience."
+    doing:
+      - Write and fix code for one part of a larger product, usually in a team with a senior reviewing your work.
+      - Read existing code, find bugs and fix them. Freshers spend more time here than writing new code.
+      - Write tests, use Git and code review, and follow the team's process (often Agile).
+      - "At product and chip companies, work closer to the system: C++, Linux, embedded or performance work."
+    asks:
+      - { skill: "JavaScript and web basics", listings: 12 }
+      - { skill: "C++", listings: 8 }
+      - { skill: "Machine learning and AI", listings: 8 }
+      - { skill: "SQL and databases", listings: 6 }
+      - { skill: "Docker and cloud", listings: 6 }
+      - { skill: "C# and .NET", listings: 5 }
+      - { skill: "Embedded systems", listings: 5 }
+      - { skill: "Git and version control", listings: 5 }
+  reference: { title: "Software Developers (O*NET 15-1252.00)", url: "https://www.onetonline.org/link/summary/15-1252.00" }
+
 
 - id: backend-engineer
   title: Backend engineer
@@ -18,6 +43,32 @@
     hire: [java, oop-design, git, sql, rest-apis, backend-framework, hash-tables, trees-heaps, algorithm-practice, testing-debugging, shell-tools, project-portfolio-api]
     firstYear: [database-internals, concurrency, system-design, docker, ci-cd, web-security, messaging]
     extra: [distributed-systems, kubernetes, observability, redis]
+  search: backend developer
+  posting:
+    source: Naukri
+    listings: 40
+    collected: 2026-11
+    method: "The first 40 listings for \"backend developer\" with 0 years' experience, India."
+    tagged: 37
+    titles: [Backend developer, Junior backend developer, Backend developer intern, Java backend developer, Node.js backend developer]
+    experience: "24 of 40 ask for 0–2 years or less. Most of the rest say 0–3 to 0–5 years."
+    doing:
+      - Build the APIs an app or website calls, and the code behind them.
+      - Design database tables and write the queries that read and write them.
+      - Debug problems in a running system, from a slow query to a failed request.
+      - Agree with frontend and mobile developers on what each API takes and returns.
+      - Write tests and work in Git with code review.
+    asks:
+      - { skill: "SQL and databases (MySQL, PostgreSQL, MongoDB)", listings: 22 }
+      - { skill: "Web basics (HTML, CSS, JavaScript, jQuery)", listings: 11 }
+      - { skill: "Python (Django, Flask)", listings: 10 }
+      - { skill: "JavaScript or Node.js", listings: 9 }
+      - { skill: "REST APIs", listings: 8 }
+      - { skill: "Git and version control", listings: 8 }
+      - { skill: "Java and Spring", listings: 7 }
+      - { skill: "Debugging and testing", listings: 6 }
+  reference: { title: "Software Developers (O*NET 15-1252.00)", url: "https://www.onetonline.org/link/summary/15-1252.00" }
+
 
 - id: frontend-engineer
   title: Frontend engineer
@@ -63,6 +114,31 @@
     hire: [spreadsheets, sql, statistics, pandas, data-visualization, project-data-analysis]
     firstYear: [bi-tools, probability, git]
     extra: [machine-learning]
+  search: data analyst
+  posting:
+    source: Naukri
+    listings: 40
+    collected: 2026-11
+    method: "The first 40 listings for \"data analyst\" with 0 years' experience, India."
+    tagged: 38
+    titles: [Data analyst, Junior data analyst, Data analyst (apprentice), Data governance analyst]
+    experience: "Most ask for 0–1 or 0–3 years. This is one of the most common first jobs for freshers from any degree."
+    doing:
+      - Pull data with SQL, clean it and check that it's right.
+      - Build and keep up dashboards and regular reports, usually in Power BI or Excel.
+      - Answer questions from managers with numbers and a short explanation.
+      - Spot problems in data quality and get them fixed at the source.
+    asks:
+      - { skill: "Python", listings: 17 }
+      - { skill: "SQL", listings: 16 }
+      - { skill: "Power BI or other BI tools", listings: 14 }
+      - { skill: "Data cleaning and validation", listings: 10 }
+      - { skill: "Dashboards and reporting", listings: 7 }
+      - { skill: "Cloud (AWS, Azure)", listings: 7 }
+      - { skill: "Excel and Google Sheets", listings: 5 }
+      - { skill: "Machine learning", listings: 5 }
+  reference: { title: "Business Intelligence Analysts (O*NET 15-2051.01)", url: "https://www.onetonline.org/link/summary/15-2051.01" }
+
 
 - id: data-engineer
   title: Data engineer
@@ -90,6 +166,30 @@
     hire: [shell-tools, linux-admin, git, networking, docker, ci-cd, cloud-basics, programming-basics, project-deploy-pipeline]
     firstYear: [kubernetes, observability, infrastructure-as-code, os-processes-memory]
     extra: [distributed-systems, systems-security, concurrency]
+  search: devops engineer
+  posting:
+    source: Naukri
+    listings: 37
+    collected: 2026-11
+    method: "The first 20 listings for \"devops engineer\" with 0 years' experience, plus the first 20 for \"devops\" with 1 year, India. Three repeats removed."
+    tagged: 36
+    titles: [DevOps engineer, Junior DevOps engineer, Azure DevOps engineer, DevOps engineer (trainee or intern), Cloud DevOps engineer]
+    experience: "There are few true fresher openings. Most ask for 0–5 or 1–3 years; many people move in from support, testing or sysadmin work."
+    doing:
+      - Build and look after the pipelines that test and deploy code.
+      - Package apps in containers and run them on Kubernetes or a cloud service.
+      - Write infrastructure as code (Terraform) instead of clicking in a console.
+      - Watch dashboards and alerts, and help fix outages.
+    asks:
+      - { skill: "CI/CD (Jenkins, GitHub Actions, Azure DevOps)", listings: 27 }
+      - { skill: "Docker and containers", listings: 15 }
+      - { skill: "AWS", listings: 13 }
+      - { skill: "Kubernetes", listings: 11 }
+      - { skill: "Azure", listings: 10 }
+      - { skill: "Terraform and infrastructure as code", listings: 10 }
+      - { skill: "Git", listings: 7 }
+      - { skill: "Monitoring (Grafana, Prometheus)", listings: 7 }
+
 
 - id: deep-learning-engineer
   title: Deep learning engineer (vision / language)
@@ -332,6 +432,31 @@
     hire: [statistics, probability, sql, pandas, data-visualization, machine-learning, experiments, feature-engineering, project-data-science]
     firstYear: [git, bi-tools, query-performance]
     extra: [deep-learning, spark]
+  search: data scientist
+  posting:
+    source: Naukri
+    listings: 40
+    collected: 2026-11
+    method: "The first 40 listings for \"data scientist\" with 0 years' experience, India."
+    tagged: 39
+    titles: [Data scientist, Data scientist I, AI/ML data scientist, Data scientist (NLP), Data scientist with generative AI]
+    experience: "Few are truly for freshers: most say 0–3 to 0–5 years, and companies often hire analysts first and move them up."
+    doing:
+      - Turn a business question (who will default, what will sell) into a modelling problem.
+      - Clean and explore data, then build, test and compare models.
+      - Explain results to people who don't read code, with charts and plain numbers.
+      - Increasingly, build features on top of language models and other pre-trained models.
+    asks:
+      - { skill: "Machine learning", listings: 23 }
+      - { skill: "Python (pandas, NumPy)", listings: 17 }
+      - { skill: "Statistics and modelling", listings: 11 }
+      - { skill: "Data visualisation and BI", listings: 11 }
+      - { skill: "Deep learning (TensorFlow, PyTorch)", listings: 10 }
+      - { skill: "NLP and generative AI", listings: 10 }
+      - { skill: "SQL and databases", listings: 7 }
+      - { skill: "Cloud (AWS, Azure, Databricks)", listings: 6 }
+  reference: { title: "Data Scientists (O*NET 15-2051.00)", url: "https://www.onetonline.org/link/summary/15-2051.00" }
+
 
 - id: ai-engineer
   title: AI / LLM engineer
