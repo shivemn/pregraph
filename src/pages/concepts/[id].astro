@@ -42,6 +42,9 @@ const shelf = c.toolGroups.find((g) => g.tools.includes(concept.id));
       {shelf && (
         <p><a href={`/tools/${concept.id}`}>Learning just this? See your route to it</a></p>
       )}
+      {concept.kind === 'project' && (
+        <p class="quiet">When it works, put it online: the <a href="/tools#shelf-hosting">hosting shelf</a> lists free places for sites, APIs and databases.</p>
+      )}
     </header>
 
     <section aria-labelledby="learn">

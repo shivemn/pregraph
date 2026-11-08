@@ -71,7 +71,7 @@
   tiers:
     hire: [programming-basics, sql, data-warehousing, pandas, spark, shell-tools, git, project-data-pipeline]
     firstYear: [orchestration, database-internals, cloud-basics, docker, messaging]
-    extra: [distributed-systems, kubernetes, dbt, snowflake]
+    extra: [distributed-systems, kubernetes, dbt, snowflake, databricks]
 
 - id: ml-engineer
   title: Machine learning engineer
@@ -177,7 +177,7 @@
   summary: Builds products on top of large language models. Mostly software engineering, plus retrieval, prompting and careful evaluation.
   tiers:
     hire: [programming-basics, git, rest-apis, llm-basics, llm-apis, embeddings, rag, llm-evaluation, project-llm-app]
-    firstYear: [machine-learning, docker, cloud-basics, testing-debugging]
+    firstYear: [machine-learning, docker, cloud-basics, testing-debugging, hugging-face]
     extra: [deep-learning, mlops]
 
 - id: cloud-engineer

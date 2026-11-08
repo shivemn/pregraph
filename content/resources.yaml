@@ -2568,3 +2568,134 @@
   free: true
   medium: practice
   note: "Short courses that run inside your own GitHub repository."
+
+- id: gh-pages-start
+  title: "Quickstart for GitHub Pages"
+  author: "GitHub"
+  type: site
+  url: https://docs.github.com/en/pages/quickstart
+  free: true
+  medium: read
+
+- id: gh-pages-video
+  title: "Getting started with GitHub Pages"
+  author: "GitHub"
+  type: video
+  url: https://www.youtube.com/watch?v=b2r9Cdvssi0
+  free: true
+  medium: watch
+  note: "Four minutes."
+
+- id: cf-pages-start
+  title: "Cloudflare Pages: Getting started"
+  author: "Cloudflare"
+  type: site
+  url: https://developers.cloudflare.com/pages/get-started/
+  free: true
+  medium: read
+
+- id: cf-workers-course
+  title: "Learn Cloudflare Workers 101"
+  author: "Cloudflare Developers"
+  type: video
+  url: https://www.youtube.com/watch?v=H7Qe96fqg1M
+  free: true
+  medium: watch
+  note: "An hour."
+
+- id: vercel-start
+  title: "Getting started with Vercel"
+  author: "Vercel"
+  type: site
+  url: https://vercel.com/docs/getting-started-with-vercel
+  free: true
+  medium: read
+
+- id: vercel-walkthrough
+  title: "Vercel Product Walkthrough"
+  author: "Vercel"
+  type: video
+  url: https://www.youtube.com/watch?v=sPmat30SE4k
+  free: true
+  medium: watch
+
+- id: netlify-start
+  title: "Deploy from your repository"
+  author: "Netlify"
+  type: site
+  url: https://docs.netlify.com/start/quickstarts/deploy-from-repository/
+  free: true
+  medium: read
+
+- id: render-start
+  title: "Your First Render Deploy"
+  author: "Render"
+  type: site
+  url: https://render.com/docs/your-first-deploy
+  free: true
+  medium: read
+
+- id: neon-start
+  title: "Neon docs: Getting started"
+  author: "Neon"
+  type: site
+  url: https://neon.com/docs/get-started/signing-up
+  free: true
+  medium: read
+
+- id: supabase-start
+  title: "Supabase: Getting Started"
+  author: "Supabase"
+  type: site
+  url: https://supabase.com/docs/guides/getting-started
+  free: true
+  medium: read
+
+- id: pedrotech-supabase
+  title: "Supabase Full Course"
+  author: "PedroTech"
+  type: video
+  url: https://www.youtube.com/watch?v=kyphLGnSz6Q
+  free: true
+  medium: watch
+
+- id: firebase-start
+  title: "Add Firebase to your JavaScript project"
+  author: "Google"
+  type: site
+  url: https://firebase.google.com/docs/web/setup
+  free: true
+  medium: read
+
+- id: fcc-firebase
+  title: "Firebase – Full Course for Beginners"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=fgdpvwEWJ9M
+  free: true
+  medium: watch
+
+- id: databricks-start
+  title: "Get started tutorials on Databricks"
+  author: "Databricks"
+  type: site
+  url: https://docs.databricks.com/aws/en/getting-started/
+  free: true
+  medium: read
+  note: "The Free Edition is enough to follow along."
+
+- id: codebasics-databricks
+  title: "Databricks Free Edition Tutorial with an end-to-end project"
+  author: "codebasics"
+  type: video
+  url: https://www.youtube.com/watch?v=761SQ9Hxbic
+  free: true
+  medium: watch
+
+- id: assemblyai-hf
+  title: "Getting Started With Hugging Face in 15 Minutes"
+  author: "AssemblyAI"
+  type: video
+  url: https://www.youtube.com/watch?v=QEaBAZQCtwE
+  free: true
+  medium: watch

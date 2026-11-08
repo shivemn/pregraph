@@ -16,7 +16,7 @@
 
 - id: ml
   title: Data science and machine learning libraries
-  tools: [pandas, scikit-learn, pytorch, tensorflow]
+  tools: [pandas, scikit-learn, pytorch, tensorflow, hugging-face]
 
 - id: databases
   title: Databases, search and streaming
@@ -24,7 +24,7 @@
 
 - id: data
   title: Spreadsheets, BI and data engineering
-  tools: [spreadsheets, bi-tools, tableau, dbt, snowflake, spark, orchestration]
+  tools: [spreadsheets, bi-tools, tableau, dbt, snowflake, databricks, spark, orchestration]
 
 - id: devops
   title: Developer tools and DevOps
@@ -33,6 +33,10 @@
 - id: cloud
   title: Cloud
   tools: [cloud-basics, azure, gcp, infrastructure-as-code]
+
+- id: hosting
+  title: Hosting and deployment (free tiers)
+  tools: [github-pages, cloudflare, vercel, netlify, render, neon, supabase, firebase]
 
 - id: testing
   title: Testing

@@ -1,0 +1,148 @@
+# Where to put your projects online, mostly on free tiers. Free tiers change
+# often, so the summaries say what each is for, not the exact limits.
+
+- id: github-pages
+  title: GitHub Pages
+  area: infra
+  kind: tool
+  summary: Free hosting for static sites straight from a GitHub repository. The simplest place for a portfolio.
+  hours: 2
+  requires: [git, html-css]
+  resources:
+    - resource: gh-pages-start
+      locator: "The quickstart"
+      verified: true
+    - resource: gh-pages-video
+      locator: "The whole video"
+      verified: true
+
+- id: cloudflare
+  title: Cloudflare Pages and Workers
+  area: infra
+  kind: tool
+  summary: Static sites on Pages and small serverless functions on Workers, served from Cloudflare's network, with a generous free tier.
+  hours: 6
+  requires: [git]
+  recommends: [web-http, javascript]
+  resources:
+    - resource: cf-pages-start
+      locator: "Getting started, then the Workers docs when you need a backend"
+      verified: true
+    - resource: cf-workers-course
+      locator: "The whole course"
+      verified: true
+
+- id: vercel
+  title: Vercel
+  area: infra
+  kind: tool
+  summary: Deploy frontends and Next.js apps from a Git repository, with a preview link for every branch.
+  hours: 3
+  requires: [git]
+  recommends: [react, nextjs]
+  resources:
+    - resource: vercel-start
+      locator: "Getting started with Vercel"
+      verified: true
+    - resource: vercel-walkthrough
+      locator: "The whole video"
+      verified: true
+
+- id: netlify
+  title: Netlify
+  area: infra
+  kind: tool
+  summary: Deploy static sites and frontends from a Git repository, with forms and serverless functions built in.
+  hours: 3
+  requires: [git]
+  resources:
+    - resource: netlify-start
+      locator: "Deploy from your repository"
+      verified: true
+
+- id: render
+  title: Render
+  area: infra
+  kind: tool
+  summary: Hosting for backends, APIs and background workers, deployed from Git or a Dockerfile. Free instances sleep when idle.
+  hours: 4
+  requires: [git, rest-apis]
+  recommends: [docker]
+  resources:
+    - resource: render-start
+      locator: "Your First Render Deploy"
+      verified: true
+
+- id: neon
+  title: Neon
+  area: data
+  kind: tool
+  summary: Serverless Postgres with a free tier, and database branches you can make like Git branches.
+  hours: 3
+  requires: [sql]
+  resources:
+    - resource: neon-start
+      locator: "The Getting started section"
+      verified: true
+
+- id: supabase
+  title: Supabase
+  area: data
+  kind: tool
+  summary: A Postgres database with sign-in, file storage and an API generated for you. A quick backend for side projects.
+  hours: 8
+  requires: [sql]
+  recommends: [rest-apis, javascript]
+  resources:
+    - resource: supabase-start
+      locator: "Getting Started, then the quickstart for your framework"
+      verified: true
+    - resource: pedrotech-supabase
+      locator: "The whole video"
+      verified: true
+
+- id: firebase
+  title: Firebase
+  area: web
+  kind: tool
+  summary: Google's app backend. Sign-in, a NoSQL database, hosting and functions, common in mobile apps.
+  hours: 8
+  requires: [javascript]
+  resources:
+    - resource: firebase-start
+      locator: "Add Firebase to your JavaScript project, then Authentication and Cloud Firestore"
+      verified: true
+    - resource: fcc-firebase
+      locator: "The whole video"
+      verified: true
+
+- id: databricks
+  title: Databricks
+  area: data
+  kind: tool
+  summary: The data and AI platform built around Spark. Notebooks, Delta tables, jobs and SQL warehouses in one place.
+  hours: 15
+  requires: [sql]
+  recommends: [spark, programming-basics]
+  resources:
+    - resource: databricks-start
+      locator: "The Get started tutorials"
+      verified: true
+    - resource: codebasics-databricks
+      locator: "The whole video, on the free edition"
+      verified: true
+
+- id: hugging-face
+  title: Hugging Face
+  area: ai
+  kind: tool
+  summary: The Hub for open models and datasets, and the Transformers library for using and fine-tuning them.
+  hours: 10
+  requires: [programming-basics]
+  recommends: [transformers, pytorch]
+  resources:
+    - resource: hf-llm-course
+      locator: "Chapters 1–4: using Transformers, fine-tuning, sharing on the Hub"
+    - resource: assemblyai-hf
+      locator: "The whole video"
+      verified: true
