@@ -1,5 +1,16 @@
 # Changelog
 
+## Your train: study time, coaches and the terminus
+
+- **Study time.** Pick how many hours a week you can give (5, 10, 15, 20 or full time). The route then says how long it takes in weeks or months and roughly when you'll arrive, instead of a bare number of hours.
+- **The next stop comes first.** The summary leads with how long and when, then "Next stop", then the total as a range of hours, since the per-topic hours are estimates.
+- **Coaches.** The route is split into coaches of about a month each at your pace, in order, with the weeks each one covers. A coach turns yellow when every stop in it is done. Coaches are worked out over the whole route, so ticking a stop never reshuffles them (`src/lib/coaches.ts`, with property tests).
+- **The train.** A strip above the route shows the engine, a carriage per coach that fills in as you go, and the role's terminus board. Tap a carriage to jump to it.
+- **The terminus.** The route ends at a station board with the role's name.
+- A line explains why it takes longer than a YouTube course promises: the video is in there too, and the rest is practice.
+- The home page preview gives months at 10 hours a week instead of total hours.
+- The header now shows the end-of-the-line mark; the browser tab keeps the T.
+
 ## Pregraph is now Terminus
 
 - New name: Terminus, after the station every Mumbai local runs towards, and the job at the end of your route. The site now lives at terminus.pages.dev and the repository at github.com/shivemn/terminus.

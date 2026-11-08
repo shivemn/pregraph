@@ -7,6 +7,7 @@
 // you picked are stored per role.
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { indexConcepts, planPath, type ConceptNode, type PlanStep } from '../lib/graph';
+import { coaches, duration, hourRange } from '../lib/coaches';
 
 // The map pulls in the layout code, so it only loads when someone opens it.
 const RouteMap = lazy(() => import('./RouteMap'));
@@ -33,7 +34,22 @@ interface Me {
   known: string[];
   /** Things you've finished. They stay in the plan, ticked. */
   done: string[];
+  /** Hours of study a week. Turns hours into weeks, months and coaches. */
+  pace?: number;
 }
+
+/** The study-time choices. 10 a week is the default: about an hour and a half a day. */
+const PACES = [
+  { hours: 5, label: '5 h a week' },
+  { hours: 10, label: '10 h a week' },
+  { hours: 15, label: '15 h a week' },
+  { hours: 20, label: '20 h a week' },
+  { hours: 40, label: '40 h a week (full time)' },
+];
+const DEFAULT_PACE = 10;
+
+const monthYear = (weeksFromNow: number) =>
+  new Date(Date.now() + weeksFromNow * 7 * 24 * 3600 * 1000).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
 
 interface RoleState {
   tier?: TierId;
@@ -167,6 +183,9 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
   const stateOf = (s: PlanStep): 'done' | 'ready' | 'waiting' =>
     done.has(s.id) ? 'done' : s.waitingOn.every((p) => done.has(p)) ? 'ready' : 'waiting';
 
+  const pace = PACES.some((p) => p.hours === me.pace) ? me.pace! : DEFAULT_PACE;
+  const train = useMemo(() => coaches(plan.steps, pace), [plan.steps, pace]);
+  const nextStop = plan.steps.find((s) => !done.has(s.id) && s.waitingOn.every((p) => done.has(p)));
   const finished = plan.steps.filter((s) => done.has(s.id));
   const hoursLeft = plan.steps.filter((s) => !done.has(s.id)).reduce((h, s) => h + s.hours, 0);
   const left = plan.steps.length - finished.length;
@@ -208,6 +227,14 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
               ))}
             </select>
           </label>
+          <label className="control">
+            <span className="control-label">Study time</span>
+            <select value={pace} onChange={(e) => setMe((m) => ({ ...m, pace: Number(e.target.value) }))}>
+              {PACES.map((p) => (
+                <option key={p.hours} value={p.hours}>{p.label}</option>
+              ))}
+            </select>
+          </label>
           {usedTiers.length > 1 && (
             <div className="control">
               <span className="control-label" id="tier-label">How far</span>
@@ -228,19 +255,33 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
             already covers is left out.
           </p>
         )}
-        <p className="summary" aria-live="polite">
+        <div className="summary" aria-live="polite">
           {left === 0 ? (
-            <>{goal === 'tool'
-              ? `You've finished every stop on this route, ${role.title} included.`
-              : "You've finished every stop on this route. Try the next tier, or another role."}</>
+            <p className="summary-main">
+              {goal === 'tool'
+                ? `You've finished every stop on this route, ${role.title} included.`
+                : "You've finished every stop on this route. Try the next tier, or another role."}
+            </p>
           ) : (
             <>
-              <strong className="num">{left}</strong> {left === 1 ? 'stop' : 'stops'} to go, about{' '}
-              <strong className="num">{hoursLeft}</strong> hours of study.
-              {finished.length > 0 && <> You've finished {finished.length}.</>}
+              <p className="summary-main">
+                <strong>{duration(hoursLeft, pace)}</strong> at {pace} hours a week
+                {loaded && <>, arriving around <strong>{monthYear(hoursLeft / pace)}</strong></>}.
+              </p>
+              {nextStop && (
+                <p className="summary-next">
+                  Next stop: <button className="link-button" onClick={() => openPanel(nextStop.id)}>{nextStop.title}</button>,{' '}
+                  {duration(nextStop.hours, pace)}.
+                </p>
+              )}
+              <p className="summary-small quiet">
+                {left} {left === 1 ? 'stop' : 'stops'} in {train.length} {train.length === 1 ? 'coach' : 'coaches'},{' '}
+                {hourRange(hoursLeft).join('–')} hours of study in all.
+                {finished.length > 0 && <> You've finished {finished.length}.</>}
+              </p>
             </>
           )}
-        </p>
+        </div>
         <div className="tabs view-switch" role="group" aria-label="View">
           <button aria-pressed={view === 'list'} onClick={() => setView('list')}>List</button>
           <button aria-pressed={view === 'map'} onClick={() => setView('map')}>Map</button>
@@ -259,53 +300,98 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
           </Suspense>
         ) : (
         <>
-        <p className="hint faint">Open a stop to see the book, the video course and the practice for it. Tick its circle when you've finished.</p>
+        <p className="hint faint">
+          Open a stop to see the book, the video course and the practice for it. Tick its circle when you've finished.
+          Longer than a YouTube course promises? The video is in here too; the rest of the time is practice, which is
+          what makes it stick.
+        </p>
 
-        <ol className="route">
-          {plan.steps.map((s) => {
-            const state = stateOf(s);
-            const status =
-              state === 'done'
-                ? 'Done.'
-                : state === 'ready'
-                  ? 'Ready to start.'
-                  : `After ${listOf(s.waitingOn.filter((p) => !done.has(p)).map(titleOf))}.`;
+        <nav className="train" aria-label="Your train">
+          <span className="engine" aria-hidden="true" />
+          {train.map((c) => {
+            const d = c.stops.filter((s) => done.has(s.id)).length;
             return (
-              <li key={s.id} className="stop" data-area={s.area} data-state={state} data-kind={kindOf(s.id)}>
-                <button
-                  className="station"
-                  aria-pressed={state === 'done'}
-                  aria-label={state === 'done' ? `Mark ${s.title} as not done` : `Mark ${s.title} as done`}
-                  title={state === 'done' ? 'Mark as not done' : 'Mark as done'}
-                  onClick={() => toggleDone(s.id)}
-                >
-                  <Tick />
-                </button>
-                <div className="stop-body">
-                  <div className="stop-head">
-                    <button className="stop-title" aria-haspopup="dialog" onClick={() => openPanel(s.id)}>{s.title}</button>
-                    {kindOf(s.id) !== 'concept' && <span className="kind">{kindOf(s.id) === 'tool' ? 'Tool' : 'Project'}</span>}
-                    <span className="stop-hours">{s.hours} h</span>
-                  </div>
-                  <p className="stop-sub">
-                    <span className="area-name">{areaTitle.get(s.area)}</span>. {status}
-                  </p>
-                </div>
-              </li>
+              <a
+                key={c.number}
+                href={`#coach-${c.number}`}
+                className={d === c.stops.length ? 'coach-chip is-done' : 'coach-chip'}
+                title={`Coach ${c.number}: ${d} of ${c.stops.length} done`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById(`coach-${c.number}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+              >
+                <span className="coach-fill" style={{ width: `${(d / c.stops.length) * 100}%` }} />
+                <span className="coach-num">{c.number}</span>
+              </a>
             );
           })}
-        </ol>
+          <span className="train-terminus">{role.title}</span>
+        </nav>
+
+        {train.map((c) => {
+          const d = c.stops.filter((s) => done.has(s.id)).length;
+          return (
+            <section key={c.number} className="coach" id={`coach-${c.number}`} data-done={d === c.stops.length}>
+              <header className="coach-head">
+                <h3>Coach {c.number}</h3>
+                <span className="coach-weeks">Weeks {c.weeks[0] === c.weeks[1] ? c.weeks[0] : `${c.weeks[0]}–${c.weeks[1]}`}</span>
+                <span className="coach-count num">{d === c.stops.length ? 'Done' : `${d} of ${c.stops.length} done`}</span>
+              </header>
+              <ol className="route">
+              {c.stops.map((s) => {
+                const state = stateOf(s);
+                const status =
+                  state === 'done'
+                    ? 'Done.'
+                    : state === 'ready'
+                      ? 'Ready to start.'
+                      : `After ${listOf(s.waitingOn.filter((p) => !done.has(p)).map(titleOf))}.`;
+                return (
+                  <li key={s.id} className="stop" data-area={s.area} data-state={state} data-kind={kindOf(s.id)}>
+                    <button
+                      className="station"
+                      aria-pressed={state === 'done'}
+                      aria-label={state === 'done' ? `Mark ${s.title} as not done` : `Mark ${s.title} as done`}
+                      title={state === 'done' ? 'Mark as not done' : 'Mark as done'}
+                      onClick={() => toggleDone(s.id)}
+                    >
+                      <Tick />
+                    </button>
+                    <div className="stop-body">
+                      <div className="stop-head">
+                        <button className="stop-title" aria-haspopup="dialog" onClick={() => openPanel(s.id)}>{s.title}</button>
+                        {kindOf(s.id) !== 'concept' && <span className="kind">{kindOf(s.id) === 'tool' ? 'Tool' : 'Project'}</span>}
+                        <span className="stop-hours">{s.hours} h</span>
+                      </div>
+                      <p className="stop-sub">
+                        <span className="area-name">{areaTitle.get(s.area)}</span>. {status}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+              </ol>
+            </section>
+          );
+        })}
         {plan.steps.length > 0 && (
-          <p className="route-end">
-            {goal === 'tool' ? (
-              <>That's the whole route to {role.title}.</>
-            ) : (
-              <>
-                That's everything for {tierTitle(tier)}.
-                {tier !== usedTiers[usedTiers.length - 1]!.id && ' Switch "How far" to see what comes after.'}
-              </>
-            )}
-          </p>
+          <div className="terminus-end">
+            <p className="terminus-board">
+              <span className="terminus-label">Terminus</span>
+              {role.title}
+            </p>
+            <p className="route-end">
+              {goal === 'tool' ? (
+                <>That's the whole route to {role.title}.</>
+              ) : (
+                <>
+                  That's everything {tierTitle(tier) === 'to get hired' ? 'you need to get hired' : `for ${tierTitle(tier)}`}.
+                  {tier !== usedTiers[usedTiers.length - 1]!.id && ' Switch "How far" to see what comes after.'}
+                </>
+              )}
+            </p>
+          </div>
         )}
         </>
         )}

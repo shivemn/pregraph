@@ -42,10 +42,11 @@ const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
     <header class="masthead">
       <div class="masthead-inner">
         <a href="/" class="wordmark" aria-label="Terminus home">
-          <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
-            <rect x="1.5" y="1.5" width="29" height="29" fill="#ffcc00" stroke="#000" stroke-width="3" />
-            <path d="M7 8.5h18M16 8.5V27" stroke="#000" stroke-width="5" />
-            <circle cx="16" cy="20" r="3.4" fill="#ffcc00" stroke="#000" stroke-width="2.4" />
+          <svg viewBox="0 0 48 24" width="48" height="24" aria-hidden="true">
+            <path d="M5 12H40" stroke="currentColor" stroke-width="4" />
+            <circle cx="7" cy="12" r="4.5" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" />
+            <circle cx="22" cy="12" r="4.5" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" />
+            <rect x="38" y="2" width="7" height="20" fill="var(--yellow)" stroke="#000" stroke-width="2.5" />
           </svg>
           Terminus
         </a>

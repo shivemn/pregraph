@@ -169,6 +169,10 @@ The panel's data comes from `/stops.json`, built at deploy time from the same `s
 
 The full concept pages stay, for search engines and for links from elsewhere.
 
+## 6a. Coaches and study time
+
+Hours are honest but a bare total ("464 hours") reads like a sentence. The planner asks for hours a week (default 10, saved with the rest of your progress) and turns hours into weeks or months and an arrival month. `src/lib/coaches.ts` cuts the ordered route into coaches of about four weeks each: a coach closes when the next stop would overfill it, and a stop bigger than a coach gets one to itself. The cut is over the whole route, done stops included, so ticking never moves a stop to another coach. Totals are shown as a range (±15%), because the per-topic hours are estimates.
+
 ## 6b. Tools
 
 Not everyone wants a whole job. Someone already working may only need Redis, or Power BI, or Go. `/tools` lists everything on the shelves in `content/tool-groups.yaml`, with hours, which of the three picks exist, and what comes first. Each tool page (`/tools/redis`) shows the picks, then the same planner as a role page, with the tool as its only target. There's no new engine code: a tool is a role with one target and one tier. The planner takes `goal="tool"` to change its wording, and it shares the same saved progress, so finishing Java on a role page counts on the Spring Boot page too. Search results for tools open the tool page.

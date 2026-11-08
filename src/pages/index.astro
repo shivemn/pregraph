@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { planPath } from '../lib/graph';
+import { duration } from '../lib/coaches';
 import { BACKGROUND_GROUPS, targetsUpTo } from '../lib/schema';
 import { content, listOf, plannerNodes, title } from '../lib/site';
 import { stopDetails } from '../lib/stops';
@@ -105,7 +106,7 @@ const counts = {
         }
       </ol>
       <p class="route-end" data-preview-end>
-        Then {plan.steps.length - preview.length} more stops to get hired, about {plan.totalHours} hours in all.
+        Then {plan.steps.length - preview.length} more stops to get hired: {duration(plan.totalHours, 10)} in all at 10 hours a week.
       </p>
       <script type="application/json" id="preview-data" set:html={JSON.stringify(previewData)} />
     </section>
@@ -152,6 +153,7 @@ const counts = {
 
 <script>
   import { planPath, type ConceptNode } from '../lib/graph';
+  import { duration } from '../lib/coaches';
 
   interface PreviewData {
     nodes: ConceptNode[];
@@ -220,8 +222,8 @@ const counts = {
     const more = plan.steps.length - shown.length;
     document.querySelector('[data-preview-end]')!.textContent =
       more > 0
-        ? `Then ${more} more ${more === 1 ? 'stop' : 'stops'} to get hired, about ${plan.totalHours} hours in all.`
-        : `That's the whole route to get hired, about ${plan.totalHours} hours.`;
+        ? `Then ${more} more ${more === 1 ? 'stop' : 'stops'} to get hired: ${duration(plan.totalHours, 10)} in all at 10 hours a week.`
+        : `That's the whole route to get hired: ${duration(plan.totalHours, 10)} at 10 hours a week.`;
   }
   form.addEventListener('change', update);
   update(); // the browser may have kept the last choices on a back navigation
