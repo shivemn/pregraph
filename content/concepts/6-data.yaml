@@ -54,6 +54,14 @@
   resources:
     - resource: gcf-excel
       locator: "Formulas and functions, then the data analysis lessons"
+    - resource: fcc-excel
+      locator: "The whole video"
+      verified: true
+    - resource: mishra-excel
+      locator: "The whole video"
+      role: alternative
+      verified: true
+
 
 - id: pandas
   title: Data wrangling with pandas

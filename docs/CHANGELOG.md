@@ -1,5 +1,13 @@
 # Changelog
 
+## Every common tool
+
+- **The tools page now has 68 tools on eleven shelves:** languages, web frameworks, mobile, data science and ML libraries, databases and search, BI and data engineering, DevOps, cloud, testing, security, and workplace platforms. A row of links at the top jumps to each shelf.
+- **35 new tools:** C#, PHP, Swift and iOS, R, Django, FastAPI, ASP.NET Core, Angular, Vue, Next.js, Flutter, React Native, scikit-learn, TensorFlow and Keras, Elasticsearch, dbt, Snowflake, Jenkins, Ansible, Nginx, Microsoft Azure, Google Cloud, Selenium, Postman, JUnit, pytest, Wireshark, Nmap, Burp Suite, Splunk, Jira, Figma, Salesforce administration and ServiceNow. Each has a free book or official guide and a video course, opened and checked first. PHP and Angular also have CodeWithHarry's Hindi courses, and Excel has Rishabh Mishra's.
+- Spreadsheets and observability now have video picks.
+- A new area, Workplace tools, for platforms like Jira, Figma, Salesforce and ServiceNow.
+- Some of the new tools are on role lists too: Selenium and Postman for QA, Wireshark and Splunk for security analysts, dbt and Snowflake for data engineers, Azure and Google Cloud for cloud engineers, ServiceNow for application support.
+
 ## No assumed background
 
 - Nothing is preselected any more. The ticket and every planner start at "Select your background", and until you choose, the route is the full one from the very beginning, with a note saying so.

@@ -1,0 +1,562 @@
+# Tools people come to learn on their own, from many areas. Each one sits on a
+# shelf in tool-groups.yaml. Every pick here was opened and checked before it
+# went in; the few that weren't say so with verified: false.
+
+# Languages
+
+- id: csharp
+  title: C#
+  area: programming
+  kind: tool
+  summary: Microsoft's typed, object-oriented language, behind .NET backends, Windows apps and Unity games.
+  hours: 30
+  requires: [programming-basics]
+  recommends: [oop-design]
+  resources:
+    - resource: ms-csharp
+      locator: "A tour of C#, then the tutorials it links to"
+      verified: true
+    - resource: fcc-csharp
+      locator: "The whole video"
+      verified: true
+    - resource: exercism
+      locator: "C# track"
+
+- id: php
+  title: PHP
+  area: web
+  kind: tool
+  summary: The server-side language behind WordPress and Laravel, and still behind a large share of the web.
+  hours: 25
+  requires: [programming-basics]
+  recommends: [html-css, web-http]
+  resources:
+    - resource: php-manual
+      locator: "Language Reference, from Basic syntax to Classes and Objects"
+      verified: true
+    - resource: fcc-php
+      locator: "The whole video"
+      verified: true
+    - resource: harry-php
+      locator: "The whole video"
+      role: alternative
+      verified: true
+    - resource: exercism
+      locator: "PHP track"
+
+- id: swift
+  title: Swift and iOS
+  area: mobile
+  kind: tool
+  summary: Apple's language for iPhone, iPad and Mac apps, usually with SwiftUI for the interface.
+  hours: 40
+  requires: [programming-basics]
+  recommends: [oop-design]
+  resources:
+    - resource: swift-book
+      locator: "A Swift Tour, then the Language Guide"
+      verified: true
+    - resource: allen-swift
+      locator: "The whole video"
+      verified: true
+    - resource: exercism
+      locator: "Swift track"
+
+- id: r-lang
+  title: R
+  area: data
+  kind: tool
+  summary: The statistics language. Data cleaning, models and charts, with the tidyverse doing most of the work.
+  hours: 20
+  recommends: [statistics]
+  resources:
+    - resource: r4ds
+      locator: "The Whole game, then Transform, Import and Visualize"
+      why: "Free, current, and written by the people who made the tools it teaches."
+      verified: true
+    - resource: fcc-r
+      locator: "The whole video"
+      verified: true
+
+# Web frameworks
+
+- id: django
+  title: Django
+  area: web
+  kind: tool
+  summary: Python's batteries-included web framework. Models, an admin site, forms, auth and templates out of the box.
+  hours: 25
+  requires: [programming-basics, web-http]
+  recommends: [sql, rest-apis]
+  resources:
+    - resource: django-tutorial
+      locator: "The official tutorial, parts 1 to 8"
+    - resource: gray-django
+      locator: "The whole video"
+      verified: true
+
+- id: fastapi
+  title: FastAPI
+  area: web
+  kind: tool
+  summary: A modern Python framework for APIs, with type hints, request validation and docs generated for you.
+  hours: 10
+  requires: [programming-basics, rest-apis]
+  resources:
+    - resource: fastapi-tutorial
+      locator: "Tutorial - User Guide, start to finish"
+      verified: true
+    - resource: fcc-fastapi
+      locator: "The whole video"
+      verified: true
+
+- id: aspnet-core
+  title: ASP.NET Core
+  area: web
+  kind: tool
+  summary: Microsoft's framework for web APIs and sites in C#, common in banks and large companies.
+  hours: 30
+  requires: [csharp, rest-apis]
+  recommends: [sql]
+  resources:
+    - resource: ms-aspnet-api
+      locator: "Create a controller-based web API, then the tutorials beside it"
+      verified: true
+    - resource: casal-aspnet
+      locator: "The whole video"
+      verified: true
+
+- id: angular
+  title: Angular
+  area: web
+  kind: tool
+  summary: Google's full frontend framework, written in TypeScript. Common in enterprise and service-company projects.
+  hours: 30
+  requires: [typescript, html-css]
+  resources:
+    - resource: angular-tutorial
+      locator: "Learn Angular, the in-browser tutorial"
+      verified: true
+    - resource: mosh-angular
+      locator: "The whole video"
+      verified: true
+    - resource: harry-angular
+      locator: "The whole video"
+      role: alternative
+      verified: true
+
+- id: vue
+  title: Vue
+  area: web
+  kind: tool
+  summary: A frontend framework that's gentle to start with and grows with the app.
+  hours: 20
+  requires: [javascript, html-css]
+  resources:
+    - resource: vue-guide
+      locator: "Introduction, then Essentials and Components In-Depth"
+      verified: true
+    - resource: traversy-vue
+      locator: "The whole video"
+      verified: true
+
+- id: nextjs
+  title: Next.js
+  area: web
+  kind: tool
+  summary: The React framework for full sites, with routing, server rendering and data fetching built in.
+  hours: 20
+  requires: [react]
+  recommends: [typescript, nodejs]
+  resources:
+    - resource: nextjs-learn
+      locator: "The App Router course, every chapter"
+      why: "Builds one real dashboard app across the whole course."
+      verified: true
+    - resource: jsm-nextjs
+      locator: "The whole video"
+      verified: true
+
+# Mobile
+
+- id: flutter
+  title: Flutter
+  area: mobile
+  kind: tool
+  summary: Google's toolkit for building Android and iOS apps from one Dart codebase.
+  hours: 40
+  requires: [programming-basics]
+  recommends: [oop-design]
+  resources:
+    - resource: flutter-learn
+      locator: "The Learn Flutter pathway"
+      verified: true
+    - resource: fcc-flutter
+      locator: "The whole course, or its first half for the basics"
+      verified: true
+
+- id: react-native
+  title: React Native
+  area: mobile
+  kind: tool
+  summary: Building Android and iOS apps with React and JavaScript.
+  hours: 25
+  requires: [react]
+  resources:
+    - resource: rn-docs
+      locator: "Introduction, then The Basics"
+      verified: true
+    - resource: fcc-react-native
+      locator: "The whole video"
+      verified: true
+
+# Data and ML
+
+- id: scikit-learn
+  title: scikit-learn
+  area: ai
+  kind: tool
+  summary: Python's standard library for classic machine learning. Models, preprocessing, pipelines and evaluation.
+  hours: 15
+  requires: [pandas]
+  recommends: [machine-learning]
+  resources:
+    - resource: sklearn-docs
+      locator: "Getting Started, then the User Guide sections you need"
+      verified: true
+    - resource: fcc-sklearn
+      locator: "The whole video"
+      verified: true
+    - resource: kaggle-learn
+      locator: "Intro to Machine Learning, then Intermediate Machine Learning"
+
+- id: tensorflow
+  title: TensorFlow and Keras
+  area: ai
+  kind: tool
+  summary: Google's deep learning library, usually used through Keras. Common in production and on mobile.
+  hours: 30
+  requires: [machine-learning]
+  recommends: [deep-learning]
+  resources:
+    - resource: keras-start
+      locator: "Getting started, then the developer guides"
+      verified: true
+    - resource: fcc-keras
+      locator: "The whole video"
+      verified: true
+    - resource: tf-tutorials
+      locator: "The beginner and advanced quickstarts"
+      role: alternative
+      verified: true
+
+- id: elasticsearch
+  title: Elasticsearch
+  area: data
+  kind: tool
+  summary: A search engine and analytics store. Full-text search, logs, and the "E" in the ELK stack.
+  hours: 12
+  requires: [rest-apis]
+  recommends: [hash-tables]
+  resources:
+    - resource: elastic-start
+      locator: "Get started with search, then the pages it links to"
+      verified: true
+    - resource: fcc-elastic
+      locator: "The whole video"
+      verified: true
+
+- id: dbt
+  title: dbt
+  area: data
+  kind: tool
+  summary: Writing data transformations as tested, versioned SQL models. A staple of modern data teams.
+  hours: 10
+  requires: [sql]
+  recommends: [data-warehousing, git]
+  resources:
+    - resource: dbt-guides
+      locator: "The quickstart for the warehouse you use"
+      verified: true
+    - resource: lamba-dbt
+      locator: "The whole video"
+      verified: true
+
+- id: snowflake
+  title: Snowflake
+  area: data
+  kind: tool
+  summary: A cloud data warehouse. Loading data, warehouses and credits, and querying at scale with SQL.
+  hours: 10
+  requires: [sql]
+  recommends: [data-warehousing]
+  resources:
+    - resource: snowflake-start
+      locator: "Get Started, then the tutorials"
+      verified: true
+    - resource: bailey-snowflake
+      locator: "The whole video"
+      verified: true
+
+# DevOps and cloud
+
+- id: jenkins
+  title: Jenkins
+  area: infra
+  kind: tool
+  summary: The long-standing CI server. Pipelines as code in a Jenkinsfile; still everywhere in large companies.
+  hours: 10
+  requires: [git, shell-tools]
+  recommends: [ci-cd]
+  resources:
+    - resource: jenkins-tour
+      locator: "The Guided Tour, then the Pipeline chapter"
+      verified: true
+    - resource: dj-jenkins
+      locator: "The whole video"
+      verified: true
+
+- id: ansible
+  title: Ansible
+  area: infra
+  kind: tool
+  summary: Configuring many servers at once from simple YAML playbooks, over SSH.
+  hours: 12
+  requires: [linux-admin]
+  resources:
+    - resource: ansible-start
+      locator: "Getting started with Ansible, every page"
+      verified: true
+    - resource: wagh-ansible
+      locator: "The whole video"
+      verified: true
+
+- id: nginx
+  title: Nginx
+  area: infra
+  kind: tool
+  summary: The web server and reverse proxy in front of most apps. Serving files, proxying, load balancing and TLS.
+  hours: 6
+  requires: [web-http, linux-admin]
+  resources:
+    - resource: nginx-guide
+      locator: "The whole guide"
+      verified: true
+    - resource: nana-nginx
+      locator: "The whole video"
+      verified: true
+
+- id: azure
+  title: Microsoft Azure
+  area: infra
+  kind: tool
+  summary: Microsoft's cloud. Compute, storage, networking and identity, and how the bill works.
+  hours: 20
+  requires: [networking]
+  recommends: [cloud-basics]
+  resources:
+    - resource: ms-az900
+      locator: "The free learning paths on the Azure Fundamentals page"
+      why: "Microsoft's own course for the AZ-900 exam, which is also a good overview without the exam."
+      verified: true
+    - resource: savill-az900
+      locator: "The whole video"
+      verified: true
+
+- id: gcp
+  title: Google Cloud
+  area: infra
+  kind: tool
+  summary: Google's cloud. Compute, storage, networking, IAM, and BigQuery for data.
+  hours: 20
+  requires: [networking]
+  recommends: [cloud-basics]
+  resources:
+    - resource: gcp-start
+      locator: "Get started, then the quickstarts for Compute Engine, Cloud Storage and IAM"
+      verified: true
+    - resource: piyush-gcp
+      locator: "The whole video"
+      verified: true
+
+# Testing
+
+- id: selenium
+  title: Selenium
+  area: programming
+  kind: tool
+  summary: Driving a real browser from code to test web apps. The long-standing standard for browser testing.
+  hours: 20
+  requires: [testing-debugging]
+  recommends: [java, html-css]
+  resources:
+    - resource: selenium-start
+      locator: "Getting started, then the WebDriver pages"
+      verified: true
+    - resource: fcc-selenium
+      locator: "The whole video"
+      verified: true
+
+- id: postman
+  title: Postman
+  area: programming
+  kind: tool
+  summary: Sending, organising and testing API requests by hand and in automated collections.
+  hours: 6
+  requires: [web-http]
+  recommends: [rest-apis]
+  resources:
+    - resource: postman-start
+      locator: "Get started, then Write scripts and Run collections"
+      verified: true
+    - resource: fcc-postman
+      locator: "The whole video"
+      verified: true
+
+- id: junit
+  title: JUnit
+  area: programming
+  kind: tool
+  summary: The standard way to write unit tests in Java, with assertions, parameterised tests and extensions.
+  hours: 8
+  requires: [java]
+  recommends: [testing-debugging]
+  resources:
+    - resource: junit-guide
+      locator: "Overview, then Writing Tests"
+      verified: true
+    - resource: fcc-junit
+      locator: "The whole video"
+      verified: true
+
+- id: pytest
+  title: pytest
+  area: programming
+  kind: tool
+  summary: The standard way to write tests in Python. Plain asserts, fixtures and parametrised tests.
+  hours: 6
+  requires: [programming-basics]
+  recommends: [testing-debugging]
+  resources:
+    - resource: pytest-start
+      locator: "Get Started, then the how-to guides on fixtures and parametrizing"
+      verified: true
+    - resource: fcc-pytest
+      locator: "The whole video"
+      verified: true
+
+# Security
+
+- id: wireshark
+  title: Wireshark
+  area: security
+  kind: tool
+  summary: Capturing and reading network traffic packet by packet. How you see what's really on the wire.
+  hours: 10
+  requires: [networking]
+  resources:
+    - resource: wireshark-guide
+      locator: "Chapters 1 to 6: capturing, filtering and reading packets"
+    - resource: joe-wireshark
+      locator: "The whole video"
+      verified: true
+
+- id: nmap
+  title: Nmap
+  area: security
+  kind: tool
+  summary: Scanning a network to find hosts, open ports and the services behind them.
+  hours: 6
+  requires: [networking]
+  resources:
+    - resource: nmap-book
+      locator: "The chapters available free online, starting with Port Scanning Basics"
+    - resource: joe-nmap
+      locator: "The whole video"
+      verified: true
+
+- id: splunk
+  title: Splunk
+  area: security
+  kind: tool
+  summary: Searching and charting machine data, the main tool in many security operations centres.
+  hours: 15
+  recommends: [log-analysis]
+  resources:
+    - resource: splunk-tutorial
+      locator: "The whole Search Tutorial, with its sample data"
+      verified: true
+    - resource: gupta-splunk
+      locator: "The whole video"
+      verified: true
+
+- id: burp-suite
+  title: Burp Suite
+  area: security
+  kind: tool
+  summary: The proxy for testing web apps by hand. Intercepting, changing and replaying requests.
+  hours: 10
+  requires: [web-http]
+  recommends: [web-security]
+  resources:
+    - resource: burp-start
+      locator: "Getting started, then the guided tutorials"
+      verified: true
+    - resource: netsec-burp
+      locator: "The whole video"
+      verified: true
+    - resource: portswigger-academy
+      locator: "The apprentice labs, using Burp for each one"
+
+# Workplace tools
+
+- id: figma
+  title: Figma
+  area: workplace
+  kind: tool
+  summary: Where interfaces are designed and handed to developers. Frames, components, auto layout and prototypes.
+  hours: 10
+  resources:
+    - resource: figma-learn
+      locator: "The Figma Design courses"
+    - resource: supercreator-figma
+      locator: "The whole video"
+      verified: true
+
+- id: jira
+  title: Jira
+  area: workplace
+  kind: tool
+  summary: The issue tracker most software teams plan their work in. Boards, sprints, workflows and filters.
+  hours: 4
+  resources:
+    - resource: jira-guide
+      locator: "The getting started guide, every section"
+      verified: true
+    - resource: stratvert-jira
+      locator: "The whole video"
+      verified: true
+
+- id: salesforce
+  title: Salesforce administration
+  area: workplace
+  kind: tool
+  summary: Running the world's biggest CRM for a company. Objects, fields, users, security, automation and reports.
+  hours: 40
+  resources:
+    - resource: trailhead-admin
+      locator: "The Admin Beginner trail, then Admin Intermediate"
+      why: "Salesforce's own free training, with hands-on challenges checked in a free practice org."
+      verified: true
+
+- id: servicenow
+  title: ServiceNow
+  area: workplace
+  kind: tool
+  summary: The platform large companies run IT support on. Incidents, requests, changes and workflows.
+  hours: 30
+  recommends: [incident-management]
+  resources:
+    - resource: servicenow-dev
+      locator: "The free developer program: its learning plans and a personal developer instance"
+      verified: true

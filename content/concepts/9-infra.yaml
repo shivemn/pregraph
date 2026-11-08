@@ -82,6 +82,10 @@
     - resource: prometheus-docs
       locator: "Overview, then First steps"
       role: alternative
+    - resource: piyush-grafana
+      locator: "The whole video"
+      verified: true
+
 
 - id: infrastructure-as-code
   title: Infrastructure as code

@@ -37,6 +37,10 @@ const count = shelves.reduce((n, s) => n + s.items.length, 0);
     you already know.
   </p>
 
+  <nav class="jump" aria-label="Shelves">
+    {shelves.map((s) => <a href={`#shelf-${s.id}`}>{s.title}</a>)}
+  </nav>
+
   {
     shelves.map((s) => (
       <section aria-labelledby={`shelf-${s.id}`}>
@@ -70,7 +74,9 @@ const count = shelves.reduce((n, s) => n + s.items.length, 0);
 <style>
   h1 { padding-top: 8px; font-size: clamp(2.2rem, 7vw, 3.6rem); }
   .lede { font-size: 1.1875rem; max-width: 60ch; margin-top: 14px; }
-  section { margin-top: 44px; }
+  section { margin-top: 44px; scroll-margin-top: 16px; }
+  .jump { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 22px; max-width: 900px; }
+  .jump a { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.1rem; }
 
   .shelf {
     list-style: none; padding: 0; margin: 12px 0 0;

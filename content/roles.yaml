@@ -52,7 +52,7 @@
   summary: Finds out whether software works before customers do, increasingly by writing code that tests code.
   tiers:
     hire: [programming-basics, testing-debugging, test-automation, git, sql, web-http, rest-apis, project-test-suite]
-    firstYear: [ci-cd, javascript, docker]
+    firstYear: [ci-cd, javascript, docker, selenium, postman]
     extra: [web-performance, web-security]
 
 - id: data-analyst
@@ -71,7 +71,7 @@
   tiers:
     hire: [programming-basics, sql, data-warehousing, pandas, spark, shell-tools, git, project-data-pipeline]
     firstYear: [orchestration, database-internals, cloud-basics, docker, messaging]
-    extra: [distributed-systems, kubernetes]
+    extra: [distributed-systems, kubernetes, dbt, snowflake]
 
 - id: ml-engineer
   title: Machine learning engineer
@@ -124,7 +124,7 @@
   tiers:
     hire: [shell-tools, linux-admin, networking, cloud-basics, cloud-networking, cloud-iam, infrastructure-as-code, docker, git, project-cloud-app]
     firstYear: [kubernetes, observability, ci-cd, cloud-architecture]
-    extra: [systems-security, distributed-systems]
+    extra: [systems-security, distributed-systems, azure, gcp]
 
 - id: support-engineer
   title: Application support engineer
@@ -133,7 +133,7 @@
   tiers:
     hire: [sql, shell-tools, linux-admin, networking, web-http, incident-management, log-analysis, git, project-support-runbook]
     firstYear: [query-performance, observability, java, messaging, ci-cd]
-    extra: [cloud-basics, docker]
+    extra: [cloud-basics, docker, servicenow]
 
 - id: security-analyst
   title: Security analyst (SOC)
@@ -141,7 +141,7 @@
   summary: Watches for attacks, investigates alerts and responds when something gets through.
   tiers:
     hire: [networking, linux-admin, shell-tools, security-fundamentals, log-analysis, threat-detection, incident-management, web-security, project-ctf]
-    firstYear: [programming-basics, systems-security, cryptography, cloud-basics]
+    firstYear: [programming-basics, systems-security, cryptography, cloud-basics, wireshark, splunk]
     extra: [cloud-iam]
 
 - id: embedded-engineer

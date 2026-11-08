@@ -1419,3 +1419,587 @@
   url: https://www.learnpytorch.io/
   free: true
   medium: practice
+
+- id: ms-csharp
+  title: "C# documentation: A tour of C#"
+  author: "Microsoft"
+  type: site
+  url: https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/
+  free: true
+  medium: read
+
+- id: fcc-csharp
+  title: "C# Tutorial – Full Course for Beginners"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=GhQdlIFylQ8
+  free: true
+  medium: watch
+
+- id: php-manual
+  title: "PHP Manual: Language Reference"
+  author: "The PHP Group"
+  type: site
+  url: https://www.php.net/manual/en/langref.php
+  free: true
+  medium: read
+
+- id: fcc-php
+  title: "PHP Programming Language Tutorial – Full Course"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=OK_JCtrrv-c
+  free: true
+  medium: watch
+
+- id: harry-php
+  title: "PHP Tutorial for Beginners in Hindi"
+  author: "CodeWithHarry"
+  type: video
+  url: https://www.youtube.com/watch?v=1SnPKhCdlsU
+  free: true
+  medium: watch
+  note: "In Hindi, with a MySQL project."
+
+- id: swift-book
+  title: "The Swift Programming Language"
+  author: "Apple and the Swift project"
+  type: book
+  url: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/
+  free: true
+  medium: read
+
+- id: allen-swift
+  title: "Swift Programming Tutorial: Full Course"
+  author: "Sean Allen"
+  type: video
+  url: https://www.youtube.com/watch?v=CwA1VWP0Ldw
+  free: true
+  medium: watch
+  note: "About ten hours, for complete beginners."
+
+- id: r4ds
+  title: "R for Data Science (2nd edition)"
+  author: "Hadley Wickham, Mine Çetinkaya-Rundel, Garrett Grolemund"
+  type: book
+  url: https://r4ds.hadley.nz/
+  free: true
+  medium: read
+
+- id: fcc-r
+  title: "R Programming Tutorial"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=_V8eKsto3Ug
+  free: true
+  medium: watch
+
+- id: gray-django
+  title: "Python Django Full Course for Beginners"
+  author: "Dave Gray"
+  type: video
+  url: https://www.youtube.com/watch?v=Rp5vd34d-z4
+  free: true
+  medium: watch
+
+- id: fastapi-tutorial
+  title: "FastAPI Tutorial - User Guide"
+  author: "Sebastián Ramírez and contributors"
+  type: site
+  url: https://fastapi.tiangolo.com/tutorial/
+  free: true
+  medium: read
+
+- id: fcc-fastapi
+  title: "FastAPI Course for Beginners"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=tLKKmouUams
+  free: true
+  medium: watch
+
+- id: ms-aspnet-api
+  title: "Tutorial: Create a controller-based web API with ASP.NET Core"
+  author: "Microsoft"
+  type: site
+  url: https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api
+  free: true
+  medium: read
+
+- id: casal-aspnet
+  title: "ASP.NET Core Full Course For Beginners"
+  author: "Julio Casal"
+  type: video
+  url: https://www.youtube.com/watch?v=YbRe4iIVYJk
+  free: true
+  medium: watch
+
+- id: angular-tutorial
+  title: "Learn Angular"
+  author: "The Angular team"
+  type: site
+  url: https://angular.dev/tutorials/learn-angular
+  free: true
+  medium: read
+  note: "Runs in the browser, nothing to install."
+
+- id: mosh-angular
+  title: "Angular Tutorial for Beginners"
+  author: "Programming with Mosh"
+  type: video
+  url: https://www.youtube.com/watch?v=k5E2AVpwsko
+  free: true
+  medium: watch
+
+- id: harry-angular
+  title: "Angular Tutorial in Hindi"
+  author: "CodeWithHarry"
+  type: video
+  url: https://www.youtube.com/watch?v=0LhBvp8qpro
+  free: true
+  medium: watch
+  note: "In Hindi."
+
+- id: vue-guide
+  title: "Vue.js Guide"
+  author: "The Vue team"
+  type: site
+  url: https://vuejs.org/guide/introduction.html
+  free: true
+  medium: read
+
+- id: traversy-vue
+  title: "Vue.js Crash Course"
+  author: "Traversy Media"
+  type: video
+  url: https://www.youtube.com/watch?v=VeNfHj6MhgA
+  free: true
+  medium: watch
+
+- id: nextjs-learn
+  title: "Learn Next.js: App Router"
+  author: "Vercel"
+  type: course
+  url: https://nextjs.org/learn/dashboard-app
+  free: true
+  medium: read
+
+- id: jsm-nextjs
+  title: "Next.js Full Course"
+  author: "JavaScript Mastery"
+  type: video
+  url: https://www.youtube.com/watch?v=I1V9YWqRIeI
+  free: true
+  medium: watch
+  note: "Builds and deploys one full app."
+
+- id: flutter-learn
+  title: "Learn Flutter"
+  author: "The Flutter team"
+  type: site
+  url: https://docs.flutter.dev/learn
+  free: true
+  medium: read
+
+- id: fcc-flutter
+  title: "Flutter Course for Beginners"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=VPvVD8t02U8
+  free: true
+  medium: watch
+  note: "37 hours."
+
+- id: rn-docs
+  title: "React Native documentation"
+  author: "Meta and the React Native community"
+  type: site
+  url: https://reactnative.dev/docs/getting-started
+  free: true
+  medium: read
+
+- id: fcc-react-native
+  title: "React Native Full Course for Beginners"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=sm5Y7Vtuihg
+  free: true
+  medium: watch
+
+- id: sklearn-docs
+  title: "scikit-learn: Getting Started and User Guide"
+  author: "The scikit-learn developers"
+  type: site
+  url: https://scikit-learn.org/stable/getting_started.html
+  free: true
+  medium: read
+
+- id: fcc-sklearn
+  title: "Scikit-learn Crash Course"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=0B5eIE_1vpU
+  free: true
+  medium: watch
+
+- id: keras-start
+  title: "Getting started with Keras"
+  author: "The Keras team"
+  type: site
+  url: https://keras.io/getting_started/
+  free: true
+  medium: read
+
+- id: fcc-keras
+  title: "Keras with TensorFlow Course"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=qFJeN9V1ZsI
+  free: true
+  medium: watch
+
+- id: tf-tutorials
+  title: "TensorFlow tutorials"
+  author: "Google"
+  type: site
+  url: https://www.tensorflow.org/tutorials
+  free: true
+  medium: read
+
+- id: elastic-start
+  title: "Get started with search in Elasticsearch"
+  author: "Elastic"
+  type: site
+  url: https://www.elastic.co/docs/solutions/search/get-started
+  free: true
+  medium: read
+
+- id: fcc-elastic
+  title: "Elasticsearch Course for Beginners"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=a4HBKEda_F8
+  free: true
+  medium: watch
+
+- id: dbt-guides
+  title: "dbt guides and quickstarts"
+  author: "dbt Labs"
+  type: site
+  url: https://docs.getdbt.com/guides
+  free: true
+  medium: read
+
+- id: lamba-dbt
+  title: "DBT: The Ultimate Guide"
+  author: "Ansh Lamba"
+  type: video
+  url: https://www.youtube.com/watch?v=B8uwFmVt4sU
+  free: true
+  medium: watch
+  note: "About five hours, ending with CI/CD."
+
+- id: snowflake-start
+  title: "Get Started with Snowflake"
+  author: "Snowflake"
+  type: site
+  url: https://docs.snowflake.com/en/user-guide-getting-started
+  free: true
+  medium: read
+  note: "There is a free trial account to follow along."
+
+- id: bailey-snowflake
+  title: "Learn Snowflake: 1-Hour Crash Course"
+  author: "Tom Bailey"
+  type: video
+  url: https://www.youtube.com/watch?v=2t-ls6ekA8E
+  free: true
+  medium: watch
+
+- id: jenkins-tour
+  title: "Jenkins Guided Tour"
+  author: "The Jenkins project"
+  type: site
+  url: https://www.jenkins.io/doc/pipeline/tour/getting-started/
+  free: true
+  medium: read
+
+- id: dj-jenkins
+  title: "Learn Jenkins! Complete Jenkins Course"
+  author: "DevOps Journey"
+  type: video
+  url: https://www.youtube.com/watch?v=6YZvp2GwT0A
+  free: true
+  medium: watch
+
+- id: ansible-start
+  title: "Getting started with Ansible"
+  author: "The Ansible community"
+  type: site
+  url: https://docs.ansible.com/ansible/latest/getting_started/index.html
+  free: true
+  medium: read
+
+- id: wagh-ansible
+  title: "Ansible Full Course: Zero to Hero"
+  author: "Rahul Wagh"
+  type: video
+  url: https://www.youtube.com/watch?v=GROqwFFLl3s
+  free: true
+  medium: watch
+
+- id: nginx-guide
+  title: "Beginner’s Guide"
+  author: "NGINX"
+  type: site
+  url: https://nginx.org/en/docs/beginners_guide.html
+  free: true
+  medium: read
+  note: "Short. An afternoon."
+
+- id: nana-nginx
+  title: "Full NGINX Tutorial"
+  author: "TechWorld with Nana"
+  type: video
+  url: https://www.youtube.com/watch?v=q8OleYuqntY
+  free: true
+  medium: watch
+
+- id: ms-az900
+  title: "Microsoft Certified: Azure Fundamentals"
+  author: "Microsoft"
+  type: course
+  url: https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/
+  free: true
+  medium: read
+  note: "The learning paths are free; the exam is not."
+
+- id: savill-az900
+  title: "AZ-900 Azure Fundamentals Exam Cram"
+  author: "John Savill"
+  type: video
+  url: https://www.youtube.com/watch?v=8n-kWJetQRk
+  free: true
+  medium: watch
+
+- id: gcp-start
+  title: "Get started with Google Cloud"
+  author: "Google Cloud"
+  type: site
+  url: https://cloud.google.com/docs/get-started
+  free: true
+  medium: read
+
+- id: piyush-gcp
+  title: "Google Cloud Full Course for Beginners"
+  author: "Tech Tutorials with Piyush"
+  type: video
+  url: https://www.youtube.com/watch?v=lvZk_sc8u5I
+  free: true
+  medium: watch
+
+- id: selenium-start
+  title: "Selenium WebDriver: Getting started"
+  author: "The Selenium project"
+  type: site
+  url: https://www.selenium.dev/documentation/webdriver/getting_started/
+  free: true
+  medium: read
+
+- id: fcc-selenium
+  title: "Java Testing with Selenium Course"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=QQliGCtqD2w
+  free: true
+  medium: watch
+
+- id: postman-start
+  title: "Postman Docs: Get started"
+  author: "Postman"
+  type: site
+  url: https://learning.postman.com/docs/getting-started/overview/
+  free: true
+  medium: read
+
+- id: fcc-postman
+  title: "Postman Beginner’s Course: API Testing"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=VywxIQ2ZXw4
+  free: true
+  medium: watch
+
+- id: junit-guide
+  title: "JUnit User Guide"
+  author: "The JUnit team"
+  type: site
+  url: https://docs.junit.org/current/user-guide/
+  free: true
+  medium: read
+
+- id: fcc-junit
+  title: "Java Testing: JUnit 5 Crash Course"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=flpmSXVTqBI
+  free: true
+  medium: watch
+  note: "Under half an hour."
+
+- id: pytest-start
+  title: "pytest: Get Started"
+  author: "The pytest developers"
+  type: site
+  url: https://docs.pytest.org/en/stable/getting-started.html
+  free: true
+  medium: read
+
+- id: fcc-pytest
+  title: "Pytest Tutorial: How to Test Python Code"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=cHYq1MRoyI0
+  free: true
+  medium: watch
+
+- id: wireshark-guide
+  title: "Wireshark User’s Guide"
+  author: "The Wireshark project"
+  type: book
+  url: https://www.wireshark.org/docs/wsug_html_chunked/
+  free: true
+  medium: read
+
+- id: joe-wireshark
+  title: "Mastering Wireshark: The Complete Tutorial"
+  author: "Hacker Joe"
+  type: video
+  url: https://www.youtube.com/watch?v=a_4MjV_-7Sw
+  free: true
+  medium: watch
+
+- id: nmap-book
+  title: "Nmap Network Scanning"
+  author: "Gordon “Fyodor” Lyon"
+  type: book
+  url: https://nmap.org/book/toc.html
+  free: true
+  medium: read
+  note: "About half the book is free online."
+
+- id: joe-nmap
+  title: "NMAP Full Guide"
+  author: "Hacker Joe"
+  type: video
+  url: https://www.youtube.com/watch?v=JHAMj2vN2oU
+  free: true
+  medium: watch
+
+- id: splunk-tutorial
+  title: "Splunk Search Tutorial"
+  author: "Splunk"
+  type: site
+  url: https://docs.splunk.com/Documentation/Splunk/latest/SearchTutorial/WelcometotheSearchTutorial
+  free: true
+  medium: read
+
+- id: gupta-splunk
+  title: "Splunk SIEM Crash Course"
+  author: "Rajneesh Gupta"
+  type: video
+  url: https://www.youtube.com/watch?v=LbR5cqqaFVk
+  free: true
+  medium: watch
+
+- id: burp-start
+  title: "Getting started with Burp Suite"
+  author: "PortSwigger"
+  type: site
+  url: https://portswigger.net/burp/documentation/desktop/getting-started
+  free: true
+  medium: read
+  note: "The Community Edition is free."
+
+- id: netsec-burp
+  title: "Master Burp Suite Like A Pro In Just 1 Hour"
+  author: "Netsec Explained"
+  type: video
+  url: https://www.youtube.com/watch?v=QiNLNDSLuJY
+  free: true
+  medium: watch
+
+- id: figma-learn
+  title: "Figma Learn: courses and collections"
+  author: "Figma"
+  type: site
+  url: https://help.figma.com/hc/en-us/sections/23691657321239
+  free: true
+  medium: read
+
+- id: supercreator-figma
+  title: "Figma Full Course: Zero to Pro"
+  author: "Supercreator"
+  type: video
+  url: https://www.youtube.com/watch?v=3m0TXas0Vjw
+  free: true
+  medium: watch
+
+- id: jira-guide
+  title: "Get started with Jira"
+  author: "Atlassian"
+  type: site
+  url: https://www.atlassian.com/software/jira/guides
+  free: true
+  medium: read
+
+- id: stratvert-jira
+  title: "Jira Tutorial for Beginners"
+  author: "Kevin Stratvert"
+  type: video
+  url: https://www.youtube.com/watch?v=GPOWZSxEslU
+  free: true
+  medium: watch
+  note: "Twenty minutes."
+
+- id: trailhead-admin
+  title: "Trailhead: Admin Beginner"
+  author: "Salesforce"
+  type: course
+  url: https://trailhead.salesforce.com/content/learn/trails/force_com_admin_beginner
+  free: true
+  medium: read
+
+- id: servicenow-dev
+  title: "ServiceNow Developer Program"
+  author: "ServiceNow"
+  type: site
+  url: https://developer.servicenow.com/dev.do
+  free: true
+  medium: read
+  note: "Free, with your own practice instance."
+
+- id: fcc-excel
+  title: "Microsoft Excel Tutorial for Beginners"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=Vl0H-qTclOg
+  free: true
+  medium: watch
+
+- id: mishra-excel
+  title: "Excel Tutorial For Beginners in Hindi"
+  author: "Rishabh Mishra"
+  type: video
+  url: https://www.youtube.com/watch?v=OX-iyb-21tk
+  free: true
+  medium: watch
+  note: "In Hindi."
+
+- id: piyush-grafana
+  title: "Server Monitoring with Grafana, Prometheus and Loki"
+  author: "Piyush Garg"
+  type: video
+  url: https://www.youtube.com/watch?v=ddZjhv66o_o
+  free: true
+  medium: watch

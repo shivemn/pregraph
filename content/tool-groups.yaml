@@ -1,23 +1,47 @@
 # The tools page. Each group is a shelf; order here is the order on the page.
 # A "tool" is anything people come to learn on its own: a language, a
-# database, a framework. Every concept of kind "tool" has to be on a shelf.
+# database, a framework. Any concept can go on a shelf.
 
 - id: languages
   title: Languages
-  tools: [programming-basics, java, javascript, typescript, go, cpp, c-and-memory, rust, kotlin]
+  tools: [programming-basics, java, javascript, typescript, csharp, go, cpp, c-and-memory, rust, kotlin, swift, php, r-lang]
 
-- id: frameworks
-  title: Frameworks and libraries
-  tools: [spring-boot, nodejs, react, android, pandas, pytorch]
+- id: web
+  title: Web frameworks
+  tools: [react, angular, vue, nextjs, spring-boot, nodejs, django, fastapi, aspnet-core]
+
+- id: mobile
+  title: Mobile
+  tools: [android, flutter, react-native]
+
+- id: ml
+  title: Data science and machine learning libraries
+  tools: [pandas, scikit-learn, pytorch, tensorflow]
 
 - id: databases
-  title: Databases and streaming
-  tools: [sql, redis, mongodb, messaging]
+  title: Databases, search and streaming
+  tools: [sql, redis, mongodb, elasticsearch, messaging]
 
 - id: data
-  title: Spreadsheets, BI and big data
-  tools: [spreadsheets, bi-tools, tableau, spark, orchestration]
+  title: Spreadsheets, BI and data engineering
+  tools: [spreadsheets, bi-tools, tableau, dbt, snowflake, spark, orchestration]
 
 - id: devops
-  title: Developer tools, DevOps and cloud
-  tools: [git, shell-tools, linux-admin, docker, kubernetes, ci-cd, infrastructure-as-code, cloud-basics, test-automation]
+  title: Developer tools and DevOps
+  tools: [git, shell-tools, linux-admin, docker, kubernetes, ci-cd, jenkins, ansible, nginx, observability]
+
+- id: cloud
+  title: Cloud
+  tools: [cloud-basics, azure, gcp, infrastructure-as-code]
+
+- id: testing
+  title: Testing
+  tools: [test-automation, selenium, postman, junit, pytest]
+
+- id: security
+  title: Security
+  tools: [wireshark, nmap, burp-suite, splunk]
+
+- id: workplace
+  title: Workplace platforms
+  tools: [jira, figma, salesforce, servicenow]

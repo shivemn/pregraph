@@ -59,6 +59,7 @@
   --infra: #56606b;
   --mobile: #5b8a0a;
   --security: #8b5a2b;
+  --workplace: #9a4dbf;
 
   --sign: 'Pregraph Sign', 'Arial Narrow', sans-serif;
   --text: 'Mukta', system-ui, sans-serif;
@@ -87,6 +88,7 @@
     --infra: #a9b4c0;
     --mobile: #a5d84e;
     --security: #dba06a;
+    --workplace: #d39af0;
     color-scheme: dark;
   }
 }
@@ -103,6 +105,7 @@
 [data-area='infra'] { --line: var(--infra); }
 [data-area='mobile'] { --line: var(--mobile); }
 [data-area='security'] { --line: var(--security); }
+[data-area='workplace'] { --line: var(--workplace); }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
