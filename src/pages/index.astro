@@ -304,7 +304,8 @@ const counts = {
   .roles, .how { margin-top: 80px; }
   .exams-line { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule); }
   .roles-lede { max-width: 66ch; color: var(--ink-2); margin-top: 10px; }
-  .map-wide { display: block; }
+  /* The map is wider than the page column: it breaks out to use the screen, up to 1500px. */
+  .map-wide { position: relative; left: 50%; width: min(1500px, calc(100vw - 48px)); transform: translateX(-50%); }
   .roles .families { display: none; }
   @media (max-width: 860px) {
     .map-wide { display: none; }

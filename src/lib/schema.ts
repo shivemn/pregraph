@@ -45,6 +45,8 @@ export const conceptSchema = z.object({
   /** A concept to understand, a tool to get fluent in, or a project to build and show. */
   kind: z.enum(['concept', 'tool', 'project']).default('concept'),
   summary: z.string().min(1),
+  /** A one-tap "skip it" on the route, for a stop people often know another way. */
+  skipLabel: z.string().min(1).optional(),
   hours: z.number().positive(),
   /** Hard prerequisites: must be learned first, and are pulled into a plan. */
   requires: z.array(id).default([]),

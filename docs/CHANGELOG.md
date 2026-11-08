@@ -1,5 +1,13 @@
 # Changelog
 
+## Wider map, role boxes and any first language
+
+- **The network map is wider.** It now uses up to 1500 px of the screen instead of the page column, with more room between lines and bigger station names.
+- **All roles is a grid of boxes,** two to a row, with each family's line colour, a row of line chips at the top to jump to a family, and how many stops are on each role's hiring list.
+- **"Coach 1, Coach 2" is gone** from the route. Each box is headed by the weeks it covers ("Weeks 1–3", or "Week 11" for one week), and the summary no longer counts coaches.
+- **The end of a route no longer says it's everything you need to get hired.** It says it's the end of the hiring list, and that projects you can show and interview practice count too.
+- **Programming basics in any language.** "Programming in Python" is now "Programming basics". The main picks still use Python, and Java (MOOC.fi), C++ (learncpp) and C# (Microsoft Learn) courses are listed as other options. On a route the stop has an "I already code in another language" button that skips it in one tap. Any concept can offer this with `skipLabel`.
+
 ## The network map and switching jobs
 
 - **The home page now has a map of the whole network.** Each family of jobs is a line in its own colour, and every job is a terminus at the end of its line. A line stops at what most of its jobs need. Where two or more lines share a stop (Git, SQL, Python, spreadsheets, statistics) there's an interchange: that's where one career can change to another.

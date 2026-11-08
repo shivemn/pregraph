@@ -15,7 +15,7 @@ const net = buildNetwork(c.concepts, c.families, jobs);
 
 // Geometry, in SVG units.
 const LABELS = 196; // left margin for interchange names
-const COL = 192;
+const COL = 250;
 const TOP = 86; // first station row
 const ROW = 40;
 const LINE_W = 6;
@@ -41,7 +41,7 @@ const TERM_GAP = 14;
 const termini = net.lines.map((l, i) => {
   let at = termTop;
   return l.roles.map((r) => {
-    const lines = wrap(r.title, 19);
+    const lines = wrap(r.title, 25);
     const top = at;
     at += lines.length * TERM_LINE + TERM_GAP;
     return { ...r, line: l.id, lines, x: x(i), y: top + 9 };
@@ -74,8 +74,8 @@ const bridges = net.stations
     {/* Line names, like the coloured boards above a platform. */}
     {net.lines.map((l, i) => (
       <g class="line-head" data-line={l.id}>
-        <rect x={x(i) - 14} y="8" width={COL - 22} height="34" />
-        <text x={x(i) - 3} y="32">{l.title}</text>
+        <rect x={x(i) - 14} y="8" width={COL - 34} height="36" />
+        <text x={x(i) - 2} y="33">{l.title}</text>
       </g>
     ))}
 
@@ -109,12 +109,12 @@ const bridges = net.stations
     {net.stations.filter((s) => !s.interchange).map((s) => {
       const sx = x(col.get(s.lines[0]!)!);
       const sy = y(s.row);
-      const lines = wrap(s.title, 20);
+      const lines = wrap(s.title, 25);
       return (
         <g class="st" data-id={s.id} data-roles={s.roles.join(' ')} data-lines={s.lines.join(' ')} data-line={s.lines[0]}>
           <circle cx={sx} cy={sy} r="7" />
           <text x={sx + 15} y={lines.length > 1 ? sy - 3 : sy + 5}>
-            {lines.map((t, i) => <tspan x={sx + 15} dy={i === 0 ? 0 : 16}>{t}</tspan>)}
+            {lines.map((t, i) => <tspan x={sx + 15} dy={i === 0 ? 0 : 18}>{t}</tspan>)}
           </text>
         </g>
       );
@@ -185,17 +185,17 @@ const bridges = net.stations
 
 
   .line-head rect { fill: var(--c); }
-  .line-head text { fill: var(--l-text); font-family: var(--sign); font-stretch: 88%; font-weight: 700; font-size: 18px; }
+  .line-head text { fill: var(--l-text); font-family: var(--sign); font-stretch: 88%; font-weight: 700; font-size: 20px; }
   .line { fill: none; stroke: var(--c); }
   .bridge-gap { stroke: var(--paper); stroke-width: 14px; }
 
   .inter .link { fill: var(--paper); stroke: var(--ink); stroke-width: 3px; }
   .inter circle { fill: var(--paper); stroke: var(--ink); stroke-width: 2.5px; }
   .inter .leader { stroke: var(--ink-3); stroke-width: 1.5px; stroke-dasharray: 2 4; }
-  .inter-name { fill: var(--ink); font-family: var(--text); font-weight: 700; font-size: 15px; }
+  .inter-name { fill: var(--ink); font-family: var(--text); font-weight: 700; font-size: 16.5px; }
 
   .st:not(.inter) circle { fill: var(--paper); stroke: var(--c); stroke-width: 4px; }
-  .st:not(.inter) text { fill: var(--ink); font-family: var(--text); font-size: 14.5px; }
+  .st:not(.inter) text { fill: var(--ink); font-family: var(--text); font-size: 16.5px; }
 
   .terminus { cursor: pointer; }
   .terminus .bar { fill: var(--yellow); stroke: #000; stroke-width: 2px; }

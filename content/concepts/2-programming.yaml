@@ -1,7 +1,8 @@
 - id: programming-basics
-  title: Programming in Python
+  title: Programming basics
   area: programming
-  summary: Variables, conditions, loops, functions, lists and dictionaries. Enough to write small programs on your own.
+  summary: "Variables, conditions, loops, functions, lists and dictionaries, in one language, enough to write small programs on your own. Any language teaches this. The main picks use Python, the easiest to start with; Java, C, C++ and C# courses are under more options. If you already write code in any language, skip this stop."
+  skipLabel: I already code in another language
   hours: 40
   resources:
     - resource: think-python
@@ -17,6 +18,18 @@
       why: "Short, clear lectures with problem sets that check your code."
     - resource: exercism
       locator: "Python track"
+    - resource: mooc-java
+      locator: "Java Programming I, parts 1–7"
+      role: alternative
+      why: "If your first language will be Java: the same basics, with exercises checked as you go."
+    - resource: learncpp
+      locator: "Chapters 0–8"
+      role: alternative
+      why: "If you'd rather start in C++."
+    - resource: ms-csharp
+      locator: "A tour of C#, then the tutorials it links to"
+      role: alternative
+      why: "If you'd rather start in C#."
 
 - id: recursion
   title: Recursion

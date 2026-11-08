@@ -51,6 +51,9 @@ const PACES = [
 ];
 const DEFAULT_PACE = 10;
 
+/** "Week 11" or "Weeks 1–3". */
+const weeksLabel = ([a, b]: [number, number]) => (a === b ? `Week ${a}` : `Weeks ${a}–${b}`);
+
 const monthYear = (weeksFromNow: number) =>
   new Date(Date.now() + weeksFromNow * 7 * 24 * 3600 * 1000).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
 
@@ -183,7 +186,6 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
     () => (switchingFrom ? planPath(index, targets, new Set(me.known)).steps.length : 0),
     [switchingFrom, index, targets, me.known],
   );
-  const tierTitle = (t: TierId) => tiers.find((x) => x.id === t)!.title.toLowerCase();
 
   const why = (s: PlanStep) => {
     const others = s.neededFor.filter((t) => t !== s.id).map(titleOf);
@@ -308,8 +310,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
                 </p>
               )}
               <p className="summary-small quiet">
-                {left} {left === 1 ? 'stop' : 'stops'} in {train.length} {train.length === 1 ? 'coach' : 'coaches'},{' '}
-                {hourRange(hoursLeft).join('–')} hours of study in all.
+                {left} {left === 1 ? 'stop' : 'stops'}, {hourRange(hoursLeft).join('–')} hours of study in all.
                 {finished.length > 0 && <> You've finished {finished.length}.</>}
               </p>
             </>
@@ -348,7 +349,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
                 key={c.number}
                 href={`#coach-${c.number}`}
                 className={d === c.stops.length ? 'coach-chip is-done' : 'coach-chip'}
-                title={`Coach ${c.number}: ${d} of ${c.stops.length} done`}
+                title={`${weeksLabel(c.weeks)}: ${d} of ${c.stops.length} done`}
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById(`coach-${c.number}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -367,8 +368,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
           return (
             <section key={c.number} className="coach" id={`coach-${c.number}`} data-done={d === c.stops.length}>
               <header className="coach-head">
-                <h3>Coach {c.number}</h3>
-                <span className="coach-weeks">Weeks {c.weeks[0] === c.weeks[1] ? c.weeks[0] : `${c.weeks[0]}–${c.weeks[1]}`}</span>
+                <h3>{weeksLabel(c.weeks)}</h3>
                 <span className="coach-count num">{d === c.stops.length ? 'Done' : `${d} of ${c.stops.length} done`}</span>
               </header>
               <ol className="route">
@@ -399,6 +399,14 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
                       </div>
                       <p className="stop-sub">
                         <span className="area-name">{areaTitle.get(s.area)}</span>. {status}
+                        {state !== 'done' && index.get(s.id)?.skipLabel && (
+                          <>
+                            {' '}
+                            <button className="text-button skip-inline" onClick={() => skip(s.id)}>
+                              {index.get(s.id)!.skipLabel}
+                            </button>
+                          </>
+                        )}
                       </p>
                     </div>
                   </li>
@@ -419,7 +427,8 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
                 <>That's the whole route to {role.title}.</>
               ) : (
                 <>
-                  That's everything {tierTitle(tier) === 'to get hired' ? 'you need to get hired' : `for ${tierTitle(tier)}`}.
+                  That's the end of the {tier === 'hire' ? 'hiring' : tier === 'firstYear' ? 'first-year' : 'good-to-have'} list
+                  for {role.title}. Getting hired also takes projects you can show and practice at interviews, so keep building as you go.
                   {tier !== usedTiers[usedTiers.length - 1]!.id && ' Switch "How far" to see what comes after.'}
                 </>
               )}

@@ -16,6 +16,8 @@ export interface ConceptNode {
   recommends: string[];
   /** concept, tool or project. The engine ignores it; the planner shows it. */
   kind?: string;
+  /** A one-tap "skip it" label the planner shows on this stop. */
+  skipLabel?: string;
 }
 
 export interface PlanStep {

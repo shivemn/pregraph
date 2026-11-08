@@ -16,8 +16,8 @@ export function listOf(items: readonly string[]): string {
 
 /** Only the fields the planner needs in the browser. Keeps the page small. */
 export function plannerNodes(c: Content): ConceptNode[] {
-  return c.concepts.map(({ id, title, area, hours, requires, recommends, kind }) => ({
-    id, title, area, hours, requires, recommends, kind,
+  return c.concepts.map(({ id, title, area, hours, requires, recommends, kind, skipLabel }) => ({
+    id, title, area, hours, requires, recommends, kind, ...(skipLabel ? { skipLabel } : {}),
   }));
 }
 

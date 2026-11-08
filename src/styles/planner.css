@@ -156,7 +156,7 @@
   padding: 8px 14px 6px; background: var(--platform); border-bottom: 2px solid var(--ink);
 }
 .coach-head h3 { font-size: 1.3rem; }
-.coach-weeks { font-family: var(--sign); font-stretch: 88%; font-weight: 600; font-size: 1.1rem; color: var(--ink-2); }
+.skip-inline { font-size: 0.92rem; }
 .coach-count { margin-left: auto; font-size: 0.92rem; color: var(--ink-2); font-weight: 600; }
 .coach[data-done='true'] .coach-head { background: var(--yellow); }
 .coach[data-done='true'] .coach-head h3,
