@@ -61,6 +61,7 @@
   --security: #8b5a2b;
   --workplace: #9a4dbf;
   --finance: #00796b;
+  --product: #b5179e;
 
   --sign: 'Pregraph Sign', 'Arial Narrow', sans-serif;
   --text: 'Mukta', system-ui, sans-serif;
@@ -91,6 +92,7 @@
     --security: #dba06a;
     --workplace: #d39af0;
     --finance: #4fd1c0;
+    --product: #f28ad8;
     color-scheme: dark;
   }
 }
@@ -109,6 +111,7 @@
 [data-area='security'] { --line: var(--security); }
 [data-area='workplace'] { --line: var(--workplace); }
 [data-area='finance'] { --line: var(--finance); }
+[data-area='product'] { --line: var(--product); }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }

@@ -14,15 +14,17 @@ Pregraph starts from a ticket: *From a maths graduate, To Backend engineer.* Eac
 
 ## What's here
 
-- **Twenty-three roles and five exams:**
-  - Software: software engineer, backend, frontend, full-stack, Android, QA/SDET, embedded.
-  - Data and ML: data analyst, data scientist, data engineer, ML engineer, deep learning engineer, AI/LLM engineer.
-  - Infrastructure: DevOps/SRE, cloud, application support, security analyst.
+- **Forty-one roles and five exams:**
+  - Software: software engineer, backend, frontend, full-stack, Android, iOS, QA/SDET, embedded, Salesforce, ServiceNow.
+  - Data and ML: data analyst, data scientist, data engineer, analytics engineer, BI developer, product analyst, ML engineer, MLOps engineer, deep learning engineer, AI/LLM engineer.
+  - Infrastructure and security: DevOps/SRE, platform engineer, cloud engineer, solutions architect, system administrator, database administrator, application support, security analyst, security engineer, penetration tester.
   - Finance, economics and quant: quant researcher, quant developer, risk analyst, financial analyst, economist, statistician.
+  - Product, design and delivery: product manager, UI/UX designer, business analyst, technical writer, scrum master.
   - Exams: GATE CS, GATE DA, GATE ST, IIT JAM MS and UGC NET CS, each mapped from its official syllabus.
-- **A tools page** with 68 tools on eleven shelves, for learning one thing on its own: languages from Python to Rust, web and mobile frameworks, ML libraries, databases, BI, DevOps, cloud, testing, security, and platforms like Jira and Salesforce. Each tool page has the three picks and the route to it from your background.
+- **A practice page** with 43 free places to practise, grouped by skill, each listing the stops it tests.
+- **A tools page** with 78 tools on twelve shelves, including where to host your projects for free, for learning one thing on its own: languages from Python to Rust, web and mobile frameworks, ML libraries, databases, BI, DevOps, cloud, testing, security, and platforms like Jira and Salesforce. Each tool page has the three picks and the route to it from your background.
 - **Eight starting points, nothing assumed:** CS or IT, maths or stats, engineering or science graduates; commerce, economics or any other degree; or no degree yet. Until you pick one, the route starts from the very beginning.
-- **One shared graph** of 104 concepts, 57 tools and 16 projects, linked to 276 resources, almost all of them free.
+- **One shared graph** of 108 concepts, 67 tools and 16 projects, linked to 324 resources, almost all of them free.
 - **Read, watch, practise.** Each stop has one pick of each. Open a stop to see them, along with why it's on your route and what it leads to.
 - **Ticking off progress.** What you finish counts for every role. Each stop can say why it's there, and you can skip what you already know.
 - **A map of the route,** drawn by a layout algorithm written for this project.

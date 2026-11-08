@@ -38,6 +38,10 @@
   title: Finance
   resources: [quantconnect]
 
+- id: design
+  title: Design
+  resources: [daily-ui]
+
 - id: embedded
   title: Embedded
   resources: [wokwi]

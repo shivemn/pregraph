@@ -1,5 +1,14 @@
 # Changelog
 
+## Practice, hosting and eighteen more roles
+
+- **A practice page** at `/practice`: 43 free places to practise in eleven groups (coding, SQL and data, ML, web, systems from scratch, DevOps, security, maths and quant puzzles, finance, design, embedded). Each lists the stops it tests, worked out from the graph. "Practice" is in the header.
+- **23 new practice sets,** including LeetCode's Top Interview 150 and SQL 50, Codeforces, Project Euler, PostgreSQL Exercises, Frontend Mentor, Type Challenges, MIT's xv6 and distributed systems labs, BusTub, Maelstrom, TryHackMe, Khan Academy, Brainstellar, Kaggle competitions, TidyTuesday, QuantConnect, Wokwi, GitHub Skills and Daily UI. Practice picks now cover 83 of 191 stops, up from 60.
+- **A hosting and deployment shelf** on the tools page: GitHub Pages, Cloudflare Pages and Workers, Vercel, Netlify, Render, Neon, Supabase and Firebase. Project pages point to it.
+- **Databricks** on the data engineering shelf and **Hugging Face** on the ML shelf.
+- **A new Product and design area:** Agile and Scrum, product management, UX and UI design, and technical writing.
+- **Eighteen new roles:** iOS developer, Salesforce administrator/developer, ServiceNow developer, MLOps engineer, BI developer, analytics engineer, product analyst, platform engineer, system administrator, database administrator, penetration tester, security engineer, solutions architect, product manager, UI/UX designer, business analyst, technical writer, and scrum master.
+
 ## Deep learning, finance and more exams
 
 - **Dark mode fixes.** Dropdown lists now use the dark colours instead of light grey on white, the route preview's header is readable, and finished stops show their tick.

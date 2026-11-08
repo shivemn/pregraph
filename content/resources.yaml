@@ -2699,3 +2699,86 @@
   url: https://www.youtube.com/watch?v=QEaBAZQCtwE
   free: true
   medium: watch
+
+- id: scrum-guide
+  title: "The Scrum Guide"
+  author: "Ken Schwaber, Jeff Sutherland"
+  type: book
+  url: https://scrumguides.org/scrum-guide.html
+  free: true
+  medium: read
+
+- id: scrum-20min
+  title: "Scrum in 20 mins (with examples)"
+  author: "Codex Community"
+  type: video
+  url: https://www.youtube.com/watch?v=SWDhGSZNF9M
+  free: true
+  medium: watch
+
+- id: atlassian-agile
+  title: "Agile Coach"
+  author: "Atlassian"
+  type: site
+  url: https://www.atlassian.com/agile
+  free: true
+  medium: read
+
+- id: shape-up
+  title: "Shape Up"
+  author: "Ryan Singer (Basecamp)"
+  type: book
+  url: https://basecamp.com/shapeup
+  free: true
+  medium: read
+  note: "Free to read online."
+
+- id: nngroup
+  title: "Nielsen Norman Group articles"
+  author: "Nielsen Norman Group"
+  type: site
+  url: https://www.nngroup.com/articles/
+  free: true
+  medium: read
+
+- id: letsuncover-ux
+  title: "UI/UX Design Full Course for Beginners"
+  author: "Lets Uncover"
+  type: video
+  url: https://www.youtube.com/watch?v=truRwcI7-kg
+  free: true
+  medium: watch
+
+- id: laws-of-ux
+  title: "Laws of UX"
+  author: "Jon Yablonski"
+  type: site
+  url: https://lawsofux.com/
+  free: true
+  medium: read
+
+- id: daily-ui
+  title: "Daily UI"
+  author: "Daily UI"
+  type: site
+  url: https://www.dailyui.co/
+  free: true
+  medium: practice
+  note: "A design prompt in your inbox every day for 100 days."
+
+- id: google-tech-writing
+  title: "Technical Writing courses"
+  author: "Google for Developers"
+  type: course
+  url: https://developers.google.com/tech-writing
+  free: true
+  medium: read
+  note: "Free, with short exercises in each lesson."
+
+- id: fcc-tech-writing
+  title: "Technical Writing Course for Beginners"
+  author: "freeCodeCamp.org"
+  type: video
+  url: https://www.youtube.com/watch?v=vT5pcc30Ffw
+  free: true
+  medium: watch

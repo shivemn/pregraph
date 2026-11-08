@@ -24,7 +24,7 @@ You say where you're starting from and which job you want: "I'm a maths graduate
 
 Done so far:
 
-- Twenty-three roles and five exams, over one shared graph: 104 concepts, 57 tools, 16 projects and 276 resources, plus a tools page with 68 of them on eleven shelves.
+- Forty-one roles and five exams, over one shared graph: 108 concepts, 67 tools, 16 projects and 324 resources, plus a tools page with 78 of them on twelve shelves and a practice page with 43 places to practise.
 - For every stop, a pick to read, a pick to watch (YouTube, NPTEL, OCW or Coursera) and, where there's a good one, a pick to practise with.
 - A panel that opens on any stop, in the list or on the map, with those picks and what the stop needs and leads to.
 - Four backgrounds: maths graduate, engineering graduate (not CS), CS or IT graduate, and starting from zero.
@@ -82,6 +82,7 @@ erDiagram
 | `content/backgrounds.yaml` | What a kind of learner already knows, as a list of concept ids, plus a `phrase` for the home page sentence ("a maths graduate") and a `group` (`stem`, `other` or `none`) that decides where it sits in the picker. Nothing is preselected: with no background chosen, the planner shows the full route. |
 | `content/families.yaml` | Groups of roles: software, data, infrastructure, exams. |
 | `content/tool-groups.yaml` | The shelves on the tools page (languages, frameworks, databases, BI, DevOps) and which concepts sit on each, in order. A "tool" here is anything people come to learn on its own, so Python and SQL count even though their `kind` is `concept`. |
+| `content/practice-groups.yaml` | The groups on the practice page and the practice resources in each. Which stops a resource tests is worked out from the concept files, so it can't drift. |
 | `content/roles.yaml` | A role (or an exam): `title`, `family`, `summary`, and `tiers` with three lists of concept ids: `hire`, `firstYear` and `extra`. An optional `evidence` block records the job postings the tiers are based on. Without it the role page says "Draft". |
 | `research/postings/*.csv` | Hand-collected, hand-tagged job postings, one file per role. `npm run evidence -- <role>` turns them into counts. See [ROLES.md](ROLES.md). |
 

@@ -154,6 +154,168 @@
     firstYear: [time-series, econometrics, machine-learning, data-visualization]
     extra: [pandas, multivariable-calculus]
 
+- id: ios-developer
+  title: iOS developer
+  family: software
+  summary: Builds iPhone and iPad apps in Swift, from screens and navigation to networking and the App Store.
+  tiers:
+    hire: [swift, oop-design, git, linear-structures, hash-tables, web-http, rest-apis]
+    firstYear: [testing-debugging, concurrency, ci-cd, firebase]
+    extra: [system-design, flutter]
+
+- id: salesforce-developer
+  title: Salesforce administrator / developer
+  family: software
+  summary: Configures and extends Salesforce for a company. Objects, security, automation and reports, then code and integrations as the job grows.
+  tiers:
+    hire: [salesforce, spreadsheets, sql, programming-basics]
+    firstYear: [javascript, rest-apis, oop-design, git]
+    extra: [bi-tools, testing-debugging]
+
+- id: servicenow-developer
+  title: ServiceNow developer
+  family: software
+  summary: Builds and runs the ServiceNow platform that a company's IT support runs on. Forms, workflows, scripts and integrations.
+  tiers:
+    hire: [servicenow, javascript, incident-management, sql, rest-apis]
+    firstYear: [git, testing-debugging, log-analysis]
+    extra: [cloud-basics, jira]
+
+- id: mlops-engineer
+  title: MLOps engineer
+  family: data
+  summary: Gets models out of notebooks and keeps them running. Pipelines, deployment, monitoring and retraining.
+  tiers:
+    hire: [programming-basics, machine-learning, git, shell-tools, docker, ci-cd, mlops, cloud-basics, project-ml-service]
+    firstYear: [kubernetes, observability, infrastructure-as-code, orchestration, databricks]
+    extra: [distributed-systems, spark, hugging-face]
+
+- id: bi-developer
+  title: BI developer
+  family: data
+  summary: Builds the dashboards and data models a business runs on, in Power BI or Tableau on top of a warehouse.
+  tiers:
+    hire: [sql, spreadsheets, bi-tools, data-visualization, data-warehousing, statistics, project-data-analysis]
+    firstYear: [tableau, dbt, query-performance, snowflake]
+    extra: [pandas, databricks]
+
+- id: analytics-engineer
+  title: Analytics engineer
+  family: data
+  summary: Sits between data engineering and analysis. Turns raw tables into clean, tested models with SQL and dbt.
+  tiers:
+    hire: [sql, dbt, data-warehousing, git, snowflake, programming-basics, testing-debugging]
+    firstYear: [orchestration, bi-tools, databricks, ci-cd]
+    extra: [spark, pandas, query-performance]
+
+- id: product-analyst
+  title: Product analyst
+  family: data
+  summary: Works out how people use a product and whether changes helped, with SQL, experiments and dashboards.
+  tiers:
+    hire: [sql, spreadsheets, statistics, experiments, data-visualization, bi-tools, project-data-analysis]
+    firstYear: [pandas, probability, product-management]
+    extra: [machine-learning, bayesian-statistics]
+
+- id: platform-engineer
+  title: Platform engineer
+  family: infra
+  summary: Builds the internal platform other engineers ship on. Clusters, pipelines, templates and self-service tooling.
+  tiers:
+    hire: [linux-admin, shell-tools, git, networking, docker, kubernetes, ci-cd, infrastructure-as-code, cloud-basics, programming-basics]
+    firstYear: [observability, go, ansible, nginx]
+    extra: [distributed-systems, systems-security]
+
+- id: system-administrator
+  title: System administrator
+  family: infra
+  summary: Keeps servers, users and networks working. Patching, backups, access, monitoring and fixing what breaks.
+  tiers:
+    hire: [shell-tools, linux-admin, networking, nginx, incident-management, log-analysis]
+    firstYear: [ansible, docker, cloud-basics, observability, git]
+    extra: [azure, systems-security]
+
+- id: database-administrator
+  title: Database administrator
+  family: infra
+  summary: Keeps databases fast, safe and backed up. Tuning, indexing, replication, upgrades and access control.
+  tiers:
+    hire: [sql, database-internals, query-performance, linux-admin, shell-tools]
+    firstYear: [observability, cloud-basics, incident-management]
+    extra: [distributed-systems, mongodb, redis]
+
+- id: penetration-tester
+  title: Penetration tester
+  family: infra
+  summary: Breaks into systems with permission, then writes up how and how to fix it. Web apps, networks and cloud.
+  tiers:
+    hire: [networking, linux-admin, shell-tools, web-http, web-security, security-fundamentals, nmap, burp-suite, programming-basics, project-ctf]
+    firstYear: [wireshark, systems-security, cryptography]
+    extra: [cloud-iam, c-and-memory]
+
+- id: security-engineer
+  title: Security engineer
+  family: infra
+  summary: Designs and builds defences. Secure infrastructure, identity, detection and helping developers ship safe code.
+  tiers:
+    hire: [networking, linux-admin, security-fundamentals, web-security, systems-security, cryptography, programming-basics, cloud-iam]
+    firstYear: [threat-detection, incident-management, splunk, infrastructure-as-code]
+    extra: [kubernetes, wireshark]
+
+- id: solutions-architect
+  title: Solutions architect
+  family: infra
+  summary: Designs systems for customers or teams on a cloud platform, and explains the trade-offs to people who'll pay for them.
+  tiers:
+    hire: [system-design, cloud-basics, cloud-architecture, cloud-networking, cloud-iam, networking, distributed-systems, rest-apis, sql]
+    firstYear: [azure, gcp, infrastructure-as-code, observability]
+    extra: [kubernetes, data-warehousing]
+
+- id: product-manager
+  title: Product manager
+  family: product
+  summary: Decides what a team builds and why, and makes sure it gets built. Users, priorities, specs, data and a lot of conversations.
+  tiers:
+    hire: [product-management, agile-scrum, ux-design, sql, spreadsheets, experiments, jira, web-http]
+    firstYear: [statistics, data-visualization, technical-writing, figma]
+    extra: [system-design, programming-basics]
+
+- id: ui-ux-designer
+  title: UI / UX designer
+  family: product
+  summary: Researches what users need and designs screens that meet it, from wireframes to polished prototypes.
+  tiers:
+    hire: [ux-design, figma, html-css, agile-scrum]
+    firstYear: [web-accessibility, product-management, experiments]
+    extra: [javascript, react]
+
+- id: business-analyst
+  title: Business analyst
+  family: product
+  summary: Turns what a business needs into requirements a team can build, and checks the result with data. Common in IT services and banks.
+  tiers:
+    hire: [sql, spreadsheets, agile-scrum, jira, bi-tools, data-visualization, technical-writing, statistics]
+    firstYear: [product-management, ux-design, accounting]
+    extra: [pandas, salesforce]
+
+- id: technical-writer
+  title: Technical writer
+  family: product
+  summary: Writes the guides, API references and help pages that make software usable.
+  tiers:
+    hire: [technical-writing, git, html-css, web-http, rest-apis]
+    firstYear: [programming-basics, agile-scrum, jira, github-pages]
+    extra: [ux-design, javascript]
+
+- id: scrum-master
+  title: Scrum master / delivery manager
+  family: product
+  summary: Keeps a team's process working and its delivery predictable. Ceremonies, blockers, metrics and stakeholders.
+  tiers:
+    hire: [agile-scrum, jira, spreadsheets, technical-writing]
+    firstYear: [product-management, git, ci-cd]
+    extra: [incident-management, bi-tools]
+
 - id: gate-cs
   title: GATE computer science
   family: exams

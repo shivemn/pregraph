@@ -1,0 +1,64 @@
+# Product, design and delivery: the non-coding half of building software.
+
+- id: agile-scrum
+  title: Agile and Scrum
+  area: product
+  summary: How most software teams plan and deliver. Sprints, backlogs, stand-ups, reviews and retrospectives, and why they exist.
+  hours: 8
+  resources:
+    - resource: scrum-guide
+      locator: "The whole guide"
+      why: "The official definition, and only about fifteen pages."
+      verified: true
+    - resource: scrum-20min
+      locator: "The whole video"
+      verified: true
+    - resource: atlassian-agile
+      locator: "Scrum, Kanban and the other Agile Coach guides"
+      role: alternative
+
+- id: product-management
+  title: Product management
+  area: product
+  summary: Deciding what to build and why. Talking to users, writing specs, prioritising, shaping work and measuring whether it helped.
+  hours: 25
+  requires: [agile-scrum]
+  recommends: [ux-design, experiments]
+  resources:
+    - resource: shape-up
+      locator: "The whole book"
+      why: "A free, concrete account of how one product team decides, shapes and ships work."
+      verified: true
+
+- id: ux-design
+  title: UX and UI design
+  area: product
+  summary: Designing interfaces people can use. User research, information architecture, wireframes, visual hierarchy and usability testing.
+  hours: 30
+  recommends: [figma]
+  resources:
+    - resource: nngroup
+      locator: "The articles on usability heuristics, user research and information architecture"
+      verified: true
+    - resource: letsuncover-ux
+      locator: "The whole video"
+      verified: true
+    - resource: laws-of-ux
+      locator: "Every law, with its examples"
+      role: alternative
+    - resource: daily-ui
+      locator: "The 100-day challenge, one small design a day"
+      verified: true
+
+- id: technical-writing
+  title: Technical writing
+  area: product
+  summary: Writing documentation people can follow. Clear sentences, structure, audience, and docs for APIs and code.
+  hours: 10
+  resources:
+    - resource: google-tech-writing
+      locator: "Technical Writing One, then Two"
+      verified: true
+    - resource: fcc-tech-writing
+      locator: "The whole video"
+      verified: true
