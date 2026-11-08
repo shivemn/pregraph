@@ -13,7 +13,7 @@ const RouteMap = lazy(() => import('./RouteMap'));
 import StopPanel from './StopPanel';
 
 interface Named { id: string; title: string }
-interface Background extends Named { description: string; knows: string[] }
+interface Background extends Named { description: string; knows: string[]; group: 'stem' | 'other' | 'none' }
 type TierId = 'hire' | 'firstYear' | 'extra';
 
 interface Props {
@@ -22,6 +22,7 @@ interface Props {
   areas: Named[];
   tiers: Array<{ id: TierId; title: string }>;
   backgrounds: Background[];
+  backgroundGroups: Array<{ id: Background['group']; title: string }>;
   /** A job role (the default), or a single tool picked from the tools page. */
   goal?: 'role' | 'tool';
 }
@@ -68,7 +69,7 @@ const Tick = () => (
   </svg>
 );
 
-export default function RolePlanner({ role, concepts, areas, tiers, backgrounds, goal = 'role' }: Props) {
+export default function RolePlanner({ role, concepts, areas, tiers, backgrounds, backgroundGroups, goal = 'role' }: Props) {
   const roleKey = `pregraph:role:${role.id}`;
   const index = useMemo(() => indexConcepts(concepts), [concepts]);
   const areaTitle = useMemo(() => new Map(areas.map((a) => [a.id, a.title])), [areas]);
@@ -118,13 +119,15 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
     write(ME_KEY, me);
     write(roleKey, roleState);
     const url = new URL(location.href);
-    url.searchParams.set('from', background.id);
+    if (background) url.searchParams.set('from', background.id);
+    else url.searchParams.delete('from');
     if (tier !== 'hire') url.searchParams.set('tier', tier);
     else url.searchParams.delete('tier');
     history.replaceState(null, '', url);
   }, [me, roleState, loaded]);
 
-  const background = backgrounds.find((b) => b.id === me.background) ?? backgrounds[0]!;
+  // Nothing is assumed: until you say where you're starting from, the route is the full one.
+  const background = backgrounds.find((b) => b.id === me.background);
   const tier: TierId = usedTiers.some((t) => t.id === roleState.tier) ? roleState.tier! : 'hire';
   const view = roleState.view ?? 'list';
 
@@ -139,7 +142,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
   }, [role, tier]);
   const targets = useMemo(() => [...targetTier.keys()], [targetTier]);
 
-  const known = useMemo(() => new Set([...background.knows, ...me.known]), [background, me.known]);
+  const known = useMemo(() => new Set([...(background?.knows ?? []), ...me.known]), [background, me.known]);
   const done = useMemo(() => new Set(me.done), [me.done]);
   const plan = useMemo(() => planPath(index, targets, known), [index, targets, known]);
   const tierTitle = (t: TierId) => tiers.find((x) => x.id === t)!.title.toLowerCase();
@@ -188,9 +191,18 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
         <div className="controls">
           <label className="control">
             <span className="control-label">Starting as</span>
-            <select value={background.id} onChange={(e) => setMe((m) => ({ ...m, background: e.target.value }))}>
-              {backgrounds.map((b) => (
-                <option key={b.id} value={b.id}>{b.title}</option>
+            <select
+              value={background?.id ?? ''}
+              onChange={(e) => setMe((m) => ({ ...m, background: e.target.value || undefined }))}
+              className={background ? undefined : 'unset'}
+            >
+              <option value="">Select your background</option>
+              {backgroundGroups.map((g) => (
+                <optgroup key={g.id} label={g.title}>
+                  {backgrounds.filter((b) => b.group === g.id).map((b) => (
+                    <option key={b.id} value={b.id}>{b.title}</option>
+                  ))}
+                </optgroup>
               ))}
             </select>
           </label>
@@ -208,6 +220,12 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
           )}
         </div>
 
+        {!background && loaded && (
+          <p className="choose-bg">
+            This is the full route, from the very beginning. Pick your background above and anything your degree
+            already covers is left out.
+          </p>
+        )}
         <p className="summary" aria-live="polite">
           {left === 0 ? (
             <>{goal === 'tool'
@@ -309,9 +327,13 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
 
         <section>
           <h2 className="side-heading">Left out</h2>
+          {!background ? (
+            <p className="quiet small">Nothing yet. Pick your background and what it covers is left out.</p>
+          ) : (
+          <>
           <p className="quiet small">{background.description}</p>
           {background.knows.length === 0 ? (
-            <p className="quiet small">Nothing is left out when you start from zero.</p>
+            <p className="quiet small">So nothing is left out. Skip anything you already know as you go.</p>
           ) : background.knows.length <= 5 ? (
             <p className="quiet small">So {listOf(background.knows.map(titleOf))} {background.knows.length === 1 ? 'is' : 'are'} left out.</p>
           ) : (
@@ -319,6 +341,8 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
               <summary>{background.knows.length} topics are left out</summary>
               <p>{listOf(background.knows.map(titleOf))}.</p>
             </details>
+          )}
+          </>
           )}
           {me.known.length > 0 && (
             <ul className="skipped">

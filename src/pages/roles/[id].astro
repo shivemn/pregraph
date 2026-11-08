@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import RolePlanner from '../../components/RolePlanner';
 import { content, plannerNodes } from '../../lib/site';
-import { TIERS } from '../../lib/schema';
+import { BACKGROUND_GROUPS, TIERS } from '../../lib/schema';
 import '../../styles/route.css';
 import '../../styles/planner.css';
 import '../../styles/map.css';
@@ -45,6 +45,7 @@ const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((
     areas={c.areas}
     tiers={TIERS}
     backgrounds={c.backgrounds}
+        backgroundGroups={BACKGROUND_GROUPS}
   />
 
   <noscript>

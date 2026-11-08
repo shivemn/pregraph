@@ -54,6 +54,8 @@ export const conceptSchema = z.object({
 });
 
 export const backgroundSchema = z.object({
+  /** Where it sits in the picker: a STEM degree, another degree, or no degree yet. */
+  group: z.enum(['stem', 'other', 'none']),
   id,
   title: z.string().min(1),
   /** How it reads after "I'm", e.g. "a maths graduate" or "starting from zero". */
@@ -137,6 +139,13 @@ export type Resource = z.infer<typeof resourceSchema>;
 export type ResourceSection = z.infer<typeof resourceSectionSchema>;
 export type Concept = z.infer<typeof conceptSchema>;
 export type Background = z.infer<typeof backgroundSchema>;
+
+/** The picker's headings, in order. */
+export const BACKGROUND_GROUPS: Array<{ id: Background['group']; title: string }> = [
+  { id: 'stem', title: 'Science, tech, engineering or maths degree' },
+  { id: 'other', title: 'Another degree' },
+  { id: 'none', title: 'No degree' },
+];
 export type Family = z.infer<typeof familySchema>;
 export type Role = z.infer<typeof roleSchema>;
 export type ToolGroup = z.infer<typeof toolGroupSchema>;

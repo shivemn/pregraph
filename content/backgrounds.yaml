@@ -1,23 +1,53 @@
-- id: maths-grad
-  phrase: a maths graduate
-  title: Maths graduate
-  description: A degree in mathematics. Comfortable with proof, discrete structures, linear algebra, probability and statistics, and little or no programming.
-  knows: [proofs, discrete-math, linear-algebra, probability, statistics]
-
-- id: engineering-grad
-  phrase: an engineering graduate, not CS
-  title: Engineering graduate, not CS
-  description: Mechanical, civil, electrical or similar. Engineering maths is done; programming probably stopped at a first-year course.
-  knows: [linear-algebra, probability]
+# Where a learner starts. `group` decides where it sits in the picker:
+# a STEM degree, another degree, or no degree yet. Nothing is preselected.
+# `knows` is what the route leaves out. Keep it to what almost everyone with
+# that degree really has; people can skip more themselves.
 
 - id: cs-grad
+  group: stem
   phrase: a CS or IT graduate
   title: CS or IT graduate
   description: The textbook basics are done. What's left is what the job adds on top.
   knows: [proofs, discrete-math, programming-basics, recursion, c-and-memory, oop-design, linear-structures, hash-tables, trees-heaps, sorting-searching, complexity-analysis, sql, digital-logic, computer-architecture, os-processes-memory, networking]
 
+- id: maths-grad
+  group: stem
+  phrase: a maths or statistics graduate
+  title: Maths or stats graduate
+  description: Comfortable with proof, discrete structures, linear algebra, probability and statistics, with little or no programming.
+  knows: [proofs, discrete-math, linear-algebra, probability, statistics]
+
+- id: engineering-grad
+  group: stem
+  phrase: an engineering graduate, not CS
+  title: Engineering graduate (not CS)
+  description: Mechanical, civil, electrical or similar. Engineering maths is done; programming probably stopped at a first-year course.
+  knows: [linear-algebra, probability]
+
+- id: science-grad
+  group: stem
+  phrase: a science graduate
+  title: Science graduate
+  description: Physics, chemistry, biology or similar. Lab work, some maths and the statistics that goes with experiments. Programming varies a lot, so nothing beyond that is assumed.
+  knows: [statistics]
+
+- id: commerce-grad
+  group: other
+  phrase: a commerce or business graduate
+  title: Commerce or business graduate
+  description: B.Com, BBA, BMS, economics or similar. Spreadsheets are familiar; programming and university maths aren't assumed.
+  knows: [spreadsheets]
+
+- id: other-grad
+  group: other
+  phrase: a graduate
+  title: Arts or another degree
+  description: Arts, humanities, law, design or any other subject. Nothing technical is assumed, and that's fine.
+  knows: []
+
 - id: no-background
-  phrase: starting from zero
-  title: Starting from zero
-  description: No university maths or programming assumed.
+  group: none
+  phrase: someone without a degree yet
+  title: No degree yet
+  description: Still studying, or learning outside college. No university maths or programming assumed.
   knows: []

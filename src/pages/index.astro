@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { planPath } from '../lib/graph';
-import { targetsUpTo } from '../lib/schema';
-import { content, listOf, title } from '../lib/site';
+import { BACKGROUND_GROUPS, targetsUpTo } from '../lib/schema';
+import { content, listOf, plannerNodes, title } from '../lib/site';
 import { stopDetails } from '../lib/stops';
 import '../styles/route.css';
 
@@ -11,9 +11,16 @@ const areaTitle = new Map(c.areas.map((a) => [a.id, a.title]));
 const kindOf = new Map(c.concepts.map((x) => [x.id, x.kind]));
 
 const exampleRole = c.roles.find((r) => r.id === 'backend-engineer')!;
-const exampleBg = c.backgrounds.find((b) => b.id === 'maths-grad')!;
-const plan = planPath(c.concepts, targetsUpTo(exampleRole, 'hire'), new Set(exampleBg.knows));
+// The preview starts with no background assumed, then re-plans in the browser
+// as the ticket changes. Everything it needs is inlined below as JSON.
+const plan = planPath(c.concepts, targetsUpTo(exampleRole, 'hire'), new Set());
 const preview = plan.steps.slice(0, 6);
+const previewData = {
+  nodes: plannerNodes(c),
+  areas: Object.fromEntries(c.areas.map((a) => [a.id, a.title])),
+  backgrounds: Object.fromEntries(c.backgrounds.map((b) => [b.id, { phrase: b.phrase, knows: b.knows }])),
+  roles: Object.fromEntries(c.roles.map((r) => [r.id, { title: r.title, hire: r.tiers.hire }])),
+};
 
 const featured = ['go', 'cpp', 'redis', 'bi-tools', 'spring-boot', 'docker', 'pytorch'].map((id) => c.concepts.find((x) => x.id === id)!);
 const toolCount = c.toolGroups.reduce((n, g) => n + g.tools.length, 0);
@@ -46,8 +53,13 @@ const counts = {
         <div class="ticket-main">
           <label class="ticket-row">
             <span class="ticket-label">From</span>
-            <select name="from">
-              {c.backgrounds.map((b) => <option value={b.id} selected={b.id === exampleBg.id}>{b.phrase}</option>)}
+            <select name="from" required>
+              <option value="" disabled selected>Select your background</option>
+              {BACKGROUND_GROUPS.map((g) => (
+                <optgroup label={g.title}>
+                  {c.backgrounds.filter((b) => b.group === g.id).map((b) => <option value={b.id}>{b.title}</option>)}
+                </optgroup>
+              ))}
             </select>
           </label>
           <label class="ticket-row">
@@ -69,10 +81,10 @@ const counts = {
     </section>
 
     <section class="preview" aria-labelledby="preview-heading">
-      <h2 id="preview-heading">
-        Next stations for {exampleBg.phrase} going to {exampleRole.title.toLowerCase()}
+      <h2 id="preview-heading" data-preview-heading>
+        First stations to {exampleRole.title.toLowerCase()}, from the very beginning
       </h2>
-      <ol class="route">
+      <ol class="route" data-preview-route aria-live="polite">
         {
           preview.map((s) => (
             <li class="stop" data-area={s.area} data-kind={kindOf.get(s.id)} data-state={s.waitingOn.length === 0 ? 'ready' : 'waiting'}>
@@ -92,9 +104,10 @@ const counts = {
           ))
         }
       </ol>
-      <p class="route-end">
+      <p class="route-end" data-preview-end>
         Then {plan.steps.length - preview.length} more stops to get hired, about {plan.totalHours} hours in all.
       </p>
+      <script type="application/json" id="preview-data" set:html={JSON.stringify(previewData)} />
     </section>
   </div>
 
@@ -138,13 +151,80 @@ const counts = {
 </Base>
 
 <script>
+  import { planPath, type ConceptNode } from '../lib/graph';
+
+  interface PreviewData {
+    nodes: ConceptNode[];
+    areas: Record<string, string>;
+    backgrounds: Record<string, { phrase: string; knows: string[] }>;
+    roles: Record<string, { title: string; hire: string[] }>;
+  }
+
   // Send the ticket straight to the role page; without JavaScript it falls back to the roles list.
-  const form = document.querySelector<HTMLFormElement>('[data-picker]');
-  form?.addEventListener('submit', (e) => {
+  const form = document.querySelector<HTMLFormElement>('[data-picker]')!;
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(form);
-    location.href = `/roles/${data.get('role')}?from=${data.get('from')}`;
+    const from = data.get('from');
+    location.href = `/roles/${data.get('role')}${from ? `?from=${from}` : ''}`;
   });
+
+  // Re-plan the preview whenever the ticket changes.
+  const data: PreviewData = JSON.parse(document.getElementById('preview-data')!.textContent!);
+  const titles = new Map(data.nodes.map((n) => [n.id, n.title]));
+  const kinds = new Map(data.nodes.map((n) => [n.id, n.kind ?? 'concept']));
+  const list = (xs: string[]) => (xs.length <= 1 ? xs[0] ?? '' : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`);
+  const el = <K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text) e.textContent = text;
+    return e;
+  };
+
+  function update() {
+    const fd = new FormData(form);
+    const bg = data.backgrounds[String(fd.get('from') ?? '')];
+    const role = data.roles[String(fd.get('role'))];
+    if (!role) return;
+    const plan = planPath(data.nodes, role.hire, new Set(bg?.knows ?? []));
+    const shown = plan.steps.slice(0, 6);
+    document.querySelector('[data-preview-heading]')!.textContent = bg
+      ? `Next stations for ${bg.phrase} going to ${role.title.toLowerCase()}`
+      : `First stations to ${role.title.toLowerCase()}, from the very beginning`;
+    document.querySelector('[data-preview-route]')!.replaceChildren(
+      ...shown.map((s) => {
+        const li = el('li', 'stop');
+        li.dataset.area = s.area;
+        li.dataset.kind = kinds.get(s.id);
+        li.dataset.state = s.waitingOn.length === 0 ? 'ready' : 'waiting';
+        const station = el('span', 'station');
+        station.setAttribute('aria-hidden', 'true');
+        const body = el('div', 'stop-body');
+        const head = el('div', 'stop-head');
+        const a = el('a', 'stop-title', s.title);
+        a.href = `/concepts/${s.id}`;
+        head.append(a);
+        const kind = kinds.get(s.id);
+        if (kind !== 'concept') head.append(el('span', 'kind', kind === 'tool' ? 'Tool' : 'Project'));
+        head.append(el('span', 'stop-hours', `${s.hours} h`));
+        const sub = el('p', 'stop-sub');
+        sub.append(
+          el('span', 'area-name', data.areas[s.area] ?? s.area),
+          `. ${s.waitingOn.length === 0 ? 'Ready to start.' : `After ${list(s.waitingOn.map((id) => titles.get(id) ?? id))}.`}`,
+        );
+        body.append(head, sub);
+        li.append(station, body);
+        return li;
+      }),
+    );
+    const more = plan.steps.length - shown.length;
+    document.querySelector('[data-preview-end]')!.textContent =
+      more > 0
+        ? `Then ${more} more ${more === 1 ? 'stop' : 'stops'} to get hired, about ${plan.totalHours} hours in all.`
+        : `That's the whole route to get hired, about ${plan.totalHours} hours.`;
+  }
+  form.addEventListener('change', update);
+  update(); // the browser may have kept the last choices on a back navigation
 </script>
 
 <style>
@@ -168,7 +248,8 @@ const counts = {
     background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2374797f' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 6px center;
     appearance: none;
   }
-  .ticket select option, .ticket select optgroup { font-family: var(--text); font-size: 1rem; }
+  .ticket select option, .ticket select optgroup { font-family: var(--text); font-size: 1rem; color: var(--ink); }
+  .ticket select:invalid { color: var(--ink-3); }
   .ticket-stub {
     display: grid; align-content: center; justify-items: center; gap: 8px;
     padding: 14px 18px; border-left: 3px dashed var(--ink); background: var(--yellow);

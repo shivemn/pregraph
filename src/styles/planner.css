@@ -98,3 +98,11 @@
 @media (max-width: 560px) {
   .panel { padding: 18px 18px 40px; border-left: 0; }
 }
+
+/* No background picked yet: the select asks, and a note says the route is the full one. */
+.control select.unset { color: var(--ink-3); box-shadow: 5px 5px 0 var(--yellow); }
+.control select.unset option, .control select.unset optgroup { color: var(--ink); }
+.choose-bg {
+  margin-top: 16px; padding: 10px 14px; max-width: 62ch;
+  border-left: 5px solid var(--yellow); background: var(--platform); color: var(--ink-2); font-size: 0.97rem;
+}

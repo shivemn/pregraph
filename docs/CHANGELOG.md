@@ -1,5 +1,11 @@
 # Changelog
 
+## No assumed background
+
+- Nothing is preselected any more. The ticket and every planner start at "Select your background", and until you choose, the route is the full one from the very beginning, with a note saying so.
+- Seven starting points in three groups: a science, tech, engineering or maths degree (CS or IT, maths or stats, engineering, science), another degree (commerce or business, arts or anything else), or no degree yet. Science and commerce graduates are new.
+- The route preview on the home page now re-plans as you change the ticket, in the browser, from the same engine.
+
 ## Tools
 
 - **A tools page** at `/tools`, for people who need one thing rather than a whole job: 33 languages, frameworks, databases, BI and DevOps tools on five shelves, each showing its hours, which picks it has and what comes first. "Tools" is in the header next to "All roles".

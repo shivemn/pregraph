@@ -19,7 +19,7 @@ Pregraph starts from a ticket: *From a maths graduate, To Backend engineer.* Eac
   - Data: data analyst, data scientist, data engineer, ML engineer, AI/LLM engineer.
   - Infrastructure: DevOps/SRE, cloud, application support, security analyst.
 - **A tools page** for learning one thing on its own: Go, C++, Rust, Spring Boot, Node.js, Redis, MongoDB, Kafka, Power BI, Tableau, PyTorch, Docker, Kubernetes and more. Each tool page has the three picks and the route to it from your background.
-- **Four starting points:** maths graduate, engineering graduate (not CS), CS or IT graduate, starting from zero.
+- **Seven starting points, nothing assumed:** CS or IT, maths or stats, engineering or science graduates; commerce or business graduates; any other degree; or no degree yet. Until you pick one, the route starts from the very beginning.
 - **One shared graph** of 75 concepts, 23 tools and 14 projects, linked to 162 resources, almost all of them free.
 - **Read, watch, practise.** Each stop has one pick of each. Open a stop to see them, along with why it's on your route and what it leads to.
 - **Ticking off progress.** What you finish counts for every role. Each stop can say why it's there, and you can skip what you already know.

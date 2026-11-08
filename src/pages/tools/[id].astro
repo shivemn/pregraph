@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Picks from '../../components/Picks.astro';
 import RolePlanner from '../../components/RolePlanner';
 import { content, listOf, plannerNodes } from '../../lib/site';
-import { TIERS } from '../../lib/schema';
+import { BACKGROUND_GROUPS, TIERS } from '../../lib/schema';
 import { stopDetails } from '../../lib/stops';
 import '../../styles/route.css';
 import '../../styles/planner.css';
@@ -56,6 +56,7 @@ const inRoles = c.roles.flatMap((r) =>
         areas={c.areas}
         tiers={TIERS}
         backgrounds={c.backgrounds}
+        backgroundGroups={BACKGROUND_GROUPS}
       />
     </section>
 
