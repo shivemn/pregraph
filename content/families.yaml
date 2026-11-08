@@ -1,12 +1,17 @@
 - id: software
+  short: Software
   title: Software engineering
 - id: data
+  short: Data and ML
   title: Data and machine learning
 - id: infra
+  short: Infrastructure
   title: Infrastructure
 - id: finance
+  short: Finance and quant
   title: Finance, economics and quant
 - id: product
+  short: Product and design
   title: Product, design and delivery
 - id: exams
   title: Exams

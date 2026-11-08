@@ -1,5 +1,13 @@
 # Changelog
 
+## The network map and switching jobs
+
+- **The home page now has a map of the whole network.** Each family of jobs is a line in its own colour, and every job is a terminus at the end of its line. A line stops at what most of its jobs need. Where two or more lines share a stop (Git, SQL, Python, spreadsheets, statistics) there's an interchange: that's where one career can change to another.
+- Hover or focus a job and its stops light up. Pick where you're starting from in the ticket and what's already behind you turns grey.
+- On a phone the map gives way to a list, with each line's colour down the side.
+- **Switching jobs.** The From list has a new group, "Already working as". Pick your current job and the route leaves out that job's hiring and first-year lists and everything under them, and says how many stops are already behind you. It works on the home page ticket, every role page and every tool page.
+- Exams get their own line of links under the map.
+
 ## What the job looks like
 
 - **Every job role now ends with "What the job looks like".** Live searches on Naukri (freshers), LinkedIn and Indeed for that job, so you can read real openings today. A link under the role's summary jumps there.

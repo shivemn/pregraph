@@ -1,10 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
-import { planPath } from '../lib/graph';
+import NetworkMap from '../components/NetworkMap.astro';
+import { planPath, withPrerequisites } from '../lib/graph';
 import { duration } from '../lib/coaches';
 import { BACKGROUND_GROUPS, targetsUpTo } from '../lib/schema';
 import { content, listOf, plannerNodes, title } from '../lib/site';
 import { stopDetails } from '../lib/stops';
+import { midSentence } from '../lib/text';
 import '../styles/route.css';
 
 const c = content();
@@ -12,6 +14,8 @@ const areaTitle = new Map(c.areas.map((a) => [a.id, a.title]));
 const kindOf = new Map(c.concepts.map((x) => [x.id, x.kind]));
 
 const exampleRole = c.roles.find((r) => r.id === 'backend-engineer')!;
+const jobs = c.roles.filter((r) => r.kind !== 'exam');
+const exams = c.roles.filter((r) => r.kind === 'exam');
 // The preview starts with no background assumed, then re-plans in the browser
 // as the ticket changes. Everything it needs is inlined below as JSON.
 const plan = planPath(c.concepts, targetsUpTo(exampleRole, 'hire'), new Set());
@@ -19,7 +23,11 @@ const preview = plan.steps.slice(0, 6);
 const previewData = {
   nodes: plannerNodes(c),
   areas: Object.fromEntries(c.areas.map((a) => [a.id, a.title])),
-  backgrounds: Object.fromEntries(c.backgrounds.map((b) => [b.id, { phrase: b.phrase, knows: b.knows }])),
+  backgrounds: Object.fromEntries([
+    ...c.backgrounds.map((b) => [b.id, { phrase: b.phrase, knows: b.knows }]),
+    // Switching jobs: everything up to that job's first year is behind you.
+    ...jobs.map((r) => [`role:${r.id}`, { job: r.title, knows: [...withPrerequisites(c.concepts, [...r.tiers.hire, ...r.tiers.firstYear])] }]),
+  ]),
   roles: Object.fromEntries(c.roles.map((r) => [r.id, { title: r.title, hire: r.tiers.hire }])),
 };
 
@@ -61,6 +69,9 @@ const counts = {
                   {c.backgrounds.filter((b) => b.group === g.id).map((b) => <option value={b.id}>{b.title}</option>)}
                 </optgroup>
               ))}
+              <optgroup label="Already working as">
+                {jobs.map((r) => <option value={`role:${r.id}`}>{r.title}</option>)}
+              </optgroup>
             </select>
           </label>
           <label class="ticket-row">
@@ -83,7 +94,7 @@ const counts = {
 
     <section class="preview" aria-labelledby="preview-heading">
       <h2 id="preview-heading" data-preview-heading>
-        First stations to {exampleRole.title.toLowerCase()}, from the very beginning
+        First stations to {midSentence(exampleRole.title)}, from the very beginning
       </h2>
       <ol class="route" data-preview-route aria-live="polite">
         {
@@ -114,10 +125,24 @@ const counts = {
 
   <section class="roles" aria-labelledby="roles-heading">
     <h2 id="roles-heading">Where you can go</h2>
+    <p class="roles-lede">
+      Every line ends at a job. Where two lines share a stop, those jobs ask for the same skills, so that's where you
+      can change from one career to the other.
+    </p>
+    <div class="map-wide">
+      <NetworkMap />
+      <p class="exams-line">
+        Studying for an exam instead?{' '}
+        {exams.map((r, i) => (
+          <>{i > 0 && ', '}<a href={`/roles/${r.id}`}>{r.title}</a></>
+        ))}
+        .
+      </p>
+    </div>
     <div class="families">
       {
         groups.map(({ family, roles }) => (
-          <div>
+          <div data-family={family.id}>
             <h3>{family.title}</h3>
             <ul>{roles.map((r) => <li><a href={`/roles/${r.id}`}>{r.title}</a></li>)}</ul>
           </div>
@@ -152,13 +177,14 @@ const counts = {
 </Base>
 
 <script>
-  import { planPath, type ConceptNode } from '../lib/graph';
+  import { planPath, withPrerequisites, type ConceptNode } from '../lib/graph';
   import { duration } from '../lib/coaches';
+  import { midSentence } from '../lib/text';
 
   interface PreviewData {
     nodes: ConceptNode[];
     areas: Record<string, string>;
-    backgrounds: Record<string, { phrase: string; knows: string[] }>;
+    backgrounds: Record<string, { phrase?: string; job?: string; knows: string[] }>;
     roles: Record<string, { title: string; hire: string[] }>;
   }
 
@@ -189,10 +215,18 @@ const counts = {
     const role = data.roles[String(fd.get('role'))];
     if (!role) return;
     const plan = planPath(data.nodes, role.hire, new Set(bg?.knows ?? []));
+    const from = String(fd.get('from') ?? '');
+    document.dispatchEvent(
+      new CustomEvent('terminus:ticket', {
+        detail: { known: [...withPrerequisites(data.nodes, bg?.knows ?? [])], from: from.startsWith('role:') ? from.slice(5) : undefined },
+      }),
+    );
     const shown = plan.steps.slice(0, 6);
-    document.querySelector('[data-preview-heading]')!.textContent = bg
-      ? `Next stations for ${bg.phrase} going to ${role.title.toLowerCase()}`
-      : `First stations to ${role.title.toLowerCase()}, from the very beginning`;
+    document.querySelector('[data-preview-heading]')!.textContent = bg?.job
+      ? `From ${midSentence(bg.job)} to ${midSentence(role.title)}: what's new`
+      : bg
+        ? `Next stations for ${bg.phrase} going to ${midSentence(role.title)}`
+        : `First stations to ${midSentence(role.title)}, from the very beginning`;
     document.querySelector('[data-preview-route]')!.replaceChildren(
       ...shown.map((s) => {
         const li = el('li', 'stop');
@@ -268,8 +302,17 @@ const counts = {
   }
 
   .roles, .how { margin-top: 80px; }
+  .exams-line { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .roles-lede { max-width: 66ch; color: var(--ink-2); margin-top: 10px; }
+  .map-wide { display: block; }
+  .roles .families { display: none; }
+  @media (max-width: 860px) {
+    .map-wide { display: none; }
+    .roles .families { display: grid; }
+  }
   .families { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 18px; }
-  .families h3 { font-size: 1.1rem; color: var(--ink-2); padding-bottom: 6px; border-bottom: 3px solid var(--ink); margin-bottom: 10px; }
+  .families h3 { font-size: 1.1rem; color: var(--ink-2); padding-bottom: 6px; border-bottom: 6px solid var(--family, var(--ink)); margin-bottom: 10px; }
+  .families ul { border-left: 6px solid var(--family, var(--ink)); padding-left: 14px !important; }
   .families ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; }
   .families a { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.15rem; }
   .one-tool { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--rule); max-width: 70ch; }

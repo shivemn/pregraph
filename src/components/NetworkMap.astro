@@ -1,0 +1,227 @@
+---
+// The home page network map. Lines are families, stations are the stops
+// most of a family's roles need, interchanges are stops lines share, and
+// every job is a terminus at the end of its line. Drawn at build time; a
+// small script lights up a role on hover and greys out what the ticket's
+// background covers.
+import { buildNetwork } from '../lib/network';
+import { content } from '../lib/site';
+
+const c = content();
+const jobs = c.roles
+  .filter((r) => r.kind !== 'exam')
+  .map((r) => ({ id: r.id, title: r.title, family: r.family, hire: r.tiers.hire }));
+const net = buildNetwork(c.concepts, c.families, jobs);
+
+// Geometry, in SVG units.
+const LABELS = 196; // left margin for interchange names
+const COL = 192;
+const TOP = 86; // first station row
+const ROW = 40;
+const LINE_W = 6;
+const x = (i: number) => LABELS + 22 + i * COL;
+const y = (row: number) => TOP + row * ROW;
+const col = new Map(net.lines.map((l, i) => [l.id, i]));
+
+/** Greedy word wrap. Station and role names are short, so two lines is plenty. */
+function wrap(text: string, max: number): string[] {
+  const out: string[] = [];
+  for (const w of text.split(' ')) {
+    const last = out[out.length - 1];
+    if (last !== undefined && (last + ' ' + w).length <= max) out[out.length - 1] = last + ' ' + w;
+    else out.push(w);
+  }
+  return out;
+}
+
+// Termini hang under each line, one under another.
+const termTop = y(net.rows - 1) + 56;
+const TERM_LINE = 19;
+const TERM_GAP = 14;
+const termini = net.lines.map((l, i) => {
+  let at = termTop;
+  return l.roles.map((r) => {
+    const lines = wrap(r.title, 19);
+    const top = at;
+    at += lines.length * TERM_LINE + TERM_GAP;
+    return { ...r, line: l.id, lines, x: x(i), y: top + 9 };
+  });
+});
+const lineEnd = termini.map((ts) => ts[ts.length - 1]!.y);
+const height = Math.max(...termini.flat().map((t) => t.y + (t.lines.length - 1) * TERM_LINE)) + 24;
+const width = LABELS + net.lines.length * COL + 16;
+
+// Where a line runs past an interchange without stopping, it's drawn over
+// the link with a gap, like a bridge.
+const bridges = net.stations
+  .filter((s) => s.interchange)
+  .flatMap((s) => {
+    const cols = s.lines.map((l) => col.get(l)!);
+    const lo = Math.min(...cols);
+    const hi = Math.max(...cols);
+    return net.lines.filter((_, i) => i > lo && i < hi && !cols.includes(i)).map((l) => ({ line: l.id, x: x(col.get(l.id)!), y: y(s.row) }));
+  });
+---
+
+<figure class="netmap" data-netmap>
+  <svg viewBox={`0 0 ${width} ${height}`} role="group" aria-labelledby="netmap-title netmap-desc">
+    <title id="netmap-title">The Terminus network</title>
+    <desc id="netmap-desc">
+      {net.lines.length} lines, one for each family of jobs. Each line ends at its jobs. Stations are the stops most of a
+      line's jobs need; interchanges are stops two or more lines share.
+    </desc>
+
+    {/* Line names, like the coloured boards above a platform. */}
+    {net.lines.map((l, i) => (
+      <g class="line-head" data-line={l.id}>
+        <rect x={x(i) - 14} y="8" width={COL - 22} height="34" />
+        <text x={x(i) - 3} y="32">{l.title}</text>
+      </g>
+    ))}
+
+    {/* The lines themselves, down to the last terminus. */}
+    {net.lines.map((l, i) => (
+      <path class="line" data-line={l.id} d={`M${x(i)} 42V${lineEnd[i]}`} stroke-width={LINE_W} />
+    ))}
+
+    {/* Interchanges: a link across every line that calls there. */}
+    {net.stations.filter((s) => s.interchange).map((s) => {
+      const xs = s.lines.map((l) => x(col.get(l)!));
+      const left = Math.min(...xs);
+      const right = Math.max(...xs);
+      return (
+        <g class="st inter" data-id={s.id} data-roles={s.roles.join(' ')} data-lines={s.lines.join(' ')}>
+          {left > x(0) && <path class="leader" d={`M${LABELS - 2} ${y(s.row)}H${left - 12}`} />}
+          <rect class="link" x={left - 12} y={y(s.row) - 12} width={right - left + 24} height="24" rx="12" />
+          {xs.map((sx) => <circle cx={sx} cy={y(s.row)} r="6.5" />)}
+          <text class="inter-name" x={LABELS - 8} y={y(s.row) + 5} text-anchor="end">{s.title}</text>
+        </g>
+      );
+    })}
+    {bridges.map((b) => (
+      <g class="bridge" data-line={b.line}>
+        <path class="bridge-gap" d={`M${b.x} ${b.y - 15}V${b.y + 15}`} />
+        <path class="line" data-line={b.line} d={`M${b.x} ${b.y - 15}V${b.y + 15}`} stroke-width={LINE_W} />
+      </g>
+    ))}
+
+    {/* Stations on one line only. */}
+    {net.stations.filter((s) => !s.interchange).map((s) => {
+      const sx = x(col.get(s.lines[0]!)!);
+      const sy = y(s.row);
+      const lines = wrap(s.title, 20);
+      return (
+        <g class="st" data-id={s.id} data-roles={s.roles.join(' ')} data-lines={s.lines.join(' ')} data-line={s.lines[0]}>
+          <circle cx={sx} cy={sy} r="7" />
+          <text x={sx + 15} y={lines.length > 1 ? sy - 3 : sy + 5}>
+            {lines.map((t, i) => <tspan x={sx + 15} dy={i === 0 ? 0 : 16}>{t}</tspan>)}
+          </text>
+        </g>
+      );
+    })}
+
+    {/* Termini: one per job. */}
+    {termini.flat().map((t) => (
+      <a class="terminus" href={`/roles/${t.id}`} data-role={t.id} data-line={t.line}>
+        <path class="line" data-line={t.line} d={`M${t.x - LINE_W / 2} ${t.y}H${t.x + 16}`} stroke-width={LINE_W} />
+        <rect class="bar" x={t.x + 15} y={t.y - 11} width="7" height="22" />
+        <text x={t.x + 31} y={t.y + 6}>
+          {t.lines.map((s, i) => <tspan x={t.x + 31} dy={i === 0 ? 0 : TERM_LINE}>{s}</tspan>)}
+        </text>
+        <text class="here" x={t.x + 31} y={t.y - 16} aria-hidden="true">You are here</text>
+      </a>
+    ))}
+  </svg>
+
+  <figcaption class="netmap-key">
+    <span><svg viewBox="0 0 44 20" aria-hidden="true"><rect class="key-link" x="2" y="3" width="40" height="14" rx="7" /></svg>An interchange: a stop two or more lines share, where you can change careers.</span>
+    <span><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="key-st" cx="10" cy="10" r="6" /></svg>A stop most of that line's jobs need.</span>
+    <span><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="key-passed" cx="10" cy="10" r="6" /></svg>Already behind you. Pick where you're starting from in the ticket above.</span>
+    <span><svg viewBox="0 0 20 22" aria-hidden="true"><rect class="key-bar" x="7" y="1" width="7" height="20" /></svg>A job. Pick one to plan your route there.</span>
+  </figcaption>
+</figure>
+
+<script>
+  // Light up one job's stops while it's hovered or focused.
+  const map = document.querySelector<HTMLElement>('[data-netmap]');
+  if (map) {
+    const stations = [...map.querySelectorAll<SVGGElement>('.st')];
+    const termini = [...map.querySelectorAll<SVGAElement>('.terminus')];
+    const lined = [...map.querySelectorAll<SVGElement>('[data-line]')];
+
+    const focus = (role: string | null, line: string | null) => {
+      map.classList.toggle('focusing', role !== null);
+      for (const s of stations) s.classList.toggle('on', role !== null && (s.dataset.roles ?? '').split(' ').includes(role));
+      for (const t of termini) t.classList.toggle('on', t.dataset.role === role);
+      for (const el of lined) if (!el.closest('.terminus, .st')) el.classList.toggle('on', el.dataset.line === line);
+    };
+    for (const t of termini) {
+      const on = () => focus(t.dataset.role!, t.dataset.line!);
+      const off = () => focus(null, null);
+      t.addEventListener('pointerenter', on);
+      t.addEventListener('pointerleave', off);
+      t.addEventListener('focus', on);
+      t.addEventListener('blur', off);
+    }
+
+    // The home page ticket says what's already behind you.
+    document.addEventListener('terminus:ticket', (e) => {
+      const { known, from } = (e as CustomEvent<{ known: string[]; from?: string }>).detail;
+      const set = new Set(known);
+      for (const s of stations) s.classList.toggle('passed', set.has(s.dataset.id!));
+      for (const t of termini) t.classList.toggle('here', t.dataset.role === from);
+    });
+  }
+</script>
+
+<style>
+  .netmap { margin: 22px 0 0; }
+  [data-line='software'] { --c: var(--l-software); }
+  [data-line='data'] { --c: var(--l-data); }
+  [data-line='infra'] { --c: var(--l-infra); }
+  [data-line='finance'] { --c: var(--l-finance); }
+  [data-line='product'] { --c: var(--l-product); }
+  .netmap svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+
+  .line-head rect { fill: var(--c); }
+  .line-head text { fill: var(--l-text); font-family: var(--sign); font-stretch: 88%; font-weight: 700; font-size: 18px; }
+  .line { fill: none; stroke: var(--c); }
+  .bridge-gap { stroke: var(--paper); stroke-width: 14px; }
+
+  .inter .link { fill: var(--paper); stroke: var(--ink); stroke-width: 3px; }
+  .inter circle { fill: var(--paper); stroke: var(--ink); stroke-width: 2.5px; }
+  .inter .leader { stroke: var(--ink-3); stroke-width: 1.5px; stroke-dasharray: 2 4; }
+  .inter-name { fill: var(--ink); font-family: var(--text); font-weight: 700; font-size: 15px; }
+
+  .st:not(.inter) circle { fill: var(--paper); stroke: var(--c); stroke-width: 4px; }
+  .st:not(.inter) text { fill: var(--ink); font-family: var(--text); font-size: 14.5px; }
+
+  .terminus { cursor: pointer; }
+  .terminus .bar { fill: var(--yellow); stroke: #000; stroke-width: 2px; }
+  .terminus text { fill: var(--ink); font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 18.5px; }
+  .terminus:hover text, .terminus:focus-visible text { text-decoration: underline; text-decoration-thickness: 2px; }
+  .terminus:focus-visible { outline: none; }
+  .terminus:focus-visible .bar { stroke-width: 4px; }
+  .terminus .here { display: none; font-family: var(--text); font-size: 12px; font-weight: 700; fill: var(--ink-2); }
+  .terminus.here .here { display: inline; }
+  .terminus.here .bar { fill: var(--ink); stroke: var(--ink); }
+
+  /* Already behind you. */
+  .st.passed circle { fill: var(--ink-3); stroke: var(--ink-3); }
+  .st.passed .link { stroke: var(--ink-3); }
+  .st.passed text { fill: var(--ink-3); }
+
+  /* One job lit up: everything else steps back. */
+  .netmap :is(.st, .terminus, .line-head, .line, .bridge) { transition: opacity 0.15s; }
+  .netmap.focusing :is(.st:not(.on), .terminus:not(.on), .line-head:not(.on), svg > .line:not(.on), .bridge:not(.on)) { opacity: 0.22; }
+  @media (prefers-reduced-motion: reduce) { .netmap :is(.st, .terminus, .line-head, .line, .bridge) { transition: none; } }
+
+  .netmap-key { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 28px; margin-top: 22px; font-size: 0.92rem; line-height: 1.4; color: var(--ink-2); }
+  .netmap-key span { display: grid; grid-template-columns: 46px 1fr; align-items: start; gap: 8px; }
+  .netmap-key svg { height: 20px; width: auto; justify-self: center; margin-top: 1px; }
+  .key-link { fill: var(--paper); stroke: var(--ink); stroke-width: 2.5px; }
+  .key-st { fill: var(--paper); stroke: var(--ink-2); stroke-width: 3.5px; }
+  .key-passed { fill: var(--ink-3); }
+  .key-bar { fill: var(--yellow); stroke: #000; stroke-width: 2px; }
+</style>

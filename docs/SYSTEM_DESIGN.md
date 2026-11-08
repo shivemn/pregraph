@@ -177,6 +177,12 @@ Hours are honest but a bare total ("464 hours") reads like a sentence. The plann
 
 Not everyone wants a whole job. Someone already working may only need Redis, or Power BI, or Go. `/tools` lists everything on the shelves in `content/tool-groups.yaml`, with hours, which of the three picks exist, and what comes first. Each tool page (`/tools/redis`) shows the picks, then the same planner as a role page, with the tool as its only target. There's no new engine code: a tool is a role with one target and one tier. The planner takes `goal="tool"` to change its wording, and it shares the same saved progress, so finishing Java on a role page counts on the Spring Boot page too. Search results for tools open the tool page.
 
+## 6c. The network and switching jobs
+
+The home page draws every job on one map (`src/lib/network.ts` for the layout, `src/components/NetworkMap.astro` to draw it). Each family is a line. A line calls at a stop when at least a third of its roles (and at least two) have it on their hiring list, up to seven stops. A stop two or more lines call at is an interchange: the place where one career can change to another. Lines go left to right in whichever of the 120 orders makes interchange links cross the fewest lines that don't stop there, keeping the families file's order on a tie. Rows follow prerequisites, so a line never calls at a stop before the stops it needs; an interchange gets a row to itself, and every other stop goes as high as it can. Each line ends in a comb of termini, one per job. Hovering a terminus lights up the stops on its hiring list, and the ticket's From choice greys out what's already behind you. Under 860 px wide the map gives way to a coloured list per line.
+
+Switching jobs uses the same planner. "Already working as" in the From list (`role:<id>`) treats that job's hiring and first-year lists, closed under their prerequisites (`withPrerequisites` in `graph.ts`), as known, and the route says how many of its stops the old job already covers.
+
 ## 7. The map
 
 `src/lib/layout.ts` draws the route as a layered graph. I wrote it rather than pulling in dagre or React Flow. The map only needs a fraction of what those do, the code is about 200 lines, and it's the most mathematical part of the project, so it's worth understanding properly.

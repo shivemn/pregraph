@@ -63,6 +63,10 @@
   --finance: #00796b;
   --product: #b5179e;
 
+  /* Lines on the home page network map, one per family of jobs. */
+  --l-software: #1c64c8; --l-data: #e8590c; --l-infra: #8a5a2b; --l-finance: #00796b; --l-product: #b5179e;
+  --l-text: #fff;
+
   --sign: 'Terminus Sign', 'Arial Narrow', sans-serif;
   --text: 'Mukta', system-ui, sans-serif;
   color-scheme: light;
@@ -70,6 +74,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --l-software: #6aa5ff; --l-data: #ff9a52; --l-infra: #cf9b62; --l-finance: #4fd1c0; --l-product: #f28ad8;
+    --l-text: #000;
     --paper: #0f1114;
     --platform: #191c21;
     --ink: #f5f5f5;
@@ -96,6 +102,14 @@
     color-scheme: dark;
   }
 }
+
+/* Each family of jobs is a line on the network map, with its own colour. */
+[data-family='software'] { --family: var(--l-software); }
+[data-family='data'] { --family: var(--l-data); }
+[data-family='infra'] { --family: var(--l-infra); }
+[data-family='finance'] { --family: var(--l-finance); }
+[data-family='product'] { --family: var(--l-product); }
+[data-family='exams'] { --family: var(--ink); }
 
 /* Each area sets --line for everything inside it. */
 [data-area='foundations'] { --line: var(--foundations); }

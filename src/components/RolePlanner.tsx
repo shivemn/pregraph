@@ -6,8 +6,9 @@
 // they're stored once and shared across every role page. The tier and view
 // you picked are stored per role.
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { indexConcepts, planPath, type ConceptNode, type PlanStep } from '../lib/graph';
+import { indexConcepts, planPath, withPrerequisites, type ConceptNode, type PlanStep } from '../lib/graph';
 import { coaches, duration, hourRange } from '../lib/coaches';
+import { midSentence } from '../lib/text';
 
 // The map pulls in the layout code, so it only loads when someone opens it.
 const RouteMap = lazy(() => import('./RouteMap'));
@@ -24,6 +25,8 @@ interface Props {
   tiers: Array<{ id: TierId; title: string }>;
   backgrounds: Background[];
   backgroundGroups: Array<{ id: Background['group']; title: string }>;
+  /** Jobs you might be switching from, as "role:<id>", with what that job covers. */
+  jobs?: Array<{ id: string; title: string; knows: string[] }>;
   /** A job role (the default), or a single tool picked from the tools page. */
   goal?: 'role' | 'tool';
 }
@@ -87,7 +90,7 @@ const Tick = () => (
   </svg>
 );
 
-export default function RolePlanner({ role, concepts, areas, tiers, backgrounds, backgroundGroups, goal = 'role' }: Props) {
+export default function RolePlanner({ role, concepts, areas, tiers, backgrounds, backgroundGroups, jobs = [], goal = 'role' }: Props) {
   const roleKey = `terminus:role:${role.id}`;
   const index = useMemo(() => indexConcepts(concepts), [concepts]);
   const areaTitle = useMemo(() => new Map(areas.map((a) => [a.id, a.title])), [areas]);
@@ -125,7 +128,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
     const params = new URLSearchParams(location.search);
     const from = params.get('from');
     const tier = params.get('tier');
-    if (from && backgrounds.some((b) => b.id === from)) m.background = from;
+    if (from && (backgrounds.some((b) => b.id === from) || jobs.some((j) => j.id === from))) m.background = from;
     if (tier && usedTiers.some((t) => t.id === tier)) r.tier = tier as TierId;
     setMe(m);
     setRoleState(r);
@@ -145,7 +148,19 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
   }, [me, roleState, loaded]);
 
   // Nothing is assumed: until you say where you're starting from, the route is the full one.
-  const background = backgrounds.find((b) => b.id === me.background);
+  const switchingFrom = jobs.find((j) => j.id === me.background && j.id !== `role:${role.id}`);
+  const background: Background | undefined = useMemo(() => {
+    const b = backgrounds.find((x) => x.id === me.background);
+    if (b || !switchingFrom) return b;
+    // Someone already doing a job knows its route, down to the foundations.
+    return {
+      id: switchingFrom.id,
+      title: switchingFrom.title,
+      group: 'other',
+      description: `${switchingFrom.title} is your job now, so its hiring and first-year lists, and everything under them, are behind you.`,
+      knows: [...withPrerequisites(index, switchingFrom.knows)],
+    };
+  }, [me.background, switchingFrom, index]);
   const tier: TierId = usedTiers.some((t) => t.id === roleState.tier) ? roleState.tier! : 'hire';
   const view = roleState.view ?? 'list';
 
@@ -163,6 +178,11 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
   const known = useMemo(() => new Set([...(background?.knows ?? []), ...me.known]), [background, me.known]);
   const done = useMemo(() => new Set(me.done), [me.done]);
   const plan = useMemo(() => planPath(index, targets, known), [index, targets, known]);
+  // For "switching from": how much of the full route the old job already covers.
+  const fullLength = useMemo(
+    () => (switchingFrom ? planPath(index, targets, new Set(me.known)).steps.length : 0),
+    [switchingFrom, index, targets, me.known],
+  );
   const tierTitle = (t: TierId) => tiers.find((x) => x.id === t)!.title.toLowerCase();
 
   const why = (s: PlanStep) => {
@@ -225,6 +245,13 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
                   ))}
                 </optgroup>
               ))}
+              {jobs.length > 0 && (
+                <optgroup label="Already working as">
+                  {jobs.filter((j) => j.id !== `role:${role.id}`).map((j) => (
+                    <option key={j.id} value={j.id}>{j.title}</option>
+                  ))}
+                </optgroup>
+              )}
             </select>
           </label>
           <label className="control">
@@ -253,6 +280,12 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
           <p className="choose-bg">
             This is the full route, from the very beginning. Pick your background above and anything your degree
             already covers is left out.
+          </p>
+        )}
+        {switchingFrom && loaded && (
+          <p className="choose-bg switching">
+            Switching from {switchingFrom.title}: {fullLength - plan.steps.length} of {fullLength} stops are already
+            behind you, so this route is only what's new.
           </p>
         )}
         <div className="summary" aria-live="polite">
@@ -467,7 +500,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
             if (known.has(panel)) return "You've marked this as something you already know.";
             return goal === 'tool'
               ? `It isn't on your route to ${role.title}.`
-              : `It isn't on your route for ${role.title.toLowerCase()} at this tier.`;
+              : `It isn't on your route for ${midSentence(role.title)} at this tier.`;
           })()}
           done={done.has(panel)}
           isTarget={targetTier.has(panel)}

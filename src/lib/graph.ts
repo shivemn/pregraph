@@ -286,3 +286,23 @@ export function planPath(
 export function unlockedBy(concepts: readonly ConceptNode[], id: string): ConceptNode[] {
   return concepts.filter((c) => c.requires.includes(id));
 }
+
+/**
+ * These concepts and everything they need, all the way down. For someone
+ * who already does a job: if you work with Docker every day, the Linux
+ * underneath it is behind you too.
+ */
+export function withPrerequisites(concepts: readonly ConceptNode[] | Index, ids: readonly string[]): Set<string> {
+  const index = concepts instanceof Map ? concepts : indexConcepts(concepts);
+  const out = new Set<string>();
+  const stack = [...ids];
+  while (stack.length) {
+    const id = stack.pop()!;
+    if (out.has(id)) continue;
+    const node = index.get(id);
+    if (!node) continue;
+    out.add(id);
+    stack.push(...node.requires);
+  }
+  return out;
+}

@@ -67,6 +67,8 @@ export const backgroundSchema = z.object({
 export const familySchema = z.object({
   id,
   title: z.string().min(1),
+  /** A line name for the network map, where space is tight. */
+  short: z.string().min(1).optional(),
 });
 
 /**

@@ -23,6 +23,9 @@ Terminus starts from a ticket: *From a maths graduate, To Backend engineer.* Eac
   - Finance, economics and quant: quant researcher, quant developer, risk analyst, financial analyst, economist, statistician.
   - Product, design and delivery: product manager, UI/UX designer, business analyst, technical writer, scrum master.
   - Exams: GATE CS, GATE DA, GATE ST, IIT JAM MS and UGC NET CS, each mapped from its official syllabus.
+- **A network map** on the home page: every job is a terminus, each family of jobs is a line, and the stops that lines share are interchanges where one career can change to another.
+- **Switching jobs.** Start from "Already working as" a job you have, and the route leaves out everything that job already covers.
+- **What the job looks like** on every job role: live searches on Naukri, LinkedIn and Indeed, and for five roles a summary of real entry-level listings.
 - **A practice page** with 43 free places to practise, grouped by skill, each listing the stops it tests.
 - **A tools page** with 78 tools on twelve shelves, including where to host your projects for free, for learning one thing on its own: languages from Python to Rust, web and mobile frameworks, ML libraries, databases, BI, DevOps, cloud, testing, security, and platforms like Jira and Salesforce. Each tool page has the three picks and the route to it from your background.
 - **Eight starting points, nothing assumed:** CS or IT, maths or stats, engineering or science graduates; commerce, economics or any other degree; or no degree yet. Until you pick one, the route starts from the very beginning.
