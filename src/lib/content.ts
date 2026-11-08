@@ -15,6 +15,7 @@ import {
   resourceSchema,
   roleSchema,
   toolGroupSchema,
+  practiceGroupSchema,
   type Content,
 } from './schema';
 import { findCycle } from './graph';
@@ -103,6 +104,15 @@ export function checkContent(c: Content): string[] {
       if (!conceptIds.has(t)) problems.push(`Tool group "${g.id}" refers to unknown concept "${t}"`);
     }
   }
+  dupes('practice group', c.practiceGroups.map((g) => g.id));
+  dupes('resource (on the practice page)', c.practiceGroups.flatMap((g) => g.resources));
+  for (const g of c.practiceGroups) {
+    for (const r of g.resources) {
+      const res = resourceById.get(r);
+      if (!res) problems.push(`Practice group "${g.id}" refers to unknown resource "${r}"`);
+      else if (res.medium !== 'practice') problems.push(`Practice group "${g.id}" lists "${r}", which isn't a practice resource`);
+    }
+  }
   return problems;
 }
 
@@ -123,6 +133,7 @@ export function loadContent(root = join(process.cwd(), 'content')): Content {
     families: parseList(familySchema, readYaml(join(root, 'families.yaml')), 'families.yaml', problems),
     roles: parseList(roleSchema, readYaml(join(root, 'roles.yaml')), 'roles.yaml', problems),
     toolGroups: parseList(toolGroupSchema, readYaml(join(root, 'tool-groups.yaml')), 'tool-groups.yaml', problems),
+    practiceGroups: parseList(practiceGroupSchema, readYaml(join(root, 'practice-groups.yaml')), 'practice-groups.yaml', problems),
   };
 
   problems.push(...checkContent(content));

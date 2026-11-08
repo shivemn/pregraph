@@ -28,6 +28,10 @@
     - resource: mit-6042-psets
       locator: "Problem sets 3–9"
       verified: true
+    - resource: project-euler
+      locator: "Problems 1–50"
+      role: alternative
+      verified: true
 
 - id: linear-algebra
   title: Linear algebra
@@ -68,6 +72,8 @@
       locator: "Problem sets 10–12"
       role: alternative
       verified: true
+    - resource: brainstellar
+      locator: "The easy and medium puzzles"
 
 - id: calculus
   title: Calculus
@@ -79,6 +85,9 @@
       locator: "Volumes 1 and 2"
     - resource: tbob-calculus
       locator: "The whole series, first, for the pictures"
+      verified: true
+    - resource: khan-math
+      locator: "Calculus 1, then Calculus 2"
       verified: true
 
 - id: multivariable-calculus

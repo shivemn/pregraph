@@ -1,0 +1,43 @@
+# The practice page. Each group lists practice resources (ids from
+# resources.yaml, medium: practice). The stops each one practises are worked
+# out from the concept files, so they never drift out of date.
+
+- id: coding
+  title: Coding and algorithms
+  resources: [leetcode-150, cses-problemset, codeforces, exercism, project-euler, rustlings, type-challenges]
+
+- id: data
+  title: SQL and data
+  resources: [sqlbolt, pgexercises, leetcode-sql50, hackerrank-sql, kaggle-learn, pandas-exercises, tidytuesday, kaggle-datasets]
+
+- id: ml
+  title: Machine learning and deep learning
+  resources: [kaggle-competitions, udl-notebooks, learnpytorch-exercises]
+
+- id: web
+  title: Web development
+  resources: [frontend-mentor, fcc-rwd, fcc-backend]
+
+- id: systems
+  title: Systems, built from scratch
+  resources: [nand2tetris-projects, ostep-homework, xv6-labs, bustub, mit-6824-labs, maelstrom, build-your-own-x]
+
+- id: devops
+  title: Git, DevOps and cloud
+  resources: [learn-git-branching, github-skills, killercoda-k8s]
+
+- id: security
+  title: Security
+  resources: [tryhackme, overthewire, picoctf, portswigger-academy, cryptopals]
+
+- id: maths
+  title: Maths, probability and quant puzzles
+  resources: [khan-math, mit-6042-psets, mit-1806sc, brainstellar]
+
+- id: finance
+  title: Finance
+  resources: [quantconnect]
+
+- id: embedded
+  title: Embedded
+  resources: [wokwi]

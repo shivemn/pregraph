@@ -12,6 +12,8 @@
       locator: "The free chapters"
     - resource: picoctf
       locator: "The practice gym, General Skills first"
+    - resource: tryhackme
+      locator: "Pre Security, then Cyber Security 101"
 
 - id: threat-detection
   title: Detecting attacks
@@ -22,6 +24,8 @@
   resources:
     - resource: mitre-attack
       locator: "The Enterprise matrix, one tactic at a time"
+    - resource: tryhackme
+      locator: "The SOC Level 1 path"
 
 - id: project-ctf
   title: "Project: work through beginner CTFs"

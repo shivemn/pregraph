@@ -79,6 +79,13 @@ export const toolGroupSchema = z.object({
   tools: z.array(id).min(1),
 });
 
+/** A group on the practice page: practice resources that test the same kind of skill. */
+export const practiceGroupSchema = z.object({
+  id,
+  title: z.string().min(1),
+  resources: z.array(id).min(1),
+});
+
 /**
  * A job role (or an exam) and what it takes. Requirements come in tiers so a
  * fresher can see the short list that gets them hired before the long one.
@@ -149,6 +156,7 @@ export const BACKGROUND_GROUPS: Array<{ id: Background['group']; title: string }
 export type Family = z.infer<typeof familySchema>;
 export type Role = z.infer<typeof roleSchema>;
 export type ToolGroup = z.infer<typeof toolGroupSchema>;
+export type PracticeGroup = z.infer<typeof practiceGroupSchema>;
 export type Tier = keyof Role['tiers'];
 
 export const TIERS: Array<{ id: Tier; title: string }> = [
@@ -171,4 +179,5 @@ export interface Content {
   backgrounds: Background[];
   roles: Role[];
   toolGroups: ToolGroup[];
+  practiceGroups: PracticeGroup[];
 }

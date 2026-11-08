@@ -19,6 +19,11 @@
       role: alternative
     - resource: kaggle-learn
       locator: "Intro to Machine Learning, then Intermediate Machine Learning"
+      verified: true
+    - resource: kaggle-competitions
+      locator: "The Getting Started competitions"
+      role: alternative
+      verified: true
 
 - id: neural-networks
   title: Neural networks and backpropagation
@@ -108,6 +113,7 @@
       verified: true
     - resource: kaggle-learn
       locator: "Computer Vision"
+      verified: true
 
 - id: nlp
   title: Natural language processing
@@ -186,6 +192,7 @@
       verified: true
     - resource: kaggle-learn
       locator: "Intro to Deep Learning"
+      verified: true
 
 - id: mlops
   title: Putting models into production

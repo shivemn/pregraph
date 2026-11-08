@@ -38,6 +38,8 @@
     - resource: nptel-compilers
       locator: "The lectures on lexical analysis and parsing"
       role: alternative
+    - resource: build-your-own-x
+      locator: "The “Programming Language” section"
 
 - id: compilers
   title: Compilers and virtual machines

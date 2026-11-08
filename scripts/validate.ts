@@ -28,6 +28,9 @@ try {
     const shelved = new Set(c.toolGroups.flatMap((g) => g.tools));
     const unshelved = c.concepts.filter((x) => x.kind === 'tool' && !shelved.has(x.id)).map((x) => x.id);
     if (unshelved.length) console.log(`  tools not on the tools page: ${unshelved.join(', ')}`);
+    const listed = new Set(c.practiceGroups.flatMap((g) => g.resources));
+    const unlisted = c.resources.filter((r) => r.medium === 'practice' && !listed.has(r.id)).map((r) => r.id);
+    if (unlisted.length) console.log(`  practice resources not on the practice page: ${unlisted.join(', ')}`);
   }
 } catch (err) {
   if (err instanceof ContentError) {

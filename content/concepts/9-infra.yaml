@@ -56,6 +56,9 @@
     - resource: cs50-web
       locator: "Lecture 7, Testing, CI/CD"
       verified: true
+    - resource: github-skills
+      locator: "Hello GitHub Actions, then Test with Actions"
+      verified: true
 
 - id: cloud-basics
   title: Cloud basics
@@ -206,6 +209,8 @@
     - resource: cmu-15445
       locator: "Lectures on indexes and query execution"
       role: alternative
+    - resource: pgexercises
+      locator: "Every section, then rewrite your slowest answers after reading their EXPLAIN plans"
 
 - id: project-support-runbook
   title: "Project: break an app and write the runbook"

@@ -15,6 +15,15 @@
       locator: "Part I, Tutorial"
     - resource: kaggle-learn
       locator: "Intro to SQL, then Advanced SQL"
+      verified: true
+    - resource: leetcode-sql50
+      locator: "SQL 50, every section"
+      role: alternative
+      verified: true
+    - resource: pgexercises
+      locator: "Every section, in order"
+      role: alternative
+      verified: true
 
 - id: database-internals
   title: How databases work
@@ -32,6 +41,8 @@
     - resource: nptel-dbms
       locator: "The full course"
       role: alternative
+    - resource: bustub
+      locator: "The course projects: buffer pool, B+ tree index, query execution"
 
 - id: statistics
   title: Statistics
@@ -44,6 +55,8 @@
       locator: "Chapters 1–9"
     - resource: khan-statistics
       locator: "Units on study design through inference for regression"
+    - resource: khan-math
+      locator: "Statistics and probability"
 
 - id: spreadsheets
   title: Spreadsheets
@@ -78,6 +91,13 @@
     - resource: schafer-pandas
       locator: "The whole playlist"
       verified: true
+    - resource: kaggle-learn
+      locator: "Pandas, then Data Cleaning"
+      verified: true
+    - resource: pandas-exercises
+      locator: "Every folder, in order"
+      role: alternative
+      verified: true
 
 - id: data-visualization
   title: Data visualisation
@@ -93,6 +113,13 @@
       role: alternative
     - resource: kaggle-learn
       locator: "Data Visualization course"
+    - resource: kaggle-learn
+      locator: "Data Visualization"
+      verified: true
+    - resource: tidytuesday
+      locator: "Pick any week’s dataset and make one chart worth sharing"
+      role: alternative
+      verified: true
 
 - id: bi-tools
   title: Power BI
@@ -167,6 +194,10 @@
     - resource: py4da
       locator: "Chapter 13, Data analysis examples"
       role: alternative
+    - resource: tidytuesday
+      locator: "Any recent week’s dataset"
+      role: alternative
+      verified: true
 
 - id: project-data-pipeline
   title: "Project: build a data pipeline"
@@ -204,6 +235,9 @@
       locator: "Chapters 1–8"
     - resource: kaggle-learn
       locator: "Feature Engineering course"
+    - resource: kaggle-learn
+      locator: "Feature Engineering"
+      verified: true
 
 - id: project-data-science
   title: "Project: answer a business question with data and a model"
@@ -216,6 +250,9 @@
   resources:
     - resource: kaggle-datasets
       locator: "Pick a dataset with a decision attached to it"
+    - resource: kaggle-competitions
+      locator: "One of the Getting Started competitions, written up properly"
+      verified: true
 
 - id: redis
   title: Redis
@@ -284,6 +321,9 @@
     - resource: mit-18s096
       locator: "Lectures 8, 11 and 12, Time Series Analysis I–III"
       role: alternative
+      verified: true
+    - resource: kaggle-learn
+      locator: "Time Series"
       verified: true
 
 - id: bayesian-statistics

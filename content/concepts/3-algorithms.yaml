@@ -11,6 +11,9 @@
     - resource: cses-book
       locator: "Chapter 2, Time complexity"
       role: alternative
+    - resource: leetcode-150
+      locator: "Top Interview 150: Binary Search, then Divide & Conquer"
+      verified: true
 
 - id: linear-structures
   title: Arrays, lists, stacks and queues
@@ -30,6 +33,9 @@
     - resource: nptel-pdsa
       locator: "Weeks on lists, arrays, stacks and queues"
       role: alternative
+    - resource: leetcode-150
+      locator: "Top Interview 150: Array / String, Two Pointers, Stack, Linked List"
+      verified: true
 
 - id: hash-tables
   title: Hash tables
@@ -46,6 +52,9 @@
       locator: "Chapter 5"
       verified: true
       role: alternative
+    - resource: leetcode-150
+      locator: "Top Interview 150: Hashmap"
+      verified: true
 
 - id: sorting-searching
   title: Sorting and searching
@@ -83,6 +92,9 @@
     - resource: nptel-dsa
       locator: "Lectures on trees, AVL trees and heaps"
       role: alternative
+    - resource: leetcode-150
+      locator: "Top Interview 150: Binary Tree General, Binary Tree BFS, Binary Search Tree, Heap"
+      verified: true
 
 - id: graph-algorithms
   title: Graph algorithms
@@ -150,4 +162,7 @@
       locator: "Introductory, then Sorting and Searching, Dynamic Programming and Graph Algorithms"
     - resource: cses-book
       locator: "Use as a reference while solving"
+      role: alternative
+    - resource: codeforces
+      locator: "Problems rated 800 to 1400, sorted by rating"
       role: alternative

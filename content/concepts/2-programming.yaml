@@ -35,6 +35,9 @@
     - resource: mit-60001
       locator: "Lecture 6, Recursion and dictionaries"
       verified: true
+    - resource: leetcode-150
+      locator: "Top Interview 150: Backtracking"
+      verified: true
 
 - id: higher-order-programming
   title: Functions and abstraction
@@ -47,6 +50,9 @@
       locator: "Chapters 1–2"
     - resource: mit-60001
       locator: "Lecture 4, Decomposition, abstraction and functions"
+      verified: true
+    - resource: exercism
+      locator: "Python track"
       verified: true
 
 - id: shell-tools
@@ -80,6 +86,10 @@
       role: alternative
     - resource: learn-git-branching
       locator: "Main and Remote sequences"
+    - resource: github-skills
+      locator: "Introduction to GitHub"
+      role: alternative
+      verified: true
 
 - id: oop-design
   title: Objects and design

@@ -50,6 +50,9 @@
       locator: "The cpu-* and vm-* homeworks"
       why: "Simulators that ask you to predict what the OS will do, then check."
       verified: true
+    - resource: xv6-labs
+      locator: "The first labs: utilities, system calls, page tables"
+      role: alternative
 
 - id: concurrency
   title: Concurrency
@@ -66,6 +69,9 @@
     - resource: ostep-homework
       locator: "The threads-* homeworks"
       verified: true
+    - resource: xv6-labs
+      locator: "The threads and locks labs"
+      role: alternative
 
 - id: file-systems
   title: Storage and file systems
@@ -100,6 +106,9 @@
     - resource: nptel-networks
       locator: "The full course"
       role: alternative
+    - resource: tryhackme
+      locator: "The Pre Security path"
+      verified: true
 
 - id: web-http
   title: The web and HTTP
@@ -130,6 +139,11 @@
     - resource: mixu-distsys
       locator: "The whole book"
       why: "Short and free. Read it before the MIT lectures."
+    - resource: mit-6824-labs
+      locator: "The labs: MapReduce, Raft, then the key/value service"
+    - resource: maelstrom
+      locator: "The guide, from echo to broadcast to Raft"
+      role: alternative
 
 - id: systems-security
   title: Systems security
@@ -187,6 +201,8 @@
       locator: "Chapters 1–10"
     - resource: nptel-embedded
       locator: "The full course"
+    - resource: wokwi
+      locator: "Build each exercise from your course in the Arduino or ESP32 simulator"
 
 - id: embedded-protocols
   title: Talking to hardware
@@ -197,6 +213,8 @@
   resources:
     - resource: sparkfun-serial
       locator: "Serial communication, then the I2C and SPI tutorials"
+    - resource: wokwi
+      locator: "Wire up I2C and SPI sensors in the simulator"
 
 - id: rtos
   title: Real-time operating systems
@@ -208,6 +226,8 @@
   resources:
     - resource: freertos-book
       locator: "The whole book"
+    - resource: wokwi
+      locator: "ESP32 projects using FreeRTOS tasks and queues"
 
 - id: project-embedded
   title: "Project: build a working device"
@@ -219,3 +239,6 @@
   resources:
     - resource: arduino-docs
       locator: "Start from a sensor tutorial and extend it"
+    - resource: wokwi
+      locator: "Prototype the whole project in the simulator first"
+      role: alternative

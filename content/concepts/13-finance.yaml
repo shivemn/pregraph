@@ -158,3 +158,5 @@
     - resource: varsity
       locator: "Trading Systems"
       verified: true
+    - resource: quantconnect
+      locator: "The Learning Center, then backtest your own strategy"

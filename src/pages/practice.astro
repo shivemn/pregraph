@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import { content } from '../lib/site';
+
+const c = content();
+const resources = new Map(c.resources.map((r) => [r.id, r]));
+const shelved = new Set(c.toolGroups.flatMap((g) => g.tools));
+const hrefOf = (id: string) => `/${shelved.has(id) ? 'tools' : 'concepts'}/${id}`;
+
+// Which stops each resource practises, straight from the concept files.
+const uses = new Map<string, Array<{ id: string; title: string; area: string }>>();
+for (const x of c.concepts) {
+  for (const s of x.resources) {
+    const list = uses.get(s.resource) ?? [];
+    if (!list.some((u) => u.id === x.id)) list.push({ id: x.id, title: x.title, area: x.area });
+    uses.set(s.resource, list);
+  }
+}
+
+const groups = c.practiceGroups.map((g) => ({
+  ...g,
+  items: g.resources.map((id) => ({ ...resources.get(id)!, stops: uses.get(id) ?? [] })),
+}));
+const count = groups.reduce((n, g) => n + g.items.length, 0);
+---
+
+<Base
+  wide
+  title="Practice"
+  description="Free places to practise, from LeetCode and Kaggle to TryHackMe and MIT's systems labs, and which topics each one tests."
+>
+  <h1><span class="board">Practice</span></h1>
+  <p class="lede quiet">
+    Reading and watching tell you that you've seen something. Practice tells you whether you can do it.{' '}
+    These {count} places are free (a few need a free account), and each one lists the stops it tests, so you know when to use it.
+  </p>
+
+  <nav class="jump" aria-label="Groups">
+    {groups.map((g) => <a href={`#practice-${g.id}`}>{g.title}</a>)}
+  </nav>
+
+  {
+    groups.map((g) => (
+      <section aria-labelledby={`practice-${g.id}`}>
+        <h2 id={`practice-${g.id}`}>{g.title}</h2>
+        <ul class="platforms">
+          {g.items.map((r) => (
+            <li>
+              <a class="platform-name" href={r.url} rel="noopener">{r.title}</a>
+              <p class="faint">{r.author}</p>
+              {r.note && <p class="quiet">{r.note}</p>}
+              {r.stops.length > 0 && (
+                <p class="tests">
+                  <span class="tests-label">Practises</span>
+                  {r.stops.map((s) => (
+                    <a class="chip" data-area={s.area} href={hrefOf(s.id)}>{s.title}</a>
+                  ))}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  h1 { padding-top: 8px; font-size: clamp(2.2rem, 7vw, 3.6rem); }
+  .lede { font-size: 1.1875rem; max-width: 62ch; margin-top: 14px; }
+  .jump { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 22px; max-width: 900px; }
+  .jump a { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.1rem; }
+  section { margin-top: 44px; scroll-margin-top: 16px; }
+  .platforms {
+    list-style: none; padding: 0; margin: 12px 0 0; border-top: 3px solid var(--ink);
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); column-gap: 32px;
+  }
+  .platforms li { padding: 14px 0 16px; border-bottom: 1px solid var(--rule); display: grid; gap: 3px; align-content: start; }
+  .platform-name { font-family: var(--sign); font-stretch: 85%; font-size: 1.45rem; font-weight: 650; line-height: 1.1; }
+  .platforms .quiet { font-size: 0.97rem; }
+  .tests { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; }
+  .tests-label { font-family: var(--sign); font-stretch: 85%; font-weight: 700; color: var(--ink-2); margin-right: 2px; }
+  .chip {
+    font-size: 0.85rem; font-weight: 600; text-decoration: none; padding: 1px 8px;
+    border: 1.5px solid var(--line); color: var(--ink);
+  }
+  .chip:hover { background: var(--platform); }
+  @media (max-width: 560px) { .platforms { grid-template-columns: 1fr; } }
+</style>

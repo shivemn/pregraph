@@ -2375,3 +2375,196 @@
   url: https://www.youtube.com/playlist?list=PLp6ek2hDcoNB_YJCruBFjhF79f5ZHyBuz
   free: true
   medium: watch
+
+- id: leetcode-150
+  title: "Top Interview 150"
+  author: "LeetCode"
+  type: site
+  url: https://leetcode.com/studyplan/top-interview-150/
+  free: true
+  medium: practice
+  note: "Grouped by topic, which makes it a good map of interview DSA. Needs a free account."
+
+- id: leetcode-sql50
+  title: "SQL 50"
+  author: "LeetCode"
+  type: site
+  url: https://leetcode.com/studyplan/top-sql-50/
+  free: true
+  medium: practice
+
+- id: codeforces
+  title: "Codeforces problemset"
+  author: "Codeforces"
+  type: site
+  url: https://codeforces.com/problemset
+  free: true
+  medium: practice
+  note: "Every problem has a difficulty rating, so you can climb steadily."
+
+- id: project-euler
+  title: "Project Euler"
+  author: "Project Euler"
+  type: site
+  url: https://projecteuler.net/archives
+  free: true
+  medium: practice
+  note: "Maths puzzles you solve with code."
+
+- id: pgexercises
+  title: "PostgreSQL Exercises"
+  author: "Alisdair Owens"
+  type: site
+  url: https://pgexercises.com/
+  free: true
+  medium: practice
+  note: "Runs in the browser against a real database."
+
+- id: hackerrank-sql
+  title: "HackerRank SQL"
+  author: "HackerRank"
+  type: site
+  url: https://www.hackerrank.com/domains/sql
+  free: true
+  medium: practice
+
+- id: frontend-mentor
+  title: "Frontend Mentor challenges"
+  author: "Frontend Mentor"
+  type: site
+  url: https://www.frontendmentor.io/challenges
+  free: true
+  medium: practice
+  note: "Real designs to build, from newbie to advanced. Most are free."
+
+- id: type-challenges
+  title: "Type Challenges"
+  author: "Anthony Fu and contributors"
+  type: site
+  url: https://github.com/type-challenges/type-challenges
+  free: true
+  medium: practice
+
+- id: xv6-labs
+  title: "6.1810 Operating System Engineering labs"
+  author: "MIT"
+  type: site
+  url: https://pdos.csail.mit.edu/6.1810/
+  free: true
+  medium: practice
+  note: "Labs on xv6, a small teaching OS. Hard and very good."
+
+- id: mit-6824-labs
+  title: "6.5840 Distributed Systems labs"
+  author: "MIT"
+  type: site
+  url: https://pdos.csail.mit.edu/6.824/
+  free: true
+  medium: practice
+  note: "Build MapReduce and Raft in Go, with tests that try to break them."
+
+- id: maelstrom
+  title: "Maelstrom"
+  author: "Jepsen"
+  type: site
+  url: https://github.com/jepsen-io/maelstrom
+  free: true
+  medium: practice
+  note: "A workbench that runs your toy distributed system and checks it."
+
+- id: bustub
+  title: "BusTub"
+  author: "CMU Database Group"
+  type: site
+  url: https://github.com/cmu-db/bustub
+  free: true
+  medium: practice
+  note: "The teaching database behind CMU 15-445’s projects."
+
+- id: build-your-own-x
+  title: "Build your own X"
+  author: "CodeCrafters and contributors"
+  type: site
+  url: https://github.com/codecrafters-io/build-your-own-x
+  free: true
+  medium: practice
+  note: "Tutorials for rebuilding real tools from scratch."
+
+- id: tryhackme
+  title: "TryHackMe"
+  author: "TryHackMe"
+  type: site
+  url: https://tryhackme.com/path/outline/presecurity
+  free: true
+  medium: practice
+  note: "Guided rooms with a machine to attack in the browser. Many are free."
+
+- id: khan-math
+  title: "Khan Academy exercises"
+  author: "Khan Academy"
+  type: site
+  url: https://www.khanacademy.org/math/calculus-1
+  free: true
+  medium: practice
+  note: "Short practice sets that check each answer, with hints."
+
+- id: brainstellar
+  title: "Brainstellar"
+  author: "Brainstellar"
+  type: site
+  url: https://brainstellar.com/
+  free: true
+  medium: practice
+  note: "Probability and logic puzzles from quant interviews."
+
+- id: wokwi
+  title: "Wokwi"
+  author: "Wokwi"
+  type: site
+  url: https://wokwi.com/
+  free: true
+  medium: practice
+  note: "An Arduino, ESP32 and Raspberry Pi Pico simulator in the browser."
+
+- id: kaggle-competitions
+  title: "Kaggle competitions"
+  author: "Kaggle"
+  type: site
+  url: https://www.kaggle.com/competitions?hostSegmentIdFilter=5
+  free: true
+  medium: practice
+
+- id: quantconnect
+  title: "QuantConnect"
+  author: "QuantConnect"
+  type: site
+  url: https://www.quantconnect.com/learning
+  free: true
+  medium: practice
+  note: "Free backtesting on real market data, in Python or C#."
+
+- id: tidytuesday
+  title: "TidyTuesday"
+  author: "R for Data Science community"
+  type: site
+  url: https://github.com/rfordatascience/tidytuesday
+  free: true
+  medium: practice
+  note: "A new real dataset every week. Works just as well with pandas."
+
+- id: pandas-exercises
+  title: "pandas exercises"
+  author: "Guilherme Samora"
+  type: site
+  url: https://github.com/guipsamora/pandas_exercises
+  free: true
+  medium: practice
+
+- id: github-skills
+  title: "GitHub Skills"
+  author: "GitHub"
+  type: site
+  url: https://github.com/skills
+  free: true
+  medium: practice
+  note: "Short courses that run inside your own GitHub repository."

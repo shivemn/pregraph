@@ -229,6 +229,7 @@
       verified: true
     - resource: kaggle-learn
       locator: "Intro to Machine Learning, then Intermediate Machine Learning"
+      verified: true
 
 - id: tensorflow
   title: TensorFlow and Keras
