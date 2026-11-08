@@ -82,3 +82,8 @@ button.stop-title:hover, a.stop-title:hover { text-decoration: underline; text-d
 .stop-tools { display: flex; gap: 16px; margin-top: 6px; flex-wrap: wrap; }
 
 .route-end { padding-left: 56px; color: var(--ink-2); font-size: 0.95rem; }
+
+/* In dark mode the finished station is light, so the tick goes dark. */
+@media (prefers-color-scheme: dark) {
+  .stop[data-state='done'] .station svg { color: var(--paper); }
+}

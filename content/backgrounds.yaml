@@ -8,35 +8,42 @@
   phrase: a CS or IT graduate
   title: CS or IT graduate
   description: The textbook basics are done. What's left is what the job adds on top.
-  knows: [proofs, discrete-math, programming-basics, recursion, c-and-memory, oop-design, linear-structures, hash-tables, trees-heaps, sorting-searching, complexity-analysis, sql, digital-logic, computer-architecture, os-processes-memory, networking]
+  knows: [calculus, multivariable-calculus, proofs, discrete-math, programming-basics, recursion, c-and-memory, oop-design, linear-structures, hash-tables, trees-heaps, sorting-searching, complexity-analysis, sql, digital-logic, computer-architecture, os-processes-memory, networking]
 
 - id: maths-grad
   group: stem
   phrase: a maths or statistics graduate
   title: Maths or stats graduate
   description: Comfortable with proof, discrete structures, linear algebra, probability and statistics, with little or no programming.
-  knows: [proofs, discrete-math, linear-algebra, probability, statistics]
+  knows: [calculus, multivariable-calculus, proofs, discrete-math, linear-algebra, probability, statistics]
 
 - id: engineering-grad
   group: stem
   phrase: an engineering graduate, not CS
   title: Engineering graduate (not CS)
   description: Mechanical, civil, electrical or similar. Engineering maths is done; programming probably stopped at a first-year course.
-  knows: [linear-algebra, probability]
+  knows: [calculus, multivariable-calculus, linear-algebra, probability]
 
 - id: science-grad
   group: stem
   phrase: a science graduate
   title: Science graduate
-  description: Physics, chemistry, biology or similar. Lab work, some maths and the statistics that goes with experiments. Programming varies a lot, so nothing beyond that is assumed.
-  knows: [statistics]
+  description: Physics, chemistry, biology or similar. Calculus, lab work and the statistics that goes with experiments. Programming varies a lot, so nothing beyond that is assumed.
+  knows: [calculus, statistics]
 
 - id: commerce-grad
   group: other
   phrase: a commerce or business graduate
   title: Commerce or business graduate
-  description: B.Com, BBA, BMS, economics or similar. Spreadsheets are familiar; programming and university maths aren't assumed.
-  knows: [spreadsheets]
+  description: B.Com, BBA, BMS or similar. Accounting and spreadsheets are familiar; programming and university maths aren't assumed.
+  knows: [spreadsheets, accounting]
+
+- id: economics-grad
+  group: other
+  phrase: an economics graduate
+  title: Economics graduate
+  description: BA or B.Sc. economics. Micro, macro and introductory statistics are done; programming isn't assumed.
+  knows: [microeconomics, macroeconomics, statistics]
 
 - id: other-grad
   group: other

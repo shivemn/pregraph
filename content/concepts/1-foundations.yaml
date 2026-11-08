@@ -68,3 +68,66 @@
       locator: "Problem sets 10–12"
       role: alternative
       verified: true
+
+- id: calculus
+  title: Calculus
+  area: foundations
+  summary: Limits, derivatives, integrals and series, and what they say about change and accumulation.
+  hours: 40
+  resources:
+    - resource: openstax-calculus
+      locator: "Volumes 1 and 2"
+    - resource: tbob-calculus
+      locator: "The whole series, first, for the pictures"
+      verified: true
+
+- id: multivariable-calculus
+  title: Multivariable calculus
+  area: foundations
+  summary: Partial derivatives, gradients, multiple integrals and the vector calculus that optimisation and physics lean on.
+  hours: 30
+  requires: [calculus]
+  recommends: [linear-algebra]
+  resources:
+    - resource: openstax-calculus
+      locator: "Volume 3"
+    - resource: mit-1802
+      locator: "The whole course"
+      verified: true
+
+- id: optimization
+  title: Optimisation
+  area: foundations
+  summary: Convex sets and functions, duality, and the algorithms that find minima, from least squares to portfolio choice.
+  hours: 30
+  requires: [multivariable-calculus, linear-algebra]
+  resources:
+    - resource: boyd-cvx
+      locator: "Chapters 1–5, then the applications you need"
+    - resource: ee364a
+      locator: "The whole course"
+      verified: true
+
+- id: stochastic-processes
+  title: Stochastic processes
+  area: foundations
+  summary: Random walks, Markov chains, Poisson processes and Brownian motion.
+  hours: 25
+  requires: [probability, calculus]
+  resources:
+    - resource: probability-book
+      locator: "The chapters on Markov chains and Poisson processes"
+    - resource: mit-18s096
+      locator: "Lectures 5 and 17, Stochastic Processes I and II"
+      verified: true
+
+- id: stochastic-calculus
+  title: Stochastic calculus
+  area: foundations
+  summary: Itô's lemma and stochastic differential equations, the maths under option pricing and interest-rate models.
+  hours: 30
+  requires: [stochastic-processes, multivariable-calculus]
+  resources:
+    - resource: mit-18s096
+      locator: "Lectures 18 and 21: Itô calculus, stochastic differential equations"
+      verified: true

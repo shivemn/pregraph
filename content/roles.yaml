@@ -79,7 +79,7 @@
   summary: Trains models and, more often, gets them working reliably in a real product.
   tiers:
     hire: [machine-learning, deep-learning, pandas, sql, git, statistics, algorithm-practice, project-ml-service]
-    firstYear: [mlops, docker, software-engineering, cloud-basics]
+    firstYear: [mlops, docker, software-engineering, cloud-basics, transformers, pytorch]
     extra: [distributed-systems, spark]
 
 - id: devops-engineer
@@ -90,6 +90,69 @@
     hire: [shell-tools, linux-admin, git, networking, docker, ci-cd, cloud-basics, programming-basics, project-deploy-pipeline]
     firstYear: [kubernetes, observability, infrastructure-as-code, os-processes-memory]
     extra: [distributed-systems, systems-security, concurrency]
+
+- id: deep-learning-engineer
+  title: Deep learning engineer (vision / language)
+  family: data
+  summary: Trains and ships neural networks for images, text or speech. More modelling than an ML engineer, more shipping than a researcher.
+  tiers:
+    hire: [machine-learning, neural-networks, cnns, transformers, pytorch, deep-learning, git, project-ml-service]
+    firstYear: [computer-vision, nlp, mlops, docker, generative-models]
+    extra: [reinforcement-learning, distributed-systems]
+
+- id: quant-researcher
+  title: Quantitative researcher / analyst
+  family: finance
+  summary: Finds and tests trading or pricing ideas with maths, statistics and data. Most of the job is research that doesn't work, and noticing when it does.
+  tiers:
+    hire: [probability, statistics, linear-algebra, calculus, stochastic-processes, time-series, programming-basics, pandas, machine-learning, financial-markets, derivatives, algorithm-practice, project-backtest]
+    firstYear: [stochastic-calculus, optimization, portfolio-theory, bayesian-statistics, cpp]
+    extra: [deep-learning, reinforcement-learning, econometrics]
+
+- id: quant-developer
+  title: Quant developer
+  family: finance
+  summary: Builds the fast, correct systems quants and traders run on. Pricing libraries, backtesters, market data and execution.
+  tiers:
+    hire: [cpp, linear-structures, hash-tables, trees-heaps, algorithm-practice, concurrency, os-processes-memory, probability, financial-markets, git, shell-tools]
+    firstYear: [derivatives, networking, programming-basics, pandas, testing-debugging, messaging]
+    extra: [stochastic-processes, distributed-systems, time-series]
+
+- id: risk-analyst
+  title: Risk analyst
+  family: finance
+  summary: Measures market, credit and operational risk for a bank or fund, and reports it to people who set limits.
+  tiers:
+    hire: [statistics, probability, financial-markets, derivatives, risk-management, spreadsheets, sql, programming-basics]
+    firstYear: [time-series, pandas, bi-tools, portfolio-theory, accounting]
+    extra: [stochastic-processes, machine-learning, econometrics]
+
+- id: financial-analyst
+  title: Financial analyst
+  family: finance
+  summary: Reads companies' numbers, builds models and valuations, and turns them into recommendations, in research, banking or a company's finance team.
+  tiers:
+    hire: [accounting, corporate-finance, spreadsheets, financial-markets, statistics, project-financial-model]
+    firstYear: [bi-tools, sql, portfolio-theory, macroeconomics]
+    extra: [pandas, time-series, derivatives]
+
+- id: economist
+  title: Economist / economic research analyst
+  family: finance
+  summary: Studies how economies and markets behave with data, for a central bank, ministry, think tank, consultancy or company.
+  tiers:
+    hire: [microeconomics, macroeconomics, calculus, statistics, econometrics, r-lang, spreadsheets]
+    firstYear: [time-series, data-visualization, sql, programming-basics]
+    extra: [machine-learning, bayesian-statistics, experiments]
+
+- id: statistician
+  title: Statistician / biostatistician
+  family: finance
+  summary: Designs studies and analyses data carefully enough that the conclusions hold, in pharma, health, government or industry.
+  tiers:
+    hire: [probability, statistics, calculus, linear-algebra, r-lang, bayesian-statistics, experiments, sql]
+    firstYear: [time-series, econometrics, machine-learning, data-visualization]
+    extra: [pandas, multivariable-calculus]
 
 - id: gate-cs
   title: GATE computer science

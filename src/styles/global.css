@@ -60,6 +60,7 @@
   --mobile: #5b8a0a;
   --security: #8b5a2b;
   --workplace: #9a4dbf;
+  --finance: #00796b;
 
   --sign: 'Pregraph Sign', 'Arial Narrow', sans-serif;
   --text: 'Mukta', system-ui, sans-serif;
@@ -89,6 +90,7 @@
     --mobile: #a5d84e;
     --security: #dba06a;
     --workplace: #d39af0;
+    --finance: #4fd1c0;
     color-scheme: dark;
   }
 }
@@ -106,6 +108,7 @@
 [data-area='mobile'] { --line: var(--mobile); }
 [data-area='security'] { --line: var(--security); }
 [data-area='workplace'] { --line: var(--workplace); }
+[data-area='finance'] { --line: var(--finance); }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -135,6 +138,7 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 button { font: inherit; color: inherit; cursor: pointer; }
+select { color-scheme: inherit; }
 
 .num { font-variant-numeric: tabular-nums; }
 .quiet { color: var(--ink-2); }

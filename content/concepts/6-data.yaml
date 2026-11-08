@@ -266,3 +266,37 @@
       verified: true
     - resource: kaggle-datasets
       locator: "Pick a dataset you care about and publish a one-page dashboard on Tableau Public"
+
+- id: time-series
+  title: Time series and forecasting
+  area: data
+  summary: Trends, seasonality, autocorrelation, ARIMA and exponential smoothing, and checking a forecast honestly.
+  hours: 25
+  requires: [statistics]
+  recommends: [r-lang]
+  resources:
+    - resource: fpp3
+      locator: "Chapters 1–9"
+      why: "Free, practical and written by the people behind the standard R tools."
+    - resource: fpp3-videos
+      locator: "The whole playlist, alongside the book"
+      verified: true
+    - resource: mit-18s096
+      locator: "Lectures 8, 11 and 12, Time Series Analysis I–III"
+      role: alternative
+      verified: true
+
+- id: bayesian-statistics
+  title: Bayesian statistics
+  area: data
+  summary: Priors, posteriors and models you can reason about, fitted with simulation instead of formulas.
+  hours: 30
+  requires: [probability, statistics]
+  resources:
+    - resource: bayes-rules
+      locator: "Units 1 and 2, then regression in Unit 3"
+      verified: true
+    - resource: rethinking
+      locator: "The whole course"
+      why: "Famous for teaching how to think about models, not just how to fit them."
+      verified: true

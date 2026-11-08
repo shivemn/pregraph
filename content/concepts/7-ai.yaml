@@ -20,21 +20,172 @@
     - resource: kaggle-learn
       locator: "Intro to Machine Learning, then Intermediate Machine Learning"
 
-- id: deep-learning
-  title: Deep learning
+- id: neural-networks
+  title: Neural networks and backpropagation
   area: ai
-  summary: Neural networks from linear layers up to convolutions, recurrence and transformers.
-  hours: 60
+  summary: Layers, activations, losses, gradient descent and backpropagation, and why training goes wrong.
+  hours: 25
   requires: [machine-learning]
-  recommends: [linear-structures]
   resources:
     - resource: d2l
-      locator: "Chapters 1–11"
+      locator: "Chapters 3–6: linear networks, multilayer perceptrons, the builders' guide"
+      verified: true
+    - resource: tbob-nn
+      locator: "The whole series"
+      why: "The clearest picture of what backpropagation is actually doing."
+      verified: true
     - resource: karpathy-zero-to-hero
-      locator: "All lectures, in order"
-      why: "You build everything from scratch, up to a small GPT."
+      locator: "The first lecture, building micrograd"
+      role: alternative
+    - resource: udl-notebooks
+      locator: "Notebooks for chapters 3–9"
+      verified: true
+
+- id: cnns
+  title: Convolutional networks
+  area: ai
+  summary: Convolutions, pooling, residual connections, and the architectures from LeNet to ResNet.
+  hours: 20
+  requires: [neural-networks]
+  resources:
+    - resource: d2l
+      locator: "Chapters 7–8"
+      verified: true
+    - resource: cs231n
+      locator: "The lectures on CNNs and architectures"
+      verified: true
+    - resource: udl-notebooks
+      locator: "Notebooks for chapters 10–11"
+      verified: true
+
+- id: rnns
+  title: Recurrent networks and LSTMs
+  area: ai
+  summary: Modelling sequences with recurrence, why gradients vanish, and how LSTMs and GRUs fix it.
+  hours: 15
+  requires: [neural-networks]
+  resources:
+    - resource: d2l
+      locator: "Chapters 9–10"
+      verified: true
+    - resource: cs224n
+      locator: "The lectures on language models and RNNs"
+      verified: true
+
+- id: transformers
+  title: Attention and transformers
+  area: ai
+  summary: Attention, self-attention, multi-head attention and the transformer, the architecture behind every modern LLM.
+  hours: 20
+  requires: [neural-networks]
+  recommends: [rnns]
+  resources:
+    - resource: d2l
+      locator: "Chapter 11"
+      verified: true
+    - resource: karpathy-zero-to-hero
+      locator: "Let's build GPT, from scratch"
+      why: "You write a working transformer yourself, line by line."
+    - resource: illustrated-transformer
+      locator: "The whole post"
+      role: alternative
+    - resource: udl-notebooks
+      locator: "Notebooks for chapter 12"
+      verified: true
+
+- id: computer-vision
+  title: Computer vision
+  area: ai
+  summary: Classification, detection and segmentation, data augmentation and transfer learning for images.
+  hours: 25
+  requires: [cnns]
+  resources:
+    - resource: d2l
+      locator: "Chapter 14"
+      verified: true
+    - resource: cs231n
+      locator: "The whole course"
+      verified: true
     - resource: kaggle-learn
-      locator: "Intro to Deep Learning, then Computer Vision"
+      locator: "Computer Vision"
+
+- id: nlp
+  title: Natural language processing
+  area: ai
+  summary: Word vectors, pretraining, fine-tuning, and the tasks language models are used for.
+  hours: 30
+  requires: [transformers]
+  recommends: [rnns]
+  resources:
+    - resource: d2l
+      locator: "Chapters 15–16"
+      verified: true
+    - resource: cs224n
+      locator: "The whole course"
+      verified: true
+    - resource: hf-llm-course
+      locator: "Chapters 1–4, then the fine-tuning chapters"
+      role: alternative
+
+- id: generative-models
+  title: Generative models
+  area: ai
+  summary: VAEs, GANs, normalising flows and diffusion models, and how each one learns a distribution.
+  hours: 30
+  requires: [neural-networks]
+  recommends: [probability, transformers]
+  resources:
+    - resource: udl-book
+      locator: "Chapters 14–18"
+      why: "The clearest free treatment of diffusion models, with all four families side by side."
+      verified: true
+    - resource: cs236
+      locator: "The whole course"
+      verified: true
+    - resource: udl-notebooks
+      locator: "Notebooks for chapters 15–18"
+      verified: true
+
+- id: reinforcement-learning
+  title: Reinforcement learning
+  area: ai
+  summary: Agents learning from reward. Markov decision processes, dynamic programming, Q-learning and policy gradients.
+  hours: 40
+  requires: [probability, programming-basics]
+  recommends: [neural-networks]
+  resources:
+    - resource: sutton-barto
+      locator: "Part I (chapters 2–8), then chapter 13 on policy gradients"
+      why: "The standard textbook, free from the authors."
+      verified: true
+    - resource: silver-rl
+      locator: "The whole course"
+      verified: true
+    - resource: udl-notebooks
+      locator: "Notebooks for chapter 19"
+      verified: true
+
+- id: deep-learning
+  title: Deep learning in practice
+  area: ai
+  summary: Training real models end to end. Transfer learning, tuning, debugging a training run and shipping the result.
+  hours: 25
+  requires: [neural-networks, cnns]
+  recommends: [transformers, pytorch]
+  resources:
+    - resource: fastai-course
+      locator: "Part 1, all lessons"
+      why: "Top-down: you train useful models in lesson one and learn why later."
+      verified: true
+    - resource: mit-6s191
+      locator: "The whole series"
+      verified: true
+    - resource: d2l
+      locator: "Chapters 12–13 on optimisation and performance"
+      role: alternative
+      verified: true
+    - resource: kaggle-learn
+      locator: "Intro to Deep Learning"
 
 - id: mlops
   title: Putting models into production
@@ -67,7 +218,7 @@
   summary: Tokens, embeddings, attention and the transformer, pretraining and fine-tuning. Enough to reason about what a model can and can't do.
   hours: 15
   requires: [programming-basics]
-  recommends: [linear-algebra, probability]
+  recommends: [linear-algebra, probability, transformers]
   resources:
     - resource: illustrated-transformer
       locator: "The whole post"

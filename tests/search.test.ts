@@ -21,7 +21,8 @@ describe('search', () => {
 
   it('finds concepts by the resources that teach them', () => {
     expect(search(docs, 'three easy pieces').map((h) => h.doc.id)).toContain('concurrency');
-    expect(top('strang')).toBe('linear-algebra');
+    // Strang wrote the linear algebra lectures and co-wrote the OpenStax calculus books.
+    expect(search(docs, 'strang').map((h) => h.doc.id)).toEqual(expect.arrayContaining(['linear-algebra', 'calculus']));
     expect(search(docs, 'ostep').map((h) => h.doc.id)).toContain('file-systems');
     expect(search(docs, '6.006')).not.toEqual([]);
   });

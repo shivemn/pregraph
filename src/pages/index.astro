@@ -248,7 +248,9 @@ const counts = {
     background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2374797f' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 6px center;
     appearance: none;
   }
-  .ticket select option, .ticket select optgroup { font-family: var(--text); font-size: 1rem; color: var(--ink); }
+  /* The open list is drawn by the browser; give it our own colours so dark mode stays readable. */
+  .ticket select option, .ticket select optgroup { font-family: var(--text); font-size: 1rem; color: var(--ink); background: var(--paper); }
+  .ticket select optgroup { color: var(--ink-2); font-weight: 700; }
   .ticket select:invalid { color: var(--ink-3); }
   .ticket-stub {
     display: grid; align-content: center; justify-items: center; gap: 8px;
@@ -260,7 +262,7 @@ const counts = {
   .preview { padding: 20px 22px 18px; border: 3px solid var(--ink); background: var(--paper); }
   .preview h2 {
     font-size: 1.05rem; font-stretch: 88%; font-weight: 700; margin: -20px -22px 18px; padding: 8px 22px 6px;
-    background: var(--ink); color: var(--yellow);
+    background: #000; color: var(--yellow);
   }
 
   .roles, .how { margin-top: 80px; }

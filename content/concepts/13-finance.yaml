@@ -1,0 +1,160 @@
+# Economics and finance: the concepts behind finance, economics, statistics
+# and quant roles. Picks were opened and checked before they went in.
+
+- id: microeconomics
+  title: Microeconomics
+  area: finance
+  summary: How people and firms choose, how markets set prices, and where markets fail.
+  hours: 30
+  resources:
+    - resource: core-econ
+      locator: "The Economy 2.0: Microeconomics"
+      why: "Free, current and built around real data rather than only diagrams."
+      verified: true
+    - resource: mit-1401
+      locator: "The whole course"
+      verified: true
+
+- id: macroeconomics
+  title: Macroeconomics
+  area: finance
+  summary: Growth, unemployment, inflation, interest rates, and what central banks and governments can do about them.
+  hours: 30
+  recommends: [microeconomics]
+  resources:
+    - resource: core-econ
+      locator: "The Economy 2.0: Macroeconomics"
+      verified: true
+    - resource: mit-1402
+      locator: "The whole course"
+      verified: true
+
+- id: econometrics
+  title: Econometrics
+  area: finance
+  summary: Regression with real economic data. Causality, instruments, panels, and the ways regressions mislead.
+  hours: 30
+  requires: [statistics]
+  recommends: [r-lang, linear-algebra]
+  resources:
+    - resource: econometrics-r
+      locator: "Chapters 4–12"
+      verified: true
+    - resource: lambert-econometrics
+      locator: "The whole playlist"
+      verified: true
+
+- id: financial-markets
+  title: Financial markets
+  area: finance
+  summary: Stocks, bonds, exchanges, brokers and how prices move, with Indian markets as the running example.
+  hours: 20
+  resources:
+    - resource: varsity
+      locator: "Introduction to Stock Markets"
+      why: "Written for Indian markets, and also available in Hindi."
+      verified: true
+    - resource: shiller-markets
+      locator: "The whole course"
+      verified: true
+
+- id: accounting
+  title: Accounting and financial statements
+  area: finance
+  summary: Double entry, the balance sheet, income statement and cash flow statement, and how to read a company's annual report.
+  hours: 25
+  resources:
+    - resource: openstax-accounting
+      locator: "Chapters 1–5"
+    - resource: varsity
+      locator: "Fundamental Analysis"
+      role: alternative
+      verified: true
+
+- id: corporate-finance
+  title: Corporate finance and valuation
+  area: finance
+  summary: Time value of money, cost of capital, discounted cash flows and what a business is actually worth.
+  hours: 30
+  requires: [accounting]
+  recommends: [financial-markets, spreadsheets]
+  resources:
+    - resource: openstax-finance
+      locator: "The chapters on time value of money, valuation and cost of capital"
+    - resource: damodaran-valuation
+      locator: "The whole class"
+      why: "Aswath Damodaran's NYU course, the best-known valuation teaching there is, free."
+      verified: true
+    - resource: mit-15401
+      locator: "The whole course"
+      role: alternative
+      verified: true
+
+- id: derivatives
+  title: Futures, options and derivatives pricing
+  area: finance
+  summary: Forwards, futures, options and the Greeks, then pricing them with Black-Scholes and risk-neutral valuation.
+  hours: 30
+  requires: [financial-markets, probability]
+  recommends: [stochastic-calculus]
+  resources:
+    - resource: varsity
+      locator: "Futures Trading, then Options Theory for Professional Trading"
+      verified: true
+    - resource: mit-18s096
+      locator: "Lectures 19–20: Black-Scholes, risk-neutral valuation"
+      verified: true
+
+- id: portfolio-theory
+  title: Portfolio theory and factor models
+  area: finance
+  summary: Risk and return, diversification, the efficient frontier, CAPM and factor models.
+  hours: 20
+  requires: [financial-markets, statistics]
+  recommends: [optimization]
+  resources:
+    - resource: openstax-finance
+      locator: "The chapters on risk, return and portfolios"
+    - resource: mit-18s096
+      locator: "Lectures 14–16: portfolio theory, factor modeling, portfolio management"
+      verified: true
+
+- id: risk-management
+  title: Risk management
+  area: finance
+  summary: Measuring and limiting risk. Volatility, Value at Risk, stress tests, and market, credit and operational risk.
+  hours: 20
+  requires: [statistics, financial-markets]
+  recommends: [derivatives, time-series]
+  resources:
+    - resource: varsity
+      locator: "Risk Management and Trading Psychology"
+      verified: true
+    - resource: mit-18s096
+      locator: "Lectures 7 and 9: Value at Risk, volatility modelling"
+      verified: true
+
+- id: project-financial-model
+  title: "Project: model a listed company"
+  area: finance
+  kind: project
+  summary: Build a three-statement model and a valuation for a real listed company from its annual reports, in a spreadsheet.
+  hours: 20
+  requires: [accounting, corporate-finance, spreadsheets]
+  resources:
+    - resource: varsity
+      locator: "Integrated Financial Modelling"
+      verified: true
+
+- id: project-backtest
+  title: "Project: backtest a trading strategy"
+  area: finance
+  kind: project
+  summary: Take a simple strategy, test it on years of real prices in Python, and report returns, drawdowns and costs without fooling yourself.
+  hours: 25
+  requires: [time-series, pandas, financial-markets]
+  recommends: [risk-management]
+  resources:
+    - resource: varsity
+      locator: "Trading Systems"
+      verified: true

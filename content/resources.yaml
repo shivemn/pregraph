@@ -2003,3 +2003,275 @@
   url: https://www.youtube.com/watch?v=ddZjhv66o_o
   free: true
   medium: watch
+
+- id: tbob-nn
+  title: Neural networks
+  author: Grant Sanderson (3Blue1Brown)
+  type: video
+  url: https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
+  free: true
+  medium: watch
+
+- id: udl-book
+  title: Understanding Deep Learning
+  author: Simon J. D. Prince
+  type: book
+  url: https://udlbook.github.io/udlbook/
+  free: true
+  medium: read
+  short: "udl udlbook"
+  note: The full PDF is free from the book's site.
+
+- id: udl-notebooks
+  title: Understanding Deep Learning notebooks
+  author: Simon J. D. Prince
+  type: site
+  url: https://udlbook.github.io/udlbook/
+  free: true
+  medium: practice
+  note: Sixty-eight Python notebooks with the key code left for you to fill in.
+
+- id: cs231n
+  title: "CS231n: Deep Learning for Computer Vision"
+  author: Stanford Online
+  type: video
+  url: https://www.youtube.com/playlist?list=PLoROMvodv4rOmsNzYBMe0gJY2XS8AQg16
+  free: true
+  medium: watch
+  short: "cs231n"
+
+- id: cs224n
+  title: "CS224N: Natural Language Processing with Deep Learning"
+  author: Christopher Manning, Stanford Online
+  type: video
+  url: https://www.youtube.com/playlist?list=PLoROMvodv4rOaMFbaqxPDoLWjDaRAdP9D
+  free: true
+  medium: watch
+  short: "cs224n"
+
+- id: cs236
+  title: "CS236: Deep Generative Models"
+  author: Stefano Ermon, Stanford Online
+  type: video
+  url: https://www.youtube.com/playlist?list=PLoROMvodv4rPOWA-omMM6STXaWW4FvJT8
+  free: true
+  medium: watch
+  short: "cs236"
+
+- id: sutton-barto
+  title: "Reinforcement Learning: An Introduction"
+  author: Richard Sutton, Andrew Barto
+  type: book
+  url: http://incompleteideas.net/book/the-book-2nd.html
+  free: true
+  medium: read
+  short: "sutton barto"
+
+- id: silver-rl
+  title: Introduction to Reinforcement Learning (DeepMind x UCL)
+  author: David Silver, Google DeepMind
+  type: video
+  url: https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ
+  free: true
+  medium: watch
+
+- id: fastai-course
+  title: Practical Deep Learning for Coders
+  author: Jeremy Howard (fast.ai)
+  type: course
+  url: https://course.fast.ai/
+  free: true
+  medium: watch
+  short: "fastai fast.ai"
+
+- id: mit-6s191
+  title: "MIT 6.S191: Introduction to Deep Learning"
+  author: Alexander Amini, Ava Amini
+  type: video
+  url: https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI
+  free: true
+  medium: watch
+  short: "6.s191"
+
+- id: openstax-calculus
+  title: Calculus (Volumes 1–3)
+  author: Gilbert Strang, Edwin Herman (OpenStax)
+  type: book
+  url: https://openstax.org/details/books/calculus-volume-1
+  free: true
+  medium: read
+  note: Free online and as PDF, with worked examples and exercises in every section.
+
+- id: tbob-calculus
+  title: Essence of calculus
+  author: Grant Sanderson (3Blue1Brown)
+  type: video
+  url: https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr
+  free: true
+  medium: watch
+
+- id: mit-1802
+  title: "MIT 18.02 Multivariable Calculus"
+  author: Denis Auroux, MIT OpenCourseWare
+  type: video
+  url: https://www.youtube.com/playlist?list=PL4C4C8A7D06566F38
+  free: true
+  medium: watch
+  short: "18.02"
+
+- id: boyd-cvx
+  title: Convex Optimization
+  author: Stephen Boyd, Lieven Vandenberghe
+  type: book
+  url: https://web.stanford.edu/~boyd/cvxbook/
+  free: true
+  medium: read
+  short: "boyd"
+
+- id: ee364a
+  title: "EE364A: Convex Optimization I"
+  author: Stephen Boyd, Stanford Online
+  type: video
+  url: https://www.youtube.com/playlist?list=PLoROMvodv4rMJqxxviPa4AmDClvcbHi6h
+  free: true
+  medium: watch
+  short: "ee364a"
+
+- id: mit-18s096
+  title: "MIT 18.S096: Topics in Mathematics with Applications in Finance"
+  author: MIT OpenCourseWare, with practitioners from Morgan Stanley
+  type: video
+  url: https://www.youtube.com/playlist?list=PLUl4u3cNGP63ctJIEC1UnZ0btsphnnoHR
+  free: true
+  medium: watch
+  short: "18.s096"
+
+- id: fpp3
+  title: "Forecasting: Principles and Practice (3rd edition)"
+  author: Rob J Hyndman, George Athanasopoulos
+  type: book
+  url: https://otexts.com/fpp3/
+  free: true
+  medium: read
+  short: "fpp3 hyndman"
+
+- id: fpp3-videos
+  title: "Forecasting: Principles & Practice (videos)"
+  author: OTexts
+  type: video
+  url: https://www.youtube.com/playlist?list=PLyCNZ_xXGzpm7W9jLqbIyBAiSO5jDwJeE
+  free: true
+  medium: watch
+
+- id: bayes-rules
+  title: Bayes Rules!
+  author: Alicia Johnson, Miles Ott, Mine Dogucu
+  type: book
+  url: https://www.bayesrulesbook.com/
+  free: true
+  medium: read
+
+- id: rethinking
+  title: Statistical Rethinking (2023)
+  author: Richard McElreath
+  type: video
+  url: https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus
+  free: true
+  medium: watch
+  short: "rethinking mcelreath"
+
+- id: core-econ
+  title: The Economy 2.0
+  author: CORE Econ
+  type: book
+  url: https://books.core-econ.org/
+  free: true
+  medium: read
+  short: "core econ"
+
+- id: mit-1401
+  title: "MIT 14.01 Principles of Microeconomics (Fall 2023)"
+  author: MIT OpenCourseWare
+  type: video
+  url: https://www.youtube.com/playlist?list=PLUl4u3cNGP60V7HxLYRaJMbFzP77bzEjb
+  free: true
+  medium: watch
+  short: "14.01"
+
+- id: mit-1402
+  title: "MIT 14.02 Principles of Macroeconomics (Spring 2023)"
+  author: MIT OpenCourseWare
+  type: video
+  url: https://www.youtube.com/playlist?list=PLUl4u3cNGP62EXoZ4B3_Ob7lRRwpGQxkb
+  free: true
+  medium: watch
+  short: "14.02"
+
+- id: econometrics-r
+  title: Introduction to Econometrics with R
+  author: Christoph Hanck, Martin Arnold, Alexander Gerber, Martin Schmelzer
+  type: book
+  url: https://www.econometrics-with-r.org/
+  free: true
+  medium: read
+
+- id: lambert-econometrics
+  title: A full course in econometrics (undergraduate)
+  author: Ben Lambert
+  type: video
+  url: https://www.youtube.com/playlist?list=PLwJRxp3blEvZyQBTTOMFRP_TDaSdly3gU
+  free: true
+  medium: watch
+
+- id: varsity
+  title: Zerodha Varsity
+  author: Zerodha
+  type: site
+  url: https://zerodha.com/varsity/modules/
+  free: true
+  medium: read
+  short: "varsity zerodha"
+  note: Free modules on Indian markets, most with a Hindi version and videos.
+
+- id: shiller-markets
+  title: Financial Markets (2011)
+  author: Robert Shiller, Yale University
+  type: video
+  url: https://www.youtube.com/playlist?list=PL8FB14A2200B87185
+  free: true
+  medium: watch
+  short: "shiller"
+
+- id: openstax-accounting
+  title: "Principles of Accounting, Volume 1: Financial Accounting"
+  author: Mitchell Franklin, Patty Graybeal, Dixon Cooper (OpenStax)
+  type: book
+  url: https://openstax.org/details/books/principles-financial-accounting
+  free: true
+  medium: read
+
+- id: openstax-finance
+  title: Principles of Finance
+  author: Julie Dahlquist, Rainford Knight (OpenStax)
+  type: book
+  url: https://openstax.org/details/books/principles-finance
+  free: true
+  medium: read
+
+- id: damodaran-valuation
+  title: Valuation (Undergraduate, Spring 2025)
+  author: Aswath Damodaran, NYU Stern
+  type: video
+  url: https://www.youtube.com/playlist?list=PLUkh9m2BorqkYrFjNdut81IIcYdLfgqNd
+  free: true
+  medium: watch
+  short: "damodaran"
+
+- id: mit-15401
+  title: "MIT 15.401 Finance Theory I"
+  author: Andrew Lo, MIT OpenCourseWare
+  type: video
+  url: https://www.youtube.com/playlist?list=PLUl4u3cNGP63B2lDhyKOsImI7FjCf6eDW
+  free: true
+  medium: watch
+  short: "15.401"
