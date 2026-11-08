@@ -24,7 +24,7 @@ You say where you're starting from and which job you want: "I'm a maths graduate
 
 Done so far:
 
-- Sixteen roles plus GATE CS, over one shared graph: 75 concepts, 14 tools, 14 projects and 141 resources.
+- Sixteen roles plus GATE CS, over one shared graph: 75 concepts, 23 tools, 14 projects and 162 resources, plus a tools page with 33 of them on five shelves.
 - For every stop, a pick to read, a pick to watch (YouTube, NPTEL, OCW or Coursera) and, where there's a good one, a pick to practise with.
 - A panel that opens on any stop, in the list or on the map, with those picks and what the stop needs and leads to.
 - Four backgrounds: maths graduate, engineering graduate (not CS), CS or IT graduate, and starting from zero.
@@ -81,12 +81,13 @@ erDiagram
 | `content/resources.yaml` | Books, courses and sites: title, author, URL, whether it's free, its `medium` (`read`, `watch` or `practice`), and an optional `short` name people actually use ("OSTEP", "CLRS", "NPTEL DBMS"). |
 | `content/backgrounds.yaml` | What a kind of learner already knows, as a list of concept ids, plus a `phrase` for the home page sentence ("a maths graduate"). |
 | `content/families.yaml` | Groups of roles: software, data, infrastructure, exams. |
+| `content/tool-groups.yaml` | The shelves on the tools page (languages, frameworks, databases, BI, DevOps) and which concepts sit on each, in order. A "tool" here is anything people come to learn on its own, so Python and SQL count even though their `kind` is `concept`. |
 | `content/roles.yaml` | A role (or an exam): `title`, `family`, `summary`, and `tiers` with three lists of concept ids: `hire`, `firstYear` and `extra`. An optional `evidence` block records the job postings the tiers are based on. Without it the role page says "Draft". |
 | `research/postings/*.csv` | Hand-collected, hand-tagged job postings, one file per role. `npm run evidence -- <role>` turns them into counts. See [ROLES.md](ROLES.md). |
 
 A resource section says which part of a resource teaches a concept (`locator: "Part I, Virtualization"`), its role (`primary`, `alternative` or `deep-dive`), an optional one-line `why`, and `verified`.
 
-**Picks.** Each stop shows one pick per medium: something to read, something to watch, something to practise with. The pick is the first free section of that medium marked `primary`, or failing that `alternative`. Deep dives and paid resources are never the pick; they appear under "more options". This lives in `picksFor` in `src/lib/schema.ts`, so the concept page, the panel and the tests all agree. `npm run validate -- --gaps` lists the stops still missing a pick. Right now that's 100 of 103 with something to read, 63 with something to watch and 26 with something to practise. The site says "No video course picked yet" and links to a pre-filled GitHub issue, rather than hiding the gap. Every section starts as `verified: false` until someone opens the resource and checks the chapter numbers. Concept pages say "Section not checked yet" for those.
+**Picks.** Each stop shows one pick per medium: something to read, something to watch, something to practise with. The pick is the first free section of that medium marked `primary`, or failing that `alternative`. Deep dives and paid resources are never the pick; they appear under "more options". This lives in `picksFor` in `src/lib/schema.ts`, so the concept page, the panel and the tests all agree. `npm run validate -- --gaps` lists the stops still missing a pick. Right now that's 109 of 112 with something to read, 77 with something to watch and 49 with something to practise. The site says "No video course picked yet" and links to a pre-filled GitHub issue, rather than hiding the gap. Every section starts as `verified: false` until someone opens the resource and checks the chapter numbers. Concept pages say "Section not checked yet" for those. `npm run check-sections` (run on your own machine) loads each unchecked resource and looks for the names in its locator, then sorts the sections into likely fine, worth a look, numbers only, and didn't load. It never sets `verified` itself: that stays a person's call.
 
 Hard and soft prerequisites behave differently, and that's deliberate. A hard one (`requires`) decides what you need: it gets pulled into your plan. A soft one (`recommends`) only affects order, and only when both concepts are already in the plan. That keeps plans short. Git is a soft prerequisite of C, for example: it's worth learning first, but nobody needs Git to understand pointers.
 
@@ -167,6 +168,10 @@ The panel's data comes from `/stops.json`, built at deploy time from the same `s
 
 The full concept pages stay, for search engines and for links from elsewhere.
 
+## 6b. Tools
+
+Not everyone wants a whole job. Someone already working may only need Redis, or Power BI, or Go. `/tools` lists everything on the shelves in `content/tool-groups.yaml`, with hours, which of the three picks exist, and what comes first. Each tool page (`/tools/redis`) shows the picks, then the same planner as a role page, with the tool as its only target. There's no new engine code: a tool is a role with one target and one tier. The planner takes `goal="tool"` to change its wording, and it shares the same saved progress, so finishing Java on a role page counts on the Spring Boot page too. Search results for tools open the tool page.
+
 ## 7. The map
 
 `src/lib/layout.ts` draws the route as a layered graph. I wrote it rather than pulling in dagre or React Flow. The map only needs a fraction of what those do, the code is about 200 lines, and it's the most mathematical part of the project, so it's worth understanding properly.
@@ -211,7 +216,7 @@ flowchart LR
     E -. first search .-> S[/search.json/]
 ```
 
-Every page is plain HTML built at deploy time. The planner (with its panel) is the one React island, on role pages only. Concept pages and the home page ship no framework at all.
+Every page is plain HTML built at deploy time. The planner (with its panel) is the one React island, on role and tool pages only. Concept pages and the home page ship no framework at all.
 
 ### What ships
 
@@ -309,7 +314,7 @@ src/lib/schema.ts        content contract (zod)
 src/lib/content.ts       loads and cross-checks content at build time
 src/components/          RolePlanner, StopPanel, RouteMap (React), Search (plain TS)
 src/lib/stops.ts         what a stop's panel shows; also builds /stops.json
-src/pages/               home, /roles, /roles/[id], /concepts/[id], /search.json, /stops.json, 404
+src/pages/               home, /roles, /roles/[id], /tools, /tools/[id], /concepts/[id], /search.json, /stops.json, 404
 research/postings/       tagged job postings per role (the evidence)
 scripts/role-evidence.ts npm run evidence
 src/styles/              tokens, route, planner, map

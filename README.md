@@ -18,8 +18,9 @@ Pregraph starts from a ticket: *From a maths graduate, To Backend engineer.* Eac
   - Software: software engineer, backend, frontend, full-stack, Android, QA/SDET, embedded.
   - Data: data analyst, data scientist, data engineer, ML engineer, AI/LLM engineer.
   - Infrastructure: DevOps/SRE, cloud, application support, security analyst.
+- **A tools page** for learning one thing on its own: Go, C++, Rust, Spring Boot, Node.js, Redis, MongoDB, Kafka, Power BI, Tableau, PyTorch, Docker, Kubernetes and more. Each tool page has the three picks and the route to it from your background.
 - **Four starting points:** maths graduate, engineering graduate (not CS), CS or IT graduate, starting from zero.
-- **One shared graph** of 75 concepts, 14 tools and 14 projects, linked to 141 resources, almost all of them free.
+- **One shared graph** of 75 concepts, 23 tools and 14 projects, linked to 162 resources, almost all of them free.
 - **Read, watch, practise.** Each stop has one pick of each. Open a stop to see them, along with why it's on your route and what it leads to.
 - **Ticking off progress.** What you finish counts for every role. Each stop can say why it's there, and you can skip what you already know.
 - **A map of the route,** drawn by a layout algorithm written for this project.
@@ -50,6 +51,8 @@ npm run validate                     # checks content/ for typos, unknown ids an
 npm run validate -- --gaps           # also lists stops missing a read, watch or practise pick
 npm run evidence -- backend-engineer # counts tagged job postings for a role
 npm run build                        # validate, then build the static site into dist/
+npm run check-links                  # every resource URL still answers (needs the internet)
+npm run check-sections               # which unchecked chapter references look right (needs the internet)
 ```
 
 ## Deploying
@@ -62,7 +65,7 @@ It's a static site, so there's no server or database to run. It's hosted on Clou
 
 Every push to `main` deploys, and every other branch gets its own preview URL. `public/_headers` sets the caching. If the site ever moves to a custom domain, change `site` in `astro.config.mjs` and the sitemap line in `public/robots.txt`.
 
-Before a release, run `npm run check-links` on your own machine. It tries every resource URL and lists the ones to look at.
+Before a release, run `npm run check-links` on your own machine. It tries every resource URL and lists the ones to look at. `npm run check-sections` does the same for chapter and lecture references that nobody has checked yet, and says which ones need a person.
 
 ## Adding to the graph
 
@@ -83,6 +86,8 @@ Concepts, tools and projects live in `content/concepts/`, one file per area:
       verified: true                  # only once you've opened it and checked
 ```
 
+Tools for the tools page are listed by shelf in `content/tool-groups.yaml`. Any concept can go on a shelf.
+
 Roles live in `content/roles.yaml`:
 
 ```yaml
@@ -101,7 +106,8 @@ Run `npm run validate` afterwards.
 Every resource in `content/resources.yaml` has a `medium`: `read`, `watch` or `practice`. Each stop shows the first free one of each medium as its pick.
 
 The most useful contributions right now:
-- Checking chapter and lecture references. About a quarter are checked so far; `npm run validate` says how many are left.
+- Checking chapter and lecture references. About a third are checked so far; `npm run validate` says how many are left, and `npm run check-sections` says where to start.
+- Suggesting a tool that's missing from the tools page.
 - Suggesting a video or practice pick where one is missing.
 - Collecting job postings for a role.
 
@@ -114,7 +120,7 @@ src/lib/graph.ts      the path engine
 src/lib/layout.ts     layered graph layout for the map
 src/lib/search.ts     search scoring
 src/components/       role planner, stop panel and map (React), search box (plain TypeScript)
-src/pages/            home, roles, concept pages
+src/pages/            home, roles, tools, concept pages
 docs/                 design notes, how roles get checked, what this teaches, changelog
 ```
 
@@ -126,3 +132,7 @@ docs/                 design notes, how roles get checked, what this teaches, ch
 - [Changelog](docs/CHANGELOG.md): what changed each week
 
 Built with TypeScript, Astro, React, zod, Vitest and fast-check, and hosted on Cloudflare Pages.
+
+## Licence
+
+The code is under the [MIT licence](LICENSE). The content in `content/` (the graph, roles, picks and notes) is under [CC BY-SA 4.0](content/LICENSE): reuse it, with credit, under the same terms. The books, courses and videos it points to belong to their authors.

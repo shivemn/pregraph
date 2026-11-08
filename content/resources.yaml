@@ -1238,3 +1238,184 @@
   url: https://www.youtube.com/watch?v=30LWjhZzg50
   free: true
   medium: watch
+
+- id: go-tour
+  title: A Tour of Go
+  author: The Go team
+  type: site
+  url: https://go.dev/tour/
+  free: true
+  medium: read
+  note: Short lessons with a code box on every page, so you run each example as you read.
+
+- id: nana-go
+  title: Golang Tutorial for Beginners
+  author: TechWorld with Nana
+  type: video
+  url: https://www.youtube.com/watch?v=yyUHQIec83I
+  free: true
+  medium: watch
+  note: About three and a half hours, building a small booking app as it goes.
+
+- id: learncpp
+  title: Learn C++
+  author: Alex and contributors
+  type: site
+  url: https://www.learncpp.com/
+  free: true
+  medium: read
+  short: "learncpp"
+
+- id: brocode-cpp
+  title: C++ Full Course
+  author: Bro Code
+  type: video
+  url: https://www.youtube.com/watch?v=-TkoO8Z07hI
+  free: true
+  medium: watch
+  note: Six hours, beginner-paced.
+
+- id: harry-cpp
+  title: C++ Tutorials In Hindi
+  author: CodeWithHarry
+  type: video
+  url: https://www.youtube.com/playlist?list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL
+  free: true
+  medium: watch
+  note: In Hindi.
+
+- id: rust-book
+  title: The Rust Programming Language
+  author: Steve Klabnik, Carol Nichols and the Rust community
+  type: book
+  url: https://doc.rust-lang.org/book/
+  free: true
+  medium: read
+  short: "the book trpl"
+
+- id: rust-book-videos
+  title: The Rust Lang Book (videos)
+  author: Let's Get Rusty
+  type: video
+  url: https://www.youtube.com/playlist?list=PLai5B987bZ9CoVR-QEIN9foz4QCJ0H2Y8
+  free: true
+  medium: watch
+
+- id: rustlings
+  title: Rustlings
+  author: The Rust community
+  type: site
+  url: https://rustlings.rust-lang.org/
+  free: true
+  medium: practice
+  note: Small broken programs you fix one at a time, on your own machine.
+
+- id: redis-data-types
+  title: Redis data types
+  author: Redis
+  type: site
+  url: https://redis.io/docs/latest/develop/data-types/
+  free: true
+  medium: read
+  note: Each type has an overview with a tutorial and code samples.
+
+- id: wds-redis
+  title: Redis Crash Course
+  author: Web Dev Simplified
+  type: video
+  url: https://www.youtube.com/watch?v=jgpVdJB2sKQ
+  free: true
+  medium: watch
+  note: Half an hour, including caching an API with it.
+
+- id: mongodb-manual
+  title: MongoDB Database Manual
+  author: MongoDB
+  type: site
+  url: https://www.mongodb.com/docs/manual/crud/
+  free: true
+  medium: read
+
+- id: netninja-mongodb
+  title: Complete MongoDB Tutorial
+  author: Net Ninja
+  type: video
+  url: https://www.youtube.com/playlist?list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA
+  free: true
+  medium: watch
+
+- id: tableau-tutorial
+  title: "Tutorial: Get Started with Tableau Desktop"
+  author: Tableau
+  type: site
+  url: https://help.tableau.com/current/guides/get-started-tutorial/en-us/get-started-tutorial-home.htm
+  free: true
+  medium: read
+  note: One to three hours, following a retail sales story.
+
+- id: alex-tableau
+  title: Learn Tableau in Under 2 Hours
+  author: Alex The Analyst
+  type: video
+  url: https://www.youtube.com/watch?v=j8FSP8XuFyk
+  free: true
+  medium: watch
+
+- id: alex-powerbi
+  title: Learn Power BI in Under 3 Hours
+  author: Alex The Analyst
+  type: video
+  url: https://www.youtube.com/watch?v=I0vQ_VLZTWg
+  free: true
+  medium: watch
+
+- id: telusko-spring
+  title: Spring Framework and Spring Boot Tutorial with Project
+  author: Telusko (Navin Reddy)
+  type: video
+  url: https://www.youtube.com/watch?v=-Fe0zk-F4OA
+  free: true
+  medium: watch
+  note: About five and a half hours, ending with a small project.
+
+- id: nodejs-learn
+  title: Learn Node.js
+  author: The Node.js project
+  type: site
+  url: https://nodejs.org/en/learn/getting-started/introduction-to-nodejs
+  free: true
+  medium: read
+
+- id: fcc-node
+  title: Node.js and Express.js – Full Course
+  author: freeCodeCamp.org
+  type: video
+  url: https://www.youtube.com/watch?v=Oe421EPjeBE
+  free: true
+  medium: watch
+
+- id: learnpytorch
+  title: Learn PyTorch for Deep Learning
+  author: Daniel Bourke
+  type: book
+  url: https://www.learnpytorch.io/
+  free: true
+  medium: read
+  short: "learnpytorch zero to mastery"
+
+- id: bourke-pytorch
+  title: Learn PyTorch for deep learning in a day
+  author: Daniel Bourke
+  type: video
+  url: https://www.youtube.com/watch?v=Z_ikDlimN6A
+  free: true
+  medium: watch
+  note: About 25 hours. Covers the first chapters of the book.
+
+- id: learnpytorch-exercises
+  title: Learn PyTorch exercises
+  author: Daniel Bourke
+  type: site
+  url: https://www.learnpytorch.io/
+  free: true
+  medium: practice

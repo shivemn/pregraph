@@ -9,6 +9,8 @@ export interface SearchDoc {
   summary: string;
   /** Titles and authors of the resources that teach it, so "OSTEP" or "Strang" finds something. */
   sources: string;
+  /** On the tools page, so results open the tool's own page. */
+  tool?: boolean;
 }
 
 export interface Hit {

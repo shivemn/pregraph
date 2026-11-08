@@ -1,0 +1,97 @@
+---
+import Base from '../../layouts/Base.astro';
+import Picks from '../../components/Picks.astro';
+import RolePlanner from '../../components/RolePlanner';
+import { content, listOf, plannerNodes } from '../../lib/site';
+import { TIERS } from '../../lib/schema';
+import { stopDetails } from '../../lib/stops';
+import '../../styles/route.css';
+import '../../styles/planner.css';
+import '../../styles/map.css';
+
+export function getStaticPaths() {
+  return content().toolGroups.flatMap((g) => g.tools.map((id) => ({ params: { id } })));
+}
+
+const c = content();
+const tool = c.concepts.find((x) => x.id === Astro.params.id)!;
+const shelf = c.toolGroups.find((g) => g.tools.includes(tool.id))!;
+const byId = new Map(c.concepts.map((x) => [x.id, x]));
+const detail = stopDetails(c).find((d) => d.id === tool.id)!;
+const first = tool.requires.map((id) => byId.get(id)!);
+const inRoles = c.roles.flatMap((r) =>
+  TIERS.filter((t) => r.tiers[t.id].includes(tool.id)).map((t) => ({ role: r, tier: t })),
+);
+---
+
+<Base title={tool.title} description={`${tool.summary} Free books, videos and practice, and what to learn first.`} wide>
+  <article data-area={tool.area}>
+    <header class="tool-head">
+      <p class="crumbs quiet"><a href="/tools">Tools</a> / {shelf.title}</p>
+      <h1><span class="board">{tool.title}</span></h1>
+      <p class="tool-lede">{tool.summary}</p>
+      <p class="quiet">
+        About <span class="num">{tool.hours}</span> hours of study.{' '}
+        {first.length > 0 ? <>It builds on {listOf(first.map((x) => x.title))}.</> : <>You can start it straight away.</>}
+      </p>
+    </header>
+
+    <section class="narrow" aria-labelledby="learn">
+      <h2 id="learn">Where to learn it</h2>
+      <Picks title={tool.title} detail={detail} />
+    </section>
+
+    <section aria-labelledby="route">
+      <h2 id="route">Your route to {tool.title}</h2>
+      <p class="quiet route-lede">
+        {first.length > 0
+          ? 'Pick where you’re starting from. Anything your background already covers is left out, and the rest is put in order.'
+          : 'Nothing has to come first, so the route is just this one stop. Tick it off when you’re done.'}
+      </p>
+      <RolePlanner
+        client:visible
+        goal="tool"
+        role={{ id: `tool:${tool.id}`, title: tool.title, tiers: { hire: [tool.id], firstYear: [], extra: [] } }}
+        concepts={plannerNodes(c)}
+        areas={c.areas}
+        tiers={TIERS}
+        backgrounds={c.backgrounds}
+      />
+    </section>
+
+    {
+      inRoles.length > 0 && (
+        <section class="narrow" aria-labelledby="roles">
+          <h2 id="roles">Which roles ask for it</h2>
+          <ul class="role-uses">
+            {inRoles.map(({ role, tier }) => (
+              <li>
+                <a href={`/roles/${role.id}`}>{role.title}</a>
+                <span class="quiet"> {tier.id === 'hire' ? 'to get hired' : tier.id === 'firstYear' ? 'in the first year' : 'good to have'}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <p class="narrow more-link quiet">
+      What it needs and what it leads to: <a href={`/concepts/${tool.id}`}>{tool.title} on the map</a>.
+    </p>
+  </article>
+</Base>
+
+<style>
+  .tool-head { max-width: 800px; display: grid; gap: 14px; }
+  .tool-head h1 { font-size: clamp(2.2rem, 7vw, 3.8rem); }
+  .crumbs { font-size: 0.95rem; }
+  .crumbs a { color: inherit; }
+  .tool-lede { font-size: 1.25rem; line-height: 1.5; max-width: 56ch; }
+  section { margin-top: 44px; }
+  h2 { margin-bottom: 8px; }
+  .narrow { max-width: 780px; }
+  .route-lede { max-width: 60ch; margin-bottom: 18px; }
+  .role-uses { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; }
+  .role-uses a { font-family: var(--sign); font-stretch: 88%; font-weight: 680; font-size: 1.15rem; }
+  .more-link { margin-top: 40px; }
+</style>

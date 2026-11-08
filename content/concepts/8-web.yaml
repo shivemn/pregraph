@@ -165,3 +165,37 @@
   resources:
     - resource: spring-guides
       locator: "Building REST services with Spring, then Securing a Web Application"
+
+- id: spring-boot
+  title: Spring Boot
+  area: web
+  kind: tool
+  summary: The usual way to build Java backends. Web APIs, data access with JPA, security and tests, with little setup.
+  hours: 30
+  requires: [java, rest-apis]
+  recommends: [sql]
+  resources:
+    - resource: spring-guides
+      locator: "Building an Application with Spring Boot, Building a RESTful Web Service, Accessing Data with JPA, Testing the Web Layer, then Building REST services with Spring"
+      verified: true
+    - resource: telusko-spring
+      locator: "The whole video"
+      verified: true
+
+- id: nodejs
+  title: Node.js and Express
+  area: web
+  kind: tool
+  summary: Running JavaScript on the server, and Express, the small framework most Node APIs start from.
+  hours: 20
+  requires: [javascript, rest-apis]
+  resources:
+    - resource: nodejs-learn
+      locator: "From Introduction to Node.js to Don't Block the Event Loop"
+      verified: true
+    - resource: fcc-node
+      locator: "The whole video"
+      verified: true
+    - resource: fcc-backend
+      locator: "The whole course and its five projects"
+      verified: true

@@ -75,7 +75,7 @@ const areaTitles = Object.fromEntries(content().areas.map((a) => [a.id, a.title]
       const li = document.createElement('li');
       li.dataset.area = doc.area;
       const a = document.createElement('a');
-      a.href = `/concepts/${doc.id}`;
+      a.href = `/${doc.tool ? 'tools' : 'concepts'}/${doc.id}`;
       a.id = `search-hit-${i}`;
       a.setAttribute('role', 'option');
       const t = document.createElement('span');

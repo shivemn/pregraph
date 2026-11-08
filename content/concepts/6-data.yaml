@@ -87,9 +87,9 @@
       locator: "Data Visualization course"
 
 - id: bi-tools
-  title: Dashboards and BI tools
+  title: Power BI
   area: data
-  summary: Building dashboards other people use to make decisions, in tools like Power BI.
+  summary: Building dashboards other people use to make decisions, in Microsoft's BI tool.
   hours: 15
   kind: tool
   requires: [sql]
@@ -97,6 +97,11 @@
   resources:
     - resource: powerbi-learn
       locator: "The data analyst learning paths"
+    - resource: alex-powerbi
+      locator: "The whole video"
+      verified: true
+    - resource: kaggle-datasets
+      locator: "Pick a dataset you care about and build a one-page report"
 
 - id: data-warehousing
   title: Data modelling for analytics
@@ -203,3 +208,53 @@
   resources:
     - resource: kaggle-datasets
       locator: "Pick a dataset with a decision attached to it"
+
+- id: redis
+  title: Redis
+  area: data
+  kind: tool
+  summary: An in-memory data store used for caching, sessions, rate limits, leaderboards and simple queues.
+  hours: 8
+  requires: [programming-basics]
+  recommends: [hash-tables, sql]
+  resources:
+    - resource: redis-data-types
+      locator: "Strings, Hashes, Lists, Sets, Sorted sets and Streams"
+      verified: true
+    - resource: wds-redis
+      locator: "The whole video"
+      verified: true
+
+- id: mongodb
+  title: MongoDB
+  area: data
+  kind: tool
+  summary: A document database. Records are JSON-like documents, schemas are flexible, and it has its own query and aggregation language.
+  hours: 10
+  requires: [programming-basics]
+  recommends: [sql]
+  resources:
+    - resource: mongodb-manual
+      locator: "CRUD Operations, then Data Modeling, Indexes and Aggregation"
+      verified: true
+    - resource: netninja-mongodb
+      locator: "The whole playlist"
+      verified: true
+
+- id: tableau
+  title: Tableau
+  area: data
+  kind: tool
+  summary: Drag-and-drop dashboards. The free Tableau Public app is enough to learn it and to publish a portfolio.
+  hours: 12
+  recommends: [data-visualization, sql]
+  resources:
+    - resource: tableau-tutorial
+      locator: "The whole tutorial"
+      why: "Written for Tableau Desktop, but it works the same in the free Tableau Public app."
+      verified: true
+    - resource: alex-tableau
+      locator: "The whole video"
+      verified: true
+    - resource: kaggle-datasets
+      locator: "Pick a dataset you care about and publish a one-page dashboard on Tableau Public"

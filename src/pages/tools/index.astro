@@ -1,0 +1,97 @@
+---
+import Base from '../../layouts/Base.astro';
+import MediaIcon from '../../components/MediaIcon.astro';
+import { content, listOf } from '../../lib/site';
+import { MEDIA } from '../../lib/schema';
+import { stopDetails } from '../../lib/stops';
+
+const c = content();
+const byId = new Map(c.concepts.map((x) => [x.id, x]));
+const details = new Map(stopDetails(c).map((d) => [d.id, d]));
+const HAVE = { read: 'something to read', watch: 'a video course', practice: 'somewhere to practise' } as const;
+
+const shelves = c.toolGroups.map((g) => ({
+  ...g,
+  items: g.tools.map((id) => {
+    const t = byId.get(id)!;
+    const d = details.get(id)!;
+    return {
+      ...t,
+      first: t.requires.map((r) => byId.get(r)!.title),
+      have: MEDIA.filter((m) => d.picks[m]),
+    };
+  }),
+}));
+const count = shelves.reduce((n, s) => n + s.items.length, 0);
+---
+
+<Base
+  wide
+  title="Tools"
+  description="Languages, databases, frameworks and cloud tools, each with a free book, a video course, somewhere to practise, and what to learn first."
+>
+  <h1><span class="board">Tools</span></h1>
+  <p class="lede quiet">
+    Need one thing for your job, an interview or a project? Pick it from these {count}. Each one points to the
+    free book or guide, video course and practice we'd use, and works out what you need to learn first from what
+    you already know.
+  </p>
+
+  {
+    shelves.map((s) => (
+      <section aria-labelledby={`shelf-${s.id}`}>
+        <h2 id={`shelf-${s.id}`}>{s.title}</h2>
+        <ul class="shelf">
+          {s.items.map((t) => (
+            <li data-area={t.area}>
+              <div class="tool-head">
+                <a class="tool-name" href={`/tools/${t.id}`}>{t.title}</a>
+                <span class="tool-hours num">{t.hours} h</span>
+              </div>
+              <p class="quiet tool-summary">{t.summary}</p>
+              <div class="tool-foot">
+                <span class="kit" aria-label={`Has ${listOf(t.have.map((m) => HAVE[m]))}`}>
+                  {MEDIA.map((m) => (
+                    <span class:list={['kit-icon', { off: !t.have.includes(m) }]}>
+                      <MediaIcon medium={m} />
+                    </span>
+                  ))}
+                </span>
+                <span class="faint">{t.first.length > 0 ? `After ${listOf(t.first)}` : 'No prerequisites'}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  h1 { padding-top: 8px; font-size: clamp(2.2rem, 7vw, 3.6rem); }
+  .lede { font-size: 1.1875rem; max-width: 60ch; margin-top: 14px; }
+  section { margin-top: 44px; }
+
+  .shelf {
+    list-style: none; padding: 0; margin: 12px 0 0;
+    border-top: 3px solid var(--ink);
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); column-gap: 32px;
+  }
+  .shelf li { padding: 14px 0 16px; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; align-content: start; }
+  .tool-head { display: flex; align-items: baseline; gap: 10px; }
+  .tool-name {
+    font-family: var(--sign); font-stretch: 85%; font-size: 1.5rem; font-weight: 650; line-height: 1.05;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+  }
+  .tool-name::before { content: ''; width: 18px; height: 6px; background: var(--line); flex: none; }
+  .tool-name:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+  .tool-hours { margin-left: auto; font-family: var(--sign); font-stretch: 85%; font-weight: 600; font-size: 1.05rem; color: var(--ink-3); white-space: nowrap; }
+  .tool-summary { font-size: 0.97rem; }
+  .tool-foot { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; margin-top: 2px; flex-wrap: wrap; }
+  .kit { display: inline-flex; gap: 4px; }
+  /* The icons come from a child component, so these reach in with :global. */
+  .kit-icon :global(svg) { width: 18px; height: 18px; fill: none; stroke: var(--line); stroke-width: 2; display: block; }
+  .kit-icon :global(svg .fill) { fill: var(--line); stroke: none; }
+  .kit-icon.off :global(svg) { stroke: var(--rule); }
+  .kit-icon.off :global(svg .fill) { fill: var(--rule); }
+</style>

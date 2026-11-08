@@ -1,0 +1,23 @@
+# The tools page. Each group is a shelf; order here is the order on the page.
+# A "tool" is anything people come to learn on its own: a language, a
+# database, a framework. Every concept of kind "tool" has to be on a shelf.
+
+- id: languages
+  title: Languages
+  tools: [programming-basics, java, javascript, typescript, go, cpp, c-and-memory, rust, kotlin]
+
+- id: frameworks
+  title: Frameworks and libraries
+  tools: [spring-boot, nodejs, react, android, pandas, pytorch]
+
+- id: databases
+  title: Databases and streaming
+  tools: [sql, redis, mongodb, messaging]
+
+- id: data
+  title: Spreadsheets, BI and big data
+  tools: [spreadsheets, bi-tools, tableau, spark, orchestration]
+
+- id: devops
+  title: Developer tools, DevOps and cloud
+  tools: [git, shell-tools, linux-admin, docker, kubernetes, ci-cd, infrastructure-as-code, cloud-basics, test-automation]

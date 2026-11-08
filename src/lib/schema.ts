@@ -68,6 +68,16 @@ export const familySchema = z.object({
 });
 
 /**
+ * A shelf on the tools page: languages, databases and so on. A tool is any
+ * concept someone might come to learn on its own, whatever its kind.
+ */
+export const toolGroupSchema = z.object({
+  id,
+  title: z.string().min(1),
+  tools: z.array(id).min(1),
+});
+
+/**
  * A job role (or an exam) and what it takes. Requirements come in tiers so a
  * fresher can see the short list that gets them hired before the long one.
  */
@@ -129,6 +139,7 @@ export type Concept = z.infer<typeof conceptSchema>;
 export type Background = z.infer<typeof backgroundSchema>;
 export type Family = z.infer<typeof familySchema>;
 export type Role = z.infer<typeof roleSchema>;
+export type ToolGroup = z.infer<typeof toolGroupSchema>;
 export type Tier = keyof Role['tiers'];
 
 export const TIERS: Array<{ id: Tier; title: string }> = [
@@ -150,4 +161,5 @@ export interface Content {
   resources: Resource[];
   backgrounds: Background[];
   roles: Role[];
+  toolGroups: ToolGroup[];
 }

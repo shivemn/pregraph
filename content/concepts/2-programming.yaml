@@ -191,3 +191,65 @@
   resources:
     - resource: playwright-docs
       locator: "Use the guides on API testing and CI as you go"
+
+- id: go
+  title: Go
+  area: programming
+  kind: tool
+  summary: A small, fast language built for servers and command-line tools, with concurrency built in.
+  hours: 25
+  requires: [programming-basics]
+  recommends: [concurrency]
+  resources:
+    - resource: go-tour
+      locator: "Every section, from Basics to Concurrency"
+      verified: true
+    - resource: nana-go
+      locator: "The whole video"
+      verified: true
+    - resource: exercism
+      locator: "Go track"
+      verified: true
+
+- id: cpp
+  title: C++
+  area: programming
+  kind: tool
+  summary: C with classes, templates and a large standard library. Used where speed matters, from trading systems to games to competitive programming.
+  hours: 40
+  requires: [programming-basics]
+  recommends: [c-and-memory, oop-design]
+  resources:
+    - resource: learncpp
+      locator: "Chapters 0–17, then 21–25 (operator overloading to virtual functions)"
+      why: "Kept up to date with modern C++, and careful about the mistakes beginners make."
+      verified: true
+    - resource: brocode-cpp
+      locator: "The whole video"
+      verified: true
+    - resource: harry-cpp
+      locator: "The whole playlist"
+      role: alternative
+      verified: true
+    - resource: exercism
+      locator: "C++ track"
+      verified: true
+
+- id: rust
+  title: Rust
+  area: programming
+  kind: tool
+  summary: A systems language that checks memory safety when it compiles, without a garbage collector.
+  hours: 40
+  requires: [programming-basics]
+  recommends: [c-and-memory]
+  resources:
+    - resource: rust-book
+      locator: "Chapters 1–13, then 15–16 (smart pointers and concurrency)"
+      verified: true
+    - resource: rust-book-videos
+      locator: "The whole playlist, one video per chapter of the book"
+      verified: true
+    - resource: rustlings
+      locator: "All the exercises, in order"
+      verified: true

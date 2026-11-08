@@ -10,9 +10,10 @@
     "preview": "astro preview",
     "validate": "tsx scripts/validate.ts",
     "test": "vitest run",
-    "check": "astro check",
+    "check": "tsc --noEmit",
     "evidence": "tsx scripts/role-evidence.ts",
-    "check-links": "tsx scripts/check-links.ts"
+    "check-links": "tsx scripts/check-links.ts",
+    "check-sections": "tsx scripts/check-sections.ts"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.4",

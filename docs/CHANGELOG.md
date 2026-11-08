@@ -1,5 +1,14 @@
 # Changelog
 
+## Tools
+
+- **A tools page** at `/tools`, for people who need one thing rather than a whole job: 33 languages, frameworks, databases, BI and DevOps tools on five shelves, each showing its hours, which picks it has and what comes first. "Tools" is in the header next to "All roles".
+- **A page for each tool** with its three picks and the route to it from your background, worked out by the same planner as the role pages. Progress is shared, so Java ticked on a role page counts on the Spring Boot page.
+- **Nine new tools:** Go, C++, Rust, Redis, MongoDB, Spring Boot, Node.js and Express, Tableau and PyTorch. Every pick was opened and checked first. C++ also has CodeWithHarry's Hindi playlist as an alternative. Dashboards and BI tools is now Power BI, with Alex The Analyst's course, and message queues is now Kafka and message queues. Redis is on the backend engineer's good-to-have list.
+- **`npm run check-sections`** loads each unchecked resource and looks for the names in its chapter or lecture reference, then sorts them into likely fine, worth a look, numbers only, and didn't load. It never marks anything checked on its own.
+- Every pick list now ends with a link for reporting a wrong chapter or a dead link.
+- Licences: MIT for the code, CC BY-SA 4.0 for the content.
+
 ## Checked links and more practice
 
 - **Links.** `npm run check-links` now sorts what it finds into broken links, sites that block scripts (401, 403, 429) and certificate problems, so a 403 from a site that works fine in a browser no longer looks like a dead link. Linux Journey now redirects to a paid site, so the Linux pick is the Linux Upskill Challenge. The AWS Cloud Practitioner link moved, and the NPTEL course authors were corrected after checking each course page.

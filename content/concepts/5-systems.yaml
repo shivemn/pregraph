@@ -165,7 +165,7 @@
       why: "Short, well-drawn explanations of one building block at a time."
 
 - id: messaging
-  title: Message queues and event streams
+  title: Kafka and message queues
   area: systems
   summary: Decoupling services with queues and logs. Delivery guarantees, ordering and consumer groups.
   hours: 10

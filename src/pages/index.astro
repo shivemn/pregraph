@@ -15,6 +15,8 @@ const exampleBg = c.backgrounds.find((b) => b.id === 'maths-grad')!;
 const plan = planPath(c.concepts, targetsUpTo(exampleRole, 'hire'), new Set(exampleBg.knows));
 const preview = plan.steps.slice(0, 6);
 
+const featured = ['go', 'cpp', 'redis', 'bi-tools', 'spring-boot', 'docker', 'pytorch'].map((id) => c.concepts.find((x) => x.id === id)!);
+const toolCount = c.toolGroups.reduce((n, g) => n + g.tools.length, 0);
 const groups = c.families
   .map((f) => ({ family: f, roles: c.roles.filter((r) => r.family === f.id) }))
   .filter((g) => g.roles.length > 0);
@@ -108,6 +110,13 @@ const counts = {
         ))
       }
     </div>
+    <p class="one-tool">
+      Or learn just one tool:{' '}
+      {featured.map((x, i) => (
+        <>{i > 0 && ', '}<a href={`/tools/${x.id}`}>{x.title}</a></>
+      ))}
+      . <a href="/tools">All {toolCount} tools</a>
+    </p>
   </section>
 
   <section class="how" aria-labelledby="how-heading">
@@ -120,7 +129,7 @@ const counts = {
       chains first and keeping you on one line at a time where it can.
     </p>
     <p>
-      So far there are {counts.concepts} concepts, {counts.tools} tools and {counts.projects} projects.
+      So far there are {counts.concepts} concepts, {counts.tools} tools and {counts.projects} projects.{' '}
       {pickCount.read} have a book or written guide picked and {pickCount.watch} have a video course.
       Role lists are drafts until they've been checked against real job postings. The
       {' '}<a href="https://github.com/shivemn/pregraph/blob/main/docs/SYSTEM_DESIGN.md">design notes</a> have the details.
@@ -178,6 +187,7 @@ const counts = {
   .families h3 { font-size: 1.1rem; color: var(--ink-2); padding-bottom: 6px; border-bottom: 3px solid var(--ink); margin-bottom: 10px; }
   .families ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; }
   .families a { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.15rem; }
+  .one-tool { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--rule); max-width: 70ch; }
   .how { max-width: 780px; }
   .how p { margin-top: 14px; max-width: 66ch; }
 

@@ -134,3 +134,22 @@
   resources:
     - resource: hf-cookbook
       locator: "Start from a RAG recipe and make it your own"
+
+- id: pytorch
+  title: PyTorch
+  area: ai
+  kind: tool
+  summary: The library most deep learning is written in. Tensors, automatic gradients, training loops and ready-made models.
+  hours: 30
+  requires: [machine-learning]
+  recommends: [deep-learning]
+  resources:
+    - resource: learnpytorch
+      locator: "Chapters 00–06"
+      verified: true
+    - resource: bourke-pytorch
+      locator: "The whole video, alongside the book"
+      why: "The same author and the same notebooks as the book."
+      verified: true
+    - resource: learnpytorch-exercises
+      locator: "The exercises at the end of chapters 00–06"

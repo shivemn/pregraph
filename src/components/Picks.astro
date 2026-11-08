@@ -1,0 +1,83 @@
+---
+// The three picks for a stop (read, watch, practise), then any other options.
+import { MEDIA } from '../lib/schema';
+import MediaIcon from './MediaIcon.astro';
+import type { StopDetail } from '../lib/stops';
+import '../styles/picks.css';
+
+interface Props {
+  title: string;
+  detail: StopDetail;
+}
+const { title, detail } = Astro.props;
+
+const LABEL = { read: 'Read', watch: 'Watch', practice: 'Practise' } as const;
+const MISSING = {
+  read: 'No book or written guide picked yet.',
+  watch: 'No video course picked yet.',
+  practice: 'No practice set picked yet.',
+} as const;
+const report = `https://github.com/shivemn/pregraph/issues/new?title=${encodeURIComponent(`Problem with a pick for ${title}`)}`;
+const suggest = (m: keyof typeof LABEL) =>
+  `https://github.com/shivemn/pregraph/issues/new?title=${encodeURIComponent(`${LABEL[m]} pick for ${title}`)}`;
+---
+
+<div class="picks">
+  {
+    MEDIA.map((m) => {
+      const src = detail.picks[m];
+      return (
+        <div class:list={['pick', { missing: !src }]}>
+          <div class="pick-label">
+            <MediaIcon medium={m} />
+            {LABEL[m]}
+          </div>
+          {src ? (
+            <div class="pick-body">
+              <a class="pick-title" href={src.url} rel="noopener">{src.title}</a>
+              <p class="faint">{src.author}</p>
+              <p class="pick-use">{src.locator}</p>
+              {src.why && <p class="quiet">{src.why}</p>}
+              {src.note && <p class="faint">{src.note}</p>}
+              {(!src.free || !src.verified) && (
+                <p class="flags">
+                  {!src.free && <span class="flag paid">Paid</span>}
+                  {!src.verified && <span class="flag" title="Nobody has opened it yet to confirm the chapter or lecture numbers.">Section not checked yet</span>}
+                </p>
+              )}
+            </div>
+          ) : (
+            <div class="pick-body">
+              <p class="quiet">{MISSING[m]}</p>
+              <a class="text-button" href={suggest(m)} rel="noopener">Suggest one</a>
+            </div>
+          )}
+        </div>
+      );
+    })
+  }
+</div>
+{
+  detail.others.length > 0 && (
+    <div class="more">
+      <h3>Other options</h3>
+      <ul>
+        {detail.others.map((s) => (
+          <li>
+            <a href={s.url} rel="noopener">{s.title}</a>
+            <span class="faint"> ({LABEL[s.medium].toLowerCase()}{s.role === 'deep-dive' ? ', to go deeper' : ''}{s.free ? '' : ', paid'})</span>
+            <br /><span class="quiet">{s.locator}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+<p class="report faint">Wrong chapter, dead link, or know something better? <a href={report} rel="noopener">Tell us on GitHub</a>.</p>
+
+<style>
+  .report { font-size: 0.9rem; margin-top: 12px; }
+  .more { margin-top: 22px; }
+  .more ul { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 10px; }
+</style>

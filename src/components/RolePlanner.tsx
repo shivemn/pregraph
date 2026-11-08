@@ -22,6 +22,8 @@ interface Props {
   areas: Named[];
   tiers: Array<{ id: TierId; title: string }>;
   backgrounds: Background[];
+  /** A job role (the default), or a single tool picked from the tools page. */
+  goal?: 'role' | 'tool';
 }
 
 interface Me {
@@ -66,7 +68,7 @@ const Tick = () => (
   </svg>
 );
 
-export default function RolePlanner({ role, concepts, areas, tiers, backgrounds }: Props) {
+export default function RolePlanner({ role, concepts, areas, tiers, backgrounds, goal = 'role' }: Props) {
   const roleKey = `pregraph:role:${role.id}`;
   const index = useMemo(() => indexConcepts(concepts), [concepts]);
   const areaTitle = useMemo(() => new Map(areas.map((a) => [a.id, a.title])), [areas]);
@@ -145,6 +147,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
   const why = (s: PlanStep) => {
     const others = s.neededFor.filter((t) => t !== s.id).map(titleOf);
     const own = targetTier.get(s.id);
+    if (own && goal === 'tool') return "It's what you came to learn.";
     if (own) {
       const list = own === 'hire' ? 'hiring list' : own === 'firstYear' ? 'first-year list' : 'good-to-have list';
       return others.length > 0
@@ -207,7 +210,9 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
 
         <p className="summary" aria-live="polite">
           {left === 0 ? (
-            <>You've finished every stop on this route. Try the next tier, or another role.</>
+            <>{goal === 'tool'
+              ? `You've finished every stop on this route, ${role.title} included.`
+              : "You've finished every stop on this route. Try the next tier, or another role."}</>
           ) : (
             <>
               <strong className="num">{left}</strong> {left === 1 ? 'stop' : 'stops'} to go, about{' '}
@@ -272,8 +277,14 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
         </ol>
         {plan.steps.length > 0 && (
           <p className="route-end">
-            That's everything for {tierTitle(tier)}.
-            {tier !== usedTiers[usedTiers.length - 1]!.id && ' Switch "How far" to see what comes after.'}
+            {goal === 'tool' ? (
+              <>That's the whole route to {role.title}.</>
+            ) : (
+              <>
+                That's everything for {tierTitle(tier)}.
+                {tier !== usedTiers[usedTiers.length - 1]!.id && ' Switch "How far" to see what comes after.'}
+              </>
+            )}
           </p>
         )}
         </>
@@ -324,7 +335,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
           <button
             className="text-button start-over"
             onClick={() => {
-              if (confirm('Clear everything you have ticked and skipped? This affects every role.')) {
+              if (confirm('Clear everything you have ticked and skipped? This affects every role and tool.')) {
                 setMe((m) => ({ ...m, known: [], done: [] }));
               }
             }}
@@ -342,7 +353,9 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds 
             const step = plan.steps.find((x) => x.id === panel);
             if (step) return why(step);
             if (known.has(panel)) return "You've marked this as something you already know.";
-            return `It isn't on your route for ${role.title.toLowerCase()} at this tier.`;
+            return goal === 'tool'
+              ? `It isn't on your route to ${role.title}.`
+              : `It isn't on your route for ${role.title.toLowerCase()} at this tier.`;
           })()}
           done={done.has(panel)}
           isTarget={targetTier.has(panel)}

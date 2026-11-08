@@ -19,11 +19,15 @@ try {
   const picks = c.concepts.map((x) => ({ id: x.id, kind: x.kind, p: picksFor(x, resources) }));
   const line = MEDIA.map((m) => `${m} ${picks.filter((x) => x.p[m] !== undefined).length}/${c.concepts.length}`).join(', ');
   console.log(`  picks: ${line}`);
+  console.log(`  tools page: ${c.toolGroups.reduce((n, g) => n + g.tools.length, 0)} tools on ${c.toolGroups.length} shelves`);
   if (process.argv.includes('--gaps')) {
     for (const m of MEDIA) {
       const missing = picks.filter((x) => x.p[m] === undefined && x.kind !== 'project').map((x) => x.id);
       if (missing.length) console.log(`  no ${m} pick: ${missing.join(', ')}`);
     }
+    const shelved = new Set(c.toolGroups.flatMap((g) => g.tools));
+    const unshelved = c.concepts.filter((x) => x.kind === 'tool' && !shelved.has(x.id)).map((x) => x.id);
+    if (unshelved.length) console.log(`  tools not on the tools page: ${unshelved.join(', ')}`);
   }
 } catch (err) {
   if (err instanceof ContentError) {

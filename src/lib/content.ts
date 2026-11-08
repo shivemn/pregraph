@@ -14,6 +14,7 @@ import {
   familySchema,
   resourceSchema,
   roleSchema,
+  toolGroupSchema,
   type Content,
 } from './schema';
 import { findCycle } from './graph';
@@ -56,6 +57,8 @@ export function checkContent(c: Content): string[] {
   dupes('background', c.backgrounds.map((x) => x.id));
   dupes('family', c.families.map((x) => x.id));
   dupes('role', c.roles.map((x) => x.id));
+  dupes('tool group', c.toolGroups.map((x) => x.id));
+  dupes('tool (on the tools page)', c.toolGroups.flatMap((g) => g.tools));
   for (const x of c.concepts) conceptIds.add(x.id);
 
   const areaIds = new Set(c.areas.map((a) => a.id));
@@ -95,6 +98,11 @@ export function checkContent(c: Content): string[] {
       seen.add(t);
     }
   }
+  for (const g of c.toolGroups) {
+    for (const t of g.tools) {
+      if (!conceptIds.has(t)) problems.push(`Tool group "${g.id}" refers to unknown concept "${t}"`);
+    }
+  }
   return problems;
 }
 
@@ -114,6 +122,7 @@ export function loadContent(root = join(process.cwd(), 'content')): Content {
     backgrounds: parseList(backgroundSchema, readYaml(join(root, 'backgrounds.yaml')), 'backgrounds.yaml', problems),
     families: parseList(familySchema, readYaml(join(root, 'families.yaml')), 'families.yaml', problems),
     roles: parseList(roleSchema, readYaml(join(root, 'roles.yaml')), 'roles.yaml', problems),
+    toolGroups: parseList(toolGroupSchema, readYaml(join(root, 'tool-groups.yaml')), 'tool-groups.yaml', problems),
   };
 
   problems.push(...checkContent(content));

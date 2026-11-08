@@ -17,7 +17,7 @@
   tiers:
     hire: [java, oop-design, git, sql, rest-apis, backend-framework, hash-tables, trees-heaps, algorithm-practice, testing-debugging, shell-tools, project-portfolio-api]
     firstYear: [database-internals, concurrency, system-design, docker, ci-cd, web-security, messaging]
-    extra: [distributed-systems, kubernetes, observability]
+    extra: [distributed-systems, kubernetes, observability, redis]
 
 - id: frontend-engineer
   title: Frontend engineer

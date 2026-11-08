@@ -52,6 +52,7 @@ const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
         </a>
         <nav aria-label="Main">
           <a href="/roles" aria-current={path.startsWith('/roles') ? 'page' : undefined}>All roles</a>
+          <a href="/tools" aria-current={path.startsWith('/tools') ? 'page' : undefined}>Tools</a>
         </nav>
         <Search />
       </div>
