@@ -9,6 +9,7 @@
       locator: "All lessons"
     - resource: cs50x
       locator: "Week 7, SQL"
+      verified: true
       role: alternative
     - resource: postgres-tutorial
       locator: "Part I, Tutorial"
@@ -66,6 +67,9 @@
       locator: "Chapters 4–10"
     - resource: kaggle-learn
       locator: "Pandas course"
+    - resource: schafer-pandas
+      locator: "The whole playlist"
+      verified: true
 
 - id: data-visualization
   title: Data visualisation

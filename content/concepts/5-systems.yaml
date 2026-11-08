@@ -6,9 +6,13 @@
   recommends: [discrete-math]
   resources:
     - resource: nand2tetris
-      locator: "Projects 1–3"
+      locator: "Projects 1–3: Boolean logic, Boolean arithmetic, memory"
+      verified: true
     - resource: nand2tetris-coursera
       locator: "Weeks 1–3"
+    - resource: nand2tetris-projects
+      locator: "Projects 1–3"
+      verified: true
 
 - id: computer-architecture
   title: How a computer runs a program
@@ -18,12 +22,16 @@
   requires: [digital-logic, programming-basics]
   resources:
     - resource: nand2tetris
-      locator: "Projects 4–6"
+      locator: "Projects 4–6: machine language, computer architecture, assembler"
+      verified: true
     - resource: nand2tetris-coursera
       locator: "Weeks 4–6"
     - resource: nptel-coa
       locator: "The full course"
       role: alternative
+    - resource: nand2tetris-projects
+      locator: "Projects 4–6"
+      verified: true
 
 - id: os-processes-memory
   title: Processes and virtual memory
@@ -35,8 +43,13 @@
   resources:
     - resource: ostep
       locator: "Part I, Virtualization"
+      verified: true
     - resource: nptel-os
       locator: "Lectures on processes, scheduling and virtual memory"
+    - resource: ostep-homework
+      locator: "The cpu-* and vm-* homeworks"
+      why: "Simulators that ask you to predict what the OS will do, then check."
+      verified: true
 
 - id: concurrency
   title: Concurrency
@@ -47,8 +60,12 @@
   resources:
     - resource: ostep
       locator: "Part II, Concurrency"
+      verified: true
     - resource: nptel-os
       locator: "Lectures on threads, locks and synchronisation"
+    - resource: ostep-homework
+      locator: "The threads-* homeworks"
+      verified: true
 
 - id: file-systems
   title: Storage and file systems
@@ -60,8 +77,12 @@
   resources:
     - resource: ostep
       locator: "Part III, Persistence"
+      verified: true
     - resource: nptel-os
       locator: "Lectures on file systems and crash recovery"
+    - resource: ostep-homework
+      locator: "The file-* homeworks"
+      verified: true
 
 - id: networking
   title: Computer networks
@@ -91,6 +112,7 @@
       locator: "Overview, Messages, Caching and Cookies"
     - resource: cs50-web
       locator: "Lecture 3, Django (it opens with how HTTP works)"
+      verified: true
 
 - id: distributed-systems
   title: Distributed systems
@@ -122,6 +144,8 @@
     - resource: anderson-security
       locator: "The free chapters"
       role: alternative
+    - resource: picoctf
+      locator: "picoGym: Binary Exploitation, then Reverse Engineering"
 
 - id: system-design
   title: System design

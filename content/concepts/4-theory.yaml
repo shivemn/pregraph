@@ -51,6 +51,9 @@
       locator: "Part III, A Bytecode Virtual Machine"
     - resource: nptel-compilers
       locator: "The full course"
+    - resource: nand2tetris-projects
+      locator: "Projects 7–11: the VM translator, then the Jack compiler"
+      verified: true
 
 - id: cryptography
   title: Cryptography
@@ -65,3 +68,7 @@
     - resource: crypto-boneh
       locator: "The whole course"
       why: "The standard introduction, from the co-author of the book."
+    - resource: cryptopals
+      locator: "Sets 1–6"
+      why: "Break real constructions yourself. Little maths needed to start."
+      verified: true

@@ -7,7 +7,11 @@
     - resource: mit-6042
       locator: "Part I: Proofs"
     - resource: mit-6042-2010
-      locator: "The proof and induction lectures at the start"
+      locator: "Lectures 1–3: proofs, induction, strong induction"
+      verified: true
+    - resource: mit-6042-psets
+      locator: "Problem sets 1–2, on proofs and induction"
+      verified: true
 
 - id: discrete-math
   title: Discrete maths
@@ -19,7 +23,11 @@
     - resource: mit-6042
       locator: "Parts II and III: Structures, Counting"
     - resource: mit-6042-2010
-      locator: "Lectures on number theory, graphs, counting and recurrences"
+      locator: "Lectures 4–17: number theory, graphs, relations, sums, recurrences, counting"
+      verified: true
+    - resource: mit-6042-psets
+      locator: "Problem sets 3–9"
+      verified: true
 
 - id: linear-algebra
   title: Linear algebra
@@ -36,6 +44,10 @@
       locator: "The whole series, before or alongside 18.06"
       role: alternative
       why: "Builds the geometric picture in about three hours."
+    - resource: mit-1806sc
+      locator: "The Check Yourself problems at the end of each session"
+      why: "Every session has problems with worked solutions, so you can check yourself."
+      verified: true
 
 - id: probability
   title: Probability
@@ -52,3 +64,7 @@
     - resource: probability-book
       locator: "Chapters 1–7"
       why: "The textbook that goes with Stat 110, free from the authors."
+    - resource: mit-6042-psets
+      locator: "Problem sets 10–12"
+      role: alternative
+      verified: true

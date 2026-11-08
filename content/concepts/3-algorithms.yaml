@@ -6,7 +6,8 @@
   requires: [discrete-math]
   resources:
     - resource: mit-6006
-      locator: "Lecture 1 and Recitation 1"
+      locator: "Lecture 1, Algorithms and computation"
+      verified: true
     - resource: cses-book
       locator: "Chapter 2, Time complexity"
       role: alternative
@@ -21,8 +22,10 @@
   resources:
     - resource: mit-6006
       locator: "Lecture 2, Data structures and dynamic arrays"
+      verified: true
     - resource: ods
       locator: "Chapters 2–3"
+      verified: true
       role: alternative
     - resource: nptel-pdsa
       locator: "Weeks on lists, arrays, stacks and queues"
@@ -38,8 +41,10 @@
   resources:
     - resource: mit-6006
       locator: "Lecture 4, Hashing"
+      verified: true
     - resource: ods
       locator: "Chapter 5"
+      verified: true
       role: alternative
 
 - id: sorting-searching
@@ -51,6 +56,7 @@
   resources:
     - resource: mit-6006
       locator: "Lectures 3 and 5"
+      verified: true
     - resource: algs4
       locator: "Chapter 2"
       role: alternative
@@ -69,8 +75,10 @@
   resources:
     - resource: mit-6006
       locator: "Lectures 6–8"
+      verified: true
     - resource: ods
       locator: "Chapters 6, 9 and 10"
+      verified: true
       role: alternative
     - resource: nptel-dsa
       locator: "Lectures on trees, AVL trees and heaps"
@@ -86,6 +94,7 @@
   resources:
     - resource: mit-6006
       locator: "Lectures 9–14"
+      verified: true
     - resource: algs4
       locator: "Chapter 4"
       role: alternative
@@ -122,6 +131,7 @@
   resources:
     - resource: mit-6006
       locator: "Lectures 15–18"
+      verified: true
     - resource: cses-book
       locator: "Chapter 7, Dynamic programming"
       role: alternative

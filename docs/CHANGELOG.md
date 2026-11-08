@@ -1,5 +1,12 @@
 # Changelog
 
+## Checked links and more practice
+
+- **Links.** `npm run check-links` now sorts what it finds into broken links, sites that block scripts (401, 403, 429) and certificate problems, so a 403 from a site that works fine in a browser no longer looks like a dead link. Linux Journey now redirects to a paid site, so the Linux pick is the Linux Upskill Challenge. The AWS Cloud Practitioner link moved, and the NPTEL course authors were corrected after checking each course page.
+- **Checked sections.** 61 chapter and lecture references were opened and checked against the source, mostly for the stops that the most roles share: Think Python, CS50x, CS50P, CS50W, MIT 6.0001, MIT 6.006, Open Data Structures, Pro Git, Software Engineering at Google, OSTEP, Nand to Tetris, MIT 6.042 and the Missing Semester. Checked sections no longer show "Section not checked yet". The Missing Semester references now use the 2026 lecture names.
+- **Sixteen more stops have somewhere to practise:** Nand to Tetris projects, the OSTEP homework simulators, MIT 6.042 problem sets, 18.06SC's Check Yourself problems, Cryptopals, Killercoda's Kubernetes labs, and freeCodeCamp's Responsive Web Design and Back-End courses.
+- **Four more video picks:** Docker and Kubernetes from TechWorld with Nana, Corey Schafer's pandas playlist, and freeCodeCamp's TypeScript course.
+
 ## Ready to deploy
 
 - Sitemap, `robots.txt`, canonical URLs and social share tags with a preview image (`public/og.png`), so a shared link shows a proper card on LinkedIn or WhatsApp.

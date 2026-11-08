@@ -413,13 +413,14 @@
   short: "Kafka"
 
 # Infrastructure
-- id: linux-journey
-  title: Linux Journey
-  author: Linux Journey
-  type: site
-  url: https://linuxjourney.com/
+- id: linux-upskill
+  title: Linux Upskill Challenge
+  author: Livia Lima and contributors
+  type: course
+  url: https://linuxupskillchallenge.org/
   free: true
   medium: read
+  note: Twenty short daily lessons on a real server you set up yourself.
 
 - id: docker-docs
   title: Get started with Docker
@@ -450,7 +451,7 @@
   title: AWS Cloud Practitioner Essentials
   author: Amazon Web Services
   type: course
-  url: https://aws.amazon.com/training/course-descriptions/cloud-practitioner-essentials/
+  url: https://aws.amazon.com/training/learn-about/cloud-practitioner/
   free: true
   medium: watch
   short: "AWS"
@@ -719,7 +720,7 @@
 
 - id: nptel-toc
   title: Theory of Computation (NPTEL)
-  author: IIT Kanpur
+  author: Raghunath Tewari, IIT Kanpur
   type: course
   url: https://nptel.ac.in/courses/106104148
   free: true
@@ -737,7 +738,7 @@
 
 - id: nptel-coa
   title: Computer Organization and Architecture (NPTEL)
-  author: IIT Madras
+  author: V. Kamakoti, IIT Madras
   type: course
   url: https://nptel.ac.in/courses/106106166
   free: true
@@ -746,7 +747,7 @@
 
 - id: nptel-embedded
   title: Introduction to Embedded System Design (NPTEL)
-  author: NPTEL
+  author: Dhananjay V. Gadre (NSUT), Badri N. Subudhi (IIT Jammu)
   type: course
   url: https://nptel.ac.in/courses/108102169
   free: true
@@ -1130,3 +1131,110 @@
   free: true
   medium: practice
   note: Free labs where you exploit real vulnerabilities in a safe sandbox.
+
+- id: nand2tetris-projects
+  title: Nand to Tetris projects
+  author: Noam Nisan, Shimon Schocken
+  type: course
+  url: https://www.nand2tetris.org/course
+  free: true
+  medium: practice
+  short: "n2t"
+  note: Twelve projects with tests, from logic gates to a compiler, run in the free online tools.
+
+- id: ostep-homework
+  title: OSTEP homeworks
+  author: Remzi and Andrea Arpaci-Dusseau
+  type: site
+  url: https://github.com/remzi-arpacidusseau/ostep-homework
+  free: true
+  medium: practice
+  note: Small simulators for scheduling, paging, threads and file systems. Each asks you to predict the result before you run it.
+
+- id: mit-6042-psets
+  title: 6.042J problem sets (Fall 2010)
+  author: Tom Leighton, Marten van Dijk
+  type: course
+  url: https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/pages/assignments/
+  free: true
+  medium: practice
+
+- id: mit-1806sc
+  title: 18.06SC Linear Algebra, problems and solutions
+  author: Gilbert Strang
+  type: course
+  url: https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/
+  free: true
+  medium: practice
+  note: The self-paced version of 18.06. Each session ends with problems and worked solutions.
+
+- id: killercoda-k8s
+  title: Kubernetes 101 labs
+  author: Killercoda community
+  type: site
+  url: https://killercoda.com/k8s-101
+  free: true
+  medium: practice
+  short: "killercoda"
+  note: A real cluster in the browser. Needs a free account.
+
+- id: cryptopals
+  title: The Cryptopals crypto challenges
+  author: Matasano Security (now part of NCC Group)
+  type: site
+  url: https://cryptopals.com/
+  free: true
+  medium: practice
+
+- id: fcc-rwd
+  title: Responsive Web Design
+  author: freeCodeCamp
+  type: course
+  url: https://www.freecodecamp.org/learn/responsive-web-design-v9/
+  free: true
+  medium: practice
+  short: "freecodecamp fcc"
+
+- id: fcc-backend
+  title: Back-End Development and APIs
+  author: freeCodeCamp
+  type: course
+  url: https://www.freecodecamp.org/learn/back-end-development-and-apis-v9/
+  free: true
+  medium: practice
+  short: "freecodecamp fcc"
+  note: Node and Express, with projects checked by automated tests.
+
+- id: nana-docker
+  title: Docker Tutorial for Beginners
+  author: TechWorld with Nana
+  type: video
+  url: https://www.youtube.com/watch?v=3c-iBn73dDE
+  free: true
+  medium: watch
+  note: About three hours, from what a container is to Compose and volumes.
+
+- id: nana-kubernetes
+  title: Kubernetes Tutorial for Beginners
+  author: TechWorld with Nana
+  type: video
+  url: https://www.youtube.com/watch?v=X48VuDVv0do
+  free: true
+  medium: watch
+  note: About three and a half hours, with a local cluster you set up yourself.
+
+- id: schafer-pandas
+  title: Pandas Tutorials
+  author: Corey Schafer
+  type: video
+  url: https://www.youtube.com/playlist?list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS
+  free: true
+  medium: watch
+
+- id: fcc-typescript
+  title: Learn TypeScript – Full Tutorial
+  author: freeCodeCamp.org
+  type: video
+  url: https://www.youtube.com/watch?v=30LWjhZzg50
+  free: true
+  medium: watch

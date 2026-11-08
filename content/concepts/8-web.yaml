@@ -11,6 +11,10 @@
       role: alternative
     - resource: cs50-web
       locator: "Lecture 0, HTML and CSS"
+      verified: true
+    - resource: fcc-rwd
+      locator: "The whole course, including its certification projects"
+      verified: true
 
 - id: javascript
   title: JavaScript
@@ -26,6 +30,7 @@
       role: alternative
     - resource: cs50-web
       locator: "Lecture 5, JavaScript"
+      verified: true
     - resource: exercism
       locator: "JavaScript track"
 
@@ -40,6 +45,9 @@
       locator: "The Basics through Narrowing, then Object Types"
     - resource: exercism
       locator: "TypeScript track"
+    - resource: fcc-typescript
+      locator: "The whole video"
+      verified: true
 
 - id: react
   title: React
@@ -56,6 +64,7 @@
       role: alternative
     - resource: cs50-web
       locator: "Lecture 6, User interfaces"
+      verified: true
 
 - id: web-accessibility
   title: Accessibility
@@ -89,6 +98,9 @@
     - resource: fullstackopen
       locator: "Part 3"
       role: alternative
+    - resource: fcc-backend
+      locator: "From Introduction to Express to the Timestamp Microservice project"
+      verified: true
 
 - id: backend-framework
   title: A backend framework
@@ -109,6 +121,7 @@
       role: alternative
     - resource: cs50-web
       locator: "Lectures 3–4, Django, SQL, models and migrations"
+      verified: true
 
 - id: web-security
   title: Web security
@@ -122,6 +135,7 @@
       locator: "Each of the ten categories"
     - resource: cs50-web
       locator: "Lecture 8, Scalability and security"
+      verified: true
     - resource: portswigger-academy
       locator: "The apprentice-level labs for each topic"
 

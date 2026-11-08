@@ -24,7 +24,7 @@ You say where you're starting from and which job you want: "I'm a maths graduate
 
 Done so far:
 
-- Sixteen roles plus GATE CS, over one shared graph: 75 concepts, 14 tools, 14 projects and 129 resources.
+- Sixteen roles plus GATE CS, over one shared graph: 75 concepts, 14 tools, 14 projects and 141 resources.
 - For every stop, a pick to read, a pick to watch (YouTube, NPTEL, OCW or Coursera) and, where there's a good one, a pick to practise with.
 - A panel that opens on any stop, in the list or on the map, with those picks and what the stop needs and leads to.
 - Four backgrounds: maths graduate, engineering graduate (not CS), CS or IT graduate, and starting from zero.

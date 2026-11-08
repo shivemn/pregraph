@@ -19,7 +19,7 @@ Pregraph starts from a ticket: *From a maths graduate, To Backend engineer.* Eac
   - Data: data analyst, data scientist, data engineer, ML engineer, AI/LLM engineer.
   - Infrastructure: DevOps/SRE, cloud, application support, security analyst.
 - **Four starting points:** maths graduate, engineering graduate (not CS), CS or IT graduate, starting from zero.
-- **One shared graph** of 75 concepts, 14 tools and 14 projects, linked to 129 resources, almost all of them free.
+- **One shared graph** of 75 concepts, 14 tools and 14 projects, linked to 141 resources, almost all of them free.
 - **Read, watch, practise.** Each stop has one pick of each. Open a stop to see them, along with why it's on your route and what it leads to.
 - **Ticking off progress.** What you finish counts for every role. Each stop can say why it's there, and you can skip what you already know.
 - **A map of the route,** drawn by a layout algorithm written for this project.
@@ -101,7 +101,7 @@ Run `npm run validate` afterwards.
 Every resource in `content/resources.yaml` has a `medium`: `read`, `watch` or `practice`. Each stop shows the first free one of each medium as its pick.
 
 The most useful contributions right now:
-- Checking chapter and lecture references. All of them are still `verified: false`.
+- Checking chapter and lecture references. About a quarter are checked so far; `npm run validate` says how many are left.
 - Suggesting a video or practice pick where one is missing.
 - Collecting job postings for a role.
 
@@ -125,4 +125,4 @@ docs/                 design notes, how roles get checked, what this teaches, ch
 - [What building this teaches](docs/CONCEPTS.md): every technique used, with free places to learn it
 - [Changelog](docs/CHANGELOG.md): what changed each week
 
-Built with TypeScript, Astro, React, zod, Vitest and fast-check. It'll be hosted on Cloudflare Pages.
+Built with TypeScript, Astro, React, zod, Vitest and fast-check, and hosted on Cloudflare Pages.

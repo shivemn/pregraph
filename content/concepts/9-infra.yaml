@@ -5,8 +5,8 @@
   hours: 20
   requires: [shell-tools]
   resources:
-    - resource: linux-journey
-      locator: "Grasshopper and Journeyman sections"
+    - resource: linux-upskill
+      locator: "Days 1–20"
     - resource: lfs101
       locator: "The whole course"
     - resource: overthewire
@@ -22,6 +22,9 @@
   resources:
     - resource: docker-docs
       locator: "The getting-started guide, start to finish"
+    - resource: nana-docker
+      locator: "The whole video"
+      verified: true
 
 - id: kubernetes
   title: Kubernetes
@@ -33,6 +36,12 @@
   resources:
     - resource: k8s-basics
       locator: "All six modules"
+    - resource: killercoda-k8s
+      locator: "Labs 1–22, from Pods to Services"
+      verified: true
+    - resource: nana-kubernetes
+      locator: "The whole video"
+      verified: true
 
 - id: ci-cd
   title: CI and CD
@@ -46,6 +55,7 @@
       locator: "Quickstart, then Building and testing, then Deployment"
     - resource: cs50-web
       locator: "Lecture 7, Testing, CI/CD"
+      verified: true
 
 - id: cloud-basics
   title: Cloud basics
@@ -173,7 +183,8 @@
     - resource: sre-book
       locator: "Chapter 12, Effective troubleshooting"
     - resource: missing-semester
-      locator: "Data Wrangling"
+      locator: "Data Wrangling (in the 2020 lectures)"
+      verified: true
     - resource: overthewire
       locator: "Bandit, levels 0–20"
 

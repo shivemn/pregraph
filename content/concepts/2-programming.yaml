@@ -6,11 +6,14 @@
   resources:
     - resource: think-python
       locator: "Chapters 1–11"
+      verified: true
     - resource: cs50x
       locator: "Weeks 0–3, then Week 6 for Python"
+      verified: true
       role: alternative
     - resource: cs50p
       locator: "Lectures 0–6"
+      verified: true
       why: "Short, clear lectures with problem sets that check your code."
     - resource: exercism
       locator: "Python track"
@@ -25,11 +28,13 @@
   resources:
     - resource: think-python
       locator: "Chapters 5–6"
+      verified: true
     - resource: composing-programs
       locator: "Section 1.7, Recursive functions"
       role: alternative
     - resource: mit-60001
       locator: "Lecture 6, Recursion and dictionaries"
+      verified: true
 
 - id: higher-order-programming
   title: Functions and abstraction
@@ -42,6 +47,7 @@
       locator: "Chapters 1–2"
     - resource: mit-60001
       locator: "Lecture 4, Decomposition, abstraction and functions"
+      verified: true
 
 - id: shell-tools
   title: The shell and command-line tools
@@ -50,7 +56,8 @@
   hours: 8
   resources:
     - resource: missing-semester
-      locator: "The Shell; Shell Tools and Scripting; Editors"
+      locator: "Course Overview + Introduction to the Shell; Command-line Environment; Development Environment and Tools"
+      verified: true
     - resource: tlcl
       locator: "Part 1, Learning the shell"
       why: "Free, patient and complete. Read it with a terminal open."
@@ -66,8 +73,10 @@
   resources:
     - resource: pro-git
       locator: "Chapters 1–3"
+      verified: true
     - resource: missing-semester
-      locator: "Version Control (Git)"
+      locator: "Version Control and Git"
+      verified: true
       role: alternative
     - resource: learn-git-branching
       locator: "Main and Remote sequences"
@@ -81,11 +90,16 @@
   resources:
     - resource: think-python
       locator: "Chapters 14–17"
+      verified: true
     - resource: refactoring-guru
       locator: "Creational, structural and behavioural patterns"
       role: deep-dive
     - resource: mit-60001
       locator: "Lectures 8–9, Object oriented programming"
+      verified: true
+    - resource: exercism
+      locator: "Python track: the Classes concept and its exercise"
+      verified: true
 
 - id: testing-debugging
   title: Testing and debugging
@@ -97,9 +111,15 @@
   resources:
     - resource: missing-semester
       locator: "Debugging and Profiling"
+      verified: true
     - resource: swe-at-google
       locator: "Chapters 11–14 on testing"
+      verified: true
       role: alternative
+    - resource: mit-60001
+      locator: "Lecture 7, Testing, debugging, exceptions and assertions"
+      role: alternative
+      verified: true
 
 - id: c-and-memory
   title: C and memory
@@ -111,6 +131,7 @@
   resources:
     - resource: cs50x
       locator: "Weeks 1–5"
+      verified: true
     - resource: beej-c
       locator: "The chapters on pointers, arrays, strings, structs and memory allocation"
       why: "Friendly and precise. Pairs well with the CS50 lectures."
@@ -126,7 +147,8 @@
   recommends: [oop-design]
   resources:
     - resource: swe-at-google
-      locator: "Part I, then the chapters on style, code review and documentation"
+      locator: "Chapters 1–3, then 8–10 (style guides, code review, documentation)"
+      verified: true
 
 - id: java
   title: Java
