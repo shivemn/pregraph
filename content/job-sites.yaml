@@ -1,0 +1,49 @@
+# Where each job role links out to: verified page names on each site,
+# checked in a browser on 8 November 2026. A missing entry means the site
+# has no page for that role; the role page then leaves it out.
+#
+# ambitionbox: /profile/<name>-salary (salaries in India)
+# wellfound:   /role/l/<name>/india (startup jobs)
+# yc:          /jobs/role/<category>/india, and `kinds` are the posting types
+#              in content/startups/yc-india.json that match this role.
+software-engineer: { ambitionbox: software-engineer, wellfound: software-engineer, yc: software-engineer, kinds: [Full stack, Backend, Frontend] }
+backend-engineer: { ambitionbox: backend-developer, wellfound: backend-engineer, yc: software-engineer, kinds: [Backend] }
+frontend-engineer: { ambitionbox: front-end-developer, wellfound: frontend-engineer, yc: software-engineer, kinds: [Frontend] }
+full-stack-engineer: { ambitionbox: full-stack-developer, wellfound: full-stack-engineer, yc: software-engineer, kinds: [Full stack] }
+android-developer: { ambitionbox: android-developer, wellfound: android-developer, yc: software-engineer }
+ios-developer: { ambitionbox: ios-developer, wellfound: ios-developer, yc: software-engineer }
+qa-engineer: { ambitionbox: qa-engineer, wellfound: qa-engineer, yc: software-engineer, kinds: [QA engineer] }
+salesforce-developer: { ambitionbox: salesforce-developer, wellfound: salesforce-developer }
+servicenow-developer: { ambitionbox: servicenow-developer, wellfound: servicenow-developer }
+embedded-engineer: { ambitionbox: embedded-software-engineer, yc: software-engineer, kinds: [Embedded systems, Robotics] }
+data-analyst: { ambitionbox: data-analyst, wellfound: data-analyst, yc: software-engineer, kinds: [Data science] }
+data-engineer: { ambitionbox: data-engineer, wellfound: data-engineer, yc: software-engineer, kinds: [Data science] }
+data-scientist: { ambitionbox: data-scientist, wellfound: data-scientist, yc: software-engineer, kinds: [Data science] }
+ml-engineer: { ambitionbox: machine-learning-engineer, wellfound: machine-learning-engineer, yc: software-engineer, kinds: [Machine learning] }
+deep-learning-engineer: { ambitionbox: deep-learning-engineer, wellfound: machine-learning-engineer, yc: software-engineer, kinds: [Machine learning] }
+mlops-engineer: { ambitionbox: mlops-engineer, wellfound: machine-learning-engineer, yc: software-engineer, kinds: [Machine learning, Devops] }
+ai-engineer: { ambitionbox: ai-engineer, wellfound: ai-engineer, yc: software-engineer, kinds: [Machine learning] }
+bi-developer: { ambitionbox: bi-developer, wellfound: data-analyst, kinds: [Data science] }
+analytics-engineer: { ambitionbox: analytics-engineer, wellfound: analytics-engineer, kinds: [Data science] }
+product-analyst: { ambitionbox: product-analyst, wellfound: product-analyst, yc: product-manager, kinds: [Product, Data science] }
+devops-engineer: { ambitionbox: devops-engineer, wellfound: devops-engineer, yc: software-engineer, kinds: [Devops] }
+platform-engineer: { ambitionbox: platform-engineer, wellfound: site-reliability-engineer, yc: software-engineer, kinds: [Devops] }
+cloud-engineer: { ambitionbox: cloud-engineer, wellfound: cloud-engineer, yc: software-engineer, kinds: [Devops] }
+system-administrator: { ambitionbox: system-administrator, wellfound: system-administrator }
+database-administrator: { ambitionbox: database-administrator, wellfound: database-administrator }
+penetration-tester: { ambitionbox: penetration-tester }
+security-engineer: { ambitionbox: security-engineer, wellfound: security-engineer, yc: software-engineer }
+security-analyst: { ambitionbox: security-analyst }
+solutions-architect: { ambitionbox: solution-architect, wellfound: solutions-architect }
+support-engineer: { ambitionbox: application-support-engineer, yc: support }
+quant-researcher: { ambitionbox: quantitative-researcher }
+quant-developer: { ambitionbox: quantitative-developer }
+risk-analyst: { ambitionbox: risk-analyst, wellfound: risk-analyst, yc: operations, kinds: [Finance] }
+financial-analyst: { ambitionbox: financial-analyst, wellfound: financial-analyst, yc: operations, kinds: [Finance] }
+economist: { ambitionbox: economist }
+statistician: { ambitionbox: statistician }
+product-manager: { ambitionbox: product-manager, wellfound: product-manager, yc: product-manager, kinds: [Product] }
+ui-ux-designer: { ambitionbox: ux-designer, wellfound: ui-ux-designer, yc: designer, kinds: [Product design, UI / UX] }
+business-analyst: { ambitionbox: business-analyst, wellfound: business-analyst, yc: operations }
+technical-writer: { ambitionbox: technical-writer }
+scrum-master: { ambitionbox: scrum-master, wellfound: scrum-master }

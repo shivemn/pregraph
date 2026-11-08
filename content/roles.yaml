@@ -264,6 +264,7 @@
     extra: [system-design, flutter]
 
 - id: salesforce-developer
+  search: salesforce developer
   title: Salesforce administrator / developer
   family: software
   summary: Configures and extends Salesforce for a company. Objects, security, automation and reports, then code and integrations as the job grows.
@@ -381,6 +382,7 @@
     extra: [system-design, programming-basics]
 
 - id: ui-ux-designer
+  search: ui ux designer
   title: UI / UX designer
   family: product
   summary: Researches what users need and designs screens that meet it, from wireframes to polished prototypes.
@@ -459,6 +461,7 @@
 
 
 - id: ai-engineer
+  search: ai engineer
   title: AI / LLM engineer
   family: data
   summary: Builds products on top of large language models. Mostly software engineering, plus retrieval, prompting and careful evaluation.

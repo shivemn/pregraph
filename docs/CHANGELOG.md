@@ -1,5 +1,12 @@
 # Changelog
 
+## Startups, more job sites and a wider page
+
+- **A Startups page** at `/startups`: the 41 YC-funded startups based in India with engineering, product, design or finance openings on 8 November 2026. Each links to its live jobs page on YC, with its batch, city, the kinds of job open and how many take new graduates. You can filter to companies hiring new graduates, or by kind of job. Above the list: the skills the postings named most (linked to Terminus routes), the experience they asked for, and a table by kind of job. It says plainly that only 23 of 132 openings took new graduates or interns.
+- **More places to look on every job role:** Glassdoor, Internshala jobs and internships, Wellfound and YC startup jobs where they have a page for the role, and AmbitionBox for salaries, beside Naukri, LinkedIn and Indeed. Every address was checked in a browser. Roles that match YC postings also say how many there were, how many took new graduates, and the skills named most.
+- Fixed two broken searches: "UI / UX designer" searched for "UI" and "AI / LLM engineer" for "AI".
+- **The page is wider:** up to 1440 px instead of 1160, while paragraphs keep a readable width. All roles shows three boxes to a row on a big screen, and the bottom of the home page uses two columns.
+
 ## A home page that explains itself
 
 - **The home page opens with what Terminus is,** not a pre-filled ticket. A short introduction, the three parts of a ticket (from, to, the ride), and a button to plan your route.

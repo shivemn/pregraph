@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import RolePlanner from '../../components/RolePlanner';
 import { content, jobStarts, plannerNodes } from '../../lib/site';
+import { jobLinks, searchTerm, startupMatch } from '../../lib/jobs';
 import { BACKGROUND_GROUPS, TIERS } from '../../lib/schema';
 import '../../styles/route.css';
 import '../../styles/planner.css';
@@ -17,16 +18,10 @@ const role = c.roles.find((r) => r.id === Astro.params.id)!;
 const family = c.families.find((f) => f.id === role.family)!;
 const counts = TIERS.map((t) => ({ ...t, n: role.tiers[t.id].length })).filter((t) => t.n > 0);
 
-// Live job-board searches. The title before any "/" or "(" is usually what
-// employers call the job; a role can name a better term with `search`.
-const term = (role.search ?? role.title.split(/[/(]/)[0]!).trim();
-const q = encodeURIComponent(term);
-const slug = term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const boards = [
-  { name: 'Naukri', note: 'freshers, India', url: `https://www.naukri.com/${slug}-jobs?experience=0` },
-  { name: 'LinkedIn', note: 'India', url: `https://www.linkedin.com/jobs/search/?keywords=${q}&location=India` },
-  { name: 'Indeed', note: 'India', url: `https://in.indeed.com/jobs?q=${q}` },
-];
+const term = searchTerm(role);
+const links = jobLinks(role, c.jobSites[role.id]);
+const yc = startupMatch(c.jobSites[role.id], c.startups);
+const dateOf = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 const posting = role.posting;
 const isJob = role.kind !== 'exam';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -108,12 +103,28 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
         )}
         <div class="openings">
           <h3>See real openings now</h3>
-          <p class="boards">
-            {boards.map((b) => (
-              <a class="board-link" href={b.url} rel="noopener" target="_blank">{b.name} <span class="quiet">({b.note})</span></a>
+          <div class="site-groups">
+            {links.map((g) => (
+              <div class="site-group">
+                <h4>{g.title}</h4>
+                <p class="boards">
+                  {g.links.map((b) => (
+                    <a class="board-link" href={b.url} rel="noopener" target="_blank">{b.name}{b.note && <span class="quiet"> ({b.note})</span>}</a>
+                  ))}
+                </p>
+              </div>
             ))}
-          </p>
-          <p class="quiet small">Searches for “{term}”. Read a few listings end to end: the skills repeat quickly.</p>
+          </div>
+          {yc && (
+            <p class="yc-note">
+              On {dateOf(yc.collected)}, YC startups based in India had {yc.n} {yc.n === 1 ? 'opening' : 'openings'} like this
+              ({yc.kinds.join(', ').toLowerCase()}) across {yc.companies} {yc.companies === 1 ? 'company' : 'companies'};{' '}
+              {yc.newGrad === 0 ? 'none were' : `${yc.newGrad} ${yc.newGrad === 1 ? 'was' : 'were'}`} open to new graduates or interns.
+              {yc.top.length > 0 && ` The skills they named most: ${yc.top.join(', ')}.`}{' '}
+              <a href="/startups">See the startups</a>
+            </p>
+          )}
+          <p class="quiet small">Searches for “{term.replace(/\s+fresher$/i, '')}”. Read a few listings end to end: the skills repeat quickly.</p>
           {role.reference && (
             <p class="small">Official description: <a href={role.reference.url} rel="noopener">{role.reference.title}</a></p>
           )}
@@ -145,12 +156,13 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
   .static-list { margin-top: 24px; }
   .jump { font-weight: 600; }
 
-  .job { margin-top: 56px; padding-top: 28px; border-top: 4px solid var(--ink); max-width: 1000px; }
+  .job { margin-top: 56px; padding-top: 28px; border-top: 4px solid var(--ink); }
   .job h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
   .job h3 { font-size: 1.25rem; margin: 22px 0 8px; }
   .job-source { max-width: 70ch; margin-top: 8px; }
   .small { font-size: 0.92rem; }
-  .job-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 48px; }
+  .job-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 64px; }
+  .job-grid p, .job-doing { max-width: 64ch; }
   @media (max-width: 760px) { .job-grid { grid-template-columns: 1fr; } }
   .job-doing { padding-left: 1.2em; display: grid; gap: 6px; }
   .asks { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 10px; }
@@ -160,7 +172,10 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
   .ask-n { font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 0.92rem; white-space: nowrap; }
   .openings { margin-top: 28px; padding: 16px 18px; background: var(--platform); border-left: 5px solid var(--yellow); }
   .openings h3 { margin-top: 0; }
-  .boards { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0; }
+  .site-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px 28px; margin: 10px 0 14px; }
+  .site-group h4 { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; color: var(--ink-2); margin: 0; }
+  .boards { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 0; }
+  .yc-note { max-width: 80ch; margin: 4px 0 10px; }
   .board-link { display: inline-block; padding: 6px 12px; border: 2px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 600; background: var(--paper); }
   .board-link:hover, .board-link:focus-visible { background: var(--yellow); color: #000; }
 </style>

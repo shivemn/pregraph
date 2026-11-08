@@ -197,6 +197,46 @@ export function targetsUpTo(role: Role, tier: Tier): string[] {
   return order.slice(0, order.indexOf(tier) + 1).flatMap((t) => role.tiers[t]);
 }
 
+/** Where a job role links out to on job sites. See content/job-sites.yaml. */
+export const jobSitesSchema = z.object({
+  ambitionbox: z.string().regex(/^[a-z0-9-]+$/).optional(),
+  wellfound: z.string().regex(/^[a-z0-9-]+$/).optional(),
+  yc: z.enum(['software-engineer', 'product-manager', 'designer', 'operations', 'support', 'science', 'marketing', 'sales-manager', 'recruiting-hr']).optional(),
+  kinds: z.array(z.string()).default([]),
+});
+export type JobSites = z.infer<typeof jobSitesSchema>;
+
+const pairs = z.array(z.tuple([z.string(), z.number().int().nonnegative()]));
+/** A dated summary of YC startups in India that are hiring. See content/startups/. */
+export const startupsSchema = z.object({
+  source: z.string(),
+  url: z.string().url(),
+  collected: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  companiesHiring: z.number().int(),
+  postings: z.number().int(),
+  counted: z.number().int(),
+  countedNote: z.string(),
+  withSkills: z.number().int(),
+  experience: pairs,
+  skills: pairs,
+  kinds: z.record(z.string(), z.object({ n: z.number().int(), newGrad: z.number().int(), top: pairs })),
+  companies: z.array(
+    z.object({
+      slug: z.string().regex(/^[a-z0-9-]+$/),
+      name: z.string(),
+      batch: z.string(),
+      one: z.string(),
+      city: z.string(),
+      size: z.number().int(),
+      open: z.number().int(),
+      newGrad: z.number().int(),
+      kinds: z.array(z.string()),
+    }),
+  ),
+  notHiringTech: z.array(z.string()),
+});
+export type Startups = z.infer<typeof startupsSchema>;
+
 export interface Content {
   areas: Area[];
   families: Family[];
@@ -206,4 +246,6 @@ export interface Content {
   roles: Role[];
   toolGroups: ToolGroup[];
   practiceGroups: PracticeGroup[];
+  jobSites: Record<string, JobSites>;
+  startups: Startups;
 }

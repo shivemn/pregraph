@@ -147,19 +147,21 @@ const counts = {
 
   <section class="how" aria-labelledby="how-heading">
     <h2 id="how-heading">How the route is worked out</h2>
-    <p>
+    <div class="how-cols">
+      <p>
       Every role lists what it needs in three tiers: what gets you hired, what the first year expects, and what's
       good to have. Every topic lists what you need to know before it. Terminus walks back from the role through
       those prerequisites and stops wherever your background already covers the ground, so a CS graduate aiming
       for backend work never sees an intro programming course. What's left goes in order, starting the longest
       chains first and keeping you on one line at a time where it can.
     </p>
-    <p>
+      <p>
       So far there are {counts.concepts} concepts, {counts.tools} tools and {counts.projects} projects.{' '}
       {pickCount.read} have a book or written guide picked and {pickCount.watch} have a video course.
       Role lists are drafts until they've been checked against real job postings. The
       {' '}<a href="https://github.com/shivemn/terminus/blob/main/docs/SYSTEM_DESIGN.md">design notes</a> have the details.
     </p>
+    </div>
   </section>
 </Base>
 
@@ -307,8 +309,7 @@ const counts = {
   .how { margin-top: 80px; }
   .exams-line { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule); }
   .roles-lede { max-width: 66ch; color: var(--ink-2); margin-top: 10px; }
-  /* The map is wider than the page column: it breaks out to use the screen, up to 1500px. */
-  .map-wide { position: relative; left: 50%; width: min(1500px, calc(100vw - 48px)); transform: translateX(-50%); }
+  .map-wide { display: block; }
   .roles .families { display: none; }
   @media (max-width: 860px) {
     .map-wide { display: none; }
@@ -319,9 +320,10 @@ const counts = {
   .families ul { border-left: 6px solid var(--family, var(--ink)); padding-left: 14px !important; }
   .families ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; }
   .families a { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.15rem; }
-  .one-tool { margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--rule); max-width: 70ch; }
-  .how { max-width: 780px; }
-  .how p { margin-top: 14px; max-width: 66ch; }
+  .one-tool { margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--rule); max-width: 70ch; }
+  .how-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 64px; margin-top: 14px; }
+  .how-cols p { max-width: 70ch; }
+  @media (max-width: 860px) { .how-cols { grid-template-columns: 1fr; } }
 
   @media (max-width: 960px) {
     .intro, .plan { grid-template-columns: 1fr; gap: 40px; }

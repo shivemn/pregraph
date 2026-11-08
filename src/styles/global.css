@@ -67,6 +67,9 @@
   --l-software: #1c64c8; --l-data: #e8590c; --l-infra: #8a5a2b; --l-finance: #00796b; --l-product: #b5179e;
   --l-text: #fff;
 
+  /* Wide enough for grids and maps on a big screen; paragraphs keep their own measure. */
+  --page-w: 1440px;
+
   --sign: 'Terminus Sign', 'Arial Narrow', sans-serif;
   --text: 'Mukta', system-ui, sans-serif;
   color-scheme: light;
@@ -189,7 +192,7 @@ select { color-scheme: inherit; }
 /* Masthead */
 .masthead { border-bottom: 3px solid var(--ink); }
 .masthead-inner {
-  max-width: 1160px; margin: 0 auto; padding: 14px 20px;
+  max-width: var(--page-w); margin: 0 auto; padding: 14px 24px;
   display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
 }
 .wordmark {
@@ -206,11 +209,11 @@ select { color-scheme: inherit; }
 .masthead nav a[aria-current='page'] { box-shadow: inset 0 -3px var(--yellow); }
 
 /* Page */
-.page { max-width: 1160px; margin: 0 auto; padding: 32px 20px 96px; }
+.page { max-width: var(--page-w); margin: 0 auto; padding: 32px 24px 96px; }
 .page:not(.wide) > * { max-width: 780px; }
 
 .colophon { background: var(--platform); margin-top: 40px; }
-.colophon p { max-width: 1160px; margin: 0 auto; padding: 26px 20px 40px; color: var(--ink-2); font-size: 0.95rem; }
+.colophon p { max-width: var(--page-w); margin: 0 auto; padding: 26px 24px 40px; color: var(--ink-2); font-size: 0.95rem; }
 
 /* Small shared pieces */
 .area-chip {

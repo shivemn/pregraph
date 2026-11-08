@@ -16,6 +16,8 @@ import {
   roleSchema,
   toolGroupSchema,
   practiceGroupSchema,
+  jobSitesSchema,
+  startupsSchema,
   type Content,
 } from './schema';
 import { findCycle } from './graph';
@@ -37,6 +39,13 @@ function parseList<T>(schema: z.ZodType<T>, data: unknown, file: string, problem
     problems.push(`${file}: ${issue.path.join('.') || '(root)'}: ${issue.message}`);
   }
   return [];
+}
+
+function parseOne<T>(schema: z.ZodType<T>, data: unknown, file: string, problems: string[]): T | undefined {
+  const result = schema.safeParse(data);
+  if (result.success) return result.data;
+  for (const issue of result.error.issues) problems.push(`${file}: ${issue.path.join('.') || '(root)'}: ${issue.message}`);
+  return undefined;
 }
 
 /** Checks everything a schema can't. Returns a list of problems (empty = valid). */
@@ -113,6 +122,12 @@ export function checkContent(c: Content): string[] {
       else if (res.medium !== 'practice') problems.push(`Practice group "${g.id}" lists "${r}", which isn't a practice resource`);
     }
   }
+  const roleIds = new Set(c.roles.map((r) => r.id));
+  const kinds = new Set(Object.keys(c.startups?.kinds ?? {}));
+  for (const [id, s] of Object.entries(c.jobSites)) {
+    if (!roleIds.has(id)) problems.push(`job-sites.yaml names unknown role "${id}"`);
+    for (const k of s.kinds) if (!kinds.has(k)) problems.push(`job-sites.yaml: "${id}" names unknown startup posting kind "${k}"`);
+  }
   return problems;
 }
 
@@ -134,6 +149,8 @@ export function loadContent(root = join(process.cwd(), 'content')): Content {
     roles: parseList(roleSchema, readYaml(join(root, 'roles.yaml')), 'roles.yaml', problems),
     toolGroups: parseList(toolGroupSchema, readYaml(join(root, 'tool-groups.yaml')), 'tool-groups.yaml', problems),
     practiceGroups: parseList(practiceGroupSchema, readYaml(join(root, 'practice-groups.yaml')), 'practice-groups.yaml', problems),
+    jobSites: parseOne(z.record(z.string(), jobSitesSchema), readYaml(join(root, 'job-sites.yaml')), 'job-sites.yaml', problems) ?? {},
+    startups: parseOne(startupsSchema, JSON.parse(readFileSync(join(root, 'startups', 'yc-india.json'), 'utf8')), 'startups/yc-india.json', problems)!,
   };
 
   problems.push(...checkContent(content));
