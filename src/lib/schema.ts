@@ -226,7 +226,7 @@ export const jobSitesSchema = z.object({
 export type JobSites = z.infer<typeof jobSitesSchema>;
 
 const pairs = z.array(z.tuple([z.string(), z.number().int().nonnegative()]));
-/** A dated summary of YC startups in India that are hiring. See content/startups/. */
+/** A dated summary of YC startups in India that were hiring, for the "At startups" note on role pages. */
 export const startupsSchema = z.object({
   source: z.string(),
   url: z.string().url(),

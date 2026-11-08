@@ -28,7 +28,10 @@ const titleOf = (id: string) => c.concepts.find((x) => x.id === id)?.title ?? id
 const added = base ? role.tiers.hire.filter((id) => !base.tiers.hire.includes(id)).map(titleOf) : [];
 const removed = base ? base.tiers.hire.filter((id) => !role.tiers.hire.includes(id)).map(titleOf) : [];
 const siblings = base ? c.roles.filter((r) => r.variantOf === base.id && r.id !== role.id) : c.roles.filter((r) => r.variantOf === role.id);
-const dateOf = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+// Snapshots are dated by month: the numbers are a picture of that month, not of today.
+const monthOf = (d: string) => new Date(d).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+const allStartups = c.startups;
+const startupFreshers = allStartups.experience.filter(([k]) => /new grads|Internship/.test(k)).reduce((n, [, v]) => n + v, 0);
 const posting = role.posting;
 const isJob = role.kind !== 'exam';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -138,13 +141,19 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
             ))}
           </div>
           {yc && (
-            <p class="yc-note">
-              On {dateOf(yc.collected)}, YC startups based in India had {yc.n} {yc.n === 1 ? 'opening' : 'openings'} like this
-              ({yc.kinds.join(', ').toLowerCase()}) across {yc.companies} {yc.companies === 1 ? 'company' : 'companies'};{' '}
-              {yc.newGrad === 0 ? 'none were' : `${yc.newGrad} ${yc.newGrad === 1 ? 'was' : 'were'}`} open to new graduates or interns.
-              {yc.top.length > 0 && ` The skills they named most: ${yc.top.join(', ')}.`}{' '}
-              <a href="/startups">See the startups</a>
-            </p>
+            <div class="yc-note">
+              <h4>At startups</h4>
+              <p>
+                In {monthOf(yc.collected)}, startups funded by Y Combinator and based in India had {yc.n}{' '}
+                {listOf(yc.kinds.map((k) => (/^[A-Z]{2}/.test(k) ? k : k.toLowerCase())))} {yc.n === 1 ? 'opening' : 'openings'} across {yc.companies}{' '}
+                {yc.companies === 1 ? 'company' : 'companies'}, and {yc.newGrad === 0 ? 'none' : yc.newGrad} took new graduates or interns.
+                {yc.top.length > 0 && ` The skills they named most: ${yc.top.join(', ')}.`}
+              </p>
+              <p class="quiet small">
+                Across every kind of job, {startupFreshers} of {allStartups.counted} startup openings took new graduates, so a startup
+                is more often a second job than a first. The startup links above show what's open today.
+              </p>
+            </div>
           )}
           <p class="quiet small">Searches for “{term.replace(/\s+fresher$/i, '')}”. Read a few listings end to end: the skills repeat quickly.</p>
           {role.reference && (
@@ -199,7 +208,10 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
   .site-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px 28px; margin: 10px 0 14px; }
   .site-group h4 { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; color: var(--ink-2); margin: 0; }
   .boards { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 0; }
-  .yc-note { max-width: 80ch; margin: 4px 0 10px; }
+  .yc-note { max-width: 86ch; margin: 6px 0 14px; padding: 12px 14px; border: 2px solid var(--ink); background: var(--paper); }
+  .yc-note h4 { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; color: var(--ink-2); margin: 0 0 4px; }
+  .yc-note p { margin: 0; }
+  .yc-note p + p { margin-top: 6px; }
   .board-link { display: inline-block; padding: 6px 12px; border: 2px solid var(--ink); color: var(--ink); text-decoration: none; font-weight: 600; background: var(--paper); }
   .board-link:hover, .board-link:focus-visible { background: var(--yellow); color: #000; }
 </style>

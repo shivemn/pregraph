@@ -1,6 +1,6 @@
 # YC startups in India, November 2026
 
-The receipts behind `/startups` and the "YC startups" lines on role pages. The data is in `content/startups/yc-india.json`.
+The receipts behind the "At startups" note on role pages. The data is in `content/startups/yc-india.json`.
 
 ## How it was collected
 

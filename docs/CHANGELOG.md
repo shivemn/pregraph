@@ -8,10 +8,10 @@
 - **Every title page** says which route it's on and what it changes, and lists the other titles on the same route.
 - **Salary links for 120 titles,** each checked on AmbitionBox. Where AmbitionBox only has a nearby title (FastAPI developer → Python developer), the link says so.
 
-## Startups, more job sites and a wider page
+## More job sites and a wider page
 
-- **A Startups page** at `/startups`: the 41 YC-funded startups based in India with engineering, product, design or finance openings on 8 November 2026. Each links to its live jobs page on YC, with its batch, city, the kinds of job open and how many take new graduates. You can filter to companies hiring new graduates, or by kind of job. Above the list: the skills the postings named most (linked to Terminus routes), the experience they asked for, and a table by kind of job. It says plainly that only 23 of 132 openings took new graduates or interns.
-- **More places to look on every job role:** Glassdoor, Internshala jobs and internships, Wellfound and YC startup jobs where they have a page for the role, and AmbitionBox for salaries, beside Naukri, LinkedIn and Indeed. Every address was checked in a browser. Roles that match YC postings also say how many there were, how many took new graduates, and the skills named most.
+- **More places to look on every job role:** Glassdoor, Internshala jobs and internships, Wellfound and YC startup jobs where they have a page for the role, and AmbitionBox for salaries, beside Naukri, LinkedIn and Indeed. Every address was checked in a browser.
+- **An "At startups" note** on roles that match startup postings: how many openings YC-funded startups in India had in November 2026, how many took new graduates, and the skills they named most. It says plainly that only 23 of 132 startup openings took new graduates. The counts are in `content/startups/yc-india.json`, the method in `research/postings/yc-india-2026-11.md`.
 - Fixed two broken searches: "UI / UX designer" searched for "UI" and "AI / LLM engineer" for "AI".
 - **The page is wider:** up to 1440 px instead of 1160, while paragraphs keep a readable width. All roles shows three boxes to a row on a big screen, and the bottom of the home page uses two columns.
 
