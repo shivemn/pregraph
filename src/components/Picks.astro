@@ -17,9 +17,9 @@ const MISSING = {
   watch: 'No video course picked yet.',
   practice: 'No practice set picked yet.',
 } as const;
-const report = `https://github.com/shivemn/pregraph/issues/new?title=${encodeURIComponent(`Problem with a pick for ${title}`)}`;
+const report = `https://github.com/shivemn/terminus/issues/new?title=${encodeURIComponent(`Problem with a pick for ${title}`)}`;
 const suggest = (m: keyof typeof LABEL) =>
-  `https://github.com/shivemn/pregraph/issues/new?title=${encodeURIComponent(`${LABEL[m]} pick for ${title}`)}`;
+  `https://github.com/shivemn/terminus/issues/new?title=${encodeURIComponent(`${LABEL[m]} pick for ${title}`)}`;
 ---
 
 <div class="picks">

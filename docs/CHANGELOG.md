@@ -1,5 +1,11 @@
 # Changelog
 
+## Pregraph is now Terminus
+
+- New name: Terminus, after the station every Mumbai local runs towards, and the job at the end of your route. The site now lives at terminus.pages.dev and the repository at github.com/shivemn/terminus.
+- New logo: a T on a yellow station board. On a metro map a terminus is a line meeting a bar, which is the shape of a T. It's the favicon too, and the share image has the new tagline: "Roadmaps are the same for everyone. This one starts from you."
+- Progress saved in the browser carries over: the planner reads the old saved keys if it doesn't find the new ones.
+
 ## Practice, hosting and eighteen more roles
 
 - **A practice page** at `/practice`: 43 free places to practise in eleven groups (coding, SQL and data, ML, web, systems from scratch, DevOps, security, maths and quant puzzles, finance, design, embedded). Each lists the stops it tests, worked out from the graph. "Practice" is in the header.

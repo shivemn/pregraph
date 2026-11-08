@@ -68,7 +68,7 @@ function Pick({ medium, source, stopTitle }: { medium: Medium; source?: Source; 
           <p className="quiet">{MISSING[medium]}</p>
           <a
             className="text-button"
-            href={`https://github.com/shivemn/pregraph/issues/new?title=${encodeURIComponent(`${LABEL[medium]} pick for ${stopTitle}`)}`}
+            href={`https://github.com/shivemn/terminus/issues/new?title=${encodeURIComponent(`${LABEL[medium]} pick for ${stopTitle}`)}`}
             target="_blank"
             rel="noopener"
           >

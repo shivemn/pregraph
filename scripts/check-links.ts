@@ -25,7 +25,7 @@ async function check(url: string): Promise<Result> {
         method,
         redirect: 'follow',
         signal: AbortSignal.timeout(TIMEOUT),
-        headers: { 'User-Agent': 'Mozilla/5.0 (link check for Pregraph)' },
+        headers: { 'User-Agent': 'Mozilla/5.0 (link check for Terminus)' },
       });
       if (res.ok) return { kind: 'ok' };
       last = [401, 403, 429].includes(res.status)

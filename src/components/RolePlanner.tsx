@@ -40,11 +40,13 @@ interface RoleState {
   view?: 'list' | 'map';
 }
 
-const ME_KEY = 'pregraph:me';
+const ME_KEY = 'terminus:me';
 
 function read<T>(key: string, fallback: T): T {
   try {
-    return { ...fallback, ...(JSON.parse(localStorage.getItem(key) ?? 'null') ?? {}) };
+    // Progress saved before the rename lives under the old "pregraph:" keys.
+    const saved = localStorage.getItem(key) ?? localStorage.getItem(key.replace(/^terminus:/, 'pregraph:'));
+    return { ...fallback, ...(JSON.parse(saved ?? 'null') ?? {}) };
   } catch {
     return fallback; // private browsing, blocked storage or a corrupt value
   }
@@ -70,7 +72,7 @@ const Tick = () => (
 );
 
 export default function RolePlanner({ role, concepts, areas, tiers, backgrounds, backgroundGroups, goal = 'role' }: Props) {
-  const roleKey = `pregraph:role:${role.id}`;
+  const roleKey = `terminus:role:${role.id}`;
   const index = useMemo(() => indexConcepts(concepts), [concepts]);
   const areaTitle = useMemo(() => new Map(areas.map((a) => [a.id, a.title])), [areas]);
   const titleOf = (id: string) => index.get(id)?.title ?? id;

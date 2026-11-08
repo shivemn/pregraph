@@ -1,10 +1,12 @@
-# Pregraph
+# Terminus
 
 A study plan that starts from what you already know.
 
+*Roadmaps are the same for everyone. This one starts from you.*
+
 I have a maths degree and had to work out computer science on my own. The material is all free. What I lost time on was everything around it: what a job actually needs, what I could skip, what order to learn the rest in, and how to know I'd really learned something.
 
-Pregraph starts from a ticket: *From a maths graduate, To Backend engineer.* Each role lists what it needs in three tiers: to get hired, in the first year, and good to have. Pregraph keeps everything as a graph of concepts, tools and projects with their prerequisites. It drops what your background covers and puts the rest in order. Every stop comes with three picks: a good book or written guide, a good video course (YouTube, NPTEL, OCW) and, where there's a good one, somewhere to practise.
+Terminus starts from a ticket: *From a maths graduate, To Backend engineer.* Each role lists what it needs in three tiers: to get hired, in the first year, and good to have. Terminus keeps everything as a graph of concepts, tools and projects with their prerequisites. It drops what your background covers and puts the rest in order. Every stop comes with three picks: a good book or written guide, a good video course (YouTube, NPTEL, OCW) and, where there's a good one, somewhere to practise.
 
 ![The home page: a ticket picker, From your background To the role, next to a preview of the route](docs/img/home.png)
 

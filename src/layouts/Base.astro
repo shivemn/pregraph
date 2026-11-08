@@ -13,7 +13,7 @@ interface Props {
 }
 const { title, description = 'A study plan that starts from what you already know.', wide = false } = Astro.props;
 const path = Astro.url.pathname;
-const fullTitle = title === 'Pregraph' ? 'Pregraph: a study plan that starts from what you know' : `${title} | Pregraph`;
+const fullTitle = title === 'Terminus' ? 'Terminus: a study plan that starts from what you know' : `${title} | Terminus`;
 const canonical = Astro.site ? new URL(path, Astro.site).href : undefined;
 const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
 ---
@@ -30,7 +30,7 @@ const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
     <title>{fullTitle}</title>
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Pregraph" />
+    <meta property="og:site_name" content="Terminus" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}
@@ -41,14 +41,13 @@ const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
     <a class="skip" href="#main">Skip to content</a>
     <header class="masthead">
       <div class="masthead-inner">
-        <a href="/" class="wordmark" aria-label="Pregraph home">
-          <svg viewBox="0 0 40 16" width="40" height="16" aria-hidden="true">
-            <path d="M6 8h28" stroke="currentColor" stroke-width="4" />
-            <circle cx="6" cy="8" r="4.5" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" />
-            <circle cx="20" cy="8" r="4.5" fill="var(--paper)" stroke="currentColor" stroke-width="2.5" />
-            <circle cx="34" cy="8" r="5.5" fill="var(--yellow)" stroke="currentColor" stroke-width="2.5" />
+        <a href="/" class="wordmark" aria-label="Terminus home">
+          <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+            <rect x="1.5" y="1.5" width="29" height="29" fill="#ffcc00" stroke="#000" stroke-width="3" />
+            <path d="M7 8.5h18M16 8.5V27" stroke="#000" stroke-width="5" />
+            <circle cx="16" cy="20" r="3.4" fill="#ffcc00" stroke="#000" stroke-width="2.4" />
           </svg>
-          Pregraph
+          Terminus
         </a>
         <nav aria-label="Main">
           <a href="/roles" aria-current={path.startsWith('/roles') ? 'page' : undefined}>All roles</a>
@@ -63,8 +62,8 @@ const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : '/og.png';
     </main>
     <footer class="colophon">
       <p>
-        Pregraph points to free books, lectures and practice. It never copies them.
-        Found a dead link, or know something better? <a href="https://github.com/shivemn/pregraph/issues">Tell us on GitHub</a>.
+        Terminus points to free books, lectures and practice. It never copies them.
+        Found a dead link, or know something better? <a href="https://github.com/shivemn/terminus/issues">Tell us on GitHub</a>.
       </p>
     </footer>
   </body>

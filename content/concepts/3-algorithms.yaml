@@ -99,7 +99,7 @@
 - id: graph-algorithms
   title: Graph algorithms
   area: algorithms
-  summary: Breadth- and depth-first search, topological order and shortest paths. Pregraph itself is built on these.
+  summary: Breadth- and depth-first search, topological order and shortest paths. Terminus itself is built on these.
   hours: 25
   requires: [linear-structures, complexity-analysis]
   recommends: [trees-heaps]

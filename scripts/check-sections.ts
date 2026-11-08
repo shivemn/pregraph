@@ -53,7 +53,7 @@ async function pageText(url: string): Promise<string> {
   const res = await fetch(target, {
     redirect: 'follow',
     signal: AbortSignal.timeout(TIMEOUT),
-    headers: { 'User-Agent': 'Mozilla/5.0 (section check for Pregraph)' },
+    headers: { 'User-Agent': 'Mozilla/5.0 (section check for Terminus)' },
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const body = await res.text();

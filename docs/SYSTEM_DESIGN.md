@@ -1,4 +1,4 @@
-# Pregraph: system design
+# Terminus: system design
 
 Last updated after week 7: more roles, book and video picks for every stop, and the Mumbai local redesign (November 2026). I keep this file in step with the code, so if something here disagrees with `src/`, the code wins and this file has a bug.
 
@@ -14,11 +14,11 @@ Say you have a maths degree and want a job as a backend engineer. The material i
 4. where to learn each piece, down to the chapter or lecture, and
 5. how to tell that you've really learned it.
 
-roadmap.sh has role-based lists and OSSU has a full curriculum, but both give everybody the same path. Pregraph's path starts from your background. Point 5 isn't built yet; it's the next big piece (section 12).
+roadmap.sh has role-based lists and OSSU has a full curriculum, but both give everybody the same path. Terminus's path starts from your background. Point 5 isn't built yet; it's the next big piece (section 12).
 
 ## 2. What it does
 
-You say where you're starting from and which job you want: "I'm a maths graduate and I'm aiming for Backend engineer". Each role lists what it needs in three tiers: to get hired, in the first year, and good to have. Pregraph stores everything as a graph of concepts, tools and projects with prerequisites. It drops what your background covers, orders what's left so every stop comes after the things it depends on, and links each step to a free chapter, course or video. You tick stops off as you go, and the plan updates straight away. Your progress is shared across roles, so SQL you finished while looking at data analysis stays finished when you look at backend.
+You say where you're starting from and which job you want: "I'm a maths graduate and I'm aiming for Backend engineer". Each role lists what it needs in three tiers: to get hired, in the first year, and good to have. Terminus stores everything as a graph of concepts, tools and projects with prerequisites. It drops what your background covers, orders what's left so every stop comes after the things it depends on, and links each step to a free chapter, course or video. You tick stops off as you go, and the plan updates straight away. Your progress is shared across roles, so SQL you finished while looking at data analysis stays finished when you look at backend.
 
 ## 3. Scope
 
@@ -42,7 +42,7 @@ Next:
 - Later: more role families next to tech (business analyst, product manager, digital marketing, finance). Accounts and sync. A dead-link checker.
 
 Not planned:
-- Hosting course material. Pregraph links, it never copies.
+- Hosting course material. Terminus links, it never copies.
 - Paid courses in the main path. Paid books can appear, marked as paid, as optional extras.
 - Regulated professions (medicine, law, chartered accountancy and so on). Those are learned through degrees and licences, not free resources. If they ever appear, it'll be as "here's the official route" with a link.
 - Every job at once. The engine doesn't care about the field, but each role needs real curation. Roles get added in families that share most of their concepts, so each new one is cheap.
@@ -251,9 +251,9 @@ Tokens live in `src/styles/global.css`. Area colours are set once, with `[data-a
 ### Planner state
 
 ```ts
-// pregraph:me, shared by every role
+// terminus:me, shared by every role (read from the old pregraph:me if it's missing)
 { background?: string, known: string[], done: string[] }
-// pregraph:role:<id>, one per role
+// terminus:role:<id>, one per role
 { tier?: 'hire' | 'firstYear' | 'extra', view?: 'list' | 'map' }
 ```
 
@@ -363,7 +363,7 @@ scripts/validate.ts      npm run validate
 - **Curation is the real cost.** Every locator is unverified until someone checks it. Plan: one route done properly before adding more, and later, an AI drafts while a human reviews.
 - **A wrong prerequisite makes a bad plan.** Concepts are kept small, there are tests on the real graph, and the "Why?" panel makes odd orderings easy to spot.
 - **Links rot.** Most links point at stable hosts (university sites, authors' own sites, OCW), and the v1 link checker will flag the rest.
-- **"Why not just ask a chatbot?"** A chatbot gives a different plan every time and can't track your progress. Pregraph's graph is reviewed, stable and checkable. A chatbot could sit on top to explain a concept, but the graph should decide the order and the sources.
+- **"Why not just ask a chatbot?"** A chatbot gives a different plan every time and can't track your progress. Terminus's graph is reviewed, stable and checkable. A chatbot could sit on top to explain a concept, but the graph should decide the order and the sources.
 
 ## 15. Open questions
 
