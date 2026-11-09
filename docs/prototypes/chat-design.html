@@ -1,0 +1,514 @@
+<title>Terminus Chat Design</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600&family=Mukta:wght@400;600;700&display=swap">
+<style>
+/* Layout: Terminus station-board header, a full-width diagram with its steps beside it, then reading column + sticky rail of real-world links. */
+:root {
+  --paper: #ffffff; --platform: #eff1f3; --ink: #000000; --ink-2: #464a4f; --ink-3: #74797f;
+  --rule: #d6d9dc; --yellow: #ffcc00; --on-yellow: #000; --focus: #0057d9;
+  --edge-c: #56606b; --svc: #1f5fd0; --store: #0687a0; --ext: #d4600a;
+  --wire: #b9bec4; --wire-on: #000000;
+  --sign: 'Teko', 'Arial Narrow', sans-serif;
+  --body: 'Mukta', 'Segoe UI', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0f1114; --platform: #191c21; --ink: #f5f5f5; --ink-2: #b7bbc1; --ink-3: #888d94;
+  --rule: #2c3038; --focus: #7fb0ff; --edge-c: #a9b4c0; --svc: #6aa2ff; --store: #3ccbe0; --ext: #ff9d55;
+  --wire: #3a3f47; --wire-on: #f5f5f5; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #0f1114; --platform: #191c21; --ink: #f5f5f5; --ink-2: #b7bbc1; --ink-3: #888d94;
+  --rule: #2c3038; --focus: #7fb0ff; --edge-c: #a9b4c0; --svc: #6aa2ff; --store: #3ccbe0; --ext: #ff9d55;
+  --wire: #3a3f47; --wire-on: #f5f5f5; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+a { color: inherit; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, li[tabindex]:focus-visible, svg a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+@media (max-width: 600px) { .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); } }
+
+.masthead { border-bottom: 3px solid var(--ink); }
+.masthead .wrap { display: flex; align-items: center; gap: 24px; padding-block: 12px; flex-wrap: wrap; }
+.wordmark { font-family: var(--sign); font-weight: 600; font-size: 1.7rem; line-height: 1; text-decoration: none; }
+.masthead nav { display: flex; gap: 6px 20px; flex-wrap: wrap; font-family: var(--sign); font-size: 1.25rem; font-weight: 500; }
+.masthead nav a { text-decoration: none; color: var(--ink-2); }
+.masthead nav a[aria-current] { color: var(--ink); box-shadow: inset 0 -3px var(--yellow); }
+
+.preview-note { background: var(--platform); font-size: 0.95rem; color: var(--ink-2); }
+.preview-note .wrap { padding-block: 8px; }
+
+header.design-head { padding-block: 28px 8px; }
+.crumbs { color: var(--ink-3); font-size: 0.95rem; margin: 0 0 10px; }
+.board { display: inline-block; background: var(--yellow); color: var(--on-yellow); border: 3px solid #000; outline: 2px solid #000; outline-offset: -8px;
+  font-family: var(--sign); font-weight: 600; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1; padding: 16px 20px 10px; margin: 0; text-wrap: balance; }
+.like { font-family: var(--sign); font-size: 1.5rem; font-weight: 500; margin: 14px 0 0; color: var(--ink-2); }
+.like b { color: var(--ink); font-weight: 600; }
+.chip { display: inline-block; font-family: var(--body); font-size: 0.85rem; font-weight: 700; border: 2px solid var(--ink); padding: 0 8px; margin-left: 10px; vertical-align: 3px; color: var(--ink); }
+.gist { max-width: 68ch; font-size: 1.12rem; margin: 12px 0 0; }
+
+h2 { font-family: var(--sign); font-weight: 600; font-size: 2rem; line-height: 1.05; margin: 0 0 6px; text-wrap: balance; }
+h3 { font-family: var(--sign); font-weight: 600; font-size: 1.45rem; line-height: 1.1; margin: 0; }
+.quiet { color: var(--ink-2); }
+
+/* Diagram */
+.diagram-block { border-top: 3px solid var(--ink); margin-top: 24px; padding-top: 18px; }
+.flowbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 4px 0 14px; }
+.flowbar span { font-weight: 600; margin-right: 4px; }
+.flowbar button { font: 600 0.98rem var(--body); background: var(--paper); color: var(--ink); border: 2px solid var(--ink); padding: 4px 12px; cursor: pointer; }
+.flowbar button[aria-pressed="true"] { background: var(--yellow); color: #000; border-color: #000; }
+.diagram-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; align-items: start; }
+@media (max-width: 1150px) { .diagram-grid { grid-template-columns: minmax(0, 1fr); } }
+.canvas { overflow-x: auto; border: 2px solid var(--rule); background: var(--paper); }
+.canvas svg { display: block; width: 100%; min-width: 880px; height: auto; }
+.scroll-hint { display: none; font-size: 0.9rem; color: var(--ink-3); margin: 6px 0 0; }
+@media (max-width: 900px) { .scroll-hint { display: block; } }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.9rem; color: var(--ink-2); margin-top: 8px; }
+.legend i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; }
+
+svg .node rect.box { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
+svg .node .tile { stroke: none; }
+svg .node .ico { fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+svg .node text.name { font: 600 19px var(--sign); fill: var(--ink); }
+svg .node text.sub { font: 400 12px var(--body); fill: var(--ink-2); }
+svg .node { transition: opacity .2s; }
+svg .node.dim { opacity: .28; }
+svg .node.link { cursor: pointer; }
+svg .node.link:hover rect.box { stroke-width: 3; }
+svg .wire { fill: none; stroke: var(--wire); stroke-width: 2; transition: stroke .2s, opacity .2s; }
+svg .wire.on { stroke: var(--wire-on); stroke-width: 2.6; }
+svg .wire.hot { stroke: var(--wire-on); stroke-width: 3.4; stroke-dasharray: 8 6; animation: flow 0.8s linear infinite; }
+svg .wire.off { opacity: .35; }
+@keyframes flow { to { stroke-dashoffset: -14; } }
+@media (prefers-reduced-motion: reduce) { svg .wire.hot { animation: none; stroke-dasharray: none; } }
+svg text.wl { font: 600 12.5px var(--body); fill: var(--ink-2); paint-order: stroke; stroke: var(--paper); stroke-width: 5px; stroke-linejoin: round; }
+svg text.wl.off { opacity: .35; }
+svg .badge circle { fill: var(--yellow); stroke: #000; stroke-width: 2; }
+svg .badge text { font: 600 15px var(--sign); fill: #000; text-anchor: middle; dominant-baseline: central; }
+svg .arrow-off { fill: var(--wire); } svg .arrow-on { fill: var(--wire-on); }
+
+.steps h3 { margin-bottom: 6px; }
+.steps ol { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--ink); counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding: 9px 4px; border-bottom: 1px solid var(--rule); cursor: pointer; font-size: 0.98rem; line-height: 1.45; }
+.steps li::before { content: counter(s); font: 600 1.05rem/1 var(--sign); background: var(--yellow); color: #000; border: 2px solid #000; border-radius: 50%; width: 26px; height: 26px; display: grid; place-items: center; padding-top: 2px; }
+.steps li:hover, .steps li.active { background: var(--platform); }
+.steps .tip { font-size: 0.9rem; color: var(--ink-3); margin: 8px 0 0; }
+
+/* Below the diagram */
+.lower { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; margin-top: 44px; align-items: start; }
+@media (max-width: 1050px) { .lower { grid-template-columns: minmax(0, 1fr); } }
+.main > section { margin-bottom: 40px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px; }
+@media (max-width: 640px) { .cols { grid-template-columns: 1fr; } }
+.ticks { list-style: none; padding: 0; margin: 6px 0 0; }
+.ticks li { padding-left: 20px; position: relative; margin: 4px 0; }
+.ticks li::before { content: ""; position: absolute; left: 2px; top: 0.62em; width: 8px; height: 8px; background: var(--ink); }
+table { border-collapse: collapse; width: 100%; font-size: 0.98rem; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); }
+thead th { border-bottom: 3px solid var(--ink); font-weight: 700; }
+td.num { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+.assume { font-size: 0.95rem; color: var(--ink-2); margin: 2px 0 10px; }
+.real { margin-top: 14px; border: 2px solid var(--ink); padding: 12px 16px; }
+.real h3 { font-size: 1.25rem; margin-bottom: 4px; }
+.real p { margin: 4px 0; font-size: 0.98rem; }
+.decide { list-style: none; padding: 0; margin: 8px 0 0; border-top: 3px solid var(--ink); }
+.decide li { padding: 10px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 170px 1fr; gap: 16px; }
+.decide b { font-family: var(--sign); font-size: 1.3rem; font-weight: 600; line-height: 1.1; }
+@media (max-width: 640px) { .decide li { grid-template-columns: 1fr; gap: 2px; } }
+.breaks li { margin: 6px 0; }
+.breaks em { font-style: normal; font-weight: 700; }
+.stops { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.stops a { text-decoration: none; border: 2px solid var(--ink); padding: 2px 10px; font-weight: 600; font-size: 0.95rem; }
+.stops a:hover { background: var(--yellow); color: #000; border-color: #000; }
+.table-wrap { overflow-x: auto; }
+
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); }
+@media (max-width: 1050px) { .rail { position: static; } }
+.rail > h2 { font-size: 1.8rem; }
+.rail .intro { font-size: 0.95rem; color: var(--ink-2); margin: 0 0 12px; }
+.co { border-top: 3px solid var(--ink); padding: 10px 0 14px; }
+.co h3 { font-size: 1.5rem; }
+.co p { margin: 2px 0 6px; font-size: 0.96rem; }
+.co ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.co li { font-size: 0.95rem; }
+.co li a { font-weight: 600; }
+.co li small { color: var(--ink-3); font-size: 0.85rem; }
+.others { border-top: 3px solid var(--ink); padding-top: 10px; margin-top: 6px; }
+.others h3 { font-size: 1.3rem; }
+footer { border-top: 3px solid var(--ink); margin-top: 32px; }
+footer .wrap { padding-block: 16px 32px; font-size: 0.9rem; color: var(--ink-3); }
+</style>
+
+<div class="masthead"><div class="wrap">
+  <a class="wordmark" href="https://terminus-317.pages.dev/">Terminus</a>
+  <nav aria-label="Main">
+    <a href="https://terminus-317.pages.dev/roles">All roles</a>
+    <a href="https://terminus-317.pages.dev/tools">Tools</a>
+    <a href="https://terminus-317.pages.dev/practice">Practice</a>
+    <a href="https://terminus-317.pages.dev/designs" aria-current="page">Designs</a>
+    <a href="https://terminus-317.pages.dev/certifications">Certifications</a>
+  </nav>
+</div></div>
+<div class="preview-note"><div class="wrap">Sample of the new design page. Only the chat design looks like this so far.</div></div>
+
+<main class="wrap">
+  <header class="design-head">
+    <p class="crumbs"><a href="https://terminus-317.pages.dev/designs">Designs</a> / Core</p>
+    <h1 class="board">Design a chat app</h1>
+    <p class="like">Like <b>WhatsApp</b>, <b>Telegram</b>, <b>Discord</b> and <b>Slack</b><span class="chip">Core</span></p>
+    <p class="gist">Every phone keeps one connection open to a gateway, so the server can push a message the moment it arrives. A message service checks it, gives it an ID that sorts by time, stores it and sends it to whichever gateway holds the recipient. If the recipient is offline, a push notification wakes their phone. The hard parts are never losing a message, never showing it twice, and keeping order.</p>
+  </header>
+
+  <section class="diagram-block" aria-labelledby="arch">
+    <h2 id="arch">How it fits together</h2>
+    <div class="flowbar" role="group" aria-label="Choose a flow">
+      <span>Follow a flow:</span>
+      <button type="button" data-flow="send" aria-pressed="true">Send a message</button>
+      <button type="button" data-flow="offline" aria-pressed="false">Recipient is offline</button>
+      <button type="button" data-flow="photo" aria-pressed="false">Send a photo</button>
+      <button type="button" data-flow="group" aria-pressed="false">Message a group</button>
+    </div>
+    <div class="diagram-grid">
+      <div>
+        <div class="canvas"><svg id="dia" viewBox="0 0 1240 640" role="img" aria-labelledby="dia-t"><title id="dia-t">Architecture of a chat app: phones, load balancer, chat gateways, message service, stores, push notifications and media.</title></svg></div>
+        <p class="scroll-hint">Scroll sideways to see the whole diagram.</p>
+        <div class="legend">
+          <span><i style="background:var(--edge-c)"></i>Phones and the edge</span>
+          <span><i style="background:var(--svc)"></i>Services we run</span>
+          <span><i style="background:var(--store)"></i>Where data lives</span>
+          <span><i style="background:var(--ext)"></i>Outside services</span>
+          <span>Click a box to learn that piece on Terminus.</span>
+        </div>
+      </div>
+      <div class="steps">
+        <h3 id="flow-title">Send a message</h3>
+        <ol id="steps"></ol>
+        <p class="tip">Point at a step to see where it happens.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="lower">
+    <div class="main">
+      <section aria-labelledby="reqs">
+        <h2 id="reqs">What it must do</h2>
+        <div class="cols">
+          <div><h3>Features</h3>
+            <ul class="ticks">
+              <li>One-to-one and group chats</li>
+              <li>Sent, delivered and read ticks</li>
+              <li>Photos and files</li>
+              <li>Online and last seen</li>
+              <li>Messages wait for offline phones</li>
+            </ul></div>
+          <div><h3>Qualities</h3>
+            <ul class="ticks">
+              <li>Delivered in well under a second</li>
+              <li>Never lost, never shown twice</li>
+              <li>In order within a chat</li>
+              <li>Light on battery and mobile data</li>
+              <li>Keeps working when a server dies</li>
+            </ul></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="nums">
+        <h2 id="nums">Rough numbers</h2>
+        <p class="assume">Our assumption for a mid-size app: 100 million people a day, 40 messages each. These are not WhatsApp's figures.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th scope="col">What</th><th scope="col">Size</th><th scope="col">How we got it</th></tr></thead>
+          <tbody>
+            <tr><td>Messages</td><td class="num">46,000 a second</td><td>4 billion a day ÷ 86,400 seconds. Plan for about three times that at peak.</td></tr>
+            <tr><td>Text stored</td><td class="num">800 GB a day</td><td>About 200 bytes per message with its details. Only if you keep history, which WhatsApp does not.</td></tr>
+            <tr><td>Open connections</td><td class="num">30 million</td><td>Say 30% of daily users are online at the busiest moment.</td></tr>
+            <tr><td>Gateway servers</td><td class="num">60 to 300</td><td>100,000 to 500,000 connections each, leaving room for a server to fail.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="real">
+          <h3>At real scale</h3>
+          <p><b>WhatsApp</b> said in 2020 that it delivers roughly 100 billion messages a day, about 25 times our example, but deletes each one from its servers once it is delivered.</p>
+          <p><b>Discord</b> keeps every message forever. By 2023 that was trillions of messages on 72 database nodes.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="dec">
+        <h2 id="dec">Key decisions</h2>
+        <ul class="decide">
+          <li><b>Open connection, not polling</b><span>A WebSocket or long-lived TCP connection lets the server push at once. Asking "anything new?" every few seconds is slow and drains the battery.</span></li>
+          <li><b>Server-made IDs</b><span>Phone clocks are wrong. IDs that sort by time (timestamp, machine, sequence, as in Twitter's Snowflake) give one order everyone agrees on.</span></li>
+          <li><b>Store by chat</b><span>The common read is "latest messages in this chat", so a wide-column store partitioned by chat and time window beats one big SQL table.</span></li>
+          <li><b>Keep or delete</b><span>Deleting after delivery (WhatsApp) or keeping forever (Discord, Slack) is a product choice. It changes storage by orders of magnitude.</span></li>
+          <li><b>End-to-end encryption</b><span>The server can't read messages, so search and backups move to the phone.</span></li>
+          <li><b>Big groups pull</b><span>Push each message to small groups. In huge channels, members fetch recent messages when they open the chat.</span></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="brk">
+        <h2 id="brk">What breaks first</h2>
+        <ul class="ticks breaks">
+          <li><em>A gateway restarts.</em> Hundreds of thousands of phones reconnect at once. Phones wait a random, growing delay before retrying.</li>
+          <li><em>One chat gets huge.</em> Its partition is overloaded. Split by time window and merge identical reads, as Discord does.</li>
+          <li><em>New Year's Eve.</em> Push notifications spike. Collapse several messages into one notification and queue the rest.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="learn">
+        <h2 id="learn">Learn the pieces</h2>
+        <p class="quiet">Each of these is a stop on Terminus routes.</p>
+        <div class="stops">
+          <a href="https://terminus-317.pages.dev/concepts/api-styles">Real-time APIs</a>
+          <a href="https://terminus-317.pages.dev/concepts/scaling-load-balancing">Scaling and load balancing</a>
+          <a href="https://terminus-317.pages.dev/tools/messaging">Kafka and message queues</a>
+          <a href="https://terminus-317.pages.dev/tools/redis">Redis</a>
+          <a href="https://terminus-317.pages.dev/concepts/partitioning-replication">Replication and sharding</a>
+          <a href="https://terminus-317.pages.dev/concepts/caching">Caching</a>
+          <a href="https://terminus-317.pages.dev/concepts/reliability-patterns">Designing for failure</a>
+          <a href="https://terminus-317.pages.dev/concepts/cryptography">Cryptography</a>
+        </div>
+      </section>
+    </div>
+
+    <aside class="rail" aria-labelledby="real-h">
+      <h2 id="real-h">How the real ones built it</h2>
+      <p class="intro">What each company has published about its own system.</p>
+      <div class="co">
+        <h3>WhatsApp</h3>
+        <p>In 2012 a single Erlang server held over 2 million open connections. Messages are end-to-end encrypted and leave the server once delivered. Each linked device has its own keys, so a sender's phone encrypts a copy for every device.</p>
+        <ul>
+          <li><a href="https://blog.whatsapp.com/1-million-is-so-2011" target="_blank" rel="noopener">1 million is so 2011</a> <small>WhatsApp blog, 2012</small></li>
+          <li><a href="https://engineering.fb.com/2021/07/14/security/whatsapp-multi-device/" target="_blank" rel="noopener">How WhatsApp enables multi-device capability</a> <small>Meta Engineering, 2021</small></li>
+        </ul>
+      </div>
+      <div class="co">
+        <h3>Discord</h3>
+        <p>Keeps every message. Moved from MongoDB to Cassandra, then to ScyllaDB. Its real-time gateway runs on Elixir.</p>
+        <ul>
+          <li><a href="https://discord.com/blog/how-discord-stores-billions-of-messages" target="_blank" rel="noopener">How Discord stores billions of messages</a> <small>Discord, 2017</small></li>
+          <li><a href="https://discord.com/blog/how-discord-stores-trillions-of-messages" target="_blank" rel="noopener">How Discord stores trillions of messages</a> <small>Discord, 2023</small></li>
+          <li><a href="https://discord.com/blog/how-discord-scaled-elixir-to-5-000-000-concurrent-users" target="_blank" rel="noopener">How Discord scaled Elixir to 5,000,000 concurrent users</a> <small>Discord, 2017</small></li>
+        </ul>
+      </div>
+      <div class="co">
+        <h3>Slack</h3>
+        <p>Channel servers keep recent channel state in memory and are found by consistent hashing. Gateway servers in each region hold the WebSockets.</p>
+        <ul>
+          <li><a href="https://slack.engineering/real-time-messaging/" target="_blank" rel="noopener">Real-time messaging</a> <small>Slack Engineering, 2023</small></li>
+        </ul>
+      </div>
+      <div class="co">
+        <h3>Messenger</h3>
+        <p>Moved phones from asking for updates to being sent an ordered stream of changes, which cut data use and made sync faster.</p>
+        <ul>
+          <li><a href="https://engineering.fb.com/2014/10/09/production-engineering/building-mobile-first-infrastructure-for-messenger/" target="_blank" rel="noopener">Building mobile-first infrastructure for Messenger</a> <small>Facebook Engineering, 2014</small></li>
+        </ul>
+      </div>
+      <div class="co">
+        <h3>Telegram</h3>
+        <p>Publishes its protocol, MTProto, rather than its server design. Ordinary chats are stored on its servers so every device syncs. Only Secret Chats are end-to-end encrypted.</p>
+        <ul>
+          <li><a href="https://core.telegram.org/mtproto" target="_blank" rel="noopener">MTProto protocol</a> <small>Telegram</small></li>
+          <li><a href="https://telegram.org/faq#secret-chats" target="_blank" rel="noopener">Secret chats FAQ</a> <small>Telegram</small></li>
+        </ul>
+      </div>
+      <div class="others">
+        <h3>Other diagrams worth seeing</h3>
+        <ul class="ticks">
+          <li><a href="https://www.hellointerview.com/learn/system-design/problem-breakdowns/whatsapp" target="_blank" rel="noopener">Design WhatsApp</a> <small class="quiet">Hello Interview</small></li>
+          <li><a href="https://bytebytego.com/guides/what-is-the-journey-of-a-slack-message/" target="_blank" rel="noopener">The journey of a Slack message</a> <small class="quiet">ByteByteGo</small></li>
+          <li><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">The System Design Primer</a> <small class="quiet">open, CC BY 4.0</small></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</main>
+<footer><div class="wrap">Diagram drawn for Terminus. Icons from Tabler Icons (MIT). Simplified for learning; the companies above describe what they actually run.</div></footer>
+
+<script>
+(() => {
+const SITE = 'https://terminus-317.pages.dev';
+const ICON = {
+  phone: '<path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2v-14z"/><path d="M11 4h2"/><path d="M12 17v.01"/>',
+  lb: '<path d="M21 17h-5.397a5 5 0 0 1 -4.096 -2.133l-.514 -.734a5 5 0 0 0 -4.096 -2.133h-3.897"/><path d="M21 7h-5.395a5 5 0 0 0 -4.098 2.135l-.51 .73a5 5 0 0 1 -4.097 2.135h-3.9"/><path d="M18 10l3 -3l-3 -3"/><path d="M18 20l3 -3l-3 -3"/>',
+  plug: '<path d="M7 12l5 5l-1.5 1.5a3.536 3.536 0 1 1 -5 -5l1.5 -1.5z"/><path d="M17 12l-5 -5l1.5 -1.5a3.536 3.536 0 1 1 5 5l-1.5 1.5z"/><path d="M3 21l2.5 -2.5"/><path d="M18.5 5.5l2.5 -2.5"/><path d="M10 11l-2 2"/><path d="M13 14l-2 2"/>',
+  msg: '<path d="M3 20l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c3.255 2.777 3.695 7.266 1.029 10.501c-2.666 3.235 -7.615 4.215 -11.574 2.293l-4.7 1"/>',
+  db: '<path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0"/><path d="M4 6v6a8 3 0 0 0 16 0v-6"/><path d="M4 12v6a8 3 0 0 0 16 0v-6"/>',
+  users: '<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0 -3 -3.85"/>',
+  beat: '<path d="M3 12h4.5l1.5 -6l4 12l2 -9l1.5 3h4.5"/>',
+  bell: '<path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"/><path d="M9 17v1a3 3 0 0 0 6 0v-1"/>',
+  send: '<path d="M10 14l11 -11"/><path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"/>',
+  photo: '<path d="M15 8h.01"/><path d="M12.5 21h-6.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6.5"/><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l3.5 3.5"/><path d="M14 14l1 -1c.679 -.653 1.473 -.829 2.214 -.526"/><path d="M19 22v-6"/><path d="M22 19l-3 -3l-3 3"/>',
+  box: '<path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12l0 9"/><path d="M12 12l-8 -4.5"/>',
+  world: '<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M3.6 9h16.8"/><path d="M3.6 15h16.8"/><path d="M11.5 3a17 17 0 0 0 0 18"/><path d="M12.5 3a17 17 0 0 1 0 18"/>'
+};
+const C = { edge: 'var(--edge-c)', svc: 'var(--svc)', store: 'var(--store)', ext: 'var(--ext)' };
+// x, y = centre; w defaults to 180
+const N = {
+  cdn:    { x: 290, y: 70,  name: 'CDN', sub: 'Files near the reader', icon: 'world', c: 'ext', href: '/concepts/caching' },
+  obj:    { x: 530, y: 70,  name: 'Object storage', sub: 'Encrypted files', icon: 'box', c: 'store', href: '/concepts/cloud-basics' },
+  media:  { x: 750, y: 70,  name: 'Media service', sub: 'Takes uploads', icon: 'photo', c: 'svc' },
+  phoneA: { x: 110, y: 250, w: 170, name: "Sender's phone", sub: 'Sends the message', icon: 'phone', c: 'edge' },
+  lb:     { x: 300, y: 340, name: 'Load balancer', sub: 'Spreads connections', icon: 'lb', c: 'edge', href: '/concepts/scaling-load-balancing' },
+  gw:     { x: 520, y: 340, name: 'Chat gateways', sub: 'Hold the connections', icon: 'plug', c: 'svc', href: '/concepts/api-styles' },
+  msg:    { x: 750, y: 340, name: 'Message service', sub: 'Checks, IDs, stores', icon: 'msg', c: 'svc', href: '/concepts/distributed-systems' },
+  groups: { x: 985, y: 200, name: 'Users and groups', sub: 'Who\u2019s in each chat', icon: 'users', c: 'store', href: '/concepts/sql' },
+  store:  { x: 985, y: 340, name: 'Message store', sub: 'Wide-column, by chat', icon: 'db', c: 'store', href: '/concepts/partitioning-replication' },
+  sess:   { x: 750, y: 510, name: 'Sessions', sub: 'User \u2192 gateway', icon: 'beat', c: 'store', href: '/tools/redis' },
+  push:   { x: 985, y: 510, name: 'Push service', sub: 'Wakes offline phones', icon: 'bell', c: 'svc', href: '/tools/messaging' },
+  apns:   { x: 1160, y: 510, w: 140, name: 'APNs / FCM', sub: 'Apple, Google', icon: 'send', c: 'ext' },
+  phoneB: { x: 110, y: 470, w: 170, name: "Recipient's phone", sub: 'Gets the message', icon: 'phone', c: 'edge' }
+};
+// pts: polyline; lab: [x, y, anchor]; two: two-way
+const E = {
+  'a-lb':     { pts: [[195,250],[300,250],[300,305]], lab: ['open connection', 248, 238, 'middle'], two: true },
+  'lb-gw':    { pts: [[390,340],[428,340]], two: true },
+  'gw-msg':   { pts: [[612,328],[658,328]], lab: ['send', 635, 314, 'middle'] },
+  'msg-gw':   { pts: [[658,352],[612,352]], lab: ['deliver', 635, 372, 'middle'] },
+  'msg-store':{ pts: [[842,340],[893,340]], lab: ['write', 868, 328, 'middle'] },
+  'msg-groups':{ pts: [[738,305],[738,200],[893,200]], lab: ['members?', 812, 188, 'middle'] },
+  'msg-sess': { pts: [[750,375],[750,475]], lab: ['where is B?', 758, 430, 'start'] },
+  'gw-sess':  { pts: [[548,375],[548,510],[658,510]], lab: ['register', 603, 498, 'middle'] },
+  'gw-b':     { pts: [[490,375],[490,470],[195,470]], lab: ['push down the open connection', 330, 458, 'middle'], two: true },
+  'msg-push': { pts: [[805,375],[805,440],[985,440],[985,475]], lab: ['B is offline', 895, 430, 'middle'] },
+  'push-apns':{ pts: [[1075,510],[1090,510]] },
+  'apns-b':   { pts: [[1160,545],[1160,605],[110,605],[110,505]], lab: ['notification, no message text', 640, 593, 'middle'] },
+  'a-media':  { pts: [[110,215],[110,148],[770,148],[770,105]], lab: ['upload encrypted photo', 440, 136, 'middle'] },
+  'media-obj':{ pts: [[660,70],[622,70]], lab: ['save', 641, 56, 'middle'] },
+  'cdn-obj':  { pts: [[380,70],[438,70]], lab: ['on miss', 409, 56, 'middle'] },
+  'b-cdn':    { pts: [[25,470],[12,470],[12,70],[198,70]], lab: ['download photo', 20, 128, 'start'] }
+};
+const FLOWS = {
+  send: { title: 'Send a message', steps: [
+    ['Your phone sends the message, with an ID it made, over its open connection.', ['a-lb','lb-gw']],
+    ['The gateway passes it to the message service.', ['gw-msg']],
+    ['The service checks you are in this chat.', ['msg-groups']],
+    ['It gives the message a server ID that sorts by time and writes it to the store. If the phone retried, the same ID means it is stored once.', ['msg-store']],
+    ['It replies to your phone: one tick.', ['gw-msg','lb-gw','a-lb']],
+    ['It looks up which gateway holds the recipient.', ['msg-sess']],
+    ['It sends the message to that gateway.', ['msg-gw']],
+    ['The gateway pushes it down the recipient’s open connection.', ['gw-b']],
+    ['The recipient’s phone confirms. You see two ticks.', ['gw-b','msg-gw','gw-msg','a-lb']]
+  ]},
+  offline: { title: 'Recipient is offline', steps: [
+    ['You send as usual. The message is checked and stored.', ['a-lb','lb-gw','gw-msg','msg-store']],
+    ['The session lookup finds no open connection for the recipient.', ['msg-sess']],
+    ['The message service asks the push service to wake their phone.', ['msg-push']],
+    ['A notification goes out through Apple or Google. Apple and Google can't read it: it carries no message text, or only encrypted text.', ['push-apns','apns-b']],
+    ['Their app opens, connects to a gateway and registers.', ['gw-b','gw-sess']],
+    ['It asks for everything after the last message ID it has. The service reads those from the store.', ['gw-msg','msg-store','msg-gw','gw-b']],
+    ['Once their phone confirms, WhatsApp deletes the message from its servers. Discord and Slack keep it.', ['msg-store']]
+  ]},
+  photo: { title: 'Send a photo', steps: [
+    ['Your phone encrypts the photo with a fresh key.', [], ['phoneA']],
+    ['It uploads the encrypted file to the media service.', ['a-media']],
+    ['The media service saves it to object storage and returns a link.', ['media-obj']],
+    ['Your phone sends an ordinary message holding the link and the key.', ['a-lb','lb-gw','gw-msg','msg-store']],
+    ['The recipient gets that message the usual way.', ['msg-gw','gw-b']],
+    ['Their phone downloads the file from the CDN, which fetches it from storage the first time.', ['b-cdn','cdn-obj']],
+    ['It decrypts the photo with the key from the message. The servers never saw it.', [], ['phoneB']]
+  ]},
+  group: { title: 'Message a group', steps: [
+    ['You send one message to the group.', ['a-lb','lb-gw','gw-msg']],
+    ['The service fetches the member list, usually from a cache.', ['msg-groups']],
+    ['The message is stored once, not once per member.', ['msg-store']],
+    ['For each member it looks up their gateway, and sends one copy per gateway rather than one per member.', ['msg-sess','msg-gw']],
+    ['Each gateway delivers to its members who are online.', ['gw-b']],
+    ['Members who are offline get a push notification.', ['msg-push','push-apns','apns-b']],
+    ['With WhatsApp’s encryption, the sender encrypts once with a key every member already has, so the server can fan out one copy.', [], ['phoneA']]
+  ]}
+};
+
+const svg = document.getElementById('dia');
+const NS = 'http://www.w3.org/2000/svg';
+const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+
+const defs = el('defs', {}, svg);
+for (const [id, cls] of [['ah', 'arrow-off'], ['ah-on', 'arrow-on']]) {
+  const m = el('marker', { id, viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto-start-reverse' }, defs);
+  el('path', { d: 'M0 0L10 5L0 10z', class: cls }, m);
+}
+
+function rounded(pts, r = 12) {
+  let d = `M${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
+    const l1 = Math.hypot(x1 - x0, y1 - y0), l2 = Math.hypot(x2 - x1, y2 - y1), rr = Math.min(r, l1 / 2, l2 / 2);
+    d += ` L${x1 - (x1 - x0) / l1 * rr} ${y1 - (y1 - y0) / l1 * rr} Q${x1} ${y1} ${x1 + (x2 - x1) / l2 * rr} ${y1 + (y2 - y1) / l2 * rr}`;
+  }
+  const L = pts[pts.length - 1];
+  return d + ` L${L[0]} ${L[1]}`;
+}
+
+const gW = el('g', {}, svg), gL = el('g', {}, svg), gN = el('g', {}, svg), gB = el('g', {}, svg);
+for (const id in E) {
+  const e = E[id];
+  e.path = el('path', { d: rounded(e.pts), class: 'wire', 'marker-end': 'url(#ah)' }, gW);
+  if (e.two) e.path.setAttribute('marker-start', 'url(#ah)');
+  if (e.lab) { e.text = el('text', { x: e.lab[1], y: e.lab[2], 'text-anchor': e.lab[3], class: 'wl' }, gL); e.text.textContent = e.lab[0]; }
+}
+for (const id in N) {
+  const n = N[id], w = n.w || 180, h = 66, x = n.x - w / 2, y = n.y - h / 2;
+  const g = n.href ? el('a', { class: 'node link', href: SITE + n.href, target: '_blank', rel: 'noopener', 'aria-label': `${n.name}: learn it on Terminus` }, gN) : el('g', { class: 'node' }, gN);
+  if (n.href) el('title', {}, g).textContent = `${n.name}. Click to learn it on Terminus.`;
+  el('rect', { x, y, width: w, height: h, rx: 4, class: 'box' }, g);
+  el('rect', { x: x + 8, y: y + 13, width: 40, height: 40, rx: 3, class: 'tile', fill: C[n.c] }, g);
+  const ic = el('g', { class: 'ico', transform: `translate(${x + 16} ${y + 21}) scale(1)` }, g); ic.innerHTML = ICON[n.icon];
+  const t = el('text', { x: x + 56, y: y + 30, class: 'name' }, g); t.textContent = n.name;
+  const s = el('text', { x: x + 56, y: y + 49, class: 'sub' }, g); s.textContent = n.sub;
+  n.g = g;
+}
+// shrink subtitle text that overflows its box
+requestAnimationFrame(() => { for (const id in N) { const n = N[id], w = (n.w || 180) - 64; for (const t of n.g.querySelectorAll('text')) { try { if (t.getComputedTextLength() > w) t.setAttribute('textLength', w), t.setAttribute('lengthAdjust', 'spacingAndGlyphs'); } catch (_) {} } } });
+
+const ends = (eid) => { const p = E[eid].pts, a = p[0], b = p[p.length - 1], near = (pt) => { let best, bd = 1e9; for (const k in N) { const d = Math.hypot(N[k].x - pt[0], N[k].y - pt[1]); if (d < bd) bd = d, best = k; } return best; }; return [near(a), near(b)]; };
+
+const stepsEl = document.getElementById('steps'), titleEl = document.getElementById('flow-title');
+let current = 'send';
+
+function paint(flow, only) {
+  const f = FLOWS[flow];
+  const all = new Set(), nodes = new Set();
+  f.steps.forEach(([, es, ns = []]) => { es.forEach((e) => { all.add(e); ends(e).forEach((n) => nodes.add(n)); }); ns.forEach((n) => nodes.add(n)); });
+  const hot = new Set(only != null ? f.steps[only][1] : []);
+  const hotNodes = new Set(only != null ? (f.steps[only][2] || []) : []);
+  hot.forEach((e) => ends(e).forEach((n) => hotNodes.add(n)));
+  for (const id in E) {
+    const e = E[id], on = all.has(id), h = hot.has(id);
+    e.path.setAttribute('class', 'wire' + (h ? ' hot' : on ? (only != null ? '' : ' on') : ' off'));
+    const mk = (h || (on && only == null)) ? 'url(#ah-on)' : 'url(#ah)';
+    e.path.setAttribute('marker-end', mk); if (e.two) e.path.setAttribute('marker-start', mk);
+    if (e.text) e.text.setAttribute('class', 'wl' + (on ? '' : ' off'));
+  }
+  for (const id in N) N[id].g.classList.toggle('dim', only != null ? !hotNodes.has(id) : !nodes.has(id));
+  // badges: number at the first edge of each step (or on the node for node-only steps)
+  gB.innerHTML = '';
+  const used = {};
+  f.steps.forEach(([, es, ns = []], i) => {
+    if (only != null && only !== i) return;
+    let x, y;
+    if (es.length) { const p = E[es[0]].path, L = p.getTotalLength(), pt = p.getPointAtLength(L * 0.5); x = pt.x; y = pt.y; }
+    else { const n = N[ns[0]]; x = n.x + (n.w || 180) / 2 - 4; y = n.y - 33; }
+    const key = Math.round(x / 20) + ':' + Math.round(y / 20); const k = used[key] || 0; used[key] = k + 1;
+    const g = el('g', { class: 'badge', transform: `translate(${x + k * 24} ${y})` }, gB);
+    el('circle', { r: 12 }, g); el('text', { y: 1 }, g).textContent = i + 1;
+  });
+}
+
+function show(flow) {
+  current = flow; const f = FLOWS[flow]; titleEl.textContent = f.title; stepsEl.innerHTML = '';
+  f.steps.forEach(([txt], i) => {
+    const li = document.createElement('li'); li.textContent = txt; li.tabIndex = 0;
+    const on = () => { [...stepsEl.children].forEach((c) => c.classList.remove('active')); li.classList.add('active'); paint(flow, i); };
+    const off = () => { li.classList.remove('active'); paint(flow); };
+    li.addEventListener('mouseenter', on); li.addEventListener('focus', on);
+    li.addEventListener('mouseleave', off); li.addEventListener('blur', off);
+    li.addEventListener('click', on);
+    stepsEl.appendChild(li);
+  });
+  document.querySelectorAll('.flowbar button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.flow === flow)));
+  paint(flow);
+}
+document.querySelectorAll('.flowbar button').forEach((b) => b.addEventListener('click', () => show(b.dataset.flow)));
+show('send');
+})();
+</script>
