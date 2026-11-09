@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import { content } from '../../lib/site';
+import { LEVELS } from '../../lib/designs';
+
+const c = content();
+const groups = LEVELS.map((l) => ({ ...l, items: c.designs.filter((d) => d.level === l.id) })).filter((g) => g.items.length);
+---
+
+<Base
+  wide
+  title="Designs"
+  description="Worked system designs for products you use: URL shortener, rate limiter, chat, news feed, live cricket streaming, UPI payments, ticket rushes, food delivery and an AI assistant."
+>
+  <h1><span class="board">Designs</span></h1>
+  <p class="lede">
+    System designs for products you already use, worked through the way you'd do it in an interview: what it must do, the
+    numbers, the API and data, how a request flows, the hard parts, and what breaks first.
+  </p>
+  <p class="quiet note">
+    These are our designs, written for learning. They're simplified, and the real systems differ. Where a page says what a
+    company actually built, that comes from the company's own engineering write-up, linked at the bottom of the page.
+  </p>
+
+  {
+    groups.map((g) => (
+      <section aria-labelledby={`level-${g.id}`}>
+        <h2 id={`level-${g.id}`}>{g.title}</h2>
+        <p class="quiet level-note">{g.note}</p>
+        <ul class="designs">
+          {g.items.map((d) => (
+            <li>
+              <a class="design-name" href={`/designs/${d.id}`}>{d.title}</a>
+              <p class="like">Like {d.like}</p>
+              <p class="quiet">{d.summary}</p>
+              <p class="faint meta">{d.deepDives.length} deep dives, {d.sources.length} sources</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  h1 { padding-top: 8px; font-size: clamp(2.2rem, 7vw, 3.6rem); }
+  .lede { font-size: 1.1875rem; max-width: 66ch; margin-top: 14px; }
+  .note { max-width: 66ch; margin-top: 8px; }
+  section { margin-top: 40px; }
+  .level-note { margin-top: 2px; }
+  .designs {
+    list-style: none; padding: 0; margin: 12px 0 0; border-top: 3px solid var(--ink);
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); column-gap: 32px;
+  }
+  .designs li { padding: 14px 0 18px; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; align-content: start; }
+  .design-name { font-family: var(--sign); font-stretch: 85%; font-size: 1.5rem; font-weight: 650; line-height: 1.1; }
+  .like { font-weight: 600; font-size: 0.97rem; }
+  .meta { font-size: 0.9rem; }
+  @media (max-width: 560px) { .designs { grid-template-columns: 1fr; } }
+</style>

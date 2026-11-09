@@ -323,6 +323,38 @@ export const startupsSchema = z.object({
 });
 export type Startups = z.infer<typeof startupsSchema>;
 
+/**
+ * A worked system design: written by us, with every claim about a real
+ * company tied to that company's own write-up in `sources`.
+ */
+const step = z.object({ at: z.string().min(1), does: z.string().min(1) });
+export const designSchema = z.object({
+  id,
+  title: z.string().min(1),
+  /** Real products this is like, e.g. "WhatsApp, Discord". */
+  like: z.string().min(1),
+  level: z.enum(['starter', 'core', 'advanced']),
+  summary: z.string().min(1),
+  /** Stops this design uses, linked from the page and back from each stop. */
+  stops: z.array(id).min(1),
+  requirements: z.object({ functional: z.array(z.string()).min(2), nonFunctional: z.array(z.string()).min(2) }),
+  /** Back-of-the-envelope numbers, with the working shown. Assumptions say so. */
+  estimates: z.array(z.object({ quantity: z.string(), value: z.string(), working: z.string() })).min(2),
+  api: z.array(z.object({ call: z.string(), does: z.string() })).min(1),
+  data: z.array(z.object({ name: z.string(), store: z.string(), holds: z.string(), why: z.string() })).min(1),
+  /** Components in layers, left to right: clients, edge, services, data. */
+  layers: z.array(z.object({ name: z.string(), parts: z.array(z.object({ name: z.string(), does: z.string() })).min(1) })).min(2),
+  /** Requests followed through the components, drawn as lines. */
+  flows: z.array(z.object({ name: z.string(), steps: z.array(step).min(2) })).min(1),
+  deepDives: z.array(z.object({ title: z.string(), body: z.array(z.string()).min(1) })).min(2),
+  tradeoffs: z.array(z.object({ decision: z.string(), chose: z.string(), over: z.string(), because: z.string() })).min(2),
+  breaks: z.array(z.object({ what: z.string(), fix: z.string() })).min(1),
+  /** What the real companies did. Each point names its source by number (1-based). */
+  inPractice: z.array(z.object({ text: z.string(), source: z.number().int().positive() })).default([]),
+  sources: z.array(z.object({ title: z.string(), publisher: z.string(), year: z.string(), url: z.url() })).min(1),
+});
+export type Design = z.infer<typeof designSchema>;
+
 export interface Content {
   areas: Area[];
   families: Family[];
@@ -336,4 +368,5 @@ export interface Content {
   interviews: Interview[];
   certifications: Certification[];
   startups: Startups;
+  designs: Design[];
 }

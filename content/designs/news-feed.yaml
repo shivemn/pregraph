@@ -1,0 +1,206 @@
+id: news-feed
+title: Design a news feed
+like: Twitter/X home timeline, Instagram feed
+level: core
+summary: Show each person the latest posts from everyone they follow, in a fraction of a second, when
+  reads outnumber writes by fifty to one and some accounts have millions of followers.
+stops:
+- caching
+- partitioning-replication
+- messaging
+- redis
+- system-design
+- database-internals
+requirements:
+  functional:
+  - Post text and photos
+  - Follow and unfollow people
+  - A home feed of recent posts from people you follow, newest first (ranking comes later)
+  - Each person's own profile timeline
+  - Likes and their counts
+  nonFunctional:
+  - 'The home feed loads fast: under about 200 ms of server time'
+  - It's fine if a new post takes a few seconds to appear in followers' feeds
+  - Staying up matters more than every follower seeing a post at the same instant
+  - Very read-heavy
+estimates:
+- quantity: Feed reads
+  value: about 23,000 a second, over 100,000 at peak
+  working: 'Assume 200 million daily users opening the feed 10 times a day: 2 billion reads ÷ 86,400 ≈
+    23,000 a second.'
+- quantity: New posts
+  value: about 1,200 a second
+  working: Assume 100 million posts a day ÷ 86,400 ≈ 1,160 a second.
+- quantity: Feed insertions if you fan out on write
+  value: about 230,000 a second
+  working: 'With 200 followers on average, each post is copied into 200 feeds: 100 million × 200 = 20
+    billion insertions a day. Fan-out turns a modest write rate into a very large one.'
+- quantity: Precomputed feeds in memory
+  value: about 1.3 TB
+  working: 'Keep the latest 800 post IDs per person at 8 bytes each: 6.4 KB × 200 million people ≈ 1.3
+    TB, before replication. Spread across a cache cluster, that''s feasible.'
+api:
+- call: POST /posts {text, mediaIds}
+  does: Creates a post.
+- call: GET /feed?cursor=
+  does: The next page of the home feed. The cursor is the last post ID seen, not a page number, so new
+    posts don't shift pages.
+- call: GET /users/{id}/posts?cursor=
+  does: A profile timeline.
+- call: PUT /users/{id}/follow  and  DELETE …
+  does: Follow and unfollow.
+- call: POST /posts/{id}/like
+  does: Likes a post.
+data:
+- name: posts
+  store: Sharded relational or wide-column store
+  holds: post_id (time-sortable), author_id, text, media, created_at
+  why: Looked up by ID in bulk to fill a feed page.
+- name: follows
+  store: A graph or two indexed tables
+  holds: follower → followee, and followee → followers
+  why: Fan-out needs 'who follows X'; the feed needs 'who does Y follow'.
+- name: home feeds
+  store: Redis lists
+  holds: user_id → the latest few hundred post IDs
+  why: A feed read is one list fetch plus a batch lookup of posts.
+- name: media
+  store: Object storage and a CDN
+  holds: Images in several sizes
+  why: Served from near the user; resized in the background.
+- name: like counts
+  store: Counters, updated asynchronously
+  holds: post_id → count
+  why: Exact live counts aren't needed; batching avoids hot rows on popular posts.
+layers:
+- name: Clients
+  parts:
+  - name: Apps and web
+    does: Post, scroll, like
+- name: Edge
+  parts:
+  - name: Load balancer and CDN
+    does: API traffic and images
+- name: Services
+  parts:
+  - name: Post service
+    does: Stores posts
+  - name: Fan-out workers
+    does: Copy new post IDs into followers' feeds
+  - name: Feed service
+    does: Reads a feed and fills in posts
+  - name: Graph service
+    does: Follows
+- name: Data
+  parts:
+  - name: Post store
+    does: Every post
+  - name: Feed cache (Redis)
+    does: Precomputed feeds
+  - name: Queue
+    does: New-post events
+  - name: Object storage
+    does: Images
+flows:
+- name: Posting
+  steps:
+  - at: App
+    does: Uploads the photo, then sends the post
+  - at: Post service
+    does: Stores the post and publishes a 'new post' event
+  - at: Fan-out workers
+    does: Fetch the author's followers in batches
+  - at: Feed cache
+    does: Gets the post ID pushed onto each follower's list, trimmed to the newest few hundred
+  - at: Fan-out workers
+    does: Skip this for authors with millions of followers (see below)
+- name: Reading the feed
+  steps:
+  - at: App
+    does: Asks for the feed
+  - at: Feed service
+    does: Reads the precomputed list of post IDs from the feed cache
+  - at: Feed service
+    does: Adds recent posts from any very large accounts the person follows
+  - at: Post store
+    does: Returns the posts for those IDs in one batch, mostly from cache
+  - at: App
+    does: Shows the page and keeps the cursor for the next one
+deepDives:
+- title: Fan out on write, on read, or both
+  body:
+  - 'Fan-out on read builds the feed when you open the app: fetch everyone you follow, get their recent
+    posts, merge them. Writes are cheap, but every read does a big merge, and reads are the common case.'
+  - 'Fan-out on write does the work when a post is made: push its ID into every follower''s precomputed
+    feed. Reads become one cache fetch. The catch is accounts with millions of followers: one post means
+    millions of inserts, which takes minutes and delays everything queued behind it.'
+  - Real systems mix them. Fan out on write for ordinary accounts, and for the few very large ones, don't
+    fan out at all; merge their recent posts in at read time. Each person follows only a handful of such
+    accounts, so the read-time merge stays small.
+- title: Feeds people haven't opened in months
+  body:
+  - Keeping a precomputed feed for someone who never opens the app wastes memory and fan-out work. Only
+    maintain feeds for recently active people; for someone returning after a long gap, build the feed
+    on read once, then start maintaining it again.
+- title: IDs and sharding
+  body:
+  - Feeds are sorted by time, so post IDs that sort by time let a feed be just a list of IDs. Shard posts
+    by author or by post ID; shard follows by user. A celebrity's own profile timeline is read far more
+    than average, so cache it separately.
+- title: Ranking
+  body:
+  - 'A chronological feed is the base. Ranked feeds add stages on top: gather a few thousand candidate
+    posts (from the precomputed feed plus suggestions), score each with a model using features like who
+    you interact with and how fresh the post is, then filter and mix for variety. The feed service design
+    stays the same; ranking replaces ''newest first''.'
+tradeoffs:
+- decision: Feed building
+  chose: 'Hybrid: push for most accounts, pull for very large ones'
+  over: Pure push or pure pull
+  because: Fast reads without minutes-long fan-out for celebrities.
+- decision: Feed storage
+  chose: Lists of IDs in memory, capped in length
+  over: Full posts in each feed
+  because: Hundreds of copies of an ID are cheap; posts are fetched once in a batch and cached.
+- decision: Consistency
+  chose: 'Eventual: a post appears within seconds'
+  over: Every follower seeing it at once
+  because: People don't notice a few seconds, and it lets fan-out run in the background.
+breaks:
+- what: Fan-out queues back up during a huge event
+  fix: More workers, prioritise active followers, and let less active feeds catch up later.
+- what: A viral post's like count becomes a hot row
+  fix: Count in memory or in sharded counters and write totals every few seconds.
+- what: Replies arrive before the post they reply to
+  fix: Accept it as a symptom of fan-out lag, or hold replies until the parent is visible.
+inPractice:
+- text: 'In 2013 Twitter served 300,000 queries a second for timelines but only about 6,000 writes a second:
+    it was mostly a reading system.'
+  source: 1
+- text: Twitter precomputed home timelines by fanning tweets out on write into a Redis cluster, each timeline
+    capped at 800 entries and each tweet ID stored on three machines.
+  source: 1
+- text: 'Fan-out to huge follower lists was slow: a tweet from an account with 31 million followers could
+    take up to five minutes to reach them all, so Twitter began doing more of the work at read time for
+    those accounts.'
+  source: 1
+- text: Instagram sharded data across PostgreSQL servers using thousands of logical shards, each a Postgres
+    schema, mapped to fewer physical servers so shards could move without re-bucketing data.
+  source: 3
+sources:
+- title: The Architecture Twitter Uses to Deal with 150M Active Users, 300K QPS…
+  publisher: High Scalability, summarising Raffi Krikorian's talk
+  year: '2013'
+  url: https://highscalability.com/the-architecture-twitter-uses-to-deal-with-150m-active-users/
+- title: Timelines at Scale (talk)
+  publisher: Raffi Krikorian, Twitter, at QCon
+  year: '2013'
+  url: https://www.infoq.com/presentations/Twitter-Timeline-Scalability/
+- title: Sharding & IDs at Instagram
+  publisher: Instagram Engineering
+  year: '2012'
+  url: https://medium.com/instagram-engineering/sharding-ids-at-instagram-1cf5a71e5a5c
+- title: Design Facebook's News Feed
+  publisher: Hello Interview
+  year: '2026'
+  url: https://www.hellointerview.com/learn/system-design/problem-breakdowns/fb-news-feed

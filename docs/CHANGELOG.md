@@ -1,5 +1,11 @@
 # Changelog
 
+## Designs
+
+- **A new Designs section** with nine worked system designs: a URL shortener, a rate limiter, a chat app, a news feed, live streaming for a cricket final, a UPI payments app, ticket booking for a rush, food delivery dispatch and an AI chat assistant. Each one covers requirements, back-of-the-envelope numbers with the working shown, the API, the data model, the architecture, how requests flow, deep dives, trade-offs and what breaks first.
+- **What they actually built:** each design ends with what real companies did, every point numbered to the company's own write-up: Discord's move from Cassandra to ScyllaDB, Twitter's timeline fan-out, Instagram's IDs, Stripe's and Cloudflare's rate limiters, Hotstar's 25-million-viewer match, NPCI's UPI volumes, DoorDash's dispatch optimiser, Uber's H3 and vLLM's PagedAttention. Every source was opened and read before anything was taken from it.
+- Stop pages link to the designs that use them, designs show up in search, and the monthly link check covers design sources.
+
 ## Three project levels on every route
 
 - **Pick a beginner, intermediate or advanced project** on any route. The beginner one is small and quick, the intermediate one is what most freshers should show at an interview, and the advanced one is for standing out. The planner swaps your choice in and keeps it as the last stop.

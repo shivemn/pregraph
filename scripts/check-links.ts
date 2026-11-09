@@ -19,6 +19,7 @@ const c = loadContent();
 const targets = [
   ...c.resources.map((r) => ({ id: r.id, url: r.url })),
   ...c.certifications.map((x) => ({ id: `certificate ${x.id}`, url: x.url })),
+  ...c.designs.flatMap((d) => d.sources.map((s, i) => ({ id: `design ${d.id} source ${i + 1}`, url: s.url }))),
 ];
 const urls = [...new Map(targets.map((r) => [r.url, r])).values()];
 const TIMEOUT = 15_000;

@@ -28,6 +28,7 @@ const inRoles = c.roles.flatMap((r) => {
     note: t.id === 'hire' ? 'to get hired' : t.id === 'firstYear' ? 'in the first year' : 'good to have',
   }));
 });
+const designs = c.designs.filter((d) => d.stops.includes(concept.id));
 const kindLabel = concept.kind === 'tool' ? 'Tool' : concept.kind === 'project' ? 'Project to build' : null;
 
 const detail = stopDetails(c).find((d) => d.id === concept.id)!;
@@ -94,6 +95,22 @@ const shelf = c.toolGroups.find((g) => g.tools.includes(concept.id));
       <h2 id="learn">{concept.brief ? 'Help while you build' : 'Where to learn it'}</h2>
       <Picks title={concept.title} detail={detail} />
     </section>
+
+    {
+      designs.length > 0 && (
+        <section aria-labelledby="designs">
+          <h2 id="designs">See it in a design</h2>
+          <ul class="role-uses">
+            {designs.map((d) => (
+              <li>
+                <a href={`/designs/${d.id}`}>{d.title}</a>
+                <span class="quiet"> like {d.like}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     {
       inRoles.length > 0 && (

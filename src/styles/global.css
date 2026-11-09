@@ -223,7 +223,7 @@ select { color-scheme: inherit; }
   font-family: var(--sign); font-weight: 600; font-size: 1.6rem;
   text-decoration: none; line-height: 1;
 }
-.masthead nav { display: flex; gap: 22px; }
+.masthead nav { display: flex; gap: 6px 20px; flex-wrap: wrap; }
 .masthead nav a {
   font-family: var(--sign); font-stretch: 85%; font-weight: 650; font-size: 1.1rem;
   text-decoration: none; color: var(--ink-2); padding: 4px 0;

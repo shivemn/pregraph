@@ -1,0 +1,203 @@
+id: delivery-dispatch
+title: Design food delivery dispatch
+like: Swiggy, Zomato, Uber Eats, DoorDash
+level: advanced
+summary: Match every order to a delivery partner within seconds, using live locations from hundreds of
+  thousands of phones and predictions of when food will be ready. Half of it is a streaming system, half
+  an optimisation problem.
+stops:
+- messaging
+- redis
+- partitioning-replication
+- operations-research
+- machine-learning
+- reliability-patterns
+requirements:
+  functional:
+  - Customers order from restaurants and track the delivery live
+  - Each order is assigned to a delivery partner, who can accept or decline
+  - Delivery-time estimates before ordering and during delivery
+  - Partners can carry more than one order when routes line up
+  nonFunctional:
+  - Assignment within seconds of the order being placed
+  - Location updates from every active partner, every few seconds
+  - A failure in one city doesn't affect others
+  - 'Good assignments: short waits at restaurants, fast deliveries, fair earnings'
+estimates:
+- quantity: Orders
+  value: about 100 a second at peak
+  working: 'Assume 3 million orders a day: 35 a second on average, with lunch and dinner peaks about three
+    times that.'
+- quantity: Location updates
+  value: about 60,000 a second
+  working: 'Assume 300,000 partners online at peak, each sending a GPS fix every 5 seconds: 300,000 ÷
+    5 = 60,000 updates a second. This, not orders, is the heaviest write load.'
+- quantity: Location data
+  value: a few hundred MB live
+  working: 'Only the latest position matters for dispatch: 300,000 partners × about 100 bytes = 30 MB,
+    held in memory. History goes to cheaper storage for analytics.'
+- quantity: Assignment batch
+  value: hundreds of orders per city per run
+  working: Run the matcher per city every few seconds on the orders and partners in it, rather than one
+    order at a time.
+api:
+- call: POST /orders
+  does: Places an order; returns an estimated delivery time.
+- call: Partner app → POST /locations (batched)
+  does: Recent GPS fixes, sent every few seconds.
+- call: Partner app ← offer {orderIds, pickup, payout, expiresIn}
+  does: An assignment the partner accepts or declines.
+- call: GET /orders/{id}/track (or a WebSocket)
+  does: Live partner location and updated ETA for the customer.
+data:
+- name: live locations
+  store: In-memory geo index (Redis GEO or cells of a grid like H3)
+  holds: partner_id → latest position, status, cell
+  why: '''Who is near this restaurant?'' must be answered in milliseconds.'
+- name: location stream
+  store: Kafka, partitioned by city
+  holds: Every GPS fix
+  why: Feeds the live index, tracking, ETA models and analytics.
+- name: orders
+  store: Relational database, partitioned by city
+  holds: Order, restaurant, customer, state, assigned partner
+  why: Order state changes must be consistent; cities are natural shards.
+- name: ETA features
+  store: Feature store
+  holds: Restaurant prep times, traffic by hour, partner speed
+  why: Models predict when food is ready and how long travel takes.
+layers:
+- name: Clients
+  parts:
+  - name: Customer app
+    does: Orders and tracks
+  - name: Restaurant app
+    does: Accepts and marks food ready
+  - name: Partner app
+    does: Sends location, gets offers
+- name: Ingest
+  parts:
+  - name: Location gateway
+    does: Takes GPS updates
+  - name: Stream (Kafka)
+    does: Per-city topics
+- name: Services
+  parts:
+  - name: Geo index
+    does: Live partner positions
+  - name: ETA service
+    does: Prep and travel predictions
+  - name: Dispatcher (per city)
+    does: Batches and solves assignments
+  - name: Offer service
+    does: Sends offers, handles declines
+- name: Data
+  parts:
+  - name: Orders DB
+    does: Sharded by city
+  - name: Feature store
+    does: Inputs to ETA models
+  - name: Analytics store
+    does: History for training and audits
+flows:
+- name: An order gets a partner
+  steps:
+  - at: Customer app
+    does: Places the order; the ETA service gives an estimate
+  - at: Restaurant app
+    does: Accepts; prep starts
+  - at: Dispatcher
+    does: Every few seconds, collects unassigned orders in the city
+  - at: Geo index
+    does: Returns nearby available partners for each order
+  - at: ETA service
+    does: Predicts travel to the restaurant, food-ready time and delivery time for each pairing
+  - at: Dispatcher
+    does: Scores every pairing and solves for the best overall assignment, including combining orders
+  - at: Offer service
+    does: Sends offers; a decline puts the order back into the next batch
+- name: A location update
+  steps:
+  - at: Partner app
+    does: Sends a batch of GPS fixes
+  - at: Location gateway
+    does: Validates and publishes them to the city's topic
+  - at: Geo index
+    does: Updates the partner's latest position and cell
+  - at: Customer app
+    does: If this partner is carrying the order, the map moves
+deepDives:
+- title: Finding who's nearby
+  body:
+  - 'Searching 300,000 positions for each order is too slow. Geo indexes divide the map into cells: geohashes
+    (rectangles named by string prefixes), quadtrees, or hexagonal grids like Uber''s H3. To find partners
+    near a restaurant, look in its cell and the neighbouring ones. Hexagons have a nice property: every
+    neighbour is the same distance away, which makes ''within a few cells'' a fair approximation of ''within
+    a radius''.'
+- title: Assignment is an optimisation problem
+  body:
+  - 'Assigning each order greedily to the nearest partner looks sensible and performs badly: the nearest
+    partner for one order might be the only good option for another. Batching orders for a few seconds
+    and solving them together does better. With one order per partner it''s a bipartite matching problem,
+    solvable with the Hungarian algorithm; once partners can carry several orders, it becomes a vehicle-routing
+    problem, usually written as a mixed-integer program and handed to a solver.'
+  - 'The cost of each pairing combines several predictions: travel time to the restaurant, when the food
+    will actually be ready (arriving early means waiting), and the customer''s delivery time. Getting
+    those predictions right matters as much as the solver.'
+- title: Streaming location at scale
+  body:
+  - Phones send small, frequent updates over flaky networks. Batch several fixes per request, accept out-of-order
+    arrivals by timestamp, and drop obviously wrong jumps. Partition the stream by city so each city's
+    dispatcher reads only its own data, and a backlog in one city doesn't slow the rest.
+- title: Changing the dispatcher safely
+  body:
+  - 'Dispatch is a tier-zero system: if it stops, no food moves. A safe way to change the algorithm is
+    to run the new optimiser alongside the old one on the same inputs, keep using the old one''s answers,
+    and log every difference until you''re confident.'
+tradeoffs:
+- decision: Assignment
+  chose: Batch orders per city every few seconds and solve together
+  over: Assign each order instantly to the nearest partner
+  because: Better global matches for a few seconds' delay.
+- decision: Partitioning
+  chose: By city
+  over: One global system
+  because: Orders and partners rarely cross cities, so failures and load stay local.
+- decision: Locations
+  chose: Latest position in memory, history in a stream
+  over: Writing every fix to a database
+  because: Dispatch needs speed; analytics can read the stream later.
+breaks:
+- what: Rain in one city doubles orders and halves available partners
+  fix: Surge incentives, longer quoted ETAs, and throttling new orders before the dispatcher drowns.
+- what: The solver doesn't finish within the batch window
+  fix: Time-box it and use the best solution so far, or split the city into zones.
+- what: A burst of GPS errors teleports partners
+  fix: Filter impossible speeds and fall back to the last good fix.
+inPractice:
+- text: Uber built H3, a hexagonal hierarchical grid, for pricing and dispatch analysis; for example,
+    it measures supply and demand per hexagon to set surge pricing. It chose hexagons partly because they
+    reduce the error when moving people are bucketed into cells. Uber open-sourced H3 in 2018.
+  source: 1
+- text: 'DoorDash first framed dispatch as bipartite matching solved with the Hungarian algorithm, which
+    was too slow at large sizes and couldn''t put two deliveries in one route. It moved to a mixed-integer
+    program solved with Gurobi: up to 10 times faster than the Hungarian algorithm, and on average 34
+    times faster than the open-source CBC solver on its problems.'
+  source: 2
+- text: DoorDash's optimiser runs several times a minute on instances split by region. It rolled out the
+    new optimiser by running it alongside the old one and comparing outputs, which matched more than 99%
+    of the time.
+  source: 2
+sources:
+- title: 'H3: Uber''s Hexagonal Hierarchical Spatial Index'
+  publisher: Uber Engineering
+  year: '2018'
+  url: https://www.uber.com/blog/h3/
+- title: Next-Generation Optimization for Dasher Dispatch at DoorDash
+  publisher: DoorDash Engineering
+  year: '2020'
+  url: https://doordash.engineering/2020/02/28/next-generation-optimization-for-dasher-dispatch-at-doordash/
+- title: Design a Ride-Sharing Service Like Uber
+  publisher: Hello Interview
+  year: '2026'
+  url: https://www.hellointerview.com/learn/system-design/problem-breakdowns/uber

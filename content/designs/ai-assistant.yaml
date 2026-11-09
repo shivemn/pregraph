@@ -1,0 +1,205 @@
+id: ai-assistant
+title: Design an AI chat assistant
+like: ChatGPT, Claude, Gemini
+level: advanced
+summary: Stream answers from a large language model to millions of people, with conversation history,
+  file search and tools, while keeping GPU costs, latency and safety under control.
+stops:
+- ai-system-design
+- inference-serving
+- rag
+- llm-apis
+- api-styles
+- caching
+- ai-security
+requirements:
+  functional:
+  - Chat with a model, with answers streamed as they're written
+  - Conversations saved and resumable on any device
+  - Upload files and ask questions about them
+  - Tools such as web search and code execution
+  - Different plans with different models and limits
+  nonFunctional:
+  - The first words appear within about a second
+  - Costs per message are predictable and bounded
+  - Fair limits per user, measured in tokens, not just requests
+  - Unsafe inputs and outputs are caught; tools can't be abused
+  - If one model or provider fails, chats keep working on another
+estimates:
+- quantity: Messages
+  value: about 1,200 a second, 3,500 at peak
+  working: 'Assume 10 million daily users sending 10 messages each: 100 million ÷ 86,400 ≈ 1,160 a second,
+    with peaks about three times that.'
+- quantity: Tokens generated
+  value: about 460,000 a second
+  working: 'Assume answers average 400 tokens: 1,160 × 400 ≈ 463,000 output tokens a second, on average.'
+- quantity: Tokens read
+  value: about 2.3 million a second
+  working: 'Assume each request sends 2,000 tokens of history and instructions: 1,160 × 2,000 ≈ 2.3 million
+    a second. Reading the prompt (prefill) is faster per token than writing, but it adds up.'
+- quantity: GPUs
+  value: roughly 200, at average load
+  working: 'Illustration only: if one serving instance with batching produces about 2,500 output tokens
+    a second for the chosen model, 463,000 ÷ 2,500 ≈ 185. Real throughput varies tenfold with model size,
+    hardware and batch size, so measure yours.'
+api:
+- call: 'POST /conversations/{id}/messages  (response: text/event-stream)'
+  does: Sends a message; the answer streams back as server-sent events.
+- call: POST /conversations/{id}/stop
+  does: Cancels generation, freeing the GPU.
+- call: GET /conversations?cursor=
+  does: Lists past conversations.
+- call: POST /files
+  does: Uploads a file to be parsed, chunked and indexed for this user.
+data:
+- name: conversations and messages
+  store: Document or wide-column store, keyed by user and conversation
+  holds: Messages, model used, token counts, tool calls
+  why: Read whole conversations by key; huge volume of small writes.
+- name: files
+  store: Object storage
+  holds: Uploaded originals
+  why: Cheap and durable.
+- name: file chunks
+  store: Vector index with metadata filters
+  holds: Embeddings of chunks, owner, file ID
+  why: Retrieval for questions about a user's files, filtered so users only see their own.
+- name: usage
+  store: Counters, plus a billing store
+  holds: Tokens per user per period
+  why: Rate limits and plan quotas measured in tokens.
+layers:
+- name: Clients
+  parts:
+  - name: Web and apps
+    does: Show streaming answers
+- name: Edge
+  parts:
+  - name: API gateway
+    does: Auth, token-based rate limits
+- name: Orchestration
+  parts:
+  - name: Chat service
+    does: Builds the prompt, runs tools, streams the answer
+  - name: Guardrails
+    does: Checks input and output
+  - name: Retrieval
+    does: Finds relevant file chunks
+  - name: Tool runners
+    does: Search, sandboxed code
+- name: Models
+  parts:
+  - name: Model gateway
+    does: Routes to models, falls back, caches
+  - name: Inference servers
+    does: Batched serving with a KV cache
+- name: Data
+  parts:
+  - name: Conversation store
+    does: History
+  - name: Object storage and vector index
+    does: Files
+  - name: Traces and evals
+    does: Quality and cost per request
+flows:
+- name: Answering a message
+  steps:
+  - at: App
+    does: Sends the message and opens an event stream
+  - at: API gateway
+    does: Checks the user's token budget
+  - at: Guardrails
+    does: Checks the input
+  - at: Chat service
+    does: Loads recent history, trims or summarises it to fit the context budget
+  - at: Retrieval
+    does: If files are attached, finds relevant chunks
+  - at: Model gateway
+    does: Picks a model for the plan and task; checks the cache
+  - at: Inference servers
+    does: Add the request to a running batch; prefill the prompt, then decode token by token
+  - at: Chat service
+    does: Streams tokens to the app as they arrive, runs any tool the model asks for, and continues
+  - at: Conversation store
+    does: Saves the finished answer with token counts and a trace
+deepDives:
+- title: Streaming
+  body:
+  - 'Generating 400 tokens takes seconds; waiting for all of them before showing anything feels broken.
+    The model server emits tokens as they''re decoded, the chat service forwards them, and the app renders
+    them as server-sent events. The metric users feel is time to first token, which is mostly queueing
+    plus prompt prefill. Cancellation matters too: when someone hits stop, the request must leave the
+    GPU batch immediately.'
+- title: Why GPUs are the bottleneck
+  body:
+  - Each generated token needs the attention keys and values of every earlier token, kept in GPU memory
+    as the KV cache. That memory, not raw computation, limits how many conversations a GPU can serve at
+    once. Serving engines use continuous batching, adding and removing requests from the running batch
+    every step, and manage the KV cache in pages to waste less memory. Prefix caching reuses the cache
+    for a shared system prompt across users.
+- title: Context is a budget
+  body:
+  - 'Long conversations and big files can''t all go into every request: they cost money and slow the first
+    token. The chat service keeps a token budget: system instructions, the most relevant retrieved chunks,
+    a summary of older turns and the recent ones verbatim. Choosing what goes in is one of the biggest
+    levers on both quality and cost.'
+- title: The model gateway
+  body:
+  - Putting one internal API in front of all models gives one place for routing (a smaller model for simple
+    messages, a larger one for hard ones), fallbacks when a provider errors, caching, logging and cost
+    tracking. Limits are counted in tokens, because one request can cost a hundred times another.
+- title: Safety and tools
+  body:
+  - Inputs and outputs pass through checks for abuse and for leaking private data. Retrieved documents
+    and web pages can contain instructions aimed at the model, so tools get only the permissions they
+    need, code runs in a sandbox with no secrets, and actions with side effects ask the user first.
+tradeoffs:
+- decision: Serving
+  chose: Self-hosted open models with a serving engine, plus an API provider as fallback
+  over: One or the other
+  because: Control over cost and latency, with resilience when your own capacity runs out.
+- decision: Limits
+  chose: Token-based budgets per user
+  over: Requests per minute
+  because: Requests vary hugely in cost; tokens track it.
+- decision: History
+  chose: Summarise older turns
+  over: Sending the full conversation every time
+  because: Bounded cost and faster first tokens, at some loss of detail.
+breaks:
+- what: A launch triples traffic and GPU queues grow
+  fix: Route overflow to a smaller model or an external provider, and queue free-tier users.
+- what: Very long prompts starve short ones
+  fix: Separate queues or capacity for long-context requests, and chunked prefill.
+- what: A poisoned web page makes the model misuse a tool
+  fix: Least-privilege tools, confirmation for side effects, and output checks on tool arguments.
+inPractice:
+- text: The vLLM team found serving is bottlenecked by GPU memory for the KV cache, which takes up to
+    1.7 GB for one sequence in LLaMA-13B, and that existing systems wasted 60–80% of that memory to fragmentation
+    and over-reservation.
+  source: 1
+- text: 'vLLM''s PagedAttention stores the KV cache in non-contiguous blocks, like pages in virtual memory,
+    cutting waste to under 4%, which allows larger batches: up to 24 times the throughput of Hugging Face
+    Transformers in their tests.'
+  source: 1
+- text: 'Chip Huyen''s description of a generative AI platform builds up in steps: enhancing context with
+    retrieval, guardrails, a model router and gateway, caching to cut latency, then complex logic and
+    write actions, with observability throughout.'
+  source: 2
+sources:
+- title: 'vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention'
+  publisher: vLLM team, UC Berkeley
+  year: '2023'
+  url: https://blog.vllm.ai/2023/06/20/vllm.html
+- title: Building A Generative AI Platform
+  publisher: Chip Huyen
+  year: '2024'
+  url: https://huyenchip.com/2024/07/25/genai-platform.html
+- title: Optimizing LLMs for Speed and Memory
+  publisher: Hugging Face
+  year: '2026'
+  url: https://huggingface.co/docs/transformers/llm_tutorial_optimization
+- title: Design ChatGPT
+  publisher: Hello Interview
+  year: '2026'
+  url: https://www.hellointerview.com/learn/system-design/problem-breakdowns/chatgpt

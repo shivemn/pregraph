@@ -1,0 +1,183 @@
+id: rate-limiter
+title: Design a rate limiter
+like: The limits on Stripe's and Cloudflare's APIs
+level: starter
+summary: Stop any one client from overwhelming an API, across many servers, adding almost no latency.
+  The design is mostly about the counting algorithm and where the counts live.
+stops:
+- scaling-load-balancing
+- redis
+- hash-tables
+- reliability-patterns
+- distributed-systems
+requirements:
+  functional:
+  - Limit each client (API key, user or IP) to a set number of requests per time window, per rule
+  - Different limits for different endpoints and plans
+  - Rejected requests get HTTP 429 with a Retry-After header
+  - Rules can change without redeploying the API
+  nonFunctional:
+  - Adds no more than a millisecond or two to each request
+  - Works when requests from one client land on many different servers
+  - If the limiter itself breaks, the API keeps working (fail open)
+  - Accurate enough that honest clients are never blocked below their limit
+estimates:
+- quantity: Requests
+  value: 50,000 a second
+  working: Assume an API serving 50,000 requests a second across 100 servers. Each request needs one or
+    two operations against the counter store.
+- quantity: Clients tracked
+  value: 10 million a day
+  working: Assume 10 million distinct API keys and IPs a day.
+- quantity: Counter memory
+  value: about 500 MB
+  working: 'A sliding-window counter needs two numbers per client per rule. With the key, call it 50 bytes:
+    10,000,000 × 50 bytes = 500 MB. That fits in memory on one Redis node; you shard for throughput.'
+- quantity: Counter-store throughput
+  value: a few Redis shards
+  working: Up to 100,000 counter operations a second is within reach of a single Redis node for simple
+    commands, but sharding by client spreads load and removes the single point of failure.
+api:
+- call: check(client, rule) → {allowed, remaining, resetAt}
+  does: Called by the gateway or middleware on every request.
+- call: 'HTTP 429 Too Many Requests, Retry-After: 12'
+  does: What a blocked client sees, with headers saying the limit and when it resets.
+- call: PUT /admin/rules/{id}
+  does: Changes a rule; gateways pick it up within seconds.
+data:
+- name: rules
+  store: Config store pushed to every gateway
+  holds: match (endpoint, plan, method), limit, window, action
+  why: Read on every request, so each gateway keeps them in memory.
+- name: counters
+  store: Redis (or memcached), sharded by client
+  holds: key = rule:client:window, value = count, with an expiry
+  why: Shared across servers, atomic increments, and old windows expire on their own.
+layers:
+- name: Clients
+  parts:
+  - name: API clients
+    does: Scripts, apps and partners
+- name: Edge
+  parts:
+  - name: API gateway
+    does: Runs the limiter check before anything else
+  - name: Local cache
+    does: Rules, and clients already blocked
+- name: Services
+  parts:
+  - name: API servers
+    does: Only see requests that passed
+- name: Data
+  parts:
+  - name: Counter store (Redis)
+    does: Shared counts
+  - name: Rules config
+    does: Limits per endpoint and plan
+flows:
+- name: A request under the limit
+  steps:
+  - at: Client
+    does: Calls POST /v1/charges with its API key
+  - at: API gateway
+    does: Finds the matching rule in memory, say 100 requests a second for this plan
+  - at: Counter store
+    does: Atomically increments this client's counter for the current window and returns the counts
+  - at: API gateway
+    does: Works out the rate, finds it under the limit, and adds rate-limit headers
+  - at: API servers
+    does: Handle the request as normal
+- name: A request over the limit
+  steps:
+  - at: API gateway
+    does: Sees the rate is over the limit
+  - at: Local cache
+    does: Remembers this client is blocked until the window resets, so later requests skip the counter
+      store
+  - at: Client
+    does: Gets 429 with Retry-After, and backs off
+deepDives:
+- title: The counting algorithms
+  body:
+  - 'Fixed window: count requests in each calendar minute and reset at :00. Cheap, but a client can send
+    the full limit at 0:59 and again at 1:00, twice the limit in two seconds.'
+  - 'Sliding log: store the timestamp of every request and count those in the last minute. Exact, but
+    memory grows with traffic, which is costly for large limits.'
+  - 'Sliding-window counter: keep this window''s count and the previous one, and weight the previous count
+    by how much of it still overlaps. With a limit of 50 a minute, 42 requests last minute, 18 so far
+    and 15 seconds into this minute: 42 × 45/60 + 18 = 49.5. Two numbers per client, one increment per
+    request, and close to exact.'
+  - 'Token bucket: each client has a bucket that refills at a steady rate up to a maximum; each request
+    takes a token. It allows short bursts up to the bucket size, which suits real traffic. Leaky bucket
+    is the mirror image: requests drain at a fixed rate, smoothing output.'
+- title: Counting across many servers
+  body:
+  - 'Each server counting on its own lets a client get N times its limit by spreading requests across
+    N servers. A shared store fixes that. The danger is a race: two servers read 99, both allow, both
+    write 100. Use an atomic increment, or run the whole token-bucket check as a Lua script inside Redis
+    so it''s one atomic step.'
+  - 'Going to the store on every request costs a network round trip. Two tricks help: once a client is
+    over the limit, cache that fact locally until the window ends; and for very high-volume edges, count
+    asynchronously and accept a slight overshoot.'
+- title: When the limiter fails
+  body:
+  - The limiter protects the API; it must not become the reason the API is down. Put a short timeout on
+    calls to the counter store, catch every error, and let requests through if the store is unavailable.
+    Log it loudly so someone fixes it.
+- title: Rate limiting is not load shedding
+  body:
+  - 'A rate limiter judges one client against that client''s limit. A load shedder judges the whole system:
+    when servers are struggling it drops the least important traffic, whoever sent it. Production APIs
+    usually need both.'
+tradeoffs:
+- decision: Algorithm
+  chose: Sliding-window counter (or token bucket if bursts matter)
+  over: Sliding log
+  because: Near-exact with two numbers per client, instead of storing every timestamp.
+- decision: Where counts live
+  chose: A shared, sharded Redis
+  over: Each server's memory
+  because: Limits hold across servers; the cost is a round trip, reduced by caching blocked clients locally.
+- decision: Failure mode
+  chose: Fail open
+  over: Fail closed
+  because: An outage of the limiter shouldn't become an outage of the API.
+breaks:
+- what: One huge client generates most of the counter traffic
+  fix: Its key lands on one Redis shard; give very large clients a local pre-check or split their key
+    across shards.
+- what: A global API with users near many regions
+  fix: Count per region (or per point of presence) instead of globally, accepting that a client could
+    get its limit in each region.
+- what: An attack from millions of IPs
+  fix: Per-client limits don't help; you need load shedding, bot detection and limits at the network edge.
+inPractice:
+- text: 'Stripe runs four limiters: a request rate limiter (N requests a second per user, by far the most
+    important), a concurrent-requests limiter (for example 20 requests in flight), a fleet-usage load
+    shedder that keeps a share of capacity, such as 20%, for critical requests like creating charges,
+    and a worker-utilisation load shedder that drops test-mode traffic first during incidents.'
+  source: 1
+- text: Stripe implements its limiters as token buckets in Redis, and stresses hooking them into middleware
+    so a bug or a Redis outage never affects requests.
+  source: 1
+- text: Cloudflare counts per point of presence, because anycast sends the same IP to the same data centre.
+    Inside each one, counters live in memcached sharded with consistent hashing. It uses the sliding-window
+    counter; in an analysis of 400 million requests from 270,000 sources, 0.003% were wrongly allowed
+    or limited.
+  source: 2
+- text: Cloudflare increments counters asynchronously, and once a client crosses the threshold every server
+    caches the block until it expires, so mitigating an attack doesn't slow legitimate requests.
+  source: 2
+sources:
+- title: Scaling your API with rate limiters
+  publisher: Stripe
+  year: '2017'
+  url: https://stripe.com/blog/rate-limiters
+- title: How we built rate limiting capable of scaling to millions of domains
+  publisher: Cloudflare
+  year: '2017'
+  url: https://blog.cloudflare.com/counting-things-a-lot-of-different-things/
+- title: Design a Distributed Rate Limiter
+  publisher: Hello Interview
+  year: '2026'
+  url: https://www.hellointerview.com/learn/system-design/problem-breakdowns/distributed-rate-limiter

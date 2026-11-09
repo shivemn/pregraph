@@ -1,0 +1,292 @@
+---
+import Base from '../../layouts/Base.astro';
+import { content } from '../../lib/site';
+import { LEVELS, LAYER_COLOURS, layerColour } from '../../lib/designs';
+
+export function getStaticPaths() {
+  return content().designs.map((d) => ({ params: { id: d.id } }));
+}
+
+const c = content();
+const d = c.designs.find((x) => x.id === Astro.params.id)!;
+const level = LEVELS.find((l) => l.id === d.level)!;
+const shelved = new Set(c.toolGroups.flatMap((g) => g.tools));
+const stops = d.stops.map((id) => c.concepts.find((x) => x.id === id)!);
+const others = c.designs.filter((x) => x.id !== d.id);
+const sections = [
+  ['requirements', 'Requirements'],
+  ['numbers', 'Numbers'],
+  ['api', 'API'],
+  ['data', 'Data'],
+  ['architecture', 'Architecture'],
+  ['flows', 'How requests flow'],
+  ['deep-dives', 'Deep dives'],
+  ['trade-offs', 'Trade-offs'],
+  ['breaks', 'What breaks first'],
+  ...(d.inPractice.length ? [['in-practice', 'What they actually built']] : []),
+  ['sources', 'Sources'],
+];
+---
+
+<Base wide title={d.title} description={d.summary}>
+  <article class="design" data-area="systems">
+    <p class="level"><span>{level.title} design</span> Like {d.like}</p>
+    <h1><span class="board">{d.title}</span></h1>
+    <p class="lede">{d.summary}</p>
+    <p class="quiet note">
+      Our design, simplified for learning. Statements about what a company built are from that company's own write-ups,
+      numbered and linked under Sources. Numbers marked as assumptions are ours.
+    </p>
+
+    <nav class="jump" aria-label="On this page">
+      {sections.map(([id, t]) => <a href={`#${id}`}>{t}</a>)}
+    </nav>
+
+    <section aria-labelledby="requirements">
+      <h2 id="requirements">Requirements</h2>
+      <div class="two">
+        <div>
+          <h3>It must do</h3>
+          <ul class="ticks">{d.requirements.functional.map((x) => <li>{x}</li>)}</ul>
+        </div>
+        <div>
+          <h3>It must be</h3>
+          <ul class="ticks">{d.requirements.nonFunctional.map((x) => <li>{x}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="numbers">
+      <h2 id="numbers">Numbers</h2>
+      <p class="quiet section-note">Rough sums decide the design: what fits on one machine, what must be spread out, and what dominates.</p>
+      <dl class="numbers">
+        {
+          d.estimates.map((e) => (
+            <div>
+              <dt>{e.quantity}</dt>
+              <dd class="value">{e.value}</dd>
+              <dd class="working">{e.working}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section aria-labelledby="api">
+      <h2 id="api">API</h2>
+      <ul class="api">
+        {d.api.map((a) => <li><code>{a.call}</code><span>{a.does}</span></li>)}
+      </ul>
+    </section>
+
+    <section aria-labelledby="data">
+      <h2 id="data">Data</h2>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>What</th><th>Where</th><th>Holds</th><th>Why</th></tr></thead>
+          <tbody>
+            {d.data.map((x) => <tr><th scope="row">{x.name}</th><td>{x.store}</td><td>{x.holds}</td><td>{x.why}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="architecture">
+      <h2 id="architecture">Architecture</h2>
+      <p class="quiet section-note">From the person using it to where the data lives.</p>
+      <ol class="layers" style={`--n:${d.layers.length}`}>
+        {
+          d.layers.map((l, i) => (
+            <li style={`--c: var(${LAYER_COLOURS[Math.min(i, LAYER_COLOURS.length - 1)]})`}>
+              <h3>{l.name}</h3>
+              <ul>
+                {l.parts.map((p) => <li><b>{p.name}</b><span>{p.does}</span></li>)}
+              </ul>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section aria-labelledby="flows">
+      <h2 id="flows">How requests flow</h2>
+      <div class="flows">
+        {
+          d.flows.map((f) => (
+            <div class="flow">
+              <h3>{f.name}</h3>
+              <ol>
+                {f.steps.map((s) => (
+                  <li style={`--c: ${layerColour(d, s.at)}`}>
+                    <b>{s.at}</b>
+                    <span>{s.does}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section aria-labelledby="deep-dives">
+      <h2 id="deep-dives">Deep dives</h2>
+      {
+        d.deepDives.map((x) => (
+          <div class="dive">
+            <h3>{x.title}</h3>
+            {x.body.map((p) => <p>{p}</p>)}
+          </div>
+        ))
+      }
+    </section>
+
+    <section aria-labelledby="trade-offs">
+      <h2 id="trade-offs">Trade-offs</h2>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>Decision</th><th>We chose</th><th>Over</th><th>Because</th></tr></thead>
+          <tbody>
+            {d.tradeoffs.map((t) => <tr><th scope="row">{t.decision}</th><td>{t.chose}</td><td>{t.over}</td><td>{t.because}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="breaks">
+      <h2 id="breaks">What breaks first</h2>
+      <ul class="breaks">
+        {d.breaks.map((b) => <li><p class="what">{b.what}</p><p><span class="fix">Fix</span> {b.fix}</p></li>)}
+      </ul>
+    </section>
+
+    {
+      d.inPractice.length > 0 && (
+        <section aria-labelledby="in-practice">
+          <h2 id="in-practice">What they actually built</h2>
+          <ul class="practice">
+            {d.inPractice.map((p) => (
+              <li>
+                {p.text} <a class="cite" href={`#source-${p.source}`} aria-label={`Source ${p.source}`}>[{p.source}]</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section aria-labelledby="sources">
+      <h2 id="sources">Sources</h2>
+      <ol class="sources">
+        {
+          d.sources.map((s, i) => (
+            <li id={`source-${i + 1}`}>
+              <a href={s.url} rel="noopener">{s.title}</a>
+              <span class="faint">, {s.publisher}, {s.year}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section aria-labelledby="stops">
+      <h2 id="stops">Stops this design uses</h2>
+      <p class="quiet section-note">Learn these and every part of the design above will make sense.</p>
+      <p class="chips">
+        {stops.map((s) => <a class="chip" data-area={s.area} href={`/${shelved.has(s.id) ? 'tools' : 'concepts'}/${s.id}`}>{s.title}</a>)}
+      </p>
+    </section>
+
+    <section aria-labelledby="more">
+      <h2 id="more">More designs</h2>
+      <p class="chips">{others.map((o) => <a class="chip" href={`/designs/${o.id}`}>{o.title.replace(/^Design (a |an )?/, '')}</a>)}</p>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .design { max-width: 1040px; }
+  .level { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; font-weight: 600; color: var(--ink-2); padding-top: 8px; }
+  .level span {
+    font-family: var(--sign); font-stretch: 85%; font-weight: 700; color: var(--ink);
+    border: 2px solid var(--ink); padding: 0 7px;
+  }
+  h1 { margin-top: 10px; font-size: clamp(2rem, 6vw, 3.2rem); }
+  .lede { font-size: 1.1875rem; max-width: 66ch; margin-top: 14px; }
+  .note { max-width: 66ch; margin-top: 8px; font-size: 0.97rem; }
+  .jump { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 20px; padding: 10px 0; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--rule); }
+  .jump a { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; text-decoration: none; }
+  .jump a:hover { text-decoration: underline; }
+  section { margin-top: 44px; scroll-margin-top: 16px; }
+  h2 { font-size: 2rem; }
+  h3 { font-family: var(--sign); font-stretch: 88%; font-size: 1.3rem; font-weight: 650; }
+  .section-note { margin-top: 2px; max-width: 66ch; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 12px; }
+  .ticks { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; }
+  .ticks li { padding-left: 22px; position: relative; max-width: 60ch; }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 10px; height: 10px; background: var(--line); }
+
+  .numbers { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0 28px; margin: 14px 0 0; border-top: 3px solid var(--ink); }
+  .numbers div { padding: 12px 0 16px; border-bottom: 1px solid var(--rule); }
+  .numbers dt { font-family: var(--sign); font-stretch: 85%; font-weight: 700; color: var(--ink-2); font-size: 1.05rem; }
+  .numbers .value { margin: 0; font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.6rem; line-height: 1.1; }
+  .numbers .working { margin: 6px 0 0; color: var(--ink-2); font-size: 0.95rem; }
+
+  .api { list-style: none; padding: 0; margin: 12px 0 0; border-top: 3px solid var(--ink); }
+  .api li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .api code { font-size: 0.9rem; background: var(--platform); padding: 4px 8px; overflow-wrap: anywhere; align-self: start; }
+
+  .table-wrap { overflow-x: auto; margin-top: 12px; }
+  .data { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.97rem; }
+  .data thead th { text-align: left; font-family: var(--sign); font-stretch: 85%; font-weight: 700; color: var(--ink-2); border-bottom: 3px solid var(--ink); padding: 6px 10px 6px 0; }
+  .data th[scope='row'] { text-align: left; font-weight: 700; padding-right: 12px; }
+  .data td, .data th[scope='row'] { vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); }
+
+  /* Architecture: columns of components, a coloured rule per layer, arrows between. */
+  .layers { list-style: none; padding: 0; margin: 14px 0 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 28px; }
+  .layers > li { position: relative; border-top: 6px solid var(--c); padding-top: 8px; }
+  .layers > li:not(:last-child)::after {
+    content: '→'; position: absolute; right: -22px; top: -16px; font-weight: 700; color: var(--ink-3);
+  }
+  .layers ul { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; }
+  .layers ul li { border: 1.5px solid var(--rule); padding: 8px 10px; display: grid; gap: 2px; background: var(--paper); }
+  .layers b { font-weight: 700; line-height: 1.25; }
+  .layers span { color: var(--ink-2); font-size: 0.92rem; line-height: 1.35; }
+
+  /* Flows: each request is a line with stations, coloured by the layer each stop is in. */
+  .flows { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px 40px; margin-top: 12px; }
+  .flow ol { list-style: none; padding: 0; margin: 10px 0 0; position: relative; }
+  .flow ol::before { content: ''; position: absolute; left: 8px; top: 10px; bottom: 10px; width: 4px; background: var(--rule); }
+  .flow li { position: relative; padding: 0 0 14px 32px; display: grid; gap: 1px; }
+  .flow li::before {
+    content: ''; position: absolute; left: 0; top: 5px; width: 20px; height: 20px; border-radius: 50%;
+    border: 5px solid var(--c); background: var(--paper); box-sizing: border-box;
+  }
+  .flow b { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.1rem; }
+  .flow span { color: var(--ink-2); }
+
+  .dive { max-width: 70ch; margin-top: 18px; }
+  .dive p { margin-top: 8px; }
+
+  .breaks { list-style: none; padding: 0; margin: 12px 0 0; border-top: 3px solid var(--ink); max-width: 80ch; }
+  .breaks li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .breaks .what { font-weight: 700; }
+  .fix { font-family: var(--sign); font-stretch: 85%; font-weight: 700; background: var(--yellow); color: #000; padding: 0 6px; margin-right: 4px; }
+
+  .practice { padding-left: 20px; display: grid; gap: 10px; max-width: 75ch; margin-top: 12px; }
+  .cite { font-weight: 700; text-decoration: none; }
+  .sources { padding-left: 24px; display: grid; gap: 6px; margin-top: 12px; max-width: 80ch; }
+  .sources li:target { background: var(--platform); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip { font-size: 0.92rem; font-weight: 600; text-decoration: none; padding: 2px 10px; border: 1.5px solid var(--line, var(--ink)); color: var(--ink); }
+  .chip:hover { background: var(--platform); }
+
+  @media (max-width: 860px) {
+    .layers { grid-template-columns: 1fr; gap: 22px; }
+    .layers > li:not(:last-child)::after { content: '↓'; right: auto; left: 0; top: auto; bottom: -22px; }
+    .two { grid-template-columns: 1fr; gap: 16px; }
+    .api li { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>

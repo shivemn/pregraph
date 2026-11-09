@@ -1,0 +1,214 @@
+id: upi-payments
+title: Design a UPI payments app
+like: PhonePe, Google Pay, Paytm, BHIM
+level: core
+summary: Move money between bank accounts in seconds, billions of times a month, without ever charging
+  someone twice or losing track of a payment when a bank doesn't answer.
+stops:
+- api-styles
+- database-internals
+- reliability-patterns
+- messaging
+- distributed-systems
+- systems-security
+requirements:
+  functional:
+  - Pay a UPI ID, a phone number or a QR code
+  - Request money (collect) and approve or decline requests
+  - See transaction history and the status of pending payments
+  - Get refunds and reversals when a payment fails after money left the account
+  - Notifications for every debit and credit
+  nonFunctional:
+  - Never debit twice for one payment, however many times anything is retried
+  - Every payment ends in a known state, even when a bank times out
+  - 'A full audit trail: nothing is edited, everything is appended'
+  - Most payments complete within a few seconds
+  - The UPI PIN never passes through or is stored by the app's servers
+estimates:
+- quantity: UPI-wide volume
+  value: about 25.5 billion a month
+  working: NPCI's statistics show 25,466.70 million UPI transactions in October 2026, worth ₹31.5 lakh
+    crore, across 758 banks.
+- quantity: Average rate across UPI
+  value: about 9,500 a second
+  working: 25.47 billion ÷ (31 days × 86,400 seconds) ≈ 9,500 transactions a second, on average. Peaks
+    around salary days, festivals and sales are several times higher.
+- quantity: Our app
+  value: about 1,000 a second, 5,000 at peak
+  working: 'Assume our app handles about a tenth of UPI: 950 a second on average, with peaks five times
+    that.'
+- quantity: Ledger storage
+  value: about 30 TB a year
+  working: 'A tenth of UPI is about 2.5 billion payments a month. Assume each writes about 1 KB across
+    ledger entries and status changes: 2.5 billion × 1 KB × 12 months ≈ 30 TB a year, kept for years for
+    audits. Old months move to cheaper storage.'
+api:
+- call: 'POST /payments  Idempotency-Key: {uuid}  {payeeVpa, amount, note}'
+  does: Starts a payment. Sending the same key again returns the same payment, never a second one.
+- call: GET /payments/{id}
+  does: 'Current status: pending, success, failed or deemed (outcome not yet known).'
+- call: POST /collect-requests/{id}/approve
+  does: Approves a money request; the payer then enters their UPI PIN.
+- call: Callback from the UPI switch → /upi/callback
+  does: Final status for a payment, matched by transaction reference.
+data:
+- name: payments
+  store: Relational database with strong consistency, sharded by payer
+  holds: payment_id, idempotency_key (unique), payer, payee, amount, state, upi_txn_ref, timestamps
+  why: State changes must be transactional, and the unique key on idempotency_key stops duplicates.
+- name: ledger
+  store: Append-only, double-entry tables
+  holds: One debit and one credit row per movement, never updated
+  why: Balances and audits are computed from entries; mistakes are fixed by reversing entries, not edits.
+- name: outbox
+  store: Same database as payments
+  holds: 'Events to publish: notifications, analytics'
+  why: Written in the same transaction as the state change, so no event is lost or sent for a change that
+    didn't happen.
+- name: reconciliation
+  store: Batch store
+  holds: Daily settlement files from the network, and match results
+  why: Proves the app's records agree with what actually moved between banks.
+layers:
+- name: Clients
+  parts:
+  - name: Payment app
+    does: Holds the bound device and SIM, collects the UPI PIN in a secure component
+- name: App backend
+  parts:
+  - name: Payments API
+    does: Idempotency, limits, risk checks
+  - name: Payment state machine
+    does: Drives each payment to a final state
+  - name: Risk engine
+    does: Velocity limits and fraud scores
+- name: Network
+  parts:
+  - name: Partner bank (PSP bank)
+    does: Connects the app to UPI
+  - name: NPCI UPI switch
+    does: Routes between banks
+  - name: Payer's bank
+    does: Verifies PIN, debits
+  - name: Payee's bank
+    does: Credits
+- name: Data
+  parts:
+  - name: Payments DB and ledger
+    does: The truth
+  - name: Outbox and queue
+    does: Notifications and analytics
+  - name: Reconciliation
+    does: Daily matching against settlement files
+flows:
+- name: Paying a shop by QR
+  steps:
+  - at: App
+    does: Scans the QR, shows the shop's name, and sends POST /payments with a new idempotency key
+  - at: Payments API
+    does: Inserts a payment in state CREATED; a repeat of the same key returns this row instead
+  - at: Risk engine
+    does: Checks limits and fraud signals
+  - at: App
+    does: The user enters the UPI PIN in the secure component; it's encrypted for the bank, not readable
+      by the app's servers
+  - at: Payment state machine
+    does: Moves to PENDING and sends the request through the partner bank to the UPI switch
+  - at: Payer's bank
+    does: Verifies the PIN and debits the account
+  - at: Payee's bank
+    does: Credits the shop's account
+  - at: Payment state machine
+    does: Receives SUCCESS, writes ledger entries and the outbox event in one transaction
+  - at: App
+    does: Shows the tick; notifications go out from the outbox
+- name: When the bank doesn't answer
+  steps:
+  - at: Payment state machine
+    does: Times out waiting; marks the payment DEEMED (outcome unknown) and tells the user it's being
+      checked
+  - at: Payment state machine
+    does: Never resends the debit; queries the status of the original transaction with backoff
+  - at: UPI switch
+    does: Eventually reports success or failure
+  - at: Reconciliation
+    does: If still unknown, the end-of-day settlement file decides; failed debits are reversed to the
+      payer
+deepDives:
+- title: 'Idempotency: the most important line of code'
+  body:
+  - Phones lose signal right after tapping Pay, and the app retries. Without protection, the retry becomes
+    a second payment. The client generates an idempotency key when the user starts the payment and sends
+    it with every attempt. The server stores the key with a unique constraint and the result; any repeat
+    gets the stored result.
+  - 'The same rule applies inward: every call the app makes to the bank carries the same transaction reference
+    on retry, so the bank and the switch can recognise a repeat too.'
+- title: Payments are state machines
+  body:
+  - 'Each payment moves through a fixed set of states: CREATED, PENDING, then SUCCESS or FAILED, with
+    DEEMED for ''we don''t know yet''. Every transition is a database transaction with a check on the
+    current state, so two workers can''t both move the same payment. Nothing jumps from PENDING to FAILED
+    just because of a timeout; a timeout means unknown, and unknown is resolved by asking, not by guessing.'
+- title: Double-entry ledger
+  body:
+  - 'Money is never ''updated''. Each movement writes balanced entries: debit the payer''s account, credit
+    the payee''s. The sum of all entries is always zero, which is a check you can run continuously. Refunds
+    and corrections are new entries that reverse old ones, so the history is complete for auditors and
+    regulators.'
+- title: Reconciliation
+  body:
+  - 'Your database says what you think happened; the banks'' settlement says what did. Every day, match
+    each payment against the network''s settlement files. Mismatches are rare but real: a payment you
+    marked failed that actually debited, or a credit you never got confirmation for. Automated matching
+    plus a team to resolve the rest is part of the system, not an afterthought.'
+- title: Security and fraud
+  body:
+  - The UPI PIN is entered in a secure component and verified by the payer's bank; the app's servers never
+    see it in plain form. Devices are bound to the registered mobile number during setup. On top of that,
+    a risk engine applies velocity limits, flags new payees, and scores collect requests, since fake requests
+    that trick people into entering their PIN are a common scam.
+tradeoffs:
+- decision: Consistency
+  chose: Strongly consistent relational database for payments and ledger
+  over: An eventually consistent store
+  because: Correctness about money beats raw scalability; shard by payer to scale.
+- decision: Timeouts
+  chose: An explicit 'unknown' state resolved by status checks
+  over: Retrying the debit or assuming failure
+  because: Retrying risks double debits; assuming failure risks lost money.
+- decision: Events
+  chose: Transactional outbox
+  over: Publishing to a queue after committing
+  because: A crash between commit and publish would lose notifications or send them for rolled-back changes.
+breaks:
+- what: A partner bank slows down on a festival day
+  fix: Circuit-break and route through another partner bank if you have one; show users an honest 'pending'
+    instead of retrying.
+- what: One merchant's sale creates a hot row on their account
+  fix: Shard by payer, not payee, and aggregate merchant credits asynchronously.
+- what: A spike of collect-request scams
+  fix: Tighten risk rules for collect requests from new payees, and add friction in the app.
+inPractice:
+- text: NPCI's published statistics show 25,466.70 million UPI transactions in October 2026, worth ₹31,52,929.46
+    crore, with 758 banks live on UPI.
+  source: 1
+- text: Stripe's API lets clients send an idempotency key with each request so retries after network failures
+    can't create duplicate charges; the server keeps the first result for that key and returns it again.
+  source: 3
+sources:
+- title: UPI product statistics
+  publisher: National Payments Corporation of India
+  year: '2026'
+  url: https://www.npci.org.in/product/upi/product-statistics
+- title: What is UPI and how it works
+  publisher: Razorpay
+  year: '2026'
+  url: https://razorpay.com/blog/what-is-upi-and-how-it-works/
+- title: Designing robust and predictable APIs with idempotency
+  publisher: Stripe
+  year: '2017'
+  url: https://stripe.com/blog/idempotency
+- title: Design a Payment System like Stripe
+  publisher: Hello Interview
+  year: '2026'
+  url: https://www.hellointerview.com/learn/system-design/problem-breakdowns/payment-system

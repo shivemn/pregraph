@@ -1,0 +1,215 @@
+id: live-streaming
+title: Design live streaming for a cricket final
+like: JioHotstar, YouTube Live, Netflix live events
+level: advanced
+summary: Stream one match to tens of millions of phones at once, on networks from fibre to patchy 4G,
+  when everyone arrives in the same few minutes. Video is mostly a CDN problem; the spike is mostly everything
+  else.
+stops:
+- networking
+- web-http
+- caching
+- scaling-load-balancing
+- reliability-patterns
+- observability
+- cloud-architecture
+requirements:
+  functional:
+  - Watch the live match on phones, TVs and browsers
+  - Quality adjusts to each viewer's connection automatically
+  - Log in and check the subscription before playing
+  - Live score, commentary languages and ads around the stream
+  - Pause, rewind a few minutes and rejoin live
+  nonFunctional:
+  - Start playing within a couple of seconds of pressing play
+  - Stay within a few seconds to tens of seconds of the TV broadcast
+  - Survive tens of millions of viewers arriving within minutes, at the toss or after a wicket
+  - When something fails, keep the video playing and drop the extras
+estimates:
+- quantity: Concurrent viewers
+  value: 25 million
+  working: Hotstar's own record during the 2019 World Cup semi-final (India vs New Zealand) was 25.3 million
+    concurrent viewers.
+- quantity: Bandwidth
+  value: about 10 Tbps
+  working: 'Assume an average of 400 kbps per viewer, since most watch on phones at modest resolutions:
+    25,000,000 × 400,000 bits/s = 10 Tbps. That matches the 10 Tbps+ peak Hotstar reported.'
+- quantity: Video segment requests
+  value: about 6 million a second
+  working: 'Players fetch one segment every few seconds. With 4-second segments: 25,000,000 ÷ 4 ≈ 6.25
+    million requests a second, plus playlist refreshes. Only a CDN can serve that.'
+- quantity: Joining rate
+  value: over a million a minute
+  working: Hotstar described growth of more than a million users a minute at key moments, with about a
+    minute for a new server to boot. Reactive autoscaling can't keep up.
+api:
+- call: POST /playback {contentId, device}
+  does: Checks login, subscription, region and device; returns a signed URL for the stream's master playlist.
+- call: GET …/master.m3u8
+  does: The list of renditions (240p to 1080p) and their bitrates. Served by the CDN.
+- call: GET …/720p/segment_10432.ts (or .m4s)
+  does: A few seconds of video. Served by the CDN.
+- call: POST /heartbeat {sessionId, position, bitrate}
+  does: 'Every 30–60 seconds: concurrency counts, quality metrics and resuming.'
+data:
+- name: segments and playlists
+  store: Origin storage, then CDN caches
+  holds: Encoded video in small chunks at each bitrate
+  why: Each segment is written once and read by millions, which is perfect for caching.
+- name: entitlements
+  store: Cache in front of a database
+  holds: user → subscription, regions, device limits
+  why: Checked at play time by everyone at once, so it must be cached and cheap.
+- name: sessions and heartbeats
+  store: Stream into an analytics system
+  holds: Viewer counts, bitrate, buffering events
+  why: Live dashboards for the operations team and the concurrency counter on screen.
+layers:
+- name: Source
+  parts:
+  - name: Stadium feed
+    does: Produced broadcast signal
+  - name: Contribution encoder
+    does: Sends it to the cloud
+- name: Video pipeline
+  parts:
+  - name: Transcoder
+    does: Makes a ladder of bitrates
+  - name: Packager
+    does: Cuts segments and writes playlists (HLS, DASH)
+  - name: Origin
+    does: Serves segments to the CDN
+- name: Delivery
+  parts:
+  - name: CDN mid-tier (origin shield)
+    does: Collapses requests to the origin
+  - name: CDN edge and ISP caches
+    does: Serve viewers from nearby
+- name: Services
+  parts:
+  - name: Playback API
+    does: Login, entitlement, signed URLs
+  - name: Home and personalisation
+    does: What's on, recommendations
+  - name: Ads, scores, notifications
+    does: Everything around the video
+- name: Players
+  parts:
+  - name: Phone, TV and web players
+    does: Choose bitrate, buffer, play
+flows:
+- name: From bat to phone
+  steps:
+  - at: Stadium feed
+    does: The broadcast is encoded and sent to cloud ingest, usually over two independent paths
+  - at: Transcoder
+    does: Re-encodes it at several bitrates and resolutions
+  - at: Packager
+    does: Cuts each rendition into segments of a few seconds and updates the playlists
+  - at: Origin
+    does: Holds the newest segments
+  - at: CDN mid-tier
+    does: Fetches each new segment once from the origin
+  - at: CDN edge
+    does: Serves it to everyone nearby
+  - at: Player
+    does: Downloads segments, measures throughput, and switches bitrate to avoid buffering
+- name: Pressing play at the toss
+  steps:
+  - at: Player
+    does: Calls the playback API
+  - at: Playback API
+    does: Checks entitlement from cache and returns a signed playlist URL
+  - at: CDN edge
+    does: Returns the playlist and first segments from cache
+  - at: Player
+    does: Starts at a low bitrate for a fast start, then climbs
+deepDives:
+- title: Segments, bitrates and delay
+  body:
+  - Adaptive streaming cuts video into short segments at several quality levels and lets the player choose
+    each next segment based on how fast the last ones arrived. Longer segments are efficient but add delay,
+    because a player usually buffers a few segments before playing; that's why plain HLS often runs 20–30
+    seconds behind live. Low-latency variants (LL-HLS, chunked CMAF) send parts of a segment as they are
+    made to get down to a few seconds, at the cost of more requests and less buffer.
+- title: The CDN does the heavy lifting
+  body:
+  - Ten terabits a second can't come from your own servers. CDNs serve segments from caches inside or
+    near internet providers. A mid-tier layer (an origin shield) means the origin is asked for each new
+    segment roughly once, however many viewers want it. Large services use several CDNs for capacity and
+    failover, and some, like Netflix with Open Connect, put their own cache appliances inside internet
+    providers' networks.
+- title: The spike is the real problem
+  body:
+  - 'Video segments cache beautifully. The trouble is everything else: login, entitlement checks, the
+    home screen, recommendations, ads. All of it gets hit at once when millions open the app because a
+    notification says the match has started. Autoscaling that reacts to CPU takes minutes to notice, request
+    and boot servers, while users arrive at over a million a minute.'
+  - 'So you scale ahead of time, from a forecast of concurrency, and test at that scale before the event
+    with load generators and deliberate failures. You also make the expensive calls cheap: cache entitlements,
+    serve a static home screen during peaks, and stagger push notifications so they don''t all land in
+    the same second.'
+- title: Degrade on purpose
+  body:
+  - Decide in advance what can be switched off. Recommendations, personalisation, live comments and even
+    ads can go, as long as video plays and payments work. Feature flags let an operator turn them off
+    in seconds, and clients should treat a failed extra as 'hide it', not 'crash'.
+tradeoffs:
+- decision: Latency
+  chose: A few seconds to tens of seconds behind live with HLS or DASH
+  over: Sub-second WebRTC
+  because: HTTP segments cache on CDNs and scale to tens of millions; real-time protocols don't scale
+    that cheaply.
+- decision: Scaling
+  chose: Pre-scale from forecasts, tested with load and failure drills
+  over: Reactive autoscaling
+  because: Traffic rises faster than new servers can boot.
+- decision: Under stress
+  chose: Turn off non-essential features
+  over: Try to keep everything
+  because: Viewers forgive a missing recommendation row, not a frozen match.
+breaks:
+- what: A push notification sends tens of millions of people to the app in seconds
+  fix: Send notifications in waves and pre-warm the services they hit.
+- what: One CDN runs out of capacity in a region
+  fix: Multi-CDN with steering by real-time performance, and lower default bitrates to cut bandwidth.
+- what: The entitlement database falls over
+  fix: Cache entitlements with a long expiry during the match, and fail open for users who were already
+    watching.
+inPractice:
+- text: Hotstar set a record of 25.3 million concurrent viewers on 10 July 2019, India vs New Zealand,
+    beating its earlier record of 18.6 million from the IPL 2019 final.
+  source: 1
+- text: At that scale Hotstar reported over a million requests a second at peak, over 10 Tbps of bandwidth,
+    and more than 10 billion clickstream messages.
+  source: 1
+- text: 'Hotstar didn''t rely on ordinary autoscaling: it cited insufficient-capacity errors, one instance
+    type per group and slow step sizes, against a million-plus new users a minute, about a minute of boot
+    time and 90 seconds to react. It pre-warmed infrastructure before matches, scaled proactively on concurrency,
+    and used spot fleets with mixed instance types.'
+  source: 1
+- text: Before big games it ran 'game days' with a load-generation system it called Hulk, plus chaos tests
+    for push-notification surges, delayed scale-up, bandwidth limits and CDN failures. In 'panic mode'
+    it turned off recommendations and personalisation to keep streaming and payments up.
+  source: 1
+- text: Netflix's Open Connect partners with over a thousand internet providers, placing Netflix cache
+    appliances inside their networks to keep traffic local.
+  source: 3
+sources:
+- title: How Hotstar.com dealt with 25 million concurrent viewers (report on the AWS re:Invent 2019 talk
+    CMY302 by Gaurav Kamboj)
+  publisher: DevelopersIO (Classmethod)
+  year: '2019'
+  url: https://dev.classmethod.jp/articles/reinvent-2019-cmy302/
+- title: Hotstar sets new global record for live viewership
+  publisher: AWS for Media & Entertainment blog
+  year: '2019'
+  url: https://aws.amazon.com/blogs/media/in-the-news-hotstar-sets-new-global-record-for-live-viewership/
+- title: Netflix Open Connect
+  publisher: Netflix
+  year: '2026'
+  url: https://openconnect.netflix.com/en/
+- title: Design a Video Streaming Platform Like YouTube
+  publisher: Hello Interview
+  year: '2026'
+  url: https://www.hellointerview.com/learn/system-design/problem-breakdowns/youtube

@@ -1,0 +1,206 @@
+id: url-shortener
+title: Design a URL shortener
+like: Bitly, TinyURL
+level: starter
+summary: 'Turn long links into short ones and redirect billions of clicks quickly. The classic first design:
+  generating unique codes, a read-heavy cache, and counting clicks without slowing anything down.'
+stops:
+- rest-apis
+- sql
+- hash-tables
+- caching
+- scaling-load-balancing
+- partitioning-replication
+- messaging
+requirements:
+  functional:
+  - Create a short link for a long URL, with an optional custom alias and expiry date
+  - Redirect anyone who opens the short link to the long URL
+  - Count clicks per link per day for the link's owner
+  - A short link never changes where it points once created
+  nonFunctional:
+  - 'Redirects are fast: a few milliseconds of server time, so they add almost nothing to a page load'
+  - Redirects almost never fail. A dead short link breaks someone else's page, email or printed poster
+  - 'Reads far outnumber writes: a link is created once and opened many times'
+  - Links last for years, so storage must be durable
+  - Codes shouldn't be easy to guess in sequence, so private links can't be enumerated
+estimates:
+- quantity: New links
+  value: about 40 per second
+  working: Assume 100 million new links a month. A month is about 2.6 million seconds, so 100,000,000
+    ÷ 2,600,000 ≈ 38 writes a second.
+- quantity: Redirects
+  value: about 4,000 a second, 20,000 at peak
+  working: 'Assume each link is opened 100 times on average: 100 × 40 = 4,000 a second. Traffic is bursty,
+    so plan for five times that at peak.'
+- quantity: Code length
+  value: 7 characters
+  working: 'Codes use a–z, A–Z and 0–9: 62 symbols. 62⁷ ≈ 3.5 trillion codes. Five years at 100 million
+    a month is 6 billion links, a tiny fraction of the space.'
+- quantity: Storage
+  value: about 3 TB over five years
+  working: About 500 bytes per link (the URL, owner, dates) × 6 billion links = 3 TB. One large database
+    could hold it; sharding is for throughput and safety, not size.
+- quantity: Cache
+  value: a few GB
+  working: A small share of links gets most clicks. Caching the 10 million most active links at 500 bytes
+    each needs about 5 GB, which fits in memory on one machine.
+api:
+- call: POST /api/links  {url, alias?, expiresAt?}
+  does: Creates a link and returns its code and short URL. Fails with 409 if the alias is taken.
+- call: GET /{code}
+  does: Answers with a redirect (302) to the long URL, or 404 if the code doesn't exist or has expired.
+- call: GET /api/links/{code}/stats?from=&to=
+  does: Returns clicks per day for the owner.
+- call: DELETE /api/links/{code}
+  does: The owner disables a link; the redirect starts returning 404 or 410.
+data:
+- name: links
+  store: Key-value or relational store, keyed by code
+  holds: code, long_url, owner_id, created_at, expires_at
+  why: Every redirect is a lookup by code, which any store does fast. A relational database works at this
+    size and gives a unique constraint on code for free.
+- name: click events
+  store: A log such as Kafka
+  holds: code, timestamp, referrer, country, a random event ID
+  why: Redirects write here without waiting. Consumers aggregate in the background.
+- name: daily clicks
+  store: Relational or column store
+  holds: code, day, count
+  why: Owners read small, pre-aggregated rows instead of scanning raw events.
+layers:
+- name: Clients
+  parts:
+  - name: Browser
+    does: Opens a short link
+  - name: App or API user
+    does: Creates links
+- name: Edge
+  parts:
+  - name: Load balancer
+    does: Spreads requests across stateless servers
+- name: Services
+  parts:
+  - name: Redirect service
+    does: Looks up a code and redirects. Read-only and tiny
+  - name: Link service
+    does: Validates URLs, checks for abuse, creates codes
+  - name: Click aggregator
+    does: Turns click events into daily counts
+- name: Data
+  parts:
+  - name: Cache (Redis)
+    does: Hot codes in memory
+  - name: Link store
+    does: Every link, durably
+  - name: Event log (Kafka)
+    does: Click events
+  - name: Stats store
+    does: Daily counts
+flows:
+- name: Creating a link
+  steps:
+  - at: App
+    does: Sends the long URL, maybe with an alias
+  - at: Link service
+    does: Checks the URL is valid and not on a malware or phishing blocklist, and that this user isn't
+      over their creation limit
+  - at: Link service
+    does: Makes a random 7-character code (or uses the alias)
+  - at: Link store
+    does: Inserts the row. The unique constraint on code rejects a duplicate, and the service retries
+      with a new code
+  - at: App
+    does: Gets back the short URL
+- name: Following a link
+  steps:
+  - at: Browser
+    does: Requests /aZ3kQ9x
+  - at: Redirect service
+    does: Looks up the code in the cache
+  - at: Link store
+    does: On a cache miss, reads the row, and the service puts it in the cache
+  - at: Browser
+    does: Gets a 302 with the long URL and goes there
+  - at: Event log
+    does: Receives a click event, sent without making the browser wait
+  - at: Click aggregator
+    does: Adds it to that link's count for the day
+deepDives:
+- title: Generating codes that don't collide
+  body:
+  - 'There are three common approaches. Hashing the long URL and keeping the first 7 characters means
+    the same URL always gets the same code, but two different URLs can still collide, so you must check
+    and retry anyway, and two users shortening one URL share stats. A counter turned into base 62 never
+    collides, but codes come out in order (aZ3kQ9x, aZ3kQ9y…), so anyone can walk through every link;
+    and one counter is a single point of failure unless each server takes a block of numbers at a time.
+    A random code checked against a unique constraint is the simplest: collisions are rare and a retry
+    fixes them.'
+  - How rare? With 6 billion of 3.5 trillion codes used, a new random code hits an existing one about
+    6 ÷ 3,500 ≈ 0.17% of the time. One retry almost always succeeds. If you want codes that are also time-ordered
+    and generated without a database round trip, a Snowflake-style 64-bit ID (time, machine number, sequence)
+    works, but it needs 11 base-62 characters instead of 7.
+- title: 301 or 302
+  body:
+  - 'A 301 tells browsers the move is permanent, so they cache it and later clicks never reach you. That
+    saves load but loses the click counts, and you can never change or disable the link for those users.
+    A 302 (or 307) is temporary: every click comes back to you. If analytics or the ability to disable
+    abusive links matters, use 302 and make the redirect path cheap instead.'
+- title: Why the cache is easy here
+  body:
+  - Caches are usually hard because data changes and the cache goes stale. Here the mapping from code
+    to URL never changes, so a cache entry can live a long time; only deletes and expiry need handling,
+    by removing the key when a link is disabled. Also cache 'not found' for a short time, so someone guessing
+    random codes doesn't send every guess to the database.
+  - A viral link can make one cache key very hot. Keeping a small in-process cache on each redirect server,
+    in front of Redis, takes that load off.
+- title: Counting clicks without slowing redirects
+  body:
+  - Writing to a database on every redirect would put the slowest part of the system on the fastest path.
+    Instead the redirect service sends an event to a log and moves on. Consumers read events in batches
+    and add to daily counters. Logs like Kafka deliver at least once, so a crash can replay a few events;
+    if counts must be exact, give each event an ID and skip IDs already counted.
+tradeoffs:
+- decision: Code generation
+  chose: Random codes with a unique constraint
+  over: A global counter
+  because: No coordination and no guessable sequence, at the cost of an occasional retry.
+- decision: Redirect status
+  chose: '302'
+  over: '301'
+  because: Keeps click counts accurate and lets abusive links be disabled, at the cost of more traffic.
+- decision: Click counting
+  chose: Asynchronous events, aggregated later
+  over: Updating a counter on each redirect
+  because: Keeps redirects fast; stats lag by seconds or minutes, which owners accept.
+breaks:
+- what: A link goes viral and one cache key gets hammered
+  fix: Local in-memory caches on each redirect server, or copies of the hot key on several cache nodes.
+- what: Spammers create millions of links to phishing pages
+  fix: Rate-limit creation per account and IP, check URLs against blocklists such as Google Safe Browsing,
+    and rescan old links.
+- what: The link store becomes the write bottleneck
+  fix: Shard by code (a hash of it), since every query is by code. There are no cross-link queries to
+    break.
+inPractice:
+- text: 'Twitter built Snowflake in 2010 to make 64-bit IDs that are roughly sorted by time without any
+    coordination: a timestamp, a worker number and a sequence number. They rejected ticket servers for
+    not giving ordering, UUIDs for needing 128 bits, and ZooKeeper sequences for speed and availability.'
+  source: 1
+- text: 'Instagram generated IDs inside PostgreSQL instead: 41 bits of milliseconds, 13 bits of logical
+    shard ID and 10 bits of sequence, allowing 1,024 IDs per shard per millisecond, with thousands of
+    logical shards mapped onto far fewer physical servers.'
+  source: 2
+sources:
+- title: Announcing Snowflake
+  publisher: Twitter Engineering
+  year: '2010'
+  url: https://blog.x.com/engineering/en_us/a/2010/announcing-snowflake
+- title: Sharding & IDs at Instagram
+  publisher: Instagram Engineering
+  year: '2012'
+  url: https://medium.com/instagram-engineering/sharding-ids-at-instagram-1cf5a71e5a5c
+- title: Design a URL Shortener Like Bitly
+  publisher: Hello Interview
+  year: '2026'
+  url: https://www.hellointerview.com/learn/system-design/problem-breakdowns/bitly

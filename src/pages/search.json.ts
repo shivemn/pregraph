@@ -34,5 +34,17 @@ export function GET() {
       label: r.kind === 'exam' ? 'Exam' : 'Job',
     });
   }
+  // Designs, so "design whatsapp" or "upi" finds the worked design.
+  for (const d of c.designs) {
+    docs.push({
+      id: `design-${d.id}`,
+      title: d.title,
+      area: '',
+      summary: d.summary,
+      sources: `${d.like} system design case study`,
+      href: `/designs/${d.id}`,
+      label: 'Design',
+    });
+  }
   return new Response(JSON.stringify(docs), { headers: { 'Content-Type': 'application/json' } });
 }

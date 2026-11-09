@@ -1,0 +1,198 @@
+id: ticket-rush
+title: Design ticket booking for a rush
+like: IRCTC Tatkal, BookMyShow, Ticketmaster
+level: advanced
+summary: Sell a fixed number of seats to far more people than there are seats, all arriving the moment
+  booking opens, without selling any seat twice and without the site falling over.
+stops:
+- database-internals
+- concurrency
+- caching
+- scaling-load-balancing
+- reliability-patterns
+- redis
+- api-styles
+requirements:
+  functional:
+  - Search trains, shows or events and see availability
+  - Hold seats while the person pays, and release them if they don't
+  - Pay and get a confirmed booking, or join a waitlist
+  - Cancel and refund
+  nonFunctional:
+  - 'A seat is never sold twice: correctness beats speed for inventory'
+  - Handle 10 to 100 times normal traffic in the first minutes after booking opens
+  - 'Fair: people who arrive first get served first, and bots don''t win'
+  - When there's too much load, queue people politely instead of erroring
+estimates:
+- quantity: People at opening
+  value: 500,000 in the first minute
+  working: Assume half a million people trying to book at the moment a popular quota opens. This is an
+    assumption for the exercise, not a published figure.
+- quantity: Requests
+  value: about 40,000 a second
+  working: 'Each person makes about five requests in that first minute (search, select, hold, retry):
+    500,000 × 5 ÷ 60 ≈ 42,000 a second.'
+- quantity: Seats
+  value: a few thousand per train or show
+  working: The inventory is tiny compared with demand. Most requests must end in 'sold out' or 'waitlist'
+    quickly and cheaply.
+- quantity: Hold duration
+  value: 10 minutes
+  working: Long enough to pay with UPI or a card, short enough that abandoned holds return to the pool.
+api:
+- call: GET /events/{id}/availability
+  does: Seat counts or a seat map, served from a short-lived cache.
+- call: POST /holds  Idempotency-Key  {eventId, seats|class, count}
+  does: Tries to hold seats; returns a hold with an expiry, or sold out.
+- call: POST /holds/{id}/payment
+  does: Starts payment for a hold.
+- call: Payment callback → confirm booking
+  does: Turns the hold into a booking if it's still valid; otherwise refunds.
+data:
+- name: inventory
+  store: Relational database, partitioned by event (train and date, or show)
+  holds: seat or quota counts, with a version number
+  why: Every change to a partition is transactional; partitioning means one hot event doesn't lock others.
+- name: holds
+  store: Same database (or Redis with expiry, backed by the database)
+  holds: hold_id, seats, user, expires_at, status
+  why: Holds must expire reliably, and conversion to a booking must be atomic.
+- name: bookings
+  store: Relational database
+  holds: booking_id, passenger details, seats, payment reference
+  why: The permanent record; strongly consistent.
+- name: waiting-room tokens
+  store: Edge or a fast key-value store
+  holds: queue position, admitted-at
+  why: Lets the edge decide who enters without touching the booking system.
+layers:
+- name: Clients
+  parts:
+  - name: Apps and browsers
+    does: Many of them refreshing at once
+- name: Edge
+  parts:
+  - name: Virtual waiting room
+    does: Admits people at the rate the system can handle
+  - name: Bot defences and rate limits
+    does: Per account and IP
+- name: Services
+  parts:
+  - name: Availability service
+    does: Cached counts
+  - name: Booking service
+    does: Holds and confirmations
+  - name: Payment service
+    does: Idempotent payments and refunds
+  - name: Expiry worker
+    does: Releases unpaid holds
+- name: Data
+  parts:
+  - name: Inventory DB
+    does: Partitioned by event
+  - name: Cache
+    does: Availability
+  - name: Queue
+    does: Booking requests per event, if serialised
+flows:
+- name: Booking at the opening second
+  steps:
+  - at: Browser
+    does: Arrives at the opening time and is placed in the waiting room with a position
+  - at: Virtual waiting room
+    does: Admits people in order at a rate the booking system can take
+  - at: Availability service
+    does: Shows counts from a cache a second or two old
+  - at: Booking service
+    does: 'Tries to hold seats with a conditional update: only succeeds if enough are still free'
+  - at: Inventory DB
+    does: Commits the decrement and the hold together, or reports none left
+  - at: Payment service
+    does: Takes payment within the hold window
+  - at: Booking service
+    does: Confirms the booking if the hold is still valid
+- name: An abandoned hold
+  steps:
+  - at: Expiry worker
+    does: Finds holds past expires_at that aren't paid
+  - at: Inventory DB
+    does: Returns the seats in the same transaction that marks the hold expired
+  - at: Payment service
+    does: If a payment arrives after expiry, refunds it automatically
+deepDives:
+- title: Never selling a seat twice
+  body:
+  - 'The core is a conditional write: ''decrease available seats by 2 where available ≥ 2'', in one statement,
+    checked by the database. Two requests can''t both succeed for the last seat, because the second sees
+    the updated count. Optimistic locking (update only if the version hasn''t changed, retry if it has)
+    works for seat maps; a row lock (SELECT … FOR UPDATE) works but holds locks longer under contention.'
+  - 'When thousands of requests hit one train at once, even correct locking becomes a queue at the database.
+    An alternative is to make that queue explicit: send all hold requests for one event to a single worker
+    through a queue, and let it process them one at a time from memory, writing results to the database.
+    No lock contention, strict first-come first-served, and the rate is easy to measure.'
+- title: The virtual waiting room
+  body:
+  - Letting everyone hit the booking service at once only produces timeouts and retries, which make the
+    load worse. A waiting room at the edge gives each arrival a place in line and lets people through
+    at a fixed rate, adjusting as people finish. Users see a position and an estimate instead of an error,
+    and the system behind stays at a load it can handle.
+- title: Holds and the payment race
+  body:
+  - 'A hold reserves seats for a few minutes so the person can pay. Two things can go wrong: the hold
+    expires while the payment is in flight, or the payment succeeds twice. Confirmation checks the hold
+    is still valid in the same transaction that creates the booking; if not, the payment is refunded.
+    Payments carry an idempotency key, so a retried callback can''t book twice.'
+- title: Fairness and bots
+  body:
+  - In a rush, automated scripts can beat people by milliseconds. Defences include requiring login before
+    the queue opens, randomising order among those who arrived before opening, per-account and per-device
+    limits, CAPTCHAs when behaviour looks automated, and verified identity for the scarcest inventory.
+- title: Showing availability
+  body:
+  - Exact live counts for every viewer would put read load on the same rows being written. Serve availability
+    from a cache that's a second or two old, and accept that someone may see '3 left' and then get 'sold
+    out'. The hold is the only moment that has to be exact.
+tradeoffs:
+- decision: Contention
+  chose: Serialise holds per event through a queue (or tight conditional updates)
+  over: Many concurrent transactions locking the same rows
+  because: Predictable throughput and strict ordering under extreme contention.
+- decision: Overload
+  chose: A virtual waiting room
+  over: Letting requests fail and retry
+  because: Turns chaos into a visible queue and protects the booking system.
+- decision: Availability display
+  chose: Slightly stale cached counts
+  over: Exact live counts
+  because: Reads stay cheap; correctness is enforced at hold time.
+breaks:
+- what: One event is so hot its partition can't keep up
+  fix: Split inventory into sub-pools (by coach or section) handled in parallel.
+- what: The payment gateway slows down and holds expire mid-payment
+  fix: Extend holds for payments already in flight, and refund automatically if a booking can't be made.
+- what: Retries from frustrated users multiply load
+  fix: Idempotency keys on holds, and client-side backoff with a visible status.
+inPractice:
+- text: Cloudflare launched its Waiting Room in 2021, first for overloaded COVID-19 vaccine registration
+    sites. It queues visitors at the edge and lets them in as people leave, so the site behind stays within
+    the load it can handle and nobody is dropped and forced to start again.
+  source: 1
+- text: Stripe uses idempotency keys so a retried request can't create a second charge.
+  source: 2
+sources:
+- title: Cloudflare Waiting Room
+  publisher: Cloudflare
+  year: '2021'
+  url: https://blog.cloudflare.com/cloudflare-waiting-room/
+- title: Designing robust and predictable APIs with idempotency
+  publisher: Stripe
+  year: '2017'
+  url: https://stripe.com/blog/idempotency
+- title: Design a Ticket Booking Site Like Ticketmaster
+  publisher: Hello Interview
+  year: '2026'
+  url: https://www.hellointerview.com/learn/system-design/problem-breakdowns/ticketmaster
+- title: Addressing Cascading Failures
+  publisher: Google SRE book
+  year: '2016'
+  url: https://sre.google/sre-book/addressing-cascading-failures/
