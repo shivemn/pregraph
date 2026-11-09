@@ -8,6 +8,8 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { indexConcepts, planPath, withPrerequisites, type ConceptNode, type PlanStep } from '../lib/graph';
 import { coaches, duration, hourRange } from '../lib/coaches';
+import { decodeProgress, mergeProgress, type Progress } from '../lib/progress';
+import { CalendarExport, ClosestJobs, ProgressLink } from './PlannerTools';
 import { midSentence } from '../lib/text';
 
 // The map pulls in the layout code, so it only loads when someone opens it.
@@ -103,6 +105,8 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
   const [me, setMe] = useState<Me>({ known: [], done: [] });
   const [roleState, setRoleState] = useState<RoleState>({});
   const [loaded, setLoaded] = useState(false);
+  /** Progress that arrived in a link from another device, waiting for a yes. */
+  const [incoming, setIncoming] = useState<Progress | null>(null);
   /** The stop whose panel is open. Mirrored in the URL hash so it can be shared. */
   const [panel, setPanel] = useState<string | null>(null);
 
@@ -133,6 +137,14 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
     const tier = params.get('tier');
     if (from && (backgrounds.some((b) => b.id === from) || jobs.some((j) => j.id === from))) m.background = from;
     if (tier && usedTiers.some((t) => t.id === tier)) r.tier = tier as TierId;
+    const code = params.get('progress');
+    if (code) {
+      const p = decodeProgress(code);
+      if (p) setIncoming(p);
+      const url = new URL(location.href);
+      url.searchParams.delete('progress');
+      history.replaceState(null, '', url);
+    }
     setMe(m);
     setRoleState(r);
     setLoaded(true);
@@ -228,8 +240,26 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
   const unskip = (id: string) => setMe((m) => ({ ...m, known: m.known.filter((x) => x !== id) }));
   const setView = (v: 'list' | 'map') => setRoleState((r) => ({ ...r, view: v }));
 
+  const acceptIncoming = () => {
+    if (incoming) setMe((m) => ({ ...m, ...mergeProgress(m, incoming) }));
+    setIncoming(null);
+  };
+  const have = useMemo(() => new Set([...known, ...done]), [known, done]);
+
   return (
     <div className={view === 'map' ? 'planner is-map' : 'planner'}>
+      {incoming && (
+        <div className="incoming" role="dialog" aria-label="Progress from another device">
+          <p>
+            This link brings progress from another device: {incoming.done.length} {incoming.done.length === 1 ? 'stop' : 'stops'} done
+            {incoming.known.length > 0 && `, ${incoming.known.length} skipped`}. Add it to this device? Nothing here is lost.
+          </p>
+          <div className="incoming-actions">
+            <button className="btn btn-small" onClick={acceptIncoming}>Add it here</button>
+            <button className="text-button" onClick={() => setIncoming(null)}>Ignore</button>
+          </div>
+        </div>
+      )}
       <div className="planner-main">
         <div className="controls">
           <label className="control">
@@ -484,6 +514,18 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
             </ul>
           )}
         </section>
+
+        {goal === 'role' && (
+          <ClosestJobs index={index} have={have} exclude={[role.id]} pace={pace} />
+        )}
+        <CalendarExport
+          stops={plan.steps.filter((s) => !done.has(s.id)).map((s) => ({ id: s.id, title: s.title, hours: s.hours }))}
+          pace={pace}
+          goal={role.title}
+          roleId={role.id}
+          routePath={goal === 'tool' ? `/tools/${role.id}` : `/roles/${role.id}`}
+        />
+        <ProgressLink progress={{ background: me.background, known: me.known, done: me.done, pace: me.pace }} />
 
         {(me.known.length > 0 || me.done.length > 0) && (
           <button

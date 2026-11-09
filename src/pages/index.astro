@@ -57,6 +57,10 @@ const counts = {
         <li><span><strong>To.</strong> One of {jobs.length} jobs or {exams.length} exams.</span></li>
         <li><span><strong>The ride.</strong> Each stop has a book, a video course and a place to practise, all free. Tick them off as you go; no account needed.</span></li>
       </ol>
+      <div class="welcome" data-welcome hidden>
+        <h2>Welcome back. The jobs closest to where you are:</h2>
+        <ol data-welcome-list></ol>
+      </div>
       <p class="intro-actions">
         <a class="btn" href="#plan">Plan my route</a>
         <a class="intro-map" href="#roles">See the whole network</a>
@@ -171,6 +175,8 @@ const counts = {
   import { planPath, withPrerequisites, type ConceptNode } from '../lib/graph';
   import { duration } from '../lib/coaches';
   import { midSentence } from '../lib/text';
+  import { closestJobs, type JobTarget } from '../lib/closest';
+  import { indexConcepts } from '../lib/graph';
 
   interface PreviewData {
     nodes: ConceptNode[];
@@ -250,6 +256,31 @@ const counts = {
         ? `Then ${more} more ${more === 1 ? 'stop' : 'stops'} on the hiring list: ${duration(plan.totalHours, 10)} in all at 10 hours a week.`
         : `That's the whole hiring list: ${duration(plan.totalHours, 10)} at 10 hours a week.`;
   }
+  // Someone coming back: their saved progress, and the jobs it puts them nearest to.
+  (async () => {
+    let me: { background?: string; known?: string[]; done?: string[]; pace?: number } = {};
+    try {
+      me = JSON.parse(localStorage.getItem('terminus:me') ?? localStorage.getItem('pregraph:me') ?? '{}') ?? {};
+    } catch {
+      return;
+    }
+    const have = new Set([...(me.known ?? []), ...(me.done ?? []), ...(me.background ? data.backgrounds[me.background]?.knows ?? [] : [])]);
+    if (have.size === 0) return;
+    const routes: JobTarget[] = await fetch('/routes.json').then((r) => r.json()).catch(() => []);
+    const near = closestJobs(indexConcepts(data.nodes), routes, have, 3);
+    if (near.length === 0) return;
+    const box = document.querySelector<HTMLElement>('[data-welcome]')!;
+    const ol = box.querySelector('[data-welcome-list]')!;
+    for (const j of near) {
+      const li = el('li');
+      const a = el('a', undefined, j.title);
+      a.href = `/roles/${j.id}`;
+      li.append(a, el('span', 'quiet', j.stops === 0 ? ': its hiring list is all behind you.' : `: ${j.stops} ${j.stops === 1 ? 'stop' : 'stops'} left, ${duration(j.hours, me.pace ?? 10)}.`));
+      ol.append(li);
+    }
+    box.hidden = false;
+  })();
+
   form.addEventListener('change', update);
   update(); // the browser may have kept the last choices on a back navigation
 </script>
@@ -266,6 +297,11 @@ const counts = {
     border: 3px solid var(--ink); font-family: var(--sign); font-weight: 750; font-size: 1rem; line-height: 1;
   }
   .how-steps strong { font-family: var(--sign); font-stretch: 88%; font-size: 1.15rem; }
+  .welcome { border: 3px solid var(--ink); padding: 12px 16px; background: var(--platform); max-width: 52ch; }
+  .welcome[hidden] { display: none; }
+  .welcome h2 { font-size: 1.15rem; }
+  .welcome ol { margin: 8px 0 0; padding-left: 1.3em; display: grid; gap: 4px; }
+  .welcome a { font-weight: 700; }
   .intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 4px; }
   .intro-actions .btn { font-size: 1.2rem; }
   .intro-map { font-weight: 600; }

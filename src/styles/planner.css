@@ -31,7 +31,7 @@
 .view-switch { margin-top: 18px; }
 .hint { margin: 14px 0 22px; font-size: 0.92rem; }
 
-.planner-side { position: sticky; top: 20px; display: grid; gap: 30px; padding-top: 4px; }
+.planner-side { display: grid; gap: 30px; padding-top: 4px; align-content: start; }
 .side-heading { font-size: 1.2rem; margin-bottom: 12px; }
 .small { font-size: 0.95rem; }
 .planner-side .small + .small { margin-top: 6px; }
@@ -173,3 +173,27 @@
 }
 .terminus-label { font-size: 1rem; font-weight: 600; text-transform: none; opacity: 0.8; }
 .terminus-end .route-end { padding-left: 0; }
+
+/* Side tools: closest jobs, calendar, progress link. */
+.closest { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; counter-reset: near; }
+.closest li { counter-increment: near; display: grid; grid-template-columns: 22px 1fr; column-gap: 6px; }
+.closest li::before { content: counter(near); font-family: var(--sign); font-weight: 750; color: var(--ink-2); grid-row: span 2; }
+.closest a { font-weight: 700; }
+.cal-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; margin: 8px 0; }
+.cal-controls label { display: grid; gap: 3px; }
+.cal-controls label:last-child { grid-column: 1 / -1; }
+.cal-controls select, .cal-controls input, .progress-link {
+  font: inherit; font-size: 0.95rem; padding: 6px 8px; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 0;
+  color-scheme: inherit; min-width: 0; width: 100%;
+}
+.btn-small { font-size: 1rem; padding: 7px 14px 5px; margin: 6px 0 8px; }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+.progress-link { margin-top: 4px; font-size: 0.85rem; }
+.incoming {
+  grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px;
+  padding: 12px 16px; border: 3px solid var(--ink); background: var(--yellow); color: #000; margin-bottom: 18px;
+}
+.incoming p { margin: 0; font-weight: 600; max-width: 70ch; }
+.incoming-actions { display: flex; align-items: center; gap: 14px; }
+.incoming .btn { background: #000; color: var(--yellow); border-color: #000; margin: 0; }
+.incoming .text-button { color: #000; }
