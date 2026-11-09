@@ -4,6 +4,25 @@
   summary: Querying, joining and aggregating tables. The most useful language you'll learn in a weekend.
   hours: 10
   recommends: [discrete-math]
+  covers:
+    - topic: SELECT basics
+      detail: Filtering, sorting and limiting rows.
+    - topic: Joins
+      detail: Inner, left and full joins, and getting the join condition right.
+    - topic: Aggregation
+      detail: GROUP BY, HAVING and aggregate functions.
+    - topic: Subqueries and CTEs
+      detail: Breaking a query into readable steps.
+    - topic: Window functions
+      detail: Running totals, ranks and comparing rows with their neighbours.
+    - topic: NULLs
+      detail: Three-valued logic and the bugs it causes.
+    - topic: Changing data
+      detail: INSERT, UPDATE, DELETE and transactions.
+    - topic: Schema design
+      detail: Keys, constraints and normalisation.
+    - topic: Indexes
+      detail: What they speed up and what they cost.
   resources:
     - resource: sqlbolt
       locator: "All lessons"
@@ -75,6 +94,21 @@
   summary: Summarising data, sampling, confidence intervals, hypothesis tests and regression, and how each one gets misused.
   hours: 30
   recommends: [probability]
+  covers:
+    - topic: Describing data
+      detail: Mean, median, spread, percentiles and distributions.
+    - topic: Sampling
+      detail: Samples versus populations, and sampling bias.
+    - topic: Estimation
+      detail: Standard errors and confidence intervals.
+    - topic: Hypothesis tests
+      detail: Null hypotheses, p-values, and what they don't mean.
+    - topic: Comparing groups
+      detail: t-tests, chi-square tests and their assumptions.
+    - topic: Correlation and regression
+      detail: Fitting a line, reading coefficients, and correlation versus causation.
+    - topic: Common mistakes
+      detail: Multiple comparisons, Simpson's paradox and survivorship bias.
   resources:
     - resource: openintro
       locator: "Chapters 1–9"
@@ -92,6 +126,21 @@
   summary: Formulas, lookups, pivot tables and charts. Still where most business data gets looked at first.
   hours: 10
   kind: tool
+  covers:
+    - topic: Formulas and references
+      detail: Relative and absolute references, and named ranges.
+    - topic: Lookups
+      detail: XLOOKUP, VLOOKUP, INDEX and MATCH.
+    - topic: Logic and text
+      detail: IF, IFS, COUNTIFS, SUMIFS and text functions.
+    - topic: Pivot tables
+      detail: Summarising data by any category.
+    - topic: Charts
+      detail: Choosing a chart and formatting it to be read.
+    - topic: Data cleaning
+      detail: Removing duplicates, splitting columns and Power Query.
+    - topic: Macros and VBA
+      detail: Recording and editing macros to automate repetitive work.
   resources:
     - resource: gcf-excel
       locator: "Formulas and functions, then the data analysis lessons"
@@ -112,7 +161,28 @@
   hours: 25
   kind: tool
   requires: [programming-basics]
+  covers:
+    - topic: Series and DataFrames
+      detail: Creating, inspecting and indexing them.
+    - topic: Selecting and filtering
+      detail: loc, iloc and boolean masks.
+    - topic: Cleaning
+      detail: Missing values, types, duplicates and string methods.
+    - topic: Grouping and aggregation
+      detail: groupby, agg and pivot tables.
+    - topic: Joining
+      detail: merge, join and concat.
+    - topic: Reshaping
+      detail: melt, pivot and stack.
+    - topic: Time series
+      detail: Dates, resampling and rolling windows.
+    - topic: File formats
+      detail: CSV, Excel, JSON and Parquet, and reading big files in chunks.
   resources:
+    - resource: pandas-cheatsheet
+      locator: Keep it open while you work
+      role: alternative
+      verified: true
     - resource: py4da
       locator: "Chapters 4–10"
       verified: true
@@ -136,7 +206,24 @@
   summary: Choosing the right chart, and the small decisions that make a chart honest and readable.
   hours: 12
   recommends: [statistics]
+  covers:
+    - topic: Choosing a chart
+      detail: Bar, line, scatter, histogram and when each fits the question.
+    - topic: Encoding data
+      detail: Position, length, colour and size, and which people read most accurately.
+    - topic: Clarity
+      detail: Titles that state the finding, labelled axes and less clutter.
+    - topic: Colour
+      detail: Sequential, diverging and categorical palettes, and colour-blind safety.
+    - topic: Honest charts
+      detail: Axes, scales and the ways charts mislead.
+    - topic: Tools
+      detail: matplotlib, seaborn or ggplot2, and a BI tool for dashboards.
   resources:
+    - resource: matplotlib-cheatsheets
+      locator: If you chart with matplotlib
+      role: alternative
+      verified: true
     - resource: dataviz-wilke
       locator: "Parts I and II"
       verified: true
@@ -163,6 +250,19 @@
   kind: tool
   requires: [sql]
   recommends: [data-visualization, spreadsheets]
+  covers:
+    - topic: Connecting data
+      detail: Importing and refreshing from files and databases.
+    - topic: Data modelling
+      detail: Tables, relationships and star schemas.
+    - topic: Measures
+      detail: Calculations with DAX in Power BI or calculated fields in Tableau.
+    - topic: Visuals and dashboards
+      detail: Laying out a page someone can read in a minute.
+    - topic: Filters and interactivity
+      detail: Slicers, drill-down and cross-filtering.
+    - topic: Sharing
+      detail: Publishing, permissions and row-level security.
   resources:
     - resource: powerbi-learn
       locator: "The data analyst learning paths"
@@ -181,6 +281,21 @@
   hours: 15
   requires: [sql]
   recommends: [database-internals]
+  covers:
+    - topic: OLTP versus OLAP
+      detail: Why analytics needs a different kind of database.
+    - topic: Dimensional modelling
+      detail: Fact and dimension tables, star and snowflake schemas.
+    - topic: Slowly changing dimensions
+      detail: Keeping history when attributes change.
+    - topic: ETL and ELT
+      detail: Transforming before loading or inside the warehouse.
+    - topic: Columnar storage
+      detail: Why warehouses store data by column, and partitioning.
+    - topic: Cloud warehouses
+      detail: BigQuery, Snowflake, Redshift and how they bill.
+    - topic: Data lakes and lakehouses
+      detail: Files in object storage with table formats like Delta and Iceberg.
   resources:
     - resource: kimball
       locator: "Fundamental concepts, then fact and dimension table techniques"
@@ -196,6 +311,21 @@
   hours: 20
   kind: tool
   requires: [pandas, sql]
+  covers:
+    - topic: Why Spark
+      detail: Processing data too big for one machine.
+    - topic: DataFrames
+      detail: Transformations, actions and lazy evaluation.
+    - topic: Partitions and shuffles
+      detail: How data is split, and why shuffles are slow.
+    - topic: Spark SQL
+      detail: Querying DataFrames with SQL.
+    - topic: Joins at scale
+      detail: Broadcast joins and skewed keys.
+    - topic: Performance
+      detail: Caching, the Spark UI and reading a query plan.
+    - topic: Structured Streaming
+      detail: Processing data as it arrives.
   resources:
     - resource: spark-docs
       locator: "Quick start, then the SQL and DataFrames guide"
@@ -213,6 +343,19 @@
   kind: tool
   requires: [programming-basics]
   recommends: [sql]
+  covers:
+    - topic: Why orchestrate
+      detail: Running dependent jobs in order, on time, with retries.
+    - topic: DAGs
+      detail: Tasks and dependencies in Airflow or similar tools.
+    - topic: Scheduling
+      detail: Cron schedules, backfills and catch-up.
+    - topic: Idempotent tasks
+      detail: Jobs that can be re-run safely for any date.
+    - topic: Sensors and triggers
+      detail: Waiting for files or upstream jobs.
+    - topic: Monitoring
+      detail: Alerts on failures and late runs.
   resources:
     - resource: airflow-docs
       locator: "Fundamental concepts, then Working with TaskFlow"
@@ -285,6 +428,19 @@
   hours: 25
   requires: [statistics]
   recommends: [probability]
+  covers:
+    - topic: Designing an A/B test
+      detail: Hypothesis, metric, randomisation unit and guardrails.
+    - topic: Sample size and power
+      detail: How many users you need to detect a given effect.
+    - topic: Analysing results
+      detail: Confidence intervals and significance for conversion rates and means.
+    - topic: Pitfalls
+      detail: Peeking, multiple metrics, novelty effects and sample-ratio mismatch.
+    - topic: When you can't randomise
+      detail: Before–after comparisons and their weaknesses.
+    - topic: Communicating results
+      detail: Effect sizes with uncertainty, and a clear decision.
   resources:
     - resource: causal-handbook
       locator: "Part I, chapters 1–12"
@@ -298,6 +454,21 @@
   hours: 12
   requires: [pandas]
   recommends: [machine-learning]
+  covers:
+    - topic: Numeric features
+      detail: Scaling, transformations and binning.
+    - topic: Categorical features
+      detail: One-hot, target and frequency encoding.
+    - topic: Missing data
+      detail: Imputation and missingness as a feature.
+    - topic: Dates and text
+      detail: Extracting useful parts from timestamps and strings.
+    - topic: Interactions
+      detail: Combining features, and letting models find them.
+    - topic: Leakage
+      detail: Features that secretly contain the answer.
+    - topic: Feature selection
+      detail: Keeping what helps and dropping noise.
   resources:
     - resource: feat-engineering
       locator: "Chapters 1–8"
@@ -377,6 +548,19 @@
   hours: 10
   requires: [programming-basics]
   recommends: [sql]
+  covers:
+    - topic: Documents and collections
+      detail: Storing JSON-like data and when that suits it.
+    - topic: CRUD
+      detail: Inserting, querying, updating and deleting documents.
+    - topic: Data modelling
+      detail: Embedding versus referencing.
+    - topic: Indexes
+      detail: Single, compound and text indexes.
+    - topic: Aggregation pipeline
+      detail: Grouping and transforming data inside the database.
+    - topic: Replication and sharding
+      detail: Replica sets and shard keys.
   resources:
     - resource: mongodb-manual
       locator: "CRUD Operations, then Data Modeling, Indexes and Aggregation"
@@ -392,6 +576,19 @@
   summary: Drag-and-drop dashboards. The free Tableau Public app is enough to learn it and to publish a portfolio.
   hours: 12
   recommends: [data-visualization, sql]
+  covers:
+    - topic: Connecting data
+      detail: Live connections and extracts.
+    - topic: Dimensions and measures
+      detail: How Tableau thinks about fields.
+    - topic: Building views
+      detail: Drag-and-drop charts and Show Me.
+    - topic: Calculated fields
+      detail: Row-level and aggregate calculations, and LOD expressions.
+    - topic: Dashboards and stories
+      detail: Combining views with filters and actions.
+    - topic: Publishing
+      detail: Tableau Public and Tableau Server.
   resources:
     - resource: tableau-tutorial
       locator: "The whole tutorial"
@@ -411,6 +608,21 @@
   hours: 25
   requires: [statistics]
   recommends: [r-lang]
+  covers:
+    - topic: Patterns
+      detail: Trend, seasonality, cycles and noise.
+    - topic: Decomposition
+      detail: Splitting a series into its parts.
+    - topic: Autocorrelation
+      detail: How a series relates to its own past.
+    - topic: Stationarity
+      detail: Why it matters and differencing to get it.
+    - topic: Exponential smoothing
+      detail: Simple to Holt–Winters methods.
+    - topic: ARIMA
+      detail: Autoregressive and moving-average models.
+    - topic: Evaluating forecasts
+      detail: Train-test splits in time, and accuracy measures.
   resources:
     - resource: fpp3
       locator: "Chapters 1–9"
@@ -433,6 +645,19 @@
   summary: Priors, posteriors and models you can reason about, fitted with simulation instead of formulas.
   hours: 30
   requires: [probability, statistics]
+  covers:
+    - topic: Bayes' theorem for models
+      detail: Prior, likelihood and posterior.
+    - topic: Conjugate priors
+      detail: Cases where the posterior has a closed form.
+    - topic: Posterior summaries
+      detail: Credible intervals and predictions.
+    - topic: MCMC
+      detail: Sampling from posteriors when there's no formula.
+    - topic: Hierarchical models
+      detail: Sharing information across groups.
+    - topic: Model checking
+      detail: Posterior predictive checks and comparing models.
   resources:
     - resource: bayes-rules
       locator: "Units 1 and 2, then regression in Unit 3"
@@ -448,6 +673,19 @@
   summary: Sufficiency, unbiased and maximum likelihood estimators, confidence intervals, most powerful tests and nonparametric tests, with the theory behind them.
   hours: 40
   requires: [probability, statistics, calculus]
+  covers:
+    - topic: Estimators
+      detail: Bias, variance, consistency and mean squared error.
+    - topic: Maximum likelihood
+      detail: Deriving estimators and their properties.
+    - topic: Sufficiency
+      detail: Statistics that capture everything the data says about a parameter.
+    - topic: Confidence intervals
+      detail: Construction and interpretation.
+    - topic: Hypothesis testing theory
+      detail: Power, the Neyman–Pearson lemma and likelihood ratio tests.
+    - topic: Asymptotics
+      detail: Large-sample distributions of estimators.
   resources:
     - resource: psu-stat415
       locator: "The lessons on point estimation, confidence intervals, hypothesis testing and nonparametric methods"
@@ -466,6 +704,19 @@
   summary: Simple and multiple regression in matrix form, the Gauss-Markov theorem, inference on coefficients, diagnostics and model choice.
   hours: 25
   requires: [statistical-inference, linear-algebra]
+  covers:
+    - topic: Least squares
+      detail: The model, the normal equations and the geometry.
+    - topic: Inference
+      detail: Standard errors, t-tests and F-tests for coefficients.
+    - topic: Diagnostics
+      detail: Residual plots, leverage and influential points.
+    - topic: Categorical predictors and interactions
+      detail: Dummy variables and effects that depend on each other.
+    - topic: Model selection
+      detail: Comparing models without overfitting.
+    - topic: Generalised linear models
+      detail: Logistic and Poisson regression.
   resources:
     - resource: psu-stat501
       locator: "Lessons 1–12"
@@ -481,6 +732,19 @@
   summary: The multivariate normal, Hotelling's T², Wishart, principal components, factor analysis, and multiple and partial correlation.
   hours: 25
   requires: [statistical-inference, linear-algebra]
+  covers:
+    - topic: Multivariate data
+      detail: Mean vectors and covariance matrices.
+    - topic: The multivariate normal
+      detail: Its properties and why it's everywhere.
+    - topic: Principal components
+      detail: Reducing dimensions while keeping variance.
+    - topic: Factor analysis
+      detail: Hidden factors behind observed variables.
+    - topic: Discriminant analysis
+      detail: Separating groups.
+    - topic: Clustering
+      detail: Hierarchical and k-means methods.
   resources:
     - resource: psu-stat505
       locator: "Lessons 1–12"
@@ -666,5 +930,36 @@
       verified: true
     - resource: de-zoomcamp
       locator: The streaming module
+      role: alternative
+      verified: true
+
+- id: scala
+  title: Scala
+  area: data
+  kind: tool
+  summary: The JVM language Spark is written in, still common in data engineering teams. Functional and object-oriented at once.
+  hours: 15
+  requires: [programming-basics]
+  recommends: [java, spark, higher-order-programming]
+  covers:
+    - topic: Basics
+      detail: val and var, types, functions and expressions.
+    - topic: Case classes and pattern matching
+      detail: Modelling data and matching on its shape.
+    - topic: Collections
+      detail: Immutable collections with map, filter, fold and flatMap.
+    - topic: Option and Either
+      detail: Handling missing values and errors without nulls.
+    - topic: Traits
+      detail: Sharing behaviour between classes.
+    - topic: Scala for Spark
+      detail: Datasets and DataFrames in Scala, and when teams choose it over Python.
+  resources:
+    - resource: scala-tour
+      locator: The whole tour
+      role: primary
+      verified: true
+    - resource: scala3-book
+      locator: The chapters on domain modelling and collections
       role: alternative
       verified: true

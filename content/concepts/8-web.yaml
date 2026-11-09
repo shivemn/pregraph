@@ -3,6 +3,21 @@
   area: web
   summary: Structuring a page so it means something, then laying it out and styling it so it works on any screen.
   hours: 30
+  covers:
+    - topic: Semantic HTML
+      detail: Headings, landmarks, lists, forms and links that mean what they say.
+    - topic: Forms
+      detail: Inputs, labels, validation and submitting data.
+    - topic: The box model
+      detail: Margin, border, padding, and box-sizing.
+    - topic: Selectors and the cascade
+      detail: Specificity, inheritance and why a style didn't apply.
+    - topic: Layout
+      detail: Flexbox for one dimension, Grid for two.
+    - topic: Responsive design
+      detail: Media queries, fluid sizes and designing for phones first.
+    - topic: Typography and colour
+      detail: Readable text sizes, line lengths and contrast.
   resources:
     - resource: mdn-learn
       locator: "Structuring content with HTML, CSS styling basics, CSS layout"
@@ -28,6 +43,23 @@
   summary: The language of the browser. Functions, objects, the event loop, promises and async code.
   hours: 40
   recommends: [programming-basics, html-css]
+  covers:
+    - topic: Language basics
+      detail: let and const, types, functions, objects and arrays.
+    - topic: Scope and closures
+      detail: How variables are found, and functions that remember them.
+    - topic: this and prototypes
+      detail: How objects share behaviour, and what classes compile to.
+    - topic: The DOM
+      detail: Selecting elements, changing them and handling events.
+    - topic: Asynchronous JavaScript
+      detail: The event loop, promises, async/await and fetch.
+    - topic: Modules
+      detail: import and export, and how bundlers use them.
+    - topic: Modern syntax
+      detail: Destructuring, spread, optional chaining and template literals.
+    - topic: Error handling and debugging
+      detail: try/catch, the browser devtools and reading stack traces.
   resources:
     - resource: javascript-info
       locator: "Part 1, The JavaScript language"
@@ -49,6 +81,19 @@
   summary: JavaScript with types. Catches a whole class of bugs before the code runs.
   hours: 10
   requires: [javascript]
+  covers:
+    - topic: Basic types
+      detail: Annotations, inference, arrays, tuples and enums.
+    - topic: Interfaces and type aliases
+      detail: Describing object shapes.
+    - topic: Unions and narrowing
+      detail: Values that can be several types, and checks that narrow them.
+    - topic: Generics
+      detail: Reusable typed functions and components.
+    - topic: Utility types
+      detail: Partial, Pick, Omit, Record and friends.
+    - topic: Configuration
+      detail: tsconfig, strict mode and typing third-party libraries.
   resources:
     - resource: ts-handbook
       locator: "The Basics through Narrowing, then Object Types"
@@ -70,6 +115,23 @@
   hours: 30
   kind: tool
   requires: [javascript, html-css]
+  covers:
+    - topic: Components and JSX
+      detail: Building UIs from small pieces.
+    - topic: Props and state
+      detail: Passing data down and keeping state where it belongs.
+    - topic: Rendering lists and conditions
+      detail: Keys, conditional rendering and lifting state up.
+    - topic: Hooks
+      detail: useState, useEffect, useRef, useMemo and when you don't need an effect.
+    - topic: Forms
+      detail: Controlled inputs and validation.
+    - topic: Data fetching
+      detail: Loading and error states, and libraries such as TanStack Query.
+    - topic: Routing
+      detail: Pages and navigation with a router or a framework.
+    - topic: Performance
+      detail: Avoiding unnecessary re-renders and measuring with the profiler.
   resources:
     - resource: react-docs
       locator: "Describing the UI, Adding interactivity, Managing state"
@@ -91,6 +153,21 @@
   summary: Making pages work with keyboards, screen readers and zoom. Often a legal requirement, always good practice.
   hours: 8
   requires: [html-css]
+  covers:
+    - topic: Why it matters
+      detail: Users with screen readers, keyboards, low vision or slow connections, and the law.
+    - topic: WCAG
+      detail: The four principles and the A and AA criteria most sites aim for.
+    - topic: Semantic structure
+      detail: Headings, landmarks and lists that assistive technology can navigate.
+    - topic: Keyboard access
+      detail: Focus order, visible focus and no keyboard traps.
+    - topic: Forms and errors
+      detail: Labels, instructions and error messages linked to fields.
+    - topic: ARIA
+      detail: When to use it, and why native HTML comes first.
+    - topic: Testing
+      detail: Automated checkers, plus testing with a keyboard and a screen reader.
   resources:
     - resource: wai-intro
       locator: "Introduction, then the linked WCAG overview"
@@ -102,6 +179,19 @@
   summary: Why pages are slow and how to measure it. Loading, rendering and the Core Web Vitals.
   hours: 10
   requires: [javascript, web-http]
+  covers:
+    - topic: Core Web Vitals
+      detail: Largest contentful paint, interaction to next paint and layout shift.
+    - topic: Measuring
+      detail: Lighthouse, the devtools performance panel and real-user data.
+    - topic: Loading
+      detail: Caching, compression, code splitting and lazy loading.
+    - topic: Images and fonts
+      detail: Right sizes, modern formats and font loading.
+    - topic: Rendering
+      detail: The critical path, reflows and expensive JavaScript.
+    - topic: Budgets
+      detail: Setting limits for page weight and checking them in CI.
   resources:
     - resource: webdev-perf
       locator: "The whole course"
@@ -113,6 +203,21 @@
   summary: Resources, methods, status codes, versioning and errors. What a good API feels like to the person calling it.
   hours: 8
   requires: [web-http]
+  covers:
+    - topic: Resources and URLs
+      detail: Nouns in paths, collections and items.
+    - topic: Methods
+      detail: GET, POST, PUT, PATCH and DELETE, and which are safe or idempotent.
+    - topic: Status codes
+      detail: 2xx, 4xx and 5xx, and choosing the right one.
+    - topic: Request and response bodies
+      detail: JSON, validation and consistent error formats.
+    - topic: Pagination, filtering and sorting
+      detail: Query parameters and cursor-based pages.
+    - topic: Versioning
+      detail: Changing an API without breaking existing clients.
+    - topic: Documentation
+      detail: OpenAPI specs and examples people can try.
   resources:
     - resource: zalando-api
       locator: "General guidelines, REST basics, JSON guidelines"
@@ -133,6 +238,21 @@
   kind: tool
   requires: [rest-apis, sql]
   recommends: [java]
+  covers:
+    - topic: Routing and controllers
+      detail: Mapping URLs to code.
+    - topic: Data access
+      detail: An ORM or query builder, migrations and transactions.
+    - topic: Validation
+      detail: Checking input at the edge and returning clear errors.
+    - topic: Configuration
+      detail: Environment-specific settings and secrets kept out of code.
+    - topic: Authentication
+      detail: Sessions or tokens, and protecting routes.
+    - topic: Testing
+      detail: Unit and integration tests against a test database.
+    - topic: Running it
+      detail: Logging, health checks and packaging for deployment.
   resources:
     - resource: spring-guides
       locator: "Building a RESTful Web Service, Accessing Data with JPA, Building REST services with Spring"
@@ -156,6 +276,23 @@
   hours: 12
   requires: [web-http]
   recommends: [sql]
+  covers:
+    - topic: The OWASP Top 10
+      detail: The most common classes of web vulnerability.
+    - topic: Injection
+      detail: SQL and command injection, and prepared statements.
+    - topic: Cross-site scripting
+      detail: Escaping output and Content Security Policy.
+    - topic: Cross-site request forgery
+      detail: SameSite cookies and CSRF tokens.
+    - topic: Authentication and sessions
+      detail: Password hashing, secure cookies, session fixation and MFA.
+    - topic: Access control
+      detail: Checking authorisation on every request, not just hiding buttons.
+    - topic: Server-side request forgery
+      detail: Why fetching user-supplied URLs is dangerous.
+    - topic: Secure defaults
+      detail: HTTPS everywhere, security headers and keeping dependencies patched.
   resources:
     - resource: owasp-top10
       locator: "Each of the ten categories"
@@ -227,6 +364,21 @@
   hours: 30
   requires: [java, rest-apis]
   recommends: [sql]
+  covers:
+    - topic: Dependency injection
+      detail: Beans, components and how Spring wires them.
+    - topic: REST controllers
+      detail: Mapping requests, validation and error handling.
+    - topic: Spring Data JPA
+      detail: Entities, repositories and transactions.
+    - topic: Configuration
+      detail: application.yml, profiles and externalised config.
+    - topic: Security
+      detail: Spring Security for authentication and authorisation.
+    - topic: Testing
+      detail: Unit tests, @SpringBootTest and test slices.
+    - topic: Production features
+      detail: Actuator health checks and metrics.
   resources:
     - resource: spring-guides
       locator: "Building an Application with Spring Boot, Building a RESTful Web Service, Accessing Data with JPA, Testing the Web Layer, then Building REST services with Spring"
@@ -242,6 +394,19 @@
   summary: Running JavaScript on the server, and Express, the small framework most Node APIs start from.
   hours: 20
   requires: [javascript, rest-apis]
+  covers:
+    - topic: The event loop
+      detail: Non-blocking I/O, and what blocks it.
+    - topic: Modules and npm
+      detail: CommonJS and ES modules, package.json and scripts.
+    - topic: Async patterns
+      detail: Callbacks, promises and async/await.
+    - topic: HTTP servers
+      detail: 'Express or Fastify: routes, middleware and error handling.'
+    - topic: Working with data
+      detail: Connecting to databases and validating input.
+    - topic: Streams
+      detail: Processing large files and responses piece by piece.
   resources:
     - resource: nodejs-learn
       locator: "From Introduction to Node.js to Don't Block the Event Loop"

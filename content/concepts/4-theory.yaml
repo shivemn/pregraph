@@ -4,6 +4,17 @@
   summary: Finite automata, regular expressions and context-free grammars. The maths behind every parser.
   hours: 20
   requires: [discrete-math]
+  covers:
+    - topic: Finite automata
+      detail: DFAs and NFAs, and converting between them.
+    - topic: Regular expressions
+      detail: Their equivalence with finite automata.
+    - topic: Non-regular languages
+      detail: The pumping lemma.
+    - topic: Context-free grammars
+      detail: Derivations, parse trees and ambiguity.
+    - topic: Pushdown automata
+      detail: Machines with a stack, and their link to grammars.
   resources:
     - resource: mit-18404
       locator: "Lectures 1–5"
@@ -22,6 +33,17 @@
   summary: Turing machines, problems no program can solve, and what P versus NP actually asks.
   hours: 30
   requires: [automata, complexity-analysis]
+  covers:
+    - topic: Turing machines
+      detail: A precise model of what computers can do.
+    - topic: Decidability
+      detail: Problems with algorithms and problems without.
+    - topic: The halting problem
+      detail: Why some questions about programs can't be answered.
+    - topic: Reductions
+      detail: Showing one problem is as hard as another.
+    - topic: Complexity classes
+      detail: P, NP, NP-completeness and what a reduction proves.
   resources:
     - resource: mit-18404
       locator: "Lecture 6 onwards"
@@ -37,6 +59,19 @@
   hours: 50
   requires: [recursion, hash-tables]
   recommends: [automata, oop-design]
+  covers:
+    - topic: Scanning
+      detail: Turning source text into tokens.
+    - topic: Parsing
+      detail: Recursive descent and building a syntax tree.
+    - topic: Evaluation
+      detail: Walking the tree to run the program.
+    - topic: Environments and scope
+      detail: Variables, closures and functions.
+    - topic: Classes
+      detail: Objects and inheritance in your own language.
+    - topic: Bytecode virtual machines
+      detail: Compiling to bytecode and running it faster.
   resources:
     - resource: crafting-interpreters
       locator: "Part II, A Tree-Walk Interpreter"
@@ -56,6 +91,19 @@
   hours: 50
   requires: [interpreters, c-and-memory]
   recommends: [computer-architecture]
+  covers:
+    - topic: The pipeline
+      detail: Lexing, parsing, semantic analysis, code generation.
+    - topic: Type checking
+      detail: Catching errors before running.
+    - topic: Intermediate representations
+      detail: Three-address code and SSA.
+    - topic: Optimisation
+      detail: Constant folding, dead code elimination and loop optimisations.
+    - topic: Code generation
+      detail: Instruction selection and register allocation.
+    - topic: Runtime
+      detail: Calling conventions, the stack and garbage collection.
   resources:
     - resource: crafting-interpreters
       locator: "Part III, A Bytecode Virtual Machine"
@@ -74,6 +122,19 @@
   hours: 40
   requires: [probability, discrete-math]
   recommends: [complexity-analysis]
+  covers:
+    - topic: Symmetric encryption
+      detail: Block ciphers like AES and modes like GCM.
+    - topic: Hash functions
+      detail: SHA-256, collision resistance and password hashing.
+    - topic: Message authentication
+      detail: MACs and HMAC.
+    - topic: Public-key cryptography
+      detail: RSA, Diffie–Hellman and elliptic curves.
+    - topic: Digital signatures and certificates
+      detail: Proving who sent something, and how TLS uses it.
+    - topic: Common mistakes
+      detail: Rolling your own crypto, reused nonces and weak randomness.
   resources:
     - resource: cryptobook
       locator: "Part I, Secret key cryptography"

@@ -7,6 +7,19 @@
   summary: How a company buys, makes and sells, step by step, and the documents each step creates. Every ERP consultant's job is mapping these onto software.
   hours: 12
   recommends: [accounting]
+  covers:
+    - topic: Order to cash
+      detail: From a customer's order to money in the bank.
+    - topic: Procure to pay
+      detail: From a purchase request to paying the supplier.
+    - topic: Record to report
+      detail: Closing the books and financial reporting.
+    - topic: Hire to retire
+      detail: The employee lifecycle in HR.
+    - topic: Documents and controls
+      detail: Purchase orders, invoices, approvals and audit trails.
+    - topic: Mapping processes
+      detail: Flowcharts and swimlanes.
   resources:
     - resource: sap-erp-processes
       locator: "The whole learning journey"
@@ -20,6 +33,19 @@
   summary: Finding your way around SAP, its modules (finance, materials, sales, production) and how one transaction feeds the next.
   hours: 25
   requires: [business-processes]
+  covers:
+    - topic: What ERP is
+      detail: One system for finance, sales, purchasing and more.
+    - topic: SAP S/4HANA
+      detail: Modules, the HANA database and Fiori apps.
+    - topic: Organisational structure
+      detail: Company codes, plants and sales organisations.
+    - topic: Master data
+      detail: Customers, suppliers and materials.
+    - topic: Navigating SAP
+      detail: Transactions, Fiori launchpad and reports.
+    - topic: Implementation projects
+      detail: SAP Activate phases and consultant roles.
   resources:
     - resource: sap-erp-processes
       locator: "The whole learning journey, hands on"
@@ -36,6 +62,19 @@
   hours: 60
   requires: [programming-basics]
   recommends: [sql, sap-basics]
+  covers:
+    - topic: ABAP basics
+      detail: Syntax, data types and internal tables.
+    - topic: Data Dictionary
+      detail: Tables, views and data elements.
+    - topic: Open SQL
+      detail: Reading and changing SAP data.
+    - topic: Reports and ALV
+      detail: Classic list reports.
+    - topic: Modularisation
+      detail: Function modules, classes and methods.
+    - topic: Modern ABAP
+      detail: CDS views and the RESTful programming model.
   resources:
     - resource: sap-abap-journey
       locator: "The whole learning journey"
@@ -49,6 +88,19 @@
   area: enterprise
   summary: How banks and insurers still run their core systems. Data sets, TSO/ISPF, job control language (JCL) to run batch jobs, and reading a job's output.
   hours: 30
+  covers:
+    - topic: z/OS concepts
+      detail: Address spaces, datasets and the master catalog.
+    - topic: Datasets
+      detail: Sequential, partitioned and VSAM datasets.
+    - topic: JCL
+      detail: Jobs, steps and DD statements.
+    - topic: TSO and ISPF
+      detail: The traditional interface for editing and submitting.
+    - topic: Batch and online
+      detail: Batch jobs, CICS and their roles.
+    - topic: Modern tools
+      detail: Zowe and VS Code for mainframe work.
   resources:
     - resource: ibm-z-xplore
       locator: "Fundamentals challenges"
@@ -66,6 +118,19 @@
   hours: 40
   requires: [mainframe-zos]
   recommends: [programming-basics]
+  covers:
+    - topic: Program structure
+      detail: Identification, environment, data and procedure divisions.
+    - topic: Data definitions
+      detail: PIC clauses, levels and records.
+    - topic: File handling
+      detail: Reading and writing sequential files.
+    - topic: Control flow
+      detail: PERFORM, IF and EVALUATE.
+    - topic: Calculations
+      detail: COMPUTE and decimal arithmetic.
+    - topic: Embedded SQL
+      detail: Working with Db2 from COBOL.
   resources:
     - resource: omp-cobol-course
       locator: "Courses 1 and 2"
@@ -83,6 +148,19 @@
   summary: Building software robots that click, type and read documents the way a person would, to automate repetitive office work.
   hours: 40
   recommends: [programming-basics, spreadsheets]
+  covers:
+    - topic: What RPA is
+      detail: Software robots that use applications like people do.
+    - topic: UiPath Studio
+      detail: Sequences, flowcharts and activities.
+    - topic: Selectors
+      detail: Finding UI elements reliably.
+    - topic: Data
+      detail: Variables, Excel, email and PDFs.
+    - topic: Error handling
+      detail: Try-catch, retries and the REFramework.
+    - topic: Orchestrator
+      detail: Running and monitoring robots centrally.
   resources:
     - resource: uipath-academy
       locator: "The whole learning plan"

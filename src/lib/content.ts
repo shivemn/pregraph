@@ -96,6 +96,7 @@ export function checkContent(c: Content): string[] {
     if (!hasFreePrimary) problems.push(`Concept "${concept.id}" has no free primary resource`);
     if (concept.kind === 'project' && !concept.brief) problems.push(`Project "${concept.id}" has no brief`);
     if (concept.kind !== 'project' && concept.brief) problems.push(`Concept "${concept.id}" has a brief but isn't a project`);
+    if (concept.kind !== 'project' && concept.covers.length < 4) problems.push(`Stop "${concept.id}" should list at least 4 things it covers`);
   }
 
   const byId = new Map(c.concepts.map((x) => [x.id, x]));

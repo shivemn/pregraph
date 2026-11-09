@@ -4,6 +4,23 @@
   summary: Users, permissions, processes, services, logs and packages. The machine everything else runs on.
   hours: 20
   requires: [shell-tools]
+  covers:
+    - topic: Users and permissions
+      detail: Users, groups, chmod, chown and sudo.
+    - topic: Packages
+      detail: apt or dnf, and keeping systems updated.
+    - topic: Services
+      detail: systemd units, starting, stopping and enabling services.
+    - topic: Logs
+      detail: journalctl and /var/log.
+    - topic: Disks and filesystems
+      detail: Partitions, mounts, df, du and LVM.
+    - topic: Networking
+      detail: ip, ss, DNS settings and the firewall.
+    - topic: Processes and performance
+      detail: top, htop, free, vmstat and finding what's slow.
+    - topic: Scheduling
+      detail: cron and systemd timers.
   resources:
     - resource: linux-upskill
       locator: "Days 1–20"
@@ -22,7 +39,26 @@
   hours: 12
   kind: tool
   requires: [shell-tools]
+  covers:
+    - topic: Images and containers
+      detail: What each is, and how they differ from VMs.
+    - topic: Dockerfiles
+      detail: Instructions, layers and caching.
+    - topic: Multi-stage builds
+      detail: Small, secure production images.
+    - topic: Volumes and networks
+      detail: Keeping data and connecting containers.
+    - topic: Docker Compose
+      detail: Running an app and its database together.
+    - topic: Registries
+      detail: Pushing and pulling images.
+    - topic: Good practice
+      detail: Non-root users, .dockerignore and pinned versions.
   resources:
+    - resource: docker-cheatsheet
+      locator: Keep it open while you work
+      role: alternative
+      verified: true
     - resource: docker-docs
       locator: "The getting-started guide, start to finish"
       verified: true
@@ -37,7 +73,28 @@
   hours: 25
   kind: tool
   requires: [docker, networking]
+  covers:
+    - topic: The architecture
+      detail: Control plane, nodes and the kubelet.
+    - topic: Pods and Deployments
+      detail: Running and updating containers.
+    - topic: Services and Ingress
+      detail: Reaching pods inside and from outside the cluster.
+    - topic: Configuration
+      detail: ConfigMaps and Secrets.
+    - topic: Storage
+      detail: Persistent volumes and claims.
+    - topic: Scaling and health
+      detail: Probes, resource limits and autoscaling.
+    - topic: Helm
+      detail: Packaging and templating manifests.
+    - topic: Debugging
+      detail: kubectl describe, logs and events.
   resources:
+    - resource: kubectl-quickref
+      locator: Keep it open while you work
+      role: alternative
+      verified: true
     - resource: k8s-basics
       locator: "All six modules"
       verified: true
@@ -55,6 +112,19 @@
   hours: 8
   kind: tool
   requires: [git, testing-debugging]
+  covers:
+    - topic: Continuous integration
+      detail: Building and testing every change automatically.
+    - topic: Pipelines
+      detail: Stages, jobs and artifacts in GitHub Actions, GitLab CI or Jenkins.
+    - topic: Secrets
+      detail: Storing credentials safely in CI.
+    - topic: Continuous delivery
+      detail: Deploying automatically to environments.
+    - topic: Deployment strategies
+      detail: Rolling, blue-green and canary deployments.
+    - topic: Rollbacks
+      detail: Getting back to the last good version fast.
   resources:
     - resource: gh-actions
       locator: "Quickstart, then Building and testing, then Deployment"
@@ -72,6 +142,21 @@
   summary: Compute, storage, networking and identity on a public cloud, and how the bill works.
   hours: 15
   requires: [networking]
+  covers:
+    - topic: What the cloud is
+      detail: Renting compute, storage and services by the hour.
+    - topic: Regions and availability zones
+      detail: Where resources live, and designing across zones.
+    - topic: Compute
+      detail: Virtual machines, containers and serverless functions.
+    - topic: Storage
+      detail: Object, block and file storage.
+    - topic: Managed databases
+      detail: Letting the provider run the database.
+    - topic: Pricing
+      detail: On-demand, reserved and spot, and avoiding surprise bills.
+    - topic: Shared responsibility
+      detail: What the provider secures and what you must.
   resources:
     - resource: aws-ccp
       locator: "Cloud Practitioner Essentials, the free course linked from the page"
@@ -124,6 +209,19 @@
   hours: 12
   kind: tool
   requires: [cloud-basics]
+  covers:
+    - topic: Why IaC
+      detail: Repeatable, reviewable infrastructure instead of clicking.
+    - topic: Terraform basics
+      detail: Providers, resources, variables and outputs.
+    - topic: State
+      detail: What the state file is and storing it remotely.
+    - topic: Plan and apply
+      detail: Seeing changes before making them.
+    - topic: Modules
+      detail: Reusing infrastructure code.
+    - topic: Environments
+      detail: Dev, staging and production from the same code.
   resources:
     - resource: terraform-tutorials
       locator: "Get Started track for your cloud"
@@ -162,6 +260,19 @@
   summary: VPCs, subnets, routing, security groups, load balancers and DNS, the cloud versions of things you know from networking.
   hours: 12
   requires: [cloud-basics, networking]
+  covers:
+    - topic: VPCs and subnets
+      detail: Private networks in the cloud, public and private subnets.
+    - topic: Routing
+      detail: Route tables, internet gateways and NAT gateways.
+    - topic: Security groups and network ACLs
+      detail: Firewalls at the instance and subnet level.
+    - topic: Load balancers
+      detail: Application and network load balancers.
+    - topic: DNS
+      detail: Hosted zones and routing policies.
+    - topic: Connecting networks
+      detail: Peering, VPNs and private links.
   resources:
     - resource: aws-vpc
       locator: "How Amazon VPC works, then the examples"
@@ -177,6 +288,19 @@
   summary: Users, roles and policies. Least privilege, and the permission mistakes that cause most cloud breaches.
   hours: 8
   requires: [cloud-basics]
+  covers:
+    - topic: Identities
+      detail: Users, groups and roles.
+    - topic: Policies
+      detail: Allow and deny, actions, resources and conditions.
+    - topic: Least privilege
+      detail: Giving only the permissions needed.
+    - topic: Roles for services
+      detail: Letting code access resources without stored keys.
+    - topic: Multi-factor and root accounts
+      detail: Protecting the most powerful identities.
+    - topic: Auditing
+      detail: Logging who did what.
   resources:
     - resource: aws-iam
       locator: "Introduction, then Identities and Policies"
@@ -193,6 +317,19 @@
   hours: 12
   requires: [cloud-networking, cloud-iam]
   recommends: [system-design]
+  covers:
+    - topic: The Well-Architected pillars
+      detail: Operational excellence, security, reliability, performance, cost and sustainability.
+    - topic: Designing for failure
+      detail: Multiple zones, health checks and automatic recovery.
+    - topic: Scaling
+      detail: Autoscaling and stateless services.
+    - topic: Managed versus self-run
+      detail: When to use the provider's service.
+    - topic: Cost optimisation
+      detail: Right-sizing, reserved capacity and turning things off.
+    - topic: Reference architectures
+      detail: Common patterns for web apps, data and events.
   resources:
     - resource: aws-well-architected
       locator: "The six pillars"
@@ -232,6 +369,19 @@
   summary: What to do when production breaks. Triage, communication, escalation and the blameless postmortem afterwards.
   hours: 8
   recommends: [web-http]
+  covers:
+    - topic: Incident lifecycle
+      detail: Detection, response, mitigation, resolution and review.
+    - topic: Roles
+      detail: Incident commander, communications and responders.
+    - topic: Severity levels
+      detail: Deciding how urgent an incident is.
+    - topic: Communication
+      detail: Status updates for users and stakeholders.
+    - topic: ITIL basics
+      detail: Incidents, problems, changes and service requests.
+    - topic: Postmortems
+      detail: Blameless reviews and follow-up actions.
   resources:
     - resource: atlassian-incidents
       locator: "The whole handbook"
@@ -247,6 +397,17 @@
   summary: Finding the one useful line in a million. grep, awk, timestamps, and a method for narrowing down the cause.
   hours: 10
   requires: [shell-tools]
+  covers:
+    - topic: Reading logs
+      detail: Formats, levels and timestamps.
+    - topic: Searching
+      detail: grep, less and filtering with shell tools.
+    - topic: Centralised logging
+      detail: Shipping logs to a search tool like the ELK stack or Splunk.
+    - topic: Correlating events
+      detail: Following one request across services by ID.
+    - topic: Root-cause analysis
+      detail: From symptom to cause, and the five whys.
   resources:
     - resource: sre-book
       locator: "Chapter 12, Effective troubleshooting"
@@ -265,6 +426,19 @@
   hours: 10
   requires: [sql]
   recommends: [database-internals]
+  covers:
+    - topic: Reading query plans
+      detail: EXPLAIN and EXPLAIN ANALYZE.
+    - topic: Indexes
+      detail: B-tree indexes, composite indexes and covering indexes.
+    - topic: Common problems
+      detail: Full scans, N+1 queries and functions on indexed columns.
+    - topic: Joins
+      detail: Nested loop, hash and merge joins.
+    - topic: Statistics
+      detail: How the planner estimates rows, and when it's wrong.
+    - topic: Fixing slow queries
+      detail: Measure, change one thing, measure again.
   resources:
     - resource: use-the-index
       locator: "Chapters 1–3"

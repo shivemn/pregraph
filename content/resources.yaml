@@ -3899,3 +3899,194 @@
   url: https://www.w3.org/WAI/ARIA/apg/patterns/
   free: true
   medium: read
+
+- id: regexone
+  title: RegexOne
+  author: RegexOne
+  type: course
+  url: https://regexone.com/
+  free: true
+  medium: practice
+  note: Short interactive lessons in the browser.
+
+- id: python-regex-howto
+  title: Regular expression HOWTO
+  author: Python Software Foundation
+  type: site
+  url: https://docs.python.org/3/howto/regex.html
+  free: true
+  medium: read
+
+- id: mdn-regex
+  title: Regular expressions (JavaScript guide)
+  author: MDN Web Docs
+  type: site
+  url: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
+  free: true
+  medium: read
+
+- id: mdn-regex-cheatsheet
+  title: Regular expression syntax cheat sheet
+  author: MDN Web Docs
+  type: site
+  url: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet
+  free: true
+  medium: read
+  note: Cheat sheet.
+
+- id: vim-user-manual
+  title: Vim user manual
+  author: Bram Moolenaar and the Vim project
+  type: book
+  url: https://vimhelp.org/usr_toc.txt.html
+  free: true
+  medium: read
+  note: The same manual as ':help user-manual' inside Vim. Run 'vimtutor' in a terminal first.
+
+- id: vim-quickref
+  title: Vim quick reference
+  author: The Vim project
+  type: site
+  url: https://vimhelp.org/quickref.txt.html
+  free: true
+  medium: read
+  note: Cheat sheet.
+
+- id: overleaf-30min
+  title: Learn LaTeX in 30 minutes
+  author: Overleaf
+  type: site
+  url: https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+  free: true
+  medium: read
+
+- id: learnlatex
+  title: learnlatex.org
+  author: The LaTeX Project and volunteers
+  type: course
+  url: https://www.learnlatex.org/en/
+  free: true
+  medium: practice
+  note: Lessons with examples you can edit and run in the browser.
+
+- id: maven-5min
+  title: Maven in 5 Minutes
+  author: Apache Maven
+  type: site
+  url: https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+  free: true
+  medium: read
+
+- id: gradle-tutorial
+  title: Gradle tutorial
+  author: Gradle
+  type: site
+  url: https://docs.gradle.org/current/userguide/part1_gradle_init.html
+  free: true
+  medium: practice
+
+- id: matlab-onramp
+  title: MATLAB Onramp
+  author: MathWorks
+  type: course
+  url: https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted
+  free: true
+  medium: practice
+  note: Free with a MathWorks account; runs in the browser. Many colleges have a campus licence for MATLAB itself.
+
+- id: octave-docs
+  title: GNU Octave documentation
+  author: The GNU Octave project
+  type: site
+  url: https://docs.octave.org/latest/
+  free: true
+  medium: read
+  note: Octave is a free program that runs most MATLAB code.
+
+- id: scala-tour
+  title: Tour of Scala
+  author: Scala Center and the Scala team
+  type: site
+  url: https://docs.scala-lang.org/tour/tour-of-scala.html
+  free: true
+  medium: read
+
+- id: scala3-book
+  title: Scala 3 Book
+  author: Scala Center and the Scala team
+  type: book
+  url: https://docs.scala-lang.org/scala3/book/introduction.html
+  free: true
+  medium: read
+
+- id: git-cheatsheet
+  title: Git cheat sheet
+  author: GitHub Education
+  type: site
+  url: https://education.github.com/git-cheat-sheet-education.pdf
+  free: true
+  medium: read
+  note: Cheat sheet (PDF).
+
+- id: docker-cheatsheet
+  title: Docker CLI cheat sheet
+  author: Docker
+  type: site
+  url: https://docs.docker.com/get-started/docker_cheatsheet.pdf
+  free: true
+  medium: read
+  note: Cheat sheet (PDF).
+
+- id: kubectl-quickref
+  title: kubectl Quick Reference
+  author: Kubernetes
+  type: site
+  url: https://kubernetes.io/docs/reference/kubectl/quick-reference/
+  free: true
+  medium: read
+  note: Cheat sheet.
+
+- id: pandas-cheatsheet
+  title: Pandas cheat sheet
+  author: pandas
+  type: site
+  url: https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf
+  free: true
+  medium: read
+  note: Cheat sheet (PDF).
+
+- id: calculus-cheatsheet
+  title: Calculus cheat sheet
+  author: Paul Dawkins, Lamar University
+  type: site
+  url: https://tutorial.math.lamar.edu/pdf/Calculus_Cheat_Sheet_All.pdf
+  free: true
+  medium: read
+  note: Cheat sheet (PDF).
+
+- id: github-markdown
+  title: Basic writing and formatting syntax
+  author: GitHub Docs
+  type: site
+  url: https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+  free: true
+  medium: read
+  note: Markdown reference.
+
+- id: matplotlib-cheatsheets
+  title: Matplotlib cheat sheets
+  author: Matplotlib
+  type: site
+  url: https://github.com/matplotlib/cheatsheets
+  free: true
+  medium: read
+  note: Cheat sheets and handouts (PDF).
+
+- id: posit-cheatsheets
+  title: Posit cheat sheets
+  author: Posit
+  type: site
+  url: https://posit.co/resources/cheatsheets/
+  free: true
+  medium: read
+  note: Cheat sheets for dplyr, ggplot2, tidyr and more.

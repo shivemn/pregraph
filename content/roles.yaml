@@ -9,7 +9,7 @@
   tiers:
     hire: [programming-basics, oop-design, git, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, algorithm-practice, sql, testing-debugging, project-software]
     firstYear: [rest-apis, web-http, cloud-basics, os-processes-memory, networking, system-design, software-engineering]
-    extra: [concurrency, ci-cd, distributed-systems, database-internals, docker, project-portfolio-api]
+    extra: [concurrency, ci-cd, distributed-systems, database-internals, docker, project-portfolio-api, regex, vim]
   evidence:
     postings: 30
     region: India, entry level
@@ -48,7 +48,7 @@
   projects: {beginner: project-url-shortener, intermediate: project-portfolio-api, advanced: project-chat-system}
   tiers:
     hire: [java, oop-design, git, sql, rest-apis, backend-framework, hash-tables, trees-heaps, algorithm-practice, testing-debugging, project-portfolio-api]
-    firstYear: [mongodb, cloud-basics, database-internals, concurrency, docker, shell-tools]
+    firstYear: [mongodb, cloud-basics, database-internals, concurrency, docker, shell-tools, build-tools]
     extra: [system-design, ci-cd, web-security, messaging, distributed-systems, kubernetes, observability, redis, caching, partitioning-replication, api-styles, microservices, reliability-patterns]
   evidence:
     postings: 30
@@ -150,7 +150,7 @@
   tiers:
     hire: [spreadsheets, sql, programming-basics, pandas, bi-tools, data-visualization, statistics, project-data-analysis]
     firstYear: [data-warehousing, probability, git]
-    extra: [machine-learning]
+    extra: [machine-learning, regex]
   evidence:
     postings: 30
     region: India, entry level
@@ -190,7 +190,7 @@
   tiers:
     hire: [programming-basics, sql, data-warehousing, cloud-basics, spark, git, project-data-pipeline]
     firstYear: [databricks, orchestration, pandas, shell-tools, database-internals, docker, messaging]
-    extra: [distributed-systems, kubernetes, dbt, snowflake]
+    extra: [distributed-systems, kubernetes, dbt, snowflake, scala, regex]
   evidence:
     postings: 30
     region: India, entry level
@@ -220,7 +220,7 @@
   tiers:
     hire: [linux-admin, shell-tools, git, docker, kubernetes, ci-cd, cloud-basics, infrastructure-as-code, observability, programming-basics, project-deploy-pipeline]
     firstYear: [azure, ansible, networking, os-processes-memory]
-    extra: [distributed-systems, systems-security, concurrency, reliability-patterns]
+    extra: [distributed-systems, systems-security, concurrency, reliability-patterns, vim]
   evidence:
     postings: 30
     region: India, entry level
@@ -269,7 +269,7 @@
   tiers:
     hire: [probability, statistics, linear-algebra, calculus, stochastic-processes, time-series, programming-basics, pandas, machine-learning, financial-markets, derivatives, algorithm-practice, project-backtest]
     firstYear: [stochastic-calculus, optimization, portfolio-theory, bayesian-statistics, cpp]
-    extra: [deep-learning, reinforcement-learning, econometrics]
+    extra: [deep-learning, reinforcement-learning, econometrics, latex]
 
 - id: quant-developer
   title: Quant developer
@@ -314,7 +314,7 @@
   tiers:
     hire: [microeconomics, macroeconomics, calculus, statistics, econometrics, r-lang, spreadsheets, project-empirical-study]
     firstYear: [time-series, data-visualization, sql, programming-basics]
-    extra: [machine-learning, bayesian-statistics, experiments]
+    extra: [machine-learning, bayesian-statistics, experiments, latex]
 
 - id: statistician
   title: Statistician / biostatistician
@@ -324,7 +324,7 @@
   tiers:
     hire: [probability, statistics, calculus, linear-algebra, r-lang, bayesian-statistics, experiments, sql, project-empirical-study]
     firstYear: [time-series, econometrics, machine-learning, data-visualization]
-    extra: [pandas, multivariable-calculus]
+    extra: [pandas, multivariable-calculus, latex]
 
 - id: ios-developer
   title: iOS developer
@@ -414,7 +414,7 @@
   projects: {beginner: project-linux-scripts, intermediate: project-homelab, advanced: project-ansible-fleet}
   tiers:
     hire: [shell-tools, linux-admin, networking, nginx, incident-management, log-analysis, project-homelab]
-    firstYear: [ansible, docker, cloud-basics, observability, git]
+    firstYear: [ansible, docker, cloud-basics, observability, git, vim, regex]
     extra: [azure, systems-security]
 
 - id: database-administrator
@@ -732,7 +732,7 @@
   tiers:
     hire: [probability, statistics, calculus, actuarial-maths, spreadsheets, financial-markets, project-pricing-model]
     firstYear: [loss-models, r-lang, sql]
-    extra: [linear-models, time-series, programming-basics]
+    extra: [linear-models, time-series, programming-basics, latex]
   search: actuarial analyst
 
 - id: analog-design-engineer
@@ -743,7 +743,7 @@
   tiers:
     hire: [circuit-analysis, analog-electronics, signals-and-systems, digital-logic, shell-tools, project-analog-circuit]
     firstYear: [asic-flow, verilog]
-    extra: [programming-basics, control-systems]
+    extra: [programming-basics, control-systems, matlab]
   search: analog design engineer
 
 - id: robotics-engineer
@@ -754,7 +754,7 @@
   tiers:
     hire: [programming-basics, cpp, linear-algebra, robotics, control-systems, ros, microcontrollers, git, project-robot]
     firstYear: [linux-admin, computer-vision, testing-debugging]
-    extra: [machine-learning, embedded-protocols]
+    extra: [machine-learning, embedded-protocols, matlab]
   search: robotics engineer
 
 - id: automation-engineer
@@ -765,7 +765,7 @@
   tiers:
     hire: [circuit-analysis, digital-logic, electrical-machines, plc-scada, control-systems, spreadsheets, project-plc-line]
     firstYear: [networking, power-electronics]
-    extra: [programming-basics, sql]
+    extra: [programming-basics, sql, matlab]
   search: PLC SCADA engineer
 
 - id: telecom-engineer
@@ -775,7 +775,7 @@
   projects: {beginner: project-signal-analysis, intermediate: project-comms-link, advanced: project-sdr-receiver}
   tiers:
     hire: [signals-and-systems, communication-systems, electromagnetics, networking, spreadsheets, project-comms-link]
-    firstYear: [linux-admin, shell-tools, programming-basics]
+    firstYear: [linux-admin, shell-tools, programming-basics, matlab]
     extra: [cloud-basics, sql]
   search: telecom engineer
 
@@ -786,7 +786,7 @@
   projects: {beginner: project-power-sim, intermediate: project-power-converter, advanced: project-inverter}
   tiers:
     hire: [circuit-analysis, analog-electronics, power-electronics, control-systems, microcontrollers, pcb-design, project-power-converter]
-    firstYear: [electrical-machines, c-and-memory]
+    firstYear: [electrical-machines, c-and-memory, matlab]
     extra: [signals-and-systems, programming-basics]
   search: power electronics engineer
 
@@ -797,7 +797,7 @@
   projects: {beginner: project-home-load, intermediate: project-electrical-design, advanced: project-solar-design}
   tiers:
     hire: [circuit-analysis, electrical-machines, power-systems, project-electrical-design]
-    firstYear: [plc-scada, power-electronics, spreadsheets, control-systems]
+    firstYear: [plc-scada, power-electronics, spreadsheets, control-systems, matlab]
     extra: [programming-basics]
   evidence:
     postings: 30

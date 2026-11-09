@@ -8,6 +8,19 @@
   hours: 35
   requires: [calculus]
   recommends: [real-analysis]
+  covers:
+    - topic: Complex numbers
+      detail: Algebra, the complex plane and polar form.
+    - topic: Analytic functions
+      detail: The Cauchy–Riemann equations.
+    - topic: Contour integrals
+      detail: Cauchy's theorem and integral formula.
+    - topic: Series
+      detail: Taylor and Laurent series.
+    - topic: Residues
+      detail: Evaluating real integrals with residues.
+    - topic: Conformal maps
+      detail: Angle-preserving transformations.
   resources:
     - resource: mit-1804
       locator: "Lecture notes, topics 1–10, with the problem sets"
@@ -20,6 +33,19 @@
   hours: 40
   requires: [calculus]
   recommends: [linear-algebra]
+  covers:
+    - topic: First-order equations
+      detail: Separable, linear and exact equations.
+    - topic: Second-order linear equations
+      detail: Homogeneous and forced solutions.
+    - topic: Laplace transforms
+      detail: Solving equations by transforming them.
+    - topic: Systems
+      detail: Matrix methods and phase portraits.
+    - topic: Stability
+      detail: Equilibria and their behaviour.
+    - topic: Numerical solutions
+      detail: Euler and Runge–Kutta methods.
   resources:
     - resource: mit-1803sc
       locator: "Units I–IV"
@@ -34,6 +60,19 @@
   summary: The heat, wave and Laplace equations, characteristics, separation of variables and transform methods.
   hours: 30
   requires: [ordinary-differential-equations, multivariable-calculus]
+  covers:
+    - topic: Classification
+      detail: Elliptic, parabolic and hyperbolic equations.
+    - topic: The heat equation
+      detail: Diffusion and separation of variables.
+    - topic: The wave equation
+      detail: Vibrations and d'Alembert's solution.
+    - topic: Laplace's equation
+      detail: Steady states and boundary conditions.
+    - topic: Fourier series
+      detail: Representing solutions as sums of waves.
+    - topic: Numerical methods
+      detail: Finite differences.
   resources:
     - resource: mit-18152
       locator: "Lecture notes and problem sets"
@@ -45,6 +84,17 @@
   summary: Groups, subgroups and the Sylow theorems, rings and ideals, and fields and their extensions.
   hours: 45
   requires: [proofs]
+  covers:
+    - topic: Groups
+      detail: Definitions, examples and subgroups.
+    - topic: Homomorphisms
+      detail: Structure-preserving maps and quotient groups.
+    - topic: Group actions
+      detail: Symmetry and counting.
+    - topic: Rings and fields
+      detail: Polynomial rings, ideals and finite fields.
+    - topic: Applications
+      detail: Cryptography and error-correcting codes.
   resources:
     - resource: judson-aata
       locator: "Chapters 1–6, 9–11, 13, 16–18, 21"
@@ -62,6 +112,19 @@
   hours: 30
   requires: [calculus, linear-algebra]
   recommends: [programming-basics]
+  covers:
+    - topic: Floating point
+      detail: Rounding, cancellation and stability.
+    - topic: Root finding
+      detail: Bisection and Newton's method.
+    - topic: Interpolation
+      detail: Polynomials and splines.
+    - topic: Numerical integration
+      detail: Trapezoidal and Simpson's rules, and Gaussian quadrature.
+    - topic: Linear systems
+      detail: LU decomposition, conditioning and iterative methods.
+    - topic: Differential equations
+      detail: Step-size, accuracy and stability of solvers.
   resources:
     - resource: mit-18330
       locator: "Lecture notes and homework"
@@ -73,6 +136,17 @@
   summary: Open sets, bases, product and quotient topologies, connectedness, compactness and the separation axioms.
   hours: 30
   requires: [real-analysis]
+  covers:
+    - topic: Topological spaces
+      detail: Open sets and continuity in general.
+    - topic: Metric spaces
+      detail: Distances and the topology they make.
+    - topic: Compactness
+      detail: Why it matters and how to prove it.
+    - topic: Connectedness
+      detail: Spaces that come in one piece.
+    - topic: Quotient spaces
+      detail: Gluing spaces together.
   resources:
     - resource: mit-18901
       locator: "Lecture notes and problem sets"
@@ -85,6 +159,19 @@
   hours: 35
   requires: [real-analysis, linear-algebra]
   recommends: [topology]
+  covers:
+    - topic: Normed spaces
+      detail: Measuring size in vector spaces of functions.
+    - topic: Banach spaces
+      detail: Completeness and its consequences.
+    - topic: Hilbert spaces
+      detail: Inner products, orthogonality and projections.
+    - topic: Linear operators
+      detail: Bounded operators and their norms.
+    - topic: Major theorems
+      detail: Hahn–Banach, open mapping and uniform boundedness.
+    - topic: Spectral theory
+      detail: Eigenvalues for operators.
   resources:
     - resource: mit-18102
       locator: "All lectures"
@@ -96,6 +183,19 @@
   summary: Writing a decision as an objective and constraints, the simplex method, duality, and transportation and assignment problems.
   hours: 25
   requires: [linear-algebra]
+  covers:
+    - topic: Formulating LPs
+      detail: Variables, objective and linear constraints.
+    - topic: Geometry
+      detail: Feasible regions and corner points.
+    - topic: The simplex method
+      detail: Moving between corners to the optimum.
+    - topic: Duality
+      detail: The dual problem and shadow prices.
+    - topic: Sensitivity analysis
+      detail: How the answer changes with the data.
+    - topic: Integer programming
+      detail: Branch and bound, and why integers are harder.
   resources:
     - resource: mit-15053
       locator: "Lectures 1–12"
@@ -112,6 +212,19 @@
   hours: 35
   requires: [linear-programming, programming-basics]
   recommends: [statistics]
+  covers:
+    - topic: Modelling decisions
+      detail: Turning a business problem into a model.
+    - topic: Integer and mixed-integer models
+      detail: Scheduling, assignment and facility location.
+    - topic: Network models
+      detail: Shortest paths, flows and transportation.
+    - topic: Queueing
+      detail: Waiting lines and service levels.
+    - topic: Simulation
+      detail: Modelling systems too complex for formulas.
+    - topic: Solvers
+      detail: OR-Tools, PuLP and commercial solvers.
   resources:
     - resource: mit-15053
       locator: "Integer programming and network lectures"
@@ -157,6 +270,19 @@
   hours: 60
   requires: [probability, calculus]
   recommends: [corporate-finance]
+  covers:
+    - topic: Interest theory
+      detail: Accumulation, discounting and annuities.
+    - topic: Survival models
+      detail: Life tables and survival probabilities.
+    - topic: Life insurance
+      detail: Present values of benefits.
+    - topic: Life annuities
+      detail: Present values of payments while alive.
+    - topic: Premiums
+      detail: The equivalence principle.
+    - topic: Reserves
+      detail: Why insurers hold money back, and computing it.
   resources:
     - resource: life-contingencies-open
       locator: "Chapters 1–4"
@@ -176,6 +302,19 @@
   hours: 40
   requires: [statistics, probability]
   recommends: [r-lang]
+  covers:
+    - topic: Frequency models
+      detail: Poisson, binomial and negative binomial claim counts.
+    - topic: Severity models
+      detail: Distributions for claim sizes and their tails.
+    - topic: Aggregate losses
+      detail: Combining frequency and severity.
+    - topic: Fitting models
+      detail: Maximum likelihood and goodness of fit.
+    - topic: Credibility
+      detail: Blending a group's experience with the wider data.
+    - topic: Reserving
+      detail: Chain ladder and estimating unpaid claims.
   resources:
     - resource: loss-data-analytics
       locator: "Chapters 1–7"

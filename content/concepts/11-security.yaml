@@ -4,6 +4,19 @@
   summary: Threats, vulnerabilities, controls, authentication, encryption basics and the vocabulary every security job assumes.
   hours: 30
   recommends: [networking]
+  covers:
+    - topic: The CIA triad
+      detail: Confidentiality, integrity and availability.
+    - topic: Threats and vulnerabilities
+      detail: Malware, phishing and common attacks.
+    - topic: Authentication and access
+      detail: Passwords, MFA and least privilege.
+    - topic: Network security basics
+      detail: Firewalls, VPNs and segmentation.
+    - topic: Cryptography in practice
+      detail: Encryption, hashing and certificates.
+    - topic: Security frameworks
+      detail: ISO 27001, NIST and why they exist.
   resources:
     - resource: professor-messer
       locator: "The Security+ course videos"
@@ -25,6 +38,19 @@
   summary: How attackers behave, what that looks like in logs, and how alerts and SIEM tools catch it.
   hours: 20
   requires: [security-fundamentals, log-analysis]
+  covers:
+    - topic: Logs and telemetry
+      detail: What to collect from endpoints, networks and apps.
+    - topic: SIEM
+      detail: Centralising logs and writing detection rules.
+    - topic: MITRE ATT&CK
+      detail: Mapping attacker techniques.
+    - topic: Triage
+      detail: Deciding which alerts matter.
+    - topic: Incident response
+      detail: Contain, eradicate and recover.
+    - topic: Threat intelligence
+      detail: Indicators of compromise and how to use them.
   resources:
     - resource: mitre-attack
       locator: "The Enterprise matrix, one tactic at a time"

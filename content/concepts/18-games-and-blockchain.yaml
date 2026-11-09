@@ -8,6 +8,19 @@
   hours: 50
   requires: [programming-basics]
   recommends: [csharp]
+  covers:
+    - topic: Scenes and nodes or objects
+      detail: How an engine organises a game.
+    - topic: Scripts
+      detail: Attaching behaviour in GDScript or C#.
+    - topic: Physics
+      detail: Bodies, collisions and triggers.
+    - topic: Input
+      detail: Keyboard, mouse, touch and controllers.
+    - topic: UI
+      detail: Menus, health bars and scores.
+    - topic: Exporting
+      detail: Building for PC, web and mobile.
   resources:
     - resource: unity-junior-programmer
       locator: "The whole pathway"
@@ -31,6 +44,19 @@
   summary: How game code is organised so it stays fast and changeable. The game loop, components, state machines, events and object pools.
   hours: 20
   requires: [oop-design]
+  covers:
+    - topic: The game loop
+      detail: Update and render every frame, and delta time.
+    - topic: Game state
+      detail: Menus, levels and saving progress.
+    - topic: Patterns
+      detail: Components, state machines and observers.
+    - topic: Movement and physics
+      detail: Velocity, acceleration and collision response.
+    - topic: AI
+      detail: Simple enemy behaviour and pathfinding.
+    - topic: Performance
+      detail: Frame budgets and profiling.
   resources:
     - resource: game-programming-patterns
       locator: "The whole book"
@@ -42,6 +68,19 @@
   summary: How a 3D scene becomes pixels. Meshes, transforms, cameras, lighting, textures and shaders.
   hours: 40
   requires: [linear-algebra, cpp]
+  covers:
+    - topic: The pipeline
+      detail: Vertices to pixels.
+    - topic: Transforms
+      detail: Model, view and projection matrices.
+    - topic: Shaders
+      detail: Vertex and fragment shaders in GLSL.
+    - topic: Lighting
+      detail: Ambient, diffuse and specular lighting.
+    - topic: Textures
+      detail: Mapping images onto surfaces.
+    - topic: Ray tracing basics
+      detail: Following light rays through a scene.
   resources:
     - resource: learnopengl
       locator: "Getting started, Lighting and Model loading"
@@ -79,6 +118,19 @@
   summary: Hashes, signatures, blocks, consensus, wallets and transactions, using Bitcoin and Ethereum as the examples.
   hours: 20
   recommends: [cryptography]
+  covers:
+    - topic: Hashes and signatures
+      detail: The cryptography underneath.
+    - topic: Blocks and chains
+      detail: Linking blocks so history can't be rewritten.
+    - topic: Consensus
+      detail: Proof of work and proof of stake.
+    - topic: Bitcoin and Ethereum
+      detail: Two different designs and their uses.
+    - topic: Wallets and keys
+      detail: Addresses, private keys and transactions.
+    - topic: Limits
+      detail: Throughput, fees and what blockchains are bad at.
   resources:
     - resource: mastering-bitcoin
       locator: "Chapters 1–4 and 10–12"
@@ -94,6 +146,19 @@
   summary: Writing, testing and deploying programs that run on Ethereum and similar chains, with tools like Foundry.
   hours: 40
   requires: [blockchain-basics, programming-basics]
+  covers:
+    - topic: Contracts and state
+      detail: Storage, functions and visibility.
+    - topic: Types
+      detail: Integers, addresses, mappings and structs.
+    - topic: Events and errors
+      detail: Logging and reverting.
+    - topic: Gas
+      detail: What operations cost and writing efficient code.
+    - topic: Standards
+      detail: ERC-20 and ERC-721 with OpenZeppelin.
+    - topic: Testing and deploying
+      detail: Foundry or Hardhat and testnets.
   resources:
     - resource: cyfrin-updraft
       locator: "Solidity Smart Contract Development, then Foundry Fundamentals"
@@ -116,6 +181,19 @@
   summary: The ways contracts get drained, such as reentrancy, access control and oracle manipulation, and how auditors find them.
   hours: 30
   requires: [solidity]
+  covers:
+    - topic: Reentrancy
+      detail: The classic attack and checks-effects-interactions.
+    - topic: Access control
+      detail: Who can call what.
+    - topic: Arithmetic and logic bugs
+      detail: Rounding, ordering and edge cases.
+    - topic: Oracle manipulation
+      detail: Trusting prices from outside the chain.
+    - topic: Front-running
+      detail: Transactions others can see before they're mined.
+    - topic: Auditing
+      detail: Reading code like an attacker, and tools like Slither.
   resources:
     - resource: ethernaut
       locator: "Every level, in order"

@@ -4,7 +4,7 @@
 
 - id: languages
   title: Languages
-  tools: [programming-basics, java, javascript, typescript, csharp, go, cpp, c-and-memory, rust, kotlin, swift, php, r-lang]
+  tools: [programming-basics, java, javascript, typescript, csharp, go, cpp, c-and-memory, rust, kotlin, swift, php, r-lang, scala, matlab]
 
 - id: web
   title: Web frameworks
@@ -28,7 +28,7 @@
 
 - id: devops
   title: Developer tools and DevOps
-  tools: [git, shell-tools, linux-admin, docker, kubernetes, ci-cd, jenkins, ansible, nginx, observability]
+  tools: [git, shell-tools, linux-admin, docker, kubernetes, ci-cd, jenkins, ansible, nginx, observability, build-tools, vim, regex]
 
 - id: cloud
   title: Cloud
@@ -48,7 +48,7 @@
 
 - id: workplace
   title: Workplace platforms
-  tools: [jira, figma, salesforce, servicenow, web-analytics]
+  tools: [jira, figma, salesforce, servicenow, web-analytics, latex]
 
 - id: enterprise
   title: Enterprise platforms

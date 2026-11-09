@@ -7,6 +7,21 @@
   summary: Describing digital circuits in code, from adders to state machines, and simulating them before anything is built.
   hours: 40
   requires: [digital-logic]
+  covers:
+    - topic: Modules and ports
+      detail: Describing hardware blocks.
+    - topic: Combinational logic
+      detail: assign statements and always @(*).
+    - topic: Sequential logic
+      detail: Clocked always blocks and non-blocking assignments.
+    - topic: State machines
+      detail: Writing FSMs in Verilog.
+    - topic: Testbenches
+      detail: Stimulus, checking and waveforms.
+    - topic: Synthesis
+      detail: What becomes real hardware and what doesn't.
+    - topic: VHDL
+      detail: The other main hardware language, and how its style differs.
   resources:
     - resource: hdlbits
       locator: "Every section, in order"
@@ -23,6 +38,19 @@
   summary: Proving a chip design works before it's made. Testbenches, constrained random tests, assertions, coverage and UVM, the industry's standard framework.
   hours: 60
   requires: [verilog, oop-design]
+  covers:
+    - topic: Why verification
+      detail: Finding bugs before chips are made.
+    - topic: Testbench architecture
+      detail: Drivers, monitors and scoreboards.
+    - topic: SystemVerilog
+      detail: Classes, constrained random stimulus and assertions.
+    - topic: Coverage
+      detail: Code and functional coverage.
+    - topic: UVM
+      detail: The standard methodology and its components.
+    - topic: Debugging
+      detail: Reading waveforms and narrowing down failures.
   resources:
     - resource: chipverify
       locator: "SystemVerilog, then UVM tutorials"
@@ -42,6 +70,19 @@
   hours: 40
   requires: [verilog]
   recommends: [computer-architecture]
+  covers:
+    - topic: The flow
+      detail: 'From RTL to a chip: synthesis, place and route, sign-off.'
+    - topic: Synthesis
+      detail: Turning RTL into gates.
+    - topic: Static timing analysis
+      detail: Setup, hold and clock constraints.
+    - topic: Physical design
+      detail: Floorplanning, placement, clock trees and routing.
+    - topic: Design for test
+      detail: Scan chains and test patterns.
+    - topic: Open-source flows
+      detail: OpenLane and OpenROAD.
   resources:
     - resource: openroad-docs
       locator: "Getting started and the flow tutorial"
@@ -55,6 +96,19 @@
   summary: Turning a circuit into a printed circuit board. Schematics, footprints, layout, design rules and the files a factory needs.
   hours: 25
   recommends: [microcontrollers]
+  covers:
+    - topic: Schematic capture
+      detail: Drawing circuits with the right symbols and footprints.
+    - topic: Footprints and parts
+      detail: Matching parts to datasheets.
+    - topic: Layout
+      detail: Placement, routing and ground planes.
+    - topic: Design rules
+      detail: Trace widths, clearances and the design-rule check.
+    - topic: Signal and power
+      detail: Decoupling capacitors and keeping noisy loops small.
+    - topic: Manufacturing
+      detail: Gerber files, bills of materials and assembly.
   resources:
     - resource: kicad-getting-started
       locator: "The whole tutorial"

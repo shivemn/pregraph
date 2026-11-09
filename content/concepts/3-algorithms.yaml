@@ -4,6 +4,19 @@
   summary: How running time and memory grow with input size, and how to argue about it.
   hours: 6
   requires: [discrete-math]
+  covers:
+    - topic: Counting steps
+      detail: Turning loops and recursion into running-time functions.
+    - topic: Big-O, Omega and Theta
+      detail: Upper, lower and tight bounds, and dropping constants.
+    - topic: Common classes
+      detail: O(1), log n, n, n log n, n², 2ⁿ and what sizes each can handle.
+    - topic: Recurrences
+      detail: The master theorem for divide-and-conquer.
+    - topic: Space complexity
+      detail: Memory used, including the call stack.
+    - topic: Amortised analysis
+      detail: Why appending to a dynamic array is O(1) on average.
   resources:
     - resource: mit-6006
       locator: "Lecture 1, Algorithms and computation"
@@ -23,6 +36,19 @@
   hours: 10
   requires: [programming-basics]
   recommends: [complexity-analysis]
+  covers:
+    - topic: Arrays and dynamic arrays
+      detail: Indexing, resizing and their costs.
+    - topic: Linked lists
+      detail: Singly and doubly linked lists, and pointer manipulation.
+    - topic: Stacks and queues
+      detail: LIFO and FIFO, and their uses.
+    - topic: Deques and monotonic stacks
+      detail: Tools behind many interview problems.
+    - topic: Two pointers and sliding windows
+      detail: Patterns for arrays and strings.
+    - topic: Prefix sums
+      detail: Answering range-sum questions quickly.
   resources:
     - resource: mit-6006
       locator: "Lecture 2, Data structures and dynamic arrays"
@@ -46,6 +72,17 @@
   hours: 8
   requires: [linear-structures]
   recommends: [probability]
+  covers:
+    - topic: Hashing
+      detail: Hash functions and what makes a good one.
+    - topic: Collisions
+      detail: Chaining and open addressing.
+    - topic: Load factor and resizing
+      detail: Why lookups stay O(1) on average.
+    - topic: Hash maps and sets in practice
+      detail: Counting, grouping, de-duplicating and two-sum style problems.
+    - topic: Pitfalls
+      detail: Mutable keys, bad hash functions and worst cases.
   resources:
     - resource: mit-6006
       locator: "Lecture 4, Hashing"
@@ -64,6 +101,19 @@
   summary: Merge sort, quicksort, binary search, lower bounds and linear-time sorting.
   hours: 12
   requires: [linear-structures, recursion]
+  covers:
+    - topic: Binary search
+      detail: On sorted arrays, and on the answer itself.
+    - topic: Simple sorts
+      detail: Insertion and selection sort, and where they're fine.
+    - topic: Merge sort and quicksort
+      detail: Divide and conquer, stability and worst cases.
+    - topic: Heapsort
+      detail: Sorting with a priority queue.
+    - topic: Linear-time sorts
+      detail: Counting and radix sort.
+    - topic: Lower bounds
+      detail: Why comparison sorting can't beat n log n.
   resources:
     - resource: mit-6006
       locator: "Lectures 3 and 5"
@@ -86,6 +136,19 @@
   summary: Binary search trees, keeping them balanced, and priority queues.
   hours: 15
   requires: [linear-structures, recursion]
+  covers:
+    - topic: Binary trees and traversals
+      detail: Pre-order, in-order, post-order and level-order.
+    - topic: Binary search trees
+      detail: Insert, delete, search and their costs.
+    - topic: Balanced trees
+      detail: Why AVL and red-black trees keep operations at log n.
+    - topic: Heaps
+      detail: Priority queues, heapify, and top-k problems.
+    - topic: Tries
+      detail: Prefix trees for strings and autocomplete.
+    - topic: Tree recursion
+      detail: Height, diameter, lowest common ancestor and path sums.
   resources:
     - resource: mit-6006
       locator: "Lectures 6–8"
@@ -109,6 +172,21 @@
   hours: 25
   requires: [linear-structures, complexity-analysis]
   recommends: [trees-heaps]
+  covers:
+    - topic: Representing graphs
+      detail: Adjacency lists and matrices.
+    - topic: BFS and DFS
+      detail: Traversal, connected components and cycle detection.
+    - topic: Topological sort
+      detail: Ordering tasks with dependencies.
+    - topic: Shortest paths
+      detail: BFS for unweighted, Dijkstra for non-negative weights, Bellman–Ford for negative edges.
+    - topic: Minimum spanning trees
+      detail: Prim's and Kruskal's algorithms.
+    - topic: Union-find
+      detail: Disjoint sets with path compression.
+    - topic: Grids as graphs
+      detail: Islands, mazes and flood fill.
   resources:
     - resource: mit-6006
       locator: "Lectures 9–14"
@@ -132,6 +210,17 @@
   hours: 10
   requires: [sorting-searching]
   recommends: [graph-algorithms]
+  covers:
+    - topic: The greedy idea
+      detail: Making the best local choice and proving it leads to the best overall.
+    - topic: Interval scheduling
+      detail: Choosing the most non-overlapping intervals.
+    - topic: Huffman coding
+      detail: Building optimal prefix codes.
+    - topic: Exchange arguments
+      detail: The standard way to prove a greedy algorithm correct.
+    - topic: When greedy fails
+      detail: Recognising problems that need dynamic programming instead.
   resources:
     - resource: cses-book
       locator: "Chapter 6, Greedy algorithms"
@@ -153,6 +242,19 @@
   summary: Breaking a problem into overlapping subproblems and solving each once.
   hours: 20
   requires: [recursion, complexity-analysis]
+  covers:
+    - topic: Overlapping subproblems
+      detail: Spotting when recursion repeats work.
+    - topic: Memoisation and tabulation
+      detail: Top-down caching versus bottom-up tables.
+    - topic: Defining the state
+      detail: Choosing what each subproblem represents.
+    - topic: Classic patterns
+      detail: Knapsack, longest common subsequence, edit distance, coin change and longest increasing subsequence.
+    - topic: DP on grids and strings
+      detail: Paths, palindromes and partitions.
+    - topic: Space optimisation
+      detail: Keeping only the rows you need.
   resources:
     - resource: mit-6006
       locator: "Lectures 15–18"
@@ -172,6 +274,19 @@
   hours: 40
   requires: [dynamic-programming, graph-algorithms, hash-tables]
   recommends: [testing-debugging]
+  covers:
+    - topic: A problem-solving routine
+      detail: Clarify, try examples, find the pattern, then code.
+    - topic: Patterns
+      detail: Two pointers, sliding window, binary search, BFS/DFS, heaps, DP and backtracking.
+    - topic: Coding under time pressure
+      detail: Writing clean code in 30–45 minutes.
+    - topic: Testing your solution
+      detail: Dry runs and edge cases before you say you're done.
+    - topic: Talking through it
+      detail: Explaining your thinking and trade-offs out loud.
+    - topic: A practice plan
+      detail: Working through a curated list and reviewing mistakes.
   resources:
     - resource: cses-problemset
       locator: "Introductory, then Sorting and Searching, Dynamic Programming and Graph Algorithms"

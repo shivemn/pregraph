@@ -4,6 +4,23 @@
   summary: "Variables, conditions, loops, functions, lists and dictionaries, in one language, enough to write small programs on your own. Any language teaches this. The main picks use Python, the easiest to start with; Java, C, C++ and C# courses are under more options. If you already write code in any language, skip this stop."
   skipLabel: I already code in another language
   hours: 40
+  covers:
+    - topic: Values, variables and types
+      detail: Numbers, strings, booleans, and what happens when types mix.
+    - topic: Control flow
+      detail: Conditions and loops, and tracing a program by hand.
+    - topic: Functions
+      detail: Parameters, return values, scope, and splitting a problem into functions.
+    - topic: Collections
+      detail: Lists, dictionaries, sets and tuples, and choosing between them.
+    - topic: Strings and files
+      detail: Formatting, slicing, reading and writing text and CSV files.
+    - topic: Errors
+      detail: Reading tracebacks, raising and catching exceptions.
+    - topic: Modules and libraries
+      detail: Importing code, installing packages and reading their docs.
+    - topic: Small programs
+      detail: Writing complete scripts that take input, do something useful and report results.
   resources:
     - resource: think-python
       locator: "Chapters 1–11"
@@ -42,6 +59,19 @@
   hours: 8
   requires: [programming-basics]
   recommends: [proofs]
+  covers:
+    - topic: Thinking recursively
+      detail: A base case, a smaller subproblem and trusting the recursive call.
+    - topic: The call stack
+      detail: What happens in memory when functions call themselves, and stack overflows.
+    - topic: Recursion on lists and trees
+      detail: Processing structures that are defined recursively.
+    - topic: Divide and conquer
+      detail: 'Splitting, solving and combining: merge sort and binary search.'
+    - topic: Backtracking
+      detail: 'Trying choices and undoing them: permutations, subsets and N-queens.'
+    - topic: Recursion to iteration
+      detail: Rewriting with an explicit stack, and tail calls.
   resources:
     - resource: think-python
       locator: "Chapters 5–6"
@@ -63,6 +93,19 @@
   summary: Functions as values, closures and data abstraction. How to keep a growing program understandable.
   hours: 20
   requires: [recursion]
+  covers:
+    - topic: Functions as values
+      detail: Passing functions as arguments and returning them.
+    - topic: map, filter and reduce
+      detail: Transforming collections without explicit loops.
+    - topic: Closures
+      detail: Functions that remember the variables around them.
+    - topic: Lambdas
+      detail: Small anonymous functions, and when a named one is clearer.
+    - topic: Abstraction
+      detail: Spotting a repeated pattern and turning it into a function that takes behaviour as input.
+    - topic: Immutability
+      detail: Avoiding shared mutable state, and why it makes code easier to reason about.
   resources:
     - resource: composing-programs
       locator: "Chapters 1–2"
@@ -79,6 +122,23 @@
   area: programming
   summary: Moving around files, pipes, small scripts and an editor you're fast in. Nobody teaches this, everybody expects it.
   hours: 8
+  covers:
+    - topic: Navigating the shell
+      detail: Paths, listing, moving, copying and permissions.
+    - topic: Pipes and redirection
+      detail: Chaining small tools with |, >, >> and 2>&1.
+    - topic: Text tools
+      detail: grep, sed, awk, cut, sort, uniq and wc for slicing data and logs.
+    - topic: Finding things
+      detail: find and xargs, and searching code with ripgrep or grep -r.
+    - topic: Shell scripts
+      detail: Variables, conditionals, loops, exit codes and 'set -euo pipefail'.
+    - topic: Processes and jobs
+      detail: ps, top, kill, background jobs and nohup.
+    - topic: Remote work
+      detail: ssh, keys, scp and rsync.
+    - topic: PowerShell
+      detail: 'The equivalents on Windows: objects in the pipeline instead of text.'
   resources:
     - resource: missing-semester
       locator: "Course Overview + Introduction to the Shell; Command-line Environment; Development Environment and Tools"
@@ -97,7 +157,28 @@
   summary: Commits, branches, merging, remotes, and how to get out of trouble.
   hours: 6
   recommends: [shell-tools]
+  covers:
+    - topic: The model
+      detail: Commits as snapshots, the staging area, and what a branch really is.
+    - topic: Everyday commands
+      detail: status, add, commit, log, diff, restore.
+    - topic: Branching and merging
+      detail: Creating branches, merging, and resolving conflicts.
+    - topic: Rebasing
+      detail: Rewriting your branch on top of another, and when not to.
+    - topic: Remotes
+      detail: clone, fetch, pull, push, and tracking branches.
+    - topic: Collaboration
+      detail: Pull requests, code review and keeping a clean history.
+    - topic: Undoing things
+      detail: revert, reset, reflog, and recovering 'lost' work.
+    - topic: Good commits
+      detail: Small, focused commits with messages that explain why.
   resources:
+    - resource: git-cheatsheet
+      locator: Keep it open while you work
+      role: alternative
+      verified: true
     - resource: pro-git
       locator: "Chapters 1–3"
       verified: true
@@ -119,6 +200,23 @@
   summary: Classes, inheritance and when not to use it, and the common design patterns you'll meet in real code.
   hours: 20
   requires: [higher-order-programming]
+  covers:
+    - topic: Classes and objects
+      detail: State and behaviour together, constructors and methods.
+    - topic: Encapsulation
+      detail: Hiding internal state behind a small public interface.
+    - topic: Inheritance and interfaces
+      detail: Sharing behaviour, and why composition is often better.
+    - topic: Polymorphism
+      detail: Calling the same method on different types and getting the right behaviour.
+    - topic: SOLID principles
+      detail: Five rules of thumb for classes that are easy to change.
+    - topic: Design patterns
+      detail: Factory, strategy, observer, adapter, decorator and singleton, and the problem each solves.
+    - topic: UML
+      detail: Class and sequence diagrams for explaining a design to others.
+    - topic: Low-level design interviews
+      detail: Designing classes for a parking lot or a library system out loud.
   resources:
     - resource: think-python
       locator: "Chapters 14–17"
@@ -141,6 +239,23 @@
   hours: 12
   requires: [programming-basics]
   recommends: [shell-tools]
+  covers:
+    - topic: Reading errors
+      detail: Stack traces, error messages and finding where it really went wrong.
+    - topic: Debuggers
+      detail: Breakpoints, stepping and inspecting variables in an IDE or pdb.
+    - topic: Logging
+      detail: Useful log messages and levels, instead of print statements everywhere.
+    - topic: Unit tests
+      detail: Testing one function at a time with a framework like pytest or JUnit.
+    - topic: What to test
+      detail: Normal cases, edge cases and error cases.
+    - topic: Test doubles
+      detail: Mocks, stubs and fakes for code that talks to the outside world.
+    - topic: Test-driven development
+      detail: Writing the test first, and when it helps.
+    - topic: Systematic debugging
+      detail: Reproduce, narrow down, form a hypothesis, test it.
   resources:
     - resource: missing-semester
       locator: "Debugging and Profiling"
@@ -161,6 +276,21 @@
   hours: 25
   requires: [programming-basics]
   recommends: [git, shell-tools]
+  covers:
+    - topic: C basics
+      detail: Types, functions, control flow and compiling with gcc or clang.
+    - topic: Pointers
+      detail: Addresses, dereferencing, pointer arithmetic and arrays as pointers.
+    - topic: Memory layout
+      detail: The stack, the heap, static data, and where each variable lives.
+    - topic: Manual memory management
+      detail: malloc and free, and leaks, double frees and use-after-free.
+    - topic: Strings and buffers
+      detail: Null-terminated strings and buffer overflows.
+    - topic: Structs
+      detail: Grouping data, padding and alignment.
+    - topic: Tools
+      detail: Make, gdb and Valgrind or AddressSanitizer for finding memory bugs.
   resources:
     - resource: cs50x
       locator: "Weeks 1–5"
@@ -180,6 +310,21 @@
   hours: 15
   requires: [git, testing-debugging]
   recommends: [oop-design]
+  covers:
+    - topic: Readable code
+      detail: Naming, small functions and comments that explain why.
+    - topic: Code review
+      detail: Giving and taking useful feedback.
+    - topic: Refactoring
+      detail: Improving structure without changing behaviour, backed by tests.
+    - topic: Dependencies
+      detail: Package managers, versioning and keeping them up to date.
+    - topic: Working in large codebases
+      detail: Finding your way around, and making safe changes.
+    - topic: Design docs
+      detail: Writing down a plan and its trade-offs before building.
+    - topic: Technical debt
+      detail: Recognising it and deciding when to pay it down.
   resources:
     - resource: swe-at-google
       locator: "Chapters 1–3, then 8–10 (style guides, code review, documentation)"
@@ -192,6 +337,25 @@
   hours: 30
   requires: [programming-basics]
   recommends: [oop-design]
+  covers:
+    - topic: Syntax and types
+      detail: Primitives, wrappers, strings and control flow.
+    - topic: Classes and interfaces
+      detail: Constructors, access modifiers, abstract classes and interfaces.
+    - topic: Collections
+      detail: List, Set, Map and their implementations, and when to use which.
+    - topic: Generics
+      detail: Type-safe collections and methods.
+    - topic: Exceptions
+      detail: Checked versus unchecked exceptions, and try-with-resources.
+    - topic: Streams and lambdas
+      detail: Functional-style processing of collections.
+    - topic: Concurrency
+      detail: Threads, ExecutorService, CompletableFuture and the synchronized keyword.
+    - topic: The JVM
+      detail: Garbage collection, the heap, and reading a stack trace.
+    - topic: Build tools
+      detail: Maven or Gradle for dependencies and builds.
   resources:
     - resource: dev-java
       locator: "Getting started, Language basics, Classes and objects"
@@ -216,6 +380,23 @@
   kind: tool
   requires: [testing-debugging]
   recommends: [web-http, javascript]
+  covers:
+    - topic: The test pyramid
+      detail: Many unit tests, fewer integration tests, few end-to-end tests.
+    - topic: UI automation
+      detail: Locators, waits and assertions with Selenium or Playwright.
+    - topic: Page objects
+      detail: Keeping tests readable when the UI changes.
+    - topic: API automation
+      detail: Testing endpoints directly, faster and more stable than through the UI.
+    - topic: Test data
+      detail: Creating and cleaning up data so tests don't depend on each other.
+    - topic: Flaky tests
+      detail: Why tests fail randomly, and fixing them instead of re-running.
+    - topic: Running in CI
+      detail: Parallel runs, reports and screenshots on failure.
+    - topic: BDD
+      detail: Gherkin and Cucumber, and when they're worth the overhead.
   resources:
     - resource: playwright-docs
       locator: "Getting started, Writing tests, Locators, Fixtures"
@@ -252,6 +433,21 @@
   hours: 25
   requires: [programming-basics]
   recommends: [concurrency]
+  covers:
+    - topic: Basics
+      detail: Types, structs, slices, maps and the go tool.
+    - topic: Functions and errors
+      detail: Multiple return values and handling errors explicitly.
+    - topic: Interfaces
+      detail: Implicit interfaces and small, composable abstractions.
+    - topic: Goroutines and channels
+      detail: Concurrency built into the language, and select.
+    - topic: Packages and modules
+      detail: Organising code and managing dependencies.
+    - topic: Standard library
+      detail: net/http, encoding/json and testing.
+    - topic: Building services
+      detail: A small HTTP API with good error handling and tests.
   resources:
     - resource: go-tour
       locator: "Every section, from Basics to Concurrency"
@@ -271,6 +467,23 @@
   hours: 40
   requires: [programming-basics]
   recommends: [c-and-memory, oop-design]
+  covers:
+    - topic: Basics and types
+      detail: Compilation, headers, references and const.
+    - topic: Classes
+      detail: Constructors, destructors, operator overloading and the rule of three/five.
+    - topic: Memory and RAII
+      detail: Smart pointers (unique_ptr, shared_ptr) and owning resources safely.
+    - topic: The STL
+      detail: vector, map, unordered_map, set, and algorithms like sort and find.
+    - topic: Templates
+      detail: Generic functions and classes.
+    - topic: Move semantics
+      detail: Moving instead of copying, and why it's fast.
+    - topic: Modern C++
+      detail: auto, lambdas, range-based for and what C++17 and C++20 added.
+    - topic: Performance
+      detail: Avoiding copies, cache-friendly data and measuring before optimising.
   resources:
     - resource: learncpp
       locator: "Chapters 0–17, then 21–25 (operator overloading to virtual functions)"
@@ -295,6 +508,21 @@
   hours: 40
   requires: [programming-basics]
   recommends: [c-and-memory]
+  covers:
+    - topic: Ownership
+      detail: Every value has one owner; moves and copies.
+    - topic: Borrowing and lifetimes
+      detail: References, the borrow checker and why it prevents data races.
+    - topic: Structs, enums and pattern matching
+      detail: Modelling data and handling every case.
+    - topic: Error handling
+      detail: Result and Option, and the ? operator.
+    - topic: Traits and generics
+      detail: Shared behaviour and generic code.
+    - topic: Cargo
+      detail: Building, testing and adding crates.
+    - topic: Concurrency
+      detail: Threads, channels and async with Tokio.
   resources:
     - resource: rust-book
       locator: "Chapters 1–13, then 15–16 (smart pointers and concurrency)"
@@ -564,4 +792,110 @@
     - resource: swe-at-google
       locator: Chapter 14, Larger Testing
       role: alternative
+      verified: true
+
+- id: regex
+  title: Regular expressions
+  area: programming
+  kind: tool
+  summary: 'Patterns for finding, checking and pulling apart text: log lines, form inputs, data cleaning and search-and-replace.'
+  hours: 6
+  requires: [programming-basics]
+  recommends: [shell-tools]
+  covers:
+    - topic: Literals and character classes
+      detail: Matching exact text, [abc], ranges and \d, \w, \s.
+    - topic: Quantifiers
+      detail: '*, +, ?, {n,m}, and greedy versus lazy matching.'
+    - topic: Anchors and boundaries
+      detail: ^, $ and \b, so a pattern matches whole words or lines.
+    - topic: Groups and alternation
+      detail: Capturing groups, named groups and a|b.
+    - topic: Lookarounds
+      detail: Matching only when something comes before or after.
+    - topic: Using regex in code
+      detail: Python's re, JavaScript and grep, and flags like case-insensitive.
+    - topic: When not to
+      detail: Why HTML, email addresses and nested structures need real parsers.
+  resources:
+    - resource: python-regex-howto
+      locator: The whole HOWTO
+      role: primary
+      verified: true
+    - resource: mdn-regex
+      locator: The guide, if you work in JavaScript
+      role: alternative
+      verified: true
+    - resource: regexone
+      locator: All lessons, then the practice problems
+      role: primary
+      verified: true
+    - resource: mdn-regex-cheatsheet
+      locator: Keep it open while you work
+      role: alternative
+      verified: true
+
+- id: vim
+  title: Vim
+  area: programming
+  kind: tool
+  summary: The editor on every server. Enough Vim to edit config files over SSH without panic, and modal editing if you want more.
+  hours: 6
+  requires: [shell-tools]
+  covers:
+    - topic: Modes
+      detail: Normal, insert, visual and command-line mode, and getting back to normal with Esc.
+    - topic: Saving and quitting
+      detail: :w, :q, :wq and :q! without having to search the web.
+    - topic: Moving
+      detail: Words, lines, searching with / and jumping to line numbers.
+    - topic: Editing
+      detail: Delete, change, yank and put, combined with motions (dw, ci", yy).
+    - topic: Undo, repeat and search-replace
+      detail: u, Ctrl-R, the dot command and :%s/old/new/g.
+    - topic: A minimal config
+      detail: A short .vimrc with line numbers and sensible defaults.
+  resources:
+    - resource: missing-semester
+      locator: Lecture 3, Editors (Vim)
+      role: primary
+      verified: true
+    - resource: vim-user-manual
+      locator: Chapters 1 to 4, after running vimtutor
+      role: primary
+      verified: true
+    - resource: vim-quickref
+      locator: Keep it open while you learn
+      role: alternative
+      verified: true
+
+- id: build-tools
+  title: 'Build tools: Maven and Gradle'
+  area: programming
+  kind: tool
+  summary: How Java and Kotlin projects declare dependencies, build, test and package. Every Java codebase you join uses one of the two.
+  hours: 6
+  requires: [java]
+  recommends: [ci-cd]
+  covers:
+    - topic: Why build tools
+      detail: Repeatable builds and dependency management instead of copying JAR files.
+    - topic: Maven's model
+      detail: pom.xml, coordinates, the standard layout and the build lifecycle.
+    - topic: Dependencies
+      detail: Scopes, transitive dependencies and resolving version conflicts.
+    - topic: Gradle
+      detail: build.gradle.kts, tasks and the Gradle wrapper.
+    - topic: Plugins
+      detail: Compiling, testing, packaging and running Spring Boot apps.
+    - topic: Multi-module projects
+      detail: Splitting a large codebase into modules.
+  resources:
+    - resource: maven-5min
+      locator: The whole guide
+      role: primary
+      verified: true
+    - resource: gradle-tutorial
+      locator: Parts 1 to 4 of the tutorial
+      role: primary
       verified: true

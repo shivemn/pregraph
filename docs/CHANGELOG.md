@@ -1,5 +1,12 @@
 # Changelog
 
+## Every stop says what it covers; gaps from cheat-sheets.org
+
+- **Every stop now lists its subtopics**, more than 1,500 of them across 240 stops, from proofs and Kubernetes to accounting and power systems. Validation now fails if a stop lists fewer than four.
+- **Six new tools that were missing:** regular expressions, Vim, LaTeX, Maven and Gradle, MATLAB (with Octave as the free alternative) and Scala. They're on the Tools page and on the routes that use them, such as MATLAB in the first year for electrical, power electronics and telecom, and LaTeX for statisticians, economists and actuaries.
+- **Cheat sheets to keep open,** linked straight from each tool's own publisher: Git (GitHub), Docker, kubectl, pandas, matplotlib, Posit's R sheets, Vim, MDN's regex sheet, GitHub's Markdown guide and Paul Dawkins's calculus sheet.
+- Other topics from cheat-sheets.org now appear as subtopics where they belong: UML and design patterns under object-oriented design, VHDL under Verilog, VBA under spreadsheets, PowerShell under the shell, GraphQL and gRPC under API styles.
+
 ## Designs
 
 - **A new Designs section** with nine worked system designs: a URL shortener, a rate limiter, a chat app, a news feed, live streaming for a cricket final, a UPI payments app, ticket booking for a rush, food delivery dispatch and an AI chat assistant. Each one covers requirements, back-of-the-envelope numbers with the working shown, the API, the data model, the architecture, how requests flow, deep dives, trade-offs and what breaks first.

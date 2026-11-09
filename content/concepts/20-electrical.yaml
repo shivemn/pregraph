@@ -7,6 +7,19 @@
   summary: Ohm's and Kirchhoff's laws, Thevenin and Norton equivalents, RC and RL transients, and AC circuits with phasors.
   hours: 35
   recommends: [calculus]
+  covers:
+    - topic: Circuit laws
+      detail: Ohm's law and Kirchhoff's laws.
+    - topic: Analysis methods
+      detail: Nodal and mesh analysis.
+    - topic: Theorems
+      detail: Thevenin, Norton and superposition.
+    - topic: Capacitors and inductors
+      detail: Energy storage and transient response.
+    - topic: AC circuits
+      detail: Phasors, impedance and power.
+    - topic: Frequency response
+      detail: Filters and resonance.
   resources:
     - resource: lessons-electric-circuits
       locator: "Volume I (DC) and Volume II (AC)"
@@ -21,6 +34,19 @@
   summary: Diodes, BJTs and MOSFETs, biasing and small-signal amplifiers, op-amps, filters and oscillators.
   hours: 45
   requires: [circuit-analysis]
+  covers:
+    - topic: Diodes
+      detail: Rectifiers, clippers and regulators.
+    - topic: Transistors
+      detail: BJT and MOSFET operation and biasing.
+    - topic: Amplifiers
+      detail: Gain, input and output impedance.
+    - topic: Op-amps
+      detail: Inverting, non-inverting and integrator circuits.
+    - topic: Feedback
+      detail: Stability and bandwidth.
+    - topic: Filters and oscillators
+      detail: Active filters and generating signals.
   resources:
     - resource: lessons-electric-circuits
       locator: "Volume III (Semiconductors)"
@@ -36,6 +62,19 @@
   hours: 40
   requires: [calculus]
   recommends: [complex-analysis]
+  covers:
+    - topic: Signals
+      detail: Continuous and discrete signals and their properties.
+    - topic: LTI systems
+      detail: Linearity, time invariance and convolution.
+    - topic: Fourier series and transforms
+      detail: Signals as sums of frequencies.
+    - topic: Laplace and z-transforms
+      detail: Analysing systems with transforms.
+    - topic: Sampling
+      detail: The sampling theorem and aliasing.
+    - topic: Filters
+      detail: Designing systems that change frequency content.
   resources:
     - resource: mit-6003
       locator: "All lectures"
@@ -51,6 +90,19 @@
   hours: 40
   requires: [signals-and-systems]
   recommends: [ordinary-differential-equations]
+  covers:
+    - topic: Modelling
+      detail: Transfer functions and block diagrams.
+    - topic: Time response
+      detail: Step response, overshoot and settling time.
+    - topic: Stability
+      detail: Poles, Routh–Hurwitz and root locus.
+    - topic: Frequency methods
+      detail: Bode and Nyquist plots, gain and phase margins.
+    - topic: PID control
+      detail: Tuning proportional, integral and derivative terms.
+    - topic: State space
+      detail: Modern control with state equations.
   resources:
     - resource: feedback-systems-book
       locator: "Chapters 1–3, 6–8, 10–12"
@@ -65,6 +117,19 @@
   summary: Modulation, noise, channel capacity, digital modulation (PSK, QAM), error-correcting codes and how wireless links work.
   hours: 40
   requires: [signals-and-systems, probability]
+  covers:
+    - topic: Signals and noise
+      detail: Bandwidth, SNR and channel capacity.
+    - topic: Analog modulation
+      detail: AM and FM.
+    - topic: Digital modulation
+      detail: ASK, FSK, PSK and QAM.
+    - topic: Error performance
+      detail: Bit error rate and noise.
+    - topic: Coding
+      detail: Source and channel coding basics.
+    - topic: Wireless systems
+      detail: Multipath, fading and cellular basics.
   resources:
     - resource: mit-602
       locator: "Lecture notes and problem sets"
@@ -79,6 +144,19 @@
   summary: Maxwell's equations, plane waves, transmission lines and the Smith chart, waveguides and antennas.
   hours: 40
   requires: [multivariable-calculus]
+  covers:
+    - topic: Electrostatics
+      detail: Charges, fields and potential.
+    - topic: Magnetostatics
+      detail: Currents and magnetic fields.
+    - topic: Maxwell's equations
+      detail: The four laws in one picture.
+    - topic: Waves
+      detail: Propagation, reflection and polarisation.
+    - topic: Transmission lines
+      detail: Impedance, matching and standing waves.
+    - topic: Antennas
+      detail: Radiation basics.
   resources:
     - resource: ellingson-em
       locator: "Chapters 1–3 and 9; then Volume 2 for waveguides and antennas"
@@ -90,6 +168,19 @@
   summary: Transformers, DC machines, induction and synchronous motors and generators, and how they're tested.
   hours: 35
   requires: [circuit-analysis]
+  covers:
+    - topic: Magnetic circuits
+      detail: Flux, reluctance and transformers' basis.
+    - topic: Transformers
+      detail: Equivalent circuits, tests and efficiency.
+    - topic: DC machines
+      detail: Motors and generators.
+    - topic: Induction motors
+      detail: How they work and their torque-speed curves.
+    - topic: Synchronous machines
+      detail: Alternators and motors.
+    - topic: Motor control basics
+      detail: Starting and speed control.
   resources:
     - resource: mit-6685
       locator: "Course notes, chapters 1–7"
@@ -102,6 +193,19 @@
   hours: 35
   requires: [circuit-analysis]
   recommends: [electrical-machines]
+  covers:
+    - topic: Generation, transmission and distribution
+      detail: How electricity reaches you.
+    - topic: Per-unit system
+      detail: Simplifying calculations.
+    - topic: Load flow
+      detail: Voltages and power flows in a network.
+    - topic: Faults
+      detail: Short-circuit calculations.
+    - topic: Protection
+      detail: Relays, circuit breakers and coordination.
+    - topic: Stability and economics
+      detail: Keeping the grid stable, and economic dispatch.
   resources:
     - resource: mit-6061
       locator: "The course textbook and problem sets"
@@ -114,6 +218,19 @@
   hours: 40
   requires: [analog-electronics]
   recommends: [control-systems]
+  covers:
+    - topic: Switching devices
+      detail: Diodes, MOSFETs, IGBTs and thyristors.
+    - topic: Rectifiers
+      detail: AC to DC, controlled and uncontrolled.
+    - topic: DC-DC converters
+      detail: Buck, boost and buck-boost.
+    - topic: Inverters
+      detail: DC to AC and PWM.
+    - topic: Losses and thermal design
+      detail: Switching and conduction losses, and heat sinks.
+    - topic: Control
+      detail: Closing the loop on converters.
   resources:
     - resource: mit-6334
       locator: "Lecture notes and problem sets"
@@ -126,6 +243,19 @@
   summary: Programming the controllers that run factory machines in ladder logic, and the SCADA screens that monitor whole plants.
   hours: 30
   recommends: [digital-logic, electrical-machines]
+  covers:
+    - topic: PLC hardware
+      detail: CPUs, I/O modules and scan cycles.
+    - topic: Ladder logic
+      detail: Contacts, coils and rungs.
+    - topic: Timers and counters
+      detail: Timed and counted operations.
+    - topic: Other languages
+      detail: Function block diagrams and structured text (IEC 61131-3).
+    - topic: HMI and SCADA
+      detail: Operator screens, alarms and trends.
+    - topic: Industrial networks
+      detail: Modbus, Profibus and EtherNet/IP.
   resources:
     - resource: control-com-openplc
       locator: "The whole article"
@@ -141,6 +271,19 @@
   hours: 50
   requires: [linear-algebra]
   recommends: [control-systems]
+  covers:
+    - topic: Kinematics
+      detail: Positions and orientations, and forward and inverse kinematics.
+    - topic: Dynamics
+      detail: Forces and motion of robot arms.
+    - topic: Sensors
+      detail: Encoders, IMUs, lidar and cameras.
+    - topic: Control
+      detail: Joint control and trajectory following.
+    - topic: Motion planning
+      detail: Finding collision-free paths.
+    - topic: Localisation and mapping
+      detail: Knowing where the robot is.
   resources:
     - resource: modern-robotics
       locator: "Chapters 2–6, 10 and 11, with the videos"
@@ -154,6 +297,19 @@
   hours: 30
   requires: [programming-basics]
   recommends: [linux-admin, cpp]
+  covers:
+    - topic: Nodes and topics
+      detail: Programs that publish and subscribe to messages.
+    - topic: Services and actions
+      detail: Request-response and long-running goals.
+    - topic: Launch files
+      detail: Starting a system with one command.
+    - topic: Simulation
+      detail: Gazebo and visualising with RViz.
+    - topic: Transforms
+      detail: tf2 for coordinate frames.
+    - topic: Navigation
+      detail: The Nav2 stack.
   resources:
     - resource: ros2-tutorials
       locator: "Beginner: CLI tools and Beginner: client libraries"
@@ -645,4 +801,35 @@
     - resource: schneider-eig
       locator: The chapter on photovoltaic installations
       role: primary
+      verified: true
+
+- id: matlab
+  title: MATLAB
+  area: electrical
+  kind: tool
+  summary: The numerical computing environment used across ECE and EEE for signals, control and simulation. Octave is a free alternative that runs most of the same code.
+  hours: 10
+  requires: [linear-algebra]
+  recommends: [signals-and-systems, control-systems]
+  covers:
+    - topic: Arrays and matrices
+      detail: Creating, indexing and operating on whole arrays at once.
+    - topic: Scripts and functions
+      detail: Writing reusable code in .m files.
+    - topic: Plotting
+      detail: Line, scatter and subplot figures, with labels.
+    - topic: Signals
+      detail: FFTs and filtering with the Signal Processing Toolbox.
+    - topic: Control and simulation
+      detail: Transfer functions, step responses and Simulink models.
+    - topic: Octave
+      detail: Running the same work for free.
+  resources:
+    - resource: matlab-onramp
+      locator: The whole course
+      role: primary
+      verified: true
+    - resource: octave-docs
+      locator: The getting-started chapters, if you use Octave
+      role: alternative
       verified: true

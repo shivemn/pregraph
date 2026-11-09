@@ -4,6 +4,19 @@
   summary: Gates, adders and memory built from nothing but NAND.
   hours: 15
   recommends: [discrete-math]
+  covers:
+    - topic: Number systems
+      detail: Binary, hexadecimal and two's complement.
+    - topic: Boolean algebra and gates
+      detail: AND, OR, NOT, XOR and simplifying with Karnaugh maps.
+    - topic: Combinational circuits
+      detail: Adders, multiplexers and decoders.
+    - topic: Sequential circuits
+      detail: Latches, flip-flops, registers and counters.
+    - topic: Finite state machines
+      detail: Designing circuits with memory.
+    - topic: Timing
+      detail: Clocks, setup and hold times and propagation delay.
   resources:
     - resource: nand2tetris
       locator: "Projects 1–3: Boolean logic, Boolean arithmetic, memory"
@@ -21,6 +34,21 @@
   summary: Machine language, a working CPU and an assembler, built by you.
   hours: 30
   requires: [digital-logic, programming-basics]
+  covers:
+    - topic: Instruction sets
+      detail: What machine instructions look like, using RISC-V or MIPS.
+    - topic: The datapath
+      detail: How a processor executes an instruction.
+    - topic: Pipelining
+      detail: Overlapping instructions, and hazards.
+    - topic: Memory hierarchy
+      detail: Registers, caches, RAM and disk, and why locality matters.
+    - topic: Caches
+      detail: Lines, associativity, hits and misses.
+    - topic: Virtual memory
+      detail: Pages, page tables and the TLB.
+    - topic: Parallelism
+      detail: Multi-core processors and what they share.
   resources:
     - resource: nand2tetris
       locator: "Projects 4–6: machine language, computer architecture, assembler"
@@ -43,6 +71,19 @@
   hours: 30
   requires: [c-and-memory, computer-architecture]
   recommends: [shell-tools]
+  covers:
+    - topic: Processes
+      detail: What a process is, fork and exec, and process states.
+    - topic: Scheduling
+      detail: How the OS shares the CPU, and common policies.
+    - topic: Address spaces
+      detail: Each process's view of memory.
+    - topic: Paging
+      detail: Page tables, page faults and swapping.
+    - topic: System calls
+      detail: How programs ask the kernel for things.
+    - topic: Threads
+      detail: Threads versus processes, and what they share.
   resources:
     - resource: ostep
       locator: "Part I, Virtualization"
@@ -102,6 +143,19 @@
   hours: 20
   requires: [os-processes-memory]
   recommends: [trees-heaps]
+  covers:
+    - topic: Files and directories
+      detail: The interface programs see.
+    - topic: On-disk structures
+      detail: Inodes, blocks and directories.
+    - topic: Crash consistency
+      detail: Journaling and why it's needed.
+    - topic: Caching and buffering
+      detail: How the OS speeds up disk access.
+    - topic: SSDs
+      detail: How flash differs from spinning disks.
+    - topic: Distributed file systems
+      detail: NFS and the problems of sharing files over a network.
   resources:
     - resource: ostep
       locator: "Part III, Persistence"
@@ -247,6 +301,19 @@
   hours: 30
   requires: [os-processes-memory, web-http]
   recommends: [cryptography]
+  covers:
+    - topic: Threat models
+      detail: Who the attacker is and what they can do.
+    - topic: Memory-safety bugs
+      detail: Buffer overflows and how they're exploited.
+    - topic: Defences
+      detail: Stack canaries, ASLR, non-executable memory and sandboxing.
+    - topic: Privilege separation
+      detail: Least privilege and isolating components.
+    - topic: Authentication
+      detail: Passwords, keys and multi-factor authentication.
+    - topic: Network security
+      detail: Firewalls, TLS and secure channels.
   resources:
     - resource: mit-6858
       locator: "Lectures on buffer overflows, privilege separation and web security"
@@ -340,6 +407,19 @@
   summary: Programming a small chip directly. Registers, GPIO, timers, interrupts and reading the datasheet.
   hours: 35
   requires: [c-and-memory, digital-logic]
+  covers:
+    - topic: Architecture
+      detail: CPU, memory, registers and peripherals on one chip.
+    - topic: GPIO
+      detail: Reading buttons and driving LEDs and relays.
+    - topic: Timers and interrupts
+      detail: Doing things on time, and reacting to events.
+    - topic: ADC and PWM
+      detail: Reading analog sensors and controlling motors and brightness.
+    - topic: Programming
+      detail: Embedded C, toolchains, flashing and debugging.
+    - topic: Power
+      detail: Sleep modes and battery life.
   resources:
     - resource: valvano-ebook
       locator: "Chapters 1–10"
@@ -357,6 +437,19 @@
   summary: UART, I2C and SPI, how sensors and chips talk to each other, and how to debug them with a logic analyser.
   hours: 10
   requires: [microcontrollers]
+  covers:
+    - topic: UART
+      detail: 'Asynchronous serial: baud rates and framing.'
+    - topic: I2C
+      detail: Two-wire buses with addresses, for sensors.
+    - topic: SPI
+      detail: Fast four-wire buses, for displays and memory.
+    - topic: CAN
+      detail: The bus used in cars and machines.
+    - topic: Debugging buses
+      detail: Reading signals with a logic analyser.
+    - topic: Wireless
+      detail: Wi-Fi, Bluetooth Low Energy and MQTT for IoT.
   resources:
     - resource: sparkfun-serial
       locator: "Serial communication, then the I2C and SPI tutorials"
@@ -372,6 +465,19 @@
   hours: 15
   requires: [microcontrollers]
   recommends: [concurrency]
+  covers:
+    - topic: Why an RTOS
+      detail: Meeting deadlines with several things happening at once.
+    - topic: Tasks and scheduling
+      detail: Priorities and preemption.
+    - topic: Queues
+      detail: Passing data between tasks.
+    - topic: Semaphores and mutexes
+      detail: Synchronisation, and priority inversion.
+    - topic: Timers and interrupts
+      detail: Software timers and deferring work from interrupts.
+    - topic: Memory
+      detail: Static versus dynamic allocation in small systems.
   resources:
     - resource: freertos-book
       locator: "The whole book"

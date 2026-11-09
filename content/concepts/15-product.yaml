@@ -5,6 +5,19 @@
   area: product
   summary: How most software teams plan and deliver. Sprints, backlogs, stand-ups, reviews and retrospectives, and why they exist.
   hours: 8
+  covers:
+    - topic: Agile values
+      detail: Working software, collaboration and responding to change.
+    - topic: Scrum roles
+      detail: Product owner, scrum master and developers.
+    - topic: Scrum events
+      detail: Sprint planning, daily scrum, review and retrospective.
+    - topic: Backlogs and stories
+      detail: Writing and ordering user stories.
+    - topic: Estimation
+      detail: Story points and velocity, and their limits.
+    - topic: Kanban
+      detail: Flow, WIP limits and when it fits better.
   resources:
     - resource: scrum-guide
       locator: "The whole guide"
@@ -25,6 +38,19 @@
   hours: 25
   requires: [agile-scrum]
   recommends: [ux-design, experiments]
+  covers:
+    - topic: Discovering problems
+      detail: Talking to users and finding what matters.
+    - topic: Prioritisation
+      detail: Frameworks like RICE, and saying no.
+    - topic: Writing specs
+      detail: PRDs, user stories and acceptance criteria.
+    - topic: Metrics
+      detail: North-star metrics, funnels and guardrails.
+    - topic: Working with teams
+      detail: Engineering, design and stakeholders.
+    - topic: Launching
+      detail: Rollouts, experiments and learning from results.
   resources:
     - resource: shape-up
       locator: "The whole book"
@@ -37,6 +63,21 @@
   summary: Designing interfaces people can use. User research, information architecture, wireframes, visual hierarchy and usability testing.
   hours: 30
   recommends: [figma]
+  covers:
+    - topic: User research
+      detail: Interviews, surveys and observation.
+    - topic: Personas and journeys
+      detail: Making research usable.
+    - topic: Information architecture
+      detail: Organising content and navigation.
+    - topic: Wireframes and prototypes
+      detail: From sketches to clickable flows.
+    - topic: Usability testing
+      detail: Watching people use your design.
+    - topic: Visual design basics
+      detail: Hierarchy, spacing, type and colour.
+    - topic: Accessibility
+      detail: Designing for everyone from the start.
   resources:
     - resource: nngroup
       locator: "The articles on usability heuristics, user research and information architecture"
@@ -57,7 +98,24 @@
   area: product
   summary: Writing documentation people can follow. Clear sentences, structure, audience, and docs for APIs and code.
   hours: 10
+  covers:
+    - topic: Audience
+      detail: Writing for what the reader already knows.
+    - topic: Clear sentences
+      detail: Short sentences, active voice and plain words.
+    - topic: Structure
+      detail: Headings, lists and putting the answer first.
+    - topic: Document types
+      detail: Tutorials, how-to guides, reference and explanations.
+    - topic: Docs as code
+      detail: Markdown, Git and review.
+    - topic: API documentation
+      detail: Endpoints, examples and errors.
   resources:
+    - resource: github-markdown
+      locator: For writing docs in Markdown
+      role: alternative
+      verified: true
     - resource: google-tech-writing
       locator: "Technical Writing One, then Two"
       verified: true

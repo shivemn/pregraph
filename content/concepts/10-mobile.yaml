@@ -4,6 +4,21 @@
   summary: The main language for Android. Concise, null-safe and easy to pick up after Python or Java.
   hours: 20
   requires: [programming-basics]
+  covers:
+    - topic: Syntax
+      detail: val and var, functions, classes and string templates.
+    - topic: Null safety
+      detail: 'Nullable types, ?. and ?: and why NullPointerExceptions mostly disappear.'
+    - topic: Data classes and sealed classes
+      detail: Concise models and closed hierarchies.
+    - topic: Collections and lambdas
+      detail: map, filter and friends.
+    - topic: Extension functions
+      detail: Adding behaviour to existing types.
+    - topic: Coroutines
+      detail: Suspend functions, scopes and structured concurrency.
+    - topic: Java interop
+      detail: Using Java libraries from Kotlin.
   resources:
     - resource: kotlin-docs
       locator: "Getting started, then Basics and Concepts"
@@ -20,6 +35,23 @@
   kind: tool
   requires: [kotlin]
   recommends: [oop-design]
+  covers:
+    - topic: Project structure
+      detail: Gradle, the manifest, resources and Android Studio.
+    - topic: Jetpack Compose
+      detail: Composable functions, state and recomposition.
+    - topic: Activity and lifecycle
+      detail: What happens when apps pause, stop and get killed.
+    - topic: Navigation
+      detail: Moving between screens and passing data.
+    - topic: Architecture
+      detail: ViewModel, repositories and unidirectional data flow.
+    - topic: Data
+      detail: Room for databases, DataStore for settings, Retrofit for APIs.
+    - topic: Background work
+      detail: WorkManager and coroutines for work that outlives a screen.
+    - topic: Releasing
+      detail: Signing, testing on devices and publishing to the Play Store.
   resources:
     - resource: android-courses
       locator: "Android Basics with Compose, all units"

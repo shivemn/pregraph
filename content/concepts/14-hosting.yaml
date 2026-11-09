@@ -8,6 +8,15 @@
   summary: Free hosting for static sites straight from a GitHub repository. The simplest place for a portfolio.
   hours: 2
   requires: [git, html-css]
+  covers:
+    - topic: Publishing a site
+      detail: From a repository branch or a GitHub Actions workflow.
+    - topic: Static site generators
+      detail: Jekyll, Astro or plain HTML.
+    - topic: Custom domains
+      detail: DNS records and HTTPS.
+    - topic: Limits
+      detail: Static files only, and size and bandwidth limits.
   resources:
     - resource: gh-pages-start
       locator: "The quickstart"
@@ -24,6 +33,17 @@
   hours: 6
   requires: [git]
   recommends: [web-http, javascript]
+  covers:
+    - topic: DNS and proxy
+      detail: Putting a domain behind Cloudflare.
+    - topic: Pages
+      detail: Deploying static and full-stack sites from Git.
+    - topic: Workers
+      detail: Running code at the edge.
+    - topic: Storage
+      detail: KV, R2 and D1.
+    - topic: Security
+      detail: HTTPS, caching rules and basic protection.
   resources:
     - resource: cf-pages-start
       locator: "Getting started, then the Workers docs when you need a backend"
@@ -40,6 +60,17 @@
   hours: 3
   requires: [git]
   recommends: [react, nextjs]
+  covers:
+    - topic: Deploying from Git
+      detail: Preview deployments for every pull request.
+    - topic: Frameworks
+      detail: Next.js and other frameworks out of the box.
+    - topic: Serverless and edge functions
+      detail: Back-end code without servers.
+    - topic: Environment variables
+      detail: Secrets per environment.
+    - topic: Limits
+      detail: What the free plan allows.
   resources:
     - resource: vercel-start
       locator: "Getting started with Vercel"
@@ -55,6 +86,15 @@
   summary: Deploy static sites and frontends from a Git repository, with forms and serverless functions built in.
   hours: 3
   requires: [git]
+  covers:
+    - topic: Deploying from Git
+      detail: Builds and deploy previews.
+    - topic: Functions
+      detail: Serverless back-end code.
+    - topic: Forms and redirects
+      detail: Built-in features for static sites.
+    - topic: Custom domains
+      detail: DNS and HTTPS.
   resources:
     - resource: netlify-start
       locator: "Deploy from your repository"
@@ -68,6 +108,15 @@
   hours: 4
   requires: [git, rest-apis]
   recommends: [docker]
+  covers:
+    - topic: Web services
+      detail: Deploying an API from a Git repository.
+    - topic: Databases
+      detail: Managed PostgreSQL and key-value stores.
+    - topic: Environment and secrets
+      detail: Configuration per service.
+    - topic: Free tier limits
+      detail: Sleeping services and what that means for users.
   resources:
     - resource: render-start
       locator: "Your First Render Deploy"
@@ -80,6 +129,15 @@
   summary: Serverless Postgres with a free tier, and database branches you can make like Git branches.
   hours: 3
   requires: [sql]
+  covers:
+    - topic: Serverless Postgres
+      detail: A Postgres database that scales to zero.
+    - topic: Branching
+      detail: Copies of a database for development and previews.
+    - topic: Connecting
+      detail: Connection strings and pooling.
+    - topic: Limits
+      detail: Free-tier storage and compute.
   resources:
     - resource: neon-start
       locator: "The Getting started section"
@@ -93,6 +151,17 @@
   hours: 8
   requires: [sql]
   recommends: [rest-apis, javascript]
+  covers:
+    - topic: Postgres database
+      detail: Tables, SQL and the dashboard.
+    - topic: Auth
+      detail: Sign-in with email and social providers.
+    - topic: Row-level security
+      detail: Policies so users only see their own data.
+    - topic: Storage and functions
+      detail: Files and edge functions.
+    - topic: Client libraries
+      detail: Calling it from a web or mobile app.
   resources:
     - resource: supabase-start
       locator: "Getting Started, then the quickstart for your framework"
@@ -108,6 +177,17 @@
   summary: Google's app backend. Sign-in, a NoSQL database, hosting and functions, common in mobile apps.
   hours: 8
   requires: [javascript]
+  covers:
+    - topic: Firestore
+      detail: A document database with real-time updates.
+    - topic: Authentication
+      detail: Sign-in methods.
+    - topic: Security rules
+      detail: Who can read and write what.
+    - topic: Hosting and functions
+      detail: Static hosting and serverless back ends.
+    - topic: Cloud Messaging
+      detail: Push notifications.
   resources:
     - resource: firebase-start
       locator: "Add Firebase to your JavaScript project, then Authentication and Cloud Firestore"
@@ -124,6 +204,17 @@
   hours: 15
   requires: [sql]
   recommends: [spark, programming-basics]
+  covers:
+    - topic: Workspace and clusters
+      detail: Notebooks, compute and jobs.
+    - topic: Delta Lake
+      detail: ACID tables on object storage, and time travel.
+    - topic: Spark on Databricks
+      detail: DataFrames and SQL at scale.
+    - topic: Unity Catalog
+      detail: Governance and permissions.
+    - topic: Workflows
+      detail: Scheduling pipelines.
   resources:
     - resource: databricks-start
       locator: "The Get started tutorials"

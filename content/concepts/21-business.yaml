@@ -7,6 +7,19 @@
   summary: Breaking a vague business question into parts, estimating sizes, testing hypotheses with numbers, and ending with a clear recommendation. What case interviews test.
   hours: 30
   recommends: [spreadsheets, statistics]
+  covers:
+    - topic: Defining the problem
+      detail: One clear question with a decision attached.
+    - topic: Issue trees
+      detail: Breaking a problem into parts that don't overlap and cover everything (MECE).
+    - topic: Hypotheses
+      detail: Starting with a likely answer and testing it.
+    - topic: Market sizing
+      detail: Top-down and bottom-up estimates.
+    - topic: Frameworks
+      detail: Profitability, market entry and others, used as starting points.
+    - topic: Communicating
+      detail: 'The pyramid principle: answer first, then the support.'
   resources:
     - resource: mckinsey-interviewing
       locator: "Sample cases, worked through on paper first"
@@ -21,6 +34,19 @@
   summary: Mapping how work flows, finding waste and variation, and fixing it with data. The DMAIC steps, value stream maps and control charts.
   hours: 20
   recommends: [statistics]
+  covers:
+    - topic: Lean
+      detail: Value, waste and flow.
+    - topic: Value-stream mapping
+      detail: Seeing a process end to end with times.
+    - topic: Six Sigma basics
+      detail: DMAIC and reducing variation.
+    - topic: Root cause tools
+      detail: Fishbone diagrams and the five whys.
+    - topic: Measuring processes
+      detail: Cycle time, throughput and bottlenecks.
+    - topic: Sustaining change
+      detail: Standard work and control charts.
   resources:
     - resource: mit-16660
       locator: "All lectures"
@@ -31,6 +57,19 @@
   area: business
   summary: Customers, segments and positioning, pricing, channels and how a company decides what to sell to whom.
   hours: 20
+  covers:
+    - topic: Customers and segments
+      detail: Who you serve and what they need.
+    - topic: Positioning
+      detail: What you stand for against competitors.
+    - topic: The marketing mix
+      detail: Product, price, place and promotion.
+    - topic: The funnel
+      detail: Awareness, consideration, conversion and retention.
+    - topic: Brand
+      detail: What people think and feel about you.
+    - topic: Metrics
+      detail: CAC, LTV, conversion and retention.
   resources:
     - resource: mit-15810
       locator: "Lecture notes"
@@ -43,6 +82,19 @@
   summary: Tracking what people do on a website or app, setting up events and conversions, and reading the reports marketing teams run on.
   hours: 15
   recommends: [marketing-fundamentals]
+  covers:
+    - topic: How tracking works
+      detail: Tags, events and cookies, and consent.
+    - topic: Google Analytics 4
+      detail: Events, parameters, conversions and reports.
+    - topic: Acquisition
+      detail: Channels, campaigns and UTM tags.
+    - topic: Funnels and paths
+      detail: Where users go and where they drop off.
+    - topic: Attribution
+      detail: Giving credit to channels, and its limits.
+    - topic: Reporting
+      detail: Looker Studio dashboards.
   resources:
     - resource: skillshop-ga4
       locator: "The whole learning plan"
@@ -54,6 +106,19 @@
   summary: Search, social, email and content marketing, paid ads, and how each is measured.
   hours: 20
   recommends: [marketing-fundamentals]
+  covers:
+    - topic: Channels
+      detail: Search, social, email, content and paid ads.
+    - topic: SEO
+      detail: How search engines rank pages, on-page and technical basics.
+    - topic: Paid search and social
+      detail: Campaigns, bidding and targeting.
+    - topic: Content and social media
+      detail: Planning, creating and measuring content.
+    - topic: Email
+      detail: Lists, segmentation and automation.
+    - topic: Measurement
+      detail: UTM tags, conversions and reporting.
   resources:
     - resource: hubspot-inbound
       locator: "The whole course"
@@ -64,6 +129,19 @@
   area: business
   summary: Hiring, pay, performance, training and employee relations, and the numbers HR teams track, like attrition and time to hire.
   hours: 15
+  covers:
+    - topic: The employee lifecycle
+      detail: Hiring, onboarding, development and exit.
+    - topic: Recruitment
+      detail: Job descriptions, sourcing and interviews.
+    - topic: Compensation and payroll
+      detail: Salary structures, CTC and statutory deductions.
+    - topic: Performance management
+      detail: Goals, reviews and feedback.
+    - topic: Labour law basics
+      detail: Key Indian labour rules and compliance.
+    - topic: HR metrics
+      detail: Attrition, time to hire and engagement.
   resources:
     - resource: mit-15660
       locator: "Lecture notes"

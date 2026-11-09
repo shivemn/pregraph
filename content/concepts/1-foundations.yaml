@@ -3,6 +3,19 @@
   area: foundations
   summary: Direct proof, contradiction and induction, plus the habit of writing precise definitions.
   hours: 20
+  covers:
+    - topic: Logic and quantifiers
+      detail: Statements, implication, negation, 'for all' and 'there exists', and negating them correctly.
+    - topic: Direct proof
+      detail: Going from assumptions to a conclusion one justified step at a time.
+    - topic: Contradiction and contrapositive
+      detail: Proving something by showing its opposite is impossible, or proving 'not B implies not A'.
+    - topic: Induction
+      detail: Ordinary and strong induction, and spotting where an induction argument quietly breaks.
+    - topic: Sets and functions
+      detail: Unions, intersections, injective and surjective functions, and proving two sets are equal.
+    - topic: Writing proofs
+      detail: Clear statements, defined notation, and proofs another person can check line by line.
   resources:
     - resource: mit-6042
       locator: "Part I: Proofs"
@@ -20,6 +33,21 @@
   summary: Logic, sets, relations, counting, graphs and recurrences. Most of algorithms rests on this.
   hours: 40
   requires: [proofs]
+  covers:
+    - topic: Counting
+      detail: Sums and products, permutations, combinations, and the binomial theorem.
+    - topic: Pigeonhole and inclusion–exclusion
+      detail: Two counting tools that settle many 'is it possible' questions.
+    - topic: Recurrences
+      detail: Writing a quantity in terms of smaller ones, and solving common recurrences.
+    - topic: Graphs
+      detail: Vertices, edges, degrees, paths, cycles, trees and connectivity.
+    - topic: Modular arithmetic
+      detail: Remainders, gcd, the Euclidean algorithm and modular inverses, the maths behind hashing and cryptography.
+    - topic: Discrete probability
+      detail: Events, independence, expectation and linearity of expectation on finite spaces.
+    - topic: Asymptotics
+      detail: Big-O, Omega and Theta, and comparing growth rates.
   resources:
     - resource: mit-6042
       locator: "Parts II and III: Structures, Counting"
@@ -40,6 +68,23 @@
   area: foundations
   summary: Vectors, matrices, eigenvalues and least squares. Essential for machine learning and graphics.
   hours: 40
+  covers:
+    - topic: Vectors and matrices
+      detail: Operations, dot products, and matrices as transformations of space.
+    - topic: Solving linear systems
+      detail: Gaussian elimination, rank, and when a system has none, one or many solutions.
+    - topic: Vector spaces
+      detail: Span, linear independence, basis and dimension; column space and null space.
+    - topic: Determinants and inverses
+      detail: What the determinant measures, and when a matrix can be inverted.
+    - topic: Orthogonality and projections
+      detail: Orthogonal bases, Gram–Schmidt, and least squares as a projection.
+    - topic: Eigenvalues and eigenvectors
+      detail: Directions a matrix only stretches, diagonalisation, and why they matter for repeated transformations.
+    - topic: Singular value decomposition
+      detail: Any matrix as rotation, scaling, rotation; the basis of PCA and low-rank approximation.
+    - topic: Linear algebra in code
+      detail: Doing all of the above with NumPy and checking results numerically.
   resources:
     - resource: mit-1806
       locator: "Video lectures, in order"
@@ -64,6 +109,23 @@
   summary: Random variables, conditioning, expectation and the common distributions.
   hours: 40
   recommends: [discrete-math]
+  covers:
+    - topic: Sample spaces and events
+      detail: Axioms of probability, and counting-based probability.
+    - topic: Conditional probability and Bayes' rule
+      detail: Updating beliefs with evidence, and the base-rate mistakes people make.
+    - topic: Random variables
+      detail: Discrete and continuous variables, PMFs, PDFs and CDFs.
+    - topic: Expectation and variance
+      detail: Linearity of expectation, variance of sums, and covariance.
+    - topic: Common distributions
+      detail: Bernoulli, binomial, geometric, Poisson, uniform, exponential and normal, and where each comes from.
+    - topic: Joint distributions
+      detail: Marginals, conditionals, independence and correlation.
+    - topic: Limit theorems
+      detail: The law of large numbers and the central limit theorem, and what they let you assume.
+    - topic: Simulation
+      detail: Checking probability answers by simulating them in code.
   resources:
     - resource: stat110
       locator: "Lecture videos and the strategic practice sets"
@@ -89,7 +151,26 @@
   area: foundations
   summary: Limits, derivatives, integrals and series, and what they say about change and accumulation.
   hours: 40
+  covers:
+    - topic: Limits and continuity
+      detail: What a limit means and how to compute common ones.
+    - topic: Derivatives
+      detail: Rules for differentiating, and the derivative as a rate of change and a slope.
+    - topic: Chain rule
+      detail: Differentiating compositions, the rule behind backpropagation.
+    - topic: Applications of derivatives
+      detail: Maxima and minima, related rates, and approximating with tangent lines.
+    - topic: Integrals
+      detail: Antiderivatives, the fundamental theorem, and integrals as accumulated area.
+    - topic: Integration techniques
+      detail: Substitution, integration by parts and partial fractions.
+    - topic: Series
+      detail: Sequences, convergence tests and Taylor series for approximating functions.
   resources:
+    - resource: calculus-cheatsheet
+      locator: For revising formulas and rules
+      role: alternative
+      verified: true
     - resource: openstax-calculus
       locator: "Volumes 1 and 2"
       verified: true
@@ -107,6 +188,19 @@
   hours: 30
   requires: [calculus]
   recommends: [linear-algebra]
+  covers:
+    - topic: Functions of several variables
+      detail: Surfaces, level curves and limits in more than one dimension.
+    - topic: Partial derivatives and gradients
+      detail: Rates of change in each direction, and the gradient as the direction of steepest ascent.
+    - topic: Multivariable chain rule and Jacobians
+      detail: How derivatives combine through layers of functions.
+    - topic: Optimisation
+      detail: Critical points, the Hessian, and Lagrange multipliers for constraints.
+    - topic: Multiple integrals
+      detail: Double and triple integrals and changing coordinates.
+    - topic: Vector calculus
+      detail: Line integrals, divergence, curl, and Green's, Stokes' and divergence theorems.
   resources:
     - resource: openstax-calculus
       locator: "Volume 3"
@@ -121,6 +215,21 @@
   summary: Convex sets and functions, duality, and the algorithms that find minima, from least squares to portfolio choice.
   hours: 30
   requires: [multivariable-calculus, linear-algebra]
+  covers:
+    - topic: Formulating problems
+      detail: Variables, objective and constraints, written precisely.
+    - topic: Convex sets and functions
+      detail: Why convexity means any local minimum is the global one.
+    - topic: Optimality conditions
+      detail: Gradients, Lagrange multipliers and the KKT conditions.
+    - topic: Duality
+      detail: The dual problem, weak and strong duality, and what dual variables mean.
+    - topic: Gradient methods
+      detail: Gradient descent, step sizes, momentum and Newton's method.
+    - topic: Linear and quadratic programs
+      detail: The standard forms and how solvers handle them.
+    - topic: Using a solver
+      detail: Writing problems in CVXPY or a similar tool and checking the answer.
   resources:
     - resource: boyd-cvx
       locator: "Chapters 1–5, then the applications you need"
@@ -135,6 +244,21 @@
   summary: Random walks, Markov chains, Poisson processes and Brownian motion.
   hours: 25
   requires: [probability, calculus]
+  covers:
+    - topic: Markov chains
+      detail: Transition matrices, classification of states, and stationary distributions.
+    - topic: Random walks
+      detail: Hitting times, gambler's ruin and recurrence.
+    - topic: Poisson processes
+      detail: Arrivals in time, inter-arrival times, splitting and merging.
+    - topic: Continuous-time Markov chains
+      detail: Rates, generators and birth–death processes.
+    - topic: Queues
+      detail: M/M/1 and related models, Little's law, and waiting times.
+    - topic: Martingales
+      detail: Fair games, stopping times and the optional stopping theorem.
+    - topic: Brownian motion
+      detail: Its definition and properties, leading into stochastic calculus.
   resources:
     - resource: probability-book
       locator: "The chapters on Markov chains and Poisson processes"
@@ -149,6 +273,21 @@
   summary: Itô's lemma and stochastic differential equations, the maths under option pricing and interest-rate models.
   hours: 30
   requires: [stochastic-processes, multivariable-calculus]
+  covers:
+    - topic: Brownian motion in depth
+      detail: Quadratic variation, and why ordinary calculus fails for it.
+    - topic: The Itô integral
+      detail: Integrating against Brownian motion, and its properties.
+    - topic: Itô's lemma
+      detail: The chain rule for stochastic processes, with its extra second-order term.
+    - topic: Stochastic differential equations
+      detail: Geometric Brownian motion and Ornstein–Uhlenbeck processes, and solving simple SDEs.
+    - topic: Change of measure
+      detail: Girsanov's theorem and risk-neutral pricing.
+    - topic: Black–Scholes
+      detail: Deriving the equation and the formula, and what its assumptions cost.
+    - topic: Simulation
+      detail: Euler–Maruyama and Monte Carlo pricing in code.
   resources:
     - resource: mit-18s096
       locator: "Lectures 18 and 21: Itô calculus, stochastic differential equations"
@@ -160,6 +299,21 @@
   summary: Calculus done rigorously. Sequences, series, continuity, differentiation and integration, with proofs.
   hours: 40
   requires: [calculus, proofs]
+  covers:
+    - topic: The real numbers
+      detail: Completeness, suprema and infima, and why they matter.
+    - topic: Sequences and series
+      detail: Convergence, Cauchy sequences, and tests for series, proved properly.
+    - topic: Continuity
+      detail: Epsilon–delta definitions, uniform continuity, and the intermediate and extreme value theorems.
+    - topic: Differentiation
+      detail: The mean value theorem and Taylor's theorem with remainder.
+    - topic: Riemann integration
+      detail: When functions are integrable, and the fundamental theorem proved.
+    - topic: Sequences of functions
+      detail: Pointwise versus uniform convergence, and when limits and integrals can swap.
+    - topic: Metric spaces
+      detail: Open and closed sets, compactness and completeness in general settings.
   resources:
     - resource: lebl-analysis
       locator: "Chapters 1–6"

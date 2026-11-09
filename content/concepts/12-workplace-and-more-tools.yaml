@@ -12,6 +12,19 @@
   hours: 30
   requires: [programming-basics]
   recommends: [oop-design]
+  covers:
+    - topic: Syntax and types
+      detail: Value and reference types, classes, structs and records.
+    - topic: LINQ
+      detail: Querying collections and data in a readable way.
+    - topic: async and await
+      detail: Asynchronous code with tasks.
+    - topic: Generics and interfaces
+      detail: Reusable, type-safe code.
+    - topic: Exceptions and nullability
+      detail: Handling errors and nullable reference types.
+    - topic: .NET tooling
+      detail: The dotnet CLI, NuGet and project files.
   resources:
     - resource: ms-csharp
       locator: "A tour of C#, then the tutorials it links to"
@@ -31,6 +44,19 @@
   hours: 25
   requires: [programming-basics]
   recommends: [html-css, web-http]
+  covers:
+    - topic: Syntax
+      detail: Variables, arrays, functions and including files.
+    - topic: Forms and requests
+      detail: Handling GET and POST, sessions and cookies.
+    - topic: Databases
+      detail: PDO with prepared statements to avoid SQL injection.
+    - topic: Object-oriented PHP
+      detail: Classes, interfaces, namespaces and Composer autoloading.
+    - topic: A framework
+      detail: Routing, controllers and ORM in Laravel or Symfony.
+    - topic: Security basics
+      detail: Escaping output, password hashing and CSRF tokens.
   resources:
     - resource: php-manual
       locator: "Language Reference, from Basic syntax to Classes and Objects"
@@ -54,6 +80,19 @@
   hours: 40
   requires: [programming-basics]
   recommends: [oop-design]
+  covers:
+    - topic: Syntax
+      detail: let and var, optionals, functions and closures.
+    - topic: Types
+      detail: Structs versus classes, enums with associated values and protocols.
+    - topic: Optionals
+      detail: Unwrapping safely with if let, guard and ??.
+    - topic: Error handling
+      detail: throws, do-catch and Result.
+    - topic: Concurrency
+      detail: async/await, tasks and actors.
+    - topic: SwiftUI basics
+      detail: Views, state and bindings.
   resources:
     - resource: swift-book
       locator: "A Swift Tour, then the Language Guide"
@@ -72,7 +111,24 @@
   summary: The statistics language. Data cleaning, models and charts, with the tidyverse doing most of the work.
   hours: 20
   recommends: [statistics]
+  covers:
+    - topic: Basics
+      detail: Vectors, data frames, factors and functions.
+    - topic: The tidyverse
+      detail: dplyr for transforming data and tidyr for reshaping it.
+    - topic: ggplot2
+      detail: Building charts layer by layer.
+    - topic: Importing data
+      detail: CSV, Excel and databases into data frames.
+    - topic: Statistics in R
+      detail: t-tests, regression with lm and reading model output.
+    - topic: Reports
+      detail: Quarto or R Markdown documents that mix code and results.
   resources:
+    - resource: posit-cheatsheets
+      locator: The dplyr, tidyr and ggplot2 sheets
+      role: alternative
+      verified: true
     - resource: r4ds
       locator: "The Whole game, then Transform, Import and Visualize"
       why: "Free, current, and written by the people who made the tools it teaches."
@@ -91,6 +147,19 @@
   hours: 25
   requires: [programming-basics, web-http]
   recommends: [sql, rest-apis]
+  covers:
+    - topic: Projects and apps
+      detail: How Django code is organised.
+    - topic: Models and the ORM
+      detail: Defining tables, migrations and queries.
+    - topic: Views and URLs
+      detail: Function and class-based views.
+    - topic: Templates and forms
+      detail: Server-rendered pages and form validation.
+    - topic: The admin
+      detail: A free back office for your models.
+    - topic: Django REST Framework
+      detail: Serializers, viewsets and authentication for APIs.
   resources:
     - resource: django-tutorial
       locator: "The official tutorial, parts 1 to 8"
@@ -106,6 +175,19 @@
   summary: A modern Python framework for APIs, with type hints, request validation and docs generated for you.
   hours: 10
   requires: [programming-basics, rest-apis]
+  covers:
+    - topic: Path operations
+      detail: Routes with type-annotated parameters.
+    - topic: Pydantic models
+      detail: Validating request and response bodies.
+    - topic: Dependency injection
+      detail: Sharing database sessions, auth and settings.
+    - topic: Async endpoints
+      detail: When async helps and when it doesn't.
+    - topic: Automatic docs
+      detail: The OpenAPI page you get for free.
+    - topic: Testing
+      detail: TestClient and test databases.
   resources:
     - resource: fastapi-tutorial
       locator: "Tutorial - User Guide, start to finish"
@@ -122,6 +204,19 @@
   hours: 30
   requires: [csharp, rest-apis]
   recommends: [sql]
+  covers:
+    - topic: Minimal APIs and controllers
+      detail: Two ways to build HTTP endpoints.
+    - topic: Dependency injection
+      detail: Built-in services and lifetimes.
+    - topic: Entity Framework Core
+      detail: Models, migrations and LINQ queries.
+    - topic: Configuration
+      detail: appsettings, environments and secrets.
+    - topic: Authentication
+      detail: JWT bearer tokens and Identity.
+    - topic: Middleware
+      detail: The request pipeline and adding your own steps.
   resources:
     - resource: ms-aspnet-api
       locator: "Create a controller-based web API, then the tutorials beside it"
@@ -137,6 +232,19 @@
   summary: Google's full frontend framework, written in TypeScript. Common in enterprise and service-company projects.
   hours: 30
   requires: [typescript, html-css]
+  covers:
+    - topic: Components and templates
+      detail: Data binding, directives and pipes.
+    - topic: Services and dependency injection
+      detail: Sharing logic and data.
+    - topic: Routing
+      detail: Pages, guards and lazy-loaded modules.
+    - topic: Forms
+      detail: Template-driven and reactive forms.
+    - topic: RxJS
+      detail: Observables for HTTP and events.
+    - topic: Signals
+      detail: Angular's newer fine-grained reactivity.
   resources:
     - resource: angular-tutorial
       locator: "Learn Angular, the in-browser tutorial"
@@ -156,6 +264,17 @@
   summary: A frontend framework that's gentle to start with and grows with the app.
   hours: 20
   requires: [javascript, html-css]
+  covers:
+    - topic: Templates and reactivity
+      detail: Data binding and reactive state.
+    - topic: Components
+      detail: Props, events and slots.
+    - topic: The Composition API
+      detail: ref, reactive, computed and watch.
+    - topic: Routing
+      detail: Vue Router for pages.
+    - topic: State management
+      detail: Pinia for shared state.
   resources:
     - resource: vue-guide
       locator: "Introduction, then Essentials and Components In-Depth"
@@ -172,6 +291,19 @@
   hours: 20
   requires: [react]
   recommends: [typescript, nodejs]
+  covers:
+    - topic: The App Router
+      detail: File-based routes, layouts and loading states.
+    - topic: Server and client components
+      detail: What runs where, and why it matters for speed.
+    - topic: Data fetching and caching
+      detail: Fetching on the server and revalidating.
+    - topic: Server actions and route handlers
+      detail: Writing back-end code inside the app.
+    - topic: Rendering modes
+      detail: Static, dynamic and streaming pages.
+    - topic: Deploying
+      detail: Vercel or any Node host, and environment variables.
   resources:
     - resource: nextjs-learn
       locator: "The App Router course, every chapter"
@@ -191,6 +323,19 @@
   hours: 40
   requires: [programming-basics]
   recommends: [oop-design]
+  covers:
+    - topic: Dart basics
+      detail: Types, null safety, classes and async.
+    - topic: Widgets
+      detail: Stateless and stateful widgets, and the widget tree.
+    - topic: Layout
+      detail: Rows, columns, stacks and constraints.
+    - topic: State management
+      detail: setState, then Provider or Riverpod.
+    - topic: Navigation
+      detail: Routes and passing data between screens.
+    - topic: Platform features
+      detail: Calling APIs, local storage and plugins.
   resources:
     - resource: flutter-learn
       locator: "The Learn Flutter pathway"
@@ -206,6 +351,19 @@
   summary: Building Android and iOS apps with React and JavaScript.
   hours: 25
   requires: [react]
+  covers:
+    - topic: Core components
+      detail: View, Text, Image, ScrollView and FlatList.
+    - topic: Styling and layout
+      detail: Flexbox in React Native.
+    - topic: Navigation
+      detail: React Navigation stacks and tabs.
+    - topic: Native features
+      detail: Camera, location and permissions with Expo modules.
+    - topic: Data and offline
+      detail: Fetching, caching and local storage.
+    - topic: Releasing
+      detail: Builds for Android and iOS with Expo or the native tools.
   resources:
     - resource: rn-docs
       locator: "Introduction, then The Basics"
@@ -224,6 +382,19 @@
   hours: 15
   requires: [pandas]
   recommends: [machine-learning]
+  covers:
+    - topic: The estimator API
+      detail: fit, predict and transform, the same for every model.
+    - topic: Preprocessing
+      detail: Scalers, encoders and ColumnTransformer.
+    - topic: Pipelines
+      detail: Chaining steps so training and prediction match.
+    - topic: Model selection
+      detail: train_test_split, cross_val_score and GridSearchCV.
+    - topic: Metrics
+      detail: Classification reports, confusion matrices and regression scores.
+    - topic: Common models
+      detail: Linear models, trees, random forests and gradient boosting.
   resources:
     - resource: sklearn-docs
       locator: "Getting Started, then the User Guide sections you need"
@@ -243,6 +414,17 @@
   hours: 30
   requires: [machine-learning]
   recommends: [deep-learning]
+  covers:
+    - topic: Tensors and operations
+      detail: The basic building blocks.
+    - topic: Keras models
+      detail: Sequential and functional APIs.
+    - topic: Training
+      detail: compile, fit, callbacks and checkpoints.
+    - topic: Data pipelines
+      detail: tf.data for loading and batching.
+    - topic: Saving and serving
+      detail: SavedModel and TensorFlow Serving or Lite.
   resources:
     - resource: keras-start
       locator: "Getting started, then the developer guides"
@@ -263,6 +445,19 @@
   hours: 12
   requires: [rest-apis]
   recommends: [hash-tables]
+  covers:
+    - topic: Documents and indexes
+      detail: Storing JSON for search.
+    - topic: Inverted indexes and analysis
+      detail: Tokenisation, analysers and why search is fast.
+    - topic: Queries
+      detail: Match, term and bool queries, and relevance scoring.
+    - topic: Aggregations
+      detail: Counts and statistics across results.
+    - topic: Mappings
+      detail: Field types and getting them right before indexing.
+    - topic: Scaling
+      detail: Shards, replicas and cluster health.
   resources:
     - resource: elastic-start
       locator: "Get started with search, then the pages it links to"
@@ -279,6 +474,19 @@
   hours: 10
   requires: [sql]
   recommends: [data-warehousing, git]
+  covers:
+    - topic: Models
+      detail: SQL SELECT statements that dbt turns into tables and views.
+    - topic: ref and sources
+      detail: Building a dependency graph between models.
+    - topic: Materialisations
+      detail: Views, tables, incremental models and ephemeral models.
+    - topic: Tests
+      detail: Unique, not-null, relationships and custom tests.
+    - topic: Documentation
+      detail: Descriptions and the generated lineage site.
+    - topic: Jinja and macros
+      detail: Reusing SQL logic.
   resources:
     - resource: dbt-guides
       locator: "The quickstart for the warehouse you use"
@@ -295,6 +503,19 @@
   hours: 10
   requires: [sql]
   recommends: [data-warehousing]
+  covers:
+    - topic: Architecture
+      detail: Separate storage and compute, and virtual warehouses.
+    - topic: Loading data
+      detail: Stages, COPY INTO and Snowpipe.
+    - topic: Querying
+      detail: SQL, semi-structured data and VARIANT.
+    - topic: Time travel and cloning
+      detail: Querying the past and zero-copy clones.
+    - topic: Cost
+      detail: Warehouse sizes, auto-suspend and credits.
+    - topic: Security
+      detail: Roles and access control.
   resources:
     - resource: snowflake-start
       locator: "Get Started, then the tutorials"
@@ -313,6 +534,17 @@
   hours: 10
   requires: [git, shell-tools]
   recommends: [ci-cd]
+  covers:
+    - topic: Jobs and pipelines
+      detail: Freestyle jobs versus pipelines as code.
+    - topic: Jenkinsfile
+      detail: Declarative pipelines with stages and steps.
+    - topic: Agents
+      detail: Running builds on other machines.
+    - topic: Plugins
+      detail: Extending Jenkins, and keeping plugins updated.
+    - topic: Credentials
+      detail: Storing secrets safely.
   resources:
     - resource: jenkins-tour
       locator: "The Guided Tour, then the Pipeline chapter"
@@ -328,6 +560,19 @@
   summary: Configuring many servers at once from simple YAML playbooks, over SSH.
   hours: 12
   requires: [linux-admin]
+  covers:
+    - topic: Inventory
+      detail: Listing the machines you manage.
+    - topic: Playbooks and tasks
+      detail: Describing the state you want in YAML.
+    - topic: Modules
+      detail: Packages, files, services and templates.
+    - topic: Idempotence
+      detail: Running a playbook twice changes nothing the second time.
+    - topic: Roles and variables
+      detail: Reusing and configuring playbooks.
+    - topic: Vault
+      detail: Encrypting secrets.
   resources:
     - resource: ansible-start
       locator: "Getting started with Ansible, every page"
@@ -343,6 +588,19 @@
   summary: The web server and reverse proxy in front of most apps. Serving files, proxying, load balancing and TLS.
   hours: 6
   requires: [web-http, linux-admin]
+  covers:
+    - topic: Serving static files
+      detail: Server blocks and locations.
+    - topic: Reverse proxy
+      detail: Forwarding requests to apps.
+    - topic: Load balancing
+      detail: Upstreams and balancing methods.
+    - topic: HTTPS
+      detail: Certificates with Let's Encrypt.
+    - topic: Caching and compression
+      detail: Faster responses for repeat requests.
+    - topic: Logs and debugging
+      detail: Access and error logs.
   resources:
     - resource: nginx-guide
       locator: "The whole guide"
@@ -359,6 +617,19 @@
   hours: 20
   requires: [networking]
   recommends: [cloud-basics]
+  covers:
+    - topic: Core services
+      detail: Virtual machines, App Service, storage and Azure SQL.
+    - topic: Resource groups and subscriptions
+      detail: How Azure organises things.
+    - topic: Microsoft Entra ID
+      detail: Identity and access.
+    - topic: Networking
+      detail: Virtual networks and network security groups.
+    - topic: Monitoring
+      detail: Azure Monitor and Log Analytics.
+    - topic: Cost management
+      detail: Budgets and alerts.
   resources:
     - resource: ms-az900
       locator: "The free learning paths on the Azure Fundamentals page"
@@ -376,6 +647,17 @@
   hours: 20
   requires: [networking]
   recommends: [cloud-basics]
+  covers:
+    - topic: Core services
+      detail: Compute Engine, Cloud Run, Cloud Storage and Cloud SQL.
+    - topic: Projects and IAM
+      detail: How Google Cloud organises access.
+    - topic: BigQuery
+      detail: The serverless data warehouse.
+    - topic: Networking
+      detail: VPCs and firewall rules.
+    - topic: Billing
+      detail: Budgets, alerts and the free tier.
   resources:
     - resource: gcp-start
       locator: "Get started, then the quickstarts for Compute Engine, Cloud Storage and IAM"
@@ -394,6 +676,17 @@
   hours: 20
   requires: [testing-debugging]
   recommends: [java, html-css]
+  covers:
+    - topic: WebDriver
+      detail: Driving a real browser from code.
+    - topic: Locators
+      detail: IDs, CSS selectors and XPath, and choosing stable ones.
+    - topic: Waits
+      detail: Explicit waits instead of sleeps.
+    - topic: Page objects
+      detail: Keeping tests maintainable.
+    - topic: Selenium Grid
+      detail: Running tests in parallel and across browsers.
   resources:
     - resource: selenium-start
       locator: "Getting started, then the WebDriver pages"
@@ -410,6 +703,17 @@
   hours: 6
   requires: [web-http]
   recommends: [rest-apis]
+  covers:
+    - topic: Requests
+      detail: Methods, headers, bodies and auth.
+    - topic: Collections and environments
+      detail: Organising requests and switching between dev and prod.
+    - topic: Tests
+      detail: Assertions on status, body and timing.
+    - topic: Variables and scripts
+      detail: Chaining requests with values from earlier responses.
+    - topic: Newman
+      detail: Running collections from the command line and CI.
   resources:
     - resource: postman-start
       locator: "Get started, then Write scripts and Run collections"
@@ -426,6 +730,17 @@
   hours: 8
   requires: [java]
   recommends: [testing-debugging]
+  covers:
+    - topic: Writing tests
+      detail: '@Test methods and assertions.'
+    - topic: Lifecycle
+      detail: '@BeforeEach, @AfterEach and test isolation.'
+    - topic: Parameterised tests
+      detail: Running one test with many inputs.
+    - topic: Mocking
+      detail: Mockito for dependencies.
+    - topic: Running tests
+      detail: Through Maven, Gradle and the IDE.
   resources:
     - resource: junit-guide
       locator: "Overview, then Writing Tests"
@@ -442,6 +757,17 @@
   hours: 6
   requires: [programming-basics]
   recommends: [testing-debugging]
+  covers:
+    - topic: Writing tests
+      detail: Plain functions and assert statements.
+    - topic: Fixtures
+      detail: Setup and teardown that tests can share.
+    - topic: Parametrize
+      detail: Many inputs for one test.
+    - topic: Mocking
+      detail: monkeypatch and unittest.mock.
+    - topic: Coverage and plugins
+      detail: Measuring coverage and useful plugins.
   resources:
     - resource: pytest-start
       locator: "Get Started, then the how-to guides on fixtures and parametrizing"
@@ -459,6 +785,17 @@
   summary: Capturing and reading network traffic packet by packet. How you see what's really on the wire.
   hours: 10
   requires: [networking]
+  covers:
+    - topic: Capturing traffic
+      detail: Choosing an interface and capture filters.
+    - topic: Display filters
+      detail: Finding the packets that matter.
+    - topic: Following streams
+      detail: Reading a whole TCP or HTTP conversation.
+    - topic: Protocols
+      detail: Recognising DNS, TCP handshakes, TLS and HTTP.
+    - topic: Troubleshooting
+      detail: Spotting retransmissions, resets and slow responses.
   resources:
     - resource: wireshark-guide
       locator: "Chapters 1 to 6: capturing, filtering and reading packets"
@@ -474,6 +811,17 @@
   summary: Scanning a network to find hosts, open ports and the services behind them.
   hours: 6
   requires: [networking]
+  covers:
+    - topic: Host discovery
+      detail: Finding which machines are up.
+    - topic: Port scanning
+      detail: SYN, connect and UDP scans.
+    - topic: Service and version detection
+      detail: What's running on open ports.
+    - topic: Scripts
+      detail: The Nmap Scripting Engine for deeper checks.
+    - topic: Ethics and permission
+      detail: Scanning only networks you're allowed to.
   resources:
     - resource: nmap-book
       locator: "The chapters available free online, starting with Port Scanning Basics"
@@ -489,6 +837,17 @@
   summary: Searching and charting machine data, the main tool in many security operations centres.
   hours: 15
   recommends: [log-analysis]
+  covers:
+    - topic: Getting data in
+      detail: Inputs, indexes and source types.
+    - topic: Search language
+      detail: Searching, filtering and piping commands.
+    - topic: Statistics
+      detail: stats, timechart and top.
+    - topic: Dashboards and alerts
+      detail: Turning searches into monitoring.
+    - topic: Security use
+      detail: Hunting through logs for suspicious activity.
   resources:
     - resource: splunk-tutorial
       locator: "The whole Search Tutorial, with its sample data"
@@ -505,6 +864,17 @@
   hours: 10
   requires: [web-http]
   recommends: [web-security]
+  covers:
+    - topic: The proxy
+      detail: Intercepting and changing browser traffic.
+    - topic: Repeater
+      detail: Sending modified requests by hand.
+    - topic: Intruder
+      detail: Automating payloads against a parameter.
+    - topic: Scanner
+      detail: Automated checks in the professional edition.
+    - topic: Testing workflow
+      detail: Mapping an app and testing each input.
   resources:
     - resource: burp-start
       locator: "Getting started, then the guided tutorials"
@@ -524,6 +894,17 @@
   kind: tool
   summary: Where interfaces are designed and handed to developers. Frames, components, auto layout and prototypes.
   hours: 10
+  covers:
+    - topic: Frames and layout
+      detail: Frames, constraints and auto layout.
+    - topic: Components and variants
+      detail: Reusable pieces and their states.
+    - topic: Styles and variables
+      detail: Colours, type and spacing tokens.
+    - topic: Prototyping
+      detail: Linking screens and adding interactions.
+    - topic: Collaboration and handoff
+      detail: Comments, sharing and Dev Mode for developers.
   resources:
     - resource: figma-learn
       locator: "The Figma Design courses"
@@ -538,6 +919,17 @@
   kind: tool
   summary: The issue tracker most software teams plan their work in. Boards, sprints, workflows and filters.
   hours: 4
+  covers:
+    - topic: Issues
+      detail: Epics, stories, tasks and bugs.
+    - topic: Boards
+      detail: Scrum and Kanban boards.
+    - topic: Sprints
+      detail: Planning and closing sprints.
+    - topic: Workflows
+      detail: Statuses and transitions.
+    - topic: JQL and reports
+      detail: Searching issues and reading burndown charts.
   resources:
     - resource: jira-guide
       locator: "The getting started guide, every section"
@@ -552,6 +944,19 @@
   kind: tool
   summary: Running the world's biggest CRM for a company. Objects, fields, users, security, automation and reports.
   hours: 40
+  covers:
+    - topic: The platform
+      detail: Orgs, objects, fields and records.
+    - topic: Data model
+      detail: Standard and custom objects and relationships.
+    - topic: Security
+      detail: Profiles, permission sets and sharing rules.
+    - topic: Automation
+      detail: Flow for business processes without code.
+    - topic: Apex and Lightning
+      detail: Code and components when clicks aren't enough.
+    - topic: Reports and dashboards
+      detail: Turning records into insight.
   resources:
     - resource: trailhead-admin
       locator: "The Admin Beginner trail, then Admin Intermediate"
@@ -565,6 +970,19 @@
   summary: The platform large companies run IT support on. Incidents, requests, changes and workflows.
   hours: 30
   recommends: [incident-management]
+  covers:
+    - topic: The platform
+      detail: Instances, tables and records.
+    - topic: ITSM
+      detail: Incidents, problems, changes and requests.
+    - topic: Forms and lists
+      detail: How users see and edit data.
+    - topic: Business rules and client scripts
+      detail: Server and browser logic.
+    - topic: Flow Designer
+      detail: Automating processes without code.
+    - topic: Integrations
+      detail: REST APIs in and out.
   resources:
     - resource: servicenow-dev
       locator: "The free developer program: its learning plans and a personal developer instance"
@@ -681,3 +1099,33 @@
       locator: The integration learning path
       role: alternative
       verified: false
+
+- id: latex
+  title: LaTeX
+  area: workplace
+  kind: tool
+  summary: How papers, theses, maths-heavy reports and many resumes are typeset. Expected in research, academia and quantitative roles.
+  hours: 8
+  requires: []
+  covers:
+    - topic: Document structure
+      detail: The preamble, document classes, sections and the title.
+    - topic: Maths
+      detail: Inline and display maths, fractions, matrices and aligned equations.
+    - topic: Lists, tables and figures
+      detail: Itemize, tabular, and placing images.
+    - topic: Cross-references
+      detail: Labels, \ref and numbered equations.
+    - topic: Citations
+      detail: BibTeX or biblatex and a bibliography.
+    - topic: Packages and Overleaf
+      detail: Common packages, and writing together on Overleaf.
+  resources:
+    - resource: overleaf-30min
+      locator: The whole guide
+      role: primary
+      verified: true
+    - resource: learnlatex
+      locator: All lessons, editing the examples as you go
+      role: primary
+      verified: true

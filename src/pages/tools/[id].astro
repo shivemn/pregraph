@@ -36,6 +36,16 @@ const inRoles = c.roles.flatMap((r) =>
       </p>
     </header>
 
+    {tool.covers.length > 0 && (
+      <section class="narrow" aria-labelledby="covers">
+        <h2 id="covers">What it covers</h2>
+        <p class="quiet section-note">In the order you'd learn it. When you can do each of these, you know this tool.</p>
+        <ol class="covers">
+          {tool.covers.map((x) => <li><b>{x.topic}</b><span>{x.detail}</span></li>)}
+        </ol>
+      </section>
+    )}
+
     <section class="narrow" aria-labelledby="learn">
       <h2 id="learn">Where to learn it</h2>
       <Picks title={tool.title} detail={detail} />
@@ -90,6 +100,8 @@ const inRoles = c.roles.flatMap((r) =>
   .crumbs a { color: inherit; }
   .tool-lede { font-size: 1.25rem; line-height: 1.5; max-width: 56ch; }
   section { margin-top: 44px; }
+  .covers { max-width: 72ch; margin-top: 10px; border-top: 3px solid var(--ink); }
+  .section-note { margin-top: 2px; }
   h2 { margin-bottom: 8px; }
   .narrow { max-width: 780px; }
   .route-lede { max-width: 60ch; margin-bottom: 18px; }

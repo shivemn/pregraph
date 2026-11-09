@@ -6,6 +6,19 @@
   area: finance
   summary: How people and firms choose, how markets set prices, and where markets fail.
   hours: 30
+  covers:
+    - topic: Supply and demand
+      detail: Markets, equilibrium and elasticity.
+    - topic: Consumer choice
+      detail: Preferences, budgets and utility.
+    - topic: Firms and costs
+      detail: Production, cost curves and profit maximisation.
+    - topic: Market structures
+      detail: Competition, monopoly and oligopoly.
+    - topic: Game theory
+      detail: Strategic choices and Nash equilibrium.
+    - topic: Market failure
+      detail: Externalities, public goods and information problems.
   resources:
     - resource: core-econ
       locator: "The Economy 2.0: Microeconomics"
@@ -21,6 +34,19 @@
   summary: Growth, unemployment, inflation, interest rates, and what central banks and governments can do about them.
   hours: 30
   recommends: [microeconomics]
+  covers:
+    - topic: Measuring the economy
+      detail: GDP, inflation and unemployment.
+    - topic: Growth
+      detail: What makes economies grow over time.
+    - topic: Money and banking
+      detail: Money creation and the RBI's role.
+    - topic: Monetary policy
+      detail: Interest rates, inflation targeting and the repo rate.
+    - topic: Fiscal policy
+      detail: Government spending, taxes and deficits.
+    - topic: Open economy
+      detail: Exchange rates, trade and capital flows.
   resources:
     - resource: core-econ
       locator: "The Economy 2.0: Macroeconomics"
@@ -36,6 +62,21 @@
   hours: 30
   requires: [statistics]
   recommends: [r-lang, linear-algebra]
+  covers:
+    - topic: Regression for causal questions
+      detail: What coefficients mean, and when they don't mean causation.
+    - topic: Omitted variable bias
+      detail: The most common reason estimates are wrong.
+    - topic: Inference
+      detail: Standard errors, robust errors and clustering.
+    - topic: Panel data
+      detail: Fixed and random effects.
+    - topic: Instrumental variables
+      detail: Estimating effects when there's hidden confounding.
+    - topic: Difference-in-differences and RD
+      detail: Natural experiments in data.
+    - topic: Time series
+      detail: Stationarity and autocorrelation in economic data.
   resources:
     - resource: econometrics-r
       locator: "Chapters 4–12"
@@ -49,6 +90,19 @@
   area: finance
   summary: Stocks, bonds, exchanges, brokers and how prices move, with Indian markets as the running example.
   hours: 20
+  covers:
+    - topic: Instruments
+      detail: Equities, bonds, money markets, mutual funds and derivatives.
+    - topic: How markets work
+      detail: Exchanges, brokers, order books and settlement.
+    - topic: Indian markets
+      detail: NSE, BSE, SEBI and the depository system.
+    - topic: Bonds and rates
+      detail: Yields, prices and the yield curve.
+    - topic: Returns and risk
+      detail: Measuring both, and why they go together.
+    - topic: Market efficiency
+      detail: What prices reflect, and the evidence.
   resources:
     - resource: varsity
       locator: "Introduction to Stock Markets"
@@ -63,6 +117,19 @@
   area: finance
   summary: Double entry, the balance sheet, income statement and cash flow statement, and how to read a company's annual report.
   hours: 25
+  covers:
+    - topic: The accounting equation
+      detail: Assets equal liabilities plus equity.
+    - topic: Double entry
+      detail: Journals, ledgers and trial balances.
+    - topic: Financial statements
+      detail: Income statement, balance sheet and cash-flow statement, and how they link.
+    - topic: Accruals
+      detail: Recognising revenue and expenses when earned, not when paid.
+    - topic: Ratios
+      detail: Profitability, liquidity and leverage.
+    - topic: Indian context
+      detail: GST basics, Ind AS and reading an annual report.
   resources:
     - resource: openstax-accounting
       locator: "Chapters 1–5"
@@ -79,6 +146,19 @@
   hours: 30
   requires: [accounting]
   recommends: [financial-markets, spreadsheets]
+  covers:
+    - topic: Time value of money
+      detail: Present value, discounting and annuities.
+    - topic: Capital budgeting
+      detail: NPV and IRR for investment decisions.
+    - topic: Cost of capital
+      detail: WACC and CAPM.
+    - topic: Capital structure
+      detail: Debt versus equity and its trade-offs.
+    - topic: Valuation
+      detail: DCF and relative valuation with multiples.
+    - topic: Financial modelling
+      detail: Three-statement models in a spreadsheet.
   resources:
     - resource: openstax-finance
       locator: "The chapters on time value of money, valuation and cost of capital"
@@ -99,6 +179,19 @@
   hours: 30
   requires: [financial-markets, probability]
   recommends: [stochastic-calculus]
+  covers:
+    - topic: Forwards and futures
+      detail: Pricing, margining and hedging.
+    - topic: Options
+      detail: Calls, puts, payoffs and put-call parity.
+    - topic: Binomial pricing
+      detail: Pricing by no-arbitrage on a tree.
+    - topic: Black–Scholes
+      detail: The formula, its inputs and its assumptions.
+    - topic: The Greeks
+      detail: Delta, gamma, vega and theta, and hedging with them.
+    - topic: Swaps
+      detail: Interest rate swaps and their uses.
   resources:
     - resource: varsity
       locator: "Futures Trading, then Options Theory for Professional Trading"
@@ -114,6 +207,19 @@
   hours: 20
   requires: [financial-markets, statistics]
   recommends: [optimization]
+  covers:
+    - topic: Risk and return
+      detail: Expected return, variance and covariance of assets.
+    - topic: Diversification
+      detail: Why combining assets lowers risk.
+    - topic: The efficient frontier
+      detail: Mean-variance optimisation.
+    - topic: CAPM
+      detail: Beta and the market risk premium.
+    - topic: Factor models
+      detail: Fama-French and other factors.
+    - topic: Performance measurement
+      detail: Sharpe ratio, alpha and benchmarks.
   resources:
     - resource: openstax-finance
       locator: "The chapters on risk, return and portfolios"
@@ -129,6 +235,19 @@
   hours: 20
   requires: [statistics, financial-markets]
   recommends: [derivatives, time-series]
+  covers:
+    - topic: Types of risk
+      detail: Market, credit, liquidity and operational risk.
+    - topic: Value at Risk
+      detail: Historical, parametric and Monte Carlo methods, and their limits.
+    - topic: Expected shortfall
+      detail: Measuring the tail beyond VaR.
+    - topic: Credit risk
+      detail: Probability of default, loss given default and exposure.
+    - topic: Stress testing
+      detail: What happens in bad scenarios.
+    - topic: Regulation
+      detail: Basel norms and the RBI's role.
   resources:
     - resource: varsity
       locator: "Risk Management and Trading Psychology"
