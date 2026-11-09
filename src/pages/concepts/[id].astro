@@ -47,6 +47,16 @@ const shelf = c.toolGroups.find((g) => g.tools.includes(concept.id));
       )}
     </header>
 
+    {concept.covers.length > 0 && (
+      <section aria-labelledby="covers">
+        <h2 id="covers">What it covers</h2>
+        <p class="quiet section-note">In the order you'd learn it. When you can do each of these, you know this stop.</p>
+        <ol class="covers">
+          {concept.covers.map((c) => <li><b>{c.topic}</b><span>{c.detail}</span></li>)}
+        </ol>
+      </section>
+    )}
+
     {concept.brief && (
       <section aria-labelledby="brief">
         <h2 id="brief">The brief</h2>
@@ -133,6 +143,8 @@ const shelf = c.toolGroups.find((g) => g.tools.includes(concept.id));
 
   section { margin-top: 44px; }
   .brief { max-width: 66ch; margin-top: 12px; }
+  .covers { max-width: 72ch; margin-top: 10px; border-top: 3px solid var(--ink); }
+  .section-note { margin-top: 2px; }
   h2 { margin-bottom: 8px; }
 
   .small { font-size: 0.9375rem; margin-top: 8px; }

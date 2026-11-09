@@ -1,5 +1,14 @@
 # Changelog
 
+## Deeper stops: AI engineering and system design
+
+- **Stops now say what they cover.** Each one lists its subtopics in the order you'd learn them, with what you should be able to do for each. It's on the stop's page and in the stop panel. AI and system design come first; the other areas follow.
+- **Seven new AI stops:** Python in depth, AI agents and tool use (including MCP), fine-tuning (LoRA, QLoRA, DPO), serving LLMs fast and cheaply (KV cache, batching, quantisation, vLLM), securing AI systems (OWASP's LLM Top 10), multimodal models, and designing AI systems. The AI engineer route picks up Python in depth and agents in the first year, and the rest as extras.
+- **System design is now six stops plus the capstone:** scaling and load balancing, caching, replication and sharding, API styles (REST, GraphQL, gRPC, WebSockets), microservices patterns, and designing for failure. Distributed systems, messaging, Redis and database internals list consistency models, consensus, delivery guarantees and isolation levels.
+- **Parallel and GPU programming,** with Stanford CS149, NVIDIA's CUDA guide and the GPU MODE lectures.
+- **Two free courses we were missing:** Stanford CS229 (Andrew Ng, 2018) and Berkeley CS285 on deep reinforcement learning.
+- New free picks include Anthropic's Building effective agents, Hugging Face's agents, smol and audio courses, Chip Huyen on generative AI platforms, Amazon's Builders' Library on retries and caching, microservices.io, Martin Kleppmann's distributed systems notes and Hello Interview's system design guide. Every one was opened before it went in.
+
 ## Every route ends in a project; every link checked
 
 - **Every job route now ends in a project,** placed last so it's what you finish before you apply. 30 new projects for the routes that didn't have one, from an order book in C++ and a VaR report to a dbt project, a COBOL batch job, a PLC sequence, a DC-DC converter, a building's electrical design, a design case study, a campaign and an attrition analysis. `npm run validate` now fails if a route's hiring list has no project.

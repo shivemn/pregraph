@@ -65,6 +65,21 @@
   summary: Threads, locks, condition variables and the bugs they cause.
   hours: 20
   requires: [os-processes-memory]
+  covers:
+    - topic: Threads
+      detail: Creating threads, shared memory, and why concurrency bugs are hard to reproduce.
+    - topic: Race conditions
+      detail: Two threads updating the same data, and finding the critical section.
+    - topic: Locks
+      detail: Mutexes, spin locks and lock granularity.
+    - topic: Condition variables and semaphores
+      detail: Waiting for a condition, and the producer-consumer problem.
+    - topic: Deadlock
+      detail: The four conditions, and avoiding it with lock ordering.
+    - topic: Atomic operations
+      detail: Compare-and-swap and lock-free counters.
+    - topic: Higher-level tools
+      detail: Thread pools, futures and concurrent queues in Java or Python.
   resources:
     - resource: ostep
       locator: "Part II, Concurrency"
@@ -105,6 +120,23 @@
   hours: 35
   requires: [programming-basics]
   recommends: [os-processes-memory]
+  covers:
+    - topic: Layers
+      detail: The TCP/IP model, and what each layer adds.
+    - topic: IP addressing and routing
+      detail: Addresses, subnets, CIDR, NAT and how routers forward packets.
+    - topic: TCP
+      detail: The handshake, reliable delivery, flow control and congestion control.
+    - topic: UDP
+      detail: 'When speed beats reliability: DNS, video, games and QUIC.'
+    - topic: DNS
+      detail: How a name becomes an address, record types and caching.
+    - topic: TLS
+      detail: Certificates, the handshake, and what HTTPS protects.
+    - topic: Latency and bandwidth
+      detail: Round trips, the speed of light, and why they limit design.
+    - topic: Tools
+      detail: ping, traceroute, dig, curl, netstat and Wireshark to see what's happening.
   resources:
     - resource: cn-systems-approach
       locator: "Chapters 1–6"
@@ -127,6 +159,21 @@
   summary: Requests, responses, headers, caching and cookies. What happens when you open a page.
   hours: 8
   requires: [networking]
+  covers:
+    - topic: Requests and responses
+      detail: Methods, URLs, headers, bodies and status codes.
+    - topic: What happens when you open a page
+      detail: DNS, TCP, TLS, the request, and rendering.
+    - topic: Caching
+      detail: Cache-Control, ETags and conditional requests.
+    - topic: Cookies and sessions
+      detail: How a site remembers you, and the security flags on cookies.
+    - topic: CORS
+      detail: Why browsers block some cross-site requests, and how servers allow them.
+    - topic: HTTP/2 and HTTP/3
+      detail: Multiplexing, header compression and QUIC.
+    - topic: Proxies and CDNs
+      detail: Forward and reverse proxies, and edge caches.
   resources:
     - resource: mdn-http
       locator: "Overview, Messages, Caching and Cookies"
@@ -142,7 +189,38 @@
   hours: 60
   requires: [concurrency, networking]
   recommends: [database-internals]
+  covers:
+    - topic: Why it's hard
+      detail: Partial failure, unreliable networks and no shared clock.
+    - topic: Time and ordering
+      detail: Physical clocks and their drift, Lamport and vector clocks, and happens-before.
+    - topic: Consistency models
+      detail: Linearizability, sequential, causal and eventual consistency, and what each guarantees.
+    - topic: CAP and PACELC
+      detail: What you give up during a partition, and the latency–consistency trade-off the rest of the time.
+    - topic: Replication and quorums
+      detail: Copies of data, and R + W > N for overlapping reads and writes.
+    - topic: Consensus
+      detail: Agreeing on one value despite failures; Raft's leader election and log replication.
+    - topic: Leader election and locks
+      detail: Leases, fencing tokens, and why a distributed lock is harder than it looks.
+    - topic: Distributed transactions
+      detail: Two-phase commit and its blocking problem, and sagas.
+    - topic: Gossip, Bloom filters and Merkle trees
+      detail: Tools large systems use to spread state, test membership and compare replicas cheaply.
+    - topic: MapReduce
+      detail: Splitting a big computation across machines, and handling stragglers and failures.
+    - topic: Build it
+      detail: Implement Raft and a fault-tolerant key-value store in the MIT labs or Maelstrom.
   resources:
+    - resource: kleppmann-distsys-notes
+      locator: The whole set of notes, before or alongside the MIT course
+      role: alternative
+      verified: true
+    - resource: raft-site
+      locator: The visualisation, then the paper it links to
+      role: alternative
+      verified: true
     - resource: mit-6824
       locator: "Lectures, plus the MapReduce and Raft labs"
       verified: true
@@ -186,9 +264,32 @@
   area: systems
   summary: Load balancers, caches, queues, sharding and the trade-offs between them. How a single app grows to serve millions.
   hours: 40
-  requires: [web-http, sql, hash-tables]
-  recommends: [distributed-systems, database-internals]
+  requires: [web-http, sql, hash-tables, scaling-load-balancing, caching]
+  recommends: [partitioning-replication, api-styles, messaging, reliability-patterns, microservices, distributed-systems, database-internals]
+  covers:
+    - topic: Requirements
+      detail: 'Separate functional requirements from non-functional ones: scale, latency, availability, consistency.'
+    - topic: Back-of-the-envelope numbers
+      detail: Requests per second, storage per year and bandwidth, from users and actions per day.
+    - topic: Numbers to know
+      detail: Rough latencies for memory, SSD, network and cross-region calls, and what a single server can handle.
+    - topic: API and data model
+      detail: Define the endpoints and the tables or documents before drawing boxes.
+    - topic: High-level design
+      detail: Clients, load balancer, services, caches, databases, queues and object storage, and how a request flows.
+    - topic: Choosing a database
+      detail: Relational versus key-value, document, wide-column and search stores, by access pattern.
+    - topic: Scaling reads and writes
+      detail: Read replicas and caches for reads; sharding, queues and batching for writes.
+    - topic: Bottlenecks and trade-offs
+      detail: Find the part that breaks first, and say what each choice costs.
+    - topic: The interview method
+      detail: Clarify, estimate, design, deep-dive, and summarise trade-offs, in about 45 minutes.
   resources:
+    - resource: hello-interview-sd
+      locator: The delivery framework, core concepts and a few question breakdowns
+      role: alternative
+      verified: true
     - resource: sd-primer
       locator: "The study guide, then each topic in the index"
       verified: true
@@ -209,6 +310,25 @@
   kind: tool
   requires: [networking]
   recommends: [concurrency]
+  covers:
+    - topic: Why queues
+      detail: Decoupling producers and consumers, smoothing spikes and doing slow work later.
+    - topic: Queues versus logs
+      detail: RabbitMQ-style queues that delete messages, and Kafka-style logs you can replay.
+    - topic: Kafka's model
+      detail: Topics, partitions, offsets, brokers and replication.
+    - topic: Consumer groups
+      detail: Sharing partitions across consumers, and rebalancing.
+    - topic: Ordering
+      detail: Ordering within a partition only, and choosing keys to keep related events together.
+    - topic: Delivery guarantees
+      detail: At-most-once, at-least-once and exactly-once, and what each really means.
+    - topic: Idempotent consumers
+      detail: Handling duplicates safely, because at-least-once delivery will send some.
+    - topic: Retries and dead-letter queues
+      detail: Parking messages that keep failing so they don't block the rest.
+    - topic: Event-driven design
+      detail: Publishing events instead of calling services, and the change-data-capture pattern.
   resources:
     - resource: kafka-docs
       locator: "Introduction, then Design"
@@ -284,5 +404,251 @@
       verified: true
     - resource: wokwi
       locator: "Prototype the whole project in the simulator first"
+      role: alternative
+      verified: true
+
+- id: parallel-computing
+  title: Parallel and GPU programming
+  area: systems
+  summary: 'Making programs use many cores and GPUs: threads and SIMD on CPUs, CUDA kernels, the memory hierarchy, and why data movement dominates.'
+  hours: 40
+  requires: [computer-architecture, c-and-memory]
+  recommends: [concurrency, cpp]
+  covers:
+    - topic: Why parallelism
+      detail: 'Why clock speeds stalled, and the kinds of parallelism: multi-core, SIMD, multi-threading and GPUs.'
+    - topic: Speed-up limits
+      detail: Amdahl's law, work and span, and why some programs don't scale.
+    - topic: Shared-memory programming
+      detail: Threads and OpenMP loops on a multi-core CPU, and avoiding data races.
+    - topic: SIMD and vectorisation
+      detail: Doing the same operation on many values at once, and helping the compiler do it.
+    - topic: GPU architecture
+      detail: Thousands of simple cores, warps, and the memory hierarchy from registers to global memory.
+    - topic: CUDA basics
+      detail: Kernels, threads, blocks and grids; write and launch a kernel that adds two vectors.
+    - topic: Memory performance
+      detail: Coalesced access, shared memory and why moving data costs more than computing.
+    - topic: Reductions and matrix multiply
+      detail: Two classic kernels, and how tiling speeds up matrix multiplication.
+    - topic: Profiling
+      detail: Measuring where time goes with a profiler before optimising anything.
+    - topic: Distributed basics
+      detail: Message passing (MPI) and splitting work across machines.
+  resources:
+    - resource: cs149
+      locator: The lecture slides in order, and the programming assignments
+      role: primary
+      verified: true
+    - resource: cuda-guide
+      locator: The programming model and the performance guidelines
+      role: deep-dive
+      verified: true
+    - resource: gpu-mode-lectures
+      locator: 'Lectures 3, 4, 8 and 9: getting started, memory architecture, the performance checklist and reductions'
+      role: primary
+      verified: true
+
+- id: scaling-load-balancing
+  title: Scaling and load balancing
+  area: systems
+  summary: 'Growing past one server: stateless services, load balancers, gateways, rate limits and autoscaling.'
+  hours: 8
+  requires: [web-http]
+  recommends: [networking]
+  covers:
+    - topic: Vertical and horizontal scaling
+      detail: Bigger machines versus more machines, and where each runs out.
+    - topic: Stateless services
+      detail: Moving sessions and state out of the app server so any server can take any request.
+    - topic: Load balancers
+      detail: Layer 4 versus layer 7, and round-robin, least-connections and hashing algorithms.
+    - topic: Health checks
+      detail: Taking unhealthy servers out of rotation without causing more trouble.
+    - topic: Reverse proxies and API gateways
+      detail: TLS termination, routing, authentication and rate limits at the edge.
+    - topic: Rate limiting
+      detail: Token bucket, leaky bucket and sliding windows, and where to enforce them.
+    - topic: Autoscaling
+      detail: Scaling on CPU, queue length or custom metrics, and warm-up time.
+    - topic: DNS and global traffic
+      detail: DNS-based load balancing, anycast and sending users to the nearest region.
+  resources:
+    - resource: sd-primer
+      locator: Performance vs scalability, Load balancer, Reverse proxy and Application layer sections
+      role: primary
+      verified: true
+    - resource: hello-interview-sd
+      locator: Core concepts, then the Rate Limiter breakdown
+      role: alternative
+      verified: true
+    - resource: bytebytego
+      locator: The videos on load balancing and rate limiting
+      role: primary
+      verified: true
+
+- id: caching
+  title: Caching
+  area: systems
+  summary: 'Keeping hot data close: where caches go, the main patterns, expiry, invalidation and the failures caches cause.'
+  hours: 8
+  requires: [web-http, hash-tables]
+  recommends: [redis]
+  covers:
+    - topic: Why cache
+      detail: 'Cutting latency and load by keeping hot data close, and the cost: stale data.'
+    - topic: Where caches live
+      detail: Browser, CDN, application memory, a shared cache like Redis, and the database's own cache.
+    - topic: Cache-aside
+      detail: Read from the cache, fall back to the database, then fill the cache; the most common pattern.
+    - topic: Read-through, write-through and write-behind
+      detail: Who writes to the cache and when, and what each risks.
+    - topic: Expiry and eviction
+      detail: TTLs, LRU and LFU, and sizing a cache.
+    - topic: Invalidation
+      detail: Deleting or updating entries on writes, and why it's one of the hard problems.
+    - topic: Stampedes and hot keys
+      detail: Many requests missing at once, request coalescing, jittered TTLs and spreading hot keys.
+    - topic: CDNs
+      detail: Caching static files and API responses at the edge, cache headers and purging.
+  resources:
+    - resource: builders-caching
+      locator: The whole article
+      role: primary
+      verified: true
+      why: How Amazon actually runs caches, including what goes wrong.
+    - resource: sd-primer
+      locator: The Cache and Content delivery network sections
+      role: alternative
+      verified: true
+    - resource: bytebytego
+      locator: The videos on caching strategies
+      role: primary
+      verified: true
+
+- id: partitioning-replication
+  title: Replication and sharding
+  area: systems
+  summary: Copying data for safety and speed, splitting it across machines, and what breaks when you do.
+  hours: 15
+  requires: [sql, hash-tables]
+  recommends: [database-internals]
+  covers:
+    - topic: Why replicate
+      detail: Surviving failures, serving more reads and putting data near users.
+    - topic: Leader-follower replication
+      detail: One writer, many readers; synchronous versus asynchronous copies.
+    - topic: Replication lag
+      detail: Reading your own writes, monotonic reads, and the bugs lag causes.
+    - topic: Multi-leader and leaderless
+      detail: Writes in several places, conflicts, and quorum reads and writes (Dynamo, Cassandra).
+    - topic: Partitioning (sharding)
+      detail: Splitting data by key range or by hash, and choosing a shard key.
+    - topic: Consistent hashing
+      detail: Adding and removing nodes without moving most of the data.
+    - topic: Hot spots and rebalancing
+      detail: Skewed keys such as a celebrity's posts, and moving partitions safely.
+    - topic: Secondary indexes and cross-shard queries
+      detail: Local versus global indexes, and why joins across shards are expensive.
+    - topic: Picking a store
+      detail: SQL, document, key-value and wide-column databases, by how the data is read and written.
+  resources:
+    - resource: sd-primer
+      locator: 'The Database section: replication, federation, sharding and denormalisation'
+      role: primary
+      verified: true
+    - resource: ddia
+      locator: The chapters on replication and partitioning
+      role: deep-dive
+      verified: true
+    - resource: hello-interview-sd
+      locator: Sharding, Consistent Hashing and CAP Theorem in core concepts
+      role: alternative
+      verified: true
+
+- id: microservices
+  title: Microservices and their patterns
+  area: systems
+  summary: 'Splitting an app into services, and the patterns that keep it working: sagas, the outbox, circuit breakers, CQRS and tracing.'
+  hours: 15
+  requires: [rest-apis, messaging]
+  recommends: [docker, reliability-patterns]
+  covers:
+    - topic: Monolith first
+      detail: What microservices cost, and why a well-structured monolith is often the right start.
+    - topic: Finding service boundaries
+      detail: Splitting by business capability, and a database per service.
+    - topic: Communication
+      detail: Synchronous calls versus events, and the coupling each creates.
+    - topic: Service discovery and gateways
+      detail: How services find each other, and one entry point for clients.
+    - topic: Distributed transactions
+      detail: Why two-phase commit is avoided, and sagas with compensating actions instead.
+    - topic: Transactional outbox
+      detail: Saving a change and its event together so neither gets lost.
+    - topic: CQRS and event sourcing
+      detail: Separate read and write models, and storing events instead of current state.
+    - topic: Resilience patterns
+      detail: Circuit breakers, bulkheads, timeouts and retries between services.
+    - topic: Service mesh
+      detail: Sidecar proxies for retries, mutual TLS and telemetry, and when it's worth the complexity.
+    - topic: Observability across services
+      detail: Correlation IDs and distributed tracing with OpenTelemetry.
+  resources:
+    - resource: fowler-microservices
+      locator: The whole article, for what microservices are and cost
+      role: primary
+      verified: true
+    - resource: microservices-io
+      locator: Service collaboration, transactional messaging, reliability and observability patterns
+      role: primary
+      verified: true
+    - resource: bytebytego
+      locator: The videos on microservice patterns
+      role: alternative
+      verified: true
+
+- id: reliability-patterns
+  title: Designing for failure
+  area: systems
+  summary: Timeouts, retries, idempotency, circuit breakers, graceful degradation, SLOs and disaster recovery.
+  hours: 10
+  requires: [web-http]
+  recommends: [observability, distributed-systems]
+  covers:
+    - topic: Failure is normal
+      detail: Disks, machines, networks and dependencies fail; design assuming they will.
+    - topic: Timeouts
+      detail: Every remote call needs one, set from measured latency.
+    - topic: Retries with backoff and jitter
+      detail: Retrying safely without causing a retry storm.
+    - topic: Idempotency
+      detail: Operations that can run twice with the same result, so retries are safe.
+    - topic: Circuit breakers and load shedding
+      detail: Failing fast when a dependency is down, and dropping work before overloading.
+    - topic: Graceful degradation
+      detail: Serving a simpler page or stale data instead of an error.
+    - topic: Redundancy
+      detail: 'No single points of failure: multiple instances, zones and regions.'
+    - topic: Health checks
+      detail: Liveness versus readiness, and checks that don't take the whole fleet down.
+    - topic: SLIs, SLOs and error budgets
+      detail: Measuring reliability as users feel it, and deciding how much risk to take.
+    - topic: Disaster recovery
+      detail: Backups you have restored, RPO and RTO, and failover drills.
+    - topic: Cascading failures
+      detail: How one overloaded service takes down others, and how queues and deadlines stop it.
+  resources:
+    - resource: builders-timeouts
+      locator: The whole article
+      role: primary
+      verified: true
+      why: The clearest explanation of why retries without jitter make outages worse.
+    - resource: sre-book
+      locator: Chapter 22, Addressing Cascading Failures, and chapter 4, Service Level Objectives
+      role: primary
+      verified: true
+    - resource: microservices-io
+      locator: 'The reliability patterns: circuit breaker and its neighbours'
       role: alternative
       verified: true

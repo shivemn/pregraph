@@ -5,7 +5,36 @@
   hours: 60
   requires: [linear-algebra, probability, programming-basics]
   recommends: [git, sql]
+  covers:
+    - topic: The learning problem
+      detail: Features, labels and a loss; supervised versus unsupervised; why the goal is doing well on data you haven't seen.
+    - topic: Train, validation and test splits
+      detail: Hold data back honestly, use cross-validation when data is small, and never tune on the test set.
+    - topic: Linear and logistic regression
+      detail: Fit them, read the coefficients, and know what the loss and the gradient look like for each.
+    - topic: Bias, variance and regularisation
+      detail: Spot overfitting and underfitting from learning curves, and control them with L1, L2 and simpler models.
+    - topic: Gradient descent
+      detail: Batch, mini-batch and stochastic versions, learning rates, and why feature scaling matters.
+    - topic: Decision trees and ensembles
+      detail: How a tree splits, and why random forests and gradient boosting (XGBoost, LightGBM) win on tabular data.
+    - topic: Distance and margin methods
+      detail: k-nearest neighbours and support vector machines, and when each is a sensible baseline.
+    - topic: Unsupervised learning
+      detail: k-means, hierarchical clustering and PCA; choosing k and reading what the clusters mean.
+    - topic: Evaluation metrics
+      detail: Accuracy, precision, recall, F1, ROC-AUC, log loss, RMSE and MAE, and picking the one the problem actually needs.
+    - topic: Imbalanced data and leakage
+      detail: Class weights, resampling, threshold choice, and the leaks that make a model look better than it is.
+    - topic: Feature work
+      detail: Encoding categories, scaling, missing values, and building pipelines so the same steps run in training and in use.
+    - topic: Model selection
+      detail: Hyperparameter search, comparing models fairly, and explaining a choice with numbers.
   resources:
+    - resource: cs229-videos
+      locator: The whole course, if you want the maths behind every method
+      role: deep-dive
+      verified: true
     - resource: islp
       locator: "Chapters 2–9"
       verified: true
@@ -35,6 +64,23 @@
   summary: Layers, activations, losses, gradient descent and backpropagation, and why training goes wrong.
   hours: 25
   requires: [machine-learning]
+  covers:
+    - topic: Perceptrons and layers
+      detail: How a neuron computes a weighted sum, and how stacking layers with non-linearities builds a function.
+    - topic: Activation functions
+      detail: ReLU, GELU, sigmoid, tanh and softmax, and why the choice affects training.
+    - topic: Loss functions
+      detail: Mean squared error for regression, cross-entropy for classification, and what the numbers mean.
+    - topic: Backpropagation
+      detail: The chain rule applied through a computation graph; compute gradients for a small network by hand.
+    - topic: Optimisers
+      detail: SGD with momentum, RMSProp and Adam, learning-rate schedules and warm-up.
+    - topic: Initialisation and normalisation
+      detail: Why weights start small and random (Xavier, He), and what batch norm and layer norm fix.
+    - topic: Regularisation
+      detail: Weight decay, dropout, early stopping and data augmentation.
+    - topic: Debugging training
+      detail: Overfit one batch first, watch the loss curve, and recognise vanishing or exploding gradients.
   resources:
     - resource: d2l
       locator: "Chapters 3–6: linear networks, multilayer perceptrons, the builders' guide"
@@ -57,6 +103,19 @@
   summary: Convolutions, pooling, residual connections, and the architectures from LeNet to ResNet.
   hours: 20
   requires: [neural-networks]
+  covers:
+    - topic: Convolution
+      detail: Kernels, stride, padding and channels; compute an output shape and a parameter count.
+    - topic: Pooling and receptive fields
+      detail: How deeper layers see more of the image, and what pooling trades away.
+    - topic: Classic architectures
+      detail: LeNet, AlexNet, VGG and what each one changed.
+    - topic: Residual networks
+      detail: Skip connections, and why they let networks go hundreds of layers deep.
+    - topic: Efficient networks
+      detail: Depthwise separable convolutions and MobileNet-style models for phones and edge devices.
+    - topic: Transfer learning
+      detail: Start from ImageNet weights, freeze, then fine-tune, and know when it helps.
   resources:
     - resource: d2l
       locator: "Chapters 7–8"
@@ -74,6 +133,17 @@
   summary: Modelling sequences with recurrence, why gradients vanish, and how LSTMs and GRUs fix it.
   hours: 15
   requires: [neural-networks]
+  covers:
+    - topic: Sequences and recurrence
+      detail: A hidden state carried step to step, and unrolling the network through time.
+    - topic: Backpropagation through time
+      detail: How gradients flow back along a sequence, and why they vanish or explode.
+    - topic: LSTMs and GRUs
+      detail: Gates that decide what to keep and forget, and why they train better than plain RNNs.
+    - topic: Sequence to sequence
+      detail: Encoder-decoder models for translation, and the bottleneck that attention was invented to remove.
+    - topic: Where RNNs still fit
+      detail: Small streaming and time-series problems, and why transformers replaced them for language.
   resources:
     - resource: d2l
       locator: "Chapters 9–10"
@@ -89,6 +159,21 @@
   hours: 20
   requires: [neural-networks]
   recommends: [rnns]
+  covers:
+    - topic: Attention
+      detail: Queries, keys and values; compute scaled dot-product attention for a tiny example.
+    - topic: Self-attention and multi-head attention
+      detail: Every token attending to every other, several heads in parallel, and the quadratic cost in sequence length.
+    - topic: Positional information
+      detail: Sinusoidal and learned positions, and rotary embeddings (RoPE) used by most current LLMs.
+    - topic: The transformer block
+      detail: Attention, feed-forward layer, residual connections and layer norm, and pre-norm versus post-norm.
+    - topic: Encoder, decoder and both
+      detail: BERT-style encoders, GPT-style decoders with causal masks, and T5-style encoder-decoders.
+    - topic: Training objectives
+      detail: Masked language modelling versus next-token prediction, and what each model is good for.
+    - topic: Build one
+      detail: Write a small GPT from scratch and train it on a text file until it produces plausible text.
   resources:
     - resource: d2l
       locator: "Chapter 11"
@@ -111,6 +196,21 @@
   summary: Classification, detection and segmentation, data augmentation and transfer learning for images.
   hours: 25
   requires: [cnns]
+  covers:
+    - topic: Image data
+      detail: Pixels, channels, resizing and normalisation, and augmentations that don't change the label.
+    - topic: Classification
+      detail: Fine-tune a pretrained backbone and read a confusion matrix.
+    - topic: Object detection
+      detail: Bounding boxes, anchors, IoU and non-max suppression; one-stage (YOLO) versus two-stage (Faster R-CNN).
+    - topic: Segmentation
+      detail: Semantic versus instance segmentation, U-Net and Mask R-CNN.
+    - topic: Vision transformers
+      detail: Images cut into patches and fed to a transformer, and when ViTs beat CNNs.
+    - topic: Evaluation
+      detail: Top-1 accuracy, mAP for detection, IoU and Dice for segmentation.
+    - topic: Classical tools
+      detail: OpenCV for reading, transforming and pre-processing images and video.
   resources:
     - resource: d2l
       locator: "Chapter 14"
@@ -129,6 +229,19 @@
   hours: 30
   requires: [transformers]
   recommends: [rnns]
+  covers:
+    - topic: Text preprocessing
+      detail: Normalisation, tokenisation, and why subword tokenisers (BPE, WordPiece) took over.
+    - topic: Word vectors
+      detail: 'word2vec and GloVe: words as vectors whose distances mean something.'
+    - topic: Pretrained language models
+      detail: BERT for understanding tasks and GPT-style models for generation.
+    - topic: Fine-tuning for tasks
+      detail: Classification, named-entity recognition, question answering and summarisation with a pretrained model.
+    - topic: Evaluation
+      detail: Accuracy and F1 for classification; BLEU, ROUGE and their limits for generation.
+    - topic: Indian languages
+      detail: Script, code-mixing (Hinglish) and tokenisation costs, and models like IndicBERT built for them.
   resources:
     - resource: d2l
       locator: "Chapters 15–16"
@@ -148,6 +261,21 @@
   hours: 30
   requires: [neural-networks]
   recommends: [probability, transformers]
+  covers:
+    - topic: What generative means
+      detail: Learning a distribution you can sample from, not just a label.
+    - topic: Autoencoders and VAEs
+      detail: An encoder, a latent space and a decoder, and the reparameterisation trick.
+    - topic: GANs
+      detail: A generator and a discriminator in a game, and why training is unstable (mode collapse).
+    - topic: Normalising flows
+      detail: Invertible transforms that give exact likelihoods.
+    - topic: Diffusion models
+      detail: Adding noise step by step and learning to remove it; the model behind Stable Diffusion.
+    - topic: Conditioning and guidance
+      detail: Steering generation with text or class labels, and classifier-free guidance.
+    - topic: Evaluation
+      detail: FID and why judging generated samples is hard.
   resources:
     - resource: udl-book
       locator: "Chapters 14–18"
@@ -167,7 +295,26 @@
   hours: 40
   requires: [probability, programming-basics]
   recommends: [neural-networks]
+  covers:
+    - topic: Markov decision processes
+      detail: States, actions, rewards, transitions and discounting.
+    - topic: Value functions and Bellman equations
+      detail: What V and Q mean, and solving small problems with value and policy iteration.
+    - topic: Monte Carlo and temporal difference
+      detail: Learning from experience instead of a model, and the bias–variance trade-off between them.
+    - topic: Q-learning and SARSA
+      detail: Off-policy versus on-policy control, and exploration with epsilon-greedy.
+    - topic: Deep Q-networks
+      detail: Q-learning with a neural network, replay buffers and target networks.
+    - topic: Policy gradients
+      detail: REINFORCE, baselines and actor-critic methods, leading to PPO.
+    - topic: RL for language models
+      detail: How RLHF and newer reward-based training use these ideas to tune LLMs.
   resources:
+    - resource: cs285
+      locator: The lectures and homeworks, after Part I of Sutton and Barto
+      role: deep-dive
+      verified: true
     - resource: sutton-barto
       locator: "Part I (chapters 2–8), then chapter 13 on policy gradients"
       why: "The standard textbook, free from the authors."
@@ -186,6 +333,21 @@
   hours: 25
   requires: [neural-networks, cnns]
   recommends: [transformers, pytorch]
+  covers:
+    - topic: A full training loop
+      detail: Data loading, model, loss, optimiser, evaluation and checkpoints, written yourself.
+    - topic: Transfer learning in practice
+      detail: Pick a pretrained model, adapt the head, and fine-tune with discriminative learning rates.
+    - topic: Tuning
+      detail: Learning-rate finders, batch size, schedules and early stopping.
+    - topic: Training on GPUs
+      detail: Moving data and models to the GPU, mixed precision, and reading GPU memory use.
+    - topic: Diagnosing a bad run
+      detail: Loss not falling, overfitting, data bugs and label noise, and how to tell them apart.
+    - topic: Experiment tracking
+      detail: Logging runs, metrics and configs so results can be repeated.
+    - topic: Shipping the model
+      detail: Exporting weights, running inference, and checking it behaves the same outside the notebook.
   resources:
     - resource: fastai-course
       locator: "Part 1, all lessons"
@@ -209,6 +371,25 @@
   hours: 30
   requires: [machine-learning, git]
   recommends: [docker, ci-cd]
+  covers:
+    - topic: The ML lifecycle
+      detail: Data, training, evaluation, deployment and monitoring as one loop, not a notebook.
+    - topic: Versioning
+      detail: Code in Git, data with DVC or similar, models in a registry, so any result can be rebuilt.
+    - topic: Experiment tracking
+      detail: MLflow or Weights & Biases to compare runs and record what produced a model.
+    - topic: Pipelines
+      detail: Training steps as repeatable jobs, scheduled or triggered, not run by hand.
+    - topic: Testing ML systems
+      detail: Tests for data, features and model behaviour, not only for code.
+    - topic: Serving
+      detail: Batch versus online prediction, REST endpoints, containers and model servers.
+    - topic: CI/CD for models
+      detail: Retrain, evaluate against a baseline, and deploy only if the new model is better.
+    - topic: Monitoring
+      detail: Data drift, prediction drift, latency and cost, and when to retrain.
+    - topic: LLMOps
+      detail: Prompt and model versioning, tracing calls with tools like Langfuse, and tracking token cost.
   resources:
     - resource: madewithml
       locator: "The whole course"
@@ -248,6 +429,23 @@
   hours: 15
   requires: [programming-basics]
   recommends: [linear-algebra, probability, transformers]
+  covers:
+    - topic: What a language model does
+      detail: Predict the next token, repeatedly; everything else is built on that.
+    - topic: Tokens and tokenisation
+      detail: How text becomes token IDs, why counts differ by language, and how tokens drive cost and limits.
+    - topic: Embeddings and attention
+      detail: Tokens become vectors, and attention lets each one draw on the others.
+    - topic: Context windows
+      detail: How much the model can see at once, and what happens to information beyond it.
+    - topic: Pretraining and post-training
+      detail: Learning from huge text, then instruction tuning and preference tuning (RLHF, DPO) to make an assistant.
+    - topic: Sampling
+      detail: Temperature, top-p and top-k, and why the same prompt can give different answers.
+    - topic: Model families
+      detail: Open-weight versus closed models, parameter counts, and what size buys you.
+    - topic: Limits
+      detail: Hallucination, knowledge cut-offs, arithmetic and why models need tools and retrieval.
   resources:
     - resource: illustrated-transformer
       locator: "The whole post"
@@ -267,7 +465,32 @@
   summary: Calling a model from code, writing prompts that hold up, structured output and tool calls.
   hours: 10
   requires: [llm-basics, web-http]
+  covers:
+    - topic: Calling a model
+      detail: Send messages to OpenAI, Anthropic or Gemini APIs, with keys kept out of code.
+    - topic: Roles and system prompts
+      detail: System, user and assistant messages, and what belongs in each.
+    - topic: Prompting techniques
+      detail: Clear instructions, examples (few-shot), asking for reasoning, and breaking a task into steps.
+    - topic: Structured output
+      detail: Get JSON that matches a schema, and validate it with Pydantic before using it.
+    - topic: Tool calling
+      detail: Describe functions, let the model choose one, run it, and return the result.
+    - topic: Streaming
+      detail: Show tokens as they arrive, and handle partial output.
+    - topic: Errors, retries and rate limits
+      detail: Timeouts, backoff, 429s and fallbacks to another model.
+    - topic: Cost and tokens
+      detail: Count tokens, estimate cost per request, and use prompt caching where offered.
+    - topic: Context management
+      detail: Choose what goes into the prompt, trim history, and keep the important parts near the instructions.
+    - topic: Prompt versioning
+      detail: Keep prompts in files under version control, and test before changing them.
   resources:
+    - resource: anthropic-prompting
+      locator: The overview, then each technique page it links to
+      role: alternative
+      verified: true
     - resource: prompting-guide
       locator: "Introduction, Techniques, then Applications"
       verified: true
@@ -282,6 +505,23 @@
   hours: 10
   requires: [llm-basics]
   recommends: [linear-algebra]
+  covers:
+    - topic: What an embedding is
+      detail: Text mapped to a vector so that similar meaning sits close together.
+    - topic: Embedding models
+      detail: Choosing one by language, dimension, cost and benchmark (MTEB), including multilingual models for Indian languages.
+    - topic: Similarity
+      detail: Cosine similarity, dot product and Euclidean distance, and normalising vectors.
+    - topic: Semantic search
+      detail: Embed documents once, embed the query, and return the nearest ones.
+    - topic: Approximate nearest neighbours
+      detail: Why exact search is too slow at scale, and how HNSW and IVF indexes trade accuracy for speed.
+    - topic: Vector databases
+      detail: pgvector, Qdrant, Weaviate, Milvus, Pinecone and Chroma; when Postgres is enough.
+    - topic: Dense, sparse and hybrid
+      detail: Keyword search (BM25) alongside vectors, and combining their scores.
+    - topic: Metadata filtering
+      detail: Restricting search by date, source or user, and why it matters for permissions.
   resources:
     - resource: boykis-embeddings
       locator: "The whole book"
@@ -294,6 +534,25 @@
   summary: Giving a model the right documents at the right time. Chunking, retrieval, reranking and citing sources.
   hours: 15
   requires: [embeddings, llm-apis]
+  covers:
+    - topic: Why retrieval
+      detail: Giving a model your documents at question time instead of retraining it.
+    - topic: Ingestion and parsing
+      detail: Getting clean text out of PDFs, HTML and tables, and keeping the source for citations.
+    - topic: Chunking
+      detail: Fixed, recursive and structure-aware chunks, overlap, and how chunk size changes answers.
+    - topic: Retrieval
+      detail: Top-k vector search, hybrid search with BM25, and metadata filters.
+    - topic: Query transformation
+      detail: Rewriting the question, splitting it into several queries, or generating a hypothetical answer to search with.
+    - topic: Reranking
+      detail: A cross-encoder to re-order the candidates before they reach the model.
+    - topic: Grounded generation
+      detail: Prompting the model to answer only from the context and cite the passages it used.
+    - topic: Advanced patterns
+      detail: Parent-child chunks, contextual retrieval, graph RAG and agentic RAG, and when each is worth it.
+    - topic: Evaluating RAG
+      detail: Retrieval recall, answer faithfulness and relevance, measured on a fixed question set.
   resources:
     - resource: hf-cookbook
       locator: "The RAG recipes"
@@ -306,6 +565,23 @@
   hours: 8
   requires: [llm-apis]
   recommends: [statistics]
+  covers:
+    - topic: Why evals
+      detail: You can't tell if a prompt or model change helped without a fixed test set.
+    - topic: Error analysis
+      detail: Read many real outputs, label the failures, and count them before building anything.
+    - topic: Golden datasets
+      detail: A set of inputs with expected outputs or criteria, grown from real failures.
+    - topic: Code-based checks
+      detail: Assertions for format, length, required facts and forbidden content.
+    - topic: LLM-as-a-judge
+      detail: Using a model to grade outputs, writing clear rubrics, and checking the judge against human labels.
+    - topic: RAG and agent metrics
+      detail: Faithfulness, context precision and recall for RAG; task success and step-level checks for agents.
+    - topic: Regression testing
+      detail: Run the eval set in CI so a change that breaks things doesn't ship.
+    - topic: Online evaluation
+      detail: User feedback, A/B tests and tracing in production.
   resources:
     - resource: hamel-evals
       locator: "The whole post, then the follow-ups it links"
@@ -343,6 +619,23 @@
   hours: 30
   requires: [machine-learning]
   recommends: [deep-learning]
+  covers:
+    - topic: Tensors
+      detail: Create, index and reshape tensors, broadcasting, and moving them between CPU and GPU.
+    - topic: Autograd
+      detail: requires_grad, backward(), and how PyTorch builds the graph as you compute.
+    - topic: nn.Module
+      detail: Define layers and models, and inspect their parameters.
+    - topic: Datasets and DataLoaders
+      detail: Batching, shuffling and custom datasets for your own files.
+    - topic: The training loop
+      detail: Forward pass, loss, backward, optimiser step and zero_grad, written out by hand.
+    - topic: Saving and loading
+      detail: state_dict checkpoints and resuming training.
+    - topic: GPU training
+      detail: Mixed precision with autocast, and reading memory with torch.cuda tools.
+    - topic: Ecosystem
+      detail: torchvision, torchaudio and how Hugging Face models are PyTorch modules underneath.
   resources:
     - resource: learnpytorch
       locator: "Chapters 00–06"
@@ -362,6 +655,19 @@
   hours: 30
   requires: [programming-basics, probability]
   recommends: [graph-algorithms]
+  covers:
+    - topic: Search
+      detail: Breadth-first, depth-first, uniform-cost and A* with admissible heuristics.
+    - topic: Adversarial search
+      detail: Minimax, alpha-beta pruning and expectimax for games.
+    - topic: Constraint satisfaction
+      detail: Backtracking, forward checking and arc consistency.
+    - topic: Logic
+      detail: Propositional and first-order logic, and inference by resolution.
+    - topic: Probability and Bayes nets
+      detail: Representing dependencies, and exact and sampling-based inference.
+    - topic: Decision making under uncertainty
+      detail: Markov decision processes and the step to reinforcement learning.
   resources:
     - resource: cs188-notes
       locator: "The notes on search, games, logic and Bayes nets"
@@ -373,4 +679,252 @@
       locator: "The whole course"
       role: alternative
       why: "Mausam's IIT Delhi course, which follows the same topics in an Indian classroom."
+      verified: true
+
+- id: ai-agents
+  title: AI agents and tool use
+  area: ai
+  summary: Models that call tools in a loop to finish a task. When a fixed workflow is better, how to design tools, memory, MCP, and keeping agents reliable.
+  hours: 20
+  requires: [llm-apis]
+  recommends: [python-depth, llm-evaluation]
+  covers:
+    - topic: What an agent is
+      detail: A model in a loop that chooses tools and acts until a task is done, and how that differs from a fixed workflow.
+    - topic: Workflows first
+      detail: Prompt chaining, routing, parallel calls, orchestrator-workers and evaluator-optimizer, and when they beat a free-running agent.
+    - topic: Tool design
+      detail: Clear tool names, descriptions and argument schemas; tools the model can't misuse easily.
+    - topic: The agent loop
+      detail: Plan, call a tool, read the result, decide the next step, and stop conditions.
+    - topic: Memory and state
+      detail: Short-term conversation state, long-term memory in a store, and keeping context small.
+    - topic: Model Context Protocol
+      detail: Exposing tools and data to any agent through MCP servers, and using existing ones.
+    - topic: Frameworks
+      detail: LangGraph, LlamaIndex, smolagents or Pydantic AI; learn one, and know what it hides.
+    - topic: Multi-agent systems
+      detail: Several specialised agents with a coordinator, and the cost and failure modes that come with them.
+    - topic: Human in the loop
+      detail: Approval steps before actions that spend money, send messages or change data.
+    - topic: Reliability
+      detail: Retries, timeouts, checkpoints so long tasks survive crashes, and budgets on steps and tokens.
+    - topic: Evaluating agents
+      detail: Task success rates, and checking each step of a trajectory, not just the final answer.
+  resources:
+    - resource: anthropic-effective-agents
+      locator: 'The whole post: the workflow patterns, then agents, then Appendix 2 on designing tools'
+      role: primary
+      verified: true
+      why: Short, practical, and honest about when not to build an agent.
+    - resource: weng-agents
+      locator: Planning, memory and tool use sections
+      role: deep-dive
+      verified: true
+    - resource: mcp-docs
+      locator: What is MCP, then Architecture, then build a server
+      role: alternative
+      verified: true
+    - resource: hf-agents-course
+      locator: Unit 1 on agent fundamentals, then the framework unit you plan to use
+      role: primary
+      verified: true
+
+- id: fine-tuning
+  title: Fine-tuning language models
+  area: ai
+  summary: 'Adapting an open model to your task: when it''s worth it, preparing data, LoRA and QLoRA, preference tuning, and checking it worked.'
+  hours: 20
+  requires: [transformers, pytorch]
+  recommends: [hugging-face, llm-evaluation]
+  covers:
+    - topic: When to fine-tune
+      detail: Prompting first, retrieval for knowledge, fine-tuning for format, style and narrow skills.
+    - topic: Data preparation
+      detail: Collecting and cleaning examples, chat templates, and how many examples are enough.
+    - topic: Supervised fine-tuning
+      detail: Training on input-output pairs with TRL's SFTTrainer, and watching the loss.
+    - topic: Parameter-efficient methods
+      detail: 'LoRA and QLoRA: training small adapter matrices instead of the whole model, on one GPU.'
+    - topic: Preference tuning
+      detail: 'RLHF and DPO: teaching a model which of two answers people prefer.'
+    - topic: Synthetic data
+      detail: Generating training examples with a stronger model, and filtering them.
+    - topic: Evaluating a fine-tune
+      detail: Held-out examples, comparison with the base model, and checking it hasn't forgotten other skills.
+    - topic: Serving adapters
+      detail: Merging LoRA weights or loading several adapters on one base model.
+  resources:
+    - resource: hf-llm-course
+      locator: 'Chapter 11, Supervised Fine-Tuning: chat templates, SFTTrainer, LoRA and evaluation'
+      role: primary
+      verified: true
+    - resource: unsloth-guide
+      locator: The whole guide, for fine-tuning on one GPU
+      role: alternative
+      verified: true
+    - resource: smol-course
+      locator: 'Units 1 to 3: instruction tuning, evaluation and preference alignment'
+      role: primary
+      verified: true
+
+- id: inference-serving
+  title: Serving LLMs fast and cheaply
+  area: ai
+  summary: 'What happens when a model generates text, and how serving engines make it fast: the KV cache, batching, quantisation and engines like vLLM.'
+  hours: 15
+  requires: [transformers]
+  recommends: [pytorch, parallel-computing, docker]
+  covers:
+    - topic: Prefill and decode
+      detail: Why reading the prompt is fast and parallel, while generating tokens is slow and one at a time.
+    - topic: The KV cache
+      detail: Storing past keys and values so each new token doesn't recompute them, and how much memory it takes.
+    - topic: Latency metrics
+      detail: Time to first token, time per output token, throughput, and how they trade off.
+    - topic: Batching
+      detail: Static versus continuous batching, and why serving engines can handle many users per GPU.
+    - topic: PagedAttention
+      detail: Managing the KV cache in pages to waste less memory, the idea behind vLLM.
+    - topic: Quantisation
+      detail: Running weights in 8 or 4 bits (GPTQ, AWQ, GGUF), and measuring the quality cost.
+    - topic: Faster decoding
+      detail: Speculative decoding, distillation into smaller models, and FlashAttention.
+    - topic: Serving engines
+      detail: vLLM, SGLang, TensorRT-LLM and llama.cpp/Ollama, and which fits which job.
+    - topic: GPU memory sums
+      detail: Estimate memory from parameter count, precision, context length and batch size.
+    - topic: Cost
+      detail: Cost per million tokens self-hosted versus an API, and when each wins.
+  resources:
+    - resource: hf-llm-optimisation
+      locator: 'The whole page: lower precision, Flash Attention and the key-value cache'
+      role: primary
+      verified: true
+    - resource: vllm-pagedattention
+      locator: The whole post, for PagedAttention and continuous batching
+      role: alternative
+      verified: true
+    - resource: weng-inference
+      locator: Quantization, pruning and distillation
+      role: deep-dive
+      verified: true
+    - resource: vllm-docs
+      locator: 'The quickstart: serve an open model behind an OpenAI-compatible API'
+      role: primary
+      verified: true
+
+- id: ai-security
+  title: Securing AI systems
+  area: ai
+  summary: Prompt injection, data leaks, over-powered agents and poisoned documents, and the defences that actually help.
+  hours: 10
+  requires: [llm-apis]
+  recommends: [web-security, ai-agents]
+  covers:
+    - topic: Prompt injection
+      detail: Direct and indirect injection, and why instructions hidden in documents or web pages are the hard case.
+    - topic: Jailbreaks
+      detail: How safety instructions get bypassed, and why prompts alone can't prevent it.
+    - topic: Sensitive data
+      detail: Keeping secrets and personal data out of prompts, logs and training data, and redacting PII.
+    - topic: Excessive agency
+      detail: Giving agents only the tools and permissions they need, and confirming risky actions.
+    - topic: Insecure output handling
+      detail: 'Treating model output as untrusted input: escaping it, validating it, never running it blindly.'
+    - topic: Sandboxing
+      detail: Running model-written code in isolated containers with no secrets and limited network.
+    - topic: Supply chain
+      detail: Risks in downloaded models and datasets, unsafe pickle files, and preferring safetensors.
+    - topic: Poisoning and RAG weaknesses
+      detail: Malicious documents in your index, and access control on what gets retrieved.
+    - topic: Guardrails and red-teaming
+      detail: Input and output filters, attacking your own system, and tracking what you found.
+  resources:
+    - resource: owasp-llm-top10
+      locator: All ten 2025 risks, with their mitigations
+      role: primary
+      verified: true
+    - resource: willison-prompt-injection
+      locator: The series, starting with the early posts that name the problem
+      role: alternative
+      verified: true
+    - resource: portswigger-llm
+      locator: The topic page and its labs
+      role: primary
+      verified: true
+    - resource: gandalf
+      locator: Every level
+      role: alternative
+      verified: true
+
+- id: multimodal
+  title: Multimodal models
+  area: ai
+  summary: 'Models that see and hear: vision-language models, CLIP, document AI, speech to text and back, and image generation.'
+  hours: 15
+  requires: [transformers]
+  recommends: [computer-vision, generative-models]
+  covers:
+    - topic: Vision-language models
+      detail: Models that take images and text together, and what they can and can't read reliably.
+    - topic: CLIP and shared embeddings
+      detail: Images and text in one vector space, for search and zero-shot classification.
+    - topic: Documents and OCR
+      detail: Extracting text, tables and layout from scans and PDFs, and checking the result.
+    - topic: Speech to text
+      detail: Whisper-style models, word error rate, and accents and code-mixed speech.
+    - topic: Text to speech
+      detail: Turning text into natural audio, latency for live use, and Indian-language voices.
+    - topic: Image generation
+      detail: 'Diffusion models in practice: prompts, guidance, and image-to-image.'
+    - topic: Multimodal RAG
+      detail: Retrieving images, diagrams and tables alongside text.
+  resources:
+    - resource: hf-cv-course
+      locator: Unit 4, Multimodal Models
+      role: primary
+      verified: true
+    - resource: hf-audio-course
+      locator: The units on speech recognition and text to speech
+      role: alternative
+      verified: true
+
+- id: ai-system-design
+  title: Designing AI systems
+  area: ai
+  summary: 'Putting LLM features into production: gateways and routing, caching, guardrails, retrieval design, cost and latency budgets, and tracing.'
+  hours: 12
+  requires: [rag, system-design]
+  recommends: [ai-agents, inference-serving, llm-evaluation]
+  covers:
+    - topic: The shape of an LLM app
+      detail: Client, API, orchestration, model calls, retrieval and storage, drawn as one diagram.
+    - topic: Model gateway and routing
+      detail: One internal API in front of many models, routing by task difficulty, with fallbacks.
+    - topic: Caching
+      detail: Exact and semantic caches for answers, and provider prompt caching for long shared prompts.
+    - topic: Context and retrieval design
+      detail: Where documents live, how indexes are updated, and per-user access control.
+    - topic: Guardrails in the request path
+      detail: Checks before and after the model call, and their latency cost.
+    - topic: Async and long jobs
+      detail: Queues and workers for slow tasks, and streaming partial results to the user.
+    - topic: Multi-tenancy
+      detail: Isolating each customer's data, keys, limits and costs.
+    - topic: Cost and latency budgets
+      detail: Estimating tokens per request and per user, and where to cut.
+    - topic: Observability
+      detail: Tracing each request through retrieval, prompts and tools, with cost and quality per step.
+    - topic: Feedback loops
+      detail: Capturing user ratings and failures, and turning them into eval cases and training data.
+  resources:
+    - resource: huyen-genai-platform
+      locator: The whole post, step by step
+      role: primary
+      verified: true
+      why: Builds one architecture up a component at a time, with the reason for each.
+    - resource: yan-llm-patterns
+      locator: The whole post
+      role: alternative
       verified: true

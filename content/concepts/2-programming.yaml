@@ -388,3 +388,63 @@
       locator: Chapter 4, Test Analysis and Design, and section 5.5, Defect Management
       role: primary
       verified: true
+
+- id: python-depth
+  title: Python in depth
+  area: programming
+  summary: 'The parts of Python that separate scripts from software: generators, decorators, context managers, type hints, Pydantic, asyncio and packaging.'
+  hours: 25
+  requires: [programming-basics]
+  recommends: [oop-design, testing-debugging]
+  covers:
+    - topic: Comprehensions
+      detail: List, dict and set comprehensions, and when a loop is clearer.
+    - topic: Iterators and generators
+      detail: The iterator protocol, yield, generator expressions and lazy pipelines.
+    - topic: Decorators
+      detail: Functions that wrap functions, functools.wraps, and decorators with arguments.
+    - topic: Context managers
+      detail: with blocks, __enter__ and __exit__, and contextlib.contextmanager.
+    - topic: Exceptions done well
+      detail: Specific exceptions, custom exception classes, and cleaning up with finally.
+    - topic: Type hints
+      detail: Annotations, generics, Optional and Union, Protocols, and checking with mypy.
+    - topic: Pydantic
+      detail: 'Models that validate data at the edges of your program: API inputs, configs and LLM output.'
+    - topic: asyncio
+      detail: async and await, the event loop, gather, timeouts and when async helps (I/O) or doesn't (CPU).
+    - topic: Concurrency choices
+      detail: Threads, processes and async, and what the GIL means for each.
+    - topic: Environments and packaging
+      detail: venv or uv, pyproject.toml, pinning dependencies and publishing a package.
+    - topic: Tooling
+      detail: pytest, a formatter, a linter and profiling with cProfile.
+  resources:
+    - resource: python-tutorial
+      locator: Chapter 9, Classes, through 9.8 Iterators, 9.9 Generators and 9.10 Generator Expressions
+      role: primary
+      verified: true
+    - resource: python-functional-howto
+      locator: Iterators, generators, and the itertools and functools sections
+      role: primary
+      verified: true
+    - resource: realpython-decorators
+      locator: The whole article
+      role: alternative
+      verified: true
+    - resource: python-asyncio-docs
+      locator: 'The high-level API: coroutines and tasks, then synchronisation and queues'
+      role: deep-dive
+      verified: true
+    - resource: pydantic-docs
+      locator: Models, then validators
+      role: primary
+      verified: true
+    - resource: mypy-cheatsheet
+      locator: Keep it open while you add type hints
+      role: alternative
+      verified: true
+    - resource: python-packaging-guide
+      locator: The whole tutorial, publishing to TestPyPI
+      role: primary
+      verified: true

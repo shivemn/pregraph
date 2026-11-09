@@ -54,6 +54,16 @@ export const projectBriefSchema = z.object({
 });
 export type ProjectBrief = z.infer<typeof projectBriefSchema>;
 
+/**
+ * One thing a stop covers: a named subtopic and what you should be able to do
+ * with it. These are what make a stop more than a title.
+ */
+export const coverSchema = z.object({
+  topic: z.string().min(1),
+  detail: z.string().min(1),
+});
+export type Cover = z.infer<typeof coverSchema>;
+
 export const conceptSchema = z.object({
   id,
   title: z.string().min(1),
@@ -69,6 +79,8 @@ export const conceptSchema = z.object({
   /** Soft prerequisites: only nudge the order when both are already in a plan. */
   recommends: z.array(id).default([]),
   resources: z.array(resourceSectionSchema).min(1),
+  /** What the stop covers, in the order you'd learn it. */
+  covers: z.array(coverSchema).default([]),
   /** Projects only: the brief. */
   brief: projectBriefSchema.optional(),
 });

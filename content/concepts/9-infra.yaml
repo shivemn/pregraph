@@ -87,6 +87,23 @@
   hours: 12
   requires: [linux-admin]
   recommends: [kubernetes]
+  covers:
+    - topic: Metrics, logs and traces
+      detail: The three signals, and which question each one answers.
+    - topic: Metrics
+      detail: Counters, gauges and histograms, and percentiles instead of averages.
+    - topic: Prometheus and Grafana
+      detail: Scraping metrics, PromQL queries, and dashboards.
+    - topic: Structured logging
+      detail: Logs as JSON with request IDs, and searching them centrally.
+    - topic: Distributed tracing
+      detail: Following one request across services with OpenTelemetry.
+    - topic: The golden signals
+      detail: Latency, traffic, errors and saturation.
+    - topic: Alerting
+      detail: Alerting on symptoms users feel, avoiding noisy alerts, and runbooks.
+    - topic: SLIs and SLOs
+      detail: Measuring reliability from the user's side, and error budgets.
   resources:
     - resource: sre-book
       locator: "Chapter 6, Monitoring Distributed Systems"

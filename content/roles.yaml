@@ -47,7 +47,7 @@
   tiers:
     hire: [java, oop-design, git, sql, rest-apis, backend-framework, hash-tables, trees-heaps, algorithm-practice, testing-debugging, project-portfolio-api]
     firstYear: [mongodb, cloud-basics, database-internals, concurrency, docker, shell-tools]
-    extra: [system-design, ci-cd, web-security, messaging, distributed-systems, kubernetes, observability, redis]
+    extra: [system-design, ci-cd, web-security, messaging, distributed-systems, kubernetes, observability, redis, caching, partitioning-replication, api-styles, microservices, reliability-patterns]
   evidence:
     postings: 30
     region: India, entry level
@@ -101,7 +101,7 @@
   tiers:
     hire: [html-css, javascript, react, nodejs, rest-apis, backend-framework, sql, git, linear-structures, hash-tables, project-web-app, project-portfolio-api]
     firstYear: [mongodb, typescript, testing-debugging, docker, ci-cd, web-security]
-    extra: [system-design, web-performance]
+    extra: [system-design, web-performance, api-styles, caching]
   evidence:
     postings: 30
     region: India, entry level
@@ -196,7 +196,7 @@
   tiers:
     hire: [programming-basics, machine-learning, deep-learning, pandas, sql, statistics, algorithm-practice, git, project-ml-service]
     firstYear: [pytorch, llm-basics, cloud-basics, mlops, docker, software-engineering, transformers]
-    extra: [distributed-systems, spark]
+    extra: [distributed-systems, spark, fine-tuning, inference-serving]
   evidence:
     postings: 30
     region: India, entry level
@@ -210,7 +210,7 @@
   tiers:
     hire: [linux-admin, shell-tools, git, docker, kubernetes, ci-cd, cloud-basics, infrastructure-as-code, observability, programming-basics, project-deploy-pipeline]
     firstYear: [azure, ansible, networking, os-processes-memory]
-    extra: [distributed-systems, systems-security, concurrency]
+    extra: [distributed-systems, systems-security, concurrency, reliability-patterns]
   evidence:
     postings: 30
     region: India, entry level
@@ -248,7 +248,7 @@
   tiers:
     hire: [machine-learning, neural-networks, cnns, transformers, pytorch, deep-learning, git, project-ml-service]
     firstYear: [computer-vision, nlp, mlops, docker, generative-models]
-    extra: [reinforcement-learning, distributed-systems]
+    extra: [reinforcement-learning, distributed-systems, fine-tuning, multimodal, parallel-computing]
 
 - id: quant-researcher
   title: Quantitative researcher / analyst
@@ -344,7 +344,7 @@
   tiers:
     hire: [programming-basics, machine-learning, git, shell-tools, docker, ci-cd, mlops, cloud-basics, project-ml-service]
     firstYear: [kubernetes, observability, infrastructure-as-code, orchestration, databricks]
-    extra: [distributed-systems, spark, hugging-face]
+    extra: [distributed-systems, spark, hugging-face, inference-serving, ai-system-design]
 
 - id: bi-developer
   title: BI developer
@@ -380,7 +380,7 @@
   tiers:
     hire: [linux-admin, shell-tools, git, networking, docker, kubernetes, ci-cd, infrastructure-as-code, cloud-basics, programming-basics, project-deploy-pipeline]
     firstYear: [observability, go, ansible, nginx]
-    extra: [distributed-systems, systems-security]
+    extra: [distributed-systems, systems-security, reliability-patterns]
 
 - id: system-administrator
   title: System administrator
@@ -425,7 +425,7 @@
   tiers:
     hire: [system-design, cloud-basics, cloud-architecture, cloud-networking, cloud-iam, networking, distributed-systems, rest-apis, sql, project-architecture-doc]
     firstYear: [azure, gcp, infrastructure-as-code, observability]
-    extra: [kubernetes, data-warehousing]
+    extra: [kubernetes, data-warehousing, caching, partitioning-replication, reliability-patterns]
 
 - id: product-manager
   title: Product manager
@@ -537,8 +537,8 @@
   summary: Builds products on top of large language models. Mostly software engineering, plus retrieval, prompting and careful evaluation.
   tiers:
     hire: [programming-basics, machine-learning, llm-basics, llm-apis, rag, embeddings, rest-apis, git, llm-evaluation, project-llm-app]
-    firstYear: [pytorch, deep-learning, sql, cloud-basics, docker, testing-debugging, hugging-face]
-    extra: [mlops]
+    firstYear: [pytorch, deep-learning, sql, cloud-basics, docker, testing-debugging, hugging-face, python-depth, ai-agents]
+    extra: [mlops, ai-system-design, ai-security, fine-tuning, inference-serving, multimodal]
   evidence:
     postings: 30
     region: India, entry level
@@ -552,7 +552,7 @@
   tiers:
     hire: [linux-admin, shell-tools, networking, cloud-basics, azure, cloud-networking, cloud-iam, infrastructure-as-code, docker, programming-basics, git, project-cloud-app]
     firstYear: [gcp, kubernetes, ci-cd, observability, cloud-architecture]
-    extra: [systems-security, distributed-systems]
+    extra: [systems-security, distributed-systems, reliability-patterns]
   evidence:
     postings: 30
     region: India, entry level

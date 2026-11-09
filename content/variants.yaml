@@ -79,7 +79,7 @@
 - id: microservices-developer
   title: "Microservices developer"
   extends: backend-engineer
-  adds: [spring-boot, docker, messaging, distributed-systems]
+  adds: [spring-boot, docker, messaging, distributed-systems, microservices]
   summary: "Builds systems as many small services that talk over APIs and queues, and keeps them running together."
 - id: kafka-developer
   title: "Kafka developer"
@@ -89,7 +89,7 @@
 - id: java-microservices-developer
   title: "Java microservices developer"
   extends: backend-engineer
-  adds: [spring-boot, messaging, docker, kubernetes]
+  adds: [spring-boot, messaging, docker, kubernetes, microservices]
   summary: "Builds Java services on Spring Boot that run in containers on Kubernetes and talk through Kafka."
 - id: graduate-engineer-trainee-it
   title: "Graduate engineer trainee (IT)"
@@ -471,7 +471,7 @@
 - id: site-reliability-engineer
   title: "Site reliability engineer (SRE)"
   extends: platform-engineer
-  adds: [observability, incident-management]
+  adds: [observability, incident-management, reliability-patterns]
   search: "site reliability engineer"
   summary: "Keeps services up and fast, with monitoring, automation and calm incident response."
 - id: build-release-engineer

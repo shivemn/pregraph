@@ -34,6 +34,25 @@
   hours: 40
   requires: [sql, trees-heaps, hash-tables]
   recommends: [file-systems, concurrency]
+  covers:
+    - topic: Storage
+      detail: Pages, heap files and how rows are laid out on disk.
+    - topic: Buffer pool
+      detail: Caching pages in memory, and eviction.
+    - topic: B+ tree indexes
+      detail: How they stay balanced, and why they suit range queries.
+    - topic: Hash and LSM indexes
+      detail: Hash indexes for lookups, and LSM trees (used by Cassandra and RocksDB) for heavy writes.
+    - topic: Query processing
+      detail: Parsing, planning, join algorithms and reading an EXPLAIN plan.
+    - topic: Transactions and ACID
+      detail: Atomicity, consistency, isolation and durability, and what each costs.
+    - topic: Isolation levels
+      detail: Read committed, repeatable read and serializable, and the anomalies each allows.
+    - topic: Concurrency control
+      detail: Two-phase locking and MVCC.
+    - topic: Recovery
+      detail: Write-ahead logging, checkpoints, and recovering after a crash.
   resources:
     - resource: cmu-15445
       locator: "The full lecture series"
@@ -325,6 +344,23 @@
   hours: 8
   requires: [programming-basics]
   recommends: [hash-tables, sql]
+  covers:
+    - topic: Data types
+      detail: Strings, hashes, lists, sets, sorted sets and streams, and a use for each.
+    - topic: Caching
+      detail: TTLs, eviction policies and the cache-aside pattern.
+    - topic: Counters and rate limits
+      detail: INCR with expiry, and sliding-window limits with sorted sets.
+    - topic: Leaderboards
+      detail: Sorted sets for rankings with fast updates.
+    - topic: Sessions and locks
+      detail: Storing sessions, and simple locks with SET NX and an expiry.
+    - topic: Pub/sub and streams
+      detail: Fire-and-forget messages versus streams with consumer groups.
+    - topic: Persistence
+      detail: RDB snapshots versus append-only files, and what you can lose.
+    - topic: Scaling
+      detail: Replication, Sentinel for failover, and Redis Cluster for sharding.
   resources:
     - resource: redis-data-types
       locator: "Strings, Hashes, Lists, Sets, Sorted sets and Streams"

@@ -252,3 +252,41 @@
     - resource: fcc-backend
       locator: "The whole course and its five projects"
       verified: true
+
+- id: api-styles
+  title: 'API styles: REST, GraphQL, gRPC and real-time'
+  area: web
+  summary: 'Choosing how services and clients talk: REST in depth, GraphQL, gRPC, WebSockets and webhooks, plus authentication with OAuth 2.0 and JWTs.'
+  hours: 10
+  requires: [rest-apis]
+  recommends: [web-security]
+  covers:
+    - topic: REST in depth
+      detail: Resources, idempotent methods, status codes, pagination, filtering and versioning.
+    - topic: Idempotency keys
+      detail: Making a retried POST safe, which payments depend on.
+    - topic: GraphQL
+      detail: Schemas, queries and mutations, letting the client choose fields, and the N+1 problem.
+    - topic: gRPC
+      detail: Protocol Buffers, generated clients, streaming, and why services use it internally.
+    - topic: Real-time
+      detail: Polling, long polling, server-sent events and WebSockets, and when each fits.
+    - topic: Webhooks
+      detail: Calling the customer's server on events, with signatures and retries.
+    - topic: Authentication and authorisation
+      detail: API keys, sessions, OAuth 2.0 flows and JWTs, and their pitfalls.
+    - topic: Documentation and contracts
+      detail: OpenAPI specs, and keeping old clients working when the API changes.
+  resources:
+    - resource: graphql-learn
+      locator: Introduction through Mutations, then Pagination and Authorization
+      role: primary
+      verified: true
+    - resource: grpc-intro
+      locator: The introduction, then the core concepts page it links to
+      role: primary
+      verified: true
+    - resource: mdn-websockets
+      locator: The WebSockets API overview and its guide to writing a client
+      role: alternative
+      verified: true

@@ -1,6 +1,6 @@
 // What a stop's panel (and its concept page) shows: the book, the video and
 // the practice pick, plus everything else. Built once at deploy time.
-import { MEDIA, picksFor, type Content, type Medium, type ProjectBrief } from './schema';
+import { MEDIA, picksFor, type Content, type Cover, type Medium, type ProjectBrief } from './schema';
 
 export interface Source {
   title: string;
@@ -28,6 +28,8 @@ export interface StopDetail {
   others: Source[];
   /** Projects only: what to build and what it must show. */
   brief?: ProjectBrief;
+  /** What the stop covers. */
+  covers?: Cover[];
 }
 
 export function stopDetails(c: Content): StopDetail[] {
@@ -64,6 +66,7 @@ export function stopDetails(c: Content): StopDetail[] {
       picks,
       others: sources.filter((_, i) => !picked.has(i)),
       ...(x.brief ? { brief: x.brief } : {}),
+      ...(x.covers.length ? { covers: x.covers } : {}),
     };
   });
 }

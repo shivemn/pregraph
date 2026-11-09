@@ -140,6 +140,23 @@
   hours: 10
   requires: [programming-basics]
   recommends: [transformers, pytorch]
+  covers:
+    - topic: The Hub
+      detail: Find models and datasets, read model cards and licences, and download weights.
+    - topic: pipeline()
+      detail: Run a task such as classification or summarisation in three lines.
+    - topic: Tokenizers
+      detail: Load the right tokenizer, and see how text becomes input IDs and attention masks.
+    - topic: AutoModel classes
+      detail: Load a model for a task and run it yourself.
+    - topic: Datasets
+      detail: Load, slice, map and stream datasets too big for memory.
+    - topic: Fine-tuning
+      detail: Trainer and TRL's SFTTrainer for adapting a model to your data.
+    - topic: Sharing
+      detail: Push a model or dataset to the Hub with a model card.
+    - topic: Accelerate
+      detail: Run the same training script on CPU, one GPU or several.
   resources:
     - resource: hf-llm-course
       locator: "Chapters 1–4: using Transformers, fine-tuning, sharing on the Hub"

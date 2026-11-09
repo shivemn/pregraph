@@ -121,6 +121,17 @@ export default function StopPanel(props: Props) {
               About {stop.hours} hours{stop.kind === 'project' ? ' to build' : ''}. {props.why}
             </p>
 
+            {stop.covers && (
+              <details className="panel-covers" open>
+                <summary>What it covers ({stop.covers.length} topics)</summary>
+                <ol className="covers">
+                  {stop.covers.map((c, i) => (
+                    <li key={i}><b>{c.topic}</b><span>{c.detail}</span></li>
+                  ))}
+                </ol>
+              </details>
+            )}
+
             {stop.brief && (
               <section className="brief panel-brief" aria-label="The brief">
                 <div>

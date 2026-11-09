@@ -93,6 +93,13 @@
 .panel-summary { font-size: 1.12rem; margin: 10px 0 8px; }
 
 .panel-brief { margin: 18px 0 6px; }
+.panel-covers { margin: 16px 0 8px; }
+.panel-covers summary {
+  font-family: var(--sign); font-stretch: 85%; font-weight: 700; font-size: 1.05rem; cursor: pointer;
+  padding: 4px 0; border-bottom: 3px solid var(--ink);
+}
+.panel-covers .covers b { font-size: 1rem; }
+.panel-covers .covers span { font-size: 0.95rem; }
 .panel-brief .brief-build { font-size: 1rem; }
 
 .links { margin-top: 18px; display: grid; gap: 8px; }

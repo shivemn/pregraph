@@ -40,7 +40,7 @@
     - name: Behavioural
       what: "Times you disagreed, failed or led something. Prepare four or five true stories and fit them to the question."
       practice: [tih-behavioral]
-  revise: [hash-tables, graph-algorithms, dynamic-programming, system-design]
+  revise: [hash-tables, graph-algorithms, dynamic-programming, system-design, caching]
 
 - id: data-analysis
   title: Data analyst and business intelligence
@@ -91,7 +91,7 @@
       practice: [ml-interviews-book, exponent-questions]
     - name: Project deep dive
       what: "One project end to end. Interviewers probe what you did yourself and what you'd change."
-  revise: [statistics, probability, machine-learning, deep-learning, experiments]
+  revise: [statistics, probability, machine-learning, deep-learning, experiments, llm-evaluation]
 
 - id: infrastructure
   title: DevOps, cloud and systems

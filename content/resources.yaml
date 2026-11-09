@@ -3552,3 +3552,342 @@
   free: true
   medium: read
   note: The free syllabus behind the paid ISTQB exam. Reading it costs nothing.
+
+- id: cs229-videos
+  title: "Stanford CS229: Machine Learning (Autumn 2018)"
+  author: Andrew Ng, Stanford
+  type: video
+  url: https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU
+  free: true
+  medium: watch
+  short: "CS229"
+  note: The maths-heavy Stanford course, not the gentler Coursera one.
+
+- id: cs285
+  title: "CS 285: Deep Reinforcement Learning"
+  author: Sergey Levine, UC Berkeley
+  type: course
+  url: https://rail.eecs.berkeley.edu/deeprlcourse/
+  free: true
+  medium: watch
+  short: "CS285"
+  note: Lecture videos, slides and homeworks are all public.
+
+- id: python-tutorial
+  title: The Python Tutorial
+  author: Python Software Foundation
+  type: site
+  url: https://docs.python.org/3/tutorial/
+  free: true
+  medium: read
+
+- id: python-functional-howto
+  title: Functional Programming HOWTO
+  author: Python Software Foundation
+  type: site
+  url: https://docs.python.org/3/howto/functional.html
+  free: true
+  medium: read
+
+- id: realpython-decorators
+  title: Primer on Python Decorators
+  author: Real Python
+  type: site
+  url: https://realpython.com/primer-on-python-decorators/
+  free: true
+  medium: read
+
+- id: python-asyncio-docs
+  title: "asyncio: Asynchronous I/O"
+  author: Python Software Foundation
+  type: site
+  url: https://docs.python.org/3/library/asyncio.html
+  free: true
+  medium: read
+
+- id: pydantic-docs
+  title: Pydantic documentation
+  author: Pydantic
+  type: site
+  url: https://docs.pydantic.dev/latest/
+  free: true
+  medium: read
+
+- id: python-packaging-guide
+  title: Packaging Python Projects
+  author: Python Packaging Authority
+  type: site
+  url: https://packaging.python.org/en/latest/tutorials/packaging-projects/
+  free: true
+  medium: practice
+
+- id: mypy-cheatsheet
+  title: Type hints cheat sheet
+  author: mypy
+  type: site
+  url: https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
+  free: true
+  medium: read
+
+- id: anthropic-effective-agents
+  title: Building effective agents
+  author: Anthropic
+  type: site
+  url: https://www.anthropic.com/research/building-effective-agents
+  free: true
+  medium: read
+
+- id: hf-agents-course
+  title: AI Agents Course
+  author: Hugging Face
+  type: course
+  url: https://huggingface.co/learn/agents-course
+  free: true
+  medium: practice
+
+- id: weng-agents
+  title: LLM Powered Autonomous Agents
+  author: Lilian Weng
+  type: site
+  url: https://lilianweng.github.io/posts/2023-06-23-agent/
+  free: true
+  medium: read
+
+- id: mcp-docs
+  title: Model Context Protocol documentation
+  author: Model Context Protocol project
+  type: site
+  url: https://modelcontextprotocol.io/docs/getting-started/intro
+  free: true
+  medium: read
+
+- id: anthropic-prompting
+  title: Prompt engineering overview
+  author: Anthropic
+  type: site
+  url: https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview
+  free: true
+  medium: read
+
+- id: smol-course
+  title: "a smol course: aligning small language models"
+  author: Hugging Face
+  type: course
+  url: https://github.com/huggingface/smol-course
+  free: true
+  medium: practice
+  note: Runs on a modest GPU or a free Colab.
+
+- id: unsloth-guide
+  title: Fine-tuning LLMs Guide
+  author: Unsloth
+  type: site
+  url: https://docs.unsloth.ai/get-started/fine-tuning-llms-guide
+  free: true
+  medium: read
+
+- id: hf-llm-optimisation
+  title: Optimizing LLMs for Speed and Memory
+  author: Hugging Face
+  type: site
+  url: https://huggingface.co/docs/transformers/llm_tutorial_optimization
+  free: true
+  medium: read
+
+- id: vllm-pagedattention
+  title: "vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention"
+  author: The vLLM team
+  type: site
+  url: https://blog.vllm.ai/2023/06/20/vllm.html
+  free: true
+  medium: read
+
+- id: weng-inference
+  title: Large Transformer Model Inference Optimization
+  author: Lilian Weng
+  type: site
+  url: https://lilianweng.github.io/posts/2023-01-10-inference-optimization/
+  free: true
+  medium: read
+
+- id: vllm-docs
+  title: vLLM documentation
+  author: The vLLM team
+  type: site
+  url: https://docs.vllm.ai/en/latest/
+  free: true
+  medium: practice
+
+- id: owasp-llm-top10
+  title: OWASP Top 10 for LLM Applications
+  author: OWASP Gen AI Security Project
+  type: site
+  url: https://genai.owasp.org/llm-top-10/
+  free: true
+  medium: read
+
+- id: willison-prompt-injection
+  title: Prompt injection (series)
+  author: Simon Willison
+  type: site
+  url: https://simonwillison.net/series/prompt-injection/
+  free: true
+  medium: read
+
+- id: portswigger-llm
+  title: Web LLM attacks
+  author: PortSwigger Web Security Academy
+  type: course
+  url: https://portswigger.net/web-security/llm-attacks
+  free: true
+  medium: practice
+  note: Free labs; needs a free account.
+
+- id: gandalf
+  title: Gandalf
+  author: Lakera
+  type: site
+  url: https://gandalf.lakera.ai/
+  free: true
+  medium: practice
+  note: A prompt-injection game, level by level.
+
+- id: hf-cv-course
+  title: Community Computer Vision Course
+  author: Hugging Face
+  type: course
+  url: https://huggingface.co/learn/computer-vision-course/unit0/welcome/welcome
+  free: true
+  medium: read
+
+- id: hf-audio-course
+  title: Audio Course
+  author: Hugging Face
+  type: course
+  url: https://huggingface.co/learn/audio-course/chapter0/introduction
+  free: true
+  medium: read
+
+- id: huyen-genai-platform
+  title: Building A Generative AI Platform
+  author: Chip Huyen
+  type: site
+  url: https://huyenchip.com/2024/07/25/genai-platform.html
+  free: true
+  medium: read
+
+- id: yan-llm-patterns
+  title: Patterns for Building LLM-based Systems & Products
+  author: Eugene Yan
+  type: site
+  url: https://eugeneyan.com/writing/llm-patterns/
+  free: true
+  medium: read
+
+- id: cs149
+  title: "CS149: Parallel Computing"
+  author: Kayvon Fatahalian and Kunle Olukotun, Stanford
+  type: course
+  url: https://gfxcourses.stanford.edu/cs149/fall24
+  free: true
+  medium: read
+  note: Lecture slides and assignments are public.
+
+- id: cuda-guide
+  title: CUDA Programming Guide
+  author: NVIDIA
+  type: site
+  url: https://docs.nvidia.com/cuda/cuda-programming-guide/index.html
+  free: true
+  medium: read
+
+- id: gpu-mode-lectures
+  title: GPU MODE lectures
+  author: GPU MODE community
+  type: video
+  url: https://github.com/gpu-mode/lectures
+  free: true
+  medium: watch
+  note: Slides and code on GitHub, each linking to its recording.
+
+- id: builders-timeouts
+  title: Timeouts, retries, and backoff with jitter
+  author: Marc Brooker, Amazon Builders' Library
+  type: site
+  url: https://builder.aws.com/content/3EumjoZascWd1oZiEgL8ORlv3qE/timeouts-retries-and-backoff-with-jitter
+  free: true
+  medium: read
+
+- id: builders-caching
+  title: Caching challenges and strategies
+  author: Amazon Builders' Library
+  type: site
+  url: https://builder.aws.com/content/3K9TeXp6strMiJ4vhakpRD7BQWO/caching-challenges-and-strategies
+  free: true
+  medium: read
+
+- id: microservices-io
+  title: A pattern language for microservices
+  author: Chris Richardson
+  type: site
+  url: https://microservices.io/patterns/index.html
+  free: true
+  medium: read
+
+- id: fowler-microservices
+  title: Microservices
+  author: James Lewis and Martin Fowler
+  type: site
+  url: https://martinfowler.com/articles/microservices.html
+  free: true
+  medium: read
+
+- id: graphql-learn
+  title: Learn GraphQL
+  author: GraphQL Foundation
+  type: site
+  url: https://graphql.org/learn/
+  free: true
+  medium: read
+
+- id: grpc-intro
+  title: Introduction to gRPC
+  author: gRPC Authors
+  type: site
+  url: https://grpc.io/docs/what-is-grpc/introduction/
+  free: true
+  medium: read
+
+- id: hello-interview-sd
+  title: System Design in a Hurry
+  author: Hello Interview
+  type: site
+  url: https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction
+  free: true
+  medium: read
+  note: The core concepts and many breakdowns are free; some need a paid plan.
+
+- id: kleppmann-distsys-notes
+  title: Distributed Systems lecture notes
+  author: Martin Kleppmann, University of Cambridge
+  type: book
+  url: https://www.cl.cam.ac.uk/teaching/2122/ConcDisSys/dist-sys-notes.pdf
+  free: true
+  medium: read
+
+- id: mdn-websockets
+  title: The WebSocket API
+  author: MDN Web Docs
+  type: site
+  url: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+  free: true
+  medium: read
+
+- id: raft-site
+  title: The Raft Consensus Algorithm
+  author: Diego Ongaro and others
+  type: site
+  url: https://raft.github.io/
+  free: true
+  medium: read
+  note: Has an interactive visualisation of a Raft cluster.
