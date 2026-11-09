@@ -274,11 +274,6 @@
   extends: bi-developer
   adds: [tableau]
   summary: "Builds dashboards and data sources in Tableau."
-- id: mis-executive
-  title: "MIS executive"
-  extends: data-analyst
-  drops: [pandas, statistics]
-  summary: "Prepares the regular reports and trackers a business runs on, mostly in Excel. A common first job for any graduate."
 - id: excel-analyst
   title: "Excel analyst"
   extends: data-analyst
@@ -296,10 +291,6 @@
   adds: [programming-basics]
   search: "data analyst python"
   summary: "Analyses data in Python with pandas, beyond what spreadsheets can do."
-- id: marketing-analyst
-  title: "Marketing analyst"
-  extends: product-analyst
-  summary: "Measures campaigns, channels and customers, and runs tests to see what works."
 - id: business-intelligence-analyst
   title: "Business intelligence analyst"
   extends: bi-developer
@@ -1080,3 +1071,307 @@
   drops: [actuarial-maths]
   adds: [sql, bi-tools]
   summary: "Analyses policies, claims and sales data at an insurer, without the actuarial exams."
+
+# Electronics and electrical
+- id: analog-layout-engineer
+  title: "Analog layout engineer"
+  extends: analog-design-engineer
+  drops: [signals-and-systems]
+  adds: [asic-flow]
+  summary: "Draws the physical layout of analog and mixed-signal blocks so they match the designer's simulations once made. A common way in for electronics freshers."
+- id: mixed-signal-design-engineer
+  title: "Mixed-signal design engineer"
+  extends: analog-design-engineer
+  adds: [verilog]
+  summary: "Designs blocks where analog and digital meet, like data converters and PLLs, and models them for verification."
+- id: circuit-design-engineer
+  title: "Circuit design engineer"
+  extends: analog-design-engineer
+  summary: "Designs and simulates transistor-level circuits for chips or boards, and debugs them in the lab."
+- id: robotics-software-engineer
+  title: "Robotics software engineer"
+  extends: robotics-engineer
+  drops: [microcontrollers]
+  adds: [linux-admin, testing-debugging]
+  summary: "Writes the software side of robots: perception, planning and control on ROS, tested in simulation before the real thing."
+- id: mechatronics-engineer
+  title: "Mechatronics engineer"
+  extends: robotics-engineer
+  adds: [electrical-machines]
+  summary: "Brings together motors, sensors, electronics and code in machines, from assembly lines to medical devices."
+- id: plc-programmer
+  title: "PLC programmer"
+  extends: automation-engineer
+  summary: "Writes and changes PLC programs in ladder logic and structured text, and tests them on the machine."
+- id: scada-engineer
+  title: "SCADA engineer"
+  extends: automation-engineer
+  adds: [networking, sql]
+  summary: "Builds the SCADA and HMI screens that operators use to watch and run a plant, and connects them to the PLCs."
+- id: control-engineer
+  title: "Control engineer"
+  extends: automation-engineer
+  adds: [signals-and-systems]
+  summary: "Designs and tunes the control loops in plants and machines, from PID settings to full control strategies."
+- id: rf-engineer
+  title: "RF engineer"
+  extends: telecom-engineer
+  summary: "Plans, tests and tunes radio networks: coverage, interference and capacity, with drive tests and planning tools."
+- id: rf-design-engineer
+  title: "RF design engineer"
+  extends: telecom-engineer
+  adds: [analog-electronics, pcb-design]
+  summary: "Designs radio-frequency circuits and boards, like amplifiers, filters and antennas, and measures them in the lab."
+- id: wireless-engineer
+  title: "Wireless engineer"
+  extends: telecom-engineer
+  summary: "Works on Wi-Fi, LTE and 5G systems, from protocol testing to network rollout."
+- id: rf-planning-engineer
+  title: "RF planning engineer"
+  extends: telecom-engineer
+  summary: "Decides where cell sites go and how they're set up, using planning tools and coverage predictions."
+- id: drive-test-engineer
+  title: "Drive test engineer"
+  extends: telecom-engineer
+  drops: [electromagnetics]
+  summary: "Drives routes with test phones and tools to measure network quality, then reports what needs fixing. A common first telecom job."
+- id: telecom-network-engineer
+  title: "Telecom network engineer"
+  extends: telecom-engineer
+  adds: [linux-admin]
+  drops: [electromagnetics]
+  summary: "Runs and troubleshoots the core and transport parts of a mobile network: routers, links and network functions."
+- id: satellite-engineer
+  title: "Satellite communication engineer"
+  extends: telecom-engineer
+  summary: "Works on satellite links and ground stations: link budgets, modems and antennas."
+- id: signal-processing-engineer
+  title: "Signal processing engineer"
+  extends: telecom-engineer
+  adds: [programming-basics, linear-algebra]
+  drops: [networking]
+  summary: "Designs the algorithms that clean up, compress and decode signals in radios, radar, audio and medical devices."
+- id: dsp-engineer
+  title: "DSP engineer"
+  extends: telecom-engineer
+  adds: [c-and-memory, programming-basics]
+  drops: [networking]
+  summary: "Writes signal-processing code that runs on DSP chips and microcontrollers, where every cycle counts."
+- id: bms-engineer
+  title: "BMS engineer"
+  extends: power-electronics-engineer
+  adds: [c-and-memory, embedded-protocols]
+  summary: "Designs battery management systems for EVs and storage: cell monitoring, balancing, state of charge and safety."
+- id: automotive-electronics-engineer
+  title: "Automotive electronics engineer"
+  extends: power-electronics-engineer
+  adds: [embedded-protocols, c-and-memory]
+  summary: "Designs and tests the electronic control units in vehicles, more and more of them for electric drivetrains."
+- id: electrical-design-engineer
+  title: "Electrical design engineer"
+  extends: electrical-engineer
+  summary: "Designs power distribution for buildings, plants and projects: load calculations, cable sizing, single-line diagrams and drawings, mostly in AutoCAD."
+- id: electrical-maintenance-engineer
+  title: "Electrical maintenance engineer"
+  extends: electrical-engineer
+  adds: [plc-scada]
+  summary: "Keeps a plant's motors, panels, transformers and drives running, and finds out why something tripped."
+- id: power-system-engineer
+  title: "Power system engineer"
+  extends: electrical-engineer
+  summary: "Studies how a grid or plant behaves: load flow, short circuits and protection settings, using simulation software."
+- id: substation-engineer
+  title: "Substation engineer"
+  extends: electrical-engineer
+  summary: "Designs, builds or runs substations: transformers, switchgear, protection and their testing."
+- id: protection-engineer
+  title: "Protection engineer"
+  extends: electrical-engineer
+  summary: "Sets and tests the relays that isolate faults on a power network before they spread."
+- id: electrical-site-engineer
+  title: "Electrical site engineer"
+  extends: electrical-engineer
+  drops: [power-electronics]
+  summary: "Supervises electrical work on construction and project sites, checks it against drawings, and signs it off."
+- id: electrical-project-engineer
+  title: "Electrical project engineer"
+  extends: electrical-engineer
+  summary: "Plans and tracks electrical projects from design to handover: materials, contractors, schedules and costs."
+- id: solar-engineer
+  title: "Solar engineer"
+  extends: electrical-engineer
+  summary: "Designs and commissions solar plants and rooftop systems: panels, inverters, cabling and grid connection."
+- id: solar-design-engineer
+  title: "Solar design engineer"
+  extends: electrical-engineer
+  summary: "Lays out solar systems and works out their output, losses and costs with design software."
+- id: embedded-hardware-engineer
+  title: "Embedded hardware engineer"
+  extends: embedded-engineer
+  adds: [analog-electronics, pcb-design]
+  summary: "Designs the boards that embedded software runs on: choosing parts, schematics, layout and bring-up."
+- id: electronics-design-engineer
+  title: "Electronics design engineer"
+  extends: embedded-engineer
+  adds: [analog-electronics, pcb-design, circuit-analysis]
+  summary: "Designs electronic products from circuit to working prototype, and gets them through testing."
+- id: electronics-engineer
+  title: "Electronics engineer"
+  extends: embedded-engineer
+  adds: [analog-electronics, circuit-analysis]
+  summary: "Tests, repairs and improves electronic products and the equipment that makes them."
+- id: avionics-engineer
+  title: "Avionics engineer"
+  extends: embedded-engineer
+  adds: [communication-systems]
+  summary: "Works on the electronics in aircraft and drones: navigation, communication and flight-control systems, under strict safety rules."
+- id: post-silicon-validation-engineer
+  title: "Post-silicon validation engineer"
+  extends: vlsi-engineer
+  drops: [design-verification]
+  adds: [c-and-memory, programming-basics]
+  summary: "Tests real chips once they come back from the factory, with lab equipment and scripts, to find what simulation missed."
+
+# Business, consulting and marketing
+- id: associate-consultant
+  title: "Associate consultant"
+  extends: management-consultant
+  summary: "The usual graduate title at consulting firms: research, analysis and slides for client projects, under a manager."
+- id: business-consultant
+  title: "Business consultant"
+  extends: management-consultant
+  adds: [business-processes]
+  summary: "Advises clients on processes and operations, often alongside a technology rollout."
+- id: strategy-analyst
+  title: "Strategy analyst"
+  extends: management-consultant
+  summary: "Works in a company's own strategy team on market sizing, competitors and new business plans."
+- id: consulting-analyst
+  title: "Consulting analyst"
+  extends: management-consultant
+  summary: "Builds the analysis behind consulting projects: data gathering, models in Excel and the charts that go into the deck."
+- id: management-trainee
+  title: "Management trainee"
+  extends: management-consultant
+  drops: [corporate-finance]
+  summary: "A rotation programme at large companies that moves graduates through sales, operations and finance before placing them."
+- id: digital-marketing-analyst
+  title: "Digital marketing analyst"
+  extends: marketing-analyst
+  adds: [digital-marketing]
+  summary: "Measures ad and campaign performance across search, social and email, and moves budget to what works."
+- id: performance-marketing-analyst
+  title: "Performance marketing analyst"
+  extends: marketing-analyst
+  adds: [digital-marketing]
+  summary: "Runs and tunes paid ads on Google and Meta against targets like cost per sale, testing creatives and audiences."
+- id: growth-analyst
+  title: "Growth analyst"
+  extends: marketing-analyst
+  adds: [pandas]
+  summary: "Finds what makes users sign up, stay and pay at a startup, and tests ideas to improve each step."
+- id: crm-analyst
+  title: "CRM analyst"
+  extends: marketing-analyst
+  adds: [digital-marketing]
+  summary: "Plans email, SMS and app campaigns to existing customers and measures what brings them back."
+- id: web-analyst
+  title: "Web analyst"
+  extends: marketing-analyst
+  adds: [html-css]
+  summary: "Sets up website tracking, keeps the data clean and reports how people use the site."
+- id: campaign-analyst
+  title: "Campaign analyst"
+  extends: marketing-analyst
+  summary: "Sets up, tracks and reports on marketing campaigns, and works out which ones paid off."
+- id: seo-analyst
+  title: "SEO analyst"
+  extends: digital-marketing-executive
+  adds: [html-css]
+  summary: "Gets a site to rank higher in search: keywords, content, technical fixes and links, measured month by month."
+- id: seo-executive
+  title: "SEO executive"
+  extends: digital-marketing-executive
+  adds: [html-css]
+  summary: "Does the day-to-day SEO work on a site: keyword research, page changes and reports."
+- id: social-media-executive
+  title: "Social media executive"
+  extends: digital-marketing-executive
+  drops: [web-analytics]
+  summary: "Plans and posts a brand's social content, replies to people, and reports what grew."
+- id: content-marketing-executive
+  title: "Content marketing executive"
+  extends: digital-marketing-executive
+  summary: "Writes and plans blogs, emails and social posts that bring in customers, and tracks which ones do."
+- id: email-marketing-executive
+  title: "Email marketing executive"
+  extends: digital-marketing-executive
+  summary: "Builds and sends email campaigns, manages lists, and tests subject lines and timing."
+- id: marketing-executive
+  title: "Marketing executive"
+  extends: digital-marketing-executive
+  summary: "Helps run a brand's marketing, online and offline, from campaigns and events to reports."
+- id: brand-executive
+  title: "Brand executive"
+  extends: digital-marketing-executive
+  drops: [web-analytics]
+  summary: "Supports a brand manager on campaigns, packaging, agencies and market research."
+- id: hr-executive
+  title: "HR executive"
+  extends: hr-analyst
+  drops: [statistics, bi-tools]
+  summary: "Handles day-to-day HR: onboarding, records, attendance, payroll inputs and employee questions."
+- id: hr-generalist
+  title: "HR generalist"
+  extends: hr-analyst
+  drops: [bi-tools]
+  summary: "Covers a bit of everything in HR for a team or site: hiring, policies, performance reviews and employee relations."
+- id: talent-acquisition-executive
+  title: "Talent acquisition executive"
+  extends: hr-analyst
+  drops: [statistics, bi-tools]
+  summary: "Finds and screens candidates, schedules interviews and tracks hiring numbers. A common first HR job."
+- id: payroll-executive
+  title: "Payroll executive"
+  extends: hr-analyst
+  adds: [accounting]
+  drops: [bi-tools]
+  summary: "Runs monthly payroll: attendance, deductions, PF, ESI and TDS, and the reports that go with it."
+- id: business-operations-analyst
+  title: "Business operations analyst"
+  extends: operations-analyst
+  summary: "Tracks a business's key numbers and runs the reviews and fixes that keep them on target."
+- id: operations-executive
+  title: "Operations executive"
+  extends: operations-analyst
+  drops: [sql]
+  summary: "Keeps daily operations running, like orders, vendors and deliveries, and reports on them in Excel."
+- id: process-excellence-analyst
+  title: "Process excellence analyst"
+  extends: operations-analyst
+  summary: "Runs Lean and Six Sigma projects that cut errors, waiting and cost in a company's processes."
+- id: mis-executive
+  title: "MIS executive"
+  extends: operations-analyst
+  drops: [process-improvement, statistics]
+  summary: "Builds and sends the daily, weekly and monthly reports a business runs on, mostly in Excel."
+- id: mis-analyst
+  title: "MIS analyst"
+  extends: operations-analyst
+  drops: [process-improvement]
+  summary: "Owns a team's reporting: pulls data, automates reports and dashboards, and answers questions from them."
+- id: revenue-operations-analyst
+  title: "Revenue operations analyst"
+  extends: sales-operations-analyst
+  adds: [marketing-fundamentals]
+  summary: "Joins up sales, marketing and customer data so the whole funnel from lead to renewal can be measured."
+- id: sales-analyst
+  title: "Sales analyst"
+  extends: sales-operations-analyst
+  adds: [statistics]
+  summary: "Reports and forecasts sales by region, product and rep, and explains why numbers moved."
+- id: marketing-operations-analyst
+  title: "Marketing operations analyst"
+  extends: sales-operations-analyst
+  adds: [web-analytics, marketing-fundamentals]
+  summary: "Runs the tools and data behind marketing, like campaign tracking, lead scoring and reports."

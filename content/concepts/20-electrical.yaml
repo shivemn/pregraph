@@ -1,0 +1,172 @@
+# Electronics and electrical engineering: the core subjects of ECE and EEE
+# degrees and of the GATE EC and EE papers, and the jobs built on them.
+
+- id: circuit-analysis
+  title: Circuit analysis
+  area: electrical
+  summary: Ohm's and Kirchhoff's laws, Thevenin and Norton equivalents, RC and RL transients, and AC circuits with phasors.
+  hours: 35
+  recommends: [calculus]
+  resources:
+    - resource: lessons-electric-circuits
+      locator: "Volume I (DC) and Volume II (AC)"
+      verified: true
+    - resource: mit-6002
+      locator: "Lectures 1–7, 13–16"
+      verified: true
+
+- id: analog-electronics
+  title: Analog electronics
+  area: electrical
+  summary: Diodes, BJTs and MOSFETs, biasing and small-signal amplifiers, op-amps, filters and oscillators.
+  hours: 45
+  requires: [circuit-analysis]
+  resources:
+    - resource: lessons-electric-circuits
+      locator: "Volume III (Semiconductors)"
+      verified: true
+    - resource: mit-6002
+      locator: "Lectures 8–12, 17–25"
+      verified: true
+
+- id: signals-and-systems
+  title: Signals and systems
+  area: electrical
+  summary: Linear time-invariant systems, convolution, Fourier, Laplace and z-transforms, sampling, and filters.
+  hours: 40
+  requires: [calculus]
+  recommends: [complex-analysis]
+  resources:
+    - resource: mit-6003
+      locator: "All lectures"
+      verified: true
+    - resource: pysdr
+      locator: "Frequency domain, sampling and filters chapters"
+      verified: true
+
+- id: control-systems
+  title: Control systems
+  area: electrical
+  summary: Feedback, transfer functions, stability, root locus and Bode plots, PID controllers and state-space models.
+  hours: 40
+  requires: [signals-and-systems]
+  recommends: [ordinary-differential-equations]
+  resources:
+    - resource: feedback-systems-book
+      locator: "Chapters 1–3, 6–8, 10–12"
+      verified: true
+    - resource: mit-res6010
+      locator: "Lectures 1–12"
+      verified: true
+
+- id: communication-systems
+  title: Communication systems
+  area: electrical
+  summary: Modulation, noise, channel capacity, digital modulation (PSK, QAM), error-correcting codes and how wireless links work.
+  hours: 40
+  requires: [signals-and-systems, probability]
+  resources:
+    - resource: mit-602
+      locator: "Lecture notes and problem sets"
+      verified: true
+    - resource: pysdr
+      locator: "Digital modulation, noise and link budgets chapters"
+      verified: true
+
+- id: electromagnetics
+  title: Electromagnetics
+  area: electrical
+  summary: Maxwell's equations, plane waves, transmission lines and the Smith chart, waveguides and antennas.
+  hours: 40
+  requires: [multivariable-calculus]
+  resources:
+    - resource: ellingson-em
+      locator: "Chapters 1–3 and 9; then Volume 2 for waveguides and antennas"
+      verified: true
+
+- id: electrical-machines
+  title: Electrical machines
+  area: electrical
+  summary: Transformers, DC machines, induction and synchronous motors and generators, and how they're tested.
+  hours: 35
+  requires: [circuit-analysis]
+  resources:
+    - resource: mit-6685
+      locator: "Course notes, chapters 1–7"
+      verified: true
+
+- id: power-systems
+  title: Power systems
+  area: electrical
+  summary: Generation, transmission and distribution, per-unit analysis, load flow, faults and protection.
+  hours: 35
+  requires: [circuit-analysis]
+  recommends: [electrical-machines]
+  resources:
+    - resource: mit-6061
+      locator: "The course textbook and problem sets"
+      verified: true
+
+- id: power-electronics
+  title: Power electronics
+  area: electrical
+  summary: Converters and inverters, switching devices, PWM, and the circuits inside chargers, solar inverters, EVs and motor drives.
+  hours: 40
+  requires: [analog-electronics]
+  recommends: [control-systems]
+  resources:
+    - resource: mit-6334
+      locator: "Lecture notes and problem sets"
+      verified: true
+
+- id: plc-scada
+  title: PLCs and SCADA
+  area: electrical
+  kind: tool
+  summary: Programming the controllers that run factory machines in ladder logic, and the SCADA screens that monitor whole plants.
+  hours: 30
+  recommends: [digital-logic, electrical-machines]
+  resources:
+    - resource: control-com-openplc
+      locator: "The whole article"
+      verified: true
+    - resource: openplc-getting-started
+      locator: "Getting started, then your first project"
+      verified: true
+
+- id: robotics
+  title: Robotics fundamentals
+  area: electrical
+  summary: How robots move and sense. Kinematics, dynamics, motion planning, sensors and control.
+  hours: 50
+  requires: [linear-algebra]
+  recommends: [control-systems]
+  resources:
+    - resource: modern-robotics
+      locator: "Chapters 2–6, 10 and 11, with the videos"
+      verified: true
+
+- id: ros
+  title: ROS 2
+  area: electrical
+  kind: tool
+  summary: The Robot Operating System that most robotics companies build on. Nodes, topics, services, launch files and simulation.
+  hours: 30
+  requires: [programming-basics]
+  recommends: [linux-admin, cpp]
+  resources:
+    - resource: ros2-tutorials
+      locator: "Beginner: CLI tools and Beginner: client libraries"
+      verified: true
+
+- id: project-robot
+  title: "Project: a robot that does one job"
+  area: electrical
+  kind: project
+  summary: A small robot, real or simulated in ROS 2, that does one thing well, such as following a line or mapping a room. Show the code, a video and what you'd fix.
+  hours: 30
+  requires: [ros]
+  resources:
+    - resource: ros2-tutorials
+      locator: "Intermediate tutorials and the simulation section"
+      verified: true

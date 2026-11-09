@@ -1,0 +1,843 @@
+{
+ "anywhere": {
+  "accounting": [
+   "accounting",
+   "\\btally\\b",
+   "\\bgst\\b",
+   "reconcil",
+   "bookkeeping",
+   "ledger",
+   "\\bifrs\\b",
+   "gaap",
+   "balance sheet",
+   "\\bp&l\\b",
+   "\\btds\\b",
+   "financial statement"
+  ],
+  "agile-scrum": [
+   "\\bagile\\b",
+   "\\bscrum\\b",
+   "user stor"
+  ],
+  "algorithm-practice": [
+   "data structures?",
+   "\\bdsa\\b",
+   "competitive programming"
+  ],
+  "analog-electronics": [
+   "analog circuits?",
+   "analog electronics",
+   "op[- ]amps?",
+   "amplifier"
+  ],
+  "android": [
+   "\\bandroid\\b"
+  ],
+  "angular": [
+   "\\bangular"
+  ],
+  "ansible": [
+   "ansible"
+  ],
+  "asic-flow": [
+   "physical design",
+   "static timing",
+   "\\bsta\\b",
+   "synthesis",
+   "place and route",
+   "\\bdft\\b",
+   "floorplan"
+  ],
+  "azure": [
+   "\\bazure\\b"
+  ],
+  "backend-framework": [
+   "\\bspring\\b",
+   "\\bexpress(\\.js|js)?\\b",
+   "\\bdjango\\b",
+   "\\bflask\\b",
+   "\\bfastapi\\b",
+   "\\blaravel\\b",
+   "\\bhibernate\\b",
+   "\\.net core\\b",
+   "\\basp\\.net\\b",
+   "\\bnestjs\\b",
+   "backend framework"
+  ],
+  "bi-tools": [
+   "power ?bi",
+   "tableau",
+   "looker",
+   "qlik",
+   "\\bdax\\b",
+   "business intelligence",
+   "\\bssrs\\b"
+  ],
+  "business-processes": [
+   "order to cash",
+   "procure to pay",
+   "\\botc\\b",
+   "\\bp2p\\b",
+   "\\bo2c\\b"
+  ],
+  "c-and-memory": [
+   "embedded c"
+  ],
+  "ci-cd": [
+   "ci\\s*/\\s*cd",
+   "\\bci-cd\\b",
+   "jenkins",
+   "github actions",
+   "gitlab ci",
+   "azure devops"
+  ],
+  "circuit-analysis": [
+   "circuit analysis",
+   "circuit design",
+   "electrical circuits?"
+  ],
+  "cloud-basics": [
+   "\\baws\\b",
+   "amazon web services",
+   "\\bec2\\b",
+   "\\bs3\\b"
+  ],
+  "computer-architecture": [
+   "computer architecture",
+   "computer organi[sz]ation",
+   "microprocessors?"
+  ],
+  "computer-vision": [
+   "computer vision",
+   "opencv",
+   "image processing"
+  ],
+  "concurrency": [
+   "multithread",
+   "multi-thread"
+  ],
+  "control-systems": [
+   "control systems?",
+   "\\bpid\\b",
+   "control loops?"
+  ],
+  "corporate-finance": [
+   "financial model",
+   "valuation",
+   "\\bfp&a\\b",
+   "financial analysis",
+   "\\bdcf\\b",
+   "variance analysis",
+   "investment banking"
+  ],
+  "cpp": [
+   "c\\+\\+"
+  ],
+  "csharp": [
+   "\\bc#",
+   "\\.net\\b",
+   "dotnet"
+  ],
+  "data-visualization": [
+   "visuali[sz]",
+   "dashboard"
+  ],
+  "data-warehousing": [
+   "\\betl\\b",
+   "\\belt\\b",
+   "data warehous",
+   "bigquery",
+   "redshift",
+   "synapse",
+   "informatica",
+   "\\bssis\\b",
+   "data lake",
+   "snowflake",
+   "\\bdwh\\b"
+  ],
+  "databricks": [
+   "databricks"
+  ],
+  "dbt": [
+   "\\bdbt\\b"
+  ],
+  "deep-learning": [
+   "deep learning",
+   "neural",
+   "\\bcnn\\b",
+   "\\brnn\\b",
+   "\\blstm\\b"
+  ],
+  "design-verification": [
+   "systemverilog",
+   "\\buvm\\b",
+   "design verification",
+   "functional verification",
+   "testbench"
+  ],
+  "digital-logic": [
+   "digital electronics",
+   "digital design",
+   "digital logic",
+   "digital circuits?",
+   "flip[- ]flops?",
+   "combinational",
+   "sequential logic"
+  ],
+  "digital-marketing": [
+   "digital marketing",
+   "\\bseo\\b",
+   "\\bsem\\b",
+   "social media",
+   "google ads",
+   "meta ads",
+   "facebook ads",
+   "performance marketing",
+   "email marketing",
+   "content marketing",
+   "ppc"
+  ],
+  "django": [
+   "\\bdjango\\b"
+  ],
+  "docker": [
+   "docker"
+  ],
+  "electrical-machines": [
+   "transformers?",
+   "electric(al)? motors?",
+   "induction motor",
+   "switchgear",
+   "\\bvfd\\b",
+   "drives",
+   "generators?",
+   "\\bdg sets?\\b"
+  ],
+  "embedded-protocols": [
+   "\\bi2c\\b",
+   "\\bspi\\b",
+   "\\buart\\b",
+   "\\bcan bus\\b",
+   "\\bcan\\b protocol",
+   "\\bmodbus\\b",
+   "\\blin\\b protocol"
+  ],
+  "embeddings": [
+   "embedding",
+   "vector (db|database|store)",
+   "pinecone",
+   "faiss",
+   "chroma"
+  ],
+  "experiments": [
+   "a/b test",
+   "experimentation",
+   "\\bexperiments\\b"
+  ],
+  "fastapi": [
+   "\\bfastapi\\b"
+  ],
+  "figma": [
+   "figma"
+  ],
+  "financial-markets": [
+   "equity research",
+   "stock market",
+   "capital market",
+   "equities",
+   "mutual fund"
+  ],
+  "flutter": [
+   "\\bflutter\\b"
+  ],
+  "gcp": [
+   "\\bgcp\\b",
+   "google cloud"
+  ],
+  "git": [
+   "\\bgit\\b",
+   "github",
+   "gitlab",
+   "version control",
+   "bitbucket"
+  ],
+  "go": [
+   "\\bgolang\\b"
+  ],
+  "hr-fundamentals": [
+   "recruitment",
+   "onboarding",
+   "payroll",
+   "employee relations",
+   "talent acquisition",
+   "\\bhrms\\b",
+   "human resources",
+   "attrition",
+   "performance management",
+   "statutory compliance"
+  ],
+  "html-css": [
+   "\\bhtml",
+   "\\bcss",
+   "tailwind"
+  ],
+  "hugging-face": [
+   "hugging ?face"
+  ],
+  "incident-management": [
+   "\\bitil\\b",
+   "production support",
+   "application support"
+  ],
+  "infrastructure-as-code": [
+   "terraform",
+   "cloudformation",
+   "\\biac\\b",
+   "infrastructure as code",
+   "bicep"
+  ],
+  "java": [
+   "\\bjava\\b(?!\\s*script)",
+   "\\bj2ee\\b",
+   "\\bcore java\\b"
+  ],
+  "javascript": [
+   "javascript",
+   "\\bjs\\b",
+   "\\bes6\\b",
+   "\\bjquery\\b"
+  ],
+  "jenkins": [
+   "jenkins"
+  ],
+  "jira": [
+   "\\bjira\\b"
+  ],
+  "kotlin": [
+   "\\bkotlin\\b"
+  ],
+  "kubernetes": [
+   "kubernetes",
+   "\\bk8s\\b",
+   "\\beks\\b",
+   "\\baks\\b",
+   "openshift"
+  ],
+  "linux-admin": [
+   "\\blinux\\b",
+   "\\bunix\\b",
+   "\\bredhat\\b",
+   "red hat"
+  ],
+  "llm-apis": [
+   "\\bllms?\\b",
+   "gen ?ai",
+   "generative ai",
+   "large language",
+   "openai",
+   "\\bgpt",
+   "langchain",
+   "llamaindex"
+  ],
+  "llm-basics": [
+   "\\bllms?\\b",
+   "gen ?ai",
+   "generative ai",
+   "large language"
+  ],
+  "log-analysis": [
+   "log analysis",
+   "root cause",
+   "\\brca\\b"
+  ],
+  "machine-learning": [
+   "machine learning",
+   "scikit",
+   "sklearn",
+   "xgboost"
+  ],
+  "messaging": [
+   "kafka",
+   "rabbitmq",
+   "pub/?sub"
+  ],
+  "microcontrollers": [
+   "microcontroller",
+   "arduino",
+   "stm32",
+   "\\besp32\\b",
+   "raspberry pi",
+   "\\bpic\\b",
+   "\\barm cortex",
+   "firmware"
+  ],
+  "mlops": [
+   "mlops",
+   "mlflow",
+   "kubeflow",
+   "model deployment",
+   "sagemaker"
+  ],
+  "mongodb": [
+   "mongo"
+  ],
+  "networking": [
+   "tcp",
+   "\\bdns\\b",
+   "firewall",
+   "ccna"
+  ],
+  "nextjs": [
+   "next\\.?js"
+  ],
+  "nlp": [
+   "\\bnlp\\b",
+   "natural language"
+  ],
+  "nodejs": [
+   "\\bnode(\\.js|js)?\\b"
+  ],
+  "observability": [
+   "monitoring",
+   "prometheus",
+   "grafana",
+   "observability",
+   "datadog",
+   "dynatrace",
+   "new relic",
+   "\\belk\\b"
+  ],
+  "oop-design": [
+   "\\boops?\\b",
+   "object[- ]oriented"
+  ],
+  "orchestration": [
+   "airflow",
+   "data factory",
+   "\\badf\\b"
+  ],
+  "os-processes-memory": [
+   "operating system"
+  ],
+  "pandas": [
+   "pandas",
+   "numpy",
+   "data cleaning",
+   "data wrangling",
+   "data manipulation",
+   "data preprocessing"
+  ],
+  "pcb-design": [
+   "\\bpcb\\b",
+   "altium",
+   "kicad",
+   "orcad",
+   "schematic"
+  ],
+  "php": [
+   "\\bphp\\b"
+  ],
+  "plc-scada": [
+   "\\bplcs?\\b",
+   "scada",
+   "\\bhmi\\b",
+   "ladder logic",
+   "\\bdcs\\b"
+  ],
+  "postman": [
+   "postman",
+   "api testing"
+  ],
+  "power-electronics": [
+   "power electronics",
+   "inverters?",
+   "converters?",
+   "\\bsmps\\b",
+   "motor control",
+   "\\bbms\\b"
+  ],
+  "power-systems": [
+   "power systems?",
+   "substation",
+   "protection relay",
+   "load flow",
+   "transmission line",
+   "distribution network",
+   "\\bhv\\b",
+   "\\bmv\\b",
+   "\\blt panels?\\b",
+   "\\bht\\b"
+  ],
+  "problem-structuring": [
+   "case interviews?",
+   "structured problem",
+   "market sizing",
+   "guesstimate",
+   "consulting"
+  ],
+  "process-improvement": [
+   "six sigma",
+   "\\blean\\b",
+   "process improvement",
+   "kaizen",
+   "root cause analysis",
+   "\\bdmaic\\b"
+  ],
+  "product-management": [
+   "\\bbrd\\b",
+   "\\bfrd\\b",
+   "product management",
+   "gap analysis"
+  ],
+  "programming-basics": [
+   "\\bpython\\b"
+  ],
+  "pytorch": [
+   "pytorch"
+  ],
+  "rag": [
+   "\\brag\\b",
+   "vector (db|database|store)",
+   "langchain",
+   "llamaindex"
+  ],
+  "react": [
+   "\\breact(\\.js|js)?\\b(?!\\s*native)"
+  ],
+  "react-native": [
+   "react native"
+  ],
+  "redis": [
+   "\\bredis\\b"
+  ],
+  "rest-apis": [
+   "\\brest\\b",
+   "restful",
+   "microservice"
+  ],
+  "rtos": [
+   "\\brtos\\b",
+   "freertos",
+   "real[- ]time operating"
+  ],
+  "salesforce": [
+   "salesforce",
+   "\\bcrm\\b",
+   "hubspot",
+   "zoho"
+  ],
+  "sap-abap": [
+   "\\babap\\b"
+  ],
+  "sap-basics": [
+   "\\bsap\\b",
+   "s/?4 ?hana",
+   "\\becc\\b"
+  ],
+  "security-fundamentals": [
+   "cyber ?security",
+   "information security",
+   "network security",
+   "\\binfosec\\b"
+  ],
+  "selenium": [
+   "selenium"
+  ],
+  "servicenow": [
+   "servicenow",
+   "service now"
+  ],
+  "shell-tools": [
+   "shell",
+   "\\bbash\\b",
+   "scripting",
+   "powershell"
+  ],
+  "snowflake": [
+   "snowflake"
+  ],
+  "spark": [
+   "spark",
+   "pyspark",
+   "hadoop",
+   "\\bhive\\b"
+  ],
+  "splunk": [
+   "splunk"
+  ],
+  "spreadsheets": [
+   "\\bexcel\\b",
+   "spreadsheet",
+   "google sheets",
+   "vlookup",
+   "pivot table",
+   "\\bvba\\b",
+   "ms[- ]excel"
+  ],
+  "spring-boot": [
+   "\\bspring\\b"
+  ],
+  "sql": [
+   "\\bsql\\b",
+   "mysql",
+   "postgres",
+   "pl/?sql",
+   "t-sql",
+   "\\brdbms\\b",
+   "oracle db",
+   "sql server",
+   "\\bdbms\\b"
+  ],
+  "statistics": [
+   "statistic",
+   "hypothesis",
+   "regression",
+   "a/b test",
+   "\\bstats\\b"
+  ],
+  "swift": [
+   "\\bswift\\b"
+  ],
+  "system-design": [
+   "system design",
+   "distributed system",
+   "high availability"
+  ],
+  "tableau": [
+   "tableau"
+  ],
+  "technical-writing": [
+   "\\bbrd\\b",
+   "\\bfrd\\b",
+   "technical writing"
+  ],
+  "tensorflow": [
+   "tensorflow",
+   "keras"
+  ],
+  "test-automation": [
+   "automation test",
+   "test automation",
+   "selenium",
+   "cypress",
+   "playwright",
+   "appium",
+   "testng",
+   "cucumber",
+   "automation framework"
+  ],
+  "testing-debugging": [
+   "debugg",
+   "unit test",
+   "test cases?",
+   "\\bjunit\\b",
+   "\\bpytest\\b"
+  ],
+  "threat-detection": [
+   "\\bsiem\\b",
+   "\\bsoc\\b",
+   "incident response",
+   "\\bedr\\b",
+   "qradar",
+   "malware"
+  ],
+  "transformers": [
+   "transformer",
+   "\\bbert\\b",
+   "hugging ?face"
+  ],
+  "typescript": [
+   "typescript"
+  ],
+  "ux-design": [
+   "\\bux\\b",
+   "user experience",
+   "user interface",
+   "wireframe",
+   "user research",
+   "adobe xd",
+   "design thinking",
+   "interaction design"
+  ],
+  "verilog": [
+   "verilog",
+   "\\brtl\\b",
+   "\\bvhdl\\b"
+  ],
+  "vue": [
+   "\\bvue"
+  ],
+  "web-analytics": [
+   "google analytics",
+   "\\bga4\\b",
+   "web analytics",
+   "google tag manager",
+   "\\bgtm\\b",
+   "mixpanel",
+   "adobe analytics"
+  ],
+  "web-http": [
+   "\\bhttp",
+   "web development"
+  ],
+  "web-security": [
+   "\\bvapt\\b",
+   "owasp",
+   "penetration",
+   "vulnerability",
+   "ethical hacking",
+   "burp"
+  ]
+ },
+ "key_skills_only": {
+  "accounting": [
+   "accounts",
+   "audit"
+  ],
+  "agile-scrum": [
+   "\\bsdlc\\b"
+  ],
+  "algorithm-practice": [
+   "problem[- ]solving",
+   "algorithms?"
+  ],
+  "business-processes": [
+   "business process"
+  ],
+  "c-and-memory": [
+   "(^|[\\s,/(])c([\\s,/)]|$)(?!\\+|#)",
+   "embedded c",
+   "c programming"
+  ],
+  "ci-cd": [
+   "pipelines?"
+  ],
+  "cloud-basics": [
+   "\\bcloud\\b"
+  ],
+  "concurrency": [
+   "concurren"
+  ],
+  "corporate-finance": [
+   "budget",
+   "forecast"
+  ],
+  "data-visualization": [
+   "reports?\\b",
+   "reporting",
+   "charts?"
+  ],
+  "data-warehousing": [
+   "data model"
+  ],
+  "docker": [
+   "container"
+  ],
+  "electrical-machines": [
+   "motors?"
+  ],
+  "financial-markets": [
+   "trading",
+   "securities"
+  ],
+  "html-css": [
+   "bootstrap"
+  ],
+  "incident-management": [
+   "incident",
+   "ticket",
+   "\\bsla\\b",
+   "l1\\b",
+   "l2\\b"
+  ],
+  "llm-apis": [
+   "prompt",
+   "agentic",
+   "ai agents?"
+  ],
+  "log-analysis": [
+   "\\blogs?\\b"
+  ],
+  "machine-learning": [
+   "predictive",
+   "classification",
+   "clustering",
+   "\\bml\\b"
+  ],
+  "marketing-fundamentals": [
+   "marketing",
+   "branding",
+   "market research"
+  ],
+  "messaging": [
+   "\\bmq\\b"
+  ],
+  "networking": [
+   "network",
+   "routing",
+   "\\blan\\b"
+  ],
+  "oop-design": [
+   "design patterns?"
+  ],
+  "orchestration": [
+   "orchestrat"
+  ],
+  "os-processes-memory": [
+   "\\bos\\b"
+  ],
+  "product-management": [
+   "requirement",
+   "stakeholder",
+   "roadmap"
+  ],
+  "rag": [
+   "retrieval"
+  ],
+  "rest-apis": [
+   "\\bapis?\\b",
+   "web services?"
+  ],
+  "risk-management": [
+   "\\brisk\\b"
+  ],
+  "security-fundamentals": [
+   "security"
+  ],
+  "spark": [
+   "big data"
+  ],
+  "spreadsheets": [
+   "\\bms office\\b"
+  ],
+  "sql": [
+   "\\bdatabases?\\b"
+  ],
+  "statistics": [
+   "predictive model"
+  ],
+  "system-design": [
+   "scalab"
+  ],
+  "technical-writing": [
+   "documentation"
+  ],
+  "testing-debugging": [
+   "\\btesting\\b",
+   "troubleshoot"
+  ],
+  "threat-detection": [
+   "threat",
+   "sentinel"
+  ],
+  "ux-design": [
+   "\\bui\\b",
+   "prototyp",
+   "usability"
+  ],
+  "web-http": [
+   "browser",
+   "web application"
+  ]
+ }
+}

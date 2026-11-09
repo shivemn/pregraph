@@ -12,8 +12,9 @@ const GROUPS: Array<{ id: Certification['group']; title: string }> = [
   { id: 'software', title: 'Programming' },
   { id: 'enterprise', title: 'Enterprise software' },
   { id: 'platforms', title: 'Business platforms' },
-  { id: 'hardware', title: 'Hardware and chips' },
+  { id: 'hardware', title: 'Electronics and chips' },
   { id: 'finance', title: 'Finance and actuarial' },
+  { id: 'business', title: 'Marketing and business' },
   { id: 'product', title: 'Product and project work' },
 ];
 

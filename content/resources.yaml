@@ -3292,3 +3292,202 @@
   url: https://www.jirka.org/diffyqs/
   free: true
   medium: read
+
+# Electronics and electrical engineering
+- id: lessons-electric-circuits
+  title: Lessons In Electric Circuits
+  author: Tony R. Kuphaldt
+  type: book
+  url: https://ibiblio.org/kuphaldt/electricCircuits/
+  free: true
+  medium: read
+  note: Free volumes on DC, AC, semiconductors and digital circuits.
+
+- id: mit-6002
+  title: Circuits and Electronics (MIT 6.002)
+  author: Anant Agarwal
+  type: course
+  url: https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/
+  free: true
+  medium: watch
+  short: "6.002"
+
+- id: mit-6003
+  title: Signals and Systems (MIT 6.003)
+  author: Dennis Freeman
+  type: course
+  url: https://ocw.mit.edu/courses/6-003-signals-and-systems-fall-2011/
+  free: true
+  medium: watch
+  short: "6.003"
+
+- id: feedback-systems-book
+  title: "Feedback Systems: An Introduction for Scientists and Engineers"
+  author: Karl Johan Åström, Richard M. Murray
+  type: book
+  url: https://www.cds.caltech.edu/~murray/amwiki/Second_Edition.html
+  free: true
+  medium: read
+  note: The authors offer the whole second edition as a free PDF.
+
+- id: mit-res6010
+  title: Electronic Feedback Systems (MIT RES.6-010)
+  author: James K. Roberge
+  type: course
+  url: https://ocw.mit.edu/courses/res-6-010-electronic-feedback-systems-spring-2013/
+  free: true
+  medium: watch
+
+- id: mit-602
+  title: "Digital Communication Systems (MIT 6.02)"
+  author: Hari Balakrishnan, George Verghese and others
+  type: course
+  url: https://ocw.mit.edu/courses/6-02-introduction-to-eecs-ii-digital-communication-systems-fall-2012/
+  free: true
+  medium: read
+  short: "6.02"
+
+- id: pysdr
+  title: "PySDR: A Guide to SDR and DSP using Python"
+  author: Marc Lichtman
+  type: book
+  url: https://pysdr.org/
+  free: true
+  medium: read
+  note: Signal processing and radio explained with Python code you can run.
+
+- id: ellingson-em
+  title: Electromagnetics, Volume 1
+  author: Steven W. Ellingson
+  type: book
+  url: https://vtechworks.lib.vt.edu/items/6f75e22e-ea6a-48a3-b441-65ce5ebf5331
+  free: true
+  medium: read
+  note: A free, open textbook from Virginia Tech. Volume 2 covers waveguides and antennas.
+
+- id: mit-6685
+  title: Electric Machines (MIT 6.685)
+  author: James Kirtley
+  type: course
+  url: https://ocw.mit.edu/courses/6-685-electric-machines-fall-2013/
+  free: true
+  medium: read
+  short: "6.685"
+
+- id: mit-6061
+  title: Introduction to Electric Power Systems (MIT 6.061)
+  author: James Kirtley
+  type: course
+  url: https://ocw.mit.edu/courses/6-061-introduction-to-electric-power-systems-spring-2011/
+  free: true
+  medium: read
+  short: "6.061"
+  note: The course textbook is a free PDF on the course page.
+
+- id: mit-6334
+  title: Power Electronics (MIT 6.334)
+  author: David Perreault
+  type: course
+  url: https://ocw.mit.edu/courses/6-334-power-electronics-spring-2007/
+  free: true
+  medium: read
+  short: "6.334"
+
+- id: openplc-getting-started
+  title: "OpenPLC: Getting started"
+  author: OpenPLC Project
+  type: site
+  url: https://openplcproject.github.io/getting-started
+  free: true
+  medium: practice
+  note: A free, open-source PLC you can program in ladder logic on a laptop, Raspberry Pi or Arduino.
+
+- id: control-com-openplc
+  title: "PLC Ladder Logic on an Arduino: Introduction to OpenPLC"
+  author: Control.com
+  type: site
+  url: https://control.com/technical-articles/plc-ladder-logic-on-an-arduino-introduction-to-openplc/
+  free: true
+  medium: read
+
+- id: ros2-tutorials
+  title: ROS 2 tutorials
+  author: Open Robotics
+  type: site
+  url: https://docs.ros.org/en/jazzy/Tutorials.html
+  free: true
+  medium: practice
+  short: ROS 2
+
+- id: modern-robotics
+  title: "Modern Robotics: Mechanics, Planning, and Control"
+  author: Kevin Lynch, Frank Park
+  type: book
+  url: https://hades.mech.northwestern.edu/index.php/Modern_Robotics
+  free: true
+  medium: read
+  note: A free preprint of the book, with free video lectures on the same page.
+
+# Business, consulting and marketing
+- id: mckinsey-interviewing
+  title: Interviewing at McKinsey, with sample cases
+  author: McKinsey & Company
+  type: site
+  url: https://www.mckinsey.com/careers/interviewing
+  free: true
+  medium: practice
+  note: McKinsey's own sample cases, with the logic and recommended answers.
+
+- id: bain-case-interview
+  title: Preparing for the case interview
+  author: Bain & Company
+  type: site
+  url: https://www.bain.com/careers/hiring-process/case-interview/
+  free: true
+  medium: practice
+  note: Two practice cases written by Bain, and how its case interviews work.
+
+- id: mit-16660
+  title: Introduction to Lean Six Sigma Methods (MIT 16.660J)
+  author: Earll Murman and others
+  type: course
+  url: https://ocw.mit.edu/courses/16-660j-introduction-to-lean-six-sigma-methods-january-iap-2012/
+  free: true
+  medium: watch
+  short: "16.660"
+
+- id: mit-15810
+  title: Marketing Management (MIT 15.810)
+  author: MIT Sloan
+  type: course
+  url: https://ocw.mit.edu/courses/15-810-marketing-management-fall-2010/
+  free: true
+  medium: read
+  short: "15.810"
+
+- id: mit-15660
+  title: Strategic HR Management (MIT 15.660)
+  author: Thomas Kochan and others
+  type: course
+  url: https://ocw.mit.edu/courses/15-660-strategic-hr-management-spring-2003/
+  free: true
+  medium: read
+  short: "15.660"
+
+- id: skillshop-ga4
+  title: Google Analytics Certification learning plan
+  author: Google Skillshop
+  type: course
+  url: https://skillshop.docebosaas.com/learn/learning-plans/11323/google-analytics-certification
+  free: true
+  medium: watch
+  note: Google's own free training and exam for Google Analytics 4.
+
+- id: hubspot-inbound
+  title: Inbound marketing course
+  author: HubSpot Academy
+  type: course
+  url: https://academy.hubspot.com/courses/inbound
+  free: true
+  medium: watch
+  note: Free, with a free account.

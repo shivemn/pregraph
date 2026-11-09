@@ -7,8 +7,13 @@
   summary: Writes and maintains the code behind products. Entry-level hiring in India mostly tests data structures and algorithms first, then how you write and reason about code.
   tiers:
     hire: [programming-basics, oop-design, git, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, algorithm-practice, sql, testing-debugging]
-    firstYear: [web-http, os-processes-memory, concurrency, networking, system-design, software-engineering, ci-cd]
-    extra: [distributed-systems, database-internals, docker, project-portfolio-api]
+    firstYear: [rest-apis, web-http, cloud-basics, os-processes-memory, networking, system-design, software-engineering]
+    extra: [concurrency, ci-cd, distributed-systems, database-internals, docker, project-portfolio-api]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Listings split by language (JavaScript 40%, Java 30%, C++ 30%), so the route lets you pick one. Data structures and algorithms stay on the hiring list though few listings name them: SDE interviews test them first."
   search: software engineer fresher
   posting:
     source: Naukri
@@ -40,9 +45,14 @@
   family: software
   summary: Builds the services, APIs and data storage behind an app. Most of the job is correctness, performance and keeping things running.
   tiers:
-    hire: [java, oop-design, git, sql, rest-apis, backend-framework, hash-tables, trees-heaps, algorithm-practice, testing-debugging, shell-tools, project-portfolio-api]
-    firstYear: [database-internals, concurrency, system-design, docker, ci-cd, web-security, messaging]
-    extra: [distributed-systems, kubernetes, observability, redis]
+    hire: [java, oop-design, git, sql, rest-apis, backend-framework, hash-tables, trees-heaps, algorithm-practice, testing-debugging, project-portfolio-api]
+    firstYear: [mongodb, cloud-basics, database-internals, concurrency, docker, shell-tools]
+    extra: [system-design, ci-cd, web-security, messaging, distributed-systems, kubernetes, observability, redis]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "SQL (87%), APIs (70%), a framework and Git lead. Half the listings want Java and half Python or Node, which have their own job titles. OOP and data structures stay on the list because interviews test them."
   search: backend developer
   posting:
     source: Naukri
@@ -75,45 +85,70 @@
   family: software
   summary: Builds what people see and touch in the browser, and makes it fast, accessible and pleasant to use.
   tiers:
-    hire: [html-css, javascript, react, typescript, git, web-http, linear-structures, hash-tables, project-web-app]
-    firstYear: [web-accessibility, web-performance, testing-debugging, ci-cd, web-security]
-    extra: [system-design, test-automation]
+    hire: [html-css, javascript, react, git, web-http, linear-structures, hash-tables, project-web-app]
+    firstYear: [typescript, testing-debugging, web-accessibility, web-performance, ci-cd, web-security]
+    extra: [angular, system-design, test-automation]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "HTML and CSS (97%), JavaScript (93%) and React (77%) lead; Angular is in 53%, mostly as the alternative to React. TypeScript moved to the first year: only 10% of fresher listings ask for it."
 
 - id: full-stack-engineer
   title: Full-stack engineer
   family: software
   summary: Works across the browser, the server and the database. Common in startups, where one person ships a whole feature.
   tiers:
-    hire: [html-css, javascript, react, rest-apis, backend-framework, sql, git, linear-structures, hash-tables, project-web-app, project-portfolio-api]
-    firstYear: [typescript, testing-debugging, docker, ci-cd, web-security]
+    hire: [html-css, javascript, react, nodejs, rest-apis, backend-framework, sql, git, linear-structures, hash-tables, project-web-app, project-portfolio-api]
+    firstYear: [mongodb, typescript, testing-debugging, docker, ci-cd, web-security]
     extra: [system-design, web-performance]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "JavaScript (77%), React (63%), SQL (57%) and Node (53%) lead, so Node joins the hiring list; MongoDB (30%) is a first-year skill."
 
 - id: android-developer
   title: Android developer
   family: software
   summary: Builds and ships Android apps. India is one of the largest Android markets, so the work is everywhere from startups to banks.
   tiers:
-    hire: [kotlin, android, git, oop-design, linear-structures, hash-tables, web-http, project-android-app]
-    firstYear: [testing-debugging, concurrency, ci-cd, rest-apis]
+    hire: [java, android, rest-apis, git, oop-design, linear-structures, hash-tables, project-android-app]
+    firstYear: [kotlin, testing-debugging, web-http, concurrency, ci-cd]
     extra: [system-design]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "70% of fresher listings name Java and 30% Kotlin, so Java is on the hiring list and Kotlin, which Google recommends for new apps, is right after. Working with APIs (50%) moved up."
 
 - id: qa-engineer
   title: QA engineer / SDET
   family: software
   summary: Finds out whether software works before customers do, increasingly by writing code that tests code.
   tiers:
-    hire: [programming-basics, testing-debugging, test-automation, git, sql, web-http, rest-apis, project-test-suite]
-    firstYear: [ci-cd, javascript, docker, selenium, postman]
-    extra: [web-performance, web-security]
+    hire: [programming-basics, testing-debugging, test-automation, postman, rest-apis, sql, project-test-suite]
+    firstYear: [selenium, agile-scrum, jira, ci-cd, git, web-http, javascript]
+    extra: [docker, web-performance, web-security]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Testing (97%), automation (50%) and API testing with Postman (47%) lead. Agile and Jira (around 40%) are first-year. Programming stays on the list: automation is code."
 
 - id: data-analyst
   title: Data analyst
   family: data
   summary: Turns business questions into queries, numbers and charts that someone can act on.
   tiers:
-    hire: [spreadsheets, sql, statistics, pandas, data-visualization, project-data-analysis]
-    firstYear: [bi-tools, probability, git]
+    hire: [spreadsheets, sql, programming-basics, pandas, bi-tools, data-visualization, statistics, project-data-analysis]
+    firstYear: [data-warehousing, probability, git]
     extra: [machine-learning]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Power BI or Tableau (90%) and SQL (87%) lead, then dashboards (73%), Python (70%) and Excel (63%), so Python and a BI tool are now on the hiring list. Statistics (27%) stays: interviews ask it even when listings don't."
   search: data analyst
   posting:
     source: Naukri
@@ -145,27 +180,42 @@
   family: data
   summary: Builds the pipelines and warehouses that get data from where it's created to where it's analysed, reliably and on time.
   tiers:
-    hire: [programming-basics, sql, data-warehousing, pandas, spark, shell-tools, git, project-data-pipeline]
-    firstYear: [orchestration, database-internals, cloud-basics, docker, messaging]
-    extra: [distributed-systems, kubernetes, dbt, snowflake, databricks]
+    hire: [programming-basics, sql, data-warehousing, cloud-basics, spark, git, project-data-pipeline]
+    firstYear: [databricks, orchestration, pandas, shell-tools, database-internals, docker, messaging]
+    extra: [distributed-systems, kubernetes, dbt, snowflake]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Python (77%), ETL and warehousing (67%), SQL (63%) and a cloud platform (57%) lead, so cloud joins the hiring list. Spark (40%) stays on it as the core big-data tool."
 
 - id: ml-engineer
   title: Machine learning engineer
   family: data
   summary: Trains models and, more often, gets them working reliably in a real product.
   tiers:
-    hire: [machine-learning, deep-learning, pandas, sql, git, statistics, algorithm-practice, project-ml-service]
-    firstYear: [mlops, docker, software-engineering, cloud-basics, transformers, pytorch]
+    hire: [programming-basics, machine-learning, deep-learning, pandas, sql, statistics, algorithm-practice, git, project-ml-service]
+    firstYear: [pytorch, llm-basics, cloud-basics, mlops, docker, software-engineering, transformers]
     extra: [distributed-systems, spark]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Machine learning (97%) and Python (80%) lead, then PyTorch, deep learning, LLMs and algorithms (around 40% each). LLMs are now a first-year skill."
 
 - id: devops-engineer
   title: DevOps / site reliability engineer
   family: infra
   summary: Keeps software building, deploying and running. Automation, infrastructure and being calm when things break.
   tiers:
-    hire: [shell-tools, linux-admin, git, networking, docker, ci-cd, cloud-basics, programming-basics, project-deploy-pipeline]
-    firstYear: [kubernetes, observability, infrastructure-as-code, os-processes-memory]
+    hire: [linux-admin, shell-tools, git, docker, kubernetes, ci-cd, cloud-basics, infrastructure-as-code, observability, programming-basics, project-deploy-pipeline]
+    firstYear: [azure, ansible, networking, os-processes-memory]
     extra: [distributed-systems, systems-security, concurrency]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Cloud, CI/CD and Kubernetes (77% each), Docker (67%), scripting (60%), Terraform and monitoring (53%) lead, so Kubernetes, Terraform and monitoring are now on the hiring list. Azure is in 60%."
   search: devops engineer
   posting:
     source: Naukri
@@ -232,9 +282,14 @@
   family: finance
   summary: Reads companies' numbers, builds models and valuations, and turns them into recommendations, in research, banking or a company's finance team.
   tiers:
-    hire: [accounting, corporate-finance, spreadsheets, financial-markets, statistics, project-financial-model]
-    firstYear: [bi-tools, sql, portfolio-theory, macroeconomics]
-    extra: [pandas, time-series, derivatives]
+    hire: [accounting, corporate-finance, spreadsheets, project-financial-model]
+    firstYear: [data-visualization, financial-markets, sql, portfolio-theory, macroeconomics]
+    extra: [statistics, bi-tools, pandas, time-series, derivatives]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Accounting (77%) and financial analysis or modelling (67%) lead; reporting is in 40%. Markets (17%) and statistics (3%) moved down. Excel (37%) stays: it's the tool for everything else."
 
 - id: economist
   title: Economist / economic research analyst
@@ -387,18 +442,28 @@
   family: product
   summary: Researches what users need and designs screens that meet it, from wireframes to polished prototypes.
   tiers:
-    hire: [ux-design, figma, html-css, agile-scrum]
-    firstYear: [web-accessibility, product-management, experiments]
+    hire: [ux-design, figma]
+    firstYear: [html-css, agile-scrum, web-accessibility, product-management, experiments]
     extra: [javascript, react]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "UI and UX design (100%) and Figma (60%) lead; HTML and CSS are in 27%. A portfolio of your designs matters more than anything listed."
 
 - id: business-analyst
   title: Business analyst
   family: product
   summary: Turns what a business needs into requirements a team can build, and checks the result with data. Common in IT services and banks.
   tiers:
-    hire: [sql, spreadsheets, agile-scrum, jira, bi-tools, data-visualization, technical-writing, statistics]
-    firstYear: [product-management, ux-design, accounting]
-    extra: [pandas, salesforce]
+    hire: [sql, spreadsheets, bi-tools, data-visualization, product-management, agile-scrum, technical-writing]
+    firstYear: [jira, ux-design, accounting]
+    extra: [statistics, pandas, salesforce]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Power BI or Tableau (87%), requirements and stakeholders (53%), SQL (50%) and Agile (47%) lead. Statistics (7%) moved to good to have. Excel (43%) stays: it's assumed in most listings."
 
 - id: technical-writer
   title: Technical writer
@@ -431,9 +496,14 @@
   family: data
   summary: Uses statistics, experiments and models to answer questions a business actually has, and explains the answer clearly.
   tiers:
-    hire: [statistics, probability, sql, pandas, data-visualization, machine-learning, experiments, feature-engineering, project-data-science]
-    firstYear: [git, bi-tools, query-performance]
-    extra: [deep-learning, spark]
+    hire: [programming-basics, statistics, probability, sql, pandas, data-visualization, machine-learning, feature-engineering, project-data-science]
+    firstYear: [deep-learning, experiments, bi-tools, git]
+    extra: [query-performance, spark]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Machine learning (100%), Python (87%) and statistics (67%) lead; deep learning is in 37%. Probability and feature engineering stay on the list though listings rarely name them: interviews and the work need both."
   search: data scientist
   posting:
     source: Naukri
@@ -466,54 +536,84 @@
   family: data
   summary: Builds products on top of large language models. Mostly software engineering, plus retrieval, prompting and careful evaluation.
   tiers:
-    hire: [programming-basics, git, rest-apis, llm-basics, llm-apis, embeddings, rag, llm-evaluation, project-llm-app]
-    firstYear: [machine-learning, docker, cloud-basics, testing-debugging, hugging-face]
-    extra: [deep-learning, mlops]
+    hire: [programming-basics, machine-learning, llm-basics, llm-apis, rag, embeddings, rest-apis, git, llm-evaluation, project-llm-app]
+    firstYear: [pytorch, deep-learning, sql, cloud-basics, docker, testing-debugging, hugging-face]
+    extra: [mlops]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Python and machine learning (77% each) lead, then LLMs (60%), RAG (37%) and PyTorch (43%), so machine learning moved onto the hiring list. Evaluating LLM output stays on it though listings rarely say so yet."
 
 - id: cloud-engineer
   title: Cloud engineer
   family: infra
   summary: Designs, builds and runs infrastructure on a public cloud. A large share of IT services hiring.
   tiers:
-    hire: [shell-tools, linux-admin, networking, cloud-basics, cloud-networking, cloud-iam, infrastructure-as-code, docker, git, project-cloud-app]
-    firstYear: [kubernetes, observability, ci-cd, cloud-architecture]
-    extra: [systems-security, distributed-systems, azure, gcp]
+    hire: [linux-admin, shell-tools, networking, cloud-basics, azure, cloud-networking, cloud-iam, infrastructure-as-code, docker, programming-basics, git, project-cloud-app]
+    firstYear: [gcp, kubernetes, ci-cd, observability, cloud-architecture]
+    extra: [systems-security, distributed-systems]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Cloud (80%), Azure (63%), Python and Docker (57%) and scripting (53%) lead, so Azure and programming are on the hiring list. Cloud networking and IAM stay on it: listings say \"cloud\" and mean both."
 
 - id: support-engineer
   title: Application support engineer
   family: infra
   summary: Keeps business applications running for the people who use them. Incidents, logs, databases and a lot of careful detective work.
   tiers:
-    hire: [sql, shell-tools, linux-admin, networking, web-http, incident-management, log-analysis, git, project-support-runbook]
-    firstYear: [query-performance, observability, java, messaging, ci-cd]
-    extra: [cloud-basics, docker, servicenow]
+    hire: [sql, linux-admin, networking, testing-debugging, incident-management, log-analysis, project-support-runbook]
+    firstYear: [os-processes-memory, shell-tools, web-http, query-performance, observability, java]
+    extra: [git, messaging, ci-cd, cloud-basics, docker, servicenow]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Troubleshooting (57%), incident handling (47%) and networking (37%) lead. SQL (20%) and logs stay on the hiring list: support work reads both daily."
 
 - id: security-analyst
   title: Security analyst (SOC)
   family: infra
   summary: Watches for attacks, investigates alerts and responds when something gets through.
   tiers:
-    hire: [networking, linux-admin, shell-tools, security-fundamentals, log-analysis, threat-detection, incident-management, web-security, project-ctf]
-    firstYear: [programming-basics, systems-security, cryptography, cloud-basics, wireshark, splunk]
+    hire: [networking, linux-admin, security-fundamentals, log-analysis, threat-detection, incident-management, web-security, project-ctf]
+    firstYear: [shell-tools, splunk, cloud-basics, programming-basics, systems-security, cryptography, wireshark]
     extra: [cloud-iam]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Security basics (100%), SIEM and threat detection (77%), vulnerabilities (50%) and networking (47%) lead. Scripting (17%) moved to the first year."
 
 - id: embedded-engineer
   title: Embedded engineer
   family: software
   summary: Writes the software inside devices, from sensors to cars. A natural fit for electronics and electrical graduates.
   tiers:
-    hire: [c-and-memory, digital-logic, computer-architecture, microcontrollers, embedded-protocols, git, project-embedded]
-    firstYear: [rtos, os-processes-memory, concurrency, testing-debugging]
+    hire: [c-and-memory, cpp, microcontrollers, embedded-protocols, rtos, digital-logic, computer-architecture, testing-debugging, git, project-embedded]
+    firstYear: [linux-admin, pcb-design, programming-basics, os-processes-memory, concurrency]
     extra: [networking]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Microcontrollers (77%), protocols like I2C, SPI and CAN (67%), C++ (67%), C (57%), RTOS and testing (53%) lead, so C++ and RTOS moved onto the hiring list. Digital logic stays: electronics interviews start there."
 
 - id: sap-consultant
   title: SAP consultant
   family: enterprise
   summary: Sets up and supports SAP, the software that runs finance, buying, sales and production at large companies. Indian IT services firms hire freshers into SAP practices every year.
   tiers:
-    hire: [business-processes, sap-basics, accounting, spreadsheets, sql]
-    firstYear: [sap-abap, data-warehousing]
-    extra: [programming-basics, agile-scrum]
+    hire: [sap-basics, business-processes]
+    firstYear: [accounting, testing-debugging, sap-abap, spreadsheets, sql]
+    extra: [data-warehousing, programming-basics, agile-scrum]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Every listing names an SAP module; testing (40%), accounting (33%) and ABAP (27%) follow. Business processes stay on the list: they're what functional SAP work is."
   search: SAP consultant fresher
 
 - id: mainframe-developer
@@ -586,6 +686,151 @@
     extra: [linear-models, time-series, programming-basics]
   search: actuarial analyst
 
+- id: analog-design-engineer
+  title: Analog design engineer
+  family: hardware
+  summary: Designs the analog and mixed-signal circuits inside chips, like amplifiers, data converters and power management, and simulates them in SPICE. Hires electronics graduates, often with an M.Tech.
+  tiers:
+    hire: [circuit-analysis, analog-electronics, signals-and-systems, digital-logic, shell-tools]
+    firstYear: [asic-flow, verilog]
+    extra: [programming-basics, control-systems]
+  search: analog design engineer
+
+- id: robotics-engineer
+  title: Robotics engineer
+  family: hardware
+  summary: Builds and programs robots, from warehouse and factory arms to drones, mostly in C++ and Python on ROS. Hires electronics, electrical and mechanical graduates who can show a robot they built.
+  tiers:
+    hire: [programming-basics, cpp, linear-algebra, robotics, control-systems, ros, microcontrollers, git, project-robot]
+    firstYear: [linux-admin, computer-vision, testing-debugging]
+    extra: [machine-learning, embedded-protocols]
+  search: robotics engineer
+
+- id: automation-engineer
+  title: PLC and automation engineer
+  family: hardware
+  summary: Programs the PLCs and SCADA systems that run factories, plants and buildings, then commissions them on site. Electrical and instrumentation graduates fill most of these jobs.
+  tiers:
+    hire: [circuit-analysis, digital-logic, electrical-machines, plc-scada, control-systems, spreadsheets]
+    firstYear: [networking, power-electronics]
+    extra: [programming-basics, sql]
+  search: PLC SCADA engineer
+
+- id: telecom-engineer
+  title: Telecom and RF engineer
+  family: hardware
+  summary: Plans, tests and tunes mobile and wireless networks, from radio coverage to the core network. Telecom vendors and operators hire electronics graduates in batches.
+  tiers:
+    hire: [signals-and-systems, communication-systems, electromagnetics, networking, spreadsheets]
+    firstYear: [linux-admin, shell-tools, programming-basics]
+    extra: [cloud-basics, sql]
+  search: telecom engineer
+
+- id: power-electronics-engineer
+  title: Power electronics engineer
+  family: hardware
+  summary: Designs converters, inverters, chargers and motor drives, now mostly for electric vehicles, solar and batteries. Electrical and electronics graduates with lab projects do well.
+  tiers:
+    hire: [circuit-analysis, analog-electronics, power-electronics, control-systems, microcontrollers, pcb-design]
+    firstYear: [electrical-machines, c-and-memory]
+    extra: [signals-and-systems, programming-basics]
+  search: power electronics engineer
+
+- id: electrical-engineer
+  title: Electrical engineer
+  family: hardware
+  summary: Designs, installs and maintains electrical systems in plants, buildings, substations and solar farms. Graduate engineer trainee programmes at power, manufacturing and infrastructure companies are the usual way in.
+  tiers:
+    hire: [circuit-analysis, electrical-machines, power-systems]
+    firstYear: [plc-scada, power-electronics, spreadsheets, control-systems]
+    extra: [programming-basics]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Machines and transformers (40%) and power systems (30%) lead. Most listings name few skills, as core trainee jobs test your degree subjects instead; circuits stay on the list for that reason."
+  search: electrical engineer fresher
+
+- id: management-consultant
+  title: Management consultant (analyst)
+  family: business
+  summary: Helps companies answer business questions, like whether to enter a market or how to cut costs, with research, numbers and slides. Big consulting firms and their India offices hire graduates as business analysts or associates.
+  tiers:
+    hire: [problem-structuring, spreadsheets, statistics, accounting, corporate-finance, data-visualization]
+    firstYear: [sql, bi-tools, process-improvement]
+    extra: [pandas, product-management]
+  search: associate consultant
+
+- id: marketing-analyst
+  title: Marketing analyst
+  family: business
+  summary: Measures what marketing spend brings in, from campaigns and ads to website visits, and tests what works better. Common at consumer brands, e-commerce and agencies.
+  tiers:
+    hire: [marketing-fundamentals, digital-marketing, spreadsheets, web-analytics]
+    firstYear: [sql, statistics, experiments, bi-tools, pandas]
+    extra: [machine-learning]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Most \"marketing analyst\" listings in India are marketing roles with numbers: marketing (83%), digital marketing (60%), Excel (40%) and Google Analytics (37%). SQL and statistics are under 10% at entry level, so they moved to the first year."
+  search: marketing analyst
+
+- id: digital-marketing-executive
+  title: Digital marketing executive
+  family: business
+  summary: Runs a brand's search, social, email and ad campaigns and reports how they did. A common first job for commerce and BBA graduates.
+  tiers:
+    hire: [marketing-fundamentals, digital-marketing, web-analytics, spreadsheets]
+    firstYear: [experiments, data-visualization]
+    extra: [html-css, sql]
+  evidence:
+    postings: 29
+    region: India, entry level
+    collected: 2026-11
+    note: "Digital marketing (97%), marketing (93%) and analytics tools (59%) lead. Excel stays on the list for the reporting part of the job."
+  search: digital marketing executive
+
+- id: hr-analyst
+  title: HR analyst
+  family: business
+  summary: Turns hiring, attrition, pay and performance data into reports and answers for HR teams. Often starts as an HR executive role with a lot of Excel.
+  tiers:
+    hire: [hr-fundamentals, spreadsheets]
+    firstYear: [data-visualization, bi-tools, statistics, sql]
+    extra: [pandas]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Entry-level \"HR analyst\" listings are mostly HR roles with Excel: HR work (93%) and Excel (33%). Reporting tools come later, as the job grows into people analytics."
+  search: HR analyst
+
+- id: operations-analyst
+  title: Operations analyst
+  family: business
+  summary: Tracks how a business runs day to day, like orders, deliveries and turnaround times, finds where it slows down, and fixes it. Common at e-commerce, logistics, banks and outsourcing firms.
+  tiers:
+    hire: [spreadsheets, data-visualization]
+    firstYear: [process-improvement, accounting, sql, bi-tools, business-processes]
+    extra: [statistics, pandas, linear-programming]
+  evidence:
+    postings: 30
+    region: India, entry level
+    collected: 2026-11
+    note: "Operations listings vary by industry. Excel (50%) and reporting (27%) are what they share; finance operations adds accounting (33%), and process improvement is in 17%."
+  search: operations analyst
+
+- id: sales-operations-analyst
+  title: Sales operations analyst
+  family: business
+  summary: Keeps the sales team's data, targets and reports in order, mostly in a CRM like Salesforce, and finds where deals get stuck.
+  tiers:
+    hire: [spreadsheets, salesforce, bi-tools, sql, data-visualization]
+    firstYear: [marketing-fundamentals, statistics]
+    extra: [experiments]
+  search: sales operations analyst
+
 - id: gate-da
   title: GATE data science and AI
   family: exams
@@ -625,3 +870,19 @@
   summary: The MA paper of GATE, for M.Sc., M.Tech and Ph.D. admissions in mathematics and some PSU and research jobs. Mapped from the official GATE 2027 syllabus (IIT Madras).
   tiers:
     hire: [calculus, multivariable-calculus, linear-algebra, real-analysis, complex-analysis, ordinary-differential-equations, abstract-algebra, functional-analysis, numerical-analysis, partial-differential-equations, topology, linear-programming]
+
+- id: gate-ec
+  title: GATE electronics and communication
+  family: exams
+  kind: exam
+  summary: The EC paper of GATE, for M.Tech admissions and PSU jobs in electronics. Mapped from the official GATE 2027 syllabus (IIT Madras).
+  tiers:
+    hire: [linear-algebra, calculus, ordinary-differential-equations, complex-analysis, probability, circuit-analysis, signals-and-systems, analog-electronics, digital-logic, computer-architecture, control-systems, communication-systems, electromagnetics]
+
+- id: gate-ee
+  title: GATE electrical
+  family: exams
+  kind: exam
+  summary: The EE paper of GATE, for M.Tech admissions and PSU jobs in electrical engineering. Mapped from the official GATE 2027 syllabus (IIT Madras). Electrical measurements is on the paper but isn't a stop here yet.
+  tiers:
+    hire: [linear-algebra, calculus, ordinary-differential-equations, complex-analysis, probability, circuit-analysis, electromagnetics, signals-and-systems, electrical-machines, power-systems, control-systems, analog-electronics, digital-logic, power-electronics]

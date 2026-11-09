@@ -63,7 +63,7 @@
   cost: low
   price: "Free to learn; ₹1,000 per proctored exam"
   why: "Courses by IIT and IISc faculty, from programming to machine learning and finance. The exam certificate is well known to Indian colleges and employers."
-  routes: [software-engineer, data-scientist, ml-engineer, embedded-engineer, economist, statistician, vlsi-engineer, operations-research-analyst]
+  routes: [software-engineer, data-scientist, ml-engineer, embedded-engineer, economist, statistician, vlsi-engineer, operations-research-analyst, analog-design-engineer, electrical-engineer, power-electronics-engineer, telecom-engineer, automation-engineer, robotics-engineer]
 
 - id: aws-cloud-practitioner
   title: AWS Certified Cloud Practitioner
@@ -123,7 +123,7 @@
   cost: mid
   price: "Priced by country"
   why: "The Power BI certificate. Power BI is the BI tool Indian analyst postings name most, so this one is asked for by name."
-  routes: [data-analyst, bi-developer, product-analyst]
+  routes: [data-analyst, bi-developer, product-analyst, operations-analyst, hr-analyst, sales-operations-analyst, marketing-analyst]
 
 - id: google-data-analytics
   title: Google Data Analytics Professional Certificate
@@ -133,7 +133,7 @@
   cost: mid
   price: "Coursera subscription (US$49 a month in the US, less in many countries); about 240 hours"
   why: "Popular with career switchers. Recruiters read it as a sign you've started, not as proof; pair it with your own analysis projects."
-  routes: [data-analyst]
+  routes: [data-analyst, operations-analyst, marketing-analyst]
 
 - id: aws-solutions-architect
   title: AWS Certified Solutions Architect – Associate
@@ -173,7 +173,7 @@
   cost: mid
   price: "US$300"
   why: "The standard networking certificate. Asked for in network engineer and administrator postings, and useful for security."
-  routes: [system-administrator, security-analyst, security-engineer]
+  routes: [system-administrator, security-analyst, security-engineer, telecom-engineer]
 
 - id: isc2-cc
   title: ISC2 Certified in Cybersecurity (CC)
@@ -203,7 +203,7 @@
   cost: mid
   price: "US$200; retake US$100"
   why: "Practically required for Salesforce admin and developer jobs. The Trailhead training is free."
-  routes: [salesforce-developer]
+  routes: [salesforce-developer, sales-operations-analyst]
 
 - id: psm-1
   title: Professional Scrum Master I (PSM I)
@@ -274,3 +274,23 @@
   price: "Paid; fee on the Institute's site"
   why: "Not a certificate but the door in: you need ACET to join the Institute as a student, and Indian insurers expect it, plus a few papers cleared, from actuarial freshers."
   routes: [actuarial-analyst]
+
+- id: google-analytics-cert
+  title: Google Analytics Certification
+  issuer: Google
+  url: https://skillshop.docebosaas.com/learn/learning-plans/11323/google-analytics-certification
+  group: business
+  cost: free
+  price: "Free training and exam; valid 12 months"
+  why: "Marketing and growth postings name Google Analytics often, and this is Google's own test of it. Renew it yearly."
+  routes: [marketing-analyst, digital-marketing-executive]
+
+- id: hubspot-inbound-cert
+  title: HubSpot Inbound
+  issuer: HubSpot Academy
+  url: https://academy.hubspot.com/courses/inbound
+  group: business
+  cost: free
+  price: "Free training, with a free account"
+  why: "A well-known starting point for digital marketing, and a common line on fresher marketing resumes."
+  routes: [digital-marketing-executive, marketing-analyst]

@@ -17,7 +17,10 @@
   short: Enterprise IT
   title: Enterprise IT (SAP, mainframes, automation)
 - id: hardware
-  short: Chips
-  title: Chips and hardware
+  short: Electronics
+  title: Electronics and electrical (ECE, EEE)
+- id: business
+  short: Business
+  title: Business, consulting and marketing
 - id: exams
   title: Exams

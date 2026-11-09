@@ -37,6 +37,7 @@ const monthOf = (d: string) => new Date(d).toLocaleDateString('en-IN', { month: 
 const allStartups = c.startups;
 const startupFreshers = allStartups.experience.filter(([k]) => /new grads|Internship/.test(k)).reduce((n, [, v]) => n + v, 0);
 const posting = role.posting;
+const evidence = role.evidence ?? base?.evidence;
 const isJob = role.kind !== 'exam';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.slice(0, 4)}`;
@@ -64,15 +65,25 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
     )}
     {isJob && <p class="jump"><a href="#the-job">{posting ? 'What the job looks like, from real listings' : 'See real openings for this job'}</a></p>}
     {
-      role.evidence ? (
+      evidence ? (
         <p class="evidence">
-          Based on {role.evidence.postings} job postings ({role.evidence.region}, collected {role.evidence.collected}).
-          {role.evidence.note && ` ${role.evidence.note}`}
+          {base && !role.evidence ? (
+            <>
+              Its route, <a href={`/roles/${base.id}`}>{base.title}</a>, was checked against {evidence.postings} entry-level
+              Naukri listings in {monthName(evidence.collected)}.
+            </>
+          ) : (
+            <>
+              Checked against {evidence.postings} entry-level Naukri listings in {monthName(evidence.collected)}.
+              {evidence.note && ` ${evidence.note}`}
+            </>
+          )}{' '}
+          <a href={`https://github.com/shivemn/terminus/blob/main/research/postings/${base && !role.evidence ? base.id : role.id}.csv`}>The listings</a>
         </p>
       ) : (
         <p class="evidence draft">
           {role.kind === 'exam'
-            ? 'Draft. Based on the published syllabus as we read it.'
+            ? 'Mapped from the published syllabus as we read it.'
             : posting
               ? 'Draft. The route is our judgement, checked against real listings below.'
               : 'Draft. This route is our judgement and hasn’t been checked against real job postings yet.'}{' '}

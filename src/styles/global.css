@@ -66,10 +66,12 @@
   --hardware: #6b7300;
   --games: #c2410c;
   --blockchain: #4d7c8a;
+  --electrical: #a16207;
+  --business: #0e7490;
 
   /* Lines on the home page network map, one per family of jobs. */
   --l-software: #1c64c8; --l-data: #e8590c; --l-infra: #8a5a2b; --l-finance: #00796b; --l-product: #b5179e;
-  --l-enterprise: #4b4fb5; --l-hardware: #5f6b00;
+  --l-enterprise: #4b4fb5; --l-hardware: #5f6b00; --l-business: #0e6e86;
   --l-text: #fff;
 
   /* Wide enough for grids and maps on a big screen; paragraphs keep their own measure. */
@@ -83,7 +85,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --l-software: #6aa5ff; --l-data: #ff9a52; --l-infra: #cf9b62; --l-finance: #4fd1c0; --l-product: #f28ad8;
-    --l-enterprise: #a3a6ff; --l-hardware: #c9d84e;
+    --l-enterprise: #a3a6ff; --l-hardware: #c9d84e; --l-business: #6fd6ec;
     --l-text: #000;
     --paper: #0f1114;
     --platform: #191c21;
@@ -112,6 +114,8 @@
     --hardware: #c9d84e;
     --games: #ff8a5c;
     --blockchain: #8cc6d6;
+    --electrical: #e3b341;
+    --business: #5fd4ea;
     color-scheme: dark;
   }
 }
@@ -124,6 +128,7 @@
 [data-family='product'] { --family: var(--l-product); }
 [data-family='enterprise'] { --family: var(--l-enterprise); }
 [data-family='hardware'] { --family: var(--l-hardware); }
+[data-family='business'] { --family: var(--l-business); }
 [data-family='exams'] { --family: var(--ink); }
 
 /* Each area sets --line for everything inside it. */
@@ -145,6 +150,8 @@
 [data-area='hardware'] { --line: var(--hardware); }
 [data-area='games'] { --line: var(--games); }
 [data-area='blockchain'] { --line: var(--blockchain); }
+[data-area='electrical'] { --line: var(--electrical); }
+[data-area='business'] { --line: var(--business); }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }

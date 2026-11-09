@@ -1,5 +1,13 @@
 # Changelog
 
+## Checked against real listings; electronics, electrical and business routes; 321 jobs
+
+- **25 routes checked against 749 real listings.** For each, the first 30 entry-level Naukri listings were opened and tagged with the stops they ask for. The hiring lists changed where the listings disagreed: Python and a BI tool for data analysts, Java before Kotlin for Android, Kubernetes, Terraform and monitoring for DevOps, Azure for cloud engineers, C++ and RTOS for embedded, Node for full stack, TypeScript moved to the first year for frontend. Where a route keeps something the listings rarely name (data structures for SDEs), the page says why. Each checked route says so at the top and links to its listings in `research/postings/`; job titles on those routes say their route was checked.
+- **Electronics and electrical (ECE, EEE):** analog design, robotics, PLC and automation, telecom and RF, power electronics and electrical engineer routes, and GATE EC and GATE EE. 13 new stops, from circuit analysis and signals to machines, power systems, PLCs and ROS, with free courses from MIT, Caltech, Northwestern and Virginia Tech. 33 new job titles, every salary and interview page checked. ECE and EEE graduates are new starting points, and there's an interview guide for core engineering jobs.
+- **Business, consulting and marketing:** management consultant, marketing analyst, digital marketing executive, HR analyst, operations analyst and sales operations analyst, with 30 titles such as SEO analyst, MIS analyst, payroll executive and revenue operations analyst. New stops for case interviews, Lean and Six Sigma, marketing, Google Analytics, digital marketing and HR, and free Google Analytics and HubSpot certificates.
+- 321 jobs and 8 exams in all. The map has a Business line, and the Chips line is now Electronics.
+- Fixed the background picker running off the edge of a phone screen.
+
 ## Calendars, closest jobs, interviews, certifications and 248 jobs
 
 - **Put your route in your calendar.** Pick the days and time you study and a start date; Terminus lays the remaining stops out as dated sessions at your weekly hours and downloads a calendar file for Google Calendar, Outlook or Apple Calendar. Each session names its stop and links to it.

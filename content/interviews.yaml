@@ -127,7 +127,7 @@
 - id: chips
   title: Chip design (VLSI)
   who: "Semiconductor companies and design-services firms hiring electronics graduates into design, verification and physical design."
-  routes: [vlsi-engineer]
+  routes: [vlsi-engineer, analog-design-engineer]
   rounds:
     - name: Written or online test
       what: "Aptitude, then digital electronics: logic gates, flip-flops, counters, state machines and timing. Some add basic C or CMOS questions."
@@ -142,6 +142,44 @@
       what: "Your final-year or internship project in depth: what you built, what broke and how you found it. Then the usual HR questions."
       practice: [tih-behavioral]
   revise: [digital-logic, verilog, design-verification, computer-architecture]
+
+- id: core-engineering
+  title: Core electronics and electrical jobs
+  who: "Power, manufacturing, telecom, automotive and automation companies, and PSUs, hiring ECE and EEE graduates as graduate engineer trainees."
+  routes: [electrical-engineer, power-electronics-engineer, automation-engineer, telecom-engineer, robotics-engineer]
+  rounds:
+    - name: Written or online test
+      what: "Aptitude, then multiple-choice questions on your branch's core subjects, close to GATE in style. PSUs often shortlist on GATE scores instead."
+      practice: [indiabix]
+    - name: Technical interview
+      what: "Fundamentals from your degree, asked plainly: why a transformer won't work on DC, how an induction motor starts, what a PLC scan cycle is, how modulation works. Then your project, in detail."
+      practice: [gfg-interview-experiences]
+    - name: Practical or site questions
+      what: "For plant and site roles, safety, reading single-line diagrams and how you'd find a fault. For design roles, a small circuit or control problem on paper."
+      practice: [openplc-getting-started]
+    - name: HR interview
+      what: "Whether you'll relocate or work at a plant or on site, shifts, and why this industry rather than IT."
+      practice: [tih-behavioral]
+  revise: [circuit-analysis, electrical-machines, analog-electronics, control-systems]
+
+- id: business
+  title: Consulting, marketing and business roles
+  who: "Consulting firms, consumer brands, e-commerce, banks and outsourcing firms hiring commerce, BBA, economics and other graduates into analyst roles."
+  routes: [management-consultant, marketing-analyst, digital-marketing-executive, hr-analyst, operations-analyst, sales-operations-analyst]
+  rounds:
+    - name: Online test
+      what: "Numerical and logical reasoning, reading data from charts, and English. Consulting firms add a timed business-reasoning test."
+      practice: [indiabix, zetamac]
+    - name: Case or guesstimate
+      what: "Estimate a market (how many cars are sold in Pune a year?) or work through a business problem out loud, with structure and quick arithmetic. Consulting interviews are mostly this."
+      practice: [mckinsey-interviewing, bain-case-interview]
+    - name: Excel or data task
+      what: "For analyst roles, a short task in Excel or Google Sheets: clean a table, build a pivot, find the answer and say what it means."
+      practice: [kaggle-learn]
+    - name: Fit and HR
+      what: "Why this role and company, a time you led or persuaded people, and whether your story hangs together."
+      practice: [tih-behavioral]
+  revise: [spreadsheets, statistics, problem-structuring]
 
 - id: finance
   title: Finance and economics

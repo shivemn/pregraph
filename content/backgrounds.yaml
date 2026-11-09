@@ -17,11 +17,25 @@
   description: Comfortable with proof, discrete structures, linear algebra, probability and statistics, with little or no programming.
   knows: [calculus, multivariable-calculus, proofs, discrete-math, linear-algebra, probability, statistics]
 
+- id: ece-grad
+  group: stem
+  phrase: an electronics (ECE) graduate
+  title: Electronics (ECE) graduate
+  description: Circuits, signals, digital logic and communication are done, plus some C. What's left is the tools and practice the job adds.
+  knows: [calculus, multivariable-calculus, linear-algebra, probability, circuit-analysis, analog-electronics, signals-and-systems, digital-logic, computer-architecture, communication-systems, electromagnetics, control-systems, c-and-memory, microcontrollers]
+
+- id: eee-grad
+  group: stem
+  phrase: an electrical (EEE) graduate
+  title: Electrical (EEE) graduate
+  description: Circuits, machines, power systems and power electronics are done. What's left is the tools and practice the job adds.
+  knows: [calculus, multivariable-calculus, linear-algebra, probability, circuit-analysis, analog-electronics, signals-and-systems, digital-logic, control-systems, electrical-machines, power-systems, power-electronics, electromagnetics]
+
 - id: engineering-grad
   group: stem
   phrase: an engineering graduate, not CS
-  title: Engineering graduate (not CS)
-  description: Mechanical, civil, electrical or similar. Engineering maths is done; programming probably stopped at a first-year course.
+  title: Other engineering graduate
+  description: Mechanical, civil, chemical or similar. Engineering maths is done; programming probably stopped at a first-year course.
   knows: [calculus, multivariable-calculus, linear-algebra, probability]
 
 - id: science-grad

@@ -43,8 +43,8 @@
   resources: [daily-ui]
 
 - id: embedded
-  title: Embedded and chips
-  resources: [wokwi, hdlbits, eda-playground]
+  title: Embedded, chips and robotics
+  resources: [wokwi, hdlbits, eda-playground, openplc-getting-started, ros2-tutorials]
 
 - id: games-web3
   title: Games and smart contracts
@@ -53,3 +53,7 @@
 - id: mainframe
   title: Mainframes
   resources: [ibm-z-xplore]
+
+- id: business
+  title: Cases and business
+  resources: [mckinsey-interviewing, bain-case-interview]

@@ -235,7 +235,7 @@ export const certificationSchema = z.object({
   title: z.string().min(1),
   issuer: z.string().min(1),
   url: z.string().url(),
-  group: z.enum(['software', 'data-ai', 'cloud', 'systems', 'security', 'finance', 'platforms', 'product', 'hardware', 'enterprise']),
+  group: z.enum(['software', 'data-ai', 'cloud', 'systems', 'security', 'finance', 'platforms', 'product', 'hardware', 'enterprise', 'business']),
   cost: z.enum(['free', 'low', 'mid', 'high']),
   price: z.string().min(1),
   why: z.string().min(1),

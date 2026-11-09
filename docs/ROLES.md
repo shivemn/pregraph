@@ -25,7 +25,9 @@ Every role in `content/roles.yaml` starts as a draft: a list of what we think th
     note: DSA kept in "hire" although postings rarely list it; interview loops test it.
 ```
 
-The role page then says "Based on 52 job postings" instead of "Draft".
+The role page then says "Checked against 52 entry-level Naukri listings in November 2026" instead of "Draft", with a link to the CSV. Job titles on that route say their route was checked.
+
+The first 25 routes were checked this way in November 2026; how is in `research/postings/README.md`.
 
 ## Routes and job titles
 

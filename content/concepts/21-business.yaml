@@ -1,0 +1,70 @@
+# Business and consulting: what commerce, BBA and economics graduates need for
+# analyst jobs in consulting, marketing, HR, operations and sales.
+
+- id: problem-structuring
+  title: Structured problem solving and cases
+  area: business
+  summary: Breaking a vague business question into parts, estimating sizes, testing hypotheses with numbers, and ending with a clear recommendation. What case interviews test.
+  hours: 30
+  recommends: [spreadsheets, statistics]
+  resources:
+    - resource: mckinsey-interviewing
+      locator: "Sample cases, worked through on paper first"
+      verified: true
+    - resource: bain-case-interview
+      locator: "Coffee Shop Co. and FashionCo. practice cases"
+      verified: true
+
+- id: process-improvement
+  title: Process improvement (Lean and Six Sigma)
+  area: business
+  summary: Mapping how work flows, finding waste and variation, and fixing it with data. The DMAIC steps, value stream maps and control charts.
+  hours: 20
+  recommends: [statistics]
+  resources:
+    - resource: mit-16660
+      locator: "All lectures"
+      verified: true
+
+- id: marketing-fundamentals
+  title: Marketing fundamentals
+  area: business
+  summary: Customers, segments and positioning, pricing, channels and how a company decides what to sell to whom.
+  hours: 20
+  resources:
+    - resource: mit-15810
+      locator: "Lecture notes"
+      verified: true
+
+- id: web-analytics
+  title: Web analytics (Google Analytics 4)
+  area: business
+  kind: tool
+  summary: Tracking what people do on a website or app, setting up events and conversions, and reading the reports marketing teams run on.
+  hours: 15
+  recommends: [marketing-fundamentals]
+  resources:
+    - resource: skillshop-ga4
+      locator: "The whole learning plan"
+      verified: true
+
+- id: digital-marketing
+  title: Digital marketing
+  area: business
+  summary: Search, social, email and content marketing, paid ads, and how each is measured.
+  hours: 20
+  recommends: [marketing-fundamentals]
+  resources:
+    - resource: hubspot-inbound
+      locator: "The whole course"
+      verified: true
+
+- id: hr-fundamentals
+  title: HR fundamentals
+  area: business
+  summary: Hiring, pay, performance, training and employee relations, and the numbers HR teams track, like attrition and time to hire.
+  hours: 15
+  resources:
+    - resource: mit-15660
+      locator: "Lecture notes"
+      verified: true

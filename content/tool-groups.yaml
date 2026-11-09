@@ -48,12 +48,12 @@
 
 - id: workplace
   title: Workplace platforms
-  tools: [jira, figma, salesforce, servicenow]
+  tools: [jira, figma, salesforce, servicenow, web-analytics]
 
 - id: enterprise
   title: Enterprise platforms
   tools: [sap-basics, sap-abap, cobol, rpa-uipath]
 
 - id: hardware-games-web3
-  title: Chips, games and blockchain
-  tools: [verilog, pcb-design, game-engines, solidity]
+  title: Chips, electronics, games and blockchain
+  tools: [verilog, pcb-design, plc-scada, ros, game-engines, solidity]
