@@ -1,0 +1,246 @@
+# Certificates worth having, per route: free ones, and paid ones recruiters
+# actually ask for. Prices and terms are as each issuer's official page showed
+# them in November 2026; they change, so the page says to check before paying.
+#
+# cost: free | low (under about ₹10,000) | mid (about ₹10,000–30,000) | high (more)
+# routes: job routes this certificate helps with (titles follow their route).
+
+- id: oci-foundations
+  title: Oracle Cloud Infrastructure Foundations Associate
+  issuer: Oracle
+  url: https://mylearn.oracle.com/ou/learning-path/become-an-oci-foundations-associate-2026/163541
+  group: cloud
+  cost: free
+  price: "Free course and exam"
+  why: "Oracle keeps its Foundations-level training and exams free. A fair first cloud credential, though Indian job posts ask for AWS and Azure far more often."
+  routes: [cloud-engineer, devops-engineer, system-administrator, support-engineer]
+
+- id: oracle-agentic-ai-foundations
+  title: Oracle Agentic AI Foundations
+  issuer: Oracle
+  url: https://blogs.oracle.com/oracleuniversity/oci-certification-learning-paths-and-exams-2026-updates-now-available
+  group: data-ai
+  cost: free
+  price: "Free course and exam"
+  why: "Oracle's free entry certificate on AI agents and how they're built. Useful to show interest; for AI jobs, projects you've built matter much more."
+  routes: [ai-engineer, ml-engineer, data-scientist]
+
+- id: microsoft-applied-skills
+  title: Microsoft Applied Skills
+  issuer: Microsoft
+  url: https://learn.microsoft.com/en-us/credentials/support/appliedskills-process-overview
+  group: cloud
+  cost: free
+  price: "Free lab assessment, online"
+  why: "A free lab-based assessment for one skill at a time, such as Power Automate, Microsoft Fabric or Active Directory. Good proof that you can actually do the task."
+  routes: [bi-developer, system-administrator, cloud-engineer, data-engineer]
+
+- id: freecodecamp
+  title: freeCodeCamp certifications
+  issuer: freeCodeCamp
+  url: https://www.freecodecamp.org/news/freecodecamp-certifications/
+  group: software
+  cost: free
+  price: "Free; five projects per certification"
+  why: "Eleven certifications, from Responsive Web Design to Data Analysis with Python. Each needs five projects you build yourself, so the work doubles as portfolio pieces, which is what employers look at."
+  routes: [frontend-engineer, full-stack-engineer, backend-engineer, data-analyst, qa-engineer]
+
+- id: hackerrank-skills
+  title: HackerRank skills certifications
+  issuer: HackerRank
+  url: https://help.hackerrank.com/articles/2563639100-introduction-to-certification
+  group: software
+  cost: free
+  price: "Free timed tests, online"
+  why: "Short timed tests, 21 certificates across 13 skills such as problem solving, SQL, Python, Java and React. A quick way to show a basic level, and practice for online assessments."
+  routes: [software-engineer, backend-engineer, frontend-engineer, data-analyst, qa-engineer]
+
+- id: nptel
+  title: NPTEL course certificates
+  issuer: NPTEL (IITs and IISc)
+  url: https://nptel.ac.in/aboutus
+  group: software
+  cost: low
+  price: "Free to learn; ₹1,000 per proctored exam"
+  why: "Courses by IIT and IISc faculty, from programming to machine learning and finance. The exam certificate is well known to Indian colleges and employers."
+  routes: [software-engineer, data-scientist, ml-engineer, embedded-engineer, economist, statistician]
+
+- id: aws-cloud-practitioner
+  title: AWS Certified Cloud Practitioner
+  issuer: Amazon Web Services
+  url: https://aws.amazon.com/certification/certified-cloud-practitioner/
+  group: cloud
+  cost: low
+  price: "US$100"
+  why: "The entry AWS exam, open to people new to cloud. AWS is the cloud Indian job posts name most, so it's a sensible first paid certificate for cloud and support roles."
+  routes: [cloud-engineer, devops-engineer, support-engineer, solutions-architect, data-engineer]
+
+- id: azure-fundamentals
+  title: Microsoft Azure Fundamentals (AZ-900)
+  issuer: Microsoft
+  url: https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/
+  group: cloud
+  cost: low
+  price: "Priced by country"
+  why: "The entry Azure exam. Common in enterprise and banking projects, where Azure is often the company cloud."
+  routes: [cloud-engineer, devops-engineer, system-administrator, support-engineer]
+
+- id: google-cloud-digital-leader
+  title: Google Cloud Digital Leader
+  issuer: Google Cloud
+  url: https://cloud.google.com/learn/certification/cloud-digital-leader
+  group: cloud
+  cost: low
+  price: "US$99; valid 3 years"
+  why: "Google Cloud's entry exam, with no prerequisites. Less asked for than AWS or Azure in India."
+  routes: [cloud-engineer, data-engineer]
+
+- id: terraform-associate
+  title: HashiCorp Terraform Associate (004)
+  issuer: HashiCorp
+  url: https://developer.hashicorp.com/certifications/terraform-associate
+  group: cloud
+  cost: low
+  price: "US$70.50; valid 2 years"
+  why: "Cheap and well regarded. Terraform shows up in about a quarter of DevOps postings."
+  routes: [devops-engineer, platform-engineer, cloud-engineer]
+
+- id: nism-equity-derivatives
+  title: NISM Series VIII Equity Derivatives
+  issuer: National Institute of Securities Markets
+  url: https://www.nism.ac.in/equity-derivatives/
+  group: finance
+  cost: low
+  price: "From ₹1,500; valid 3 years"
+  why: "The minimum knowledge benchmark for people dealing in equity derivatives at trading members. Brokers and trading desks in India often ask for it."
+  routes: [financial-analyst, risk-analyst, quant-developer]
+
+- id: pl-300
+  title: Microsoft Power BI Data Analyst (PL-300)
+  issuer: Microsoft
+  url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300
+  group: data-ai
+  cost: mid
+  price: "Priced by country"
+  why: "The Power BI certificate. Power BI is the BI tool Indian analyst postings name most, so this one is asked for by name."
+  routes: [data-analyst, bi-developer, product-analyst]
+
+- id: google-data-analytics
+  title: Google Data Analytics Professional Certificate
+  issuer: Google, on Coursera
+  url: https://grow.google/certificates/data-analytics/
+  group: data-ai
+  cost: mid
+  price: "Coursera subscription (US$49 a month in the US, less in many countries); about 240 hours"
+  why: "Popular with career switchers. Recruiters read it as a sign you've started, not as proof; pair it with your own analysis projects."
+  routes: [data-analyst]
+
+- id: aws-solutions-architect
+  title: AWS Certified Solutions Architect – Associate
+  issuer: Amazon Web Services
+  url: https://aws.amazon.com/certification/certified-solutions-architect-associate/
+  group: cloud
+  cost: mid
+  price: "US$150; valid 3 years"
+  why: "One of the most asked-for IT certificates. AWS suggests a year of hands-on AWS first; with no IT experience, start with Cloud Practitioner."
+  routes: [cloud-engineer, devops-engineer, solutions-architect, backend-engineer, data-engineer]
+
+- id: cka
+  title: Certified Kubernetes Administrator (CKA)
+  issuer: Linux Foundation and CNCF
+  url: https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/
+  group: cloud
+  cost: high
+  price: "US$445, with a retake and two practice simulator sessions; valid 2 years"
+  why: "A hands-on exam on real clusters, so it's respected. Worth it once you're working with Kubernetes; not a first certificate."
+  routes: [devops-engineer, platform-engineer, cloud-engineer]
+
+- id: rhcsa
+  title: Red Hat Certified System Administrator (RHCSA)
+  issuer: Red Hat
+  url: https://www.redhat.com/en/services/training/ex200-red-hat-certified-system-administrator-rhcsa-exam
+  group: systems
+  cost: high
+  price: "Paid; priced by location"
+  why: "A practical exam on real Linux tasks, long valued by Indian employers for Linux admin and support roles."
+  routes: [system-administrator, devops-engineer, support-engineer]
+
+- id: ccna
+  title: Cisco CCNA (200-301)
+  issuer: Cisco
+  url: https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html
+  group: systems
+  cost: mid
+  price: "US$300"
+  why: "The standard networking certificate. Asked for in network engineer and administrator postings, and useful for security."
+  routes: [system-administrator, security-analyst, security-engineer]
+
+- id: isc2-cc
+  title: ISC2 Certified in Cybersecurity (CC)
+  issuer: ISC2
+  url: https://www.isc2.org/landing/1mcc
+  group: security
+  cost: mid
+  price: "US$199, then a US$50 yearly fee. The free offer closed to new sign-ups on 20 May 2026."
+  why: "An entry security certificate from the body behind CISSP. Still a good first step, but no longer free."
+  routes: [security-analyst, penetration-tester, security-engineer]
+
+- id: comptia-security-plus
+  title: CompTIA Security+
+  issuer: CompTIA
+  url: https://www.comptia.org/en-us/certifications/security/v7/
+  group: security
+  cost: high
+  price: "Paid; see CompTIA's site for the price in India"
+  why: "The most widely recognised entry security certificate worldwide, often listed for SOC analyst roles."
+  routes: [security-analyst, security-engineer, penetration-tester]
+
+- id: salesforce-admin
+  title: Salesforce Certified Platform Administrator
+  issuer: Salesforce
+  url: https://help.salesforce.com/s/articleView?id=005298916&language=en_US&type=1
+  group: platforms
+  cost: mid
+  price: "US$200; retake US$100"
+  why: "Practically required for Salesforce admin and developer jobs. The Trailhead training is free."
+  routes: [salesforce-developer]
+
+- id: psm-1
+  title: Professional Scrum Master I (PSM I)
+  issuer: Scrum.org
+  url: https://www.scrum.org/assessments/professional-scrum-master-i-certification
+  group: product
+  cost: mid
+  price: "US$200 per attempt; never expires"
+  why: "The Scrum Master certificate recruiters recognise, with no course required. Scrum.org's free open assessments are good practice."
+  routes: [scrum-master, product-manager, business-analyst]
+
+- id: oracle-java-21
+  title: Oracle Certified Professional, Java SE 21 Developer (1Z0-830)
+  issuer: Oracle
+  url: https://education.oracle.com/java-se-21-developer-professional/pexam_1Z0-830
+  group: software
+  cost: mid
+  price: "Paid; priced by country"
+  why: "A hard, detailed Java exam. Valued at Java-heavy services firms and banks; product companies care more about your code."
+  routes: [backend-engineer]
+
+- id: cfa
+  title: CFA Program
+  issuer: CFA Institute
+  url: https://www.cfainstitute.org/programs/cfa-program
+  group: finance
+  cost: high
+  price: "From US$1,140 per exam; US$3,520–4,570 for all three levels"
+  why: "The best-known investment credential. Passing Level I alone already helps for equity research, investment banking and portfolio roles."
+  routes: [financial-analyst, quant-researcher]
+
+- id: frm
+  title: Financial Risk Manager (FRM)
+  issuer: GARP
+  url: https://www.garp.org/frm
+  group: finance
+  cost: high
+  price: "US$400 to enrol, then US$600–800 for each of the two parts"
+  why: "The standard credential for risk roles at banks and NBFCs."
+  routes: [risk-analyst, quant-researcher]

@@ -229,6 +229,20 @@ export const interviewSchema = z.object({
 });
 export type Interview = z.infer<typeof interviewSchema>;
 
+/** A certificate worth having for some routes. See content/certifications.yaml. */
+export const certificationSchema = z.object({
+  id,
+  title: z.string().min(1),
+  issuer: z.string().min(1),
+  url: z.string().url(),
+  group: z.enum(['software', 'data-ai', 'cloud', 'systems', 'security', 'finance', 'platforms', 'product', 'hardware', 'enterprise']),
+  cost: z.enum(['free', 'low', 'mid', 'high']),
+  price: z.string().min(1),
+  why: z.string().min(1),
+  routes: z.array(id).min(1),
+});
+export type Certification = z.infer<typeof certificationSchema>;
+
 /** Where a job role links out to on job sites. See content/job-sites.yaml. */
 export const jobSitesSchema = z.object({
   ambitionbox: z.string().regex(/^[a-z0-9-]+$/).optional(),
@@ -280,5 +294,6 @@ export interface Content {
   practiceGroups: PracticeGroup[];
   jobSites: Record<string, JobSites>;
   interviews: Interview[];
+  certifications: Certification[];
   startups: Startups;
 }

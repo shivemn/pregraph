@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import { content } from '../lib/site';
+import { certificationGroups, costLabel } from '../lib/certifications';
+
+const c = content();
+const roleById = new Map(c.roles.map((r) => [r.id, r]));
+const withRoutes = (list: typeof c.certifications) =>
+  list.map((x) => ({ ...x, jobs: x.routes.map((id) => ({ id, title: roleById.get(id)!.title })) }));
+
+const free = withRoutes(c.certifications.filter((x) => x.cost === 'free'));
+const paid = certificationGroups(c.certifications.filter((x) => x.cost !== 'free')).map((g) => ({ ...g, items: withRoutes(g.items) }));
+---
+
+<Base
+  wide
+  title="Certifications"
+  description="Free certificates, and the paid ones Indian recruiters ask for by name, with what each costs and which jobs it helps."
+>
+  <h1><span class="board">Certifications</span></h1>
+  <p class="lede quiet">
+    A certificate won't get you hired on its own; what you can show and explain does. But some are asked for by name in job
+    posts, and some are free and quick enough to be worth doing on the way. These are those. Prices are from each issuer's
+    own page in November 2026. They change, so check before you pay.
+  </p>
+
+  <nav class="jump" aria-label="Sections">
+    <a class="jump-free" href="#free">Free</a>
+    {paid.map((g) => <a href={`#cert-${g.id}`}>{g.title}</a>)}
+  </nav>
+
+  <section aria-labelledby="free">
+    <h2 id="free">Free</h2>
+    <p class="quiet section-lede">No exam fee. Some need a free account.</p>
+    <ul class="certs">
+      {free.map((x) => (
+        <li>
+          <a class="cert-name" href={x.url} rel="noopener">{x.title}</a>
+          <p class="faint">{x.issuer}</p>
+          <p class="fare">{x.price}</p>
+          <p class="quiet">{x.why}</p>
+          <p class="tests">
+            <span class="tests-label">Helps for</span>
+            {x.jobs.map((j) => <a class="chip" href={`/roles/${j.id}`}>{j.title}</a>)}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {
+    paid.map((g) => (
+      <section aria-labelledby={`cert-${g.id}`}>
+        <h2 id={`cert-${g.id}`}>{g.title}</h2>
+        <ul class="certs">
+          {g.items.map((x) => (
+            <li>
+              <a class="cert-name" href={x.url} rel="noopener">{x.title}</a>
+              <p class="faint">{x.issuer}</p>
+              <p class="fare" data-cost={x.cost}><span>{costLabel(x.cost)}</span> {x.price}</p>
+              <p class="quiet">{x.why}</p>
+              <p class="tests">
+                <span class="tests-label">Helps for</span>
+                {x.jobs.map((j) => <a class="chip" href={`/roles/${j.id}`}>{j.title}</a>)}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  h1 { padding-top: 8px; font-size: clamp(2.2rem, 7vw, 3.6rem); }
+  .lede { font-size: 1.1875rem; max-width: 66ch; margin-top: 14px; }
+  .jump { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 22px; max-width: 900px; }
+  .jump a { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.1rem; }
+  .jump .jump-free { background: var(--yellow); color: #000; padding: 0 8px; text-decoration: none; }
+  section { margin-top: 44px; scroll-margin-top: 16px; }
+  .section-lede { margin-top: 2px; }
+  .certs {
+    list-style: none; padding: 0; margin: 12px 0 0; border-top: 3px solid var(--ink);
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); column-gap: 32px;
+  }
+  .certs li { padding: 14px 0 16px; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; align-content: start; }
+  .cert-name { font-family: var(--sign); font-stretch: 85%; font-size: 1.4rem; font-weight: 650; line-height: 1.12; }
+  .certs .quiet { font-size: 0.97rem; }
+  /* The price reads like a fare: a class badge, then the figure. */
+  .fare { font-weight: 600; font-size: 0.97rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .fare span {
+    font-family: var(--sign); font-stretch: 85%; font-weight: 700; font-size: 0.9rem;
+    padding: 0 7px; border: 2px solid var(--ink); white-space: nowrap;
+  }
+  .fare[data-cost='free'] span { background: var(--yellow); color: #000; border-color: #000; }
+  .tests { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; }
+  .tests-label { font-family: var(--sign); font-stretch: 85%; font-weight: 700; color: var(--ink-2); margin-right: 2px; }
+  .chip {
+    font-size: 0.85rem; font-weight: 600; text-decoration: none; padding: 1px 8px;
+    border: 1.5px solid var(--line); color: var(--ink);
+  }
+  .chip:hover { background: var(--platform); }
+  @media (max-width: 560px) { .certs { grid-template-columns: 1fr; } }
+</style>

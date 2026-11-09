@@ -18,6 +18,7 @@ import {
   practiceGroupSchema,
   jobSitesSchema,
   interviewSchema,
+  certificationSchema,
   variantSchema,
   type Role,
   type Variant,
@@ -135,6 +136,9 @@ export function checkContent(c: Content): string[] {
     for (const round of loop.rounds)
       for (const id of round.practice) if (!resourceIds.has(id)) problems.push(`interviews.yaml: "${loop.id}" practises with unknown resource "${id}"`);
   }
+  dupes('certification', (c.certifications ?? []).map((x) => x.id));
+  for (const cert of c.certifications ?? [])
+    for (const r of cert.routes) if (!roleIds.has(r)) problems.push(`certifications.yaml: "${cert.id}" names unknown route "${r}"`);
   const kinds = new Set(Object.keys(c.startups?.kinds ?? {}));
   for (const [id, s] of Object.entries(c.jobSites)) {
     if (!roleIds.has(id)) problems.push(`job-sites.yaml names unknown role "${id}"`);
@@ -198,6 +202,7 @@ export function loadContent(root = join(process.cwd(), 'content')): Content {
     toolGroups: parseList(toolGroupSchema, readYaml(join(root, 'tool-groups.yaml')), 'tool-groups.yaml', problems),
     practiceGroups: parseList(practiceGroupSchema, readYaml(join(root, 'practice-groups.yaml')), 'practice-groups.yaml', problems),
     interviews: parseList(interviewSchema, readYaml(join(root, 'interviews.yaml')), 'interviews.yaml', problems),
+    certifications: parseList(certificationSchema, readYaml(join(root, 'certifications.yaml')), 'certifications.yaml', problems),
     jobSites: parseOne(z.record(z.string(), jobSitesSchema), readYaml(join(root, 'job-sites.yaml')), 'job-sites.yaml', problems) ?? {},
     startups: parseOne(startupsSchema, JSON.parse(readFileSync(join(root, 'startups', 'yc-india.json'), 'utf8')), 'startups/yc-india.json', problems)!,
   };

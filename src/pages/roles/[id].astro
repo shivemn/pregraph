@@ -4,6 +4,7 @@ import RolePlanner from '../../components/RolePlanner';
 import { content, jobStarts, listOf, plannerNodes } from '../../lib/site';
 import { interviewLinks, jobLinks, loopFor, searchTerm, sitesFor, startupMatch } from '../../lib/jobs';
 import { BACKGROUND_GROUPS, TIERS } from '../../lib/schema';
+import { certificationsFor, fareText } from '../../lib/certifications';
 import '../../styles/route.css';
 import '../../styles/planner.css';
 import '../../styles/map.css';
@@ -24,6 +25,7 @@ const links = jobLinks(role, sites);
 const yc = startupMatch(sites, c.startups);
 const loop = loopFor(c.interviews, role);
 const asked = interviewLinks(role, sites);
+const certs = certificationsFor(role, c.certifications);
 // A job title: which route it builds on, and what it adds.
 const base = role.variantOf ? c.roles.find((r) => r.id === role.variantOf) : undefined;
 const titleOf = (id: string) => c.concepts.find((x) => x.id === id)?.title ?? id;
@@ -175,6 +177,20 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
               {asked.map((x, i) => <>{i > 0 && ', '}<a href={x.url} rel="noopener" target="_blank">{x.name}</a></>)}.
             </p>
           </div>
+          {certs.length > 0 && (
+            <div class="interview-note cert-note">
+              <h4>Certificates worth having</h4>
+              <ul>
+                {certs.map((x) => (
+                  <li>
+                    <a href={x.url} rel="noopener">{x.title}</a>{' '}
+                    <span class="quiet small">{fareText(x)}</span>
+                  </li>
+                ))}
+              </ul>
+              <p class="small">None of these replaces showing your work. <a href="/certifications">All certifications, and why each one counts</a>.</p>
+            </div>
+          )}
           <p class="quiet small">Searches for “{term.replace(/\s+fresher$/i, '')}”. Read a few listings end to end: the skills repeat quickly.</p>
           {role.reference && (
             <p class="small">Official description: <a href={role.reference.url} rel="noopener">{role.reference.title}</a></p>
@@ -232,6 +248,8 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
   .interview-note h4 { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; color: var(--ink-2); margin: 0 0 4px; }
   .interview-note p { margin: 0; }
   .interview-note p + p { margin-top: 6px; }
+  .cert-note ul { margin: 0 0 6px; padding-left: 1.2em; }
+  .cert-note li { margin-bottom: 2px; }
   .yc-note { max-width: 86ch; margin: 6px 0 14px; padding: 12px 14px; border: 2px solid var(--ink); background: var(--paper); }
   .yc-note h4 { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; color: var(--ink-2); margin: 0 0 4px; }
   .yc-note p { margin: 0; }
