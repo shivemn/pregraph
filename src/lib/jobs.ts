@@ -103,6 +103,21 @@ export function sitesFor(all: Record<string, JobSites>, role: Pick<Role, 'id' | 
   };
 }
 
+/** Where candidates post the questions they were asked for this job. Both stay current on their own. */
+export function interviewLinks(role: Pick<Role, 'title' | 'search'>, sites: JobSites | undefined): JobLink[] {
+  const plain = searchTerm(role).replace(/\s+fresher$/i, '');
+  const links: JobLink[] = [
+    { name: 'Glassdoor', url: `https://www.glassdoor.co.in/Interview/${slugOf(plain)}-interview-questions-SRCH_KO0,${plain.length}.htm` },
+  ];
+  if (sites?.ambitionbox) links.push({ name: 'AmbitionBox', url: `https://www.ambitionbox.com/profiles/${sites.ambitionbox}/interview-questions` });
+  return links;
+}
+
+/** The interview loop a role usually follows: its own, or its route's. */
+export function loopFor<T extends { routes: string[] }>(loops: T[], role: Pick<Role, 'id' | 'variantOf'>): T | undefined {
+  return loops.find((l) => l.routes.includes(role.id)) ?? (role.variantOf ? loops.find((l) => l.routes.includes(role.variantOf!)) : undefined);
+}
+
 /** How many YC startup postings in India matched this role when the snapshot was taken. */
 export function startupMatch(sites: JobSites | undefined, s: Startups) {
   const kinds = (sites?.kinds ?? []).filter((k) => s.kinds[k]);

@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import RolePlanner from '../../components/RolePlanner';
 import { content, jobStarts, listOf, plannerNodes } from '../../lib/site';
-import { jobLinks, searchTerm, sitesFor, startupMatch } from '../../lib/jobs';
+import { interviewLinks, jobLinks, loopFor, searchTerm, sitesFor, startupMatch } from '../../lib/jobs';
 import { BACKGROUND_GROUPS, TIERS } from '../../lib/schema';
 import '../../styles/route.css';
 import '../../styles/planner.css';
@@ -22,6 +22,8 @@ const term = searchTerm(role);
 const sites = sitesFor(c.jobSites, role);
 const links = jobLinks(role, sites);
 const yc = startupMatch(sites, c.startups);
+const loop = loopFor(c.interviews, role);
+const asked = interviewLinks(role, sites);
 // A job title: which route it builds on, and what it adds.
 const base = role.variantOf ? c.roles.find((r) => r.id === role.variantOf) : undefined;
 const titleOf = (id: string) => c.concepts.find((x) => x.id === id)?.title ?? id;
@@ -155,6 +157,24 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
               </p>
             </div>
           )}
+          <div class="interview-note">
+            <h4>Interviews</h4>
+            <p>
+              {loop ? (
+                <>
+                  Usually {loop.rounds.length} rounds: {loop.rounds.map((r) => r.name.charAt(0).toLowerCase() + r.name.slice(1)).join(', then ')}.{' '}
+                  <a href={`/practice#interview-${loop.id}`}>What each round tests and where to practise it</a>{' '}
+                  <span class="quiet">({loop.title})</span>.
+                </>
+              ) : (
+                <>See <a href="/practice#interviews">how interviews go</a> for each kind of job, and where to practise.</>
+              )}
+            </p>
+            <p class="small">
+              Questions people were asked for this job:{' '}
+              {asked.map((x, i) => <>{i > 0 && ', '}<a href={x.url} rel="noopener" target="_blank">{x.name}</a></>)}.
+            </p>
+          </div>
           <p class="quiet small">Searches for “{term.replace(/\s+fresher$/i, '')}”. Read a few listings end to end: the skills repeat quickly.</p>
           {role.reference && (
             <p class="small">Official description: <a href={role.reference.url} rel="noopener">{role.reference.title}</a></p>
@@ -208,6 +228,10 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
   .site-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px 28px; margin: 10px 0 14px; }
   .site-group h4 { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; color: var(--ink-2); margin: 0; }
   .boards { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 0; }
+  .interview-note { max-width: 86ch; margin: 6px 0 14px; padding: 12px 14px; border: 2px solid var(--ink); background: var(--paper); }
+  .interview-note h4 { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; color: var(--ink-2); margin: 0 0 4px; }
+  .interview-note p { margin: 0; }
+  .interview-note p + p { margin-top: 6px; }
   .yc-note { max-width: 86ch; margin: 6px 0 14px; padding: 12px 14px; border: 2px solid var(--ink); background: var(--paper); }
   .yc-note h4 { font-family: var(--sign); font-stretch: 88%; font-weight: 650; font-size: 1.05rem; color: var(--ink-2); margin: 0 0 4px; }
   .yc-note p { margin: 0; }

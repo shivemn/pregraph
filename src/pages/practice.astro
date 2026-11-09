@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { content } from '../lib/site';
+import { interviewLinks, sitesFor } from '../lib/jobs';
 
 const c = content();
 const resources = new Map(c.resources.map((r) => [r.id, r]));
@@ -22,6 +23,19 @@ const groups = c.practiceGroups.map((g) => ({
   items: g.resources.map((id) => ({ ...resources.get(id)!, stops: uses.get(id) ?? [] })),
 }));
 const count = groups.reduce((n, g) => n + g.items.length, 0);
+
+// Interviews: each kind of job's loop, round by round.
+const roleById = new Map(c.roles.map((r) => [r.id, r]));
+const conceptById = new Map(c.concepts.map((x) => [x.id, x]));
+const loops = c.interviews.map((l) => ({
+  ...l,
+  rounds: l.rounds.map((r) => ({ ...r, practice: r.practice.map((id) => resources.get(id)!) })),
+  revise: l.revise.map((id) => conceptById.get(id)!),
+  jobs: l.routes.map((id) => {
+    const role = roleById.get(id)!;
+    return { id, title: role.title, links: interviewLinks(role, sitesFor(c.jobSites, role)) };
+  }),
+}));
 ---
 
 <Base
@@ -33,9 +47,11 @@ const count = groups.reduce((n, g) => n + g.items.length, 0);
   <p class="lede quiet">
     Reading and watching tell you that you've seen something. Practice tells you whether you can do it.{' '}
     These {count} places are free (a few need a free account), and each one lists the stops it tests, so you know when to use it.
+    For job interviews, see <a href="#interviews">how each kind of interview goes</a>.
   </p>
 
   <nav class="jump" aria-label="Groups">
+    <a class="jump-interviews" href="#interviews">Interviews</a>
     {groups.map((g) => <a href={`#practice-${g.id}`}>{g.title}</a>)}
   </nav>
 
@@ -63,6 +79,56 @@ const count = groups.reduce((n, g) => n + g.items.length, 0);
       </section>
     ))
   }
+
+  <section class="interviews" id="interviews" aria-labelledby="interviews-title">
+    <h2 id="interviews-title">Interviews</h2>
+    <p class="quiet interviews-lede">
+      How interviews usually go for each kind of job, round by round, in our own words, with free places to practise each
+      round. For the questions people were actually asked, each job links to Glassdoor and AmbitionBox, where candidates post
+      them after their interviews. Those pages stay current on their own.
+    </p>
+    <nav class="jump" aria-label="Kinds of interview">
+      {loops.map((l) => <a href={`#interview-${l.id}`}>{l.title}</a>)}
+    </nav>
+    {loops.map((l) => (
+      <article class="loop" id={`interview-${l.id}`} aria-labelledby={`interview-${l.id}-title`}>
+        <h3 id={`interview-${l.id}-title`}>{l.title}</h3>
+        <p class="quiet">{l.who}</p>
+        <ol class="rounds">
+          {l.rounds.map((r) => (
+            <li>
+              <span class="round-dot" aria-hidden="true" />
+              <h4>{r.name}</h4>
+              <p>{r.what}</p>
+              {r.practice.length > 0 && (
+                <p class="round-practice">
+                  <span class="tests-label">Practise</span>
+                  {r.practice.map((x) => <a href={x.url} rel="noopener">{x.title}</a>)}
+                </p>
+              )}
+            </li>
+          ))}
+        </ol>
+        {l.revise.length > 0 && (
+          <p class="tests">
+            <span class="tests-label">Revise on Terminus</span>
+            {l.revise.map((x) => <a class="chip" data-area={x.area} href={hrefOf(x.id)}>{x.title}</a>)}
+          </p>
+        )}
+        <details class="asked">
+          <summary>Questions people were asked, by job</summary>
+          <ul>
+            {l.jobs.map((j) => (
+              <li>
+                <a href={`/roles/${j.id}`}>{j.title}</a>:{' '}
+                {j.links.map((x, i) => <>{i > 0 && ', '}<a href={x.url} rel="noopener" target="_blank">{x.name}</a></>)}
+              </li>
+            ))}
+          </ul>
+        </details>
+      </article>
+    ))}
+  </section>
 </Base>
 
 <style>
@@ -86,4 +152,32 @@ const count = groups.reduce((n, g) => n + g.items.length, 0);
   }
   .chip:hover { background: var(--platform); }
   @media (max-width: 560px) { .platforms { grid-template-columns: 1fr; } }
+
+  .jump .jump-interviews { background: var(--yellow); color: #000; padding: 0 8px; text-decoration: none; }
+  .interviews { margin-top: 64px; padding-top: 24px; border-top: 6px solid var(--ink); }
+  .interviews h2 { font-size: clamp(1.8rem, 5vw, 2.4rem); }
+  .interviews-lede { max-width: 72ch; margin-top: 8px; }
+  .loop { margin-top: 40px; scroll-margin-top: 16px; }
+  .loop h3 { font-size: 1.5rem; }
+  .loop > .quiet { max-width: 72ch; margin-top: 4px; }
+  /* Rounds as stops on a line: across on a wide screen, down on a narrow one. */
+  .rounds { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0 22px; position: relative; }
+  .rounds::before { content: ''; position: absolute; left: 0; right: 0; top: 9px; height: 5px; background: var(--ink-3); }
+  .rounds li { position: relative; padding-top: 30px; }
+  .round-dot { position: absolute; top: 0; left: 0; width: 23px; height: 23px; border-radius: 50%; border: 4px solid var(--ink); background: var(--paper); }
+  .rounds h4 { font-family: var(--sign); font-stretch: 88%; font-size: 1.2rem; font-weight: 700; margin: 0 0 4px; }
+  .rounds p { font-size: 0.97rem; margin: 0; }
+  .round-practice { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 8px !important; }
+  .round-practice a { font-weight: 600; }
+  .loop .tests { margin-top: 16px; }
+  .asked { margin-top: 12px; }
+  .asked summary { cursor: pointer; font-weight: 700; }
+  .asked ul { columns: 2 260px; padding-left: 1.2em; margin: 8px 0 0; }
+  .asked li { break-inside: avoid; margin-bottom: 4px; }
+  @media (max-width: 860px) {
+    .rounds { grid-auto-flow: row; gap: 18px; padding-left: 36px; }
+    .rounds::before { left: 9px; right: auto; top: 0; bottom: 0; width: 5px; height: auto; }
+    .rounds li { padding-top: 0; }
+    .round-dot { left: -36px; top: 0; }
+  }
 </style>

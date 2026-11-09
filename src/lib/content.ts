@@ -17,6 +17,7 @@ import {
   toolGroupSchema,
   practiceGroupSchema,
   jobSitesSchema,
+  interviewSchema,
   variantSchema,
   type Role,
   type Variant,
@@ -126,6 +127,14 @@ export function checkContent(c: Content): string[] {
     }
   }
   const roleIds = new Set(c.roles.map((r) => r.id));
+  const resourceIds = new Set(c.resources.map((r) => r.id));
+  const stopIds = new Set(c.concepts.map((x) => x.id));
+  for (const loop of c.interviews ?? []) {
+    for (const r of loop.routes) if (!roleIds.has(r)) problems.push(`interviews.yaml: "${loop.id}" names unknown route "${r}"`);
+    for (const id of loop.revise) if (!stopIds.has(id)) problems.push(`interviews.yaml: "${loop.id}" revises unknown stop "${id}"`);
+    for (const round of loop.rounds)
+      for (const id of round.practice) if (!resourceIds.has(id)) problems.push(`interviews.yaml: "${loop.id}" practises with unknown resource "${id}"`);
+  }
   const kinds = new Set(Object.keys(c.startups?.kinds ?? {}));
   for (const [id, s] of Object.entries(c.jobSites)) {
     if (!roleIds.has(id)) problems.push(`job-sites.yaml names unknown role "${id}"`);
@@ -188,6 +197,7 @@ export function loadContent(root = join(process.cwd(), 'content')): Content {
     roles: [],
     toolGroups: parseList(toolGroupSchema, readYaml(join(root, 'tool-groups.yaml')), 'tool-groups.yaml', problems),
     practiceGroups: parseList(practiceGroupSchema, readYaml(join(root, 'practice-groups.yaml')), 'practice-groups.yaml', problems),
+    interviews: parseList(interviewSchema, readYaml(join(root, 'interviews.yaml')), 'interviews.yaml', problems),
     jobSites: parseOne(z.record(z.string(), jobSitesSchema), readYaml(join(root, 'job-sites.yaml')), 'job-sites.yaml', problems) ?? {},
     startups: parseOne(startupsSchema, JSON.parse(readFileSync(join(root, 'startups', 'yc-india.json'), 'utf8')), 'startups/yc-india.json', problems)!,
   };

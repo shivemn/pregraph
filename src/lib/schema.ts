@@ -216,6 +216,19 @@ export function targetsUpTo(role: Role, tier: Tier): string[] {
   return order.slice(0, order.indexOf(tier) + 1).flatMap((t) => role.tiers[t]);
 }
 
+/** How interviews go for a kind of job. See content/interviews.yaml. */
+export const interviewSchema = z.object({
+  id,
+  title: z.string().min(1),
+  who: z.string().min(1),
+  routes: z.array(id).min(1),
+  rounds: z
+    .array(z.object({ name: z.string().min(1), what: z.string().min(1), practice: z.array(id).default([]) }))
+    .min(1),
+  revise: z.array(id).default([]),
+});
+export type Interview = z.infer<typeof interviewSchema>;
+
 /** Where a job role links out to on job sites. See content/job-sites.yaml. */
 export const jobSitesSchema = z.object({
   ambitionbox: z.string().regex(/^[a-z0-9-]+$/).optional(),
@@ -266,5 +279,6 @@ export interface Content {
   toolGroups: ToolGroup[];
   practiceGroups: PracticeGroup[];
   jobSites: Record<string, JobSites>;
+  interviews: Interview[];
   startups: Startups;
 }

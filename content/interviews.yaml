@@ -1,0 +1,174 @@
+# How interviews go, per kind of job, in our own words, for Practice >
+# Interviews and the "Interviews" note on role pages. `routes` are the job
+# routes that usually follow this loop (titles follow their route). `practice`
+# are resource ids; `revise` are Terminus stops worth going over before it.
+# Reviewed November 2026; the shape of these loops changes slowly.
+
+- id: it-services
+  title: IT services fresher drives
+  who: "TCS, Infosys, Wipro, Accenture, Cognizant, Capgemini and HCL hiring graduates in large batches, on campus or off it."
+  routes: [software-engineer, qa-engineer, support-engineer, salesforce-developer, servicenow-developer]
+  rounds:
+    - name: Online test
+      what: "Aptitude (arithmetic, reasoning, English), and for most tech roles one or two coding problems. TCS's National Qualifier Test is the best known; a score lasts two years."
+      practice: [indiabix, tcs-nqt, leetcode-150]
+    - name: Technical interview
+      what: "Your final-year project in detail, one language of your choice, object-oriented basics, SQL and databases, operating system basics, and often a small coding question on paper or screen."
+      practice: [gfg-interview-experiences]
+    - name: HR interview
+      what: "Why this company, whether you can relocate or work shifts, and a short story about a problem you solved with others. Honest and brief beats rehearsed."
+      practice: [tih-behavioral]
+  revise: [oop-design, sql, database-internals, testing-debugging]
+
+- id: product-software
+  title: Software at product companies and startups
+  who: "Companies building their own products, from large tech firms to funded startups."
+  routes: [software-engineer, backend-engineer, frontend-engineer, full-stack-engineer, android-developer, ios-developer, embedded-engineer]
+  rounds:
+    - name: Online assessment
+      what: "Two or three timed problems on a coding site. Passing all the test cases matters more than clever code."
+      practice: [neetcode-150, leetcode-150, grind75]
+    - name: Data structures and algorithms
+      what: "Two to four rounds of solving a problem while talking: say your idea first, then code, then test it with examples, then discuss the running time."
+      practice: [tih-study-plan, neetcode-150]
+    - name: Fundamentals or machine coding
+      what: "Databases, networking and operating systems questions, or building a small working program (a parking lot, a rate limiter) in an hour or two."
+      practice: [tih-guide]
+    - name: System design
+      what: "Usually only after one or two years of experience: sketching how a service would work at scale and defending the trade-offs."
+      practice: [system-design-primer]
+    - name: Behavioural
+      what: "Times you disagreed, failed or led something. Prepare four or five true stories and fit them to the question."
+      practice: [tih-behavioral]
+  revise: [hash-tables, graph-algorithms, dynamic-programming, system-design]
+
+- id: data-analysis
+  title: Data analyst and business intelligence
+  who: "Analyst roles at product companies, consultancies, banks and analytics firms."
+  routes: [data-analyst, bi-developer, product-analyst, business-analyst]
+  rounds:
+    - name: SQL test
+      what: "Joins, grouping, window functions and dates, against a schema like orders or users. Often live or as a take-home."
+      practice: [datalemur, leetcode-sql50, hackerrank-sql]
+    - name: Excel or dashboard task
+      what: "Clean a messy sheet, build a pivot and a chart, or walk through a dashboard you made."
+    - name: Statistics and case
+      what: "Averages versus medians, A/B tests, and a business question like 'orders fell 10% last week, why?' Think aloud and ask about the data."
+      practice: [exponent-questions]
+    - name: HR
+      what: "Why analytics, and a project you can explain to someone who doesn't code."
+      practice: [tih-behavioral]
+  revise: [sql, statistics, experiments]
+
+- id: data-engineering
+  title: Data engineering
+  who: "Teams that build pipelines and warehouses, at product companies and data consultancies."
+  routes: [data-engineer, analytics-engineer]
+  rounds:
+    - name: SQL and coding
+      what: "Harder SQL than analyst rounds, plus Python or Scala problems on files and data structures."
+      practice: [datalemur, leetcode-sql50, neetcode-150]
+    - name: Data modelling and pipelines
+      what: "Design tables for a business, explain how a pipeline handles late or duplicate data, and how you'd test it."
+      practice: [system-design-primer]
+    - name: Tools you list
+      what: "Expect detailed questions on whatever is on your resume: Spark, Airflow, a cloud warehouse."
+  revise: [sql, database-internals, distributed-systems]
+
+- id: data-science-ml
+  title: Data science and machine learning
+  who: "Data scientist and ML engineer roles at product companies, AI startups and research labs."
+  routes: [data-scientist, ml-engineer, deep-learning-engineer, ai-engineer, mlops-engineer, statistician]
+  rounds:
+    - name: Coding and SQL
+      what: "Python with pandas or NumPy, an easy-to-medium algorithm, and SQL."
+      practice: [datalemur, neetcode-150]
+    - name: ML and statistics theory
+      what: "Bias and variance, overfitting, evaluation metrics, how a model you used works, and probability questions."
+      practice: [ml-interviews-book]
+    - name: Case or ML design
+      what: "How you'd build a model for a real problem: the data, the features, the metric, and how you'd know it worked."
+      practice: [ml-interviews-book, exponent-questions]
+    - name: Project deep dive
+      what: "One project end to end. Interviewers probe what you did yourself and what you'd change."
+  revise: [statistics, probability, machine-learning, deep-learning, experiments]
+
+- id: infrastructure
+  title: DevOps, cloud and systems
+  who: "DevOps, SRE, cloud and system administration roles, at services firms, product companies and managed-service providers."
+  routes: [devops-engineer, platform-engineer, cloud-engineer, system-administrator, database-administrator]
+  rounds:
+    - name: Linux and networking
+      what: "Commands, processes, permissions, DNS and HTTP, and 'what happens when you type a URL'."
+      practice: [devops-exercises]
+    - name: Scenario troubleshooting
+      what: "A server is slow, a deploy failed, a site is down: walk through how you'd find out why."
+      practice: [devops-exercises]
+    - name: Tools and scripting
+      what: "Docker, Kubernetes, CI/CD and a cloud you list, plus a short Bash or Python script."
+  revise: [linux-admin, networking, incident-management]
+
+- id: security
+  title: Cyber security
+  who: "SOC, VAPT and security engineering roles at security firms, banks and IT services."
+  routes: [security-analyst, penetration-tester, security-engineer]
+  rounds:
+    - name: Fundamentals
+      what: "Networking and ports, the OWASP Top 10, how common attacks work, and what logs would show them."
+      practice: [portswigger-academy, tryhackme]
+    - name: Practical
+      what: "Read a log or packet capture, or find a flaw in a test app. Writing up what you found clearly counts."
+      practice: [tryhackme, picoctf]
+    - name: HR
+      practice: [tih-behavioral]
+      what: "Shift work (SOCs run around the clock), and why security."
+  revise: [networking, web-security, incident-management]
+
+- id: finance
+  title: Finance and economics
+  who: "Analyst roles at banks, research and rating firms, corporate finance teams and consultancies."
+  routes: [financial-analyst, risk-analyst, economist]
+  rounds:
+    - name: Technical questions
+      what: "How the three financial statements link, valuation methods, and recent market news. Expect 'walk me through a DCF'."
+      practice: [ib-interview-questions-365]
+    - name: Modelling or case test
+      what: "Build or fix a small model in Excel, or analyse a company and give a view, often under time."
+    - name: Fit
+      what: "Why finance, why this firm, and what you'd do with a stock you like."
+      practice: [tih-behavioral]
+  revise: [accounting, corporate-finance, financial-markets]
+
+- id: quant
+  title: Quant and trading
+  who: "Quant researcher, quant developer and trader roles at trading firms, hedge funds and bank strategy teams."
+  routes: [quant-researcher, quant-developer]
+  rounds:
+    - name: Mental maths
+      what: "Fast arithmetic under time, sometimes as a scored test before anything else."
+      practice: [zetamac]
+    - name: Probability and puzzles
+      what: "Dice, cards and expected-value questions, solved aloud. Showing a clean method matters as much as the answer."
+      practice: [brainstellar]
+    - name: Coding
+      what: "Algorithms for developer roles, data analysis in Python for researchers, sometimes C++."
+      practice: [neetcode-150]
+    - name: Statistics and markets
+      what: "Regression, overfitting in backtests, and how options are priced."
+  revise: [probability, statistics, derivatives]
+
+- id: product-design
+  title: Product, design and delivery
+  who: "Product manager, designer, analyst and Scrum roles at product companies and startups."
+  routes: [product-manager, ui-ux-designer, scrum-master, technical-writer]
+  rounds:
+    - name: Product sense or portfolio
+      what: "Improve a product you use, or walk through two or three projects in your portfolio: the problem, the choices and the result."
+      practice: [exponent-questions]
+    - name: Metrics or design exercise
+      what: "Which numbers show a feature works, or a short design task done live or at home."
+      practice: [exponent-questions]
+    - name: Working with others
+      what: "Disagreements with engineers or stakeholders, and how you decide what to build first."
+      practice: [tih-behavioral]
+  revise: [product-management, ux-design, experiments]

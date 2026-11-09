@@ -2782,3 +2782,126 @@
   url: https://www.youtube.com/watch?v=vT5pcc30Ffw
   free: true
   medium: watch
+
+# Interview preparation (Practice > Interviews). Checked November 2026.
+- id: tih-guide
+  title: "Tech Interview Handbook"
+  author: "Yangshun Tay"
+  type: site
+  url: https://www.techinterviewhandbook.org/software-engineering-interview-guide/
+  free: true
+  medium: read
+  short: "TIH"
+  note: "The whole software interview process, from resume to offer. Free and open source."
+- id: tih-study-plan
+  title: "Coding interview study plan"
+  author: "Tech Interview Handbook"
+  type: site
+  url: https://www.techinterviewhandbook.org/coding-interview-study-plan/
+  free: true
+  medium: read
+- id: tih-behavioral
+  title: "Behavioral interview guide and questions"
+  author: "Tech Interview Handbook"
+  type: site
+  url: https://www.techinterviewhandbook.org/behavioral-interview/
+  free: true
+  medium: read
+  note: "How to tell short, true stories about your work. Useful for every HR round."
+- id: grind75
+  title: "Grind 75"
+  author: "Tech Interview Handbook"
+  type: site
+  url: https://www.techinterviewhandbook.org/grind75/
+  free: true
+  medium: practice
+  note: "A week-by-week list of LeetCode problems that adjusts to how many hours you have."
+- id: neetcode-150
+  title: "NeetCode 150"
+  author: "NeetCode"
+  type: site
+  url: https://neetcode.io/practice/practice/neetcode150
+  free: true
+  medium: practice
+  note: "150 problems grouped by pattern, each with a free video solution."
+- id: system-design-primer
+  title: "The System Design Primer"
+  author: "Donne Martin"
+  type: site
+  url: https://github.com/donnemartin/system-design-primer
+  free: true
+  medium: read
+  note: "How to approach a system design interview, with worked questions. Open source."
+- id: indiabix
+  title: "IndiaBIX aptitude questions"
+  author: "IndiaBIX"
+  type: site
+  url: https://www.indiabix.com/
+  free: true
+  medium: practice
+  note: "Quantitative aptitude, logical reasoning and verbal ability, topic by topic, with timed online tests."
+- id: tcs-nqt
+  title: "TCS iON National Qualifier Test (NQT)"
+  author: "TCS iON"
+  type: site
+  url: https://www.tcsion.com/hub/national-qualifier-test/
+  free: false
+  medium: read
+  note: "The official page for the NQT: its sections, who can take it, and how long a score lasts (two years)."
+- id: datalemur
+  title: "DataLemur SQL interview questions"
+  author: "Nick Singh"
+  type: site
+  url: https://datalemur.com/sql-interview-questions
+  free: true
+  medium: practice
+  note: "Real SQL questions from company interviews, run in the browser. Most are free; some need Premium."
+- id: ml-interviews-book
+  title: "Introduction to Machine Learning Interviews"
+  author: "Chip Huyen"
+  type: book
+  url: https://huyenchip.com/ml-interviews-book/
+  free: true
+  medium: read
+  note: "How ML interviews work, then questions on maths, CS, ML workflows and algorithms. Free to read online."
+- id: devops-exercises
+  title: "DevOps exercises and interview questions"
+  author: "Arie Bregman"
+  type: site
+  url: https://github.com/bregman-arie/devops-exercises
+  free: true
+  medium: practice
+  note: "Thousands of questions on Linux, networking, cloud, Kubernetes, CI/CD and more. Open source."
+- id: zetamac
+  title: "Arithmetic Game"
+  author: "Zetamac"
+  type: site
+  url: https://arithmetic.zetamac.com/
+  free: true
+  medium: practice
+  short: "Zetamac"
+  note: "Two-minute mental arithmetic drills, the warm-up most trading interviews expect."
+- id: exponent-questions
+  title: "Exponent interview questions"
+  author: "Exponent"
+  type: site
+  url: https://www.tryexponent.com/questions
+  free: true
+  medium: practice
+  note: "Product, design and engineering questions people were asked, with community answers. Browsing is free."
+- id: gfg-interview-experiences
+  title: "Interview experiences, company by company"
+  author: "GeeksforGeeks"
+  type: site
+  url: https://www.geeksforgeeks.org/interview-experiences/experienced-interview-experiences-company-wise/
+  free: true
+  medium: read
+  note: "Write-ups by candidates of each round they sat at Indian and global companies."
+- id: ib-interview-questions-365
+  title: "Investment banking interview questions"
+  author: "365 Financial Analyst"
+  type: site
+  url: https://365financialanalyst.com/career-advice/investment-banking-interview-questions
+  free: true
+  medium: read
+  note: "The accounting, valuation and markets questions finance interviews return to."
