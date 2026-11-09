@@ -19,9 +19,15 @@ import StopPanel from './StopPanel';
 interface Named { id: string; title: string }
 interface Background extends Named { description: string; knows: string[]; group: 'stem' | 'other' | 'none' }
 type TierId = 'hire' | 'firstYear' | 'extra';
+type Level = 'beginner' | 'intermediate' | 'advanced';
+const LEVELS: Array<{ id: Level; title: string; hint: string }> = [
+  { id: 'beginner', title: 'Beginner', hint: 'Small and quick: proves you can finish something.' },
+  { id: 'intermediate', title: 'Intermediate', hint: 'What most freshers should show at an interview.' },
+  { id: 'advanced', title: 'Advanced', hint: 'Ambitious: for when you want to stand out.' },
+];
 
 interface Props {
-  role: { id: string; title: string; tiers: Record<TierId, string[]> };
+  role: { id: string; title: string; tiers: Record<TierId, string[]>; projects?: Record<Level, string> };
   concepts: ConceptNode[];
   areas: Named[];
   tiers: Array<{ id: TierId; title: string }>;
@@ -61,6 +67,8 @@ const monthYear = (weeksFromNow: number) =>
 
 interface RoleState {
   tier?: TierId;
+  /** Which project level you're building. Defaults to the one on the hiring list. */
+  level?: Level;
   view?: 'list' | 'map';
 }
 
@@ -179,15 +187,21 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
   const tier: TierId = usedTiers.some((t) => t.id === roleState.tier) ? roleState.tier! : 'hire';
   const view = roleState.view ?? 'list';
 
+  // The project level: the one on the hiring list unless you picked another.
+  const defaultLevel = LEVELS.find((l) => role.projects && role.tiers.hire.includes(role.projects[l.id]))?.id;
+  const level: Level | undefined = role.projects ? (roleState.level ?? defaultLevel) : undefined;
+  const swapProject = (id: string) =>
+    role.projects && defaultLevel && level && id === role.projects[defaultLevel] ? role.projects[level] : id;
+
   // Each target and the tier that asks for it, up to the chosen tier.
   const targetTier = useMemo(() => {
     const m = new Map<string, TierId>();
     for (const t of usedTiers) {
-      for (const id of role.tiers[t.id]) m.set(id, t.id);
+      for (const id of role.tiers[t.id]) m.set(swapProject(id), t.id);
       if (t.id === tier) break;
     }
     return m;
-  }, [role, tier]);
+  }, [role, tier, level]);
   const targets = useMemo(() => [...targetTier.keys()], [targetTier]);
 
   const known = useMemo(() => new Set([...(background?.knows ?? []), ...me.known]), [background, me.known]);
@@ -294,6 +308,18 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
               ))}
             </select>
           </label>
+          {role.projects && goal === 'role' && (
+            <div className="control">
+              <span className="control-label" id="level-label">Project</span>
+              <div className="tabs" role="group" aria-labelledby="level-label">
+                {LEVELS.map((l) => (
+                  <button key={l.id} aria-pressed={l.id === level} title={l.hint} onClick={() => setRoleState((r) => ({ ...r, level: l.id }))}>
+                    {l.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           {usedTiers.length > 1 && (
             <div className="control">
               <span className="control-label" id="tier-label">How far</span>
@@ -308,6 +334,12 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
           )}
         </div>
 
+        {role.projects && level && goal === 'role' && (
+          <p className="level-note">
+            {LEVELS.find((l) => l.id === level)!.hint} Your project:{' '}
+            <a href={`/concepts/${role.projects[level]}`}>{index.get(role.projects[level])?.title.replace(/^Project: /, '')}</a>.
+          </p>
+        )}
         {!background && loaded && (
           <p className="choose-bg">
             This is the full route, from the very beginning. Pick your background above and anything your degree

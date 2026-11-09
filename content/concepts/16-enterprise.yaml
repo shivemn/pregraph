@@ -175,3 +175,148 @@
       locator: The free mainframe account to run it on
       role: alternative
       verified: true
+
+- id: project-sap-fit-gap
+  title: 'Project: a fit-gap and design for a mid-size company'
+  area: enterprise
+  kind: project
+  summary: A realistic company's processes compared with standard SAP, with the gaps, the design and the configuration plan.
+  hours: 50
+  requires: [sap-basics, business-processes]
+  recommends: [accounting, technical-writing]
+  brief:
+    build: Write up a realistic mid-size manufacturer or distributor, its order-to-cash and procure-to-pay processes, and compare them with SAP's standard processes. Produce the fit-gap and the design documents a consultant would.
+    shows:
+      - Current-state process maps
+      - 'A fit-gap table: fits, gaps and how each gap is handled'
+      - Organisational structure and master-data design
+      - A configuration plan and test scenarios
+    stretch:
+      - A data migration plan
+      - Change-management notes for users
+    present: The document set and a ten-minute walk-through.
+  resources:
+    - resource: sap-s4-feature-scope
+      locator: The sections for the processes you design
+      role: primary
+      verified: true
+    - resource: sap-erp-processes
+      locator: The whole journey
+      role: alternative
+      verified: true
+
+- id: project-zxplore
+  title: 'Project: finish the IBM Z Xplore fundamentals'
+  area: enterprise
+  kind: project
+  summary: A real mainframe account used to edit datasets, submit JCL and run COBOL, with notes on each step.
+  hours: 10
+  requires: [mainframe-zos]
+  recommends: [cobol]
+  brief:
+    build: Sign up for IBM Z Xplore's free mainframe access and work through the fundamentals challenges, keeping your own notes on datasets, JCL and the tools.
+    shows:
+      - The fundamentals challenges completed
+      - Your own notes on datasets, JCL and job output
+      - One small change of your own to a challenge program
+      - The badge, if you earn it
+    stretch:
+      - Start the advanced challenges
+      - Use VS Code with the Zowe extension for the work
+    present: Your notes as a short guide and the badge.
+  resources:
+    - resource: ibm-z-xplore
+      locator: The fundamentals challenges
+      role: primary
+      verified: true
+    - resource: omp-cobol-course
+      locator: The first labs, if you want more COBOL practice
+      role: alternative
+      verified: true
+
+- id: project-mainframe-api
+  title: 'Project: a COBOL system with a modern front'
+  area: enterprise
+  kind: project
+  summary: A COBOL and Db2 batch system with restart and reports, driven from modern tools through Zowe and automated tests.
+  hours: 50
+  requires: [cobol, mainframe-zos]
+  recommends: [rest-apis, sql, ci-cd]
+  brief:
+    build: 'Build a small batch system on the mainframe, such as end-of-day account processing with Db2, then drive and test it from outside: submit jobs and read results with the Zowe CLI, and run the tests automatically from a pipeline.'
+    shows:
+      - COBOL programs with embedded SQL against Db2
+      - JCL procedures with restart after failure
+      - Jobs submitted and checked from the Zowe CLI
+      - Automated tests run from a pipeline
+    stretch:
+      - A small web page that shows the report
+      - Performance measured on a larger input
+    present: The repo, a diagram of the job flow, and a recording of the pipeline running.
+  resources:
+    - resource: omp-cobol-course
+      locator: The labs, as a base for your programs
+      role: primary
+      verified: true
+    - resource: ibm-z-xplore
+      locator: The advanced challenges
+      role: alternative
+      verified: true
+
+- id: project-rpa-basic
+  title: 'Project: automate a desktop task with UiPath'
+  area: enterprise
+  kind: project
+  summary: A simple robot that reads a spreadsheet and fills a web form, built in UiPath Studio.
+  hours: 8
+  requires: [rpa-uipath]
+  brief:
+    build: 'Use UiPath Studio Community to automate a simple task: read rows from Excel and enter them into a practice web form, then save a confirmation for each.'
+    shows:
+      - Reads every row and fills the form
+      - Handles a missing value without stopping
+      - Saves a result for each row
+      - Clear names for every activity
+    stretch:
+      - Email a summary when done
+      - Run it from the UiPath Assistant
+    present: A screen recording of a run and the exported project.
+  resources:
+    - resource: uipath-studio-docs
+      locator: The getting-started sections
+      role: primary
+      verified: true
+    - resource: uipath-academy
+      locator: The developer foundation course
+      role: alternative
+      verified: true
+
+- id: project-rpa-orchestrated
+  title: 'Project: an orchestrated automation with queues'
+  area: enterprise
+  kind: project
+  summary: 'A production-style automation: queues, the framework, document understanding, Orchestrator and an ROI report.'
+  hours: 50
+  requires: [rpa-uipath]
+  recommends: [spreadsheets, business-processes]
+  brief:
+    build: 'Automate a realistic process end to end, such as invoice processing: read invoices from email, extract fields, validate them against a spreadsheet of purchase orders, and post them to a web app, using queues and Orchestrator in UiPath''s Community edition.'
+    shows:
+      - A dispatcher and performer with Orchestrator queues
+      - Business and system exceptions handled differently
+      - Document extraction with a human check for low-confidence fields
+      - Logs and a report per run
+      - Time saved worked out per month
+    stretch:
+      - Attended and unattended parts working together
+      - Unit tests with UiPath's test tools
+    present: A process definition and solution design document, a demo video and the project.
+  resources:
+    - resource: uipath-studio-docs
+      locator: The REFramework pages and the activities for queues
+      role: primary
+      verified: true
+    - resource: uipath-academy
+      locator: The advanced developer courses
+      role: alternative
+      verified: true

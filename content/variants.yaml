@@ -239,6 +239,7 @@
 - id: manual-tester
   title: "Manual tester"
   extends: qa-engineer
+  projects: {beginner: project-manual-testing, intermediate: project-api-tests, advanced: project-test-suite}
   adds: [project-manual-testing]
   drops: [test-automation, project-test-suite]
   summary: "Tests software by hand against written test cases and reports bugs. Often a way in to automation testing."
@@ -377,20 +378,24 @@
 - id: generative-ai-engineer
   title: "Generative AI engineer"
   extends: ai-engineer
+  projects: {advanced: project-mcp-servers}
   adds: [generative-models, transformers]
   summary: "Builds products on large language and image models: prompts, retrieval, fine-tuning and evaluation."
 - id: llm-engineer
   title: "LLM engineer"
   extends: ai-engineer
+  projects: {advanced: project-model-router}
   adds: [transformers, hugging-face]
   summary: "Builds, fine-tunes and serves large language models and the apps on top of them."
 - id: prompt-engineer
   title: "Prompt engineer"
   extends: ai-engineer
+  projects: {advanced: project-eval-harness}
   summary: "Designs and tests the prompts and evaluations that make language-model features work reliably."
 - id: rag-developer
   title: "RAG developer"
   extends: ai-engineer
+  projects: {advanced: project-eval-harness}
   search: "rag"
   summary: "Builds systems that answer questions from a company's own documents with retrieval and a language model."
 - id: ai-ml-engineer
@@ -955,6 +960,7 @@
 - id: pcb-design-engineer
   title: "PCB design engineer"
   extends: embedded-engineer
+  projects: {beginner: project-sensor-display, intermediate: project-pcb, advanced: project-rtos-device}
   adds: [pcb-design, project-pcb]
   drops: [project-embedded]
   summary: "Draws schematics and lays out circuit boards in tools like KiCad, Altium or OrCAD, and gets them made."

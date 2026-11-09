@@ -1,5 +1,11 @@
 # Changelog
 
+## Three project levels on every route
+
+- **Pick a beginner, intermediate or advanced project** on any route. The beginner one is small and quick, the intermediate one is what most freshers should show at an interview, and the advanced one is for standing out. The planner swaps your choice in and keeps it as the last stop.
+- **96 new projects, each with a full brief.** Beginner ones include a URL shortener, a personal site, an Excel dashboard, a Postgres load, a ladder-logic set and an SEO audit. Advanced ones include a chat service that scales across servers, a component library, a streaming pipeline, an end-to-end ML system, training a small language model from scratch, Kubernetes with GitOps, a detection lab, a responsible disclosure, a RISC-V core, an SDR receiver, a rooftop solar design and a real consulting engagement.
+- **Advanced AI projects with measurable targets:** a production-grade agent (the AI engineer default), and for related titles an MCP server suite, a cost-aware model router, and an evaluation harness that blocks bad releases.
+
 ## Deeper stops: AI engineering and system design
 
 - **Stops now say what they cover.** Each one lists its subtopics in the order you'd learn them, with what you should be able to do for each. It's on the stop's page and in the stop panel. AI and system design come first; the other areas follow.

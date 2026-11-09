@@ -26,4 +26,17 @@ describe('projects', () => {
     }
     expect([...new Set(wrong)]).toEqual([]);
   });
+
+  it('every project level is a reachable last stop', () => {
+    const wrong: string[] = [];
+    for (const role of c.roles.filter((r) => r.kind === 'role' && r.projects)) {
+      const def = Object.values(role.projects!).find((p) => role.tiers.hire.includes(p))!;
+      for (const p of Object.values(role.projects!)) {
+        const goals = targetsUpTo(role, 'hire').map((id) => (id === def ? p : id));
+        const last = planPath(nodes, goals, new Set()).steps.at(-1);
+        if (kind.get(last?.id ?? '') !== 'project') wrong.push(`${role.id}/${p}: ends with ${last?.id}`);
+      }
+    }
+    expect(wrong).toEqual([]);
+  });
 });

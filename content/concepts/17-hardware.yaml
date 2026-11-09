@@ -111,3 +111,119 @@
       locator: The whole tutorial, then start your own board
       role: primary
       verified: true
+
+- id: project-sensor-display
+  title: 'Project: read a sensor and show it'
+  area: hardware
+  kind: project
+  summary: A temperature or distance sensor read by a microcontroller and shown on a small display, first in a simulator.
+  hours: 8
+  requires: [microcontrollers]
+  brief:
+    build: In Wokwi, then on real hardware, connect a sensor such as a DHT22 or an ultrasonic sensor to an Arduino or ESP32 and show its readings on an OLED or LCD.
+    shows:
+      - Readings that match a reference you trust
+      - A display that updates without flicker
+      - A wiring diagram
+      - Code split into setup, reading and display
+    stretch:
+      - Log readings to an SD card
+      - Send them over Wi-Fi
+    present: Photos, a short video and the code with the diagram.
+  resources:
+    - resource: wokwi
+      locator: Simulate it first
+      role: alternative
+      verified: true
+    - resource: arduino-docs
+      locator: The built-in examples and the sensor libraries you use
+      role: primary
+      verified: true
+
+- id: project-rtos-device
+  title: 'Project: a connected device on an RTOS'
+  area: hardware
+  kind: project
+  summary: A finished device with FreeRTOS tasks, low power, over-the-air updates and its own board.
+  hours: 70
+  requires: [rtos, embedded-protocols]
+  recommends: [pcb-design, networking]
+  brief:
+    build: 'Build a device someone could use daily, such as an air-quality monitor or a water-tank level alarm, on an ESP32 with FreeRTOS: several tasks, Wi-Fi, low-power sleep, over-the-air updates and a custom PCB.'
+    shows:
+      - Separate tasks with queues between them, and why
+      - Battery life measured and improved
+      - Over-the-air updates that can roll back
+      - A custom PCB, assembled and tested
+      - 'Fault handling: sensor failure, Wi-Fi loss'
+    stretch:
+      - A small cloud dashboard
+      - An enclosure you designed
+    present: A project write-up with power measurements, the schematic and code, and a demo video.
+  resources:
+    - resource: freertos-book
+      locator: The chapters on tasks, queues and software timers
+      role: primary
+      verified: true
+    - resource: kicad-getting-started
+      locator: For the board
+      role: alternative
+      verified: true
+
+- id: project-verilog-basics
+  title: 'Project: design and simulate an ALU and counters'
+  area: hardware
+  kind: project
+  summary: Small digital blocks in Verilog, each with a testbench and waveforms.
+  hours: 8
+  requires: [verilog]
+  recommends: [digital-logic]
+  brief:
+    build: Write an ALU, an up-down counter and a simple state machine (a traffic light) in Verilog, and test each with a testbench in a free simulator.
+    shows:
+      - Each block with a testbench
+      - Waveforms that show it works
+      - 'Synthesisable code: no simulation-only tricks in the design'
+      - Clean module interfaces
+    stretch:
+      - Self-checking testbenches
+      - Put one on an FPGA board
+    present: The code and waveform screenshots in a repo.
+  resources:
+    - resource: hdlbits
+      locator: The problems for the blocks you build
+      role: alternative
+      verified: true
+    - resource: chipverify
+      locator: The Verilog tutorial pages
+      role: primary
+      verified: true
+
+- id: project-riscv-soc
+  title: 'Project: a RISC-V core that runs C'
+  area: hardware
+  kind: project
+  summary: A pipelined RISC-V core that runs compiled C programs, verified against a reference and taken through an open-source flow.
+  hours: 80
+  requires: [verilog, computer-architecture, design-verification]
+  recommends: [asic-flow]
+  brief:
+    build: Design a five-stage pipelined RV32I core in Verilog or SystemVerilog with hazard handling, run compiled C programs on it, check it against a reference simulator, and take it through OpenLane to a layout.
+    shows:
+      - All RV32I instructions, passing a standard test suite
+      - Forwarding and stalls for hazards, with tests
+      - C programs compiled and run, with cycle counts
+      - 'Synthesis and layout results: area and timing'
+    stretch:
+      - Branch prediction and its effect on cycles per instruction
+      - Run it on an FPGA
+    present: A detailed write-up, the repo, and the layout image.
+  resources:
+    - resource: nand2tetris
+      locator: For the computer you are building, if you need a refresher
+      role: alternative
+      verified: true
+    - resource: openroad-docs
+      locator: The getting-started guide and the flow documentation
+      role: primary
+      verified: true

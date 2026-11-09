@@ -928,3 +928,272 @@
       locator: The whole post
       role: alternative
       verified: true
+
+- id: project-kaggle-baseline
+  title: 'Project: beat a baseline on a Kaggle competition'
+  area: ai
+  kind: project
+  summary: 'A Getting Started competition entered properly: a baseline, honest validation, and a better model.'
+  hours: 12
+  requires: [machine-learning, pandas]
+  recommends: [feature-engineering]
+  brief:
+    build: Enter one of Kaggle's Getting Started competitions, such as Titanic or House Prices. Build a simple baseline, set up cross-validation you trust, then improve on it with features and a stronger model.
+    shows:
+      - A baseline score, then each improvement measured against it
+      - Cross-validation that matches the leaderboard
+      - Feature work explained in plain words
+      - A clean notebook that runs top to bottom
+    stretch:
+      - Try a gradient-boosting library and compare
+      - Write up what didn't work
+    present: The public notebook on Kaggle and its score, with a short summary of what helped most.
+  resources:
+    - resource: kaggle-learn
+      locator: Intro to Machine Learning, then Intermediate Machine Learning
+      role: primary
+      verified: true
+    - resource: islp
+      locator: Chapter 5, Resampling Methods, for cross-validation
+      role: alternative
+      verified: true
+
+- id: project-ml-platform
+  title: 'Project: an end-to-end ML system'
+  area: ai
+  kind: project
+  summary: Feature pipeline, training pipeline, model registry, serving and monitoring, with retraining when the data drifts.
+  hours: 70
+  requires: [mlops, docker, ci-cd]
+  recommends: [orchestration, kubernetes, observability]
+  brief:
+    build: 'Pick a problem with data that keeps arriving, such as demand forecasting or fraud scoring, and build the whole system: a feature pipeline, a scheduled training pipeline, a model registry, an API that serves predictions, and monitoring that triggers retraining.'
+    shows:
+      - Separate feature, training and inference pipelines
+      - Every model versioned with the data and code that made it
+      - 'A promotion rule: a new model replaces the old one only if it does better on held-out data'
+      - Drift and performance monitoring with alerts
+      - One command to set it all up
+    stretch:
+      - Shadow deployment of a new model before switching
+      - A feature store
+    present: An architecture diagram, a demo of a retrain being triggered, and the repo.
+  resources:
+    - resource: madewithml
+      locator: The whole course, applied to your own problem
+      role: primary
+      verified: true
+    - resource: mlops-zoomcamp
+      locator: All modules
+      role: alternative
+      verified: true
+
+- id: project-image-classifier
+  title: 'Project: fine-tune an image classifier'
+  area: ai
+  kind: project
+  summary: A pretrained network adapted to your own images, evaluated honestly, with a demo anyone can try.
+  hours: 15
+  requires: [cnns, pytorch]
+  recommends: [deep-learning, computer-vision]
+  brief:
+    build: Collect or find a few hundred images for a problem you care about, such as crop diseases, Indian food dishes or road signs, fine-tune a pretrained model on them, and put a demo online.
+    shows:
+      - A clean train, validation and test split
+      - Transfer learning with a frozen backbone, then fine-tuning
+      - A confusion matrix and the mistakes it still makes
+      - A live demo, for example on Hugging Face Spaces
+    stretch:
+      - Grad-CAM pictures of what the model looks at
+      - Export a small version for a phone
+    present: The demo link, the notebook, and a gallery of correct and wrong predictions.
+  resources:
+    - resource: fastai-course
+      locator: Lessons 1 and 2
+      role: alternative
+      verified: true
+    - resource: learnpytorch
+      locator: Chapter 06, Transfer Learning
+      role: primary
+      verified: true
+
+- id: project-train-from-scratch
+  title: 'Project: train a small language model from scratch'
+  area: ai
+  kind: project
+  summary: A GPT-style model trained on your own corpus, with experiments on size and data, and a write-up of what you found.
+  hours: 60
+  requires: [transformers, pytorch]
+  recommends: [parallel-computing, inference-serving]
+  brief:
+    build: 'Train a small GPT-style model from scratch on a corpus you choose, such as Hindi news, Tamil literature or Python code. Then run controlled experiments: change model size, data size or the tokenizer, and measure what happens.'
+    shows:
+      - A tokenizer trained on your data, and why you picked its vocabulary size
+      - A training loop with validation loss, checkpoints and mixed precision
+      - At least three controlled experiments with plots
+      - Samples from the model at different stages of training
+    stretch:
+      - Fine-tune it to follow simple instructions
+      - Serve it and measure tokens per second
+    present: A report with the plots and what you learned, the code, and the trained weights on Hugging Face.
+  resources:
+    - resource: karpathy-zero-to-hero
+      locator: Let's build GPT, then the tokenizer lecture
+      role: primary
+      verified: true
+    - resource: d2l
+      locator: Chapter 11, Attention Mechanisms and Transformers
+      role: alternative
+      verified: true
+
+- id: project-llm-tool
+  title: 'Project: a small LLM-powered tool'
+  area: ai
+  kind: project
+  summary: One useful task done with an LLM, with structured output and a small test set that proves it works.
+  hours: 10
+  requires: [llm-apis]
+  recommends: [python-depth, llm-evaluation]
+  brief:
+    build: 'Build a tool that does one job with a model: sort your bank SMS messages into spending categories, pull fields out of resumes, or turn meeting notes into action items. Get JSON back and check it before using it.'
+    shows:
+      - Structured output validated with a schema
+      - A test set of at least 20 real examples, with your accuracy
+      - Retries and a clear error when the model's output is unusable
+      - The cost per run worked out
+    stretch:
+      - Compare two models on your test set
+      - Run it on a local open model with Ollama
+    present: A repo with a short demo, the test set and the accuracy table.
+  resources:
+    - resource: anthropic-prompting
+      locator: The overview and the guides it links to on clear instructions and examples
+      role: primary
+      verified: true
+    - resource: hamel-evals
+      locator: The whole post, for building your test set
+      role: alternative
+      verified: true
+
+- id: project-agent-system
+  title: 'Project: a production-grade agent'
+  area: ai
+  kind: project
+  summary: 'An agent that does real work reliably: tool use, checkpoints that survive crashes, step-by-step evals and security testing.'
+  hours: 70
+  requires: [ai-agents, llm-evaluation]
+  recommends: [ai-security, ai-system-design, docker]
+  brief:
+    build: Build an agent that does a real multi-step job, such as a research desk that writes cited reports, a support agent that reads tickets and drafts replies, or a terminal agent that fixes failing tests. Make it durable, measured and safe.
+    shows:
+      - Tools with clear schemas, and approval before any risky action
+      - State checkpointed so a long task resumes after the process is killed
+      - An eval set of at least 50 tasks, graded at every step, run in CI
+      - Prompt-injection tests against your own agent, and the fixes
+      - Cost and latency per task, with a budget it can't exceed
+    stretch:
+      - A multi-agent version with a fact-checker, compared against the single agent
+      - Expose its tools through an MCP server
+    present: A demo video, the eval results before and after your main improvements, and a write-up of failures you found and fixed.
+  resources:
+    - resource: anthropic-effective-agents
+      locator: The whole post, especially the appendix on tools
+      role: primary
+      verified: true
+    - resource: hf-agents-course
+      locator: The units on frameworks and agentic RAG
+      role: alternative
+      verified: true
+    - resource: owasp-llm-top10
+      locator: Prompt injection and excessive agency, as your test plan
+      role: deep-dive
+      verified: true
+
+- id: project-mcp-servers
+  title: 'Project: MCP servers other people use'
+  area: ai
+  kind: project
+  summary: Model Context Protocol servers with authentication, rate limits and docs, used by someone other than you.
+  hours: 45
+  requires: [ai-agents, rest-apis]
+  recommends: [ai-security, python-depth]
+  brief:
+    build: Build two or three MCP servers that connect AI assistants to something useful, such as an Indian railway timetable, your college's notices, a public API or a database. Give them proper authentication, limits and documentation, and get real users.
+    shows:
+      - Tools and resources with clear names and schemas
+      - Authentication, and rate limits per user
+      - Errors the model can understand and recover from
+      - Docs and an install guide
+      - 'Real users: installs, stars, or one team using it'
+    stretch:
+      - Tests that run each tool against a mock assistant
+      - Publish it to a public MCP server list
+    present: The repos, the docs, and the evidence that someone uses them.
+  resources:
+    - resource: mcp-docs
+      locator: Architecture, then building servers, then the security pages
+      role: primary
+      verified: true
+    - resource: anthropic-effective-agents
+      locator: Appendix 2 on designing tools
+      role: alternative
+      verified: true
+
+- id: project-model-router
+  title: 'Project: a cost-aware model router'
+  area: ai
+  kind: project
+  summary: A gateway that sends each request to the cheapest model that can handle it, with caching and fallbacks, and proves the saving.
+  hours: 40
+  requires: [llm-apis, llm-evaluation]
+  recommends: [caching, ai-system-design]
+  brief:
+    build: Build a gateway in front of several models. Classify each request by difficulty, send easy ones to a small model and hard ones to a large one, cache repeated answers, and fall back when a provider fails.
+    shows:
+      - A fixed eval set to measure quality before and after routing
+      - Cost reduction measured against always using the large model, with the quality change
+      - Exact and semantic caching, with hit rates
+      - Fallbacks and timeouts when a provider is down
+      - Per-request logs of model, cost and latency
+    stretch:
+      - Learn the routing rule from your eval data
+      - Per-team budgets and limits
+    present: A table of cost and quality with and without routing, an architecture diagram, and the repo.
+  resources:
+    - resource: huyen-genai-platform
+      locator: Step 3, the model router and gateway, and step 4 on caching
+      role: primary
+      verified: true
+    - resource: yan-llm-patterns
+      locator: The caching and evals sections
+      role: alternative
+      verified: true
+
+- id: project-eval-harness
+  title: 'Project: an evaluation harness that gates releases'
+  area: ai
+  kind: project
+  summary: Golden datasets, graders checked against people, and a CI check that blocks changes that make an AI feature worse.
+  hours: 40
+  requires: [llm-evaluation]
+  recommends: [ci-cd, rag, ai-agents]
+  brief:
+    build: 'Take an LLM feature you built, such as a RAG app or an agent, and build the testing around it: a golden dataset grown from real failures, code-based checks, an LLM judge calibrated against your own labels, and a CI job that fails a pull request when quality drops.'
+    shows:
+      - At least 100 golden examples, with where each came from
+      - Code checks plus an LLM judge, with its agreement with human labels measured
+      - Step-level grading for multi-step tasks
+      - A CI gate with a threshold, and one real regression it caught
+    stretch:
+      - Dashboards of quality over time
+      - Online evaluation from user feedback
+    present: The harness repo, a report of judge agreement, and the pull request it blocked.
+  resources:
+    - resource: hamel-evals
+      locator: The whole post and the follow-ups it links
+      role: primary
+      verified: true
+    - resource: yan-llm-patterns
+      locator: The evals section
+      role: alternative
+      verified: true

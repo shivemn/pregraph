@@ -9,6 +9,7 @@ import { parse } from 'yaml';
 import { z } from 'zod';
 import {
   areaSchema,
+  LEVELS,
   backgroundSchema,
   conceptSchema,
   familySchema,
@@ -114,9 +115,22 @@ export function checkContent(c: Content): string[] {
       if (seen.has(t)) problems.push(`Role "${r.id}" lists "${t}" in more than one tier`);
       seen.add(t);
     }
-    // Every job ends in something to show. Exams are the exception.
-    if (r.kind === 'role' && !r.tiers.hire.some((t) => byId.get(t)?.kind === 'project')) {
-      problems.push(`Role "${r.id}" has no project on its hiring list`);
+    // Every job ends in something to show, at three levels. Exams are the exception.
+    if (r.kind === 'role') {
+      if (!r.tiers.hire.some((t) => byId.get(t)?.kind === 'project')) problems.push(`Role "${r.id}" has no project on its hiring list`);
+      if (!r.projects) problems.push(`Role "${r.id}" has no project levels`);
+      else {
+        const ids = LEVELS.map((l) => r.projects![l]);
+        for (const l of LEVELS) {
+          const p = r.projects[l];
+          if (byId.get(p)?.kind !== 'project') problems.push(`Role "${r.id}": its ${l} project "${p}" isn't a project`);
+        }
+        if (new Set(ids).size !== 3) problems.push(`Role "${r.id}" uses the same project at two levels`);
+        const onList = ids.filter((p) => r.tiers.hire.includes(p));
+        if (onList.length !== 1) problems.push(`Role "${r.id}" should have exactly one of its level projects on the hiring list, not ${onList.length}`);
+        const elsewhere = ids.filter((p) => r.tiers.firstYear.includes(p) || r.tiers.extra.includes(p));
+        if (elsewhere.length) problems.push(`Role "${r.id}" lists level projects in later tiers: ${elsewhere.join(', ')}`);
+      }
     }
   }
   for (const g of c.toolGroups) {
@@ -181,6 +195,7 @@ export function expandVariants(routes: Role[], variants: Variant[], problems: st
         summary: v.summary,
         search: v.search,
         tiers: { hire, firstYear: keep(base.tiers.firstYear), extra: keep(base.tiers.extra) },
+        ...(base.projects ? { projects: { ...base.projects, ...v.projects } } : {}),
         variantOf: base.id,
       },
     ];

@@ -213,3 +213,269 @@
       locator: As background on lean methods
       role: alternative
       verified: false
+
+- id: project-market-sizing
+  title: 'Project: size a market'
+  area: business
+  kind: project
+  summary: A real Indian market sized top-down and bottom-up, with the two estimates reconciled.
+  hours: 8
+  requires: [problem-structuring, spreadsheets]
+  brief:
+    build: Estimate the size of a real market, such as electric two-wheelers in Pune or coaching classes in Kota, both top-down (from population) and bottom-up (from customers and prices), and reconcile the two.
+    shows:
+      - Both estimates with every assumption written down
+      - Sources for the key numbers
+      - Why the two differ, and your final range
+      - Which assumption matters most
+    stretch:
+      - Check one assumption with a quick survey
+      - A five-year projection
+    present: A one-page summary and the workbook.
+  resources:
+    - resource: mckinsey-interviewing
+      locator: The sample cases with market sizing
+      role: primary
+      verified: true
+
+- id: project-strategy-engagement
+  title: 'Project: a consulting engagement for a real organisation'
+  area: business
+  kind: project
+  summary: 'Four to six weeks with a real small business or NGO: diagnosis, recommendations, and help putting them in place.'
+  hours: 60
+  requires: [problem-structuring, spreadsheets]
+  recommends: [accounting, data-visualization, process-improvement]
+  brief:
+    build: Take on a real problem for a small business or NGO for four to six weeks, with a clear question agreed with the owner. Diagnose it with data and interviews, recommend what to do, and help put the first change in place.
+    shows:
+      - An agreed problem statement and workplan
+      - Interviews and data analysis
+      - Recommendations with costs, benefits and risks
+      - The first change put in place, and its early effect
+      - The owner's feedback
+    stretch:
+      - A financial model of the recommendation
+      - A follow-up after three months
+    present: A final deck and a case study.
+  resources:
+    - resource: mckinsey-interviewing
+      locator: The sample cases, for structuring
+      role: primary
+      verified: true
+    - resource: mit-15810
+      locator: For the marketing parts, if the problem is about customers
+      role: alternative
+      verified: true
+
+- id: project-marketing-metrics
+  title: 'Project: a marketing KPI sheet'
+  area: business
+  kind: project
+  summary: CAC, conversion rates, LTV and ROAS worked out from sample campaign data, with a simple dashboard.
+  hours: 8
+  requires: [spreadsheets]
+  recommends: [marketing-fundamentals]
+  brief:
+    build: 'Using sample or public campaign data, build a sheet that works out the main marketing numbers by channel: spend, clicks, conversion rate, cost per acquisition, customer lifetime value and return on ad spend.'
+    shows:
+      - Each metric defined in words and in a formula
+      - Results by channel and month
+      - A small dashboard
+      - One recommendation from the numbers
+    stretch:
+      - A cohort view of retention
+      - Pull data from the GA4 demo account
+    present: The workbook and a short note.
+  resources:
+    - resource: ga4-demo
+      locator: For real data to practise on
+      role: primary
+      verified: true
+
+- id: project-attribution
+  title: 'Project: a marketing mix or attribution model'
+  area: business
+  kind: project
+  summary: Which channels really drive sales, estimated with a marketing mix model or attribution model on public data.
+  hours: 60
+  requires: [statistics, web-analytics]
+  recommends: [linear-models, experiments]
+  brief:
+    build: On a public marketing dataset with spend by channel over time, build a marketing mix model with regression, including carry-over and saturation effects. Compare it with simple last-click attribution.
+    shows:
+      - Adstock and saturation in the model, explained
+      - Each channel's contribution and return
+      - Validation on held-out weeks
+      - Budget recommendations and their uncertainty
+    stretch:
+      - A Bayesian version
+      - Check against an experiment if your data has one
+    present: A report for a marketing head and the notebook.
+  resources:
+    - resource: psu-stat501
+      locator: The lessons on multiple regression
+      role: primary
+      verified: true
+    - resource: causal-handbook
+      locator: The early chapters, on why correlation misleads
+      role: alternative
+      verified: true
+
+- id: project-seo-audit
+  title: 'Project: an SEO audit of a small site'
+  area: business
+  kind: project
+  summary: A small business's website checked for search problems, with a ranked list of fixes.
+  hours: 8
+  requires: [digital-marketing]
+  recommends: [web-analytics]
+  brief:
+    build: 'Audit a small business''s website with free tools such as Google Search Console (with the owner''s access), PageSpeed Insights and a crawler: technical issues, content and local search.'
+    shows:
+      - 'Technical issues: speed, mobile, broken links, indexing'
+      - Content and keyword gaps
+      - 'Local search: the business profile and reviews'
+      - Fixes ranked by effort and impact
+    stretch:
+      - Fix the top three and measure
+      - A keyword plan for three new pages
+    present: The audit as a short report for the owner.
+  resources:
+    - resource: hubspot-inbound
+      locator: The lessons on content and SEO
+      role: primary
+      verified: true
+
+- id: project-growth-experiments
+  title: 'Project: run growth experiments for a real product'
+  area: business
+  kind: project
+  summary: Five experiments run over two months for a real product, each with a hypothesis, a result and a decision.
+  hours: 60
+  requires: [digital-marketing, experiments]
+  recommends: [web-analytics, statistics]
+  brief:
+    build: 'Work with a real product, such as a startup, a creator or an app you built, and run at least five growth experiments over two months: landing pages, onboarding, referral, pricing pages or channels.'
+    shows:
+      - A hypothesis and success metric for each experiment, written first
+      - Enough traffic or a clear statement of what you can't conclude
+      - Results analysed correctly
+      - A decision after each one, and what happened next
+    stretch:
+      - A referral loop
+      - An experiment-prioritisation scoring sheet
+    present: An experiment log and a case study.
+  resources:
+    - resource: ga4-url-builder
+      locator: Tag every channel you test
+      role: primary
+      verified: true
+    - resource: openintro
+      locator: The chapters on comparing two proportions
+      role: alternative
+      verified: true
+
+- id: project-hr-dashboard
+  title: 'Project: a headcount and attrition dashboard'
+  area: business
+  kind: project
+  summary: Monthly headcount, joiners, leavers and attrition rate in one sheet, from sample employee data.
+  hours: 8
+  requires: [spreadsheets, hr-fundamentals]
+  recommends: [data-visualization]
+  brief:
+    build: From a sample employee dataset, build a dashboard with monthly headcount, joiners, leavers and attrition rate by department, using formulas and pivot tables.
+    shows:
+      - Attrition worked out with the standard formula
+      - Monthly trend and department split
+      - Charts a manager can read quickly
+      - No personal details shown
+    stretch:
+      - Time-to-hire if your data has it
+      - The same in Power BI
+    present: The workbook and a screenshot.
+  resources:
+    - resource: gcf-excel
+      locator: The lessons on pivot tables and charts
+      role: primary
+      verified: true
+
+- id: project-pay-equity
+  title: 'Project: a pay equity analysis'
+  area: business
+  kind: project
+  summary: Pay differences between groups analysed properly, controlling for role, level and experience.
+  hours: 50
+  requires: [hr-fundamentals, statistics]
+  recommends: [linear-models, data-visualization]
+  brief:
+    build: On a public or synthetic HR dataset with pay, role, level, experience and gender, measure the raw pay gap and the gap that remains after accounting for legitimate factors, using regression.
+    shows:
+      - The raw gap and the adjusted gap
+      - Which factors explain the difference
+      - Individual cases flagged for review
+      - Recommendations, and their cost
+    stretch:
+      - Check promotion rates, not only pay
+      - A dashboard for leadership
+    present: A report for an HR head and the analysis code. Treat real pay data as confidential.
+  resources:
+    - resource: psu-stat501
+      locator: The lessons on multiple regression and categorical predictors
+      role: primary
+      verified: true
+
+- id: project-inventory-sim
+  title: 'Project: forecast demand and set inventory policy'
+  area: business
+  kind: project
+  summary: Demand forecast for a set of products and an inventory policy tested by simulation.
+  hours: 50
+  requires: [spreadsheets, statistics]
+  recommends: [time-series, operations-research]
+  brief:
+    build: Using a public retail sales dataset, forecast demand for a few products, then set reorder points and safety stock, and simulate a year to compare service level and stock cost under different policies.
+    shows:
+      - Forecasts with their error measured
+      - Safety stock and reorder points from the forecast error
+      - A simulation of a year, with stock-outs and holding costs
+      - A recommended policy and the trade-off
+    stretch:
+      - ABC classification of the full product list
+      - Supplier lead-time variability
+    present: A report and the workbook or notebook.
+  resources:
+    - resource: fpp3
+      locator: The chapters on forecasting methods and evaluating accuracy
+      role: primary
+      verified: true
+
+- id: project-sales-forecast
+  title: 'Project: a sales forecast and territory plan'
+  area: business
+  kind: project
+  summary: Next quarter's sales forecast from pipeline and history, and a territory and quota plan built on it.
+  hours: 50
+  requires: [bi-tools, statistics]
+  recommends: [time-series, salesforce]
+  brief:
+    build: From a sales dataset with history and pipeline, forecast next quarter by region two ways, from the pipeline and from history, then design territories and quotas that are fair.
+    shows:
+      - Two forecasts, compared and combined
+      - Forecast accuracy measured on past quarters
+      - Territories balanced by potential, not just past sales
+      - Quotas with the reasoning
+    stretch:
+      - A what-if for losing a big account
+      - A dashboard for sales leaders
+    present: A planning deck and the model.
+  resources:
+    - resource: fpp3
+      locator: The chapters on forecasting and evaluating accuracy
+      role: primary
+      verified: true
+    - resource: alex-powerbi
+      locator: For the dashboard
+      role: alternative
+      verified: true

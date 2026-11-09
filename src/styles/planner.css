@@ -208,3 +208,7 @@
 .incoming-actions { display: flex; align-items: center; gap: 14px; }
 .incoming .btn { background: #000; color: var(--yellow); border-color: #000; margin: 0; }
 .incoming .text-button { color: #000; }
+
+/* Which project level you're building, under the controls. */
+.level-note { margin: 10px 0 0; color: var(--ink-2); font-size: 0.97rem; }
+.level-note a { font-weight: 600; color: var(--ink); }

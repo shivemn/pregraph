@@ -155,3 +155,115 @@
       locator: The levels for the attacks you are defending against
       role: alternative
       verified: true
+
+- id: project-pong
+  title: 'Project: remake a classic arcade game'
+  area: games
+  kind: project
+  summary: Pong, Breakout or Flappy Bird remade in Godot or Unity, start to finish.
+  hours: 8
+  requires: [game-engines]
+  recommends: [game-programming]
+  brief:
+    build: 'Remake one simple classic in Godot or Unity: Pong, Breakout or Flappy Bird. Include a start screen, scoring, sound and a game-over screen.'
+    shows:
+      - 'A full loop: start, play, game over, restart'
+      - Scoring and a little difficulty curve
+      - Sound effects
+      - A build others can play
+    stretch:
+      - A high score that's saved
+      - Your own art
+    present: Publish it on itch.io with a GIF.
+  resources:
+    - resource: godot-step-by-step
+      locator: The step-by-step guide
+      role: primary
+      verified: true
+    - resource: godot-first-2d-game
+      locator: Your first 2D game
+      role: alternative
+      verified: true
+
+- id: project-game-release
+  title: 'Project: release a polished game'
+  area: games
+  kind: project
+  summary: 'A game taken all the way: playtesting, polish, performance, a store page and real players.'
+  hours: 80
+  requires: [game-programming, game-engines]
+  recommends: [computer-graphics]
+  brief:
+    build: 'Make a game with a clear hook and finish it properly: playtest with at least ten people, polish the feel, optimise for low-end phones or PCs, and release it on itch.io or Steam.'
+    shows:
+      - Playtest notes and the changes they led to
+      - 'Game feel: feedback, juice and difficulty tuned'
+      - Steady frame rate on a low-end device, measured
+      - Save system, settings and a tutorial
+      - A store page and real players
+    stretch:
+      - Analytics on where players quit
+      - A post-launch update from feedback
+    present: The store page, a trailer, and a post-mortem.
+  resources:
+    - resource: game-programming-patterns
+      locator: 'The patterns your game needs: game loop, update method, state'
+      role: primary
+      verified: true
+
+- id: project-token
+  title: 'Project: deploy a token on a testnet'
+  area: blockchain
+  kind: project
+  summary: An ERC-20 token written, tested and deployed to a testnet, verified on a block explorer.
+  hours: 8
+  requires: [solidity]
+  brief:
+    build: Write an ERC-20 token with OpenZeppelin's libraries, test it with Foundry or Hardhat, deploy it to a testnet such as Sepolia, and verify the source on the block explorer.
+    shows:
+      - Tests for transfers, allowances and failure cases
+      - Deployment from a script, not by hand
+      - Verified source on the explorer
+      - No private keys in the repo
+    stretch:
+      - A minting role with access control
+      - A simple page that shows balances
+    present: The repo and the testnet contract link.
+  resources:
+    - resource: solidity-docs
+      locator: The introductory examples and the language basics
+      role: primary
+      verified: true
+    - resource: cryptozombies
+      locator: The first lessons
+      role: alternative
+      verified: true
+
+- id: project-defi-protocol
+  title: 'Project: a small DeFi protocol with an audit report'
+  area: blockchain
+  kind: project
+  summary: A simple lending pool or automated market maker with invariant tests and an audit-style report on your own code.
+  hours: 70
+  requires: [solidity, smart-contract-security]
+  recommends: [react, testing-debugging]
+  brief:
+    build: Build a minimal automated market maker or lending pool on a testnet, test it with fuzzing and invariant tests in Foundry, then audit your own code as an outside auditor would and fix what you find.
+    shows:
+      - The core maths explained and tested
+      - Fuzz and invariant tests for the properties that must always hold
+      - 'An audit report: findings, severity and fixes'
+      - A front end that connects a wallet
+    stretch:
+      - Ask someone else to review it
+      - A price oracle and the attacks on it
+    present: The repo, the audit report and the testnet links. Never put real money in an unaudited contract.
+  resources:
+    - resource: ethernaut
+      locator: Every level, before you audit yourself
+      role: alternative
+      verified: true
+    - resource: solidity-docs
+      locator: The security considerations page
+      role: primary
+      verified: true

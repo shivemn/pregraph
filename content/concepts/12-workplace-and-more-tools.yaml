@@ -623,3 +623,61 @@
       locator: Request a free Personal Developer Instance, then build in it
       role: alternative
       verified: true
+
+- id: project-platform-basics
+  title: 'Project: set up a free developer org for a small team'
+  area: workplace
+  kind: project
+  summary: 'A free Salesforce or ServiceNow instance set up for a small team: users, roles, one custom object and a report.'
+  hours: 8
+  requires: []
+  recommends: [salesforce, servicenow]
+  brief:
+    build: 'In a free Salesforce Developer Edition org or a ServiceNow Personal Developer Instance, set things up for a pretend small team: users with different access, one custom object or table, a simple form, and a report.'
+    shows:
+      - Three users with different permissions
+      - One custom object or table with fields and validation
+      - A list view or form a user would actually work in
+      - A report or dashboard
+    stretch:
+      - A simple Flow or business rule
+      - Import 100 records from a CSV
+    present: Screenshots and a short note of what you set up and why.
+  resources:
+    - resource: trailhead-admin
+      locator: The first modules, done in your own free org
+      role: primary
+      verified: true
+    - resource: servicenow-dev
+      locator: Request a Personal Developer Instance and follow a learning path
+      role: alternative
+      verified: true
+
+- id: project-platform-integration
+  title: 'Project: integrate a platform with an outside system'
+  area: workplace
+  kind: project
+  summary: Salesforce or ServiceNow connected to an outside system through APIs, with code, tests and automated deployment.
+  hours: 50
+  requires: [rest-apis]
+  recommends: [salesforce, servicenow, ci-cd]
+  brief:
+    build: 'Connect your free org to an outside system both ways: for example, create ServiceNow incidents from a monitoring tool''s alerts, or sync Salesforce leads with a website form and a payment provider''s test mode.'
+    shows:
+      - Inbound and outbound API calls, with authentication done properly
+      - Code (Apex or server-side scripts) with unit tests
+      - Error handling and retries, with failures logged
+      - Deployment from source control, not by clicking
+    stretch:
+      - Platform events or a message queue for the integration
+      - A dashboard of sync health
+    present: An architecture diagram, the code in a repo, and a demo video.
+  resources:
+    - resource: trailhead-admin
+      locator: Then the developer modules on Apex and integration
+      role: primary
+      verified: false
+    - resource: servicenow-dev
+      locator: The integration learning path
+      role: alternative
+      verified: false

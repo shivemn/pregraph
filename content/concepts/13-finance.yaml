@@ -241,3 +241,236 @@
       locator: The Communicate part, for writing it up in Quarto
       role: alternative
       verified: true
+
+- id: project-ratio-analysis
+  title: 'Project: compare two companies'' financial health'
+  area: finance
+  kind: project
+  summary: Two listed companies in the same industry compared on profitability, liquidity, debt and cash flow.
+  hours: 10
+  requires: [accounting]
+  recommends: [spreadsheets, corporate-finance]
+  brief:
+    build: Pick two listed Indian companies in one industry, such as two paint makers or two banks, take three years of annual reports, and compare them with the standard ratios.
+    shows:
+      - Profitability, liquidity, leverage and efficiency ratios, worked out in a spreadsheet
+      - What changed over three years, and why, from the annual reports
+      - Cash flow compared with reported profit
+      - 'A one-page conclusion: which is healthier, and the risks'
+    stretch:
+      - Add a third company or the industry average
+      - Check your numbers against a data provider
+    present: The workbook and a one-page note.
+  resources:
+    - resource: openstax-accounting
+      locator: The chapter introducing financial statements, then the appendix on financial statement analysis
+      role: primary
+      verified: true
+    - resource: varsity
+      locator: Fundamental Analysis, the chapters on financial ratios
+      role: alternative
+      verified: true
+
+- id: project-equity-report
+  title: 'Project: a full equity research report'
+  area: finance
+  kind: project
+  summary: An initiating-coverage style report with an industry view, a model, a valuation and a call, tracked over time.
+  hours: 60
+  requires: [corporate-finance, accounting]
+  recommends: [financial-markets, statistics]
+  brief:
+    build: 'Write the kind of report a sell-side analyst publishes when starting coverage of a listed company: industry, business, management, a full model, valuation by more than one method, a target price, risks and a recommendation. Then track it for six months.'
+    shows:
+      - Industry analysis with sources
+      - A three-statement model with explicit assumptions
+      - Valuation by DCF and relative multiples, reconciled
+      - Risks, with what would make you wrong
+      - A tracking note after results come out
+    stretch:
+      - Talk to customers or distributors and use what you learn
+      - Compare your call with published analyst views
+    present: The report as a PDF, the model, and the tracking notes.
+  resources:
+    - resource: damodaran-valuation
+      locator: The whole course
+      role: alternative
+      verified: true
+    - resource: openstax-finance
+      locator: The chapters on valuation and cost of capital
+      role: primary
+      verified: true
+
+- id: project-credit-scorecard
+  title: 'Project: build a credit scorecard'
+  area: finance
+  kind: project
+  summary: A scorecard that predicts loan default, validated and documented the way banks' model-risk teams expect.
+  hours: 40
+  requires: [risk-management, machine-learning]
+  recommends: [statistics, python-depth]
+  brief:
+    build: 'On a public loan dataset, build a credit scorecard with logistic regression: bin variables, use weight of evidence, check discrimination and stability, and turn it into points.'
+    shows:
+      - Variable binning and weight of evidence, with information value
+      - Gini, KS and a stability check on a later sample
+      - The points table and cut-offs
+      - 'Model documentation: data, limits and monitoring plan'
+    stretch:
+      - Compare with a gradient-boosting model and discuss explainability
+      - Reject inference
+    present: A model document and the notebook.
+  resources:
+    - resource: islp
+      locator: Chapter 4, Classification
+      role: primary
+      verified: true
+    - resource: kaggle-datasets
+      locator: Search for a credit or loan default dataset
+      role: alternative
+      verified: true
+
+- id: project-returns-analysis
+  title: 'Project: analyse stock returns and risk'
+  area: finance
+  kind: project
+  summary: 'Ten years of Nifty stocks: returns, volatility, correlation and drawdowns, worked out and charted.'
+  hours: 10
+  requires: [statistics, pandas]
+  recommends: [financial-markets]
+  brief:
+    build: Download daily prices for a handful of Nifty stocks and the index, compute returns and risk, and chart what you find.
+    shows:
+      - Daily and annual returns, volatility and maximum drawdown
+      - A correlation matrix and what it means for diversification
+      - Beta against the Nifty
+      - Charts with clear titles
+    stretch:
+      - An efficient frontier for the stocks
+      - Rolling volatility through crises
+    present: A notebook with a short summary at the top.
+  resources:
+    - resource: varsity
+      locator: Risk Management and Trading Psychology, chapters 2 to 5
+      role: primary
+      verified: true
+    - resource: py4da
+      locator: The chapter on time series
+      role: alternative
+      verified: true
+
+- id: project-alpha-research
+  title: 'Project: a factor research study'
+  area: finance
+  kind: project
+  summary: 'A trading signal tested the way a research desk would: clean data, out-of-sample tests, costs, and honesty about overfitting.'
+  hours: 60
+  requires: [time-series, statistics, financial-markets]
+  recommends: [machine-learning, econometrics]
+  brief:
+    build: Research one idea, such as momentum, value or low volatility in Indian stocks, on survivorship-free data if you can get it. Test it out of sample, with costs, and report what you found even if the answer is no.
+    shows:
+      - 'Data issues handled: survivorship, corporate actions, look-ahead'
+      - In-sample and out-of-sample periods fixed before you look
+      - Returns after costs, turnover and capacity
+      - How many ideas you tried, and what that means for the result
+    stretch:
+      - Combine two factors and test the combination
+      - Run it live on paper for three months
+    present: A research note like a desk would circulate, and the code.
+  resources:
+    - resource: quantconnect
+      locator: Use its data and backtester for the tests
+      role: alternative
+      verified: true
+    - resource: fpp3
+      locator: The chapters on time-series features and evaluation
+      role: primary
+      verified: true
+
+- id: project-options-pricer
+  title: 'Project: an options pricer in C++'
+  area: finance
+  kind: project
+  summary: Black-Scholes, a binomial tree and Monte Carlo pricing in C++, checked against each other.
+  hours: 15
+  requires: [cpp, derivatives]
+  recommends: [probability, testing-debugging]
+  brief:
+    build: Write an options pricing library in C++ that prices European options three ways, and American options with a tree, with tests.
+    shows:
+      - Black-Scholes prices and Greeks
+      - A binomial tree that converges to Black-Scholes, with a plot
+      - Monte Carlo with confidence intervals
+      - Unit tests and a small benchmark
+    stretch:
+      - Implied volatility by root finding
+      - Variance reduction for Monte Carlo
+    present: The repo with a README of results and convergence plots.
+  resources:
+    - resource: learncpp
+      locator: As a reference for classes and the standard library
+      role: alternative
+      verified: true
+    - resource: mit-18s096
+      locator: The lectures on Black-Scholes and option pricing
+      role: primary
+      verified: true
+
+- id: project-low-latency
+  title: 'Project: a low-latency market data system'
+  area: finance
+  kind: project
+  summary: A feed handler and matching engine measured in microseconds, with the profiling that got it there.
+  hours: 70
+  requires: [cpp, concurrency, networking]
+  recommends: [computer-architecture, parallel-computing]
+  brief:
+    build: Build a market data feed handler that reads a binary feed over UDP multicast (from a simulator you write), rebuilds the order book, and passes updates to a strategy thread. Measure and cut latency at every step.
+    shows:
+      - A binary protocol parser with no allocations on the hot path
+      - A lock-free queue between threads, and why it's correct
+      - Latency percentiles measured end to end
+      - Profiling results, and three optimisations with before-and-after numbers
+    stretch:
+      - Kernel-bypass or busy-polling experiments
+      - Replay a full day of messages
+    present: A write-up of the latency budget and the optimisations, with the code.
+  resources:
+    - resource: learncpp
+      locator: As a reference while you build
+      role: alternative
+      verified: true
+    - resource: cs149
+      locator: The lectures on memory and performance
+      role: primary
+      verified: true
+
+- id: project-causal-study
+  title: 'Project: replicate and extend a published study'
+  area: finance
+  kind: project
+  summary: A published empirical paper reproduced from its data, then extended with a new test or new data.
+  hours: 60
+  requires: [econometrics, r-lang]
+  recommends: [statistics, experiments]
+  brief:
+    build: 'Pick a published economics paper with public replication data, ideally on India, reproduce its main tables, then extend it: newer years, another state, or a robustness check the authors didn''t run.'
+    shows:
+      - The main results reproduced, with any differences explained
+      - The identification strategy explained in plain words
+      - One extension with its own results
+      - Robustness checks and their effect
+    stretch:
+      - Contact the authors about anything you couldn't reproduce
+      - A short policy note for a non-economist
+    present: A paper-style write-up and a reproducible code repository.
+  resources:
+    - resource: causal-handbook
+      locator: The chapters on the method the paper uses
+      role: primary
+      verified: true
+    - resource: econometrics-r
+      locator: The chapters on panel data and instrumental variables
+      role: alternative
+      verified: true

@@ -546,3 +546,125 @@
       locator: If you use Power BI instead
       role: alternative
       verified: true
+
+- id: project-excel-dashboard
+  title: 'Project: an Excel report from messy data'
+  area: data
+  kind: project
+  summary: Raw, messy data cleaned and turned into a one-page dashboard in Excel or Google Sheets.
+  hours: 10
+  requires: [spreadsheets]
+  recommends: [data-visualization]
+  brief:
+    build: Take a messy public dataset, such as sales records or a government spreadsheet with merged cells and odd formats, clean it, and build a one-page dashboard a manager could read.
+    shows:
+      - 'Cleaning steps written down: duplicates, blanks, wrong types'
+      - Lookups and pivot tables doing the work, not hand-typed numbers
+      - Three to five charts and a few headline numbers
+      - Filters or slicers for the obvious questions
+    stretch:
+      - Power Query to make the cleaning repeatable
+      - The same dashboard in Power BI or Tableau
+    present: The workbook and a screenshot, with a short note on what the numbers say.
+  resources:
+    - resource: gcf-excel
+      locator: The lessons on tables, sorting and filtering, functions and charts
+      role: primary
+      verified: true
+    - resource: fcc-excel
+      locator: The whole video
+      role: alternative
+      verified: true
+
+- id: project-analytics-case
+  title: 'Project: a full analytics case study'
+  area: data
+  kind: project
+  summary: 'A business question answered end to end: SQL on many tables, a dashboard, an experiment readout and recommendations.'
+  hours: 50
+  requires: [sql, bi-tools, statistics]
+  recommends: [experiments, pandas]
+  brief:
+    build: 'Take a realistic multi-table dataset, such as an e-commerce or ride-hailing dataset with orders, users and events, and run the analysis a company would ask a senior analyst for: metric definitions, a dashboard, a deep dive into one drop, and an A/B test readout.'
+    shows:
+      - Metric definitions written down, with the SQL behind each
+      - A dashboard someone else could use without you
+      - A deep dive that explains a change with evidence
+      - 'An experiment analysed properly: sample size, significance and what to ship'
+      - Recommendations ranked by value
+    stretch:
+      - Automate the refresh
+      - A cohort or retention analysis
+    present: A short deck for a manager, the dashboard, and the SQL in a repo.
+  resources:
+    - resource: datalemur
+      locator: The SQL questions, to sharpen the queries you will need
+      role: alternative
+      verified: true
+    - resource: openintro
+      locator: The chapters on inference for comparing two groups
+      role: primary
+      verified: true
+
+- id: project-sql-etl
+  title: 'Project: load and model a dataset in Postgres'
+  area: data
+  kind: project
+  summary: A public dataset loaded into PostgreSQL, cleaned, split into proper tables and queried.
+  hours: 10
+  requires: [sql]
+  recommends: [programming-basics, data-warehousing]
+  brief:
+    build: Pick a public dataset in CSV, load it into PostgreSQL with a script you can re-run, split it into well-designed tables with keys, and write ten queries that answer real questions.
+    shows:
+      - A schema with primary and foreign keys, and the reasons for it
+      - A load script you can run twice without duplicating data
+      - Constraints that catch bad data
+      - Ten queries, including joins, grouping and window functions
+    stretch:
+      - Indexes, with before-and-after timings
+      - A small Python script that pulls fresh data daily
+    present: The repo with the schema diagram, the scripts and the queries with their results.
+  resources:
+    - resource: postgres-tutorial
+      locator: The whole tutorial, then the chapters on data definition
+      role: primary
+      verified: true
+    - resource: pgexercises
+      locator: Every section, as practice for your queries
+      role: alternative
+      verified: true
+
+- id: project-streaming-pipeline
+  title: 'Project: a streaming data pipeline'
+  area: data
+  kind: project
+  summary: Events flowing through Kafka into a lakehouse in near real time, with data-quality checks and a live dashboard.
+  hours: 60
+  requires: [spark, messaging, data-warehousing]
+  recommends: [orchestration, docker, infrastructure-as-code]
+  brief:
+    build: Produce a realistic stream of events, such as ride requests, payments or sensor readings, into Kafka. Process it with Spark Structured Streaming or Flink, land it in a lakehouse table format, and serve a dashboard that updates every minute.
+    shows:
+      - Kafka topics with partitions and keys you can justify
+      - Streaming jobs with windows, late data and checkpoints
+      - Exactly-once or idempotent writes, and how you tested them
+      - Data-quality checks with alerts
+      - Everything started with one command, such as Docker Compose
+    stretch:
+      - Change data capture from a Postgres database
+      - Backfill and replay from Kafka
+    present: An architecture diagram, a short demo video and a write-up of the failure cases you tested.
+  resources:
+    - resource: spark-docs
+      locator: The Structured Streaming programming guide
+      role: primary
+      verified: true
+    - resource: kafka-docs
+      locator: Introduction, Design, then the Streams and Connect sections
+      role: alternative
+      verified: true
+    - resource: de-zoomcamp
+      locator: The streaming module
+      role: alternative
+      verified: true

@@ -87,3 +87,123 @@
       locator: The labs for any finding you want to understand better
       role: alternative
       verified: true
+
+- id: project-pentest-report
+  title: 'Project: test a lab and write the report'
+  area: security
+  kind: project
+  summary: A deliberately vulnerable lab tested end to end and written up as a professional penetration-test report.
+  hours: 30
+  requires: [web-security, networking]
+  recommends: [burp-suite, nmap]
+  brief:
+    build: 'Pick a few retired machines on Hack The Box or TryHackMe, or a vulnerable VM you run yourself, and test them as you would a client''s system: scope, recon, exploitation and a report.'
+    shows:
+      - Scope and rules of engagement written first
+      - Findings with severity, evidence, steps to reproduce and a fix
+      - An executive summary a manager can read
+      - Methodology mapped to a known standard
+    stretch:
+      - Retest after applying your own fixes
+      - A finding chained from two smaller issues
+    present: The report as a PDF. Only ever test systems you own or have written permission to test.
+  resources:
+    - resource: portswigger-academy
+      locator: The labs for the vulnerabilities you report
+      role: alternative
+      verified: true
+    - resource: owasp-top10
+      locator: As the checklist for web findings
+      role: primary
+      verified: true
+    - resource: tryhackme
+      locator: The offensive learning paths
+      role: alternative
+      verified: true
+
+- id: project-bug-bounty
+  title: 'Project: a real responsible disclosure'
+  area: security
+  kind: project
+  summary: A real vulnerability found in a public bug bounty or disclosure programme and reported properly.
+  hours: 80
+  requires: [web-security]
+  recommends: [burp-suite, api-styles]
+  brief:
+    build: Join a public programme with a clear scope, such as those on HackerOne or Bugcrowd, or a company's vulnerability disclosure policy. Study the target, test only what's in scope, and report what you find.
+    shows:
+      - Only in-scope testing, following the programme's rules
+      - A report with clear impact, steps to reproduce and a fix
+      - Your recon notes and method
+      - An accepted report, or a well-argued one with the response
+    stretch:
+      - A public write-up once the programme allows it
+      - A small tool that automates part of your recon
+    present: The disclosure write-up (after it's allowed) and your profile on the platform.
+  resources:
+    - resource: portswigger-academy
+      locator: Work through the labs for the bug classes you hunt
+      role: primary
+      verified: true
+    - resource: owasp-top10
+      locator: As background on each class
+      role: alternative
+      verified: true
+
+- id: project-log-investigation
+  title: 'Project: investigate a breach from the logs'
+  area: security
+  kind: project
+  summary: A simulated breach traced through real-looking logs, written up as an incident report.
+  hours: 25
+  requires: [threat-detection, splunk]
+  recommends: [log-analysis, networking]
+  brief:
+    build: 'Load a public incident dataset, such as Splunk''s Boss of the SOC data, into Splunk''s free tier and investigate: what happened, when, which machines, and how the attacker got in.'
+    shows:
+      - A timeline of the attack from first access to the end
+      - The searches you ran and what each one showed
+      - Findings mapped to MITRE ATT&CK techniques
+      - Containment and fixes you would recommend
+    stretch:
+      - Detection rules that would have caught it earlier
+      - The same hunt in an open-source SIEM
+    present: An incident report as a PDF and the queries in a repo.
+  resources:
+    - resource: splunk-tutorial
+      locator: The search tutorial
+      role: primary
+      verified: true
+    - resource: mitre-attack
+      locator: The enterprise matrix, for mapping each step
+      role: alternative
+      verified: true
+
+- id: project-detection-lab
+  title: 'Project: build a detection lab'
+  area: security
+  kind: project
+  summary: A small network you attack yourself, with a SIEM collecting logs and detection rules you wrote and tested.
+  hours: 60
+  requires: [threat-detection, linux-admin]
+  recommends: [splunk, systems-security]
+  brief:
+    build: Build a lab with a few Windows and Linux VMs, send their logs to a SIEM such as Wazuh or Splunk's free tier, run simulated attacks with Atomic Red Team, and write detection rules that catch them.
+    shows:
+      - A lab diagram and what each machine logs
+      - At least ten attack techniques run and mapped to ATT&CK
+      - A detection rule for each, tested to fire and checked for false alarms
+      - A short playbook for responding to each alert
+    stretch:
+      - Automated response for one alert
+      - Detections as code, in a repo with tests
+    present: The lab diagram, the rules with test results, and a recording of an attack being caught.
+  resources:
+    - resource: mitre-attack
+      locator: The techniques you simulate
+      role: primary
+      verified: true
+    - resource: splunk-tutorial
+      locator: Searches and alerts
+      role: alternative
+      verified: true

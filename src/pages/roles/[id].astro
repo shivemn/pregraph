@@ -95,7 +95,7 @@ const monthName = (ym: string) => `${MONTHS[Number(ym.slice(5, 7)) - 1]} ${ym.sl
 
   <RolePlanner
     client:load
-    role={{ id: role.id, title: role.title, tiers: role.tiers }}
+    role={{ id: role.id, title: role.title, tiers: role.tiers, projects: role.projects }}
     concepts={plannerNodes(c)}
     areas={c.areas}
     tiers={TIERS}

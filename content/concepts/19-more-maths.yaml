@@ -202,10 +202,112 @@
     present: 'The workbook and a one-page pricing memo: the premium, the key assumptions and the risks.'
   resources:
     - resource: loss-data-analytics
-      locator: The chapters on frequency, severity and aggregate loss models, for non-life pricing
+      locator: 'Chapters 3, 4, 7 and 10: frequency, severity, aggregate loss models and premium foundations'
       role: primary
-      verified: false
+      verified: true
     - resource: soa-exam-fm
       locator: For the interest calculations behind the premium
       role: alternative
+      verified: true
+
+- id: project-life-table
+  title: 'Project: life tables and annuity values'
+  area: finance
+  kind: project
+  summary: A life table built from an Indian mortality table, and annuity and insurance values worked out from it.
+  hours: 10
+  requires: [actuarial-maths, spreadsheets]
+  brief:
+    build: Take the IALM 2012–14 mortality rates and build a life table in a spreadsheet, then compute the present value of a life annuity and a term insurance for a few ages and interest rates.
+    shows:
+      - Survival probabilities and life expectancy by age
+      - Annuity and insurance values with your formulas visible
+      - How the values change with age and interest rate
+      - Checks against a known textbook example
+    stretch:
+      - Commutation functions
+      - Compare male and female or different tables
+    present: The workbook with a short note on what you found.
+  resources:
+    - resource: life-contingencies-open
+      locator: 'Chapters 2 and 3: Modeling Lifetimes and Basic Life Contingent Benefits'
+      role: primary
+      verified: true
+    - resource: soa-exam-fm
+      locator: Interest theory practice, for the discounting
+      role: alternative
+      verified: true
+
+- id: project-reserving
+  title: 'Project: claims reserving with chain ladder'
+  area: finance
+  kind: project
+  summary: Outstanding claims estimated from public loss triangles, with uncertainty, as a reserving actuary would.
+  hours: 40
+  requires: [loss-models, r-lang]
+  recommends: [statistics]
+  brief:
+    build: Using public loss triangles, such as the Casualty Actuarial Society's reserving database, estimate outstanding claims with chain ladder and Bornhuetter-Ferguson, then put a range around them with bootstrapping.
+    shows:
+      - Development factors chosen with reasons
+      - Chain ladder and Bornhuetter-Ferguson results compared
+      - A bootstrap distribution of reserves
+      - Back-testing against later diagonals
+    stretch:
+      - Mack's method for the standard error
+      - Look at more than one line of business
+    present: A reserving report with the triangles, results and ranges, and the R code.
+  resources:
+    - resource: loss-data-analytics
+      locator: Chapter 14, Loss Reserving
+      role: primary
+      verified: true
+
+- id: project-lp-spreadsheet
+  title: 'Project: optimise a small decision in Excel Solver'
+  area: finance
+  kind: project
+  summary: A real small decision written as a linear program and solved in a spreadsheet, with sensitivity analysis.
+  hours: 8
+  requires: [linear-programming, spreadsheets]
+  brief:
+    build: Write a small real decision as a linear program, such as a canteen's menu, a workshop's production mix or a diet within a budget, and solve it with Excel Solver or LibreOffice.
+    shows:
+      - Variables, objective and constraints written out in words
+      - The model set up clearly in the sheet
+      - The optimal answer and what it means
+      - 'Sensitivity: which constraints bind and what relaxing them is worth'
+    stretch:
+      - An integer version, and how the answer changes
+      - The same model in Python with PuLP
+    present: The workbook and a half-page explanation.
+  resources:
+    - resource: mit-15053
+      locator: The lecture notes on formulating linear programs and sensitivity analysis
+      role: primary
+      verified: true
+
+- id: project-vehicle-routing
+  title: 'Project: a delivery routing system'
+  area: finance
+  kind: project
+  summary: Vehicle routing with time windows on real map data, solved exactly and by heuristic, with the trade-off measured.
+  hours: 60
+  requires: [operations-research, programming-basics]
+  recommends: [graph-algorithms, data-visualization]
+  brief:
+    build: Plan delivery routes for a realistic case, such as a grocery service with 100 orders a day in one city. Use real road distances from OpenStreetMap, add vehicle capacities and delivery windows, and compare an exact solver with a heuristic.
+    shows:
+      - Real distances, and how you got them
+      - Capacity and time-window constraints handled
+      - OR-Tools results compared with your own heuristic on cost and time
+      - A map of the routes
+    stretch:
+      - Re-plan when a new order arrives mid-day
+      - A small web page to upload orders and see routes
+    present: A report with route maps and results tables, and the code.
+  resources:
+    - resource: or-tools
+      locator: The vehicle routing guides
+      role: primary
       verified: true

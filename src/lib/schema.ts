@@ -124,6 +124,12 @@ export const practiceGroupSchema = z.object({
  * A job role (or an exam) and what it takes. Requirements come in tiers so a
  * fresher can see the short list that gets them hired before the long one.
  */
+/** The three project levels a route offers. One of them is on the hiring list. */
+export const LEVELS = ['beginner', 'intermediate', 'advanced'] as const;
+export type Level = (typeof LEVELS)[number];
+export const projectLevelsSchema = z.object({ beginner: id, intermediate: id, advanced: id });
+export type ProjectLevels = z.infer<typeof projectLevelsSchema>;
+
 export const roleSchema = z.object({
   id,
   title: z.string().min(1),
@@ -153,6 +159,8 @@ export const roleSchema = z.object({
     .optional(),
   /** Search term for the live job-board links, if the title isn't a good one. */
   search: z.string().optional(),
+  /** A project at each level. The one on the hiring list is the default. */
+  projects: projectLevelsSchema.optional(),
   /**
    * What an entry-level posting for this role looks like, written in our own
    * words from real listings. Counts are how many listings named each skill.
@@ -191,6 +199,8 @@ export const variantSchema = z.object({
   /** Taken off every tier, e.g. Java for a Python developer. */
   drops: z.array(id).default([]),
   search: z.string().optional(),
+  /** Project levels that differ from the route's. Levels left out are the route's. */
+  projects: projectLevelsSchema.partial().optional(),
 });
 export type Variant = z.infer<typeof variantSchema>;
 

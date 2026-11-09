@@ -448,3 +448,120 @@
       locator: The whole tutorial, publishing to TestPyPI
       role: primary
       verified: true
+
+- id: project-terminal-game
+  title: 'Project: a classic game in the terminal'
+  area: programming
+  kind: project
+  summary: Tic-tac-toe, Snake or 2048 in the terminal, split into functions, with tests for the rules.
+  hours: 10
+  requires: [programming-basics]
+  recommends: [testing-debugging, git]
+  brief:
+    build: 'Pick one classic game and build it to run in the terminal: tic-tac-toe against a simple computer player, 2048, or hangman with a word list. Keep the game rules separate from the code that prints the board and reads keys.'
+    shows:
+      - The rules in their own functions or class, with no printing inside them
+      - 'Tests for the rules: a win, a draw, an illegal move'
+      - Input checked, so a typo doesn't crash it
+      - The code on GitHub with a README that says how to run it
+    stretch:
+      - A computer player that never loses at tic-tac-toe (minimax)
+      - Save and load a game in progress
+    present: A short GIF of a game being played, and the repo. Small, finished and tested beats big and half-done.
+  resources:
+    - resource: think-python
+      locator: As a reference for functions, lists and classes while you build
+      role: primary
+      verified: true
+    - resource: exercism
+      locator: Solve a few exercises in your language first to warm up
+      role: alternative
+      verified: true
+
+- id: project-build-your-own
+  title: 'Project: build your own Git, Redis or interpreter'
+  area: programming
+  kind: project
+  summary: Rebuild a well-known tool from scratch to understand how it works inside, and show it with tests and benchmarks.
+  hours: 60
+  requires: [programming-basics, hash-tables, testing-debugging]
+  recommends: [c-and-memory, networking, interpreters]
+  brief:
+    build: 'Rebuild a real tool small enough to finish: a Redis server that speaks its wire protocol, a Git that can commit and show history, an interpreter for a small language, or an HTTP server. Follow a guide for the outline, then do the work yourself.'
+    shows:
+      - 'It works with the real client where one exists: redis-cli, git or curl'
+      - Tests for each command or feature you support
+      - 'A design note: the data structures and why'
+      - Measured performance against the real tool, with honest numbers
+    stretch:
+      - Add persistence or concurrency the guide leaves out
+      - Write a blog post explaining one hard part
+    present: A repo with a README that lists what's supported and what isn't, the design note, and a short demo recording.
+  resources:
+    - resource: crafting-interpreters
+      locator: The whole book, if you build an interpreter
+      role: primary
+      verified: true
+    - resource: build-your-own-x
+      locator: Pick a guide for the tool you are rebuilding
+      role: alternative
+      verified: true
+
+- id: project-api-tests
+  title: 'Project: an API test collection'
+  area: programming
+  kind: project
+  summary: A Postman collection that tests a real API's endpoints, edge cases and errors, and runs from the command line.
+  hours: 12
+  requires: [postman]
+  recommends: [rest-apis, test-automation]
+  brief:
+    build: 'Pick a public API with documentation, such as a demo store API, and write a Postman collection that tests its main endpoints: happy paths, bad inputs, missing auth and limits. Run it with Newman from the command line.'
+    shows:
+      - Tests for status codes, response bodies and response times
+      - Environments and variables, with no secrets in the collection
+      - 'Negative tests: bad input, missing fields, wrong auth'
+      - A command-line run with a report
+    stretch:
+      - Run it in GitHub Actions on a schedule
+      - Contract tests against the API's OpenAPI spec
+    present: The exported collection in a repo, the report, and a list of any real bugs you found.
+  resources:
+    - resource: postman-start
+      locator: Writing tests and using the collection runner
+      role: primary
+      verified: true
+    - resource: istqb-ctfl-syllabus
+      locator: Chapter 4, Test Analysis and Design, for choosing test cases
+      role: alternative
+      verified: true
+
+- id: project-test-platform
+  title: 'Project: a full test framework with CI'
+  area: programming
+  kind: project
+  summary: UI, API and performance tests for one app, in one framework, running in CI with reports and flaky-test tracking.
+  hours: 50
+  requires: [test-automation, ci-cd]
+  recommends: [postman, docker]
+  brief:
+    build: 'Build a test framework for a real open-source app: UI tests with Playwright or Selenium, API tests, and a performance test with k6 or JMeter. Run everything in CI on every pull request, in parallel, with reports.'
+    shows:
+      - One framework that runs UI, API and performance tests
+      - Parallel runs, and tests that clean up after themselves
+      - Test data created through the API, not clicked through the UI
+      - Reports with screenshots and traces, and flaky tests tracked over time
+      - Performance results against a target you set
+    stretch:
+      - Run in two browsers and a mobile viewport
+      - Containers for the app and the tests, so anyone can run them
+    present: The repo, a link to a CI run, and a page on how you decided what to test at which level.
+  resources:
+    - resource: playwright-docs
+      locator: Fixtures, parallelism, the trace viewer and CI
+      role: primary
+      verified: true
+    - resource: swe-at-google
+      locator: Chapter 14, Larger Testing
+      role: alternative
+      verified: true

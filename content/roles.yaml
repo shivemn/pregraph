@@ -5,6 +5,7 @@
   title: Software engineer (SDE)
   family: software
   summary: Writes and maintains the code behind products. Entry-level hiring in India mostly tests data structures and algorithms first, then how you write and reason about code.
+  projects: {beginner: project-terminal-game, intermediate: project-software, advanced: project-build-your-own}
   tiers:
     hire: [programming-basics, oop-design, git, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, algorithm-practice, sql, testing-debugging, project-software]
     firstYear: [rest-apis, web-http, cloud-basics, os-processes-memory, networking, system-design, software-engineering]
@@ -44,6 +45,7 @@
   title: Backend engineer
   family: software
   summary: Builds the services, APIs and data storage behind an app. Most of the job is correctness, performance and keeping things running.
+  projects: {beginner: project-url-shortener, intermediate: project-portfolio-api, advanced: project-chat-system}
   tiers:
     hire: [java, oop-design, git, sql, rest-apis, backend-framework, hash-tables, trees-heaps, algorithm-practice, testing-debugging, project-portfolio-api]
     firstYear: [mongodb, cloud-basics, database-internals, concurrency, docker, shell-tools]
@@ -84,6 +86,7 @@
   title: Frontend engineer
   family: software
   summary: Builds what people see and touch in the browser, and makes it fast, accessible and pleasant to use.
+  projects: {beginner: project-static-site, intermediate: project-web-app, advanced: project-component-library}
   tiers:
     hire: [html-css, javascript, react, git, web-http, linear-structures, hash-tables, project-web-app]
     firstYear: [typescript, testing-debugging, web-accessibility, web-performance, ci-cd, web-security]
@@ -98,8 +101,9 @@
   title: Full-stack engineer
   family: software
   summary: Works across the browser, the server and the database. Common in startups, where one person ships a whole feature.
+  projects: {beginner: project-url-shortener, intermediate: project-web-app, advanced: project-saas}
   tiers:
-    hire: [html-css, javascript, react, nodejs, rest-apis, backend-framework, sql, git, linear-structures, hash-tables, project-web-app, project-portfolio-api]
+    hire: [html-css, javascript, react, nodejs, rest-apis, backend-framework, sql, git, linear-structures, hash-tables, project-web-app]
     firstYear: [mongodb, typescript, testing-debugging, docker, ci-cd, web-security]
     extra: [system-design, web-performance, api-styles, caching]
   evidence:
@@ -112,6 +116,7 @@
   title: Android developer
   family: software
   summary: Builds and ships Android apps. India is one of the largest Android markets, so the work is everywhere from startups to banks.
+  projects: {beginner: project-mobile-starter, intermediate: project-android-app, advanced: project-mobile-advanced}
   tiers:
     hire: [java, android, rest-apis, git, oop-design, linear-structures, hash-tables, project-android-app]
     firstYear: [kotlin, testing-debugging, web-http, concurrency, ci-cd]
@@ -126,6 +131,7 @@
   title: QA engineer / SDET
   family: software
   summary: Finds out whether software works before customers do, increasingly by writing code that tests code.
+  projects: {beginner: project-manual-testing, intermediate: project-test-suite, advanced: project-test-platform}
   tiers:
     hire: [programming-basics, testing-debugging, test-automation, postman, rest-apis, sql, project-test-suite]
     firstYear: [selenium, agile-scrum, jira, ci-cd, git, web-http, javascript]
@@ -140,6 +146,7 @@
   title: Data analyst
   family: data
   summary: Turns business questions into queries, numbers and charts that someone can act on.
+  projects: {beginner: project-excel-dashboard, intermediate: project-data-analysis, advanced: project-analytics-case}
   tiers:
     hire: [spreadsheets, sql, programming-basics, pandas, bi-tools, data-visualization, statistics, project-data-analysis]
     firstYear: [data-warehousing, probability, git]
@@ -179,6 +186,7 @@
   title: Data engineer
   family: data
   summary: Builds the pipelines and warehouses that get data from where it's created to where it's analysed, reliably and on time.
+  projects: {beginner: project-sql-etl, intermediate: project-data-pipeline, advanced: project-streaming-pipeline}
   tiers:
     hire: [programming-basics, sql, data-warehousing, cloud-basics, spark, git, project-data-pipeline]
     firstYear: [databricks, orchestration, pandas, shell-tools, database-internals, docker, messaging]
@@ -193,6 +201,7 @@
   title: Machine learning engineer
   family: data
   summary: Trains models and, more often, gets them working reliably in a real product.
+  projects: {beginner: project-kaggle-baseline, intermediate: project-ml-service, advanced: project-ml-platform}
   tiers:
     hire: [programming-basics, machine-learning, deep-learning, pandas, sql, statistics, algorithm-practice, git, project-ml-service]
     firstYear: [pytorch, llm-basics, cloud-basics, mlops, docker, software-engineering, transformers]
@@ -207,6 +216,7 @@
   title: DevOps / site reliability engineer
   family: infra
   summary: Keeps software building, deploying and running. Automation, infrastructure and being calm when things break.
+  projects: {beginner: project-dockerise, intermediate: project-deploy-pipeline, advanced: project-k8s-platform}
   tiers:
     hire: [linux-admin, shell-tools, git, docker, kubernetes, ci-cd, cloud-basics, infrastructure-as-code, observability, programming-basics, project-deploy-pipeline]
     firstYear: [azure, ansible, networking, os-processes-memory]
@@ -245,6 +255,7 @@
   title: Deep learning engineer (vision / language)
   family: data
   summary: Trains and ships neural networks for images, text or speech. More modelling than an ML engineer, more shipping than a researcher.
+  projects: {beginner: project-image-classifier, intermediate: project-ml-service, advanced: project-train-from-scratch}
   tiers:
     hire: [machine-learning, neural-networks, cnns, transformers, pytorch, deep-learning, git, project-ml-service]
     firstYear: [computer-vision, nlp, mlops, docker, generative-models]
@@ -254,6 +265,7 @@
   title: Quantitative researcher / analyst
   family: finance
   summary: Finds and tests trading or pricing ideas with maths, statistics and data. Most of the job is research that doesn't work, and noticing when it does.
+  projects: {beginner: project-returns-analysis, intermediate: project-backtest, advanced: project-alpha-research}
   tiers:
     hire: [probability, statistics, linear-algebra, calculus, stochastic-processes, time-series, programming-basics, pandas, machine-learning, financial-markets, derivatives, algorithm-practice, project-backtest]
     firstYear: [stochastic-calculus, optimization, portfolio-theory, bayesian-statistics, cpp]
@@ -263,6 +275,7 @@
   title: Quant developer
   family: finance
   summary: Builds the fast, correct systems quants and traders run on. Pricing libraries, backtesters, market data and execution.
+  projects: {beginner: project-options-pricer, intermediate: project-order-book, advanced: project-low-latency}
   tiers:
     hire: [cpp, linear-structures, hash-tables, trees-heaps, algorithm-practice, concurrency, os-processes-memory, probability, financial-markets, git, shell-tools, project-order-book]
     firstYear: [derivatives, networking, programming-basics, pandas, testing-debugging, messaging]
@@ -272,6 +285,7 @@
   title: Risk analyst
   family: finance
   summary: Measures market, credit and operational risk for a bank or fund, and reports it to people who set limits.
+  projects: {beginner: project-ratio-analysis, intermediate: project-risk-report, advanced: project-credit-scorecard}
   tiers:
     hire: [statistics, probability, financial-markets, derivatives, risk-management, spreadsheets, sql, programming-basics, project-risk-report]
     firstYear: [time-series, pandas, bi-tools, portfolio-theory, accounting]
@@ -281,6 +295,7 @@
   title: Financial analyst
   family: finance
   summary: Reads companies' numbers, builds models and valuations, and turns them into recommendations, in research, banking or a company's finance team.
+  projects: {beginner: project-ratio-analysis, intermediate: project-financial-model, advanced: project-equity-report}
   tiers:
     hire: [accounting, corporate-finance, spreadsheets, project-financial-model]
     firstYear: [data-visualization, financial-markets, sql, portfolio-theory, macroeconomics]
@@ -295,6 +310,7 @@
   title: Economist / economic research analyst
   family: finance
   summary: Studies how economies and markets behave with data, for a central bank, ministry, think tank, consultancy or company.
+  projects: {beginner: project-data-analysis, intermediate: project-empirical-study, advanced: project-causal-study}
   tiers:
     hire: [microeconomics, macroeconomics, calculus, statistics, econometrics, r-lang, spreadsheets, project-empirical-study]
     firstYear: [time-series, data-visualization, sql, programming-basics]
@@ -304,6 +320,7 @@
   title: Statistician / biostatistician
   family: finance
   summary: Designs studies and analyses data carefully enough that the conclusions hold, in pharma, health, government or industry.
+  projects: {beginner: project-data-analysis, intermediate: project-empirical-study, advanced: project-causal-study}
   tiers:
     hire: [probability, statistics, calculus, linear-algebra, r-lang, bayesian-statistics, experiments, sql, project-empirical-study]
     firstYear: [time-series, econometrics, machine-learning, data-visualization]
@@ -313,6 +330,7 @@
   title: iOS developer
   family: software
   summary: Builds iPhone and iPad apps in Swift, from screens and navigation to networking and the App Store.
+  projects: {beginner: project-mobile-starter, intermediate: project-ios-app, advanced: project-mobile-advanced}
   tiers:
     hire: [swift, oop-design, git, linear-structures, hash-tables, web-http, rest-apis, project-ios-app]
     firstYear: [testing-debugging, concurrency, ci-cd, firebase]
@@ -323,6 +341,7 @@
   title: Salesforce administrator / developer
   family: software
   summary: Configures and extends Salesforce for a company. Objects, security, automation and reports, then code and integrations as the job grows.
+  projects: {beginner: project-platform-basics, intermediate: project-platform-app, advanced: project-platform-integration}
   tiers:
     hire: [salesforce, spreadsheets, sql, programming-basics, project-platform-app]
     firstYear: [javascript, rest-apis, oop-design, git]
@@ -332,6 +351,7 @@
   title: ServiceNow developer
   family: software
   summary: Builds and runs the ServiceNow platform that a company's IT support runs on. Forms, workflows, scripts and integrations.
+  projects: {beginner: project-platform-basics, intermediate: project-platform-app, advanced: project-platform-integration}
   tiers:
     hire: [servicenow, javascript, incident-management, sql, rest-apis, project-platform-app]
     firstYear: [git, testing-debugging, log-analysis]
@@ -341,6 +361,7 @@
   title: MLOps engineer
   family: data
   summary: Gets models out of notebooks and keeps them running. Pipelines, deployment, monitoring and retraining.
+  projects: {beginner: project-dockerise, intermediate: project-ml-service, advanced: project-ml-platform}
   tiers:
     hire: [programming-basics, machine-learning, git, shell-tools, docker, ci-cd, mlops, cloud-basics, project-ml-service]
     firstYear: [kubernetes, observability, infrastructure-as-code, orchestration, databricks]
@@ -350,8 +371,9 @@
   title: BI developer
   family: data
   summary: Builds the dashboards and data models a business runs on, in Power BI or Tableau on top of a warehouse.
+  projects: {beginner: project-excel-dashboard, intermediate: project-sales-dashboard, advanced: project-analytics-case}
   tiers:
-    hire: [sql, spreadsheets, bi-tools, data-visualization, data-warehousing, statistics, project-data-analysis]
+    hire: [sql, spreadsheets, bi-tools, data-visualization, data-warehousing, statistics, project-sales-dashboard]
     firstYear: [tableau, dbt, query-performance, snowflake]
     extra: [pandas, databricks]
 
@@ -359,6 +381,7 @@
   title: Analytics engineer
   family: data
   summary: Sits between data engineering and analysis. Turns raw tables into clean, tested models with SQL and dbt.
+  projects: {beginner: project-sql-etl, intermediate: project-dbt-models, advanced: project-data-pipeline}
   tiers:
     hire: [sql, dbt, data-warehousing, git, snowflake, programming-basics, testing-debugging, project-dbt-models]
     firstYear: [orchestration, bi-tools, databricks, ci-cd]
@@ -368,6 +391,7 @@
   title: Product analyst
   family: data
   summary: Works out how people use a product and whether changes helped, with SQL, experiments and dashboards.
+  projects: {beginner: project-excel-dashboard, intermediate: project-data-analysis, advanced: project-analytics-case}
   tiers:
     hire: [sql, spreadsheets, statistics, experiments, data-visualization, bi-tools, project-data-analysis]
     firstYear: [pandas, probability, product-management]
@@ -377,6 +401,7 @@
   title: Platform engineer
   family: infra
   summary: Builds the internal platform other engineers ship on. Clusters, pipelines, templates and self-service tooling.
+  projects: {beginner: project-dockerise, intermediate: project-deploy-pipeline, advanced: project-k8s-platform}
   tiers:
     hire: [linux-admin, shell-tools, git, networking, docker, kubernetes, ci-cd, infrastructure-as-code, cloud-basics, programming-basics, project-deploy-pipeline]
     firstYear: [observability, go, ansible, nginx]
@@ -386,6 +411,7 @@
   title: System administrator
   family: infra
   summary: Keeps servers, users and networks working. Patching, backups, access, monitoring and fixing what breaks.
+  projects: {beginner: project-linux-scripts, intermediate: project-homelab, advanced: project-ansible-fleet}
   tiers:
     hire: [shell-tools, linux-admin, networking, nginx, incident-management, log-analysis, project-homelab]
     firstYear: [ansible, docker, cloud-basics, observability, git]
@@ -395,6 +421,7 @@
   title: Database administrator
   family: infra
   summary: Keeps databases fast, safe and backed up. Tuning, indexing, replication, upgrades and access control.
+  projects: {beginner: project-sql-etl, intermediate: project-database-ops, advanced: project-db-migration}
   tiers:
     hire: [sql, database-internals, query-performance, linux-admin, shell-tools, project-database-ops]
     firstYear: [observability, cloud-basics, incident-management]
@@ -404,8 +431,9 @@
   title: Penetration tester
   family: infra
   summary: Breaks into systems with permission, then writes up how and how to fix it. Web apps, networks and cloud.
+  projects: {beginner: project-ctf, intermediate: project-pentest-report, advanced: project-bug-bounty}
   tiers:
-    hire: [networking, linux-admin, shell-tools, web-http, web-security, security-fundamentals, nmap, burp-suite, programming-basics, project-ctf]
+    hire: [networking, linux-admin, shell-tools, web-http, web-security, security-fundamentals, nmap, burp-suite, programming-basics, project-pentest-report]
     firstYear: [wireshark, systems-security, cryptography]
     extra: [cloud-iam, c-and-memory]
 
@@ -413,6 +441,7 @@
   title: Security engineer
   family: infra
   summary: Designs and builds defences. Secure infrastructure, identity, detection and helping developers ship safe code.
+  projects: {beginner: project-ctf, intermediate: project-security-review, advanced: project-detection-lab}
   tiers:
     hire: [networking, linux-admin, security-fundamentals, web-security, systems-security, cryptography, programming-basics, cloud-iam, project-security-review]
     firstYear: [threat-detection, incident-management, splunk, infrastructure-as-code]
@@ -422,6 +451,7 @@
   title: Solutions architect
   family: infra
   summary: Designs systems for customers or teams on a cloud platform, and explains the trade-offs to people who'll pay for them.
+  projects: {beginner: project-static-site-cloud, intermediate: project-architecture-doc, advanced: project-resilient-cloud}
   tiers:
     hire: [system-design, cloud-basics, cloud-architecture, cloud-networking, cloud-iam, networking, distributed-systems, rest-apis, sql, project-architecture-doc]
     firstYear: [azure, gcp, infrastructure-as-code, observability]
@@ -431,6 +461,7 @@
   title: Product manager
   family: product
   summary: Decides what a team builds and why, and makes sure it gets built. Users, priorities, specs, data and a lot of conversations.
+  projects: {beginner: project-prd, intermediate: project-product-teardown, advanced: project-ship-feature}
   tiers:
     hire: [product-management, agile-scrum, ux-design, sql, spreadsheets, experiments, jira, web-http, project-product-teardown]
     firstYear: [statistics, data-visualization, technical-writing, figma]
@@ -441,6 +472,7 @@
   title: UI / UX designer
   family: product
   summary: Researches what users need and designs screens that meet it, from wireframes to polished prototypes.
+  projects: {beginner: project-redesign-screen, intermediate: project-design-case-study, advanced: project-product-design}
   tiers:
     hire: [ux-design, figma, project-design-case-study]
     firstYear: [html-css, agile-scrum, web-accessibility, product-management, experiments]
@@ -455,6 +487,7 @@
   title: Business analyst
   family: product
   summary: Turns what a business needs into requirements a team can build, and checks the result with data. Common in IT services and banks.
+  projects: {beginner: project-process-map, intermediate: project-requirements, advanced: project-uat}
   tiers:
     hire: [sql, spreadsheets, bi-tools, data-visualization, product-management, agile-scrum, technical-writing, project-requirements]
     firstYear: [jira, ux-design, accounting]
@@ -469,6 +502,7 @@
   title: Technical writer
   family: product
   summary: Writes the guides, API references and help pages that make software usable.
+  projects: {beginner: project-readme-rewrite, intermediate: project-docs-portfolio, advanced: project-docs-site}
   tiers:
     hire: [technical-writing, git, html-css, web-http, rest-apis, project-docs-portfolio]
     firstYear: [programming-basics, agile-scrum, jira, github-pages]
@@ -478,6 +512,7 @@
   title: Scrum master / delivery manager
   family: product
   summary: Keeps a team's process working and its delivery predictable. Ceremonies, blockers, metrics and stakeholders.
+  projects: {beginner: project-agile-board, intermediate: project-run-a-sprint, advanced: project-agile-coaching}
   tiers:
     hire: [agile-scrum, jira, spreadsheets, technical-writing, project-run-a-sprint]
     firstYear: [product-management, git, ci-cd]
@@ -495,6 +530,7 @@
   title: Data scientist
   family: data
   summary: Uses statistics, experiments and models to answer questions a business actually has, and explains the answer clearly.
+  projects: {beginner: project-data-analysis, intermediate: project-data-science, advanced: project-ml-service}
   tiers:
     hire: [programming-basics, statistics, probability, sql, pandas, data-visualization, machine-learning, feature-engineering, project-data-science]
     firstYear: [deep-learning, experiments, bi-tools, git]
@@ -535,6 +571,7 @@
   title: AI / LLM engineer
   family: data
   summary: Builds products on top of large language models. Mostly software engineering, plus retrieval, prompting and careful evaluation.
+  projects: {beginner: project-llm-tool, intermediate: project-llm-app, advanced: project-agent-system}
   tiers:
     hire: [programming-basics, machine-learning, llm-basics, llm-apis, rag, embeddings, rest-apis, git, llm-evaluation, project-llm-app]
     firstYear: [pytorch, deep-learning, sql, cloud-basics, docker, testing-debugging, hugging-face, python-depth, ai-agents]
@@ -549,6 +586,7 @@
   title: Cloud engineer
   family: infra
   summary: Designs, builds and runs infrastructure on a public cloud. A large share of IT services hiring.
+  projects: {beginner: project-static-site-cloud, intermediate: project-cloud-app, advanced: project-resilient-cloud}
   tiers:
     hire: [linux-admin, shell-tools, networking, cloud-basics, azure, cloud-networking, cloud-iam, infrastructure-as-code, docker, programming-basics, git, project-cloud-app]
     firstYear: [gcp, kubernetes, ci-cd, observability, cloud-architecture]
@@ -563,6 +601,7 @@
   title: Application support engineer
   family: infra
   summary: Keeps business applications running for the people who use them. Incidents, logs, databases and a lot of careful detective work.
+  projects: {beginner: project-kb-articles, intermediate: project-support-runbook, advanced: project-monitoring-stack}
   tiers:
     hire: [sql, linux-admin, networking, testing-debugging, incident-management, log-analysis, project-support-runbook]
     firstYear: [os-processes-memory, shell-tools, web-http, query-performance, observability, java]
@@ -577,8 +616,9 @@
   title: Security analyst (SOC)
   family: infra
   summary: Watches for attacks, investigates alerts and responds when something gets through.
+  projects: {beginner: project-ctf, intermediate: project-log-investigation, advanced: project-detection-lab}
   tiers:
-    hire: [networking, linux-admin, security-fundamentals, log-analysis, threat-detection, incident-management, web-security, project-ctf]
+    hire: [networking, linux-admin, security-fundamentals, log-analysis, threat-detection, incident-management, web-security, project-log-investigation]
     firstYear: [shell-tools, splunk, cloud-basics, programming-basics, systems-security, cryptography, wireshark]
     extra: [cloud-iam]
   evidence:
@@ -591,6 +631,7 @@
   title: Embedded engineer
   family: software
   summary: Writes the software inside devices, from sensors to cars. A natural fit for electronics and electrical graduates.
+  projects: {beginner: project-sensor-display, intermediate: project-embedded, advanced: project-rtos-device}
   tiers:
     hire: [c-and-memory, cpp, microcontrollers, embedded-protocols, rtos, digital-logic, computer-architecture, testing-debugging, git, project-embedded]
     firstYear: [linux-admin, pcb-design, programming-basics, os-processes-memory, concurrency]
@@ -605,6 +646,7 @@
   title: SAP consultant
   family: enterprise
   summary: Sets up and supports SAP, the software that runs finance, buying, sales and production at large companies. Indian IT services firms hire freshers into SAP practices every year.
+  projects: {beginner: project-process-map, intermediate: project-sap-process, advanced: project-sap-fit-gap}
   tiers:
     hire: [sap-basics, business-processes, project-sap-process]
     firstYear: [accounting, testing-debugging, sap-abap, spreadsheets, sql]
@@ -620,6 +662,7 @@
   title: Mainframe developer
   family: enterprise
   summary: Maintains the COBOL programs and batch jobs that banks, insurers and airlines still run on IBM mainframes. Few people learn it, so freshers are trained and kept.
+  projects: {beginner: project-zxplore, intermediate: project-cobol-batch, advanced: project-mainframe-api}
   tiers:
     hire: [mainframe-zos, cobol, sql, programming-basics, project-cobol-batch]
     firstYear: [testing-debugging, git]
@@ -630,6 +673,7 @@
   title: RPA developer
   family: enterprise
   summary: Builds software robots that do repetitive office work, like copying data between systems or reading invoices. UiPath is the tool most postings name.
+  projects: {beginner: project-rpa-basic, intermediate: project-automation, advanced: project-rpa-orchestrated}
   tiers:
     hire: [rpa-uipath, programming-basics, spreadsheets, sql, project-automation]
     firstYear: [business-processes, testing-debugging, rest-apis]
@@ -640,6 +684,7 @@
   title: VLSI design engineer
   family: hardware
   summary: Designs the digital logic inside chips, written in Verilog and checked in simulation. Hires mostly electronics graduates, at chip companies and design-services firms.
+  projects: {beginner: project-verilog-basics, intermediate: project-chip-design, advanced: project-riscv-soc}
   tiers:
     hire: [digital-logic, computer-architecture, verilog, design-verification, project-chip-design, shell-tools]
     firstYear: [asic-flow, git]
@@ -650,6 +695,7 @@
   title: Game developer
   family: software
   summary: Programs the gameplay, tools and systems of video games, mostly in Unity with C# or Unreal with C++. India's studios make many mobile and casual games.
+  projects: {beginner: project-pong, intermediate: project-game, advanced: project-game-release}
   tiers:
     hire: [programming-basics, csharp, oop-design, game-engines, game-programming, linear-algebra, git, project-game]
     firstYear: [linear-structures, hash-tables, testing-debugging]
@@ -660,6 +706,7 @@
   title: Blockchain developer
   family: software
   summary: Writes smart contracts and the apps around them, mostly on Ethereum and chains like it. Most openings are at startups and many are remote.
+  projects: {beginner: project-token, intermediate: project-dapp, advanced: project-defi-protocol}
   tiers:
     hire: [programming-basics, javascript, blockchain-basics, solidity, git, testing-debugging, project-dapp]
     firstYear: [smart-contract-security, react, rest-apis]
@@ -670,6 +717,7 @@
   title: Operations research analyst
   family: data
   summary: Uses optimisation and simulation to answer business questions like where to put warehouses, how to route trucks or how to staff shifts. Common at logistics, airline, retail and consulting firms.
+  projects: {beginner: project-lp-spreadsheet, intermediate: project-optimization, advanced: project-vehicle-routing}
   tiers:
     hire: [linear-algebra, probability, statistics, linear-programming, operations-research, programming-basics, sql, project-optimization]
     firstYear: [pandas, data-visualization, spreadsheets]
@@ -680,6 +728,7 @@
   title: Actuarial analyst
   family: finance
   summary: Prices insurance and works out how much money an insurer must hold for future claims. You pass actuarial exams while working; insurers hire maths and statistics graduates who have cleared a few.
+  projects: {beginner: project-life-table, intermediate: project-pricing-model, advanced: project-reserving}
   tiers:
     hire: [probability, statistics, calculus, actuarial-maths, spreadsheets, financial-markets, project-pricing-model]
     firstYear: [loss-models, r-lang, sql]
@@ -690,6 +739,7 @@
   title: Analog design engineer
   family: hardware
   summary: Designs the analog and mixed-signal circuits inside chips, like amplifiers, data converters and power management, and simulates them in SPICE. Hires electronics graduates, often with an M.Tech.
+  projects: {beginner: project-circuit-sim, intermediate: project-analog-circuit, advanced: project-mixed-signal}
   tiers:
     hire: [circuit-analysis, analog-electronics, signals-and-systems, digital-logic, shell-tools, project-analog-circuit]
     firstYear: [asic-flow, verilog]
@@ -700,6 +750,7 @@
   title: Robotics engineer
   family: hardware
   summary: Builds and programs robots, from warehouse and factory arms to drones, mostly in C++ and Python on ROS. Hires electronics, electrical and mechanical graduates who can show a robot they built.
+  projects: {beginner: project-line-follower, intermediate: project-robot, advanced: project-autonomous-nav}
   tiers:
     hire: [programming-basics, cpp, linear-algebra, robotics, control-systems, ros, microcontrollers, git, project-robot]
     firstYear: [linux-admin, computer-vision, testing-debugging]
@@ -710,6 +761,7 @@
   title: PLC and automation engineer
   family: hardware
   summary: Programs the PLCs and SCADA systems that run factories, plants and buildings, then commissions them on site. Electrical and instrumentation graduates fill most of these jobs.
+  projects: {beginner: project-ladder-basics, intermediate: project-plc-line, advanced: project-scada-system}
   tiers:
     hire: [circuit-analysis, digital-logic, electrical-machines, plc-scada, control-systems, spreadsheets, project-plc-line]
     firstYear: [networking, power-electronics]
@@ -720,6 +772,7 @@
   title: Telecom and RF engineer
   family: hardware
   summary: Plans, tests and tunes mobile and wireless networks, from radio coverage to the core network. Telecom vendors and operators hire electronics graduates in batches.
+  projects: {beginner: project-signal-analysis, intermediate: project-comms-link, advanced: project-sdr-receiver}
   tiers:
     hire: [signals-and-systems, communication-systems, electromagnetics, networking, spreadsheets, project-comms-link]
     firstYear: [linux-admin, shell-tools, programming-basics]
@@ -730,6 +783,7 @@
   title: Power electronics engineer
   family: hardware
   summary: Designs converters, inverters, chargers and motor drives, now mostly for electric vehicles, solar and batteries. Electrical and electronics graduates with lab projects do well.
+  projects: {beginner: project-power-sim, intermediate: project-power-converter, advanced: project-inverter}
   tiers:
     hire: [circuit-analysis, analog-electronics, power-electronics, control-systems, microcontrollers, pcb-design, project-power-converter]
     firstYear: [electrical-machines, c-and-memory]
@@ -740,6 +794,7 @@
   title: Electrical engineer
   family: hardware
   summary: Designs, installs and maintains electrical systems in plants, buildings, substations and solar farms. Graduate engineer trainee programmes at power, manufacturing and infrastructure companies are the usual way in.
+  projects: {beginner: project-home-load, intermediate: project-electrical-design, advanced: project-solar-design}
   tiers:
     hire: [circuit-analysis, electrical-machines, power-systems, project-electrical-design]
     firstYear: [plc-scada, power-electronics, spreadsheets, control-systems]
@@ -755,6 +810,7 @@
   title: Management consultant (analyst)
   family: business
   summary: Helps companies answer business questions, like whether to enter a market or how to cut costs, with research, numbers and slides. Big consulting firms and their India offices hire graduates as business analysts or associates.
+  projects: {beginner: project-market-sizing, intermediate: project-business-case, advanced: project-strategy-engagement}
   tiers:
     hire: [problem-structuring, spreadsheets, statistics, accounting, corporate-finance, data-visualization, project-business-case]
     firstYear: [sql, bi-tools, process-improvement]
@@ -765,6 +821,7 @@
   title: Marketing analyst
   family: business
   summary: Measures what marketing spend brings in, from campaigns and ads to website visits, and tests what works better. Common at consumer brands, e-commerce and agencies.
+  projects: {beginner: project-marketing-metrics, intermediate: project-marketing-analysis, advanced: project-attribution}
   tiers:
     hire: [marketing-fundamentals, digital-marketing, spreadsheets, web-analytics, project-marketing-analysis]
     firstYear: [sql, statistics, experiments, bi-tools, pandas]
@@ -780,6 +837,7 @@
   title: Digital marketing executive
   family: business
   summary: Runs a brand's search, social, email and ad campaigns and reports how they did. A common first job for commerce and BBA graduates.
+  projects: {beginner: project-seo-audit, intermediate: project-campaign, advanced: project-growth-experiments}
   tiers:
     hire: [marketing-fundamentals, digital-marketing, web-analytics, spreadsheets, project-campaign]
     firstYear: [experiments, data-visualization]
@@ -795,6 +853,7 @@
   title: HR analyst
   family: business
   summary: Turns hiring, attrition, pay and performance data into reports and answers for HR teams. Often starts as an HR executive role with a lot of Excel.
+  projects: {beginner: project-hr-dashboard, intermediate: project-people-analytics, advanced: project-pay-equity}
   tiers:
     hire: [hr-fundamentals, spreadsheets, project-people-analytics]
     firstYear: [data-visualization, bi-tools, statistics, sql]
@@ -810,6 +869,7 @@
   title: Operations analyst
   family: business
   summary: Tracks how a business runs day to day, like orders, deliveries and turnaround times, finds where it slows down, and fixes it. Common at e-commerce, logistics, banks and outsourcing firms.
+  projects: {beginner: project-process-map, intermediate: project-operations, advanced: project-inventory-sim}
   tiers:
     hire: [spreadsheets, data-visualization, project-operations]
     firstYear: [process-improvement, accounting, sql, bi-tools, business-processes]
@@ -825,6 +885,7 @@
   title: Sales operations analyst
   family: business
   summary: Keeps the sales team's data, targets and reports in order, mostly in a CRM like Salesforce, and finds where deals get stuck.
+  projects: {beginner: project-excel-dashboard, intermediate: project-sales-dashboard, advanced: project-sales-forecast}
   tiers:
     hire: [spreadsheets, salesforce, bi-tools, sql, data-visualization, project-sales-dashboard]
     firstYear: [marketing-fundamentals, statistics]

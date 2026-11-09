@@ -18,9 +18,16 @@ const area = c.areas.find((a) => a.id === concept.area)!;
 const before = concept.requires.map((id) => byId.get(id)!);
 const helpful = concept.recommends.map((id) => byId.get(id)!);
 const after = c.concepts.filter((x) => x.requires.includes(concept.id));
-const inRoles = c.roles.flatMap((r) =>
-  TIERS.filter((t) => r.tiers[t.id].includes(concept.id)).map((t) => ({ role: r, tier: t })),
-);
+const LEVEL_WORD = { beginner: 'beginner', intermediate: 'intermediate', advanced: 'advanced' } as const;
+const inRoles = c.roles.flatMap((r) => {
+  // A project shows the level it's offered at on each route.
+  const level = r.projects && (Object.keys(LEVEL_WORD) as Array<keyof typeof LEVEL_WORD>).find((l) => r.projects![l] === concept.id);
+  if (level) return [{ role: r, note: `as the ${LEVEL_WORD[level]} project` }];
+  return TIERS.filter((t) => r.tiers[t.id].includes(concept.id)).map((t) => ({
+    role: r,
+    note: t.id === 'hire' ? 'to get hired' : t.id === 'firstYear' ? 'in the first year' : 'good to have',
+  }));
+});
 const kindLabel = concept.kind === 'tool' ? 'Tool' : concept.kind === 'project' ? 'Project to build' : null;
 
 const detail = stopDetails(c).find((d) => d.id === concept.id)!;
@@ -93,10 +100,10 @@ const shelf = c.toolGroups.find((g) => g.tools.includes(concept.id));
         <section aria-labelledby="roles">
           <h2 id="roles">Which roles ask for it</h2>
           <ul class="role-uses">
-            {inRoles.map(({ role, tier }) => (
+            {inRoles.map(({ role, note }) => (
               <li>
                 <a href={`/roles/${role.id}`}>{role.title}</a>
-                <span class="quiet"> {tier.id === 'hire' ? 'to get hired' : tier.id === 'firstYear' ? 'in the first year' : 'good to have'}</span>
+                <span class="quiet"> {note}</span>
               </li>
             ))}
           </ul>

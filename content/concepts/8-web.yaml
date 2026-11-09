@@ -290,3 +290,155 @@
       locator: The WebSockets API overview and its guide to writing a client
       role: alternative
       verified: true
+
+- id: project-url-shortener
+  title: 'Project: a URL shortener'
+  area: web
+  kind: project
+  summary: 'The classic first backend: short links, redirects, click counts, and the design questions behind them.'
+  hours: 12
+  requires: [rest-apis, sql]
+  recommends: [backend-framework, caching]
+  brief:
+    build: Build a service that turns a long URL into a short code, redirects visitors, and counts clicks. Use any backend framework and a real database, and deploy it on a free host.
+    shows:
+      - Short codes that don't collide, and the reason for your scheme (random, hash or counter)
+      - Redirects with the right status code (301 or 302) and why
+      - Click counts by day
+      - Input validation and a limit on how fast one user can create links
+    stretch:
+      - A cache in front of the database for popular links
+      - Custom aliases and expiry dates
+    present: A live link, the repo, and a half-page note on how it would change for a billion links.
+  resources:
+    - resource: sd-primer
+      locator: The Pastebin solution in the system design exercises, which covers the same problem
+      role: primary
+      verified: true
+    - resource: fastapi-tutorial
+      locator: If you build it in Python
+      role: alternative
+      verified: true
+
+- id: project-chat-system
+  title: 'Project: a real-time chat service that scales'
+  area: web
+  kind: project
+  summary: Group chat over WebSockets that keeps working with several servers, with delivery receipts, history and a load test.
+  hours: 60
+  requires: [api-styles, sql, redis]
+  recommends: [messaging, caching, docker, reliability-patterns]
+  brief:
+    build: Build a chat backend with rooms, message history and online status, using WebSockets. Then run two or more server instances behind a load balancer and make messages reach people connected to a different instance, using Redis pub/sub or Kafka.
+    shows:
+      - Messages delivered in order within a room, even across server instances
+      - Message history stored and paged
+      - Sent, delivered and read receipts
+      - Reconnects that don't lose or repeat messages
+      - 'A load test with numbers: connections held and messages per second'
+    stretch:
+      - Push notifications for offline users
+      - End-to-end encryption for direct messages
+    present: An architecture diagram, the load-test results, and a write-up of what broke first under load and how you fixed it.
+  resources:
+    - resource: mdn-websockets
+      locator: The WebSocket API and writing a client
+      role: primary
+      verified: true
+    - resource: hello-interview-sd
+      locator: The WhatsApp breakdown, for the design questions
+      role: alternative
+      verified: true
+    - resource: redis-data-types
+      locator: Streams
+      role: deep-dive
+      verified: true
+
+- id: project-static-site
+  title: 'Project: a personal site from scratch'
+  area: web
+  kind: project
+  summary: A responsive, accessible personal site in plain HTML and CSS, live on a free host.
+  hours: 10
+  requires: [html-css]
+  recommends: [javascript, web-accessibility]
+  brief:
+    build: 'Build your own site with no framework: an about page, your projects and a way to contact you. Make it work on a phone first, then on a big screen, and put it online with GitHub Pages or Cloudflare Pages.'
+    shows:
+      - A layout that works from a small phone to a wide screen, with Flexbox or Grid
+      - 'Semantic HTML: headings, nav, main and alt text'
+      - A Lighthouse score of 90 or more for accessibility and performance
+      - Live on a real URL
+    stretch:
+      - A dark mode that follows the system setting
+      - A small piece of JavaScript, like a project filter
+    present: The live link and the repo. Recruiters do open these, so keep it up to date.
+  resources:
+    - resource: mdn-learn
+      locator: The CSS layout and accessibility modules
+      role: primary
+      verified: true
+    - resource: fcc-rwd
+      locator: The projects in the Responsive Web Design course
+      role: alternative
+      verified: true
+
+- id: project-component-library
+  title: 'Project: a UI component library'
+  area: web
+  kind: project
+  summary: Accessible, typed and documented components that another project actually uses.
+  hours: 50
+  requires: [react, typescript, web-accessibility]
+  recommends: [testing-debugging, web-performance]
+  brief:
+    build: 'Build a small library of components for real use: button, input, select, dialog, tabs, toast and a data table. Write them in TypeScript, make each one keyboard and screen-reader friendly, document them, and use them in one of your apps.'
+    shows:
+      - Keyboard support and ARIA roles that follow the WAI-ARIA patterns
+      - Tests for behaviour, including keyboard use
+      - Theming through design tokens, with a dark theme
+      - A docs site with live examples, such as Storybook
+      - Published to npm with versioning
+    stretch:
+      - Visual regression tests
+      - A bundle-size budget checked in CI
+    present: The docs site, the npm package, and a page on one accessibility problem you solved.
+  resources:
+    - resource: aria-apg
+      locator: The pattern for each component you build
+      role: primary
+      verified: true
+    - resource: react-docs
+      locator: Reusing logic with custom hooks, and passing data deeply with context
+      role: alternative
+      verified: true
+
+- id: project-saas
+  title: 'Project: a small SaaS product'
+  area: web
+  kind: project
+  summary: A product with sign-up, teams, a payment sandbox, background jobs and real users.
+  hours: 80
+  requires: [react, backend-framework, sql]
+  recommends: [api-styles, docker, ci-cd, web-security]
+  brief:
+    build: Build a small product people could pay for, such as appointment booking for clinics, invoicing for freelancers or a feedback board. Include accounts and teams, a payment flow in a provider's test mode, emails, and background jobs.
+    shows:
+      - Authentication with roles, and each team's data kept separate
+      - A payment flow in test mode, with webhooks handled safely
+      - Background jobs for emails and reports
+      - Tests, CI and automatic deploys
+      - Ten real people who tried it, and what you changed for them
+    stretch:
+      - Usage analytics and a simple admin dashboard
+      - Rate limits and audit logs
+    present: A live product, a short demo video, and a write-up of the architecture and the hardest trade-off.
+  resources:
+    - resource: fullstackopen
+      locator: Part 4, testing Express servers and user administration, then the later parts as you need them
+      role: primary
+      verified: true
+    - resource: owasp-top10
+      locator: As the security checklist before you launch
+      role: alternative
+      verified: true

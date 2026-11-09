@@ -388,3 +388,275 @@
       locator: How to approach a system design interview question
       role: alternative
       verified: true
+
+- id: project-kb-articles
+  title: 'Project: write a support knowledge base'
+  area: infra
+  kind: project
+  summary: Five troubleshooting articles for common problems, each tested by reproducing the problem yourself.
+  hours: 10
+  requires: [linux-admin]
+  recommends: [log-analysis, technical-writing]
+  brief:
+    build: Pick five problems support teams see all the time, such as a service that won't start, a full disk, a DNS failure, a permissions error and a slow query. Reproduce each on a VM, then write the article a support engineer would follow.
+    shows:
+      - 'Each article: symptoms, likely causes, the checks in order, and the fix'
+      - Commands and log lines from your own reproduction
+      - When to escalate, and what to include
+      - Plain writing someone can follow at 3 a.m.
+    stretch:
+      - A script that runs the first checks automatically
+      - Turn one article into a short video
+    present: The articles as a small site or a repo of Markdown files.
+  resources:
+    - resource: google-tech-writing
+      locator: Technical Writing One
+      role: primary
+      verified: true
+    - resource: linux-upskill
+      locator: The days on logs, services and the filesystem
+      role: alternative
+      verified: true
+
+- id: project-monitoring-stack
+  title: 'Project: monitoring and alerting for a real app'
+  area: infra
+  kind: project
+  summary: Metrics, logs and traces for a running app, with dashboards, alerts tied to SLOs and a runbook for each alert.
+  hours: 30
+  requires: [observability, docker]
+  recommends: [linux-admin, incident-management]
+  brief:
+    build: Run a small app with a database, and set up Prometheus, Grafana, a log store and tracing with OpenTelemetry. Define service-level objectives, alert on them, then cause failures and check the alerts fire.
+    shows:
+      - Dashboards for the four golden signals
+      - Two or three SLOs with error-budget alerts
+      - Logs and traces linked by a request ID
+      - A runbook for every alert
+      - A failure you caused, caught by an alert, with the timeline
+    stretch:
+      - Alert routing to a chat channel
+      - Everything set up from code, not clicked
+    present: Screenshots of the dashboards, the alert rules and runbooks in a repo, and the incident write-up.
+  resources:
+    - resource: sre-book
+      locator: Chapter 6, Monitoring Distributed Systems, and chapter 4, Service Level Objectives
+      role: primary
+      verified: true
+    - resource: prometheus-docs
+      locator: First steps, then alerting
+      role: alternative
+      verified: true
+    - resource: piyush-grafana
+      locator: The whole video
+      role: alternative
+      verified: true
+
+- id: project-dockerise
+  title: 'Project: containerise an app'
+  area: infra
+  kind: project
+  summary: An app and its database running with Docker Compose, with one command and no 'works on my machine'.
+  hours: 8
+  requires: [docker]
+  recommends: [linux-admin]
+  brief:
+    build: Take any app with a database and write a Dockerfile and a Compose file so anyone can run the whole thing with one command.
+    shows:
+      - A small image built in stages
+      - The database in its own container with a volume, so data survives restarts
+      - Configuration through environment variables, with no secrets in the image
+      - A README that gets a stranger running in two minutes
+    stretch:
+      - A health check and restart policy
+      - Push the image to a registry from CI
+    present: The repo with the Dockerfile, the Compose file and the README.
+  resources:
+    - resource: docker-docs
+      locator: Get started, then the Compose guide
+      role: primary
+      verified: true
+    - resource: nana-docker
+      locator: The whole video
+      role: alternative
+      verified: true
+
+- id: project-k8s-platform
+  title: 'Project: run apps on Kubernetes with GitOps'
+  area: infra
+  kind: project
+  summary: 'A small platform: apps deployed by Git, autoscaled, monitored, and recovered from failure on their own.'
+  hours: 60
+  requires: [kubernetes, ci-cd, observability]
+  recommends: [infrastructure-as-code, cloud-basics]
+  brief:
+    build: Set up a Kubernetes cluster (kind or k3s locally, or a cloud's free credits) and run two or three services on it. Deploy them from Git with Argo CD or Flux, package them with Helm, and add monitoring and autoscaling.
+    shows:
+      - Deploys happen by merging to Git, not by kubectl from a laptop
+      - Helm charts with values for dev and prod
+      - Autoscaling on load, shown with a load test
+      - Prometheus and Grafana dashboards, and alerts
+      - A rollback that you have actually done
+    stretch:
+      - Network policies and secrets from a vault
+      - A canary release
+    present: An architecture diagram, a recording of a Git commit becoming a deploy, and the repo.
+  resources:
+    - resource: k8s-basics
+      locator: The whole tutorial, then the concepts pages for what you use
+      role: primary
+      verified: true
+    - resource: killercoda-k8s
+      locator: The scenarios for the parts you find hard
+      role: alternative
+      verified: true
+    - resource: nana-kubernetes
+      locator: The whole video
+      role: alternative
+      verified: true
+
+- id: project-static-site-cloud
+  title: 'Project: host a site on the cloud properly'
+  area: infra
+  kind: project
+  summary: A static site in cloud storage behind a CDN, with HTTPS, a custom domain and a billing alert.
+  hours: 10
+  requires: [cloud-basics]
+  recommends: [cloud-iam, infrastructure-as-code]
+  brief:
+    build: 'Put a static site on AWS, Azure or Google Cloud the way a team would: storage, a CDN in front, HTTPS, your own domain, and least-privilege access. Set a billing alert before you start.'
+    shows:
+      - Storage that isn't public, served only through the CDN
+      - HTTPS with a managed certificate
+      - An IAM user or role with only the permissions needed
+      - A billing alert and the monthly cost
+    stretch:
+      - Write it all in Terraform
+      - Deploy on every push from GitHub Actions
+    present: The live site, an architecture diagram and the steps or code to rebuild it.
+  resources:
+    - resource: aws-ccp
+      locator: Cloud Practitioner Essentials, the modules on storage, networking and security
+      role: alternative
+      verified: true
+    - resource: aws-overview
+      locator: The sections on storage, networking and content delivery
+      role: primary
+      verified: true
+
+- id: project-resilient-cloud
+  title: 'Project: a highly available cloud deployment'
+  area: infra
+  kind: project
+  summary: An app spread across zones with autoscaling, backups and a failover drill you've actually run.
+  hours: 60
+  requires: [cloud-architecture, infrastructure-as-code]
+  recommends: [reliability-patterns, observability, kubernetes]
+  brief:
+    build: 'Deploy an app across at least two availability zones with a load balancer, autoscaling, a replicated database and backups, all in Terraform. Then break things on purpose: kill instances, fail over the database, restore a backup.'
+    shows:
+      - No single point of failure, shown on a diagram
+      - Autoscaling under a load test
+      - Database failover and a backup restore you timed
+      - Recovery targets (RPO and RTO) stated and measured
+      - A monthly cost estimate and how you'd cut it
+    stretch:
+      - A second region for disaster recovery
+      - Chaos tests that run on a schedule
+    present: The architecture diagram, the Terraform code, and the drill report with timings.
+  resources:
+    - resource: aws-well-architected
+      locator: The reliability and cost optimisation pillars
+      role: primary
+      verified: true
+    - resource: builders-timeouts
+      locator: The whole article
+      role: alternative
+      verified: true
+
+- id: project-linux-scripts
+  title: 'Project: automate admin chores with scripts'
+  area: infra
+  kind: project
+  summary: 'Shell scripts for the boring jobs: creating users, backups, log clean-up and health checks, run by cron.'
+  hours: 10
+  requires: [linux-admin, shell-tools]
+  brief:
+    build: 'Write a small set of scripts a sysadmin would actually use: add users from a CSV, back up a folder with rotation, clean old logs, and check disk, memory and services, emailing or logging a report.'
+    shows:
+      - Scripts that stop on errors and say what went wrong
+      - Safe to run twice
+      - Scheduled with cron or systemd timers
+      - Comments and a usage message in each script
+    stretch:
+      - ShellCheck clean
+      - Rewrite one in Python and compare
+    present: A repo of scripts with a README and sample output.
+  resources:
+    - resource: tlcl
+      locator: Part 4, Writing Shell Scripts
+      role: primary
+      verified: true
+    - resource: linux-upskill
+      locator: The days on scripting and scheduling
+      role: alternative
+      verified: true
+
+- id: project-ansible-fleet
+  title: 'Project: manage a fleet of servers with Ansible'
+  area: infra
+  kind: project
+  summary: Several servers set up, hardened, patched and monitored from code, rebuilt from scratch in minutes.
+  hours: 40
+  requires: [ansible, linux-admin]
+  recommends: [observability, systems-security]
+  brief:
+    build: 'Run three or more VMs and manage them only through Ansible: users and SSH keys, hardening, packages, a web app, backups and a monitoring agent. Rebuild one from nothing to prove it works.'
+    shows:
+      - Roles for each job, with variables per environment
+      - 'Idempotent playbooks: a second run changes nothing'
+      - Secrets in Ansible Vault
+      - A patching playbook that updates one server at a time
+      - A full rebuild, timed
+    stretch:
+      - Molecule tests for your roles
+      - A CI job that lints and tests playbooks
+    present: The repo with an inventory diagram and a recording of a full rebuild.
+  resources:
+    - resource: ansible-start
+      locator: The getting-started guide, then playbooks and roles
+      role: primary
+      verified: true
+    - resource: wagh-ansible
+      locator: The whole video
+      role: alternative
+      verified: true
+
+- id: project-db-migration
+  title: 'Project: migrate a live database with little downtime'
+  area: infra
+  kind: project
+  summary: A database moved to a new major version or a new server while an app keeps writing to it, with a written plan.
+  hours: 40
+  requires: [database-internals, query-performance]
+  recommends: [partitioning-replication, shell-tools]
+  brief:
+    build: Run an app that writes to a PostgreSQL or MySQL database under steady load, then migrate it to a new major version or a new server using logical replication, with a cut-over of seconds, not hours.
+    shows:
+      - A written migration plan with a rollback step
+      - Replication set up and verified with row counts and checksums
+      - A cut-over with measured downtime
+      - Application errors during the move, counted
+    stretch:
+      - Move a large table to a new schema at the same time
+      - Automate the checks with a script
+    present: The plan, the timeline with measurements, and what you'd do differently.
+  resources:
+    - resource: postgres-tutorial
+      locator: Then the docs chapters on logical replication and upgrading a cluster
+      role: primary
+      verified: true
+    - resource: pg-backup
+      locator: The whole chapter, for your fallback
+      role: alternative
+      verified: true

@@ -48,3 +48,61 @@
     - resource: android-courses
       locator: "Use the later units on data and networking as you build"
       verified: true
+
+- id: project-mobile-starter
+  title: 'Project: a small single-purpose app'
+  area: mobile
+  kind: project
+  summary: A one or two screen app that does one thing well, on your own phone.
+  hours: 10
+  requires: []
+  recommends: [android, swift, flutter]
+  brief:
+    build: 'Build a small app for one job: a unit converter, a tip splitter, a habit tick-list or a flashcard deck. Use Kotlin, Swift or Flutter, and run it on a real phone.'
+    shows:
+      - One clear job, done well
+      - Data that's still there after the app restarts
+      - A layout that works on a small and a large phone
+      - Runs on a real device, not just the emulator
+    stretch:
+      - An app icon and a splash screen
+      - A second language, such as Hindi
+    present: A screen recording and the repo with screenshots in the README.
+  resources:
+    - resource: android-courses
+      locator: The first units of Android Basics with Compose, if you build for Android
+      role: primary
+      verified: true
+    - resource: flutter-learn
+      locator: The first Flutter codelab, if you build with Flutter
+      role: alternative
+      verified: true
+
+- id: project-mobile-advanced
+  title: 'Project: an offline-first app that syncs'
+  area: mobile
+  kind: project
+  summary: An app that works without a network, syncs when it's back, and is released to real users.
+  hours: 70
+  requires: [rest-apis]
+  recommends: [android, swift, flutter, testing-debugging]
+  brief:
+    build: Build an app that keeps working offline, such as a field-survey app, a shared shopping list or a shop's order book, and syncs to a backend when the network returns. Release it through the Play Store or TestFlight.
+    shows:
+      - A local database as the source of truth, with sync in the background
+      - Conflict handling when two devices edit the same thing
+      - Tests for the sync logic and the main screens
+      - Crash reporting and a release build in users' hands
+    stretch:
+      - Push notifications
+      - A tablet layout
+    present: The store link or a test invite, a diagram of the sync design, and how you tested conflicts.
+  resources:
+    - resource: android-courses
+      locator: The units on data persistence and background work
+      role: primary
+      verified: true
+    - resource: ddia
+      locator: The chapter on replication, for conflict resolution
+      role: deep-dive
+      verified: true

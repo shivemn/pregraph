@@ -318,3 +318,331 @@
       locator: The Sizing and protection of conductors chapter, and the chapters on LV distribution and protection around it
       role: primary
       verified: true
+
+- id: project-circuit-sim
+  title: 'Project: simulate classic circuits'
+  area: electrical
+  kind: project
+  summary: RC filters, a rectifier and a transistor switch simulated and checked against hand calculation.
+  hours: 8
+  requires: [circuit-analysis]
+  recommends: [analog-electronics]
+  brief:
+    build: 'In LTspice or another free simulator, build and simulate four classic circuits: an RC low-pass filter, a full-wave rectifier, a transistor switch and a voltage divider with a load. Compare each with your hand calculation.'
+    shows:
+      - Hand calculations first
+      - Simulation results with plots
+      - Where they differ, and why
+      - Clean schematics
+    stretch:
+      - Build one on a breadboard and measure it
+      - A Bode plot of the filter
+    present: A short report with schematics, calculations and plots.
+  resources:
+    - resource: lessons-electric-circuits
+      locator: Volumes I and II, the chapters for each circuit
+      role: primary
+      verified: true
+
+- id: project-mixed-signal
+  title: 'Project: a sensor front end with an ADC'
+  area: electrical
+  kind: project
+  summary: A complete signal chain from sensor to digital data on your own PCB, with noise analysed and measured.
+  hours: 60
+  requires: [analog-electronics, pcb-design]
+  recommends: [signals-and-systems, microcontrollers]
+  brief:
+    build: 'Design the front end for a real sensor, such as a load cell or ECG electrodes (powered by battery only, for safety): amplification, filtering, an ADC and a microcontroller, on a PCB you lay out. Analyse and measure the noise.'
+    shows:
+      - A noise budget for the chain
+      - Filter design matched to the signal and sampling rate
+      - A PCB with proper grounding and layout
+      - Measured noise and accuracy against your budget
+    stretch:
+      - Calibration against a known reference
+      - Digital filtering on the microcontroller
+    present: A design report with calculations, simulation, layout and measurements.
+  resources:
+    - resource: lessons-electric-circuits
+      locator: Volume III on op-amps, and the chapters on filters
+      role: primary
+      verified: true
+    - resource: kicad-getting-started
+      locator: For the board
+      role: alternative
+      verified: true
+
+- id: project-line-follower
+  title: 'Project: a line-following robot'
+  area: electrical
+  kind: project
+  summary: A small robot that follows a line using sensors and a tuned controller.
+  hours: 12
+  requires: [microcontrollers]
+  recommends: [control-systems]
+  brief:
+    build: Build a line-following robot with an Arduino, IR sensors, a motor driver and two motors, then tune it from bang-bang control to PID.
+    shows:
+      - Sensors calibrated for your track
+      - Bang-bang control first, then PID
+      - Speed and smoothness compared
+      - A wiring diagram and the code
+    stretch:
+      - Handle junctions and sharp turns
+      - Log sensor data and plot it
+    present: A video of the run and the repo.
+  resources:
+    - resource: arduino-docs
+      locator: The motor and sensor examples
+      role: primary
+      verified: true
+    - resource: feedback-systems-book
+      locator: The chapter on PID control
+      role: alternative
+      verified: true
+
+- id: project-autonomous-nav
+  title: 'Project: autonomous navigation with ROS 2'
+  area: electrical
+  kind: project
+  summary: A robot that maps an unknown space, localises itself and navigates to goals, in simulation and on hardware.
+  hours: 70
+  requires: [ros, robotics]
+  recommends: [computer-vision, control-systems]
+  brief:
+    build: With ROS 2, build a robot (in Gazebo, then on a real base if you can) that maps a room with SLAM, localises itself, and navigates to goals around obstacles using Nav2.
+    shows:
+      - SLAM producing a usable map
+      - Localisation and navigation to goals with Nav2
+      - Obstacle avoidance, including moving obstacles
+      - Measured success rate over many runs
+    stretch:
+      - Add a camera and detect objects
+      - Run it on a real robot base
+    present: A video, the launch files and a write-up of tuning and failure cases.
+  resources:
+    - resource: ros2-tutorials
+      locator: The beginner and intermediate tutorials, then the Nav2 docs they link to
+      role: alternative
+      verified: true
+    - resource: modern-robotics
+      locator: The chapters on motion planning
+      role: primary
+      verified: true
+
+- id: project-ladder-basics
+  title: 'Project: five classic ladder-logic exercises'
+  area: electrical
+  kind: project
+  summary: Start-stop, interlocks, timers, counters and a sequence, each written and tested in OpenPLC.
+  hours: 8
+  requires: [plc-scada]
+  brief:
+    build: 'In OpenPLC, write five classic programs: a motor start-stop circuit, forward-reverse with an interlock, a timer-based light, a counter for a packing line, and a simple sequence.'
+    shows:
+      - Each program tested in simulation
+      - Interlocks that make unsafe states impossible
+      - An I/O list for each
+      - Comments on every rung
+    stretch:
+      - Run one on an Arduino with real switches
+      - Rewrite one in structured text
+    present: The exported programs and screenshots.
+  resources:
+    - resource: openplc-getting-started
+      locator: Install the editor and runtime, then the first project
+      role: alternative
+      verified: true
+    - resource: control-com-openplc
+      locator: The whole article
+      role: primary
+      verified: true
+
+- id: project-scada-system
+  title: 'Project: a SCADA system for a small plant'
+  area: electrical
+  kind: project
+  summary: A small plant simulated with PLCs, Modbus, an HMI, alarms and a historian.
+  hours: 60
+  requires: [plc-scada]
+  recommends: [networking, control-systems]
+  brief:
+    build: Simulate a small plant, such as a water treatment stage with pumps, tanks and valves. Control it with OpenPLC, connect over Modbus TCP to an open-source SCADA or HMI, and add alarms, trends and a historian.
+    shows:
+      - Control logic with interlocks and an emergency stop
+      - Modbus communication you can show in Wireshark
+      - HMI screens, alarms with priorities and trends
+      - A historian storing data
+      - 'Basic security: network separation and passwords changed'
+    stretch:
+      - Redundant PLCs or a failover
+      - PID loops tuned on the simulated process
+    present: A demo video, the system architecture diagram and a functional design specification.
+  resources:
+    - resource: openplc-getting-started
+      locator: The runtime, the editor and Modbus setup
+      role: primary
+      verified: true
+    - resource: wireshark-guide
+      locator: For looking at the Modbus traffic
+      role: alternative
+      verified: true
+
+- id: project-signal-analysis
+  title: 'Project: analyse real signals with the FFT'
+  area: electrical
+  kind: project
+  summary: 'Audio and sensor recordings analysed in Python: spectra, filtering and sampling effects.'
+  hours: 8
+  requires: [signals-and-systems]
+  recommends: [programming-basics]
+  brief:
+    build: 'Record a few real signals, such as your voice, a musical note and a phone''s accelerometer, and analyse them in Python: spectra with the FFT, a filter that removes noise, and what happens when you sample too slowly.'
+    shows:
+      - Spectra with correct frequency axes
+      - A filter designed and its effect shown
+      - Aliasing demonstrated
+      - Clear plots with labels
+    stretch:
+      - A spectrogram of speech
+      - Real-time analysis from the microphone
+    present: A notebook with plots and short explanations.
+  resources:
+    - resource: pysdr
+      locator: The Frequency Domain and Filters chapters
+      role: primary
+      verified: true
+    - resource: mit-6003
+      locator: The lectures on Fourier transforms and sampling
+      role: alternative
+      verified: true
+
+- id: project-sdr-receiver
+  title: 'Project: receive and decode real radio signals'
+  area: electrical
+  kind: project
+  summary: An RTL-SDR used to receive FM radio and decode aircraft ADS-B or weather-satellite signals, with your own processing code.
+  hours: 50
+  requires: [communication-systems]
+  recommends: [signals-and-systems, programming-basics]
+  brief:
+    build: 'With an inexpensive RTL-SDR dongle, receive and decode real signals in Python: demodulate FM broadcast audio, then decode aircraft ADS-B messages or NOAA weather-satellite images.'
+    shows:
+      - FM demodulation written yourself, with plots of each stage
+      - ADS-B messages decoded and aircraft plotted on a map, or a satellite image received
+      - Your own code for the key steps, compared with an existing decoder
+      - Antenna and gain choices explained
+    stretch:
+      - Build a simple antenna and measure the improvement
+      - Transmit on a licence-free band with a suitable device
+    present: A write-up with plots, the decoded output and the code.
+  resources:
+    - resource: pysdr
+      locator: The RTL-SDR, Frequency Domain and Synchronization chapters
+      role: primary
+      verified: true
+
+- id: project-power-sim
+  title: 'Project: simulate rectifiers and a buck converter'
+  area: electrical
+  kind: project
+  summary: A rectifier and a buck converter simulated, with waveforms compared against theory.
+  hours: 8
+  requires: [power-electronics]
+  recommends: [circuit-analysis]
+  brief:
+    build: In LTspice, simulate a single-phase bridge rectifier with a filter capacitor, and an open-loop buck converter. Compare the waveforms and ripple with what theory predicts.
+    shows:
+      - Ripple and average voltages against hand calculations
+      - Inductor current in continuous and discontinuous mode
+      - Losses in the switch and diode estimated
+      - Clear waveform plots
+    stretch:
+      - Add closed-loop control to the buck
+      - Compare a diode with a synchronous switch
+    present: A short report with plots and calculations.
+  resources:
+    - resource: mit-6334
+      locator: The lecture notes on rectifiers and dc/dc converters
+      role: primary
+      verified: true
+
+- id: project-inverter
+  title: 'Project: a motor drive or inverter with closed-loop control'
+  area: electrical
+  kind: project
+  summary: A low-voltage single-phase inverter or DC motor drive with PWM, closed-loop control and protection.
+  hours: 70
+  requires: [power-electronics, control-systems]
+  recommends: [electrical-machines, microcontrollers, pcb-design]
+  brief:
+    build: Build a low-voltage (under 48 V) H-bridge inverter or DC motor drive, controlled by a microcontroller with PWM, with current sensing, closed-loop speed or voltage control, and protection.
+    shows:
+      - PWM generation and dead time set correctly
+      - Current sensing and over-current protection
+      - A closed loop tuned from a model, then on hardware
+      - Efficiency and waveform quality measured
+    stretch:
+      - Field-oriented control of a small BLDC motor
+      - A custom PCB
+    present: A design report, measurements and a video. Stay at low voltage.
+  resources:
+    - resource: mit-6334
+      locator: The lecture notes on inverters and control
+      role: primary
+      verified: true
+    - resource: feedback-systems-book
+      locator: The chapters on PID and loop shaping
+      role: alternative
+      verified: true
+
+- id: project-home-load
+  title: 'Project: a load schedule and energy bill for a home'
+  area: electrical
+  kind: project
+  summary: Every appliance in a home listed with its power and use, the connected load and maximum demand, and the monthly bill checked.
+  hours: 8
+  requires: [circuit-analysis]
+  recommends: [spreadsheets]
+  brief:
+    build: List every appliance in your home with its rating and daily hours of use, work out connected load, maximum demand and monthly units, and check the result against a real electricity bill using your state's tariff.
+    shows:
+      - A load schedule in a spreadsheet
+      - Connected load and maximum demand with a diversity factor
+      - Monthly units and the bill under your tariff slabs
+      - Three ways to cut the bill, with savings
+    stretch:
+      - Size an inverter and battery backup
+      - Compare with a smart meter or plug's readings
+    present: The workbook and a one-page summary.
+  resources:
+    - resource: schneider-eig
+      locator: The chapter on general rules of design, for load estimation
+      role: primary
+      verified: true
+
+- id: project-solar-design
+  title: 'Project: design a rooftop solar system'
+  area: electrical
+  kind: project
+  summary: 'A grid-connected rooftop system for a real building: sizing, layout, energy yield, protection and payback.'
+  hours: 50
+  requires: [power-systems, power-electronics]
+  recommends: [spreadsheets, electrical-machines]
+  brief:
+    build: 'Design a grid-connected rooftop solar system for a real building: measure the roof, estimate generation with a free tool, size modules and inverter, design the DC and AC sides with protection and earthing, and work out the payback.'
+    shows:
+      - Energy yield estimated with a recognised free tool
+      - Module, string and inverter sizing with the checks
+      - A single-line diagram with protection and earthing
+      - Payback under current net-metering rules
+    stretch:
+      - Shading analysis through the year
+      - Add a battery and compare payback
+    present: A design report with the single-line diagram, layout and calculations.
+  resources:
+    - resource: schneider-eig
+      locator: The chapter on photovoltaic installations
+      role: primary
+      verified: true

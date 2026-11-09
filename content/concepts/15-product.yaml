@@ -205,3 +205,286 @@
       locator: The Scrum pages on sprint planning, stand-ups and retrospectives
       role: alternative
       verified: false
+
+- id: project-prd
+  title: 'Project: a one-page product spec'
+  area: product
+  kind: project
+  summary: A short, sharp spec for one feature in an app you use, with the problem, the users and how you'd measure it.
+  hours: 8
+  requires: [product-management]
+  recommends: [ux-design]
+  brief:
+    build: 'Pick an app you use every day and one problem with it. Write a one-page spec: the problem, who has it, the proposed feature, what''s out of scope, and how you''d know it worked.'
+    shows:
+      - A problem statement with evidence, even if it's three conversations
+      - Users and their goal
+      - The feature, with what's deliberately left out
+      - One success metric and one guardrail metric
+    stretch:
+      - Rough wireframes
+      - A list of risks and open questions
+    present: The spec as a one-page PDF.
+  resources:
+    - resource: shape-up
+      locator: Write the Pitch, in Part One
+      role: primary
+      verified: true
+
+- id: project-ship-feature
+  title: 'Project: take a feature from idea to launch'
+  area: product
+  kind: project
+  summary: A real feature discovered, specified, built with a team and launched, with the results measured.
+  hours: 60
+  requires: [product-management, experiments]
+  recommends: [sql, ux-design, agile-scrum]
+  brief:
+    build: 'Work with a real product, such as an open-source project, a college app or a small startup, and own one feature from discovery to launch: research, spec, working with whoever builds it, launch and measuring the result.'
+    shows:
+      - Research notes and the decision they led to
+      - A spec the team actually built from
+      - Launch plan and what happened
+      - Results against the success metric, honestly reported
+    stretch:
+      - An A/B test of two versions
+      - A retrospective with the team
+    present: 'A case study: problem, process, decisions, results and what you''d do next.'
+  resources:
+    - resource: shape-up
+      locator: The whole book
+      role: primary
+      verified: true
+    - resource: exponent-questions
+      locator: Product sense questions, to practise explaining your decisions
+      role: alternative
+      verified: true
+
+- id: project-redesign-screen
+  title: 'Project: redesign one screen and test it'
+  area: product
+  kind: project
+  summary: One confusing screen redesigned in Figma and tested with three people.
+  hours: 10
+  requires: [ux-design]
+  recommends: [figma]
+  brief:
+    build: Find a confusing screen in an app or website, such as a railway booking form or a college portal, redesign it, and test both versions with three people.
+    shows:
+      - The problems with the current screen, with evidence
+      - Two or three sketches before the final design
+      - A clickable prototype
+      - What the three tests showed, and what you changed
+    stretch:
+      - A mobile and a desktop version
+      - An accessibility check of colours and text size
+    present: A short case study with before and after screens.
+  resources:
+    - resource: laws-of-ux
+      locator: The laws that explain the problems you found
+      role: alternative
+      verified: true
+    - resource: nngroup
+      locator: The Qualitative Usability Testing study guide
+      role: primary
+      verified: true
+
+- id: project-product-design
+  title: 'Project: design a complete app'
+  area: product
+  kind: project
+  summary: A whole product designed from research to a tested high-fidelity prototype, with its own design system.
+  hours: 70
+  requires: [ux-design, figma]
+  recommends: [web-accessibility, product-management]
+  brief:
+    build: 'Design a full app for a real need, such as a community clinic''s appointments or a farmer''s crop-price app: research, information architecture, flows, a design system and a high-fidelity prototype, tested twice.'
+    shows:
+      - Research with real users and what you learned
+      - Flows and information architecture
+      - 'A design system: colours, type, components and states'
+      - Two rounds of testing and the changes between them
+      - Accessibility checked throughout
+    stretch:
+      - Handoff specs a developer could build from
+      - A coded prototype of one flow
+    present: A detailed case study and the Figma file.
+  resources:
+    - resource: nngroup
+      locator: The study guides on research methods and information architecture
+      role: primary
+      verified: true
+    - resource: figma-learn
+      locator: The courses and tutorials for the parts you need
+      role: alternative
+      verified: true
+
+- id: project-process-map
+  title: 'Project: map a real business process'
+  area: product
+  kind: project
+  summary: One real process mapped step by step, with who does what, the documents involved and where it goes wrong.
+  hours: 8
+  requires: [business-processes]
+  recommends: [technical-writing]
+  brief:
+    build: Pick a process you can see, such as how a shop orders stock, how a college issues certificates, or how a small company pays suppliers. Interview the people involved and map it.
+    shows:
+      - A flow diagram with swimlanes for each role
+      - The documents and systems used at each step
+      - Pain points and delays, marked
+      - Two improvements with their expected effect
+    stretch:
+      - Draw it in BPMN notation
+      - Time each step and add the numbers
+    present: The diagram and a one-page summary.
+  resources:
+    - resource: lean-vsm
+      locator: The whole article
+      role: primary
+      verified: true
+    - resource: sap-erp-processes
+      locator: The whole journey, for comparison with how SAP models it
+      role: alternative
+      verified: true
+
+- id: project-uat
+  title: 'Project: run requirements through to user testing'
+  area: product
+  kind: project
+  summary: Requirements written, a system built by a team from them, and user acceptance testing run and signed off.
+  hours: 50
+  requires: [product-management, technical-writing]
+  recommends: [agile-scrum, sql, testing-debugging]
+  brief:
+    build: Work with a small team building a real system, such as a club's membership tool or a small business's order tracker. Write the requirements, stay with the team through the build, then plan and run user acceptance testing with the real users.
+    shows:
+      - Requirements with acceptance criteria the team built from
+      - A traceability table from requirement to test
+      - UAT plan, test cases and results
+      - Defects found, fixed and retested, and the sign-off
+    stretch:
+      - A training guide for users
+      - A change request handled mid-build
+    present: The full document set and a short case study.
+  resources:
+    - resource: atlassian-agile
+      locator: The user stories page
+      role: primary
+      verified: false
+    - resource: istqb-ctfl-syllabus
+      locator: Section 2.2 on test levels, including acceptance testing
+      role: alternative
+      verified: true
+
+- id: project-readme-rewrite
+  title: 'Project: rewrite an open-source project''s README'
+  area: product
+  kind: project
+  summary: A confusing README rewritten so a newcomer can install and use the project, submitted as a pull request.
+  hours: 6
+  requires: [technical-writing]
+  recommends: [git]
+  brief:
+    build: Find an open-source project whose README makes it hard to get started. Follow it on a clean machine, note where you got stuck, rewrite it, and open a pull request.
+    shows:
+      - Notes from following the old README
+      - 'A new README: what it is, install, first use, where to get help'
+      - Every command tested
+      - A pull request to the project
+    stretch:
+      - Add a troubleshooting section
+      - A short getting-started tutorial
+    present: The pull request link and a before-and-after comparison.
+  resources:
+    - resource: google-tech-writing
+      locator: Technical Writing One
+      role: primary
+      verified: true
+
+- id: project-docs-site
+  title: 'Project: own the docs for a project'
+  area: product
+  kind: project
+  summary: 'A complete docs site: tutorials, how-to guides, reference generated from code, and a style guide, all as code.'
+  hours: 60
+  requires: [technical-writing, git]
+  recommends: [rest-apis, web-http]
+  brief:
+    build: Take charge of documentation for an open-source project or a product of your own. Build a docs-as-code site with tutorials, how-to guides, concept pages and reference generated from code or an OpenAPI spec.
+    shows:
+      - 'A clear structure: tutorials, how-to guides, reference and explanation'
+      - Reference generated from the source, not typed by hand
+      - A style guide and a linter that enforces it
+      - Docs built and checked for broken links in CI
+      - Feedback from real readers and the changes it led to
+    stretch:
+      - Versioned docs for two releases
+      - Analytics on which pages people need
+    present: The live site, the repo, and a short write-up of how you planned it.
+  resources:
+    - resource: google-tech-writing
+      locator: Technical Writing Two
+      role: primary
+      verified: true
+    - resource: gh-pages-start
+      locator: To publish the site
+      role: alternative
+      verified: true
+
+- id: project-agile-board
+  title: 'Project: set up and run one sprint'
+  area: product
+  kind: project
+  summary: A Jira board set up for a real team project, a backlog written, and one sprint planned and reviewed.
+  hours: 8
+  requires: [agile-scrum, jira]
+  brief:
+    build: For a college or side project with at least three people, set up a Scrum board in Jira, write the backlog as user stories, and run one two-week sprint.
+    shows:
+      - A backlog of user stories with acceptance criteria
+      - Sprint planning with a sprint goal
+      - The board kept up to date during the sprint
+      - A review and a short retrospective
+    stretch:
+      - Story points and a burndown chart
+      - A definition of done the team agreed
+    present: Screenshots of the board and a one-page summary.
+  resources:
+    - resource: scrum-guide
+      locator: The whole guide
+      role: primary
+      verified: true
+    - resource: jira-guide
+      locator: The guides on Scrum boards and sprints
+      role: alternative
+      verified: true
+
+- id: project-agile-coaching
+  title: 'Project: coach two teams through a quarter'
+  area: product
+  kind: project
+  summary: Two real teams helped over three months, with the problems you found, what you changed and what it did.
+  hours: 60
+  requires: [agile-scrum]
+  recommends: [jira, product-management]
+  brief:
+    build: Support two teams, such as two student project teams or volunteer teams, for a quarter. Run their events, watch how they work, and help them fix their biggest problems, measuring the effect.
+    shows:
+      - A starting assessment of each team
+      - Changes you introduced and why
+      - 'Flow metrics over time: cycle time, throughput, predictability'
+      - What worked, what didn't, and the teams' own feedback
+    stretch:
+      - A shared planning session across both teams
+      - A short guide the teams can use without you
+    present: A case study with the metrics and the teams' feedback.
+  resources:
+    - resource: scrum-guide
+      locator: The whole guide, especially the accountabilities
+      role: primary
+      verified: true
+    - resource: atlassian-agile
+      locator: The Kanban and agile metrics pages
+      role: alternative
+      verified: false

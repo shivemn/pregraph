@@ -3891,3 +3891,11 @@
   free: true
   medium: read
   note: Has an interactive visualisation of a Raft cluster.
+
+- id: aria-apg
+  title: ARIA Authoring Practices Guide patterns
+  author: W3C Web Accessibility Initiative
+  type: site
+  url: https://www.w3.org/WAI/ARIA/apg/patterns/
+  free: true
+  medium: read
