@@ -13,5 +13,11 @@
 - id: product
   short: Product and design
   title: Product, design and delivery
+- id: enterprise
+  short: Enterprise IT
+  title: Enterprise IT (SAP, mainframes, automation)
+- id: hardware
+  short: Chips
+  title: Chips and hardware
 - id: exams
   title: Exams

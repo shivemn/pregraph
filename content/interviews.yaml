@@ -7,7 +7,7 @@
 - id: it-services
   title: IT services fresher drives
   who: "TCS, Infosys, Wipro, Accenture, Cognizant, Capgemini and HCL hiring graduates in large batches, on campus or off it."
-  routes: [software-engineer, qa-engineer, support-engineer, salesforce-developer, servicenow-developer]
+  routes: [software-engineer, qa-engineer, support-engineer, salesforce-developer, servicenow-developer, sap-consultant, mainframe-developer, rpa-developer]
   rounds:
     - name: Online test
       what: "Aptitude (arithmetic, reasoning, English), and for most tech roles one or two coding problems. TCS's National Qualifier Test is the best known; a score lasts two years."
@@ -23,7 +23,7 @@
 - id: product-software
   title: Software at product companies and startups
   who: "Companies building their own products, from large tech firms to funded startups."
-  routes: [software-engineer, backend-engineer, frontend-engineer, full-stack-engineer, android-developer, ios-developer, embedded-engineer]
+  routes: [software-engineer, backend-engineer, frontend-engineer, full-stack-engineer, android-developer, ios-developer, embedded-engineer, game-developer, blockchain-developer]
   rounds:
     - name: Online assessment
       what: "Two or three timed problems on a coding site. Passing all the test cases matters more than clever code."
@@ -45,7 +45,7 @@
 - id: data-analysis
   title: Data analyst and business intelligence
   who: "Analyst roles at product companies, consultancies, banks and analytics firms."
-  routes: [data-analyst, bi-developer, product-analyst, business-analyst]
+  routes: [data-analyst, bi-developer, product-analyst, business-analyst, operations-research-analyst]
   rounds:
     - name: SQL test
       what: "Joins, grouping, window functions and dates, against a schema like orders or users. Often live or as a take-home."
@@ -124,10 +124,29 @@
       what: "Shift work (SOCs run around the clock), and why security."
   revise: [networking, web-security, incident-management]
 
+- id: chips
+  title: Chip design (VLSI)
+  who: "Semiconductor companies and design-services firms hiring electronics graduates into design, verification and physical design."
+  routes: [vlsi-engineer]
+  rounds:
+    - name: Written or online test
+      what: "Aptitude, then digital electronics: logic gates, flip-flops, counters, state machines and timing. Some add basic C or CMOS questions."
+      practice: [indiabix, hdlbits]
+    - name: Digital design interview
+      what: "Draw and explain circuits on a whiteboard: a sequence detector, a clock divider, a FIFO. Expect setup and hold time, metastability and clock domain crossing."
+      practice: [hdlbits]
+    - name: Verilog or verification round
+      what: "Write Verilog for a small block, or for verification roles, a SystemVerilog testbench with constraints and coverage, and explain how UVM pieces fit together."
+      practice: [eda-playground, chipverify]
+    - name: Project and HR
+      what: "Your final-year or internship project in depth: what you built, what broke and how you found it. Then the usual HR questions."
+      practice: [tih-behavioral]
+  revise: [digital-logic, verilog, design-verification, computer-architecture]
+
 - id: finance
   title: Finance and economics
   who: "Analyst roles at banks, research and rating firms, corporate finance teams and consultancies."
-  routes: [financial-analyst, risk-analyst, economist]
+  routes: [financial-analyst, risk-analyst, economist, actuarial-analyst]
   rounds:
     - name: Technical questions
       what: "How the three financial statements link, valuation methods, and recent market news. Expect 'walk me through a DCF'."

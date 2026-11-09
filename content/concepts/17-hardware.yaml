@@ -1,0 +1,78 @@
+# Hardware: chip design and verification, FPGAs and circuit boards.
+
+- id: verilog
+  title: Verilog and RTL design
+  area: hardware
+  kind: tool
+  summary: Describing digital circuits in code, from adders to state machines, and simulating them before anything is built.
+  hours: 40
+  requires: [digital-logic]
+  resources:
+    - resource: hdlbits
+      locator: "Every section, in order"
+      why: "Hundreds of small problems, checked instantly in the browser. The usual first step for VLSI freshers."
+      verified: true
+    - resource: chipverify
+      locator: "Verilog tutorial"
+      role: alternative
+      verified: true
+
+- id: design-verification
+  title: Design verification (SystemVerilog and UVM)
+  area: hardware
+  summary: Proving a chip design works before it's made. Testbenches, constrained random tests, assertions, coverage and UVM, the industry's standard framework.
+  hours: 60
+  requires: [verilog, oop-design]
+  resources:
+    - resource: chipverify
+      locator: "SystemVerilog, then UVM tutorials"
+      verified: true
+    - resource: verification-academy
+      locator: "UVM basic and advanced courses"
+      verified: true
+    - resource: eda-playground
+      locator: "Run every example yourself"
+      role: alternative
+      verified: true
+
+- id: asic-flow
+  title: From RTL to chip (ASIC flow)
+  area: hardware
+  summary: Synthesis, timing analysis (STA), floorplanning, placement and routing, and the checks before a design goes to the factory.
+  hours: 40
+  requires: [verilog]
+  recommends: [computer-architecture]
+  resources:
+    - resource: openroad-docs
+      locator: "Getting started and the flow tutorial"
+      why: "Free, open-source tools you can run the whole flow with on a laptop."
+      verified: true
+
+- id: pcb-design
+  title: PCB design
+  area: hardware
+  kind: tool
+  summary: Turning a circuit into a printed circuit board. Schematics, footprints, layout, design rules and the files a factory needs.
+  hours: 25
+  recommends: [microcontrollers]
+  resources:
+    - resource: kicad-getting-started
+      locator: "The whole tutorial"
+      verified: true
+
+- id: project-chip-design
+  title: "Project: a small design, verified"
+  area: hardware
+  kind: project
+  summary: Design something real in Verilog (a UART, a FIFO, a small CPU), write a testbench that checks it properly, and put the code and coverage results on GitHub.
+  hours: 30
+  requires: [verilog]
+  recommends: [design-verification]
+  resources:
+    - resource: eda-playground
+      locator: "Simulate and share your design"
+      verified: true
+    - resource: chipverify
+      locator: "Verilog examples: FIFO, UART and counters"
+      verified: true
+

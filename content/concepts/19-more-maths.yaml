@@ -1,0 +1,171 @@
+# More mathematics: the GATE Mathematics syllabus beyond the core courses,
+# plus operations research and actuarial work, which are built on it.
+
+- id: complex-analysis
+  title: Complex analysis
+  area: foundations
+  summary: Analytic functions, Cauchy's theorems, Taylor and Laurent series, residues, and conformal maps.
+  hours: 35
+  requires: [calculus]
+  recommends: [real-analysis]
+  resources:
+    - resource: mit-1804
+      locator: "Lecture notes, topics 1–10, with the problem sets"
+      verified: true
+
+- id: ordinary-differential-equations
+  title: Ordinary differential equations
+  area: foundations
+  summary: First- and second-order equations, linear systems, Laplace transforms, series solutions and stability.
+  hours: 40
+  requires: [calculus]
+  recommends: [linear-algebra]
+  resources:
+    - resource: mit-1803sc
+      locator: "Units I–IV"
+      verified: true
+    - resource: diffyqs
+      locator: "Chapters 0–3, 6 and 7"
+      verified: true
+
+- id: partial-differential-equations
+  title: Partial differential equations
+  area: foundations
+  summary: The heat, wave and Laplace equations, characteristics, separation of variables and transform methods.
+  hours: 30
+  requires: [ordinary-differential-equations, multivariable-calculus]
+  resources:
+    - resource: mit-18152
+      locator: "Lecture notes and problem sets"
+      verified: true
+
+- id: abstract-algebra
+  title: Abstract algebra
+  area: foundations
+  summary: Groups, subgroups and the Sylow theorems, rings and ideals, and fields and their extensions.
+  hours: 45
+  requires: [proofs]
+  resources:
+    - resource: judson-aata
+      locator: "Chapters 1–6, 9–11, 13, 16–18, 21"
+      why: "A free, complete textbook with exercises."
+      verified: true
+    - resource: mit-18701
+      locator: "Lecture notes and problem sets"
+      role: alternative
+      verified: true
+
+- id: numerical-analysis
+  title: Numerical analysis
+  area: foundations
+  summary: Solving equations and linear systems on a computer, interpolation, numerical integration, and methods for differential equations, with their errors.
+  hours: 30
+  requires: [calculus, linear-algebra]
+  recommends: [programming-basics]
+  resources:
+    - resource: mit-18330
+      locator: "Lecture notes and homework"
+      verified: true
+
+- id: topology
+  title: Topology
+  area: foundations
+  summary: Open sets, bases, product and quotient topologies, connectedness, compactness and the separation axioms.
+  hours: 30
+  requires: [real-analysis]
+  resources:
+    - resource: mit-18901
+      locator: "Lecture notes and problem sets"
+      verified: true
+
+- id: functional-analysis
+  title: Functional analysis
+  area: foundations
+  summary: Normed, Banach and Hilbert spaces, the big theorems (Hahn–Banach, open mapping, uniform boundedness) and compact operators.
+  hours: 35
+  requires: [real-analysis, linear-algebra]
+  recommends: [topology]
+  resources:
+    - resource: mit-18102
+      locator: "All lectures"
+      verified: true
+
+- id: linear-programming
+  title: Linear programming
+  area: foundations
+  summary: Writing a decision as an objective and constraints, the simplex method, duality, and transportation and assignment problems.
+  hours: 25
+  requires: [linear-algebra]
+  resources:
+    - resource: mit-15053
+      locator: "Lectures 1–12"
+      verified: true
+    - resource: or-tools
+      locator: "Linear optimization, then assignment"
+      role: alternative
+      verified: true
+
+- id: operations-research
+  title: Operations research in practice
+  area: data
+  summary: Integer programming, scheduling, routing and inventory problems, solved with real solvers and explained to the people who'll use the answer.
+  hours: 35
+  requires: [linear-programming, programming-basics]
+  recommends: [statistics]
+  resources:
+    - resource: mit-15053
+      locator: "Integer programming and network lectures"
+      verified: true
+    - resource: or-tools
+      locator: "Routing, scheduling and integer optimization guides"
+      verified: true
+    - resource: mit-15071
+      locator: "Unit 9: Integer optimization"
+      role: deep-dive
+      verified: true
+
+- id: project-optimization
+  title: "Project: optimise a real decision"
+  area: data
+  kind: project
+  summary: Take a real problem, like delivery routes, shift rosters or a diet plan, model it, solve it with OR-Tools or PuLP, and write up what the answer saves.
+  hours: 20
+  requires: [operations-research]
+  resources:
+    - resource: or-tools
+      locator: "Start from the closest example"
+      verified: true
+    - resource: mit-15053
+      locator: "Lecture examples for modelling ideas"
+      verified: true
+
+- id: actuarial-maths
+  title: Actuarial mathematics
+  area: finance
+  summary: Interest and annuities, survival models, life insurance and annuity values, premiums and reserves. The core of the actuarial exams.
+  hours: 60
+  requires: [probability, calculus]
+  recommends: [corporate-finance]
+  resources:
+    - resource: life-contingencies-open
+      locator: "Chapters 1–4"
+      verified: true
+    - resource: soa-exam-fm
+      locator: "Sample questions and solutions"
+      verified: true
+    - resource: soa-exam-p
+      locator: "Sample questions and solutions"
+      role: alternative
+      verified: true
+
+- id: loss-models
+  title: Loss models and insurance data
+  area: finance
+  summary: Modelling how often claims happen and how big they are, deductibles and limits, credibility, and pricing from claims data.
+  hours: 40
+  requires: [statistics, probability]
+  recommends: [r-lang]
+  resources:
+    - resource: loss-data-analytics
+      locator: "Chapters 1–7"
+      verified: true

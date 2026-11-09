@@ -27,3 +27,11 @@
   title: Economics and finance
 - id: product
   title: Product and design
+- id: enterprise
+  title: Enterprise systems
+- id: hardware
+  title: Chips and hardware
+- id: games
+  title: Games and graphics
+- id: blockchain
+  title: Blockchain

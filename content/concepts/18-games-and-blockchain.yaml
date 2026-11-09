@@ -1,0 +1,118 @@
+# Games and blockchain: two kinds of software with their own tools.
+
+- id: game-engines
+  title: Game engines (Unity and Godot)
+  area: games
+  kind: tool
+  summary: Scenes, game objects, physics, input and the game loop, in the engines most studios and indie teams use.
+  hours: 50
+  requires: [programming-basics]
+  recommends: [csharp]
+  resources:
+    - resource: unity-junior-programmer
+      locator: "The whole pathway"
+      why: "Unity is what most Indian game studio postings ask for."
+      verified: true
+    - resource: godot-first-2d-game
+      locator: "The whole tutorial"
+      role: alternative
+      verified: true
+    - resource: cs50-games
+      locator: "Lectures 0–5"
+      role: deep-dive
+      verified: true
+    - resource: godot-step-by-step
+      locator: "The whole section"
+      verified: true
+
+- id: game-programming
+  title: Game programming patterns
+  area: games
+  summary: How game code is organised so it stays fast and changeable. The game loop, components, state machines, events and object pools.
+  hours: 20
+  requires: [oop-design]
+  resources:
+    - resource: game-programming-patterns
+      locator: "The whole book"
+      verified: true
+
+- id: computer-graphics
+  title: Computer graphics
+  area: games
+  summary: How a 3D scene becomes pixels. Meshes, transforms, cameras, lighting, textures and shaders.
+  hours: 40
+  requires: [linear-algebra, cpp]
+  resources:
+    - resource: learnopengl
+      locator: "Getting started, Lighting and Model loading"
+      verified: true
+
+- id: project-game
+  title: "Project: a small finished game"
+  area: games
+  kind: project
+  summary: A short game someone can actually play, with a start screen, a goal and an ending. Publish it on itch.io and link the code.
+  hours: 30
+  requires: [game-engines]
+  resources:
+    - resource: cs50-games
+      locator: "Use any game from the course as a starting point"
+      verified: true
+    - resource: game-programming-patterns
+      locator: "Game Loop, Update Method and State chapters"
+      verified: true
+
+- id: blockchain-basics
+  title: How blockchains work
+  area: blockchain
+  summary: Hashes, signatures, blocks, consensus, wallets and transactions, using Bitcoin and Ethereum as the examples.
+  hours: 20
+  recommends: [cryptography]
+  resources:
+    - resource: mastering-bitcoin
+      locator: "Chapters 1–4 and 10–12"
+      verified: true
+    - resource: ethereum-docs
+      locator: "Foundational topics"
+      verified: true
+
+- id: solidity
+  title: Smart contracts in Solidity
+  area: blockchain
+  kind: tool
+  summary: Writing, testing and deploying programs that run on Ethereum and similar chains, with tools like Foundry.
+  hours: 40
+  requires: [blockchain-basics, programming-basics]
+  resources:
+    - resource: cyfrin-updraft
+      locator: "Solidity Smart Contract Development, then Foundry Fundamentals"
+      verified: true
+    - resource: cryptozombies
+      locator: "Lessons 1–6"
+      role: alternative
+      verified: true
+    - resource: mastering-ethereum
+      locator: "Chapters on smart contracts and Solidity"
+      role: deep-dive
+      verified: true
+    - resource: solidity-docs
+      locator: "Introduction to smart contracts, then Solidity by example"
+      verified: true
+
+- id: smart-contract-security
+  title: Smart contract security
+  area: blockchain
+  summary: The ways contracts get drained, such as reentrancy, access control and oracle manipulation, and how auditors find them.
+  hours: 30
+  requires: [solidity]
+  resources:
+    - resource: ethernaut
+      locator: "Every level, in order"
+      verified: true
+    - resource: cyfrin-updraft
+      locator: "Smart Contract Security course"
+      verified: true
+    - resource: solidity-docs
+      locator: "Security considerations"
+      verified: true
+

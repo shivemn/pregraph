@@ -1,5 +1,14 @@
 # Changelog
 
+## Calendars, closest jobs, interviews, certifications and 248 jobs
+
+- **Put your route in your calendar.** Pick the days and time you study and a start date; Terminus lays the remaining stops out as dated sessions at your weekly hours and downloads a calendar file for Google Calendar, Outlook or Apple Calendar. Each session names its stop and links to it.
+- **Carry your progress to another device** with a link: ticks, skips, background and study time, no account. Opening it asks before adding anything.
+- **Closest jobs from where you are,** on every route and in a "Welcome back" box on the home page: the jobs with the least left to learn, given what you've ticked and your background.
+- **Interviews on the Practice page:** how interviews usually go for eleven kinds of job, round by round, with free places to practise each round and the stops worth revising. Questions people were actually asked link out to Glassdoor and AmbitionBox for every job, so they stay current on their own. Every role page says how many rounds to expect.
+- **A Certifications page:** free certificates, and paid ones Indian recruiters ask for by name, with each issuer's own price as of November 2026 and the jobs each helps. ISC2's free entry certificate is listed as no longer free. Role pages list the certificates for that job.
+- **Eight new routes and a new exam:** SAP consultant, mainframe developer, RPA developer, VLSI design engineer, game developer, blockchain developer, operations research analyst, actuarial analyst, and GATE mathematics. Two new lines on the map, Enterprise IT and Chips. 56 new job titles on these routes (SAP modules, verification and physical design, Unity and Unreal, actuarial trainee and more), for 248 jobs and 6 exams. 19 new stops, 43 new free resources, all opened before they went in; every new salary and interview-questions page was checked on AmbitionBox.
+
 ## 184 job titles
 
 - **Job titles on top of routes.** A title like Java developer, Power BI developer or SOC analyst (L1) is a route plus the skills that title adds, and drops what it doesn't need (a Python developer is the backend route with Python and Django instead of Java). 143 titles are new, for 184 jobs and 5 exams in all. Each has its own page, planner, job searches and salary link.

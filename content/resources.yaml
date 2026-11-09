@@ -2905,3 +2905,390 @@
   free: true
   medium: read
   note: "The accounting, valuation and markets questions finance interviews return to."
+
+# Enterprise systems: SAP, mainframes and RPA
+- id: sap-erp-processes
+  title: Executing Basic ERP Processes with SAP S/4HANA
+  author: SAP Learning
+  type: course
+  url: https://learning.sap.com/learning-journeys/executing-basic-erp-processes-with-sap-s-4hana
+  free: true
+  medium: watch
+  note: A beginner learning journey of about four hours, free with an SAP account.
+
+- id: sap-abap-journey
+  title: Acquiring Core ABAP Skills
+  author: SAP Learning
+  type: course
+  url: https://learning.sap.com/learning-journeys/acquiring-core-abap-skills
+  free: true
+  medium: watch
+  short: ABAP
+  note: SAP's own ABAP course, free with an SAP account.
+
+- id: ibm-z-xplore
+  title: IBM Z Xplore
+  author: IBM
+  type: site
+  url: https://www.ibm.com/z/resources/zxplore
+  free: true
+  medium: practice
+  short: Z Xplore
+  note: Free hands-on challenges on a real mainframe, from data sets and JCL to COBOL, with badges. Needs a free account.
+
+- id: omp-cobol-course
+  title: COBOL Programming Course
+  author: Open Mainframe Project
+  type: course
+  url: https://github.com/openmainframeproject/cobol-programming-course
+  free: true
+  medium: read
+
+- id: uipath-academy
+  title: Automation Developer Associate training
+  author: UiPath Academy
+  type: course
+  url: https://academy.uipath.com/learning-plans/automation-developer-associate-training
+  free: true
+  medium: watch
+  short: UiPath Academy
+  note: Free with a UiPath account.
+
+# Blockchain
+- id: ethereum-docs
+  title: Ethereum development documentation
+  author: ethereum.org
+  type: site
+  url: https://ethereum.org/en/developers/docs/
+  free: true
+  medium: read
+
+- id: mastering-bitcoin
+  title: Mastering Bitcoin
+  author: Andreas M. Antonopoulos, David A. Harding
+  type: book
+  url: https://github.com/bitcoinbook/bitcoinbook
+  free: true
+  medium: read
+  note: The full text is free on GitHub.
+
+- id: mastering-ethereum
+  title: Mastering Ethereum
+  author: Andreas M. Antonopoulos, Gavin Wood
+  type: book
+  url: https://github.com/ethereumbook/ethereumbook
+  free: true
+  medium: read
+  note: The full text is free on GitHub.
+
+- id: cyfrin-updraft
+  title: Cyfrin Updraft
+  author: Cyfrin
+  type: course
+  url: https://updraft.cyfrin.io/courses
+  free: true
+  medium: watch
+  short: Updraft
+  note: Free video courses from Solidity basics to smart contract auditing.
+
+- id: cryptozombies
+  title: CryptoZombies
+  author: Loom Network
+  type: site
+  url: https://cryptozombies.io/
+  free: true
+  medium: practice
+  note: Learn Solidity by building a small game, one lesson at a time.
+
+- id: ethernaut
+  title: Ethernaut
+  author: OpenZeppelin
+  type: site
+  url: https://ethernaut.openzeppelin.com/
+  free: true
+  medium: practice
+  note: Levels where you break vulnerable smart contracts. The standard way to start on contract security.
+
+# Games and graphics
+- id: game-programming-patterns
+  title: Game Programming Patterns
+  author: Robert Nystrom
+  type: book
+  url: https://gameprogrammingpatterns.com/
+  free: true
+  medium: read
+  note: The whole book is free to read online.
+
+- id: unity-junior-programmer
+  title: Junior Programmer pathway
+  author: Unity Learn
+  type: course
+  url: https://learn.unity.com/pathway/junior-programmer
+  free: true
+  medium: watch
+  note: Unity's own free course, from your first script to a small finished game in C#.
+
+- id: godot-first-2d-game
+  title: "Godot docs: Your first 2D game"
+  author: Godot Engine
+  type: site
+  url: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html
+  free: true
+  medium: practice
+
+- id: cs50-games
+  title: CS50's Introduction to Game Development
+  author: Colton Ogden, Harvard
+  type: course
+  url: https://cs50.harvard.edu/games/
+  free: true
+  medium: watch
+  short: CS50G
+
+- id: learnopengl
+  title: LearnOpenGL
+  author: Joey de Vries
+  type: book
+  url: https://learnopengl.com/
+  free: true
+  medium: read
+
+# Chips and hardware
+- id: hdlbits
+  title: HDLBits
+  author: Henry Wong
+  type: site
+  url: https://hdlbits.01xz.net/
+  free: true
+  medium: practice
+  note: Short Verilog problems checked by a simulator in your browser, from gates to state machines.
+
+- id: chipverify
+  title: ChipVerify
+  author: ChipVerify
+  type: site
+  url: https://www.chipverify.com/
+  free: true
+  medium: read
+  note: Free tutorials on Verilog, SystemVerilog and UVM with runnable examples.
+
+- id: eda-playground
+  title: EDA Playground
+  author: Doulos
+  type: site
+  url: https://www.edaplayground.com/
+  free: true
+  medium: practice
+  note: Run Verilog, SystemVerilog and VHDL simulations in a browser, including commercial simulators. Free account.
+
+- id: verification-academy
+  title: Verification Academy
+  author: Siemens EDA
+  type: course
+  url: https://verificationacademy.com/
+  free: true
+  medium: watch
+  note: Video courses on SystemVerilog, UVM and formal verification. Free account.
+
+- id: openroad-docs
+  title: OpenROAD documentation
+  author: The OpenROAD Project
+  type: site
+  url: https://openroad.readthedocs.io/
+  free: true
+  medium: read
+  note: The free, open-source flow from RTL to a chip layout, with real tutorials.
+
+- id: kicad-getting-started
+  title: Getting Started in KiCad
+  author: KiCad
+  type: book
+  url: https://docs.kicad.org/10.0/en/getting_started_in_kicad/getting_started_in_kicad.pdf
+  free: true
+  medium: read
+  note: "The official tutorial: draw a schematic, then lay out the board. KiCad itself is free."
+
+# Operations research and actuarial work
+- id: mit-15053
+  title: Optimization Methods in Management Science (MIT 15.053)
+  author: James Orlin
+  type: course
+  url: https://ocw.mit.edu/courses/15-053-optimization-methods-in-management-science-spring-2013/
+  free: true
+  medium: read
+  short: "15.053"
+
+- id: mit-15071
+  title: The Analytics Edge (MIT 15.071)
+  author: Dimitris Bertsimas and others
+  type: course
+  url: https://ocw.mit.edu/courses/15-071-the-analytics-edge-spring-2017/
+  free: true
+  medium: watch
+  short: "15.071"
+
+- id: or-tools
+  title: OR-Tools guides
+  author: Google
+  type: site
+  url: https://developers.google.com/optimization
+  free: true
+  medium: practice
+  note: Working examples for linear programming, scheduling and vehicle routing, in Python, Java, C++ and C#.
+
+- id: loss-data-analytics
+  title: Loss Data Analytics
+  author: Open Actuarial Textbooks Project
+  type: book
+  url: https://openacttexts.github.io/LDAVer2/index.html
+  free: true
+  medium: read
+
+- id: life-contingencies-open
+  title: "Life Contingencies: The Mathematics, Statistics, and Economics of Life Insurance"
+  author: Open Actuarial Textbooks Project
+  type: book
+  url: https://openacttextdev.github.io/LifeCon
+  free: true
+  medium: read
+  note: A free open text, still being developed.
+
+- id: soa-exam-fm
+  title: SOA Exam FM sample questions
+  author: Society of Actuaries
+  type: site
+  url: https://www.soa.org/education/exam-req/edu-exam-fm-detail/
+  free: true
+  medium: practice
+  note: The official free sample questions with solutions, linked from the exam page.
+
+- id: soa-exam-p
+  title: SOA Exam P sample questions
+  author: Society of Actuaries
+  type: site
+  url: https://www.soa.org/education/exam-req/edu-exam-p-detail/
+  free: true
+  medium: practice
+  note: The official free probability sample questions with solutions, linked from the exam page.
+
+# More mathematics
+- id: mit-1804
+  title: Complex Variables with Applications (MIT 18.04)
+  author: Jeremy Orloff
+  type: course
+  url: https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/
+  free: true
+  medium: read
+  short: "18.04"
+
+- id: mit-1803sc
+  title: Differential Equations (MIT 18.03SC)
+  author: Arthur Mattuck, Haynes Miller and others
+  type: course
+  url: https://ocw.mit.edu/courses/18-03sc-differential-equations-fall-2011/
+  free: true
+  medium: watch
+  short: "18.03"
+
+- id: mit-18152
+  title: Introduction to Partial Differential Equations (MIT 18.152)
+  author: MIT
+  type: course
+  url: https://ocw.mit.edu/courses/18-152-introduction-to-partial-differential-equations-fall-2011/
+  free: true
+  medium: read
+  short: "18.152"
+
+- id: mit-18701
+  title: Algebra I (MIT 18.701)
+  author: Michael Artin
+  type: course
+  url: https://ocw.mit.edu/courses/18-701-algebra-i-fall-2010/
+  free: true
+  medium: read
+  short: "18.701"
+
+- id: judson-aata
+  title: "Abstract Algebra: Theory and Applications"
+  author: Thomas W. Judson
+  type: book
+  url: https://judsonbooks.org/abstract-algebra-theory-and-applications/
+  free: true
+  medium: read
+  short: AATA
+
+- id: mit-18330
+  title: Introduction to Numerical Analysis (MIT 18.330)
+  author: Laurent Demanet
+  type: course
+  url: https://ocw.mit.edu/courses/18-330-introduction-to-numerical-analysis-spring-2012/
+  free: true
+  medium: read
+  short: "18.330"
+
+- id: mit-18901
+  title: Introduction to Topology (MIT 18.901)
+  author: MIT
+  type: course
+  url: https://ocw.mit.edu/courses/18-901-introduction-to-topology-fall-2004/
+  free: true
+  medium: read
+  short: "18.901"
+
+- id: mit-18102
+  title: Introduction to Functional Analysis (MIT 18.102)
+  author: Casey Rodriguez
+  type: course
+  url: https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/
+  free: true
+  medium: watch
+  short: "18.102"
+
+- id: sap-s4-feature-scope
+  title: SAP S/4HANA 2025 Feature Scope Description
+  author: SAP
+  type: book
+  url: https://help.sap.com/doc/6c3b63ec437f421cbfd92d10131cd685/2025/en-US/OPS_OP2025.pdf
+  free: true
+  medium: read
+  note: SAP's own description of what each module does. Long; read the parts for your module.
+
+- id: abap-keyword-docs
+  title: ABAP Keyword Documentation
+  author: SAP
+  type: site
+  url: https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/index.htm
+  free: true
+  medium: read
+
+- id: uipath-studio-docs
+  title: UiPath Studio user guide
+  author: UiPath
+  type: site
+  url: https://docs.uipath.com/studio/standalone/latest/user-guide/introduction
+  free: true
+  medium: read
+
+- id: solidity-docs
+  title: Solidity documentation
+  author: Solidity team
+  type: site
+  url: https://docs.soliditylang.org/en/latest/
+  free: true
+  medium: read
+
+- id: godot-step-by-step
+  title: "Godot docs: Step by step"
+  author: Godot Engine
+  type: site
+  url: https://docs.godotengine.org/en/stable/getting_started/step_by_step/index.html
+  free: true
+  medium: read
+
+- id: diffyqs
+  title: "Notes on Diffy Qs: Differential Equations for Engineers"
+  author: Jiří Lebl
+  type: book
+  url: https://www.jirka.org/diffyqs/
+  free: true
+  medium: read

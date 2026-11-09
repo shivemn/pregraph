@@ -775,3 +775,308 @@
   extends: embedded-engineer
   search: "embedded c"
   summary: "Writes C for microcontrollers: drivers, peripherals and bare-metal applications."
+
+# Enterprise IT: SAP modules. Most hire through IT services firms; the module
+# you're placed in decides most of what you learn on the job.
+- id: sap-fico-consultant
+  title: "SAP FICO consultant"
+  extends: sap-consultant
+  adds: [corporate-finance]
+  summary: "Sets up SAP's finance and controlling modules: the ledger, payables, receivables, assets and cost centres. Commerce and accounting graduates do well here."
+- id: sap-mm-consultant
+  title: "SAP MM consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up materials management: purchasing, vendors, stock and invoice checking, the procure-to-pay side of SAP."
+- id: sap-sd-consultant
+  title: "SAP SD consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up sales and distribution: quotations, orders, pricing, delivery and billing, the order-to-cash side of SAP."
+- id: sap-pp-consultant
+  title: "SAP PP consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up production planning: bills of materials, routings, planning runs and production orders, mostly for manufacturers."
+- id: sap-ewm-consultant
+  title: "SAP EWM consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up extended warehouse management: bins, picking, packing and shipping inside large warehouses."
+- id: sap-pm-consultant
+  title: "SAP PM consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up plant maintenance: equipment records, maintenance plans and work orders for factories and utilities."
+- id: sap-qm-consultant
+  title: "SAP QM consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up quality management: inspection plans, quality checks on goods coming in and going out, and certificates."
+- id: sap-ps-consultant
+  title: "SAP PS consultant"
+  extends: sap-consultant
+  summary: "Sets up project systems: budgets, costs and milestones for large projects like construction and engineering."
+- id: sap-successfactors-consultant
+  title: "SAP SuccessFactors consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up SAP's cloud HR software: hiring, employee records, performance reviews and learning."
+- id: sap-hcm-consultant
+  title: "SAP HCM consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Supports SAP's older on-premise HR and payroll system, still run by many large Indian employers."
+- id: sap-ariba-consultant
+  title: "SAP Ariba consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up Ariba, SAP's cloud procurement network, where companies source, contract and pay suppliers."
+- id: sap-crm-consultant
+  title: "SAP CRM consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  summary: "Sets up SAP's customer relationship software for sales, service and marketing teams."
+- id: sap-bw-consultant
+  title: "SAP BW consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  adds: [data-warehousing, bi-tools]
+  summary: "Builds the reporting side of SAP: extracting data from SAP systems into the warehouse and the reports built on it."
+- id: sap-hana-consultant
+  title: "SAP HANA consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  adds: [database-internals, data-warehousing]
+  summary: "Works on HANA, the in-memory database under S/4HANA: data models, views and performance."
+- id: sap-abap-developer
+  title: "SAP ABAP developer"
+  extends: sap-consultant
+  drops: [accounting]
+  adds: [sap-abap, programming-basics, oop-design]
+  summary: "Writes the custom reports, forms, interfaces and extensions SAP doesn't do out of the box. The most common technical SAP opening."
+- id: sap-fiori-consultant
+  title: "SAP Fiori consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  adds: [html-css, javascript, rest-apis]
+  summary: "Builds and configures Fiori, SAP's web interface, with SAPUI5 apps that talk to the back end over OData services."
+- id: sap-btp-consultant
+  title: "SAP BTP consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  adds: [cloud-basics, rest-apis, sap-abap]
+  summary: "Builds extensions and integrations on SAP's Business Technology Platform, its cloud, rather than changing the core system."
+- id: sap-basis-consultant
+  title: "SAP Basis consultant"
+  extends: sap-consultant
+  drops: [accounting, spreadsheets]
+  adds: [linux-admin, database-internals, networking]
+  summary: "Installs, upgrades and keeps SAP systems running: users, transports, performance and backups. The SAP version of a system administrator."
+- id: sap-security-consultant
+  title: "SAP security consultant"
+  extends: sap-consultant
+  drops: [accounting]
+  adds: [security-fundamentals]
+  summary: "Designs roles and authorisations so each person in SAP can do their job and nothing more, and supports audits."
+
+# Enterprise IT: mainframes and automation
+- id: cobol-developer
+  title: "COBOL developer"
+  extends: mainframe-developer
+  adds: [testing-debugging]
+  summary: "Changes and fixes COBOL programs in banking and insurance systems, usually with JCL, DB2 and CICS around them."
+- id: mainframe-tester
+  title: "Mainframe tester"
+  extends: mainframe-developer
+  adds: [testing-debugging]
+  summary: "Tests changes to mainframe batch jobs and screens before they go live, a common first job in mainframe teams."
+- id: mainframe-administrator
+  title: "Mainframe administrator"
+  extends: mainframe-developer
+  drops: [cobol]
+  adds: [shell-tools]
+  summary: "Keeps mainframe systems running: jobs, storage, users and security, alongside the system programmers."
+- id: mainframe-system-programmer
+  title: "Mainframe system programmer"
+  extends: mainframe-developer
+  drops: [cobol]
+  adds: [os-processes-memory, shell-tools]
+  summary: "Installs and tunes z/OS and the software on it. The mainframe equivalent of a Linux systems engineer, and hard to hire for."
+- id: uipath-developer
+  title: "UiPath developer"
+  extends: rpa-developer
+  adds: [csharp]
+  summary: "Builds and maintains UiPath robots and the queues and orchestrator settings around them."
+- id: automation-anywhere-developer
+  title: "Automation Anywhere developer"
+  extends: rpa-developer
+  summary: "Builds software robots in Automation Anywhere. The ideas are the same as UiPath, so learning either carries over."
+- id: rpa-consultant
+  title: "RPA consultant"
+  extends: rpa-developer
+  adds: [business-processes]
+  summary: "Finds which processes are worth automating, works out how, and sees the robots into use with the business teams."
+- id: rpa-business-analyst
+  title: "RPA business analyst"
+  extends: rpa-developer
+  adds: [business-processes]
+  drops: [sql]
+  summary: "Writes down a process step by step, with its exceptions, so developers can automate it, and checks the result."
+
+# Hardware
+- id: verification-engineer
+  title: "Design verification engineer"
+  extends: vlsi-engineer
+  summary: "Writes the SystemVerilog and UVM testbenches that prove a chip design works. The biggest share of VLSI fresher hiring in India."
+- id: rtl-design-engineer
+  title: "RTL design engineer"
+  extends: vlsi-engineer
+  summary: "Writes the Verilog for a chip's blocks to a specification and hands it to verification and physical design."
+- id: asic-design-engineer
+  title: "ASIC design engineer"
+  extends: vlsi-engineer
+  adds: [asic-flow]
+  summary: "Designs custom chips from RTL through synthesis and timing, working with the verification and layout teams."
+- id: physical-design-engineer
+  title: "Physical design engineer"
+  extends: vlsi-engineer
+  drops: [design-verification]
+  adds: [asic-flow]
+  summary: "Turns a synthesised design into a chip layout: floorplan, placement, clock tree and routing, until timing and power are met."
+- id: sta-engineer
+  title: "STA engineer"
+  extends: vlsi-engineer
+  drops: [design-verification]
+  adds: [asic-flow]
+  summary: "Checks with static timing analysis that every path in a chip meets its clock, and works out fixes with the layout team."
+- id: dft-engineer
+  title: "DFT engineer"
+  extends: vlsi-engineer
+  adds: [asic-flow]
+  summary: "Adds test structures like scan chains to a chip so the factory can check each one, and generates the test patterns."
+- id: fpga-engineer
+  title: "FPGA engineer"
+  extends: vlsi-engineer
+  adds: [microcontrollers]
+  summary: "Designs logic for FPGAs, chips you can reprogram, used in telecom, defence, test equipment and prototypes."
+- id: pcb-design-engineer
+  title: "PCB design engineer"
+  extends: embedded-engineer
+  adds: [pcb-design]
+  drops: [project-embedded]
+  summary: "Draws schematics and lays out circuit boards in tools like KiCad, Altium or OrCAD, and gets them made."
+- id: hardware-engineer
+  title: "Hardware engineer"
+  extends: embedded-engineer
+  adds: [pcb-design]
+  summary: "Designs and tests the electronics in a product, from choosing parts to bringing up the first boards."
+
+# Games
+- id: unity-developer
+  title: "Unity developer"
+  extends: game-developer
+  summary: "Builds games and interactive apps in Unity with C#. The most common game opening in India, mostly mobile."
+- id: unreal-developer
+  title: "Unreal developer"
+  extends: game-developer
+  drops: [csharp]
+  adds: [cpp]
+  summary: "Builds games in Unreal Engine with C++ and Blueprints, more common at studios making PC and console games."
+- id: game-programmer
+  title: "Game programmer"
+  extends: game-developer
+  adds: [linear-structures, hash-tables]
+  summary: "Writes the code for a game's mechanics, AI, UI and tools, with the designers deciding how it should feel."
+- id: mobile-game-developer
+  title: "Mobile game developer"
+  extends: game-developer
+  summary: "Makes games for phones, where performance, small downloads and ads or in-app purchases shape the work."
+- id: ar-vr-developer
+  title: "AR/VR developer"
+  extends: game-developer
+  adds: [computer-graphics]
+  summary: "Builds augmented and virtual reality apps, mostly in Unity, for training, retail and games."
+- id: graphics-programmer
+  title: "Graphics programmer"
+  extends: game-developer
+  drops: [csharp]
+  adds: [cpp, computer-graphics]
+  summary: "Writes rendering code and shaders that turn 3D scenes into pixels fast enough for a game."
+- id: game-tester
+  title: "Game tester"
+  extends: qa-engineer
+  adds: [game-engines]
+  summary: "Plays builds of games to find bugs, writes clear reports, and checks the fixes. A common way into a games studio."
+
+# Blockchain
+- id: solidity-developer
+  title: "Solidity developer"
+  extends: blockchain-developer
+  adds: [smart-contract-security]
+  summary: "Writes and tests smart contracts in Solidity, with security in mind from the first line."
+- id: smart-contract-auditor
+  title: "Smart contract auditor"
+  extends: blockchain-developer
+  drops: [javascript]
+  adds: [smart-contract-security]
+  summary: "Reads smart contracts looking for ways to steal or lock funds, and writes up what to fix. Contest wins count as experience."
+- id: web3-developer
+  title: "Web3 developer"
+  extends: blockchain-developer
+  adds: [react, typescript]
+  summary: "Builds the websites and apps that connect to wallets and smart contracts."
+
+# Operations research
+- id: operations-research-scientist
+  title: "Operations research scientist"
+  extends: operations-research-analyst
+  adds: [machine-learning]
+  summary: "Builds the optimisation models behind products, like delivery routing or pricing, at large tech and logistics firms. Often asks for a master's."
+- id: optimization-engineer
+  title: "Optimization engineer"
+  extends: operations-research-analyst
+  adds: [software-engineering, testing-debugging]
+  summary: "Turns optimisation models into reliable production software that runs every day."
+- id: supply-chain-analyst
+  title: "Supply chain analyst"
+  extends: operations-research-analyst
+  adds: [spreadsheets, bi-tools]
+  summary: "Tracks inventory, suppliers and deliveries, and finds where the chain wastes time or money."
+- id: demand-planner
+  title: "Demand planner"
+  extends: operations-research-analyst
+  adds: [time-series, spreadsheets]
+  summary: "Forecasts how much of each product will sell so the company buys and makes the right amount."
+- id: logistics-analyst
+  title: "Logistics analyst"
+  extends: operations-research-analyst
+  adds: [spreadsheets]
+  summary: "Plans and checks how goods move: routes, loads, warehouses and costs."
+- id: pricing-analyst
+  title: "Pricing analyst"
+  extends: operations-research-analyst
+  adds: [experiments, spreadsheets]
+  summary: "Sets and tests prices and discounts, and works out what each change did to sales and margin."
+
+# Actuarial
+- id: actuarial-trainee
+  title: "Actuarial trainee"
+  extends: actuarial-analyst
+  summary: "The usual first actuarial job: supporting pricing or valuation work while you study for exams."
+- id: actuarial-associate
+  title: "Actuarial associate"
+  extends: actuarial-analyst
+  adds: [loss-models]
+  summary: "Runs pricing, reserving or valuation models under a qualified actuary, usually with several exams already passed."
+- id: actuarial-consultant
+  title: "Actuarial consultant"
+  extends: actuarial-analyst
+  adds: [loss-models, r-lang]
+  summary: "Does actuarial work for clients, such as pension valuations or reviews of an insurer's reserves, at consulting firms."
+- id: insurance-analyst
+  title: "Insurance analyst"
+  extends: actuarial-analyst
+  drops: [actuarial-maths]
+  adds: [sql, bi-tools]
+  summary: "Analyses policies, claims and sales data at an insurer, without the actuarial exams."

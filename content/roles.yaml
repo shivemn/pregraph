@@ -506,6 +506,86 @@
     firstYear: [rtos, os-processes-memory, concurrency, testing-debugging]
     extra: [networking]
 
+- id: sap-consultant
+  title: SAP consultant
+  family: enterprise
+  summary: Sets up and supports SAP, the software that runs finance, buying, sales and production at large companies. Indian IT services firms hire freshers into SAP practices every year.
+  tiers:
+    hire: [business-processes, sap-basics, accounting, spreadsheets, sql]
+    firstYear: [sap-abap, data-warehousing]
+    extra: [programming-basics, agile-scrum]
+  search: SAP consultant fresher
+
+- id: mainframe-developer
+  title: Mainframe developer
+  family: enterprise
+  summary: Maintains the COBOL programs and batch jobs that banks, insurers and airlines still run on IBM mainframes. Few people learn it, so freshers are trained and kept.
+  tiers:
+    hire: [mainframe-zos, cobol, sql, programming-basics]
+    firstYear: [testing-debugging, git]
+    extra: [java, shell-tools]
+  search: mainframe developer
+
+- id: rpa-developer
+  title: RPA developer
+  family: enterprise
+  summary: Builds software robots that do repetitive office work, like copying data between systems or reading invoices. UiPath is the tool most postings name.
+  tiers:
+    hire: [rpa-uipath, programming-basics, spreadsheets, sql, project-automation]
+    firstYear: [business-processes, testing-debugging, rest-apis]
+    extra: [csharp, llm-apis]
+  search: RPA developer
+
+- id: vlsi-engineer
+  title: VLSI design engineer
+  family: hardware
+  summary: Designs the digital logic inside chips, written in Verilog and checked in simulation. Hires mostly electronics graduates, at chip companies and design-services firms.
+  tiers:
+    hire: [digital-logic, computer-architecture, verilog, design-verification, project-chip-design, shell-tools]
+    firstYear: [asic-flow, git]
+    extra: [programming-basics, c-and-memory]
+  search: VLSI design engineer fresher
+
+- id: game-developer
+  title: Game developer
+  family: software
+  summary: Programs the gameplay, tools and systems of video games, mostly in Unity with C# or Unreal with C++. India's studios make many mobile and casual games.
+  tiers:
+    hire: [programming-basics, csharp, oop-design, game-engines, game-programming, linear-algebra, git, project-game]
+    firstYear: [linear-structures, hash-tables, testing-debugging]
+    extra: [cpp, computer-graphics, networking]
+  search: game developer
+
+- id: blockchain-developer
+  title: Blockchain developer
+  family: software
+  summary: Writes smart contracts and the apps around them, mostly on Ethereum and chains like it. Most openings are at startups and many are remote.
+  tiers:
+    hire: [programming-basics, javascript, blockchain-basics, solidity, git, testing-debugging]
+    firstYear: [smart-contract-security, react, rest-apis]
+    extra: [cryptography, rust, go]
+  search: blockchain developer
+
+- id: operations-research-analyst
+  title: Operations research analyst
+  family: data
+  summary: Uses optimisation and simulation to answer business questions like where to put warehouses, how to route trucks or how to staff shifts. Common at logistics, airline, retail and consulting firms.
+  tiers:
+    hire: [linear-algebra, probability, statistics, linear-programming, operations-research, programming-basics, sql, project-optimization]
+    firstYear: [pandas, data-visualization, spreadsheets]
+    extra: [time-series, machine-learning]
+  search: operations research analyst
+
+- id: actuarial-analyst
+  title: Actuarial analyst
+  family: finance
+  summary: Prices insurance and works out how much money an insurer must hold for future claims. You pass actuarial exams while working; insurers hire maths and statistics graduates who have cleared a few.
+  tiers:
+    hire: [probability, statistics, calculus, actuarial-maths, spreadsheets, financial-markets]
+    firstYear: [loss-models, r-lang, sql]
+    extra: [linear-models, time-series, programming-basics]
+  search: actuarial analyst
+
 - id: gate-da
   title: GATE data science and AI
   family: exams
@@ -537,3 +617,11 @@
   summary: Paper 2 of UGC NET in Computer Science and Applications, for assistant professor posts and JRF. Mapped from the ten-unit syllabus NTA publishes; check the current copy on ugcnet.nta.ac.in.
   tiers:
     hire: [discrete-math, optimization, digital-logic, computer-architecture, c-and-memory, cpp, oop-design, html-css, sql, database-internals, data-warehousing, os-processes-memory, concurrency, file-systems, distributed-systems, software-engineering, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, greedy-algorithms, complexity-analysis, automata, computability, compilers, networking, classical-ai, neural-networks]
+
+- id: gate-ma
+  title: GATE mathematics
+  family: exams
+  kind: exam
+  summary: The MA paper of GATE, for M.Sc., M.Tech and Ph.D. admissions in mathematics and some PSU and research jobs. Mapped from the official GATE 2027 syllabus (IIT Madras).
+  tiers:
+    hire: [calculus, multivariable-calculus, linear-algebra, real-analysis, complex-analysis, ordinary-differential-equations, abstract-algebra, functional-analysis, numerical-analysis, partial-differential-equations, topology, linear-programming]

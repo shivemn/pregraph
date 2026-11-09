@@ -1,0 +1,109 @@
+# Enterprise systems: SAP, IBM mainframes and robotic process automation.
+# Big companies and Indian IT services hire freshers into all three.
+
+- id: business-processes
+  title: Business processes (order to cash, procure to pay)
+  area: enterprise
+  summary: How a company buys, makes and sells, step by step, and the documents each step creates. Every ERP consultant's job is mapping these onto software.
+  hours: 12
+  recommends: [accounting]
+  resources:
+    - resource: sap-erp-processes
+      locator: "The whole learning journey"
+      why: "SAP's own beginner course on procure-to-pay, plan-to-produce and order-to-cash."
+      verified: true
+
+- id: sap-basics
+  title: SAP S/4HANA basics
+  area: enterprise
+  kind: tool
+  summary: Finding your way around SAP, its modules (finance, materials, sales, production) and how one transaction feeds the next.
+  hours: 25
+  requires: [business-processes]
+  resources:
+    - resource: sap-erp-processes
+      locator: "The whole learning journey, hands on"
+      verified: true
+    - resource: sap-s4-feature-scope
+      locator: "Finance, Sourcing and Procurement, Sales and Manufacturing"
+      verified: true
+
+- id: sap-abap
+  title: ABAP
+  area: enterprise
+  kind: tool
+  summary: SAP's own programming language, for reports, extensions and interfaces. Modern ABAP is written for the cloud and the RESTful programming model.
+  hours: 60
+  requires: [programming-basics]
+  recommends: [sql, sap-basics]
+  resources:
+    - resource: sap-abap-journey
+      locator: "The whole learning journey"
+      verified: true
+    - resource: abap-keyword-docs
+      locator: "ABAP for beginners, then the statements you meet"
+      verified: true
+
+- id: mainframe-zos
+  title: Mainframes, z/OS and JCL
+  area: enterprise
+  summary: How banks and insurers still run their core systems. Data sets, TSO/ISPF, job control language (JCL) to run batch jobs, and reading a job's output.
+  hours: 30
+  resources:
+    - resource: ibm-z-xplore
+      locator: "Fundamentals challenges"
+      why: "A real mainframe account for free, with badges employers recognise."
+      verified: true
+    - resource: omp-cobol-course
+      locator: "Course 1: data sets, JCL and TSO/ISPF chapters"
+      verified: true
+
+- id: cobol
+  title: COBOL
+  area: enterprise
+  kind: tool
+  summary: The language of most bank and insurance batch systems. Reading and changing existing COBOL is most of the job.
+  hours: 40
+  requires: [mainframe-zos]
+  recommends: [programming-basics]
+  resources:
+    - resource: omp-cobol-course
+      locator: "Courses 1 and 2"
+      why: "Free, open and written with IBM; runs on a free mainframe account."
+      verified: true
+    - resource: ibm-z-xplore
+      locator: "Advanced challenges: COBOL"
+      role: alternative
+      verified: true
+
+- id: rpa-uipath
+  title: RPA with UiPath
+  area: enterprise
+  kind: tool
+  summary: Building software robots that click, type and read documents the way a person would, to automate repetitive office work.
+  hours: 40
+  recommends: [programming-basics, spreadsheets]
+  resources:
+    - resource: uipath-academy
+      locator: "The whole learning plan"
+      why: "UiPath is the tool Indian RPA postings name most, and its training is free."
+      verified: true
+    - resource: uipath-studio-docs
+      locator: "Introduction, Workflow design and Automation best practices"
+      verified: true
+
+- id: project-automation
+  title: "Project: automate a real office task"
+  area: enterprise
+  kind: project
+  summary: Pick something repetitive, like reading invoices from email into a spreadsheet, and build a robot that does it reliably, with error handling and a log.
+  hours: 15
+  requires: [rpa-uipath]
+  resources:
+    - resource: uipath-academy
+      locator: "Use the practice exercises as a starting point"
+      verified: true
+    - resource: uipath-studio-docs
+      locator: "Robotic Enterprise Framework and error handling"
+      verified: true
+

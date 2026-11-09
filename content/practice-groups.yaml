@@ -28,20 +28,28 @@
 
 - id: security
   title: Security
-  resources: [tryhackme, overthewire, picoctf, portswigger-academy, cryptopals]
+  resources: [tryhackme, overthewire, picoctf, portswigger-academy, cryptopals, ethernaut]
 
 - id: maths
   title: Maths, probability and quant puzzles
-  resources: [khan-math, mit-6042-psets, mit-1806sc, brainstellar]
+  resources: [khan-math, mit-6042-psets, mit-1806sc, brainstellar, or-tools]
 
 - id: finance
   title: Finance
-  resources: [quantconnect]
+  resources: [quantconnect, soa-exam-p, soa-exam-fm]
 
 - id: design
   title: Design
   resources: [daily-ui]
 
 - id: embedded
-  title: Embedded
-  resources: [wokwi]
+  title: Embedded and chips
+  resources: [wokwi, hdlbits, eda-playground]
+
+- id: games-web3
+  title: Games and smart contracts
+  resources: [godot-first-2d-game, cryptozombies]
+
+- id: mainframe
+  title: Mainframes
+  resources: [ibm-z-xplore]

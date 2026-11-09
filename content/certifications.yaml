@@ -43,7 +43,7 @@
   cost: free
   price: "Free; five projects per certification"
   why: "Eleven certifications, from Responsive Web Design to Data Analysis with Python. Each needs five projects you build yourself, so the work doubles as portfolio pieces, which is what employers look at."
-  routes: [frontend-engineer, full-stack-engineer, backend-engineer, data-analyst, qa-engineer]
+  routes: [frontend-engineer, full-stack-engineer, backend-engineer, data-analyst, qa-engineer, blockchain-developer]
 
 - id: hackerrank-skills
   title: HackerRank skills certifications
@@ -63,7 +63,7 @@
   cost: low
   price: "Free to learn; ₹1,000 per proctored exam"
   why: "Courses by IIT and IISc faculty, from programming to machine learning and finance. The exam certificate is well known to Indian colleges and employers."
-  routes: [software-engineer, data-scientist, ml-engineer, embedded-engineer, economist, statistician]
+  routes: [software-engineer, data-scientist, ml-engineer, embedded-engineer, economist, statistician, vlsi-engineer, operations-research-analyst]
 
 - id: aws-cloud-practitioner
   title: AWS Certified Cloud Practitioner
@@ -244,3 +244,33 @@
   price: "US$400 to enrol, then US$600–800 for each of the two parts"
   why: "The standard credential for risk roles at banks and NBFCs."
   routes: [risk-analyst, quant-researcher]
+
+- id: ibm-z-xplore-badges
+  title: IBM Z Xplore badges
+  issuer: IBM
+  url: https://www.ibm.com/z/resources/zxplore
+  group: enterprise
+  cost: free
+  price: "Free; hands-on challenges on a real mainframe"
+  why: "Digital badges for finishing the Fundamentals and Advanced challenges. IBM uses them to invite people to its mainframe career fairs, and mainframe teams recognise them."
+  routes: [mainframe-developer]
+
+- id: uipath-automation-developer
+  title: UiPath Automation Developer Associate
+  issuer: UiPath
+  url: https://academy.uipath.com/learning-plans/automation-developer-associate-training
+  group: enterprise
+  cost: mid
+  price: "Training free; the exam is paid"
+  why: "The UiPath certificate RPA postings ask for by name. The free training covers what the exam tests."
+  routes: [rpa-developer]
+
+- id: iai-acet
+  title: Actuarial Common Entrance Test (ACET)
+  issuer: Institute of Actuaries of India
+  url: https://www.actuariesindia.org/
+  group: finance
+  cost: low
+  price: "Paid; fee on the Institute's site"
+  why: "Not a certificate but the door in: you need ACET to join the Institute as a student, and Indian insurers expect it, plus a few papers cleared, from actuarial freshers."
+  routes: [actuarial-analyst]
