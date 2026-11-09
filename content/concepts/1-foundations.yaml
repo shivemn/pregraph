@@ -6,6 +6,7 @@
   resources:
     - resource: mit-6042
       locator: "Part I: Proofs"
+      verified: true
     - resource: mit-6042-2010
       locator: "Lectures 1–3: proofs, induction, strong induction"
       verified: true
@@ -22,6 +23,7 @@
   resources:
     - resource: mit-6042
       locator: "Parts II and III: Structures, Counting"
+      verified: true
     - resource: mit-6042-2010
       locator: "Lectures 4–17: number theory, graphs, relations, sums, recurrences, counting"
       verified: true
@@ -41,13 +43,16 @@
   resources:
     - resource: mit-1806
       locator: "Video lectures, in order"
+      verified: true
     - resource: mml-book
       locator: "Chapters 2–4"
       role: alternative
+      verified: true
     - resource: three-blue-one-brown-la
       locator: "The whole series, before or alongside 18.06"
       role: alternative
       why: "Builds the geometric picture in about three hours."
+      verified: true
     - resource: mit-1806sc
       locator: "The Check Yourself problems at the end of each session"
       why: "Every session has problems with worked solutions, so you can check yourself."
@@ -62,18 +67,22 @@
   resources:
     - resource: stat110
       locator: "Lecture videos and the strategic practice sets"
+      verified: true
     - resource: mit-6042
       locator: "Part IV: Probability"
       role: alternative
+      verified: true
     - resource: probability-book
       locator: "Chapters 1–7"
       why: "The textbook that goes with Stat 110, free from the authors."
+      verified: true
     - resource: mit-6042-psets
       locator: "Problem sets 10–12"
       role: alternative
       verified: true
     - resource: brainstellar
       locator: "The easy and medium puzzles"
+      verified: true
 
 - id: calculus
   title: Calculus
@@ -83,6 +92,7 @@
   resources:
     - resource: openstax-calculus
       locator: "Volumes 1 and 2"
+      verified: true
     - resource: tbob-calculus
       locator: "The whole series, first, for the pictures"
       verified: true
@@ -100,6 +110,7 @@
   resources:
     - resource: openstax-calculus
       locator: "Volume 3"
+      verified: true
     - resource: mit-1802
       locator: "The whole course"
       verified: true
@@ -113,6 +124,7 @@
   resources:
     - resource: boyd-cvx
       locator: "Chapters 1–5, then the applications you need"
+      verified: true
     - resource: ee364a
       locator: "The whole course"
       verified: true
@@ -126,6 +138,7 @@
   resources:
     - resource: probability-book
       locator: "The chapters on Markov chains and Poisson processes"
+      verified: true
     - resource: mit-18s096
       locator: "Lectures 5 and 17, Stochastic Processes I and II"
       verified: true
@@ -150,6 +163,7 @@
   resources:
     - resource: lebl-analysis
       locator: "Chapters 1–6"
+      verified: true
     - resource: mit-18100a
       locator: "The whole course"
       verified: true

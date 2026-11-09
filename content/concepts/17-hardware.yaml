@@ -68,6 +68,17 @@
   hours: 30
   requires: [verilog]
   recommends: [design-verification]
+  brief:
+    build: Design a block small enough to finish and big enough to be interesting, such as a UART, a synchronous FIFO or a simple RISC-V core, in Verilog or SystemVerilog, and verify it with a self-checking testbench.
+    shows:
+    - 'A short spec first: ports, timing and what each mode does'
+    - A testbench that checks results by itself, not by eye on a waveform
+    - Random tests as well as directed ones, and the corner cases you covered (full, empty, reset mid-transfer)
+    - Coverage numbers, and what still isn't covered
+    stretch:
+    - Run it through the open-source OpenLane flow for area and timing
+    - Rewrite the testbench in UVM or cocotb
+    present: A repo with the spec, the RTL, the testbench, waveforms of the interesting cases and the coverage report. Be ready to explain one bug your testbench caught.
   resources:
     - resource: eda-playground
       locator: "Simulate and share your design"
@@ -76,3 +87,27 @@
       locator: "Verilog examples: FIFO, UART and counters"
       verified: true
 
+- id: project-pcb
+  title: 'Project: design a circuit board and get it made'
+  area: hardware
+  kind: project
+  summary: A schematic, a laid-out board, fabrication files sent to a maker, and a board that works when it comes back.
+  hours: 25
+  requires: [pcb-design]
+  recommends: [microcontrollers, analog-electronics]
+  brief:
+    build: Design a small board with a real job, such as a breakout for a sensor, a USB-powered LED driver or a shield for your microcontroller project. Draw it in KiCad, lay it out, order a few from a low-cost maker and assemble one.
+    shows:
+    - A clean schematic with part values and footprints checked against datasheets
+    - A layout that passes the design-rule check, with sensible power and ground routing
+    - Gerber files and a bill of materials ready for a maker
+    - The assembled board tested, and a list of what you'd change in revision two
+    stretch:
+    - A four-layer board, or one with a switching regulator laid out properly
+    - Assembly by the maker, with a placement file
+    present: The KiCad project in a repo with renders of the board, photos of the real one, and your test notes.
+  resources:
+    - resource: kicad-getting-started
+      locator: The whole tutorial, then start your own board
+      role: primary
+      verified: true

@@ -7,11 +7,14 @@
   resources:
     - resource: mit-18404
       locator: "Lectures 1–5"
+      verified: true
     - resource: erickson-models
       locator: "Chapters on strings, regular languages and finite automata"
+      verified: true
     - resource: nptel-toc
       locator: "The lectures on finite automata and context-free grammars"
       role: alternative
+      verified: true
 
 - id: computability
   title: Computability and complexity
@@ -22,8 +25,10 @@
   resources:
     - resource: mit-18404
       locator: "Lecture 6 onwards"
+      verified: true
     - resource: erickson-models
       locator: "Chapters on Turing machines and undecidability"
+      verified: true
 
 - id: interpreters
   title: Building an interpreter
@@ -35,11 +40,14 @@
   resources:
     - resource: crafting-interpreters
       locator: "Part II, A Tree-Walk Interpreter"
+      verified: true
     - resource: nptel-compilers
       locator: "The lectures on lexical analysis and parsing"
       role: alternative
+      verified: true
     - resource: build-your-own-x
       locator: "The “Programming Language” section"
+      verified: true
 
 - id: compilers
   title: Compilers and virtual machines
@@ -51,8 +59,10 @@
   resources:
     - resource: crafting-interpreters
       locator: "Part III, A Bytecode Virtual Machine"
+      verified: true
     - resource: nptel-compilers
       locator: "The full course"
+      verified: true
     - resource: nand2tetris-projects
       locator: "Projects 7–11: the VM translator, then the Jack compiler"
       verified: true
@@ -67,9 +77,11 @@
   resources:
     - resource: cryptobook
       locator: "Part I, Secret key cryptography"
+      verified: true
     - resource: crypto-boneh
       locator: "The whole course"
       why: "The standard introduction, from the co-author of the book."
+      verified: true
     - resource: cryptopals
       locator: "Sets 1–6"
       why: "Break real constructions yourself. Little maths needed to start."

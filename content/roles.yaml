@@ -6,7 +6,7 @@
   family: software
   summary: Writes and maintains the code behind products. Entry-level hiring in India mostly tests data structures and algorithms first, then how you write and reason about code.
   tiers:
-    hire: [programming-basics, oop-design, git, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, algorithm-practice, sql, testing-debugging]
+    hire: [programming-basics, oop-design, git, linear-structures, hash-tables, trees-heaps, sorting-searching, graph-algorithms, dynamic-programming, algorithm-practice, sql, testing-debugging, project-software]
     firstYear: [rest-apis, web-http, cloud-basics, os-processes-memory, networking, system-design, software-engineering]
     extra: [concurrency, ci-cd, distributed-systems, database-internals, docker, project-portfolio-api]
   evidence:
@@ -264,7 +264,7 @@
   family: finance
   summary: Builds the fast, correct systems quants and traders run on. Pricing libraries, backtesters, market data and execution.
   tiers:
-    hire: [cpp, linear-structures, hash-tables, trees-heaps, algorithm-practice, concurrency, os-processes-memory, probability, financial-markets, git, shell-tools]
+    hire: [cpp, linear-structures, hash-tables, trees-heaps, algorithm-practice, concurrency, os-processes-memory, probability, financial-markets, git, shell-tools, project-order-book]
     firstYear: [derivatives, networking, programming-basics, pandas, testing-debugging, messaging]
     extra: [stochastic-processes, distributed-systems, time-series]
 
@@ -273,7 +273,7 @@
   family: finance
   summary: Measures market, credit and operational risk for a bank or fund, and reports it to people who set limits.
   tiers:
-    hire: [statistics, probability, financial-markets, derivatives, risk-management, spreadsheets, sql, programming-basics]
+    hire: [statistics, probability, financial-markets, derivatives, risk-management, spreadsheets, sql, programming-basics, project-risk-report]
     firstYear: [time-series, pandas, bi-tools, portfolio-theory, accounting]
     extra: [stochastic-processes, machine-learning, econometrics]
 
@@ -296,7 +296,7 @@
   family: finance
   summary: Studies how economies and markets behave with data, for a central bank, ministry, think tank, consultancy or company.
   tiers:
-    hire: [microeconomics, macroeconomics, calculus, statistics, econometrics, r-lang, spreadsheets]
+    hire: [microeconomics, macroeconomics, calculus, statistics, econometrics, r-lang, spreadsheets, project-empirical-study]
     firstYear: [time-series, data-visualization, sql, programming-basics]
     extra: [machine-learning, bayesian-statistics, experiments]
 
@@ -305,7 +305,7 @@
   family: finance
   summary: Designs studies and analyses data carefully enough that the conclusions hold, in pharma, health, government or industry.
   tiers:
-    hire: [probability, statistics, calculus, linear-algebra, r-lang, bayesian-statistics, experiments, sql]
+    hire: [probability, statistics, calculus, linear-algebra, r-lang, bayesian-statistics, experiments, sql, project-empirical-study]
     firstYear: [time-series, econometrics, machine-learning, data-visualization]
     extra: [pandas, multivariable-calculus]
 
@@ -314,7 +314,7 @@
   family: software
   summary: Builds iPhone and iPad apps in Swift, from screens and navigation to networking and the App Store.
   tiers:
-    hire: [swift, oop-design, git, linear-structures, hash-tables, web-http, rest-apis]
+    hire: [swift, oop-design, git, linear-structures, hash-tables, web-http, rest-apis, project-ios-app]
     firstYear: [testing-debugging, concurrency, ci-cd, firebase]
     extra: [system-design, flutter]
 
@@ -324,7 +324,7 @@
   family: software
   summary: Configures and extends Salesforce for a company. Objects, security, automation and reports, then code and integrations as the job grows.
   tiers:
-    hire: [salesforce, spreadsheets, sql, programming-basics]
+    hire: [salesforce, spreadsheets, sql, programming-basics, project-platform-app]
     firstYear: [javascript, rest-apis, oop-design, git]
     extra: [bi-tools, testing-debugging]
 
@@ -333,7 +333,7 @@
   family: software
   summary: Builds and runs the ServiceNow platform that a company's IT support runs on. Forms, workflows, scripts and integrations.
   tiers:
-    hire: [servicenow, javascript, incident-management, sql, rest-apis]
+    hire: [servicenow, javascript, incident-management, sql, rest-apis, project-platform-app]
     firstYear: [git, testing-debugging, log-analysis]
     extra: [cloud-basics, jira]
 
@@ -360,7 +360,7 @@
   family: data
   summary: Sits between data engineering and analysis. Turns raw tables into clean, tested models with SQL and dbt.
   tiers:
-    hire: [sql, dbt, data-warehousing, git, snowflake, programming-basics, testing-debugging]
+    hire: [sql, dbt, data-warehousing, git, snowflake, programming-basics, testing-debugging, project-dbt-models]
     firstYear: [orchestration, bi-tools, databricks, ci-cd]
     extra: [spark, pandas, query-performance]
 
@@ -378,7 +378,7 @@
   family: infra
   summary: Builds the internal platform other engineers ship on. Clusters, pipelines, templates and self-service tooling.
   tiers:
-    hire: [linux-admin, shell-tools, git, networking, docker, kubernetes, ci-cd, infrastructure-as-code, cloud-basics, programming-basics]
+    hire: [linux-admin, shell-tools, git, networking, docker, kubernetes, ci-cd, infrastructure-as-code, cloud-basics, programming-basics, project-deploy-pipeline]
     firstYear: [observability, go, ansible, nginx]
     extra: [distributed-systems, systems-security]
 
@@ -387,7 +387,7 @@
   family: infra
   summary: Keeps servers, users and networks working. Patching, backups, access, monitoring and fixing what breaks.
   tiers:
-    hire: [shell-tools, linux-admin, networking, nginx, incident-management, log-analysis]
+    hire: [shell-tools, linux-admin, networking, nginx, incident-management, log-analysis, project-homelab]
     firstYear: [ansible, docker, cloud-basics, observability, git]
     extra: [azure, systems-security]
 
@@ -396,7 +396,7 @@
   family: infra
   summary: Keeps databases fast, safe and backed up. Tuning, indexing, replication, upgrades and access control.
   tiers:
-    hire: [sql, database-internals, query-performance, linux-admin, shell-tools]
+    hire: [sql, database-internals, query-performance, linux-admin, shell-tools, project-database-ops]
     firstYear: [observability, cloud-basics, incident-management]
     extra: [distributed-systems, mongodb, redis]
 
@@ -414,7 +414,7 @@
   family: infra
   summary: Designs and builds defences. Secure infrastructure, identity, detection and helping developers ship safe code.
   tiers:
-    hire: [networking, linux-admin, security-fundamentals, web-security, systems-security, cryptography, programming-basics, cloud-iam]
+    hire: [networking, linux-admin, security-fundamentals, web-security, systems-security, cryptography, programming-basics, cloud-iam, project-security-review]
     firstYear: [threat-detection, incident-management, splunk, infrastructure-as-code]
     extra: [kubernetes, wireshark]
 
@@ -423,7 +423,7 @@
   family: infra
   summary: Designs systems for customers or teams on a cloud platform, and explains the trade-offs to people who'll pay for them.
   tiers:
-    hire: [system-design, cloud-basics, cloud-architecture, cloud-networking, cloud-iam, networking, distributed-systems, rest-apis, sql]
+    hire: [system-design, cloud-basics, cloud-architecture, cloud-networking, cloud-iam, networking, distributed-systems, rest-apis, sql, project-architecture-doc]
     firstYear: [azure, gcp, infrastructure-as-code, observability]
     extra: [kubernetes, data-warehousing]
 
@@ -432,7 +432,7 @@
   family: product
   summary: Decides what a team builds and why, and makes sure it gets built. Users, priorities, specs, data and a lot of conversations.
   tiers:
-    hire: [product-management, agile-scrum, ux-design, sql, spreadsheets, experiments, jira, web-http]
+    hire: [product-management, agile-scrum, ux-design, sql, spreadsheets, experiments, jira, web-http, project-product-teardown]
     firstYear: [statistics, data-visualization, technical-writing, figma]
     extra: [system-design, programming-basics]
 
@@ -442,7 +442,7 @@
   family: product
   summary: Researches what users need and designs screens that meet it, from wireframes to polished prototypes.
   tiers:
-    hire: [ux-design, figma]
+    hire: [ux-design, figma, project-design-case-study]
     firstYear: [html-css, agile-scrum, web-accessibility, product-management, experiments]
     extra: [javascript, react]
   evidence:
@@ -456,7 +456,7 @@
   family: product
   summary: Turns what a business needs into requirements a team can build, and checks the result with data. Common in IT services and banks.
   tiers:
-    hire: [sql, spreadsheets, bi-tools, data-visualization, product-management, agile-scrum, technical-writing]
+    hire: [sql, spreadsheets, bi-tools, data-visualization, product-management, agile-scrum, technical-writing, project-requirements]
     firstYear: [jira, ux-design, accounting]
     extra: [statistics, pandas, salesforce]
   evidence:
@@ -470,7 +470,7 @@
   family: product
   summary: Writes the guides, API references and help pages that make software usable.
   tiers:
-    hire: [technical-writing, git, html-css, web-http, rest-apis]
+    hire: [technical-writing, git, html-css, web-http, rest-apis, project-docs-portfolio]
     firstYear: [programming-basics, agile-scrum, jira, github-pages]
     extra: [ux-design, javascript]
 
@@ -479,7 +479,7 @@
   family: product
   summary: Keeps a team's process working and its delivery predictable. Ceremonies, blockers, metrics and stakeholders.
   tiers:
-    hire: [agile-scrum, jira, spreadsheets, technical-writing]
+    hire: [agile-scrum, jira, spreadsheets, technical-writing, project-run-a-sprint]
     firstYear: [product-management, git, ci-cd]
     extra: [incident-management, bi-tools]
 
@@ -606,7 +606,7 @@
   family: enterprise
   summary: Sets up and supports SAP, the software that runs finance, buying, sales and production at large companies. Indian IT services firms hire freshers into SAP practices every year.
   tiers:
-    hire: [sap-basics, business-processes]
+    hire: [sap-basics, business-processes, project-sap-process]
     firstYear: [accounting, testing-debugging, sap-abap, spreadsheets, sql]
     extra: [data-warehousing, programming-basics, agile-scrum]
   evidence:
@@ -621,7 +621,7 @@
   family: enterprise
   summary: Maintains the COBOL programs and batch jobs that banks, insurers and airlines still run on IBM mainframes. Few people learn it, so freshers are trained and kept.
   tiers:
-    hire: [mainframe-zos, cobol, sql, programming-basics]
+    hire: [mainframe-zos, cobol, sql, programming-basics, project-cobol-batch]
     firstYear: [testing-debugging, git]
     extra: [java, shell-tools]
   search: mainframe developer
@@ -661,7 +661,7 @@
   family: software
   summary: Writes smart contracts and the apps around them, mostly on Ethereum and chains like it. Most openings are at startups and many are remote.
   tiers:
-    hire: [programming-basics, javascript, blockchain-basics, solidity, git, testing-debugging]
+    hire: [programming-basics, javascript, blockchain-basics, solidity, git, testing-debugging, project-dapp]
     firstYear: [smart-contract-security, react, rest-apis]
     extra: [cryptography, rust, go]
   search: blockchain developer
@@ -681,7 +681,7 @@
   family: finance
   summary: Prices insurance and works out how much money an insurer must hold for future claims. You pass actuarial exams while working; insurers hire maths and statistics graduates who have cleared a few.
   tiers:
-    hire: [probability, statistics, calculus, actuarial-maths, spreadsheets, financial-markets]
+    hire: [probability, statistics, calculus, actuarial-maths, spreadsheets, financial-markets, project-pricing-model]
     firstYear: [loss-models, r-lang, sql]
     extra: [linear-models, time-series, programming-basics]
   search: actuarial analyst
@@ -691,7 +691,7 @@
   family: hardware
   summary: Designs the analog and mixed-signal circuits inside chips, like amplifiers, data converters and power management, and simulates them in SPICE. Hires electronics graduates, often with an M.Tech.
   tiers:
-    hire: [circuit-analysis, analog-electronics, signals-and-systems, digital-logic, shell-tools]
+    hire: [circuit-analysis, analog-electronics, signals-and-systems, digital-logic, shell-tools, project-analog-circuit]
     firstYear: [asic-flow, verilog]
     extra: [programming-basics, control-systems]
   search: analog design engineer
@@ -711,7 +711,7 @@
   family: hardware
   summary: Programs the PLCs and SCADA systems that run factories, plants and buildings, then commissions them on site. Electrical and instrumentation graduates fill most of these jobs.
   tiers:
-    hire: [circuit-analysis, digital-logic, electrical-machines, plc-scada, control-systems, spreadsheets]
+    hire: [circuit-analysis, digital-logic, electrical-machines, plc-scada, control-systems, spreadsheets, project-plc-line]
     firstYear: [networking, power-electronics]
     extra: [programming-basics, sql]
   search: PLC SCADA engineer
@@ -721,7 +721,7 @@
   family: hardware
   summary: Plans, tests and tunes mobile and wireless networks, from radio coverage to the core network. Telecom vendors and operators hire electronics graduates in batches.
   tiers:
-    hire: [signals-and-systems, communication-systems, electromagnetics, networking, spreadsheets]
+    hire: [signals-and-systems, communication-systems, electromagnetics, networking, spreadsheets, project-comms-link]
     firstYear: [linux-admin, shell-tools, programming-basics]
     extra: [cloud-basics, sql]
   search: telecom engineer
@@ -731,7 +731,7 @@
   family: hardware
   summary: Designs converters, inverters, chargers and motor drives, now mostly for electric vehicles, solar and batteries. Electrical and electronics graduates with lab projects do well.
   tiers:
-    hire: [circuit-analysis, analog-electronics, power-electronics, control-systems, microcontrollers, pcb-design]
+    hire: [circuit-analysis, analog-electronics, power-electronics, control-systems, microcontrollers, pcb-design, project-power-converter]
     firstYear: [electrical-machines, c-and-memory]
     extra: [signals-and-systems, programming-basics]
   search: power electronics engineer
@@ -741,7 +741,7 @@
   family: hardware
   summary: Designs, installs and maintains electrical systems in plants, buildings, substations and solar farms. Graduate engineer trainee programmes at power, manufacturing and infrastructure companies are the usual way in.
   tiers:
-    hire: [circuit-analysis, electrical-machines, power-systems]
+    hire: [circuit-analysis, electrical-machines, power-systems, project-electrical-design]
     firstYear: [plc-scada, power-electronics, spreadsheets, control-systems]
     extra: [programming-basics]
   evidence:
@@ -756,7 +756,7 @@
   family: business
   summary: Helps companies answer business questions, like whether to enter a market or how to cut costs, with research, numbers and slides. Big consulting firms and their India offices hire graduates as business analysts or associates.
   tiers:
-    hire: [problem-structuring, spreadsheets, statistics, accounting, corporate-finance, data-visualization]
+    hire: [problem-structuring, spreadsheets, statistics, accounting, corporate-finance, data-visualization, project-business-case]
     firstYear: [sql, bi-tools, process-improvement]
     extra: [pandas, product-management]
   search: associate consultant
@@ -766,7 +766,7 @@
   family: business
   summary: Measures what marketing spend brings in, from campaigns and ads to website visits, and tests what works better. Common at consumer brands, e-commerce and agencies.
   tiers:
-    hire: [marketing-fundamentals, digital-marketing, spreadsheets, web-analytics]
+    hire: [marketing-fundamentals, digital-marketing, spreadsheets, web-analytics, project-marketing-analysis]
     firstYear: [sql, statistics, experiments, bi-tools, pandas]
     extra: [machine-learning]
   evidence:
@@ -781,7 +781,7 @@
   family: business
   summary: Runs a brand's search, social, email and ad campaigns and reports how they did. A common first job for commerce and BBA graduates.
   tiers:
-    hire: [marketing-fundamentals, digital-marketing, web-analytics, spreadsheets]
+    hire: [marketing-fundamentals, digital-marketing, web-analytics, spreadsheets, project-campaign]
     firstYear: [experiments, data-visualization]
     extra: [html-css, sql]
   evidence:
@@ -796,7 +796,7 @@
   family: business
   summary: Turns hiring, attrition, pay and performance data into reports and answers for HR teams. Often starts as an HR executive role with a lot of Excel.
   tiers:
-    hire: [hr-fundamentals, spreadsheets]
+    hire: [hr-fundamentals, spreadsheets, project-people-analytics]
     firstYear: [data-visualization, bi-tools, statistics, sql]
     extra: [pandas]
   evidence:
@@ -811,7 +811,7 @@
   family: business
   summary: Tracks how a business runs day to day, like orders, deliveries and turnaround times, finds where it slows down, and fixes it. Common at e-commerce, logistics, banks and outsourcing firms.
   tiers:
-    hire: [spreadsheets, data-visualization]
+    hire: [spreadsheets, data-visualization, project-operations]
     firstYear: [process-improvement, accounting, sql, bi-tools, business-processes]
     extra: [statistics, pandas, linear-programming]
   evidence:
@@ -826,7 +826,7 @@
   family: business
   summary: Keeps the sales team's data, targets and reports in order, mostly in a CRM like Salesforce, and finds where deals get stuck.
   tiers:
-    hire: [spreadsheets, salesforce, bi-tools, sql, data-visualization]
+    hire: [spreadsheets, salesforce, bi-tools, sql, data-visualization, project-sales-dashboard]
     firstYear: [marketing-fundamentals, statistics]
     extra: [experiments]
   search: sales operations analyst

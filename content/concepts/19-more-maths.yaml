@@ -131,6 +131,17 @@
   summary: Take a real problem, like delivery routes, shift rosters or a diet plan, model it, solve it with OR-Tools or PuLP, and write up what the answer saves.
   hours: 20
   requires: [operations-research]
+  brief:
+    build: Take a real decision with numbers behind it, such as delivery routes for a local shop, shift rosters for a clinic or a hostel menu that meets a budget and nutrition targets. Model it as a linear or integer program and solve it with OR-Tools or PuLP.
+    shows:
+    - 'The model written out: decision variables, objective and constraints, in words and in maths'
+    - Real or realistic data, and where it came from
+    - 'The answer against what people do now: what it saves'
+    - What happens when you change one constraint
+    stretch:
+    - A simple spreadsheet or web front end someone could use
+    - A heuristic for when the exact solver is too slow
+    present: A short report or notebook that opens with the saving in rupees or hours, then the model, then the details.
   resources:
     - resource: or-tools
       locator: "Start from the closest example"
@@ -168,4 +179,33 @@
   resources:
     - resource: loss-data-analytics
       locator: "Chapters 1–7"
+      verified: true
+
+- id: project-pricing-model
+  title: 'Project: price an insurance product'
+  area: finance
+  kind: project
+  summary: A premium worked out from stated assumptions, with the sensitivities and a profit test.
+  hours: 25
+  requires: [actuarial-maths, spreadsheets]
+  recommends: [loss-models, r-lang]
+  brief:
+    build: 'Price a simple product in a spreadsheet: a term life policy using the Indian mortality table (IALM 2012–14), or a motor or health cover from a public claims dataset.'
+    shows:
+    - 'Assumptions written down: mortality or claim frequency, claim size, interest and expenses'
+    - The premium worked out from them, with formulas you can explain
+    - What each assumption does to the premium
+    - A reserve or profit test over the policy's life
+    stretch:
+    - Fit frequency and severity distributions in R
+    - Compare your premium with what insurers charge
+    present: 'The workbook and a one-page pricing memo: the premium, the key assumptions and the risks.'
+  resources:
+    - resource: loss-data-analytics
+      locator: The chapters on frequency, severity and aggregate loss models, for non-life pricing
+      role: primary
+      verified: true
+    - resource: soa-exam-fm
+      locator: For the interest calculations behind the premium
+      role: alternative
       verified: true

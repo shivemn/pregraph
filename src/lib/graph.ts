@@ -14,7 +14,7 @@ export interface ConceptNode {
   hours: number;
   requires: string[];
   recommends: string[];
-  /** concept, tool or project. The engine ignores it; the planner shows it. */
+  /** concept, tool or project. Projects come last among stops that are ready; the planner shows it. */
   kind?: string;
   /** A one-tap "skip it" label the planner shows on this stop. */
   skipLabel?: string;
@@ -233,18 +233,26 @@ function pickNext(
     const rb = rank.get(ready[b]!)!;
     return ra !== rb ? ra > rb : ready[a]! < ready[b]!;
   };
-  let best = 0;
-  let bestSameArea = -1;
-  for (let i = 0; i < ready.length; i++) {
-    if (better(i, best)) best = i;
-    if (index.get(ready[i]!)!.area === lastArea && (bestSameArea < 0 || better(i, bestSameArea))) {
-      bestSameArea = i;
+  // Projects wait until nothing else is ready, so a route ends in its project.
+  const isProject = (i: number) => index.get(ready[i]!)!.kind === 'project';
+  const all = ready.map((_, i) => i);
+  const others = all.filter((i) => !isProject(i));
+  return pickAmong(others.length > 0 ? others : all);
+
+  function pickAmong(candidates: number[]): number {
+    let best = candidates[0]!;
+    let bestSameArea = -1;
+    for (const i of candidates) {
+      if (better(i, best)) best = i;
+      if (index.get(ready[i]!)!.area === lastArea && (bestSameArea < 0 || better(i, bestSameArea))) {
+        bestSameArea = i;
+      }
     }
+    if (bestSameArea >= 0 && rank.get(ready[bestSameArea]!)! >= STAY_RATIO * rank.get(ready[best]!)!) {
+      return bestSameArea;
+    }
+    return best;
   }
-  if (bestSameArea >= 0 && rank.get(ready[bestSameArea]!)! >= STAY_RATIO * rank.get(ready[best]!)!) {
-    return bestSameArea;
-  }
-  return best;
 }
 
 /** Steps 1–3 together: the personal plan for these goals, given what you know. */

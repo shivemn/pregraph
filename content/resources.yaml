@@ -451,11 +451,11 @@
   title: AWS Cloud Practitioner Essentials
   author: Amazon Web Services
   type: course
-  url: https://aws.amazon.com/training/learn-about/cloud-practitioner/
+  url: https://aws.amazon.com/certification/certified-cloud-practitioner/
   free: true
   medium: watch
   short: "AWS"
-  note: The course itself is free on AWS Skill Builder. The certification exam is paid and optional.
+  note: "The free Cloud Practitioner Essentials course is linked from this page."
 
 - id: sre-book
   title: Site Reliability Engineering
@@ -530,7 +530,7 @@
   title: Dimensional modeling techniques
   author: Kimball Group
   type: site
-  url: https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/
+  url: https://www.kimballgroup.com/techniques/dimensional-modeling-techniques/
   free: true
   medium: read
   short: "Kimball star schema"
@@ -615,10 +615,11 @@
   title: Essence of Linear Algebra
   author: Grant Sanderson (3Blue1Brown)
   type: video
-  url: https://www.3blue1brown.com/topics/linear-algebra
+  url: https://www.3blue1brown.com/lessons/eola-preview
   free: true
   medium: watch
   short: "3Blue1Brown 3b1b"
+  note: "Starts with chapter 0; each lesson links to the next."
 
 - id: khan-statistics
   title: Statistics and Probability (Khan Academy)
@@ -957,7 +958,7 @@
   title: "Feature Engineering and Selection"
   author: Max Kuhn, Kjell Johnson
   type: book
-  url: https://www.feat.engineering/
+  url: https://bookdown.org/max/FES
   free: true
   medium: read
 
@@ -1085,7 +1086,7 @@
   title: "Embedded Systems: Introduction to ARM Cortex-M Microcontrollers"
   author: Jonathan Valvano, Ramesh Yerraballi
   type: book
-  url: https://users.ece.utexas.edu/~valvano/Volume1/E-Book/
+  url: https://users.ece.utexas.edu/~valvano/Volume1/IntroToEmbSys/
   free: true
   medium: read
 
@@ -1102,7 +1103,7 @@
   title: Mastering the FreeRTOS Real Time Kernel
   author: Richard Barry
   type: book
-  url: https://www.freertos.org/Documentation/RTOS_book.html
+  url: https://github.com/FreeRTOS/FreeRTOS-Kernel-Book
   free: true
   medium: read
   short: "FreeRTOS RTOS"
@@ -1933,7 +1934,7 @@
   title: "Figma Learn: courses and collections"
   author: "Figma"
   type: site
-  url: https://help.figma.com/hc/en-us/sections/23691657321239
+  url: https://help.figma.com/hc/en-us/categories/23557013073047-Courses-tutorials-projects
   free: true
   medium: read
 
@@ -2329,7 +2330,7 @@
   title: "MIT 18.650 Statistics for Applications (Fall 2016)"
   author: Philippe Rigollet, MIT OpenCourseWare
   type: video
-  url: https://www.youtube.com/playlist?list=PLUl4u3cNGP60uVBMaoNERc6knT_MgPKS0
+  url: https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/
   free: true
   medium: watch
   short: "18.650"
@@ -2503,7 +2504,7 @@
   title: "Khan Academy exercises"
   author: "Khan Academy"
   type: site
-  url: https://www.khanacademy.org/math/calculus-1
+  url: https://www.khanacademy.org/math
   free: true
   medium: practice
   note: "Short practice sets that check each answer, with hints."
@@ -3491,3 +3492,63 @@
   free: true
   medium: watch
   note: Free, with a free account.
+
+- id: apple-develop-in-swift
+  title: Develop in Swift Tutorials
+  author: Apple
+  type: course
+  url: https://developer.apple.com/tutorials/develop-in-swift
+  free: true
+  medium: read
+  note: Needs a Mac with Xcode.
+
+- id: pg-backup
+  title: "PostgreSQL documentation: Backup and Restore"
+  author: The PostgreSQL Global Development Group
+  type: site
+  url: https://www.postgresql.org/docs/current/backup.html
+  free: true
+  medium: read
+
+- id: schneider-eig
+  title: Electrical Installation Guide
+  author: Schneider Electric
+  type: site
+  url: https://www.electrical-installation.org/enwiki/Main_Page
+  free: true
+  medium: read
+  note: Follows the IEC 60364 standards, which Indian practice largely mirrors.
+
+- id: ga4-demo
+  title: "Google Analytics demo account"
+  author: Google
+  type: site
+  url: https://support.google.com/analytics/answer/6367342
+  free: true
+  medium: read
+  note: Real data from the Google Merchandise Store; any Google account can open it.
+
+- id: ga4-url-builder
+  title: "URL builders: Collect campaign data with custom URLs"
+  author: Google
+  type: site
+  url: https://support.google.com/analytics/answer/10917952
+  free: true
+  medium: read
+
+- id: lean-vsm
+  title: Understanding the fundamentals of value-stream mapping
+  author: Lean Enterprise Institute
+  type: site
+  url: https://www.lean.org/the-lean-post/articles/understanding-the-fundamentals-of-value-stream-mapping
+  free: true
+  medium: read
+
+- id: istqb-ctfl-syllabus
+  title: "ISTQB Certified Tester Foundation Level syllabus, v4.0.1"
+  author: ISTQB
+  type: book
+  url: https://www.istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf
+  free: true
+  medium: read
+  note: The free syllabus behind the paid ISTQB exam. Reading it costs nothing.

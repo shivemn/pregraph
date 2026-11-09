@@ -38,6 +38,22 @@ export const resourceSectionSchema = z.object({
   why: z.string().optional(),
 });
 
+/**
+ * What to build for a project stop, and what it has to show. Every project
+ * has one; checkContent makes sure of it.
+ */
+export const projectBriefSchema = z.object({
+  /** What to build, with a few concrete ideas. */
+  build: z.string().min(1),
+  /** What a finished version must show. These are what an interviewer looks for. */
+  shows: z.array(z.string().min(1)).min(2),
+  /** Where to take it further if there's time. */
+  stretch: z.array(z.string().min(1)).default([]),
+  /** How to put it in front of people: repo, demo, write-up. */
+  present: z.string().min(1),
+});
+export type ProjectBrief = z.infer<typeof projectBriefSchema>;
+
 export const conceptSchema = z.object({
   id,
   title: z.string().min(1),
@@ -53,6 +69,8 @@ export const conceptSchema = z.object({
   /** Soft prerequisites: only nudge the order when both are already in a plan. */
   recommends: z.array(id).default([]),
   resources: z.array(resourceSectionSchema).min(1),
+  /** Projects only: the brief. */
+  brief: projectBriefSchema.optional(),
 });
 
 export const backgroundSchema = z.object({

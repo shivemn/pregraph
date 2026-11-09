@@ -239,6 +239,7 @@
 - id: manual-tester
   title: "Manual tester"
   extends: qa-engineer
+  adds: [project-manual-testing]
   drops: [test-automation, project-test-suite]
   summary: "Tests software by hand against written test cases and reports bugs. Often a way in to automation testing."
 - id: sdet-java
@@ -954,7 +955,7 @@
 - id: pcb-design-engineer
   title: "PCB design engineer"
   extends: embedded-engineer
-  adds: [pcb-design]
+  adds: [pcb-design, project-pcb]
   drops: [project-embedded]
   summary: "Draws schematics and lays out circuit boards in tools like KiCad, Altium or OrCAD, and gets them made."
 - id: hardware-engineer

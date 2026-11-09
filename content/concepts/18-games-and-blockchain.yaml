@@ -54,6 +54,17 @@
   summary: A short game someone can actually play, with a start screen, a goal and an ending. Publish it on itch.io and link the code.
   hours: 30
   requires: [game-engines]
+  brief:
+    build: 'Make a game in Godot or Unity that someone can finish in five minutes: one mechanic done well, a start screen, a goal and an ending. Scope it to about four weekends.'
+    shows:
+    - 'A full loop: start, play, win or lose, play again'
+    - Code split into scenes or components, not one giant script
+    - Sound and feedback when the player does something
+    - A build people can play in the browser or download
+    stretch:
+    - Enter a game jam on itch.io and finish inside its deadline
+    - Saved progress or a high-score table
+    present: Publish it on itch.io with a GIF and a short description, link the code, and write a short post about one problem you solved.
   resources:
     - resource: cs50-games
       locator: "Use any game from the course as a starting point"
@@ -116,3 +127,31 @@
       locator: "Security considerations"
       verified: true
 
+- id: project-dapp
+  title: 'Project: build and deploy a dApp'
+  area: blockchain
+  kind: project
+  summary: A tested smart contract on a testnet, with a web front end that talks to it.
+  hours: 30
+  requires: [solidity]
+  recommends: [smart-contract-security, react]
+  brief:
+    build: Write a small contract with a real use, such as escrow for freelance work, a vote or a crowdfunding pool. Test it with Foundry or Hardhat, deploy it to a testnet such as Sepolia, and give it a simple web front end.
+    shows:
+    - Tests for every function, including failures and access control
+    - 'Known attacks considered: reentrancy, front-running, unchecked calls'
+    - Deployed and verified on a testnet block explorer
+    - A front end that connects a wallet and calls the contract
+    stretch:
+    - Fuzz or invariant tests in Foundry
+    - Gas used before and after one optimisation
+    present: The repo, the testnet address, a live front end and a short note on your security choices. Never put real money in a contract nobody has audited.
+  resources:
+    - resource: ethereum-docs
+      locator: Development networks, then the pages on testing and deploying smart contracts
+      role: primary
+      verified: true
+    - resource: ethernaut
+      locator: The levels for the attacks you are defending against
+      role: alternative
+      verified: true

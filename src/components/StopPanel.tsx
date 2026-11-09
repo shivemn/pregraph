@@ -121,7 +121,30 @@ export default function StopPanel(props: Props) {
               About {stop.hours} hours{stop.kind === 'project' ? ' to build' : ''}. {props.why}
             </p>
 
-            <section className="picks" aria-label="Where to learn it">
+            {stop.brief && (
+              <section className="brief panel-brief" aria-label="The brief">
+                <div>
+                  <h3>What to build</h3>
+                  <p className="brief-build">{stop.brief.build}</p>
+                </div>
+                <div>
+                  <h3>It has to show</h3>
+                  <ul className="brief-shows">{stop.brief.shows.map((x, i) => <li key={i}>{x}</li>)}</ul>
+                </div>
+                {stop.brief.stretch.length > 0 && (
+                  <div>
+                    <h3>If you have time</h3>
+                    <ul className="brief-stretch">{stop.brief.stretch.map((x, i) => <li key={i}>{x}</li>)}</ul>
+                  </div>
+                )}
+                <div>
+                  <h3>How to show it</h3>
+                  <p>{stop.brief.present}</p>
+                </div>
+              </section>
+            )}
+
+            <section className="picks" aria-label={stop.brief ? 'Help while you build' : 'Where to learn it'}>
               {(['read', 'watch', 'practice'] as Medium[]).map((m) => (
                 <Pick key={m} medium={m} source={stop.picks[m]} stopTitle={stop.title} />
               ))}

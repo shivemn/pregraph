@@ -251,6 +251,19 @@ select { color-scheme: inherit; }
   align-self: center; white-space: nowrap;
 }
 
+/* A project's brief, on its page and in the stop panel. The coloured rule is the stop's line. */
+.brief { border-left: 6px solid var(--line); padding: 2px 0 2px 16px; display: grid; gap: 12px; }
+.brief h3 { font-family: var(--sign); font-stretch: 85%; font-size: 1.05rem; font-weight: 700; color: var(--ink-2); margin: 0 0 4px; }
+.brief p { margin: 0; }
+.brief-build { font-size: 1.05rem; }
+.brief ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.brief-shows li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: start; }
+.brief-shows li::before {
+  content: ''; width: 14px; height: 14px; margin-top: 0.3em; border: 2px solid var(--ink); background: var(--paper);
+}
+.brief-stretch li { padding-left: 28px; position: relative; color: var(--ink-2); }
+.brief-stretch li::before { content: '+'; position: absolute; left: 3px; font-weight: 700; }
+
 .flag {
   display: inline-block; font-size: 0.82rem; font-weight: 600;
   padding: 0 7px; border: 1.5px solid currentColor; color: var(--ink-2);

@@ -66,6 +66,7 @@
   resources:
     - resource: openstax-accounting
       locator: "Chapters 1–5"
+      verified: true
     - resource: varsity
       locator: "Fundamental Analysis"
       role: alternative
@@ -81,6 +82,7 @@
   resources:
     - resource: openstax-finance
       locator: "The chapters on time value of money, valuation and cost of capital"
+      verified: true
     - resource: damodaran-valuation
       locator: "The whole class"
       why: "Aswath Damodaran's NYU course, the best-known valuation teaching there is, free."
@@ -115,6 +117,7 @@
   resources:
     - resource: openstax-finance
       locator: "The chapters on risk, return and portfolios"
+      verified: true
     - resource: mit-18s096
       locator: "Lectures 14–16: portfolio theory, factor modeling, portfolio management"
       verified: true
@@ -141,6 +144,17 @@
   summary: Build a three-statement model and a valuation for a real listed company from its annual reports, in a spreadsheet.
   hours: 20
   requires: [accounting, corporate-finance, spreadsheets]
+  brief:
+    build: Choose a listed Indian company in a business you understand, download five years of annual reports from its website or the exchange, and build a three-statement model and a DCF valuation in a spreadsheet.
+    shows:
+    - An income statement, balance sheet and cash flow that link and balance
+    - Every assumption on one sheet, each with a reason
+    - A DCF with a defensible discount rate, and a sensitivity table for growth and WACC
+    - 'A one-page note: what the share is worth, and what would change your mind'
+    stretch:
+    - A comparison with three peers on multiples
+    - A switch between base, bull and bear cases
+    present: The spreadsheet and a two-page PDF. In the interview, expect to walk through how one change, say lower margins, flows through all three statements.
   resources:
     - resource: varsity
       locator: "Integrated Financial Modelling"
@@ -154,9 +168,76 @@
   hours: 25
   requires: [time-series, pandas, financial-markets]
   recommends: [risk-management]
+  brief:
+    build: Take one simple rule, such as a moving-average crossover or buying the strongest Nifty sectors each month, get ten years of daily prices, and test it in Python with pandas, counting brokerage, taxes and slippage.
+    shows:
+    - Returns, volatility, maximum drawdown and Sharpe ratio, against simply holding the index
+    - Costs included, with your assumptions written down
+    - A test on years you didn't look at while designing the rule
+    - 'No look-ahead: each day''s decision uses only what was known that day'
+    stretch:
+    - Walk-forward testing over several windows
+    - Results with and without costs, side by side
+    present: A notebook or repo with the equity curve against the index, a table of results, and an honest paragraph on why it might not work live.
   resources:
     - resource: varsity
       locator: "Trading Systems"
       verified: true
     - resource: quantconnect
       locator: "The Learning Center, then backtest your own strategy"
+      verified: true
+
+- id: project-risk-report
+  title: 'Project: measure the risk of a portfolio'
+  area: finance
+  kind: project
+  summary: Value at Risk for a real portfolio, worked out three ways and checked against what actually happened.
+  hours: 20
+  requires: [risk-management, statistics, spreadsheets]
+  recommends: [programming-basics, time-series]
+  brief:
+    build: Put together a portfolio of ten Nifty 50 shares, get five years of daily prices, and estimate its one-day Value at Risk and Expected Shortfall by historical simulation, the variance-covariance method and Monte Carlo.
+    shows:
+    - The correlation matrix and portfolio variance worked out step by step
+    - VaR at 95% and 99% by each method, side by side
+    - 'A backtest: how often real losses were worse than your VaR, and whether that''s acceptable'
+    - A stress test on a bad stretch, such as March 2020
+    stretch:
+    - 'Credit risk instead: a simple scorecard on a public loan dataset'
+    - Rebuild it in Python and compare
+    present: The workbook or notebook and a one-page risk report, the kind a risk manager reads on Monday morning.
+  resources:
+    - resource: varsity
+      locator: 'Risk Management and Trading Psychology: chapters 2 to 5 on variance and portfolio variance, then chapter 10, Value at Risk'
+      role: primary
+      verified: true
+
+- id: project-empirical-study
+  title: 'Project: answer a question with data and a model'
+  area: finance
+  kind: project
+  summary: 'A small study on real Indian data: a clear question, a model, honest checks and a short paper.'
+  hours: 30
+  requires: [statistics, r-lang]
+  recommends: [econometrics, experiments]
+  brief:
+    build: Ask one question data can answer, such as whether rainfall drives district crop yields or what explains state differences in women's work. Get public data from data.gov.in, the RBI's database or official surveys, fit a model in R and write it up like a short paper.
+    shows:
+    - The question and why it matters, in a paragraph
+    - Sources, cleaning and summary statistics
+    - A model chosen for a reason, with its assumptions checked
+    - 'Threats to validity: what else could explain the result'
+    - A conclusion that claims no more than the data shows
+    stretch:
+    - A causal design, such as difference-in-differences
+    - A fully reproducible report in Quarto
+    present: A 6–10 page PDF with tables and charts, and the R code in a repo that re-creates every number.
+  resources:
+    - resource: econometrics-r
+      locator: Chapter 9, Assessing Studies Based on Multiple Regression, as the checklist for your own study
+      role: primary
+      verified: true
+    - resource: r4ds
+      locator: The Communicate part, for writing it up in Quarto
+      role: alternative
+      verified: true

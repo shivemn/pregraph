@@ -7,12 +7,14 @@
   resources:
     - resource: sqlbolt
       locator: "All lessons"
+      verified: true
     - resource: cs50x
       locator: "Week 7, SQL"
       verified: true
       role: alternative
     - resource: postgres-tutorial
       locator: "Part I, Tutorial"
+      verified: true
     - resource: kaggle-learn
       locator: "Intro to SQL, then Advanced SQL"
       verified: true
@@ -35,14 +37,18 @@
   resources:
     - resource: cmu-15445
       locator: "The full lecture series"
+      verified: true
     - resource: db-architecture
       locator: "The whole paper"
       why: "How a real database is put together, by people who built them."
+      verified: true
     - resource: nptel-dbms
       locator: "The full course"
       role: alternative
+      verified: true
     - resource: bustub
       locator: "The course projects: buffer pool, B+ tree index, query execution"
+      verified: true
 
 - id: statistics
   title: Statistics
@@ -53,10 +59,13 @@
   resources:
     - resource: openintro
       locator: "Chapters 1–9"
+      verified: true
     - resource: khan-statistics
       locator: "Units on study design through inference for regression"
+      verified: true
     - resource: khan-math
       locator: "Statistics and probability"
+      verified: true
 
 - id: spreadsheets
   title: Spreadsheets
@@ -67,6 +76,7 @@
   resources:
     - resource: gcf-excel
       locator: "Formulas and functions, then the data analysis lessons"
+      verified: true
     - resource: fcc-excel
       locator: "The whole video"
       verified: true
@@ -86,8 +96,10 @@
   resources:
     - resource: py4da
       locator: "Chapters 4–10"
+      verified: true
     - resource: kaggle-learn
       locator: "Pandas course"
+      verified: true
     - resource: schafer-pandas
       locator: "The whole playlist"
       verified: true
@@ -108,11 +120,14 @@
   resources:
     - resource: dataviz-wilke
       locator: "Parts I and II"
+      verified: true
     - resource: py4da
       locator: "Chapter 9, Plotting and visualization"
       role: alternative
+      verified: true
     - resource: kaggle-learn
       locator: "Data Visualization course"
+      verified: true
     - resource: kaggle-learn
       locator: "Data Visualization"
       verified: true
@@ -132,11 +147,13 @@
   resources:
     - resource: powerbi-learn
       locator: "The data analyst learning paths"
+      verified: true
     - resource: alex-powerbi
       locator: "The whole video"
       verified: true
     - resource: kaggle-datasets
       locator: "Pick a dataset you care about and build a one-page report"
+      verified: true
 
 - id: data-warehousing
   title: Data modelling for analytics
@@ -148,8 +165,10 @@
   resources:
     - resource: kimball
       locator: "Fundamental concepts, then fact and dimension table techniques"
+      verified: true
     - resource: de-zoomcamp
       locator: "Module on data warehousing"
+      verified: true
 
 - id: spark
   title: Large-scale processing with Spark
@@ -161,9 +180,11 @@
   resources:
     - resource: spark-docs
       locator: "Quick start, then the SQL and DataFrames guide"
+      verified: true
     - resource: de-zoomcamp
       locator: "Module on batch processing"
       role: alternative
+      verified: true
 
 - id: orchestration
   title: Pipelines and scheduling
@@ -176,9 +197,11 @@
   resources:
     - resource: airflow-docs
       locator: "Fundamental concepts, then Working with TaskFlow"
+      verified: true
     - resource: de-zoomcamp
       locator: "Module on workflow orchestration"
       role: alternative
+      verified: true
 
 - id: project-data-analysis
   title: "Project: analyse a public dataset"
@@ -188,12 +211,25 @@
   kind: project
   requires: [pandas, data-visualization]
   recommends: [sql, statistics]
+  brief:
+    build: Pick a question you care about and find public data that can answer it, from data.gov.in, Kaggle or a TidyTuesday week. Clean it, analyse it and publish what you found.
+    shows:
+    - The question at the top, in one sentence
+    - 'Cleaning steps written down: what you dropped and why'
+    - Four to six charts, each titled with what it shows
+    - 'Limits: what this data can''t tell you'
+    stretch:
+    - One finding checked with a statistical test
+    - An interactive dashboard of the main charts
+    present: A notebook or blog post that reads top to bottom for someone non-technical, with the code in a repo. Lead with the answer.
   resources:
     - resource: kaggle-datasets
       locator: "Pick a dataset with a question you care about"
+      verified: true
     - resource: py4da
       locator: "Chapter 13, Data analysis examples"
       role: alternative
+      verified: true
     - resource: tidytuesday
       locator: "Any recent week’s dataset"
       role: alternative
@@ -207,9 +243,21 @@
   kind: project
   requires: [data-warehousing, pandas]
   recommends: [orchestration, spark]
+  brief:
+    build: Pull data from a public API on a schedule (weather, air quality or share prices), load it into a warehouse such as BigQuery, a Snowflake trial or DuckDB, and model it into tables someone can query.
+    shows:
+    - Scheduled, repeatable runs with Airflow, Prefect or GitHub Actions
+    - Raw data kept, then cleaned and modelled into fact and dimension tables
+    - Loads you can re-run without duplicating rows
+    - 'Data checks that fail loudly: nulls, duplicates, row counts'
+    stretch:
+    - Infrastructure as code for the cloud parts
+    - A small dashboard on the final tables
+    present: A repo with an architecture diagram, setup steps, a screenshot of a scheduled run, and one query that answers a real question.
   resources:
     - resource: de-zoomcamp
       locator: "Follow the course project brief"
+      verified: true
 
 - id: experiments
   title: Experiments and causal inference
@@ -222,6 +270,7 @@
     - resource: causal-handbook
       locator: "Part I, chapters 1–12"
       why: "Practical, funny and written in Python."
+      verified: true
 
 - id: feature-engineering
   title: Feature engineering
@@ -233,8 +282,10 @@
   resources:
     - resource: feat-engineering
       locator: "Chapters 1–8"
+      verified: true
     - resource: kaggle-learn
       locator: "Feature Engineering course"
+      verified: true
     - resource: kaggle-learn
       locator: "Feature Engineering"
       verified: true
@@ -247,9 +298,21 @@
   kind: project
   requires: [machine-learning, data-visualization]
   recommends: [experiments, feature-engineering]
+  brief:
+    build: Pick a question with a decision attached, such as which customers will churn, which loans default or how much stock to order next week, and answer it with data and a model.
+    shows:
+    - A simple baseline first, then the model, compared honestly
+    - Validation that doesn't leak the future into the past
+    - What drives the result, explained in plain words
+    - What the business should do, and the expected effect
+    stretch:
+    - Turn the model into a small app or API
+    - Check fairness across groups if people are being scored
+    present: A one-page summary for a manager with no jargon, and the notebook behind it for the interviewer.
   resources:
     - resource: kaggle-datasets
       locator: "Pick a dataset with a decision attached to it"
+      verified: true
     - resource: kaggle-competitions
       locator: "One of the Getting Started competitions, written up properly"
       verified: true
@@ -303,6 +366,7 @@
       verified: true
     - resource: kaggle-datasets
       locator: "Pick a dataset you care about and publish a one-page dashboard on Tableau Public"
+      verified: true
 
 - id: time-series
   title: Time series and forecasting
@@ -315,6 +379,7 @@
     - resource: fpp3
       locator: "Chapters 1–9"
       why: "Free, practical and written by the people behind the standard R tools."
+      verified: true
     - resource: fpp3-videos
       locator: "The whole playlist, alongside the book"
       verified: true
@@ -350,6 +415,7 @@
   resources:
     - resource: psu-stat415
       locator: "The lessons on point estimation, confidence intervals, hypothesis testing and nonparametric methods"
+      verified: true
     - resource: mit-18650
       locator: "The whole course"
       verified: true
@@ -367,9 +433,11 @@
   resources:
     - resource: psu-stat501
       locator: "Lessons 1–12"
+      verified: true
     - resource: mit-18650
       locator: "The lectures on linear regression"
       role: alternative
+      verified: true
 
 - id: multivariate-analysis
   title: Multivariate analysis
@@ -380,6 +448,65 @@
   resources:
     - resource: psu-stat505
       locator: "Lessons 1–12"
+      verified: true
     - resource: nptel-multivariate
       locator: "The whole course"
+      verified: true
+
+- id: project-dbt-models
+  title: 'Project: model a business''s data with dbt'
+  area: data
+  kind: project
+  summary: Raw tables turned into tested, documented models that a dashboard can sit on.
+  hours: 25
+  requires: [dbt, sql]
+  recommends: [data-warehousing, testing-debugging]
+  brief:
+    build: Load a realistic dataset with orders, customers and products (the dbt quickstart's data or a public e-commerce dataset) into a warehouse, and build staging, intermediate and mart models in dbt.
+    shows:
+    - 'Layers with clear names: staging, intermediate, marts'
+    - Tests on keys and relationships, plus one custom test
+    - Docs and the lineage graph
+    - A fact table and dimensions a dashboard could use
+    stretch:
+    - Incremental models for the biggest table
+    - CI that runs dbt build on every pull request
+    present: The repo, the generated docs site, and one dashboard or query built on your marts.
+  resources:
+    - resource: dbt-guides
+      locator: The quickstart for your warehouse, then grow its project into your own
+      role: primary
+      verified: true
+    - resource: kimball
+      locator: The fact table and dimension table techniques, for the shape of your marts
+      role: alternative
+      verified: true
+
+- id: project-sales-dashboard
+  title: 'Project: build a sales dashboard'
+  area: data
+  kind: project
+  summary: The dashboard a sales head opens every Monday, built on data you cleaned with SQL.
+  hours: 20
+  requires: [bi-tools, sql]
+  recommends: [data-visualization, salesforce]
+  brief:
+    build: Take a sales dataset, such as Tableau's Superstore sample or the sample opportunities in a free Salesforce Developer Edition org, and build the dashboard a sales head would open every Monday.
+    shows:
+    - Sales against target by region, team and month
+    - Win rate and pipeline by stage, if your data has stages
+    - Filters that answer the obvious follow-up questions
+    - Data cleaned with SQL first, with the queries saved
+    stretch:
+    - A forecast for next quarter, with the method explained
+    - Each manager sees only their own team
+    present: A published dashboard (Tableau Public, or Power BI screenshots) and a short note on the three things it tells the sales head.
+  resources:
+    - resource: tableau-tutorial
+      locator: The whole tutorial, then rebuild it on your own data
+      role: primary
+      verified: true
+    - resource: alex-powerbi
+      locator: If you use Power BI instead
+      role: alternative
       verified: true

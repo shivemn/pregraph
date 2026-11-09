@@ -143,6 +143,7 @@
   resources:
     - resource: hf-llm-course
       locator: "Chapters 1–4: using Transformers, fine-tuning, sharing on the Hub"
+      verified: true
     - resource: assemblyai-hf
       locator: "The whole video"
       verified: true

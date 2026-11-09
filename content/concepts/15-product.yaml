@@ -16,6 +16,7 @@
     - resource: atlassian-agile
       locator: "Scrum, Kanban and the other Agile Coach guides"
       role: alternative
+      verified: true
 
 - id: product-management
   title: Product management
@@ -46,6 +47,7 @@
     - resource: laws-of-ux
       locator: "Every law, with its examples"
       role: alternative
+      verified: true
     - resource: daily-ui
       locator: "The 100-day challenge, one small design a day"
       verified: true
@@ -61,4 +63,145 @@
       verified: true
     - resource: fcc-tech-writing
       locator: "The whole video"
+      verified: true
+
+- id: project-product-teardown
+  title: 'Project: take a product apart and spec its next feature'
+  area: product
+  kind: project
+  summary: User research on an app people use, the problem it leaves unsolved, and a spec for the fix.
+  hours: 20
+  requires: [product-management]
+  recommends: [ux-design, experiments, sql]
+  brief:
+    build: Choose an app many people around you use, such as a food delivery, payments or ticketing app. Find out who uses it and where it frustrates them, and write the spec for one feature that would help.
+    shows:
+    - Five or more conversations with users, and what you learned
+    - The problem stated with evidence, before any solution
+    - 'A spec: user stories, scope, what''s left out, and rough wireframes'
+    - Success metrics, and the experiment you'd run to check
+    stretch:
+    - A clickable Figma prototype tested with three people
+    - A rough estimate of the business impact
+    present: A short document or deck like a product review, and a five-minute walk-through.
+  resources:
+    - resource: shape-up
+      locator: Part One, Shaping, ending with Write the Pitch
+      role: primary
+      verified: true
+
+- id: project-design-case-study
+  title: 'Project: a design case study'
+  area: product
+  kind: project
+  summary: One flow redesigned from research to a tested prototype, written up as a portfolio case study.
+  hours: 30
+  requires: [ux-design, figma]
+  recommends: [web-accessibility]
+  brief:
+    build: Redesign one flow that frustrates people, such as booking a doctor's appointment or paying college fees, from research to a tested prototype in Figma.
+    shows:
+    - 'Research: who you talked to and what you found'
+    - The problem, and the options you explored, not only the final screens
+    - A prototype tested with at least five people, and what you changed after
+    - Consistent components, colours and type
+    stretch:
+    - An accessibility check of your design
+    - A second, shorter case study on a different kind of product
+    present: 'A case study page or PDF that tells the story: problem, process, decisions, result. Recruiters skim, so put the outcome and the final screens near the top.'
+  resources:
+    - resource: nngroup
+      locator: The Qualitative Usability Testing study guide, for testing your prototype
+      role: primary
+      verified: true
+    - resource: laws-of-ux
+      locator: To name the principles behind your decisions
+      role: alternative
+      verified: true
+
+- id: project-requirements
+  title: 'Project: document a process and the system it needs'
+  area: product
+  kind: project
+  summary: A real process mapped, its pain points found, and the requirements written for the team that will build the fix.
+  hours: 20
+  requires: [product-management, technical-writing]
+  recommends: [sql, bi-tools, agile-scrum]
+  brief:
+    build: Pick a real process with paperwork in it, such as hostel allotment or a small shop's purchasing, and document it as a business analyst would for a team about to build software.
+    shows:
+    - The current process as a flow diagram, with the pain points marked
+    - 'A business requirements document: goals, scope and stakeholders'
+    - User stories with acceptance criteria
+    - The data the system needs, and the reports people want from it
+    stretch:
+    - A dashboard of the process's numbers from sample data
+    - A wireframe of the main screen
+    present: The requirements and stories as a clean document with the diagram, and a five-minute walk-through as if to a client.
+  resources:
+    - resource: atlassian-agile
+      locator: The pages on user stories, and on stories, epics and initiatives
+      role: primary
+      verified: true
+    - resource: google-tech-writing
+      locator: Technical Writing One, for the writing itself
+      role: alternative
+      verified: true
+
+- id: project-docs-portfolio
+  title: 'Project: write the docs an open-source project is missing'
+  area: product
+  kind: project
+  summary: Real documentation, reviewed by a project's maintainers, and a portfolio that shows it.
+  hours: 25
+  requires: [technical-writing, git]
+  recommends: [rest-apis]
+  brief:
+    build: 'Find an open-source project with thin docs (look for issues labelled documentation), ask the maintainers what they need, and write it: a getting-started guide, a tutorial or an API reference.'
+    shows:
+    - A merged pull request, or at least one a maintainer has reviewed
+    - A tutorial a newcomer can follow start to finish, tested by you on a clean machine
+    - Reference pages with a consistent structure
+    - Before and after, so readers see what you changed
+    stretch:
+    - Apply to Google Season of Docs or a similar programme
+    - A docs site built with a static site generator
+    present: A portfolio page with three samples, a tutorial, a reference page and an explainer, each linking to where it lives.
+  resources:
+    - resource: google-tech-writing
+      locator: Technical Writing One and Two
+      role: primary
+      verified: true
+    - resource: gh-pages-start
+      locator: To publish your portfolio
+      role: alternative
+      verified: true
+
+- id: project-run-a-sprint
+  title: 'Project: run a team through three sprints'
+  area: product
+  kind: project
+  summary: Scrum run for a real team, with the board, the charts and what changed because of the retrospectives.
+  hours: 20
+  requires: [agile-scrum, jira]
+  recommends: []
+  brief:
+    build: Volunteer to run Scrum for a real team, such as a college project group, a hackathon team or a club building its website. Set up the board in Jira and run three short sprints.
+    shows:
+    - A backlog of clear stories, ordered with whoever plays product owner
+    - Planning, stand-ups, a review and a retrospective in every sprint
+    - A burndown chart and velocity across the three sprints
+    - Two improvements from retrospectives, and whether they worked
+    stretch:
+    - Try Kanban for one sprint and compare
+    - A short handbook for the next scrum master
+    present: A short case study with the board, the charts and what you'd do differently. In interviews, the story of clearing a real blocker matters more than the charts.
+  resources:
+    - resource: scrum-guide
+      locator: 'The whole guide: the rules you will run by'
+      role: primary
+      verified: true
+    - resource: atlassian-agile
+      locator: The Scrum pages on sprint planning, stand-ups and retrospectives
+      role: alternative
       verified: true

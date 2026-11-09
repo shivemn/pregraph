@@ -99,6 +99,17 @@
   summary: Pick something repetitive, like reading invoices from email into a spreadsheet, and build a robot that does it reliably, with error handling and a log.
   hours: 15
   requires: [rpa-uipath]
+  brief:
+    build: Find a repetitive task with real files, like reading invoice PDFs from email into Excel or filling a web form from a spreadsheet, and build a UiPath robot that does it end to end.
+    shows:
+    - A clear structure, such as the Robotic Enterprise Framework
+    - 'Error handling: a bad file or a slow website doesn''t stop the run'
+    - A log someone can read to see what happened to each item
+    - Settings in a config file, not inside the workflow
+    stretch:
+    - Run it unattended from Orchestrator in the Community edition
+    - A small report of time saved per run
+    present: A recording of a run that includes a bad input, the project on GitHub, and a one-page process definition document like the ones clients sign off.
   resources:
     - resource: uipath-academy
       locator: "Use the practice exercises as a starting point"
@@ -107,3 +118,60 @@
       locator: "Robotic Enterprise Framework and error handling"
       verified: true
 
+- id: project-sap-process
+  title: 'Project: map a business process end to end in SAP'
+  area: enterprise
+  kind: project
+  summary: Order to cash or procure to pay, step by step, documented the way consultants hand it over.
+  hours: 20
+  requires: [sap-basics, business-processes]
+  recommends: [accounting]
+  brief:
+    build: Take order to cash or procure to pay and follow it end to end with SAP's free learning journey, plus a trial or practice system if you can get one. Document each step as a consultant would for a client.
+    shows:
+    - Each step with its Fiori app or transaction, the document it creates and who does it
+    - 'The setup behind it: organisational units and master data'
+    - The accounting entry at each step
+    - A test script someone else could follow
+    stretch:
+    - The fit-gap questions you'd ask a real client
+    - A second process that connects to the first
+    present: A process document with flow diagrams and a test script, like the ones handed over at the end of a project.
+  resources:
+    - resource: sap-s4-feature-scope
+      locator: The Sales, and Sourcing and Procurement, sections for what each step does
+      role: primary
+      verified: true
+    - resource: sap-erp-processes
+      locator: The whole journey, as your map of the process
+      role: alternative
+      verified: true
+
+- id: project-cobol-batch
+  title: 'Project: write a COBOL batch job'
+  area: enterprise
+  kind: project
+  summary: A batch program that reads, checks, updates and reports, run by JCL on a real mainframe.
+  hours: 20
+  requires: [cobol, mainframe-zos]
+  recommends: [sql]
+  brief:
+    build: On the free IBM Z Xplore system, write a COBOL batch program that reads a file of records, such as bank transactions, checks them, updates a master file or table, and prints a report, all run by JCL.
+    shows:
+    - JCL that runs the steps in order and checks return codes
+    - Bad records sent to an error file with a reason
+    - A report with headings, totals and page breaks
+    - Test data that covers the edge cases, with the expected output
+    stretch:
+    - Embedded SQL against Db2
+    - Restart logic, so a failed run picks up where it stopped
+    present: The code, JCL and test data in a repo, a README explaining the job flow, and the output listing.
+  resources:
+    - resource: omp-cobol-course
+      locator: The labs, then grow the last one into your own job
+      role: primary
+      verified: true
+    - resource: ibm-z-xplore
+      locator: The free mainframe account to run it on
+      role: alternative
+      verified: true

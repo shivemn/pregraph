@@ -7,8 +7,10 @@
   resources:
     - resource: kotlin-docs
       locator: "Getting started, then Basics and Concepts"
+      verified: true
     - resource: exercism
       locator: "Kotlin track"
+      verified: true
 
 - id: android
   title: Android development
@@ -21,6 +23,7 @@
   resources:
     - resource: android-courses
       locator: "Android Basics with Compose, all units"
+      verified: true
 
 - id: project-android-app
   title: "Project: ship an Android app"
@@ -30,6 +33,18 @@
   kind: project
   requires: [android]
   recommends: [rest-apis, git]
+  brief:
+    build: Pick a small problem you or people around you actually have, like splitting a mess bill, tracking a bus pass or a shop's daily stock, and build an Android app for it in Kotlin with Jetpack Compose. Keep the first version to three or four screens.
+    shows:
+    - Data that survives a restart, in Room or DataStore
+    - A call to a real API, with a loading state and a sensible message when the network is off
+    - A layout that works on a small phone and in dark mode
+    - A signed release build someone else can install
+    stretch:
+    - Publish it on the Play Store (there's a one-time developer fee)
+    - Unit tests for the logic and one UI test
+    present: A README with screenshots, a one-minute screen recording, the APK or Play Store link, and a short list of what you'd do next.
   resources:
     - resource: android-courses
       locator: "Use the later units on data and networking as you build"
+      verified: true

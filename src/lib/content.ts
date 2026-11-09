@@ -92,6 +92,8 @@ export function checkContent(c: Content): string[] {
       (s) => s.role === 'primary' && resourceById.get(s.resource)?.free,
     );
     if (!hasFreePrimary) problems.push(`Concept "${concept.id}" has no free primary resource`);
+    if (concept.kind === 'project' && !concept.brief) problems.push(`Project "${concept.id}" has no brief`);
+    if (concept.kind !== 'project' && concept.brief) problems.push(`Concept "${concept.id}" has a brief but isn't a project`);
   }
 
   const byId = new Map(c.concepts.map((x) => [x.id, x]));
@@ -111,6 +113,10 @@ export function checkContent(c: Content): string[] {
       if (!conceptIds.has(t)) problems.push(`Role "${r.id}" refers to unknown concept "${t}"`);
       if (seen.has(t)) problems.push(`Role "${r.id}" lists "${t}" in more than one tier`);
       seen.add(t);
+    }
+    // Every job ends in something to show. Exams are the exception.
+    if (r.kind === 'role' && !r.tiers.hire.some((t) => byId.get(t)?.kind === 'project')) {
+      problems.push(`Role "${r.id}" has no project on its hiring list`);
     }
   }
   for (const g of c.toolGroups) {

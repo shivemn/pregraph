@@ -11,6 +11,7 @@
     - resource: cses-book
       locator: "Chapter 2, Time complexity"
       role: alternative
+      verified: true
     - resource: leetcode-150
       locator: "Top Interview 150: Binary Search, then Divide & Conquer"
       verified: true
@@ -33,6 +34,7 @@
     - resource: nptel-pdsa
       locator: "Weeks on lists, arrays, stacks and queues"
       role: alternative
+      verified: true
     - resource: leetcode-150
       locator: "Top Interview 150: Array / String, Two Pointers, Stack, Linked List"
       verified: true
@@ -69,11 +71,14 @@
     - resource: algs4
       locator: "Chapter 2"
       role: alternative
+      verified: true
     - resource: nptel-pdsa
       locator: "Weeks on searching and sorting"
       role: alternative
+      verified: true
     - resource: cses-problemset
       locator: "Sorting and Searching"
+      verified: true
 
 - id: trees-heaps
   title: Trees and heaps
@@ -92,6 +97,7 @@
     - resource: nptel-dsa
       locator: "Lectures on trees, AVL trees and heaps"
       role: alternative
+      verified: true
     - resource: leetcode-150
       locator: "Top Interview 150: Binary Tree General, Binary Tree BFS, Binary Search Tree, Heap"
       verified: true
@@ -110,11 +116,14 @@
     - resource: algs4
       locator: "Chapter 4"
       role: alternative
+      verified: true
     - resource: clrs
       locator: "Part VI, Graph algorithms"
       role: deep-dive
+      verified: true
     - resource: cses-problemset
       locator: "Graph Algorithms"
+      verified: true
 
 - id: greedy-algorithms
   title: Greedy algorithms
@@ -126,13 +135,17 @@
   resources:
     - resource: cses-book
       locator: "Chapter 6, Greedy algorithms"
+      verified: true
     - resource: clrs
       locator: "The chapter on greedy algorithms"
       role: deep-dive
+      verified: true
     - resource: nptel-dsa
       locator: "Lectures on greedy algorithms and minimum spanning trees"
+      verified: true
     - resource: cses-problemset
       locator: "Sorting and Searching (most are greedy)"
+      verified: true
 
 - id: dynamic-programming
   title: Dynamic programming
@@ -147,8 +160,10 @@
     - resource: cses-book
       locator: "Chapter 7, Dynamic programming"
       role: alternative
+      verified: true
     - resource: cses-problemset
       locator: "Dynamic Programming"
+      verified: true
 
 - id: algorithm-practice
   title: Solving problems under pressure
@@ -160,9 +175,12 @@
   resources:
     - resource: cses-problemset
       locator: "Introductory, then Sorting and Searching, Dynamic Programming and Graph Algorithms"
+      verified: true
     - resource: cses-book
       locator: "Use as a reference while solving"
       role: alternative
+      verified: true
     - resource: codeforces
       locator: "Problems rated 800 to 1400, sorted by rating"
       role: alternative
+      verified: true

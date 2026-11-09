@@ -166,7 +166,155 @@
   summary: A small robot, real or simulated in ROS 2, that does one thing well, such as following a line or mapping a room. Show the code, a video and what you'd fix.
   hours: 30
   requires: [ros]
+  brief:
+    build: Build one robot that does one job well, either real (a line follower or obstacle avoider) or simulated in ROS 2 with Gazebo (one that maps a room and drives to a point).
+    shows:
+    - Sensor readings filtered, not used raw
+    - A controller you tuned, with behaviour before and after
+    - 'For ROS: nodes, topics and a launch file someone else can run'
+    - What fails, and what you would fix next
+    stretch:
+    - Navigation with the Nav2 stack
+    - A real robot and a simulation of it that behave alike
+    present: A one-minute video of it working (and one of it failing), the code with setup steps, and a diagram of the nodes or circuit.
   resources:
     - resource: ros2-tutorials
       locator: "Intermediate tutorials and the simulation section"
+      verified: true
+
+- id: project-analog-circuit
+  title: 'Project: design, simulate and build an amplifier'
+  area: electrical
+  kind: project
+  summary: An analog circuit taken from spec to hand calculation, simulation, breadboard and measurement.
+  hours: 25
+  requires: [analog-electronics]
+  recommends: [pcb-design, signals-and-systems]
+  brief:
+    build: Design a small analog circuit to a spec, such as an audio preamp, an active filter or a sensor front end with an op-amp. Simulate it in LTspice, build it on a breadboard and measure it.
+    shows:
+    - 'The spec first: gain, bandwidth, noise and supply'
+    - Hand calculation, simulation and measurement, side by side
+    - The measured frequency response, plotted
+    - Why the measurement differs from the simulation
+    stretch:
+    - A PCB in KiCad, built and measured
+    - A Monte Carlo run for component tolerances
+    present: A report with the schematic, the three sets of results, photos of the build and scope screenshots.
+  resources:
+    - resource: lessons-electric-circuits
+      locator: Volume III, Operational Amplifiers, then Volume VI, Experiments, as a model for building and measuring
+      role: primary
+      verified: true
+    - resource: mit-6002
+      locator: The lectures on amplifiers and op-amps
+      role: alternative
+      verified: true
+
+- id: project-plc-line
+  title: 'Project: automate a small process with a PLC'
+  area: electrical
+  kind: project
+  summary: Ladder logic for a real sequence, with interlocks, an emergency stop and an HMI screen.
+  hours: 20
+  requires: [plc-scada]
+  recommends: [control-systems]
+  brief:
+    build: Automate a small process in ladder logic, such as a traffic junction, a tank that fills and mixes, or a conveyor that sorts by size, using OpenPLC on a PC or an Arduino, with a simple HMI.
+    shows:
+    - An I/O list with addresses
+    - Ladder logic with interlocks and an emergency stop
+    - Timers, counters and a sequence that recovers from a fault
+    - An HMI or SCADA screen showing the state
+    stretch:
+    - PID control of a level or temperature
+    - Modbus communication with another device
+    present: A video of it running, the exported ladder logic, the I/O list and a short functional description like the ones written for real panels.
+  resources:
+    - resource: control-com-openplc
+      locator: The whole article, then build on its setup
+      role: primary
+      verified: true
+    - resource: openplc-getting-started
+      locator: Install the runtime and editor, then follow the first project
+      role: alternative
+      verified: true
+
+- id: project-comms-link
+  title: 'Project: simulate a digital radio link'
+  area: electrical
+  kind: project
+  summary: Bits to radio waves and back in Python, with bit error rates checked against theory.
+  hours: 25
+  requires: [communication-systems]
+  recommends: [signals-and-systems, programming-basics]
+  brief:
+    build: 'In Python, build a digital link end to end: bits to symbols, a modulated signal, a noisy channel and a receiver that recovers the bits. If you can borrow an RTL-SDR or a PlutoSDR, receive a real signal too.'
+    shows:
+    - BPSK or QPSK modulation and demodulation, with constellation plots
+    - Bit error rate against signal-to-noise ratio, compared with theory
+    - Pulse shaping and what it does to bandwidth
+    - A link budget for a real case, such as a satellite or a mobile cell
+    stretch:
+    - Timing and frequency synchronisation
+    - Channel coding, and the gain it gives
+    present: A notebook with plots and a plain explanation of each stage.
+  resources:
+    - resource: pysdr
+      locator: Digital Modulation, Noise and dB, Link Budgets and Synchronization chapters
+      role: primary
+      verified: true
+
+- id: project-power-converter
+  title: 'Project: design and build a DC-DC converter'
+  area: electrical
+  kind: project
+  summary: A buck or boost converter designed, simulated, built and measured for efficiency and ripple.
+  hours: 30
+  requires: [power-electronics]
+  recommends: [pcb-design, microcontrollers, control-systems]
+  brief:
+    build: Design a buck or boost converter to a spec, say 12 V in and 5 V at 2 A out. Simulate it, build it, and measure its efficiency and ripple.
+    shows:
+    - 'Component choices worked out: inductor, capacitor, switch and diode'
+    - Simulation of steady state and a load step
+    - Efficiency measured across the load range, and output ripple on a scope
+    - What gets hot, and how hot
+    stretch:
+    - Closed-loop control from a microcontroller
+    - A PCB laid out with a tight switching loop
+    present: A design report with calculations, simulation and measurements side by side, and photos. Stay at low voltage; anything on mains needs supervision.
+  resources:
+    - resource: mit-6334
+      locator: The lecture notes on dc/dc converters and their control
+      role: primary
+      verified: true
+    - resource: kicad-getting-started
+      locator: If you lay out a board
+      role: alternative
+      verified: true
+
+- id: project-electrical-design
+  title: 'Project: design a building''s electrical installation'
+  area: electrical
+  kind: project
+  summary: Loads, distribution, cable sizes and protection for a real floor plan, as a drawing set and a design report.
+  hours: 25
+  requires: [power-systems, circuit-analysis]
+  recommends: [spreadsheets]
+  brief:
+    build: 'Take the floor plan of a real small building, such as a house, a clinic or a workshop, and design its low-voltage installation: loads, distribution, cables and protection.'
+    shows:
+    - A load schedule and the maximum demand
+    - A single-line diagram from the supply to each distribution board
+    - Cable sizes with voltage-drop and short-circuit checks
+    - 'Protection and earthing: breaker and RCD ratings'
+    stretch:
+    - A rooftop solar system sized for the building
+    - Lighting design for one room in a free tool
+    present: A drawing set (layout and single-line diagram) and a design report with the calculations, as you would submit for approval. Say which code you followed; in India that's the National Electrical Code and IS 732.
+  resources:
+    - resource: schneider-eig
+      locator: The Sizing and protection of conductors chapter, and the chapters on LV distribution and protection around it
+      role: primary
       verified: true

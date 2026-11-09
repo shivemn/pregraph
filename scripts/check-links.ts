@@ -1,6 +1,10 @@
 /**
- * `npm run check-links` tries every resource URL and lists the ones that
- * fail. Run it on your own machine (it needs the open internet).
+ * `npm run check-links` tries every resource and certificate URL and lists
+ * the ones that fail. It needs the open internet: run it on your own machine,
+ * or let the monthly GitHub workflow (.github/workflows/link-check.yml) run it.
+ *
+ * `npm run check-links -- --markdown report.md` also writes the result as
+ * Markdown, which the workflow posts as an issue when something is broken.
  *
  * Two kinds of failure are usually false alarms, so they're listed separately:
  * - certificate problems: some university servers send an incomplete
@@ -8,10 +12,15 @@
  * - 403 / 429: the site blocks scripts but works fine in a browser.
  * Anything else is worth opening by hand.
  */
+import { writeFileSync } from 'node:fs';
 import { loadContent } from '../src/lib/content';
 
 const c = loadContent();
-const urls = [...new Map(c.resources.map((r) => [r.url, r])).values()];
+const targets = [
+  ...c.resources.map((r) => ({ id: r.id, url: r.url })),
+  ...c.certifications.map((x) => ({ id: `certificate ${x.id}`, url: x.url })),
+];
+const urls = [...new Map(targets.map((r) => [r.url, r])).values()];
 const TIMEOUT = 15_000;
 const CERT = /CERT|SIGNATURE|SELF_SIGNED|ISSUER/i;
 
@@ -63,3 +72,18 @@ section('Broken or moved. Open these and fix them:', found.broken);
 section('Blocked scripts. Usually fine in a browser; worth a quick look:', found.blocked);
 section('Certificate chain problems. These normally open fine in browsers:', found.cert);
 if (!found.broken.length && !found.blocked.length && !found.cert.length) console.log('All links answered.');
+
+const mdAt = process.argv.indexOf('--markdown');
+if (mdAt !== -1 && process.argv[mdAt + 1]) {
+  const list = (title: string, lines: string[]) =>
+    lines.length ? `### ${title}\n\n${lines.sort().map((l) => `- \`${l.trim().replace(/\s+/g, ' ')}\``).join('\n')}\n\n` : '';
+  const md =
+    `Checked ${urls.length} links on ${new Date().toISOString().slice(0, 10)}.\n\n` +
+    list('Broken or moved: open these and fix them in content/', found.broken) +
+    list('Blocked scripts: usually fine in a browser, worth a quick look', found.blocked) +
+    list('Certificate chain problems: these normally open fine in browsers', found.cert) +
+    (found.broken.length + found.blocked.length + found.cert.length === 0 ? 'Every link answered.\n' : '');
+  writeFileSync(process.argv[mdAt + 1], md);
+}
+// A non-zero exit marks the workflow run red when something is really broken.
+if (found.broken.length) process.exitCode = 1;

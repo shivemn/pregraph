@@ -458,7 +458,7 @@ export default function RolePlanner({ role, concepts, areas, tiers, backgrounds,
               ) : (
                 <>
                   That's the end of the {tier === 'hire' ? 'hiring' : tier === 'firstYear' ? 'first-year' : 'good-to-have'} list
-                  for {role.title}. Getting hired also takes projects you can show and practice at interviews, so keep building as you go.
+                  for {role.title}. The project is what you show at interviews, so finish it before you apply, then practise the interview rounds.
                   {tier !== usedTiers[usedTiers.length - 1]!.id && ' Switch "How far" to see what comes after.'}
                 </>
               )}

@@ -52,6 +52,9 @@ A role can also carry a `posting` block: a short summary of real entry-level lis
 
 ## Keeping it honest
 
-- Re-collect once a year. Job markets move.
+- Re-collect once a year. Job markets move. A workflow (`.github/workflows/yearly-postings.yml`) opens a "Re-check routes against job listings" issue every 1 November, with a checklist of the checked routes and the drafts still waiting. Work through it with the steps above, then close it.
 - Keep the CSVs in the repo. They're the receipts.
 - Exams such as GATE use the official syllabus instead of postings.
+- Every resource link is checked on the 1st of each month by `.github/workflows/link-check.yml`, which runs `scripts/check-links.ts` over resources and certifications. If anything is broken or moved, it comments on (or opens) one issue, "Broken links found by the monthly check", with the list. Fix the URL in `content/resources.yaml` or `content/certifications.yaml`; if the page moved and its chapters changed, re-check the locators that point at it. You can run the same check by hand from the Actions tab ("Run workflow") or locally with `npm run check-links`.
+- Every resource section was opened and its locator checked in November 2026, so all are `verified: true`. A new section starts as `verified: false` and the concept page says "Section not checked yet" until someone has opened it.
+- Every job route ends in a project. `npm run validate` fails if a route's hiring list has no project stop, because a project is what you show in the interview. Each project has a brief: what to build, what it must show, what to add if you have time, and how to present it.

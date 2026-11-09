@@ -18,18 +18,22 @@
       why: "Short, clear lectures with problem sets that check your code."
     - resource: exercism
       locator: "Python track"
+      verified: true
     - resource: mooc-java
       locator: "Java Programming I, parts 1–7"
       role: alternative
       why: "If your first language will be Java: the same basics, with exercises checked as you go."
+      verified: true
     - resource: learncpp
       locator: "Chapters 0–8"
       role: alternative
       why: "If you'd rather start in C++."
+      verified: true
     - resource: ms-csharp
       locator: "A tour of C#, then the tutorials it links to"
       role: alternative
       why: "If you'd rather start in C#."
+      verified: true
 
 - id: recursion
   title: Recursion
@@ -45,6 +49,7 @@
     - resource: composing-programs
       locator: "Section 1.7, Recursive functions"
       role: alternative
+      verified: true
     - resource: mit-60001
       locator: "Lecture 6, Recursion and dictionaries"
       verified: true
@@ -61,6 +66,7 @@
   resources:
     - resource: composing-programs
       locator: "Chapters 1–2"
+      verified: true
     - resource: mit-60001
       locator: "Lecture 4, Decomposition, abstraction and functions"
       verified: true
@@ -80,8 +86,10 @@
     - resource: tlcl
       locator: "Part 1, Learning the shell"
       why: "Free, patient and complete. Read it with a terminal open."
+      verified: true
     - resource: overthewire
       locator: "Bandit, levels 0–15"
+      verified: true
 
 - id: git
   title: Git
@@ -99,6 +107,7 @@
       role: alternative
     - resource: learn-git-branching
       locator: "Main and Remote sequences"
+      verified: true
     - resource: github-skills
       locator: "Introduction to GitHub"
       role: alternative
@@ -117,6 +126,7 @@
     - resource: refactoring-guru
       locator: "Creational, structural and behavioural patterns"
       role: deep-dive
+      verified: true
     - resource: mit-60001
       locator: "Lectures 8–9, Object oriented programming"
       verified: true
@@ -158,8 +168,10 @@
     - resource: beej-c
       locator: "The chapters on pointers, arrays, strings, structs and memory allocation"
       why: "Friendly and precise. Pairs well with the CS50 lectures."
+      verified: true
     - resource: exercism
       locator: "C track"
+      verified: true
 
 - id: software-engineering
   title: Working in a codebase
@@ -184,13 +196,17 @@
     - resource: dev-java
       locator: "Getting started, Language basics, Classes and objects"
       role: alternative
+      verified: true
     - resource: mooc-java
       locator: "Java Programming I, parts 1–7"
       why: "Hundreds of small graded exercises. The best free way to actually get fluent."
+      verified: true
     - resource: nptel-java
       locator: "The full course"
+      verified: true
     - resource: exercism
       locator: "Java track"
+      verified: true
 
 - id: test-automation
   title: Test automation
@@ -203,6 +219,7 @@
   resources:
     - resource: playwright-docs
       locator: "Getting started, Writing tests, Locators, Fixtures"
+      verified: true
 
 - id: project-test-suite
   title: "Project: automate the tests for a real web app"
@@ -211,9 +228,21 @@
   hours: 25
   kind: project
   requires: [test-automation, ci-cd]
+  brief:
+    build: Pick an open-source web app with a public demo, or run one locally, and write end-to-end tests for its main flows with Playwright or Selenium, running on every push in GitHub Actions.
+    shows:
+    - 'Tests for the flows that matter most: sign-up, log-in, the main task, and a failure case'
+    - Page objects or another structure that keeps tests readable
+    - 'Stable tests: no fixed sleeps, and they pass ten runs in a row'
+    - A CI run with a report, and screenshots when a test fails
+    stretch:
+    - API tests alongside the UI tests
+    - Runs in two browsers in parallel
+    present: The repo with a README listing what's covered and what isn't, and a link to a green CI run. A real bug you found and reported upstream counts for a lot.
   resources:
     - resource: playwright-docs
       locator: "Use the guides on API testing and CI as you go"
+      verified: true
 
 - id: go
   title: Go
@@ -275,4 +304,87 @@
       verified: true
     - resource: rustlings
       locator: "All the exercises, in order"
+      verified: true
+
+- id: project-software
+  title: 'Project: build a tool people use'
+  area: programming
+  kind: project
+  summary: A program that solves a real problem, with tests and a README, that someone other than you has actually used.
+  hours: 30
+  requires: [programming-basics, git]
+  recommends: [oop-design, testing-debugging]
+  brief:
+    build: 'Build something small that someone else will use: a command-line tool, a Telegram or Discord bot, a library or a small desktop app. Ask two friends what they''d actually use, then build that.'
+    shows:
+    - Code split into modules or classes that each do one job
+    - Tests for the core logic, run in CI
+    - Error messages that tell the user what to do
+    - At least one real user, and one change you made because of them
+    stretch:
+    - Publish it as a package on PyPI or npm
+    - A small database behind it
+    present: A repo whose README gets someone from install to first use in under a minute, and a short note on one design decision you'd defend in an interview.
+  resources:
+    - resource: swe-at-google
+      locator: Chapters 11 and 12, Testing Overview and Unit Testing, as the standard for your tests
+      role: primary
+      verified: true
+    - resource: build-your-own-x
+      locator: Pick an entry in your language if you would rather rebuild something well known
+      role: alternative
+      verified: true
+
+- id: project-order-book
+  title: 'Project: build an order book in C++'
+  area: programming
+  kind: project
+  summary: A limit order book that matches buy and sell orders correctly and quickly, with tests and benchmarks.
+  hours: 30
+  requires: [cpp, hash-tables, trees-heaps]
+  recommends: [financial-markets, concurrency]
+  brief:
+    build: Write a limit order book in modern C++. It takes add, cancel and modify messages, matches orders by price and then time, and reports trades. Drive it from a file of generated messages.
+    shows:
+    - Price-time priority, partial fills and cancels all correct
+    - The data structures you chose, and the cost of each operation
+    - Unit tests for the tricky cases, like cancelling a partly filled order
+    - 'A benchmark: messages per second and time per message'
+    stretch:
+    - Swap std::map for something faster and measure the difference
+    - A second thread reading market data while the book updates
+    present: A repo with a README on the design and the benchmark numbers, with the machine they ran on. Interviewers will ask why you picked each structure.
+  resources:
+    - resource: ods
+      locator: 'Chapter 5, Hash Tables, and chapter 9, Red-Black Trees: what unordered_map and map are doing inside your book'
+      role: primary
+      verified: true
+    - resource: learncpp
+      locator: As a reference while you build
+      role: alternative
+      verified: true
+
+- id: project-manual-testing
+  title: 'Project: test a real app by hand'
+  area: programming
+  kind: project
+  summary: A test plan, test cases and bug reports for a real app, written the way a QA team writes them.
+  hours: 15
+  requires: [testing-debugging]
+  recommends: [jira, sql]
+  brief:
+    build: 'Pick a real app or website with a public bug tracker, or a demo shop built for testers, and test one feature area thoroughly by hand: plan it, design the cases, run them and report what breaks.'
+    shows:
+    - 'A short test plan: scope, what''s out of scope, environments and risks'
+    - Test cases designed with techniques such as equivalence partitions, boundary values and decision tables
+    - 'Clear bug reports: steps, expected and actual results, severity, screenshots'
+    - A summary of what was tested, what passed, and what's still risky
+    stretch:
+    - Automate your three most repeated cases with Playwright or Selenium
+    - Report a real bug upstream and follow it through
+    present: The plan, a spreadsheet of cases and results, and your three best bug reports. A bug a real project accepted is the strongest thing you can show.
+  resources:
+    - resource: istqb-ctfl-syllabus
+      locator: Chapter 4, Test Analysis and Design, and section 5.5, Defect Management
+      role: primary
       verified: true

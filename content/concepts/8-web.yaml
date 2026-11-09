@@ -6,9 +6,11 @@
   resources:
     - resource: mdn-learn
       locator: "Structuring content with HTML, CSS styling basics, CSS layout"
+      verified: true
     - resource: odin
       locator: "Foundations course, HTML and CSS sections"
       role: alternative
+      verified: true
     - resource: cs50-web
       locator: "Lecture 0, HTML and CSS"
       verified: true
@@ -18,6 +20,7 @@
     - resource: frontend-mentor
       locator: "Newbie challenges"
       role: alternative
+      verified: true
 
 - id: javascript
   title: JavaScript
@@ -28,14 +31,17 @@
   resources:
     - resource: javascript-info
       locator: "Part 1, The JavaScript language"
+      verified: true
     - resource: fullstackopen
       locator: "Part 1"
       role: alternative
+      verified: true
     - resource: cs50-web
       locator: "Lecture 5, JavaScript"
       verified: true
     - resource: exercism
       locator: "JavaScript track"
+      verified: true
 
 - id: typescript
   title: TypeScript
@@ -46,8 +52,10 @@
   resources:
     - resource: ts-handbook
       locator: "The Basics through Narrowing, then Object Types"
+      verified: true
     - resource: exercism
       locator: "TypeScript track"
+      verified: true
     - resource: fcc-typescript
       locator: "The whole video"
       verified: true
@@ -65,14 +73,17 @@
   resources:
     - resource: react-docs
       locator: "Describing the UI, Adding interactivity, Managing state"
+      verified: true
     - resource: fullstackopen
       locator: "Parts 1–2"
       role: alternative
+      verified: true
     - resource: cs50-web
       locator: "Lecture 6, User interfaces"
       verified: true
     - resource: frontend-mentor
       locator: "Junior and intermediate challenges, built in React"
+      verified: true
 
 - id: web-accessibility
   title: Accessibility
@@ -83,6 +94,7 @@
   resources:
     - resource: wai-intro
       locator: "Introduction, then the linked WCAG overview"
+      verified: true
 
 - id: web-performance
   title: Web performance
@@ -93,6 +105,7 @@
   resources:
     - resource: webdev-perf
       locator: "The whole course"
+      verified: true
 
 - id: rest-apis
   title: Designing HTTP APIs
@@ -103,9 +116,11 @@
   resources:
     - resource: zalando-api
       locator: "General guidelines, REST basics, JSON guidelines"
+      verified: true
     - resource: fullstackopen
       locator: "Part 3"
       role: alternative
+      verified: true
     - resource: fcc-backend
       locator: "From Introduction to Express to the Timestamp Microservice project"
       verified: true
@@ -121,12 +136,15 @@
   resources:
     - resource: spring-guides
       locator: "Building a RESTful Web Service, Accessing Data with JPA, Building REST services with Spring"
+      verified: true
     - resource: django-tutorial
       locator: "Parts 1–8"
       role: alternative
+      verified: true
     - resource: fullstackopen
       locator: "Parts 3–4, Node.js and Express"
       role: alternative
+      verified: true
     - resource: cs50-web
       locator: "Lectures 3–4, Django, SQL, models and migrations"
       verified: true
@@ -141,11 +159,13 @@
   resources:
     - resource: owasp-top10
       locator: "Each of the ten categories"
+      verified: true
     - resource: cs50-web
       locator: "Lecture 8, Scalability and security"
       verified: true
     - resource: portswigger-academy
       locator: "The apprentice-level labs for each topic"
+      verified: true
 
 - id: project-web-app
   title: "Project: build and ship a web app"
@@ -155,12 +175,25 @@
   kind: project
   requires: [react]
   recommends: [rest-apis, git]
+  brief:
+    build: Build a small app people could use, such as an expense splitter, a club's event sign-up or a tiffin order board, in React with a backend or a hosted database, and deploy it.
+    shows:
+    - Three or more screens with routing
+    - Data from an API or database, with loading and error states
+    - Log-in, if the app needs to know who you are
+    - Works on a phone and passes a basic accessibility check
+    stretch:
+    - Tests for the main flow
+    - Live updates without a refresh
+    present: A public URL, a README with screenshots and the stack, and a note on the hardest bug you fixed.
   resources:
     - resource: odin
       locator: "Full Stack JavaScript path, project lessons"
+      verified: true
     - resource: fullstackopen
       locator: "Exercises in parts 1–5"
       role: alternative
+      verified: true
 
 - id: project-portfolio-api
   title: "Project: build and deploy a REST API"
@@ -170,9 +203,21 @@
   kind: project
   requires: [backend-framework, git]
   recommends: [docker, testing-debugging]
+  brief:
+    build: Build the backend for something real, such as a library, a clinic's appointments or a hostel complaint tracker, in Spring Boot, Django, FastAPI or Express, with a real database, and deploy it.
+    shows:
+    - Clean REST endpoints with validation and the right status codes
+    - Authentication, and at least two roles that can do different things
+    - Tests for the main endpoints
+    - API docs, such as an OpenAPI page
+    stretch:
+    - Pagination, filtering and rate limiting
+    - Docker and a pipeline that deploys on push
+    present: A live base URL, the API docs, the repo, and a diagram of the data model.
   resources:
     - resource: spring-guides
       locator: "Building REST services with Spring, then Securing a Web Application"
+      verified: true
 
 - id: spring-boot
   title: Spring Boot

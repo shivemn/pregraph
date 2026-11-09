@@ -1,0 +1,36 @@
+# Job markets move, so docs/ROLES.md promises to re-check routes against real
+# listings once a year. Every November this opens a reminder issue with the
+# steps, so the promise doesn't depend on anyone remembering it.
+name: Yearly listings re-check
+
+on:
+  schedule:
+    - cron: '0 4 1 11 *' # 1 November, 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open the reminder issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          year=$(date -u +%Y)
+          title="Re-check routes against job listings ($year)"
+          gh label create evidence --color 0e8a16 --description "Routes and real job listings" 2>/dev/null || true
+          if [ -n "$(gh issue list --state all --search "in:title \"$title\"" --json number --jq '.[0].number')" ]; then exit 0; fi
+          cat > body.md <<'BODY'
+          Once a year, every checked route is re-checked against fresh listings (see docs/ROLES.md).
+
+          - [ ] For each route with an `evidence` block, collect the first 30 entry-level Naukri listings again.
+          - [ ] Tag them with stop ids and save `research/postings/<route>.csv`, replacing last year's.
+          - [ ] Run `npm run evidence -- <route>` and move stops between tiers where the shares changed.
+          - [ ] Update each `evidence` block: `postings`, `collected` and `note`.
+          - [ ] Add routes that are still drafts, starting with the most visited.
+          BODY
+          gh issue create --title "$title" --label evidence --body-file body.md

@@ -10,6 +10,7 @@
       verified: true
     - resource: nand2tetris-coursera
       locator: "Weeks 1–3"
+      verified: true
     - resource: nand2tetris-projects
       locator: "Projects 1–3"
       verified: true
@@ -26,9 +27,11 @@
       verified: true
     - resource: nand2tetris-coursera
       locator: "Weeks 4–6"
+      verified: true
     - resource: nptel-coa
       locator: "The full course"
       role: alternative
+      verified: true
     - resource: nand2tetris-projects
       locator: "Projects 4–6"
       verified: true
@@ -46,6 +49,7 @@
       verified: true
     - resource: nptel-os
       locator: "Lectures on processes, scheduling and virtual memory"
+      verified: true
     - resource: ostep-homework
       locator: "The cpu-* and vm-* homeworks"
       why: "Simulators that ask you to predict what the OS will do, then check."
@@ -53,6 +57,7 @@
     - resource: xv6-labs
       locator: "The first labs: utilities, system calls, page tables"
       role: alternative
+      verified: true
 
 - id: concurrency
   title: Concurrency
@@ -66,12 +71,14 @@
       verified: true
     - resource: nptel-os
       locator: "Lectures on threads, locks and synchronisation"
+      verified: true
     - resource: ostep-homework
       locator: "The threads-* homeworks"
       verified: true
     - resource: xv6-labs
       locator: "The threads and locks labs"
       role: alternative
+      verified: true
 
 - id: file-systems
   title: Storage and file systems
@@ -86,6 +93,7 @@
       verified: true
     - resource: nptel-os
       locator: "Lectures on file systems and crash recovery"
+      verified: true
     - resource: ostep-homework
       locator: "The file-* homeworks"
       verified: true
@@ -100,12 +108,15 @@
   resources:
     - resource: cn-systems-approach
       locator: "Chapters 1–6"
+      verified: true
     - resource: kurose-lectures
       locator: "Chapters 1–5"
       why: "The author of the most used networking textbook, teaching it himself."
+      verified: true
     - resource: nptel-networks
       locator: "The full course"
       role: alternative
+      verified: true
     - resource: tryhackme
       locator: "The Pre Security path"
       verified: true
@@ -119,6 +130,7 @@
   resources:
     - resource: mdn-http
       locator: "Overview, Messages, Caching and Cookies"
+      verified: true
     - resource: cs50-web
       locator: "Lecture 3, Django (it opens with how HTTP works)"
       verified: true
@@ -133,17 +145,22 @@
   resources:
     - resource: mit-6824
       locator: "Lectures, plus the MapReduce and Raft labs"
+      verified: true
     - resource: ddia
       locator: "Parts II and III"
       role: deep-dive
+      verified: true
     - resource: mixu-distsys
       locator: "The whole book"
       why: "Short and free. Read it before the MIT lectures."
+      verified: true
     - resource: mit-6824-labs
       locator: "The labs: MapReduce, Raft, then the key/value service"
+      verified: true
     - resource: maelstrom
       locator: "The guide, from echo to broadcast to Raft"
       role: alternative
+      verified: true
 
 - id: systems-security
   title: Systems security
@@ -155,11 +172,14 @@
   resources:
     - resource: mit-6858
       locator: "Lectures on buffer overflows, privilege separation and web security"
+      verified: true
     - resource: anderson-security
       locator: "The free chapters"
       role: alternative
+      verified: true
     - resource: picoctf
       locator: "picoGym: Binary Exploitation, then Reverse Engineering"
+      verified: true
 
 - id: system-design
   title: System design
@@ -171,12 +191,15 @@
   resources:
     - resource: sd-primer
       locator: "The study guide, then each topic in the index"
+      verified: true
     - resource: ddia
       locator: "Parts I and II"
       role: deep-dive
+      verified: true
     - resource: bytebytego
       locator: "The system design videos"
       why: "Short, well-drawn explanations of one building block at a time."
+      verified: true
 
 - id: messaging
   title: Kafka and message queues
@@ -189,6 +212,7 @@
   resources:
     - resource: kafka-docs
       locator: "Introduction, then Design"
+      verified: true
 
 - id: microcontrollers
   title: Microcontrollers
@@ -199,10 +223,13 @@
   resources:
     - resource: valvano-ebook
       locator: "Chapters 1–10"
+      verified: true
     - resource: nptel-embedded
       locator: "The full course"
+      verified: true
     - resource: wokwi
       locator: "Build each exercise from your course in the Arduino or ESP32 simulator"
+      verified: true
 
 - id: embedded-protocols
   title: Talking to hardware
@@ -213,8 +240,10 @@
   resources:
     - resource: sparkfun-serial
       locator: "Serial communication, then the I2C and SPI tutorials"
+      verified: true
     - resource: wokwi
       locator: "Wire up I2C and SPI sensors in the simulator"
+      verified: true
 
 - id: rtos
   title: Real-time operating systems
@@ -226,8 +255,10 @@
   resources:
     - resource: freertos-book
       locator: "The whole book"
+      verified: true
     - resource: wokwi
       locator: "ESP32 projects using FreeRTOS tasks and queues"
+      verified: true
 
 - id: project-embedded
   title: "Project: build a working device"
@@ -236,9 +267,22 @@
   hours: 30
   kind: project
   requires: [microcontrollers, embedded-protocols]
+  brief:
+    build: Build a device that reads something real and acts on it by itself, such as a plant waterer, a room monitor that logs temperature and sends alerts, or a fan controller. Prototype it in Wokwi, then build it on an ESP32 or Arduino.
+    shows:
+    - A sensor read over I2C, SPI or UART, with values checked against something you trust
+    - It starts on power-up and recovers from a sensor error
+    - A circuit diagram and a parts list
+    - Power use thought about, if it runs on a battery
+    stretch:
+    - FreeRTOS tasks instead of one loop
+    - A small PCB designed in KiCad
+    present: Photos, a short video, the schematic and the code on GitHub, with a README that says how you tested it.
   resources:
     - resource: arduino-docs
       locator: "Start from a sensor tutorial and extend it"
+      verified: true
     - resource: wokwi
       locator: "Prototype the whole project in the simulator first"
       role: alternative
+      verified: true

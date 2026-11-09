@@ -47,8 +47,34 @@ const shelf = c.toolGroups.find((g) => g.tools.includes(concept.id));
       )}
     </header>
 
+    {concept.brief && (
+      <section aria-labelledby="brief">
+        <h2 id="brief">The brief</h2>
+        <div class="brief">
+          <div>
+            <h3>What to build</h3>
+            <p class="brief-build">{concept.brief.build}</p>
+          </div>
+          <div>
+            <h3>It has to show</h3>
+            <ul class="brief-shows">{concept.brief.shows.map((x) => <li>{x}</li>)}</ul>
+          </div>
+          {concept.brief.stretch.length > 0 && (
+            <div>
+              <h3>If you have time</h3>
+              <ul class="brief-stretch">{concept.brief.stretch.map((x) => <li>{x}</li>)}</ul>
+            </div>
+          )}
+          <div>
+            <h3>How to show it</h3>
+            <p>{concept.brief.present}</p>
+          </div>
+        </div>
+      </section>
+    )}
+
     <section aria-labelledby="learn">
-      <h2 id="learn">Where to learn it</h2>
+      <h2 id="learn">{concept.brief ? 'Help while you build' : 'Where to learn it'}</h2>
       <Picks title={concept.title} detail={detail} />
     </section>
 
@@ -106,6 +132,7 @@ const shelf = c.toolGroups.find((g) => g.tools.includes(concept.id));
   .summary { font-size: 1.25rem; line-height: 1.5; max-width: 56ch; }
 
   section { margin-top: 44px; }
+  .brief { max-width: 66ch; margin-top: 12px; }
   h2 { margin-bottom: 8px; }
 
   .small { font-size: 0.9375rem; margin-top: 8px; }

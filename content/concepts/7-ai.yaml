@@ -8,15 +8,19 @@
   resources:
     - resource: islp
       locator: "Chapters 2–9"
+      verified: true
     - resource: mml-book
       locator: "Part I, if your linear algebra or probability is rusty"
       role: deep-dive
+      verified: true
     - resource: nptel-ml
       locator: "The full course"
       why: "A rigorous IIT Madras course that suits a maths background."
+      verified: true
     - resource: ng-ml
       locator: "All three courses"
       role: alternative
+      verified: true
     - resource: kaggle-learn
       locator: "Intro to Machine Learning, then Intermediate Machine Learning"
       verified: true
@@ -42,6 +46,7 @@
     - resource: karpathy-zero-to-hero
       locator: "The first lecture, building micrograd"
       role: alternative
+      verified: true
     - resource: udl-notebooks
       locator: "Notebooks for chapters 3–9"
       verified: true
@@ -91,9 +96,11 @@
     - resource: karpathy-zero-to-hero
       locator: "Let's build GPT, from scratch"
       why: "You write a working transformer yourself, line by line."
+      verified: true
     - resource: illustrated-transformer
       locator: "The whole post"
       role: alternative
+      verified: true
     - resource: udl-notebooks
       locator: "Notebooks for chapter 12"
       verified: true
@@ -132,6 +139,7 @@
     - resource: hf-llm-course
       locator: "Chapters 1–4, then the fine-tuning chapters"
       role: alternative
+      verified: true
 
 - id: generative-models
   title: Generative models
@@ -204,8 +212,10 @@
   resources:
     - resource: madewithml
       locator: "The whole course"
+      verified: true
     - resource: mlops-zoomcamp
       locator: "All modules"
+      verified: true
 
 - id: project-ml-service
   title: "Project: train, evaluate and serve a model"
@@ -215,9 +225,21 @@
   kind: project
   requires: [machine-learning, pandas]
   recommends: [mlops, docker]
+  brief:
+    build: Train a model on a real dataset, evaluate it properly, and serve it behind an API with FastAPI and Docker so anyone can send it a request.
+    shows:
+    - A held-out test set and the metric that matters for this problem
+    - Experiments tracked, so you can say why you picked this model
+    - An API with input validation and a health check
+    - A Docker image that runs the same anywhere
+    stretch:
+    - Log predictions and watch for drift
+    - CI that re-tests the model on every push
+    present: A repo with a README showing a curl request and its response, the evaluation numbers, and a diagram of how a request flows.
   resources:
     - resource: madewithml
       locator: "Follow the course with your own dataset"
+      verified: true
 
 - id: llm-basics
   title: How large language models work
@@ -230,11 +252,14 @@
     - resource: illustrated-transformer
       locator: "The whole post"
       why: "The clearest picture of attention there is."
+      verified: true
     - resource: karpathy-zero-to-hero
       locator: "Let's build GPT, then Intro to large language models"
+      verified: true
     - resource: hf-llm-course
       locator: "Chapters 1–2"
       role: alternative
+      verified: true
 
 - id: llm-apis
   title: Prompting and LLM APIs
@@ -245,8 +270,10 @@
   resources:
     - resource: prompting-guide
       locator: "Introduction, Techniques, then Applications"
+      verified: true
     - resource: deeplearning-ai-prompting
       locator: "The whole course"
+      verified: true
 
 - id: embeddings
   title: Embeddings and vector search
@@ -259,6 +286,7 @@
     - resource: boykis-embeddings
       locator: "The whole book"
       why: "Short, careful and free. Covers the history as well as the how."
+      verified: true
 
 - id: rag
   title: Retrieval-augmented generation
@@ -269,6 +297,7 @@
   resources:
     - resource: hf-cookbook
       locator: "The RAG recipes"
+      verified: true
 
 - id: llm-evaluation
   title: Evaluating LLM systems
@@ -280,6 +309,7 @@
   resources:
     - resource: hamel-evals
       locator: "The whole post, then the follow-ups it links"
+      verified: true
 
 - id: project-llm-app
   title: "Project: build an LLM app with retrieval and evals"
@@ -289,9 +319,21 @@
   kind: project
   requires: [rag, llm-evaluation]
   recommends: [rest-apis, docker]
+  brief:
+    build: Build an assistant over documents you know well, such as your college's regulations, a product's docs or a set of RBI circulars, that answers questions and cites its sources.
+    shows:
+    - Chunking and retrieval choices you can explain
+    - Answers that cite the passages they came from
+    - An evaluation set of at least 30 questions with expected answers, and your scores
+    - What it does when the answer isn't in the documents
+    stretch:
+    - Compare two retrieval setups on your evaluation set
+    - Defences against instructions hidden in the documents
+    present: A live demo or video, the repo, and a table of evaluation results before and after your best improvement.
   resources:
     - resource: hf-cookbook
       locator: "Start from a RAG recipe and make it your own"
+      verified: true
 
 - id: pytorch
   title: PyTorch
@@ -311,6 +353,7 @@
       verified: true
     - resource: learnpytorch-exercises
       locator: "The exercises at the end of chapters 00–06"
+      verified: true
 
 - id: classical-ai
   title: "Classical AI: search, logic and reasoning under uncertainty"

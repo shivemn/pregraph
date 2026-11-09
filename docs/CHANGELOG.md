@@ -1,5 +1,12 @@
 # Changelog
 
+## Every route ends in a project; every link checked
+
+- **Every job route now ends in a project,** placed last so it's what you finish before you apply. 30 new projects for the routes that didn't have one, from an order book in C++ and a VaR report to a dbt project, a COBOL batch job, a PLC sequence, a DC-DC converter, a building's electrical design, a design case study, a campaign and an attrition analysis. `npm run validate` now fails if a route's hiring list has no project.
+- **Each project has a brief:** what to build, with ideas that fit India; a checklist of what it has to show; what to add if you have time; and how to present it. It's on the project's page and in the stop panel.
+- **All 637 resource sections have been opened and checked.** Nine links had moved and were fixed (3Blue1Brown, Figma, Valvano, the FreeRTOS book, Kimball, Feature Engineering, MIT 18.650, AWS Cloud Practitioner, Khan Academy).
+- **A monthly link check.** On the 1st of each month a GitHub workflow checks every resource and certificate link, and opens an issue listing anything broken. Another opens a reminder each November to re-check routes against job listings. `docs/ROLES.md` explains both.
+
 ## Checked against real listings; electronics, electrical and business routes; 321 jobs
 
 - **25 routes checked against 749 real listings.** For each, the first 30 entry-level Naukri listings were opened and tagged with the stops they ask for. The hiring lists changed where the listings disagreed: Python and a BI tool for data analysts, Java before Kotlin for Android, Kubernetes, Terraform and monitoring for DevOps, Azure for cloud engineers, C++ and RTOS for embedded, Node for full stack, TypeScript moved to the first year for frontend. Where a route keeps something the listings rarely name (data structures for SDEs), the page says why. Each checked route says so at the top and links to its listings in `research/postings/`; job titles on those routes say their route was checked.

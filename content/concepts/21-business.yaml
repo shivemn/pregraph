@@ -68,3 +68,148 @@
     - resource: mit-15660
       locator: "Lecture notes"
       verified: true
+
+- id: project-business-case
+  title: 'Project: solve a real business problem and present it'
+  area: business
+  kind: project
+  summary: A real problem broken down, checked against facts you collected, and a recommendation with numbers.
+  hours: 20
+  requires: [problem-structuring, spreadsheets]
+  recommends: [accounting, data-visualization]
+  brief:
+    build: Pick a real problem at a business you can get close to, such as a family shop losing customers, the canteen's lunch queue or a gym's members leaving. Gather facts and numbers, and recommend what to do.
+    shows:
+    - The problem as one clear question, and an issue tree that breaks it down
+    - 'Hypotheses tested with data you collected: interviews, counts, sales records'
+    - 'The numbers: what fixing it is worth and what your fix costs'
+    - A recommendation with next steps and risks
+    stretch:
+    - Put one recommendation into practice and measure what changed
+    - A version for the owner in the language they work in
+    present: A deck of about ten slides where every title is a full-sentence finding, and a two-minute spoken summary.
+  resources:
+    - resource: mckinsey-interviewing
+      locator: The sample cases, for how a problem gets broken down
+      role: primary
+      verified: true
+    - resource: bain-case-interview
+      locator: The sample cases
+      role: alternative
+      verified: true
+
+- id: project-marketing-analysis
+  title: 'Project: find where a funnel leaks'
+  area: business
+  kind: project
+  summary: A real shop's analytics, the steps where buyers drop out, and a test to fix one.
+  hours: 20
+  requires: [web-analytics, spreadsheets]
+  recommends: [marketing-fundamentals, statistics]
+  brief:
+    build: Use Google's free Analytics demo account for the Google Merchandise Store to find where shoppers drop out between arriving and buying, and what to do about it.
+    shows:
+    - The funnel built step by step, with conversion at each step
+    - 'Segments compared: device, channel, new and returning visitors'
+    - Three findings, each with a number and a likely reason
+    - A test you'd run to check one fix, with the metric and sample size
+    stretch:
+    - Export the data and redo one analysis in a spreadsheet or SQL
+    - A Looker Studio dashboard
+    present: 'A short report or deck for a marketing manager: findings first, then the evidence, then the test.'
+  resources:
+    - resource: ga4-demo
+      locator: How to get into the demo account, and what data it holds
+      role: primary
+      verified: true
+    - resource: skillshop-ga4
+      locator: The reports and explorations modules
+      role: alternative
+      verified: true
+
+- id: project-campaign
+  title: 'Project: run a small campaign and report on it'
+  area: business
+  kind: project
+  summary: A real month-long campaign with a goal, tracked links and an honest report of what worked.
+  hours: 20
+  requires: [digital-marketing, web-analytics]
+  recommends: [experiments]
+  brief:
+    build: Promote something real for a month, such as a friend's home bakery, a college fest or an NGO's donation drive. Set a goal, plan the channels and content, run it on a tiny budget or none, and measure it.
+    shows:
+    - A goal and audience written down before you start
+    - Content for at least two channels, such as Instagram and email
+    - Tagged links so you know which channel worked
+    - Results against the goal, including what didn't work
+    stretch:
+    - A small paid campaign with two versions of the ad
+    - Search optimisation for one page, with its ranking before and after
+    present: 'A campaign report: goal, plan, samples of the content, numbers by channel, and what you''d change. Real results, even small ones, beat a polished mock campaign.'
+  resources:
+    - resource: ga4-url-builder
+      locator: 'The whole article: tag the links for each channel before you post'
+      role: primary
+      verified: true
+    - resource: hubspot-inbound
+      locator: The lessons on content and social
+      role: alternative
+      verified: true
+
+- id: project-people-analytics
+  title: 'Project: explain why people leave'
+  area: business
+  kind: project
+  summary: An attrition analysis an HR head could act on, with charts and costed recommendations.
+  hours: 20
+  requires: [hr-fundamentals, spreadsheets]
+  recommends: [statistics, data-visualization]
+  brief:
+    build: Take an HR dataset (IBM's attrition dataset on Kaggle is made up but realistic) and find what goes with people leaving, then recommend what HR should do.
+    shows:
+    - Attrition by department, role, tenure, pay band and overtime
+    - Charts a manager can read in a minute
+    - What's linked to leaving, without claiming it's the cause
+    - Recommendations with a cost and an expected effect
+    stretch:
+    - A simple model that flags who might leave, and how accurate it is
+    - A Power BI or Tableau dashboard
+    present: 'A short report for an HR head and the workbook behind it. Say how you''d protect privacy: real HR data is confidential.'
+  resources:
+    - resource: islp
+      locator: Chapter 4, Classification, if you build a model
+      role: primary
+      verified: true
+    - resource: kaggle-datasets
+      locator: Search for IBM HR Analytics Employee Attrition
+      role: alternative
+      verified: true
+
+- id: project-operations
+  title: 'Project: find and fix a bottleneck'
+  area: business
+  kind: project
+  summary: A process you watched and timed, its bottleneck found with numbers, and a fix you can measure.
+  hours: 20
+  requires: [spreadsheets, data-visualization]
+  recommends: [process-improvement]
+  brief:
+    build: Study a process you can watch, such as a canteen at lunch, a clinic's queue or a shop packing orders. Time each step, find the bottleneck and propose a fix.
+    shows:
+    - A process or value-stream map with times at each step
+    - Data you collected over a few days
+    - The bottleneck shown with numbers, not opinion
+    - A fix, its expected effect, and how you'd measure it
+    stretch:
+    - Try the fix and measure before and after
+    - A simple queue simulation in a spreadsheet
+    present: A one-page summary, the map and the data in a workbook. A real before-and-after is worth more than any template.
+  resources:
+    - resource: lean-vsm
+      locator: The whole article, then map your own process
+      role: primary
+      verified: true
+    - resource: mit-16660
+      locator: As background on lean methods
+      role: alternative
+      verified: true

@@ -8,12 +8,16 @@
     - resource: professor-messer
       locator: "The Security+ course videos"
       why: "The standard free entry point, used by most people starting in security."
+      verified: true
     - resource: anderson-security
       locator: "The free chapters"
+      verified: true
     - resource: picoctf
       locator: "The practice gym, General Skills first"
+      verified: true
     - resource: tryhackme
       locator: "Pre Security, then Cyber Security 101"
+      verified: true
 
 - id: threat-detection
   title: Detecting attacks
@@ -24,8 +28,10 @@
   resources:
     - resource: mitre-attack
       locator: "The Enterprise matrix, one tactic at a time"
+      verified: true
     - resource: tryhackme
       locator: "The SOC Level 1 path"
+      verified: true
 
 - id: project-ctf
   title: "Project: work through beginner CTFs"
@@ -35,8 +41,49 @@
   kind: project
   requires: [security-fundamentals, shell-tools]
   recommends: [web-security]
+  brief:
+    build: Work through OverTheWire Bandit, then Natas, then a picoCTF practice set, keeping notes as you go. Stop when you've solved about 30 challenges across Linux, the web and cryptography.
+    shows:
+    - 'A write-up for each challenge: what you tried, what failed, and the step that worked'
+    - The commands and tools you used, and why
+    - At least five web challenges and five cryptography ones, not just Linux
+    stretch:
+    - Enter a live CTF with friends from CTFtime and write up what your team solved
+    - Turn your three best write-ups into blog posts
+    present: A repo or blog of write-ups, sorted by category. Describe the method, not the flags or passwords, and never publish anything about a live competition before it ends.
   resources:
     - resource: overthewire
       locator: "Bandit, then Natas"
+      verified: true
     - resource: picoctf
       locator: "The practice gym"
+      verified: true
+
+- id: project-security-review
+  title: 'Project: secure a small app and its server'
+  area: security
+  kind: project
+  summary: 'A security review of a real app: threat model, findings, fixes, and a report in the format clients get.'
+  hours: 25
+  requires: [web-security, systems-security]
+  recommends: [cloud-iam, cryptography]
+  brief:
+    build: Take a web app you built, or a deliberately vulnerable one such as OWASP Juice Shop, along with the server it runs on. Review it the way a security engineer would, fix what you find, and write the report.
+    shows:
+    - 'A threat model: what''s worth protecting and who might attack it'
+    - Findings mapped to the OWASP Top 10, each with severity and proof
+    - Fixes in the code, and a re-test showing they work
+    - 'Server hardening: open ports, users, updates and secrets'
+    stretch:
+    - Dependency and static-analysis scans in CI
+    - An alert on repeated failed log-ins
+    present: 'A report in the usual format: a summary for managers, then each finding with steps to reproduce and the fix. Only test systems you own or have written permission to test.'
+  resources:
+    - resource: owasp-top10
+      locator: The ten categories, as the checklist for your review
+      role: primary
+      verified: true
+    - resource: portswigger-academy
+      locator: The labs for any finding you want to understand better
+      role: alternative
+      verified: true

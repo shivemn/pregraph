@@ -7,10 +7,13 @@
   resources:
     - resource: linux-upskill
       locator: "Days 1–20"
+      verified: true
     - resource: lfs101
       locator: "The whole course"
+      verified: true
     - resource: overthewire
       locator: "Bandit, levels 15–30"
+      verified: true
 
 - id: docker
   title: Containers and Docker
@@ -22,6 +25,7 @@
   resources:
     - resource: docker-docs
       locator: "The getting-started guide, start to finish"
+      verified: true
     - resource: nana-docker
       locator: "The whole video"
       verified: true
@@ -36,6 +40,7 @@
   resources:
     - resource: k8s-basics
       locator: "All six modules"
+      verified: true
     - resource: killercoda-k8s
       locator: "Labs 1–22, from Pods to Services"
       verified: true
@@ -53,6 +58,7 @@
   resources:
     - resource: gh-actions
       locator: "Quickstart, then Building and testing, then Deployment"
+      verified: true
     - resource: cs50-web
       locator: "Lecture 7, Testing, CI/CD"
       verified: true
@@ -68,9 +74,11 @@
   requires: [networking]
   resources:
     - resource: aws-ccp
-      locator: "The whole course"
+      locator: "Cloud Practitioner Essentials, the free course linked from the page"
+      verified: true
     - resource: aws-overview
       locator: "The overview, then the sections on compute, storage, networking and security"
+      verified: true
 
 - id: observability
   title: Monitoring and observability
@@ -82,9 +90,11 @@
   resources:
     - resource: sre-book
       locator: "Chapter 6, Monitoring Distributed Systems"
+      verified: true
     - resource: prometheus-docs
       locator: "Overview, then First steps"
       role: alternative
+      verified: true
     - resource: piyush-grafana
       locator: "The whole video"
       verified: true
@@ -100,6 +110,7 @@
   resources:
     - resource: terraform-tutorials
       locator: "Get Started track for your cloud"
+      verified: true
 
 - id: project-deploy-pipeline
   title: "Project: containerise an app and deploy it with CI"
@@ -108,12 +119,25 @@
   hours: 25
   kind: project
   requires: [docker, ci-cd, cloud-basics]
+  brief:
+    build: Take any small app with tests, write a Dockerfile for it, and set up a pipeline so every push to main builds, tests and deploys it to a cloud service.
+    shows:
+    - A small, multi-stage Docker image
+    - A pipeline that stops when tests fail
+    - Secrets kept in the CI's secret store, never in the repo
+    - A way to roll back to the last good version
+    stretch:
+    - A staging environment with a manual approval before production
+    - Deploy to Kubernetes with a Helm chart
+    present: The repo with a pipeline badge, a diagram of the flow, and a screen recording of a push going live.
   resources:
     - resource: docker-docs
       locator: "Use the guides on sharing and deploying images"
+      verified: true
     - resource: gh-actions
       locator: "Deployment section"
       role: alternative
+      verified: true
 
 - id: cloud-networking
   title: Cloud networking
@@ -124,9 +148,11 @@
   resources:
     - resource: aws-vpc
       locator: "How Amazon VPC works, then the examples"
+      verified: true
     - resource: aws-ccp
-      locator: "The modules on networking, security and architecture"
+      locator: "Cloud Practitioner Essentials: the networking, security and architecture modules"
       role: alternative
+      verified: true
 
 - id: cloud-iam
   title: Identity and access in the cloud
@@ -137,9 +163,11 @@
   resources:
     - resource: aws-iam
       locator: "Introduction, then Identities and Policies"
+      verified: true
     - resource: aws-ccp
-      locator: "The modules on networking, security and architecture"
+      locator: "Cloud Practitioner Essentials: the networking, security and architecture modules"
       role: alternative
+      verified: true
 
 - id: cloud-architecture
   title: Designing for the cloud
@@ -151,9 +179,11 @@
   resources:
     - resource: aws-well-architected
       locator: "The six pillars"
+      verified: true
     - resource: aws-ccp
-      locator: "The modules on networking, security and architecture"
+      locator: "Cloud Practitioner Essentials: the networking, security and architecture modules"
       role: alternative
+      verified: true
 
 - id: project-cloud-app
   title: "Project: run a three-tier app on the cloud"
@@ -163,9 +193,21 @@
   kind: project
   requires: [cloud-networking, cloud-iam, infrastructure-as-code]
   recommends: [docker]
+  brief:
+    build: Deploy a three-tier app (web front end, API and database) on AWS, Azure or Google Cloud with all the infrastructure in Terraform. Set a billing alert first and stay inside the free tier.
+    shows:
+    - Public and private subnets, with the database unreachable from the internet
+    - Least-privilege roles, not admin keys
+    - Everything created and destroyed by Terraform
+    - An estimate of the monthly cost
+    stretch:
+    - Autoscaling behind a load balancer
+    - Logs and alarms in the cloud's monitoring service
+    present: An architecture diagram, the Terraform code, and a short write-up of each design choice and its trade-off.
   resources:
     - resource: terraform-tutorials
       locator: "Build the app's infrastructure step by step"
+      verified: true
 
 - id: incident-management
   title: Handling incidents
@@ -176,9 +218,11 @@
   resources:
     - resource: atlassian-incidents
       locator: "The whole handbook"
+      verified: true
     - resource: sre-book
       locator: "Chapters 14 and 15, Managing incidents and Postmortem culture"
       role: deep-dive
+      verified: true
 
 - id: log-analysis
   title: Reading logs and troubleshooting
@@ -189,11 +233,13 @@
   resources:
     - resource: sre-book
       locator: "Chapter 12, Effective troubleshooting"
+      verified: true
     - resource: missing-semester
       locator: "Data Wrangling (in the 2020 lectures)"
       verified: true
     - resource: overthewire
       locator: "Bandit, levels 0–20"
+      verified: true
 
 - id: query-performance
   title: Why a query is slow
@@ -206,11 +252,14 @@
     - resource: use-the-index
       locator: "Chapters 1–3"
       why: "The book support and backend engineers wish they'd read sooner."
+      verified: true
     - resource: cmu-15445
       locator: "Lectures on indexes and query execution"
       role: alternative
+      verified: true
     - resource: pgexercises
       locator: "Every section, then rewrite your slowest answers after reading their EXPLAIN plans"
+      verified: true
 
 - id: project-support-runbook
   title: "Project: break an app and write the runbook"
@@ -220,6 +269,105 @@
   kind: project
   requires: [incident-management, log-analysis]
   recommends: [observability, query-performance]
+  brief:
+    build: Run a small app with a database on a server or in Docker, then break it five ways (full disk, bad config, database down, slow query, expired certificate) and fix each one.
+    shows:
+    - 'For each failure: what a user would see, how you found the cause, and the fix'
+    - The commands and log lines that pointed to the cause
+    - Monitoring or an alert that would have caught it sooner
+    - A blameless incident note for one of them
+    stretch:
+    - Automate one fix with a script
+    - A dashboard of the app's health
+    present: The runbook as a clean document, and a short video of you diagnosing one failure live.
   resources:
     - resource: sre-book
       locator: "Use chapter 12 as the method for each failure"
+      verified: true
+
+- id: project-homelab
+  title: 'Project: run a small server properly'
+  area: infra
+  kind: project
+  summary: 'One Linux server, run for a month the way a team would run it: secured, backed up and watched.'
+  hours: 20
+  requires: [linux-admin, networking]
+  recommends: [nginx, shell-tools, log-analysis]
+  brief:
+    build: 'Rent the cheapest cloud VM or use an old laptop, and run it like a real server for a month: a website behind Nginx, a database, backups and monitoring.'
+    shows:
+    - SSH with keys only, a firewall and automatic security updates
+    - Nginx serving a site over HTTPS with a free certificate
+    - Nightly backups, and a restore you have actually tested
+    - An alert when disk or memory runs low
+    stretch:
+    - Rebuild the whole server from scratch with an Ansible playbook
+    - A second user with limited sudo rights
+    present: A write-up of the setup with the config files in a repo (no secrets), and a log of one problem you hit and how you fixed it.
+  resources:
+    - resource: linux-upskill
+      locator: All 20 days, on a server you keep running
+      role: primary
+      verified: true
+    - resource: nginx-guide
+      locator: Serving static content, then setting up a simple proxy server
+      role: alternative
+      verified: true
+
+- id: project-database-ops
+  title: 'Project: run a database like it''s production'
+  area: data
+  kind: project
+  summary: Backups you've restored, slow queries you've fixed, and a replica you've failed over to.
+  hours: 25
+  requires: [sql, query-performance, linux-admin]
+  recommends: [database-internals, shell-tools]
+  brief:
+    build: Install PostgreSQL or MySQL on a Linux VM, load a sample database with a few million rows, and run it as a DBA would.
+    shows:
+    - Users and roles with least privilege
+    - Scheduled backups, and a point-in-time restore you've rehearsed
+    - Three slow queries found in the logs and fixed, with timings and query plans before and after
+    - A replica, and what happens when the primary fails
+    stretch:
+    - Monitoring with Prometheus and Grafana
+    - A written plan for upgrading to the next major version, then do it
+    present: A runbook-style write-up with the commands, the timings and the query plans.
+  resources:
+    - resource: pg-backup
+      locator: 'The whole chapter: SQL dumps, file-system backups, and continuous archiving with point-in-time recovery'
+      role: primary
+      verified: true
+    - resource: use-the-index
+      locator: The Where Clause and The Join Operation chapters, as the method for fixing slow queries
+      role: alternative
+      verified: true
+
+- id: project-architecture-doc
+  title: 'Project: design a system and defend it'
+  area: infra
+  kind: project
+  summary: 'The architecture document you''d hand a client: numbers, diagrams, trade-offs and a cost estimate.'
+  hours: 20
+  requires: [cloud-architecture, system-design]
+  recommends: [infrastructure-as-code]
+  brief:
+    build: Pick a realistic brief, such as food delivery for a tier-2 city or an exam results portal that gets a huge spike on one day, and write the architecture document you'd give the client.
+    shows:
+    - 'Requirements with numbers: users, requests per second, data size'
+    - A diagram of the services, data stores and networks
+    - Choices with their alternatives and trade-offs, under each Well-Architected pillar
+    - A monthly cost estimate from the provider's pricing calculator
+    stretch:
+    - Build the riskiest part as a proof of concept
+    - A disaster recovery plan with recovery time targets
+    present: A 6–10 page document with diagrams, and a 10-minute walk-through as if to the client.
+  resources:
+    - resource: aws-well-architected
+      locator: The six pillars, as the headings for your trade-offs
+      role: primary
+      verified: true
+    - resource: sd-primer
+      locator: How to approach a system design interview question
+      role: alternative
+      verified: true

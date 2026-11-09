@@ -92,6 +92,9 @@
 .panel h2 { font-size: 2rem; margin-right: 44px; }
 .panel-summary { font-size: 1.12rem; margin: 10px 0 8px; }
 
+.panel-brief { margin: 18px 0 6px; }
+.panel-brief .brief-build { font-size: 1rem; }
+
 .links { margin-top: 18px; display: grid; gap: 8px; }
 .links p { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .links-label { font-family: var(--sign); font-stretch: 85%; font-weight: 700; min-width: 74px; }

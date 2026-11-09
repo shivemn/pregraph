@@ -1,6 +1,6 @@
 # Tools people come to learn on their own, from many areas. Each one sits on a
 # shelf in tool-groups.yaml. Every pick here was opened and checked before it
-# went in; the few that weren't say so with verified: false.
+# went in.
 
 # Languages
 
@@ -21,6 +21,7 @@
       verified: true
     - resource: exercism
       locator: "C# track"
+      verified: true
 
 - id: php
   title: PHP
@@ -43,6 +44,7 @@
       verified: true
     - resource: exercism
       locator: "PHP track"
+      verified: true
 
 - id: swift
   title: Swift and iOS
@@ -61,6 +63,7 @@
       verified: true
     - resource: exercism
       locator: "Swift track"
+      verified: true
 
 - id: r-lang
   title: R
@@ -91,6 +94,7 @@
   resources:
     - resource: django-tutorial
       locator: "The official tutorial, parts 1 to 8"
+      verified: true
     - resource: gray-django
       locator: "The whole video"
       verified: true
@@ -458,6 +462,7 @@
   resources:
     - resource: wireshark-guide
       locator: "Chapters 1 to 6: capturing, filtering and reading packets"
+      verified: true
     - resource: joe-wireshark
       locator: "The whole video"
       verified: true
@@ -472,6 +477,7 @@
   resources:
     - resource: nmap-book
       locator: "The chapters available free online, starting with Port Scanning Basics"
+      verified: true
     - resource: joe-nmap
       locator: "The whole video"
       verified: true
@@ -508,6 +514,7 @@
       verified: true
     - resource: portswigger-academy
       locator: "The apprentice labs, using Burp for each one"
+      verified: true
 
 # Workplace tools
 
@@ -520,6 +527,7 @@
   resources:
     - resource: figma-learn
       locator: "The Figma Design courses"
+      verified: true
     - resource: supercreator-figma
       locator: "The whole video"
       verified: true
@@ -560,4 +568,58 @@
   resources:
     - resource: servicenow-dev
       locator: "The free developer program: its learning plans and a personal developer instance"
+      verified: true
+
+- id: project-ios-app
+  title: 'Project: ship an iPhone app'
+  area: mobile
+  kind: project
+  summary: An iPhone app in SwiftUI that solves a small real problem, running on a real phone.
+  hours: 40
+  requires: [swift]
+  recommends: [rest-apis, git]
+  brief:
+    build: Build an iPhone app in SwiftUI for a small real problem, with a few screens, saved data and one network call. You need a Mac with Xcode; a free Apple account is enough to run it on your own phone.
+    shows:
+    - Several screens with navigation
+    - Data saved with SwiftData or to a file, surviving a restart
+    - A network call with async/await, and loading and error states
+    - Support for larger text sizes and dark mode
+    stretch:
+    - A TestFlight beta (this needs the paid developer programme)
+    - Unit tests for the logic
+    present: A README with screenshots, a screen recording, and the code on GitHub.
+  resources:
+    - resource: apple-develop-in-swift
+      locator: Work through the chapters up to lists and data, then start your own app
+      role: primary
+      verified: true
+
+- id: project-platform-app
+  title: 'Project: automate a process on Salesforce or ServiceNow'
+  area: workplace
+  kind: project
+  summary: 'A small business app on a free developer org: data model, automation, access rules and a report.'
+  hours: 20
+  requires: []
+  recommends: [salesforce, servicenow]
+  brief:
+    build: In a free Salesforce Developer Edition org or a ServiceNow Personal Developer Instance, build a small app for a real process, such as leave requests, a college's placement drives or IT asset tracking.
+    shows:
+    - 'A data model: custom objects or tables with relationships'
+    - 'Automation: a Flow, or a business rule with a workflow'
+    - Two roles that see and can do different things
+    - A report or dashboard someone would check every week
+    stretch:
+    - 'Some code: an Apex trigger with tests, or a ServiceNow script include'
+    - An integration that calls an outside REST API
+    present: A short demo video, screenshots of the data model and automation, and the exported metadata or update set in a repo.
+  resources:
+    - resource: trailhead-admin
+      locator: The Data Modeling and Reports & Dashboards modules, done in your own free Developer Edition org
+      role: primary
+      verified: true
+    - resource: servicenow-dev
+      locator: Request a free Personal Developer Instance, then build in it
+      role: alternative
       verified: true
