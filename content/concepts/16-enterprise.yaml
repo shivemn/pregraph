@@ -145,7 +145,7 @@
     - resource: sap-erp-processes
       locator: The whole journey, as your map of the process
       role: alternative
-      verified: true
+      verified: false
 
 - id: project-cobol-batch
   title: 'Project: write a COBOL batch job'

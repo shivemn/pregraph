@@ -618,7 +618,7 @@
     - resource: trailhead-admin
       locator: The Data Modeling and Reports & Dashboards modules, done in your own free Developer Edition org
       role: primary
-      verified: true
+      verified: false
     - resource: servicenow-dev
       locator: Request a free Personal Developer Instance, then build in it
       role: alternative

@@ -212,4 +212,4 @@
     - resource: mit-16660
       locator: As background on lean methods
       role: alternative
-      verified: true
+      verified: false

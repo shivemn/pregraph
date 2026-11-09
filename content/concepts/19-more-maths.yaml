@@ -204,7 +204,7 @@
     - resource: loss-data-analytics
       locator: The chapters on frequency, severity and aggregate loss models, for non-life pricing
       role: primary
-      verified: true
+      verified: false
     - resource: soa-exam-fm
       locator: For the interest calculations behind the premium
       role: alternative

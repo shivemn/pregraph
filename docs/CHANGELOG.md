@@ -4,7 +4,7 @@
 
 - **Every job route now ends in a project,** placed last so it's what you finish before you apply. 30 new projects for the routes that didn't have one, from an order book in C++ and a VaR report to a dbt project, a COBOL batch job, a PLC sequence, a DC-DC converter, a building's electrical design, a design case study, a campaign and an attrition analysis. `npm run validate` now fails if a route's hiring list has no project.
 - **Each project has a brief:** what to build, with ideas that fit India; a checklist of what it has to show; what to add if you have time; and how to present it. It's on the project's page and in the stop panel.
-- **All 637 resource sections have been opened and checked.** Nine links had moved and were fixed (3Blue1Brown, Figma, Valvano, the FreeRTOS book, Kimball, Feature Engineering, MIT 18.650, AWS Cloud Practitioner, Khan Academy).
+- **All 632 older resource sections have been opened and checked** (five sections on the new projects are still marked not checked). Nine links had moved and were fixed (3Blue1Brown, Figma, Valvano, the FreeRTOS book, Kimball, Feature Engineering, MIT 18.650, AWS Cloud Practitioner, Khan Academy).
 - **A monthly link check.** On the 1st of each month a GitHub workflow checks every resource and certificate link, and opens an issue listing anything broken. Another opens a reminder each November to re-check routes against job listings. `docs/ROLES.md` explains both.
 
 ## Checked against real listings; electronics, electrical and business routes; 321 jobs

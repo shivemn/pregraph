@@ -204,4 +204,4 @@
     - resource: atlassian-agile
       locator: The Scrum pages on sprint planning, stand-ups and retrospectives
       role: alternative
-      verified: true
+      verified: false
