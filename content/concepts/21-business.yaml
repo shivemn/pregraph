@@ -290,7 +290,7 @@
     - resource: mit-16660
       locator: As background on lean methods
       role: alternative
-      verified: false
+      verified: true
 
 - id: project-market-sizing
   title: 'Project: size a market'

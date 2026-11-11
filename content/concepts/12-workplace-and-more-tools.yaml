@@ -1034,9 +1034,9 @@
     present: A short demo video, screenshots of the data model and automation, and the exported metadata or update set in a repo.
   resources:
     - resource: trailhead-admin
-      locator: The Data Modeling and Reports & Dashboards modules, done in your own free Developer Edition org
+      locator: The Data Modeling and Reports & Dashboards for Lightning Experience modules, done in a free Trailhead Playground
       role: primary
-      verified: false
+      verified: true
     - resource: servicenow-dev
       locator: Request a free Personal Developer Instance, then build in it
       role: alternative
@@ -1091,14 +1091,14 @@
       - A dashboard of sync health
     present: An architecture diagram, the code in a repo, and a demo video.
   resources:
-    - resource: trailhead-admin
-      locator: Then the developer modules on Apex and integration
+    - resource: trailhead-apex-integration
+      locator: All four units, for Salesforce
       role: primary
-      verified: false
-    - resource: servicenow-dev
-      locator: The integration learning path
+      verified: true
+    - resource: servicenow-scripted-rest
+      locator: The whole page, for ServiceNow, then build one in your Personal Developer Instance
       role: alternative
-      verified: false
+      verified: true
 
 - id: latex
   title: LaTeX

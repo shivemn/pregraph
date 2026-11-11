@@ -262,7 +262,7 @@
     - resource: atlassian-agile
       locator: The Scrum pages on sprint planning, stand-ups and retrospectives
       role: alternative
-      verified: false
+      verified: true
 
 - id: project-prd
   title: 'Project: a one-page product spec'
@@ -429,7 +429,7 @@
     - resource: atlassian-agile
       locator: The user stories page
       role: primary
-      verified: false
+      verified: true
     - resource: istqb-ctfl-syllabus
       locator: Section 2.2 on test levels, including acceptance testing
       role: alternative
@@ -545,4 +545,4 @@
     - resource: atlassian-agile
       locator: The Kanban and agile metrics pages
       role: alternative
-      verified: false
+      verified: true

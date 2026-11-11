@@ -8,7 +8,7 @@ Nothing unverified goes on Terminus. Every fact, figure and link is opened
 and checked against its source before it ships. If a source can't be
 reached, the item waits; it is not published as "unverified".
 
-## 1. Clear the 8 unverified sections
+## 1. Clear the 8 unverified sections (done 11 November 2026)
 
 These are live today and must be verified or removed before anything else:
 

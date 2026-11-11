@@ -221,9 +221,9 @@
       role: primary
       verified: true
     - resource: sap-erp-processes
-      locator: The whole journey, as your map of the process
+      locator: All four units, as your map of procure-to-pay, plan-to-produce and order-to-cash
       role: alternative
-      verified: false
+      verified: true
 
 - id: project-cobol-batch
   title: 'Project: write a COBOL batch job'

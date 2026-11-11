@@ -1978,7 +1978,25 @@
   url: https://developer.servicenow.com/dev.do
   free: true
   medium: read
-  note: "Free, with your own practice instance."
+  note: "Free, with a temporary practice instance of your own (a Personal Developer Instance)."
+
+- id: servicenow-scripted-rest
+  title: "Scripted REST APIs"
+  author: "ServiceNow"
+  type: site
+  url: https://www.servicenow.com/docs/r/api-reference/rest-api-explorer/c_CustomWebServices.html
+  free: true
+  medium: read
+  note: "The official guide to building your own web service APIs on ServiceNow."
+
+- id: trailhead-apex-integration
+  title: "Trailhead: Apex Integration Services"
+  author: "Salesforce"
+  type: course
+  url: https://trailhead.salesforce.com/content/learn/modules/apex_integration_services
+  free: true
+  medium: read
+  note: "About 2 hours: REST callouts, SOAP callouts and Apex web services."
 
 - id: fcc-excel
   title: "Microsoft Excel Tutorial for Beginners"
@@ -2912,10 +2930,10 @@
   title: Executing Basic ERP Processes with SAP S/4HANA
   author: SAP Learning
   type: course
-  url: https://learning.sap.com/learning-journeys/executing-basic-erp-processes-with-sap-s-4hana
+  url: https://learning.sap.com/courses/executing-basic-erp-processes-with-sap-s-4hana
   free: true
-  medium: watch
-  note: A beginner learning journey of about four hours, free with an SAP account.
+  medium: read
+  note: A beginner course of about four hours on procure-to-pay, plan-to-produce and order-to-cash. Lessons open without an account; a free account adds the exercises.
 
 - id: sap-abap-journey
   title: Acquiring Core ABAP Skills

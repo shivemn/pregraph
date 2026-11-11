@@ -1,5 +1,9 @@
 # Changelog
 
+## 11 November 2026
+
+- **Every section is now checked, and the build enforces it.** The last eight unchecked sections were opened in a browser and fixed where they were wrong. Trailhead's hands-on work happens in a free Trailhead Playground, not a Developer Edition org. Apex and integration now point to Trailhead's Apex Integration Services module, because the Admin Beginner trail doesn't cover them. ServiceNow's integration learning path couldn't be found, since its learning has moved behind a sign-in at ServiceNow University, so that link now goes to ServiceNow's public Scripted REST APIs guide. The SAP course moved to a new address; its lessons are reading, not video, and open without an account. The Atlassian agile pages and MIT 16.660J were confirmed as they were. `npm run validate` and the build now fail on any section that isn't `verified: true`.
+
 ## Every stop says what it covers; gaps from cheat-sheets.org
 
 - **Every stop now lists its subtopics**, more than 1,500 of them across 240 stops, from proofs and Kubernetes to accounting and power systems. Validation now fails if a stop lists fewer than four.

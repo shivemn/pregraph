@@ -89,6 +89,10 @@ export function checkContent(c: Content): string[] {
       if (!resourceById.has(s.resource)) {
         problems.push(`Concept "${concept.id}" refers to unknown resource "${s.resource}"`);
       }
+      // Nothing goes live unchecked: every section must be opened and confirmed first.
+      if (!s.verified) {
+        problems.push(`Concept "${concept.id}" uses "${s.resource}" without verified: true. Open it, confirm the locator, then mark it`);
+      }
     }
     const hasFreePrimary = concept.resources.some(
       (s) => s.role === 'primary' && resourceById.get(s.resource)?.free,
